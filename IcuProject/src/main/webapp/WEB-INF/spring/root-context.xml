@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- DB연결 설정 3단계 -->
+	 <!-- 1단계 DB연결을 위한 도구 설정. -->
+	 <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
+	 	<!-- 어느 db연결할것인지 지정 -->
+	 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+	 	<property name="url" value="jdbc:log4jdbc:oracle:thin:@172.17.0.2:1521:xe"/>
+	 	<property name="username" value="ICU"/>
+	 	<property name="password" value="ICU" />
+	 </bean>
+	 
+	  
+	  <!-- 2단계 MyBatis Spring에서 제공하는 sql명령어 실행을 위한 도구 등록 -->
+	  <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	  	 <!-- mybatis 설정파일 위치를 지정. (src/main/resources) -->
+	  	 <property name="configLocation" value="classpath:mybatis-config.xml"/> <!-- classpath : resources -->
+	  	 <!-- 연결을 위한 도구 -->
+	  	 <property name="dataSource" ref="dataSource"/>
+	  </bean>
+	  
+	   
+	   <!-- 3단계 SQL구문 실행을 위한 템플릿을 제공하는 도구 등록 -->
+	   <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	   		<!-- Sql 명령어 실행을 위한 도구에 대한 참조 -->
+	   		<constructor-arg ref="sqlSessionFactory" />
+	   </bean>
+	   
+	     
+</beans>
