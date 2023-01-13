@@ -1,5 +1,9 @@
 package com.kh.icu.common.model.vo;
 
-public class Code {
+import lombok.Data;
 
+@Data
+public class Code {
+	private String tableCode;
+	private String tableName;
 }
