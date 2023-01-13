@@ -3,7 +3,7 @@ package com.kh.icu.chat.model.vo;
 import lombok.Data;
 
 @Data
-public class chat {
+public class Chat {
 	
 	private int chatNo;
 	private int memNo;
