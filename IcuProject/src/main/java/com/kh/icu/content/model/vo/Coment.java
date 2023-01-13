@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class Comment {
+public class Coment {
 	private int cmtNo;
 	private int cmtWriter;
 	private int conNo;
