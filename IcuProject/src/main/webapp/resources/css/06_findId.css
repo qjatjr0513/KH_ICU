@@ -1,0 +1,70 @@
+@import url('main.css');
+
+td {
+  width: 150px;
+  padding: 10px;
+}
+input {
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 3px 1px var(--color-orange);
+}
+.idPwdBtn {
+  text-align: center;
+  background-color: rgb(192, 240, 224);
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  margin: auto;
+  margin-top: 250px;
+}
+
+.idPwdBtn > button {
+  background-color: antiquewhite;
+  padding: 20px;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.input__info {
+  background-color: beige;
+  width: 600px;
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.tableBtn {
+  height: 50px;
+  background-color: var(--color-purple);
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+.tableBtn:hover {
+  background-color: var(--color-purple);
+}
+.tableBtn:active {
+  background-color: var(--color-purple) !important;
+}
+
+.btn__group {
+  text-align: center;
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.btn__group > button {
+  height: 50px;
+  background-color: var(--color-purple);
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  color: white;
+  width: 150px;
+}

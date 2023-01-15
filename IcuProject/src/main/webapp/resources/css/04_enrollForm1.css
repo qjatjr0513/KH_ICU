@@ -1,0 +1,60 @@
+@import url('main.css');
+
+#main__logo {
+  text-align: center;
+  margin-top: 80px;
+}
+
+#agree {
+  /* background-color: antiquewhite; */
+  text-align: center;
+  padding: 20px;
+}
+
+input[type='checkbox'] {
+  zoom: 1.2;
+  margin: 0;
+}
+
+.form-check-input:checked {
+  background-color: var(--color-purple);
+  border: none;
+  outline: none;
+}
+
+.agreeBox__first,
+.agreeBox__second,
+.agreeBox__third {
+  padding: 20px;
+  font-size: 20px;
+}
+
+.enroll__btn {
+  width: 550px;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.button__cancel,
+.button__check {
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 23px;
+  padding: 16px;
+  width: 150px;
+}
+
+.button__cancel {
+  background-color: gray;
+}
+.button__check {
+  background-color: var(--color-purple);
+}
+
+textarea {
+  color: rgb(128, 128, 128);
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px 1px rgb(179, 179, 179);
+}

@@ -1,0 +1,104 @@
+@import url('main.css');
+
+#main__logo,
+#input__container,
+#loginButton {
+  text-align: center;
+}
+
+/* 로고 */
+#main__logo {
+  margin-top: 180px;
+  /* background-color: aquamarine; */
+}
+
+/* 아이디 비밀번호 input */
+#input__container {
+  /* background-color: bisque; */
+  padding: 20px;
+}
+
+.info {
+  width: 400px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 7px 1px lightgray;
+}
+
+.input__id,
+.input__pwd {
+  padding: 13px;
+  padding-right: 110px;
+}
+
+.input__id > span,
+.input__pwd > span {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.join-container {
+  /* background-color: rgb(252, 220, 220); */
+  padding: 10px;
+}
+.join-container > a {
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 소셜로그인, 홈페이지 로그인 */
+#loginButton {
+  /* background-color: rgb(182, 225, 227); */
+  /* padding: 20px; */
+}
+.loginbtn {
+  padding: 4px;
+}
+
+.loginbtn > button {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 400px;
+  height: 55px;
+}
+.login__button > button,
+.naver__button > button,
+.kakao__button > button {
+  color: #ffff;
+  font-weight: 900;
+  font-size: 20px;
+  border: none;
+  box-shadow: 0 0 7px 1px lightgray;
+  display: inline-block;
+}
+.login__button > button {
+  background-color: gray;
+}
+.naver__button > button,
+.kakao__button > button {
+  position: relative;
+}
+.naver__button > button {
+  background-color: rgb(98, 202, 98);
+}
+.naver__button > button > img {
+  width: 50px;
+  position: absolute;
+  top: 2.3px;
+  left: 3px;
+  border-radius: 10px;
+}
+
+.kakao__button > button {
+  background-color: rgb(242, 206, 7);
+}
+.kakao__button > button > img {
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  position: absolute;
+  top: 8px;
+  left: 3px;
+}
