@@ -10,10 +10,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/07_boardList.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/07_boardList.css" />
 
 <title>Insert title here</title>
-
+<!-- 공통적으로 사용할 라이브러리 추가 -->
+<!-- Jquery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 부트스트랩에서 제공하고있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고있는 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -63,11 +69,14 @@
 			
 			$(function(){
 				$("#boardList>tbody>tr").click(function(){
-
-					let bno = $(this).children().eq(0).text(); // 1, 2
-					// 현재 내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
 					
-					location.href="${contextPath}/board/detail/"+bno;
+					if($(this.text() != $("#boardList").text(){ // 게시물이 없을경우 클릭방지기능
+						
+						let bno = $(this).children().eq(0).text(); // 1, 2
+						// 현재 내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
+						
+						location.href="${contextPath}/board/detail.bo/"+bno;
+					}))
 
 				});
 			});
