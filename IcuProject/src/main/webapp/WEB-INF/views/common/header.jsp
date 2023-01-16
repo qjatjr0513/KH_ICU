@@ -12,7 +12,7 @@
     <nav id="navbar">
       <div class="navbar__logo">
         <a href="#">
-          <img class="logoImg" src="resources/images/navbarLogo.png" alt="cloudLogo" width="150px">
+          <img class="logoImg" src="../resources/images/navbarLogo.png" alt="cloudLogo" width="150px">
         </a>
       </div>
       

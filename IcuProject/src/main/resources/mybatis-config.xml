@@ -13,10 +13,8 @@
 	
 	<typeAliases>
  		<typeAlias type="com.kh.icu.member.model.vo.Member" alias="member"/> 
-<!-- 		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/> -->
-<!-- 		<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="reply"/> -->
-<!-- 		<typeAlias type="com.kh.spring.board.model.vo.BoardType" alias="boardType"/> -->
-<!-- 		<typeAlias type="com.kh.spring.board.model.vo.BoardImg" alias="boardImg"/> -->
+		<typeAlias type="com.kh.icu.board.model.vo.Board" alias="board"/>
+<!-- 		<typeAlias type="com.kh.icu.board.model.vo.Reply" alias="reply"/> -->
 		
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatMessage" alias="chatMessage"/> -->
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoom" alias="chatRoom"/> -->
@@ -26,7 +24,7 @@
 
   <mappers>
      <mapper resource="/mappers/member-mapper.xml"/> 
-<!--     <mapper resource="/mappers/board-mapper.xml"/> -->
+     <mapper resource="/mappers/board-mapper.xml"/>
 <!--     <mapper resource="/mappers/chatting-mapper.xml"/> -->
   </mappers>
   

@@ -45,7 +45,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-    <jsp:include page="common/header.jsp"/>
+    <jsp:include page="../common/header.jsp"/>
     
     <!-- Home -->
     <section id="home">

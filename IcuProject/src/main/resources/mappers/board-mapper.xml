@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardMapper">
+	<resultMap type="board" id="boardResultSet">
+		<id column="Board_NO" property="boardNo"/>
+		<result column="TABLE_CD" property="tableCd"/>
+		<result column="BOARD_WRITER" property="boardWriter"/>
+		<result column="BOARD_TITLE" property="boardTitle"/>
+		<result column="BOARD_CONTENT" property="boardContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="COUNT" property="count"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="boardResultSet">
+		SELECT
+			BOARD_NO,
+			BOARD_TITLE,
+			BOARD_WRITER,
+			CREATE_DATE,
+			COUNT
+		FROM BOARD
+		WHERE STATUS = 'Y'
+		ORDER BY CREATE_DATE DESC
+	</select>
+	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE STATUS = 'Y'
+	</select>
+	
+	<select id="searchSelectList" resultMap="boardResultSet">
+		SELECT
+			BOARD_NO,
+			BOARD_TITLE,
+			BOARD_WRITER,
+			COUNT,
+			B.CREATE_DATE
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (BOARD_WRITER = MEM_NO)
+		WHERE B.STATUS = 'Y'
+		<if test = "keyword != null and keyword != ''">
+			AND
+			<choose>
+				<when test="condition == 'title'">
+					BOARD_TITLE LIKE '%${keyword}%'
+				</when>
+				<when test="condition == 'writer'">
+					USER_ID LIKE '%${keyword}%'
+				</when>
+				<when test="condition == 'content'">
+					BOARD_CONTENT LIKE '%${keyword}%'
+				</when>
+			</choose>
+		</if>
+		ORDER BY B.CREATE_DATE DESC
+	</select>
+	
+	<select id="selectSearchListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (BOARD_WRITER = MEM_NO)
+		WHERE B.STATUS = 'Y'
+		<if test="keyword != null and keyword != ''">
+			AND
+			<choose>
+				<when test="condition == 'title'">
+					BOARD_TITLE LIKE '%${keyword}%'
+				</when>
+				<when test="condition == 'writer'">
+					USER_ID LIKE '%${keyword}%'
+				</when>
+				<when test="condition == 'content'">
+					BOARD_CONTENT LIKE '%${keyword}%'
+				</when>
+			</choose>
+		</if>
+	</select>
+
+</mapper>

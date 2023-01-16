@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ICU Contact</title>
+<link rel="stylesheet" href="resources/css/07_boardList.css" />
 </head>
 <body>
 	 <!-- Contact -->

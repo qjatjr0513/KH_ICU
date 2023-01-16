@@ -1,0 +1,25 @@
+@import url('main.css');
+	
+#boardList {
+	text-align:center;
+	border : 1px solid black;     	
+}
+#boardList th,tr,td {
+	border-right : 1px solid black;     	
+}
+#boardList>tbody>tr:hover {cursor:pointer;}
+
+#pagingArea {width:fit-content; margin:auto;}
+        
+#searchForm {
+	width:80%;
+	margin:auto;
+}
+#searchForm>* {
+	float:left;
+	margin:5px;
+}
+.select {width:20%;}
+.text {width:53%;}
+.searchBtn {width:20%;}
+.innerOuter > h2 {text-align: center;}

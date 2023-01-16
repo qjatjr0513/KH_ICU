@@ -25,7 +25,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model, HttpServletResponse res) {
 		
-		return "home";	
+		return "member/home";	
 	}
 	
 }
