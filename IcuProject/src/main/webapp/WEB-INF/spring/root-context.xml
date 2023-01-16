@@ -23,7 +23,7 @@
 	 <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
 	 	<!-- 어느 db연결할것인지 지정 -->
 	 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	 	<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
+	 	<property name="url" value="jdbc:log4jdbc:oracle:thin:@172.17.0.2:1521:xe"/>
 	 	<property name="username" value="ICU"/>
 	 	<property name="password" value="ICU" />
 	 </bean>
