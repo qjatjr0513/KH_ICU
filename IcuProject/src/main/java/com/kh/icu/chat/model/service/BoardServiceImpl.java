@@ -13,4 +13,11 @@ public class BoardServiceImpl implements BoardService{
 	private SqlSession sqlSession;
 	private Pagination pagination;
 	
+	public BoardServiceImpl(BoardDao boardDao, SqlSession sqlSession, Pagination pagination) {
+		this.boardDao = boardDao;
+		this.sqlSession = sqlSession;
+		this.pagination = pagination;
+	}
+	
+	
 }
