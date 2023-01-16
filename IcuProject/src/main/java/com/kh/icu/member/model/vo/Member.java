@@ -14,7 +14,7 @@ public class Member {
 	private String memNickname;
 	private String memName;
 	private String phone;
-	private String birthDay;
+	private String birthday;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String role;
