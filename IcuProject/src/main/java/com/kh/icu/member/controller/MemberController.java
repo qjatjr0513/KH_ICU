@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
 import com.twilio.Twilio;
@@ -73,6 +74,7 @@ public class MemberController {
 		
 		System.out.println("암호화 후 비밀버호 : "+m.getMemPwd());
 		
+
 		if(result1 == 0 && result2 == 0) {
 			System.out.println(result1+", "+result2);
 			int result3 = memberService.insertMember(m);
@@ -90,6 +92,7 @@ public class MemberController {
 		}
 	}
 	
+
 	// 닉네임 아이디 검사
 	@RequestMapping("idCheck.me")
 	@ResponseBody
@@ -98,7 +101,9 @@ public class MemberController {
 		return result;
 	}
 	
+
 	// 닉네임 중복 검사
+
 	@RequestMapping("nickCheck.me")
 	@ResponseBody
 	public int nickCheck(String checkNick) {
@@ -106,6 +111,7 @@ public class MemberController {
 		return result;
 	}
 	
+
 	//로그인
 	@RequestMapping("login.me")
 	public String loginMember(Member m, HttpSession session, Model model) {

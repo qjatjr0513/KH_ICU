@@ -39,4 +39,5 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginUser;
 	}
+
 }

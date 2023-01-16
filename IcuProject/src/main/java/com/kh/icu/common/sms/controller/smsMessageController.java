@@ -14,6 +14,7 @@ public class smsMessageController {
 	public static final String ACCOUNT_SID = "ACd86a0a4d8a02c40bbcbaabf0674eaa49";
 	public static final String AUTH_TOKEN = "f07f5f23e5d742fe3d3ea95cf6f334eb";
 
+
 	@RequestMapping("sendMessage.do")
 	@ResponseBody
 	public int sendMessage(String phoneNum) {

@@ -147,7 +147,6 @@
         <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
       </div>
     </form>
-   
   </body>
     <script>
     function sendMessage(){
@@ -187,8 +186,7 @@
              }
         });
      }
-    
-    
+
     function idCheck(){
         // 아이디 입력하는 input 요소 객체
         let $memberId = $("#memberEnroll input[name=memId]");
@@ -416,7 +414,5 @@
      }
     
     </script>
-    
-    
      
 </html>
