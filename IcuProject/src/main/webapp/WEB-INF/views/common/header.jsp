@@ -19,7 +19,10 @@
       <ul class="navbar__menu">
         <li class="navbar__menu__item active1" data-link="#home">파티만들기</li>
         <li class="navbar__menu__item" data-link="#about">파티찾기</li>
-        <li class="navbar__menu__item" data-link="#skills">이벤트</li>
+        <li class="navbar__menu__item" data-link="#skills">
+           <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
+        </li>
+
         <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
         <li class="navbar__menu__item" data-link="#testimonials">
         <c:choose>
