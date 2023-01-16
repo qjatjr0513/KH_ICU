@@ -32,4 +32,11 @@ public class MemberServiceImpl implements MemberService{
 	public int nickCheck(String checkNick) {
 		return memberDao.nickCheck(sqlSession, checkNick);
 	}
+	
+	@Override
+	public Member loginMember(Member m) {
+		Member loginUser = memberDao.loginMember(sqlSession, m);
+		
+		return loginUser;
+	}
 }

@@ -70,6 +70,7 @@
 
     <!-- id / pwd input -->
     <!-- 회원가입 / 아이디, 비밀번호 찾기 -->
+   <form id="memberLogin" action="${contextPath }/login.me" method="post">
     <div id="input__container">
       <div class="input__id">
         <span>아이디</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -77,14 +78,19 @@
           class="info-id info"
           type="text"
           placeholder="아이디를 입력해주세요."
+          id="memId"
+          name="memId"
+          
         />
       </div>
       <div class="input__pwd">
         <span>비밀번호</span> &nbsp;&nbsp;
         <input
           class="info-pwd info"
-          type="text"
+          type="password"
           placeholder="비밀번호를 입력해주세요."
+           id="memPwd"
+          name="memPwd"
         />
       </div>
       <div class="join-container">
@@ -96,7 +102,7 @@
     <!-- login , naver , kakao -->
     <div id="loginButton">
       <div class="login__button loginbtn">
-        <button type="button">로그인</button>
+        <button type="submit">로그인</button>
       </div>
       <div class="naver__button loginbtn">
         <button type="button">
@@ -106,10 +112,14 @@
       <div class="kakao__button loginbtn">
         <button type="button">
           <img src="resources/images/kakaoLogo.png" />카카오톡 로그인
+          <a href=https://kauth.kakao.com/oauth/authorize?client_id=eeeeeeeeeeee&redirect_uri=http://localhost:8080/login/kakao-redirect&response_type=code">
+		    카카오로그인
+		  </a>
         </button>
       </div>
     </div>
-
+	</form>
+	
     <script src="resources/js/02_mainPage.js" defer></script>
     <script src="resources/js/main.js" defer></script>
   </body>

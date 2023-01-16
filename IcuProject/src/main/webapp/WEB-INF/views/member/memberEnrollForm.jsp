@@ -76,19 +76,17 @@
       <table>
         <tr>
           <td><label>이름</label></td>
-          <td><input type="text" placeholder="사용자 이름" name="memName"/></td>
+          <td><input type="text" placeholder="사용자 이름" name="memName" required/></td>
           <td><label>&nbsp;&nbsp;생년월일</label></td>
           <td><input type="date" name="birthDay"/></td>
         </tr>
         <tr>
           <td><label for="">아이디</label></td>
-          <td><input type="text" placeholder="아이디" name="memId"/></td>
+          <td><input type="text" placeholder="아이디" name="memId" required/></td>
           <td>
             <button
               type="button"
               class="btn btn-primary tableBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#idModal"
               onclick="idCheck();"
             >
               중복확인
@@ -98,13 +96,11 @@
         </tr>
         <tr>
           <td><label>닉네임</label></td>
-          <td><input type="text" placeholder="닉네임" name="memNickname" /></td>
+          <td><input type="text" placeholder="닉네임" name="memNickname" required/></td>
           <td>
             <button
               type="button"
               class="btn btn-primary tableBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#nickNameModal"
               onclick="nickCheck();"
             >
               중복확인
@@ -114,7 +110,7 @@
         </tr>
         <tr>
           <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" placeholder="비밀번호" name="memPwd"/></td>
+          <td><input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/></td>
           <td></td>
           <td></td>
         </tr>
@@ -126,13 +122,11 @@
         </tr>
         <tr>
           <td><label>휴대폰 번호</label></td>
-          <td><input type="text" placeholder="010-0000-0000" name="phone" /></td>
+          <td><input type="text" placeholder="010-0000-0000" name="phone" required/></td>
           <td>
             <button
               type="button"
               class="btn btn-primary tableBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#phoneModal"
               onclick="sendMessage();"
             >
               인증번호 전송
@@ -140,120 +134,20 @@
           </td>
           <td></td>
         </tr>
+        <tr>
+          <td><label>인증번호</label></td>
+          <td><input type="text" placeholder="인증번호 확인" id="authNum" required/></td>
+          <td><font id="chkAuth" size="3"></font></td>
+          <td></td>
+        </tr>
       </table>
 
       <div class="btn__group">
-        <button type="reset">취소</button>
-        <button type="submit">회원가입</button>
+        <button type="button" onclick="location.href='${contextPath }/loginForm.me'">취소</button>
+        <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
       </div>
     </form>
-
-    <!-- 아이디 중복확인 모달창 -->
-    <div
-      class="modal fade"
-      id="idModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              회원가입 - 아이디 중복확인
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">사용가능한 아이디 입니다!</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="button" class="btn btn-primary">확인</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 닉네임 중복확인 모달창 -->
-    <div
-      class="modal fade"
-      id="nickNameModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              회원가입 - 닉네임 중복확인
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">사용가능한 닉네임 입니다!</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="button" class="btn btn-primary">확인</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 휴대폰 인증번호 전송 모달창 -->
-    <div
-      class="modal fade"
-      id="phoneModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">휴대폰인증</div>
-          <div style="text-align:center;"><input type="text" placeholder="인증번호 입력"></div>
-          <div class="modal-footer"> 
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="button" class="btn btn-primary">확인</button>
-          </div>
-        </div>
-      </div>
-    </div>
+   
   </body>
     <script>
     function sendMessage(){
@@ -263,10 +157,37 @@
     		url : "${contextPath }/sendMessage.do",
     		data : {phoneNum : "+82"+$sms.val()},
             success : function(result){	
-            	alert(result);
-            }
+            	
+            	Swal.fire({
+                    icon: 'success',
+                    title: '인증번호 전송완료!'                  
+                });
+            	
+            	$(function(){
+             	$('#authNum').keyup(function(){
+                    $('#chkAuth').html('');
+                  });
+
+                  $('#authNum').keyup(function(){
+
+                      if($('#authNum').val() != result ){
+                        $('#chkAuth').html('인증번호 일치하지 않음');
+                        $('#chkAuth').attr('color', '#FF0000');
+                      } else{
+                        $('#chkAuth').html('인증번호 일치함');
+                        $('#chkAuth').attr('color', '#01DF01');
+                        $("button:button[name=enroll]").attr("disabled",false);
+                      }
+
+                  });	
+                });
+            },
+            error : function(){
+                alert("인증번호 전송 실패");
+             }
         });
      }
+    
     
     function idCheck(){
         // 아이디 입력하는 input 요소 객체
@@ -318,7 +239,6 @@
                       cancelButtonText: '취소'
                   }).then((result) => {
                 	  if(result.isConfirmed){
-                          $("button:button[name=checkSelct]").attr("disabled",false);
                           $("input[name=memId]").attr("readonly", true);
                        }  
                 	  
@@ -381,7 +301,6 @@
                       cancelButtonText: '취소'
                   }).then((result) => {
                 	  if(result.isConfirmed){
-                          $("button:button[name=checkSelct]").attr("disabled",false);
                           $("input[name=memNickname]").attr("readonly", true);
                        }  
                 	  
@@ -413,7 +332,91 @@
         });
     });
     
+    function btnEnroll(){
+        
+   	 let regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*]).{8,15}$/i;
+   	 
+   		if($('input[name=memName]').val() == ""){
+  		 Swal.fire({
+               icon: 'error',
+               title: '이름을 입력해주세요.'                  
+           });
+  		 
+  		} else if($('input[name=birthDay]').val() == ""){
+  	   		 Swal.fire({
+                 icon: 'error',
+                 title: '생년월일을 입력해주세요.'                  
+             });
+      	}else if($('input[name=memId]').val() == ""){
+  	   		 Swal.fire({
+                 icon: 'error',
+                 title: '아이디를 입력해주세요.'                  
+             });
+      	}else if($('input[name=memNickname]').val() == ""){
+  	   		 Swal.fire({
+                 icon: 'error',
+                 title: '닉네임을 입력해주세요.'                  
+             });
+      	} else if(!regExp.test($('input[name=memPwd]').val())){
+            Swal.fire({
+                icon: 'error',
+                title: '유효한 비밀번호를 입력해주세요.'                  
+            });
+            $('input[name=memPwd]').val()="";
+            $('input[name=memPwd]').focus();
+        }   else if($('input[name=memPwd]').val() == ""){
+   		 Swal.fire({
+                icon: 'error',
+                title: '비밀번호를 입력해주세요.'                  
+            });
+   	 } else if($('input[id=memPwdCheck]').val() == ""){
+   		 Swal.fire({
+                icon: 'error',
+                title: '비밀번호확인을 입력해주세요.'                  
+            });
+   	 } else if($('input[name=phone]').val() == ""){
+   		 Swal.fire({
+                icon: 'error',
+                title: '휴대폰번호를 입력해주세요.'                  
+            });
+   	 }else if($('input[id=authNum]').val() == ""){
+      		 Swal.fire({
+                 icon: 'error',
+                 title: '인증번호를 입력해주세요.'                  
+             });
+         }else {
+   		 Swal.fire({
+                title: '회원가입 하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '가입',
+                cancelButtonText: '취소'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                          title: '가입이 완료되었습니다.',
+                          text: '로그인 화면으로 이동합니다.',
+                          icon:'success',
+                          customClass: {
+                              confirmButton: 'swal2-confirm swal2-styled swal2-jong',
+                              cancelButton: 'btn btn-danger'
+                            },    
+                    }).then((result) => {
+                   	 
+                       if(result.isConfirmed){
+                       	
+                        $("#memberEnroll").submit();
+                       }                                   
+                    });
+                }
+            });
+   	 }
+     }
+    
     </script>
+    
     
      
 </html>

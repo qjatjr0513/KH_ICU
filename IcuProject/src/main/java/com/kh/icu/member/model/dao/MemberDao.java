@@ -20,4 +20,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.nickCheck", checkNick);
 	}
 	
+	public Member loginMember(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.loginMember", m);	
+	}
+	
 }

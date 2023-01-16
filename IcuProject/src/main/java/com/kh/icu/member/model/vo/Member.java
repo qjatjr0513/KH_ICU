@@ -19,5 +19,5 @@ public class Member {
 	private Date modifyDate;
 	private String role;
 	private String status;
-	private String bStates;
+	private String bStatus;
 }

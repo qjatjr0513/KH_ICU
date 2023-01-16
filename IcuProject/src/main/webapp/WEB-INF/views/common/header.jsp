@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,17 @@
         <li class="navbar__menu__item" data-link="#skills">이벤트</li>
         <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
         <li class="navbar__menu__item" data-link="#testimonials">
-          <a href="${contextPath }/login.me" style="text-decoration: none; color:black;">로그인</a>
+        <c:choose>
+        	<c:when test="${ empty loginUser }">
+        	<!-- 로그인 전 -->
+          		<a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black;">로그인</a>
+          	</c:when>
+          	<c:otherwise>
+          		<label>${loginUser.memName }님 환영합니다.</label>&nbsp;&nbsp;
+          		<a href="${contextPath }/myPage.me">마이페이지</a>
+				<a href="${contextPath }/logout.me">로그아웃</a>
+          	</c:otherwise>
+          </c:choose>
         </li>
       </ul>
       

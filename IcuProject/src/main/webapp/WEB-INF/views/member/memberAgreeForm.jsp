@@ -347,7 +347,7 @@
         </textarea>
       </div>
       <div class="enroll__btn">
-        <button class="button__cancel" onclick="location.href='${contextPath }/login.me';">취소</button>
+        <button class="button__cancel" onclick="location.href='${contextPath }/loginForm.me';">취소</button>
         <button class="button__check" onclick="location.href='${contextPath }/enrollForm.me';">확인</button>
       </div>
     </section>

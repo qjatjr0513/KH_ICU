@@ -93,7 +93,7 @@
       </table>
 
       <div class="btn__group">
-        <button onclick="location.href='${contextPath}/login.me'">이전</button>
+        <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
         <button data-bs-toggle="modal" data-bs-target="#idModal">확인</button>
       </div>
     </div>
