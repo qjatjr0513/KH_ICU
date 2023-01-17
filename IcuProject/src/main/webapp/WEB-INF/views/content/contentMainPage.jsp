@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="list" value="${list}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,20 +17,26 @@
 		font-size: 20px;
 		font-weight: bold;
   	}
-  	#searchResult{
+  	#whole{
 	  	margin: auto;
 		margin-top: 20px;
-		width: 800px;
-		height: 600px;
+		width: 810px;
+		height: 700px;
 		border: 1px solid black;
+  	}
+  	#card{
+  		margin: auto;
+  		width: 200px;
+		height: 350px;
+		float: left;
   	}
   	tr, td{
   		padding: 15px;
   		margin: auto;
   	}
   	#poster{
-  		width: 200px;
-  		height: 300px;
+  		width: 180px;
+  		height: 230px;
   	}
   	.btn_netflix{
   		width: 100px;
@@ -37,6 +46,14 @@
   		width: 100%;
   		height: 100%;
   		border-radius: 50%;
+  	}
+  	#movie, #drama{
+  		background-color: mediumorchid;
+  		color: white;
+  		border: none;
+  	}
+  	#info>h4, h5{
+  		margin:auto;
   	}
 </style>
 </head>
@@ -99,17 +116,19 @@
 	
 	<table id="searchContent">
 		<tr>
-			<td colspan="2">
+			<td></td>
+			<td>
 				<div class="d-grid gap-2">
-					<button class="btn btn-outline-primary btn-lg" id="movie">영화</button>
+					<button class="btn btn-outline-primary btn-lg" id="movie" name="movie">영화</button>
 				</div>
 			</td>
 			<td></td>
-			<td colspan="2">
+			<td>
 				<div class="d-grid gap-2">
-					<button class="btn btn-outline-primary btn-lg" id="drama">드라마</button>
+					<button class="btn btn-outline-primary btn-lg" id="drama" name="drama">드라마</button>
 				</div>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>
@@ -176,67 +195,56 @@
 		</tr>
 	</table>
 	
-	<table id="searchResult">
-		<tr>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
+
+	<div id="whole">
+		<c:forEach var="c" items="${list }">
+			<div id="card">
+				<img id="poster" onclick="movePage(${c.conNo });" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
+				<div id="info" onclick="movePage(${c.conNo });">
+					<h4 align="center">${c.conKTitle }</h4>
+					<h5 align="center">(${ c.conDate})</h5>
 					<h5 align="center">★★★★★</h5>
 				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-			<td>
-				<img id="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/1200px-Question_mark_%28black%29.svg.png">
-				<div id="info">
-					<h4 align="center">제목(출시년도)</h4>
-					<h5 align="center">★★★★★</h5>
-				</div>
-			</td>
-		</tr>
-	</table>
+			</div>
+		</c:forEach>
+	</div>
+
+	<script>
+		$(function() {
+			let mvClicked = false;
+			let drClicked = false;
+			
+			$('#movie').click(function(){
+				console.log(mvClicked)
+				if(mvClicked == false){
+		    		$(this).css('background', 'plum');
+		    		$('#drama').css('background', 'mediumorchid');
+		    		mvClicked = true;
+		    		drClicked = false;
+				}
+				else{
+					$(this).css('background', 'mediumorchid');
+					mvClicked = false;
+				}		    	
+		  	});
+			
+			$('#drama').click(function(){				
+				if(drClicked == false){
+		    		$(this).css('background', 'plum');
+		    		$('#movie').css('background', 'mediumorchid');
+		    		drClicked = true;
+		    		mvClicked = false;
+				}
+				else{
+					$(this).css('background', 'mediumorchid');
+					drClicked = false;
+				}
+		  	});
+		});
+		
+		function movePage(cno){
+	 		location.href = '${contextPath}/content/detail?bno='+cno;
+	 	}
+	</script>
 </body>
 </html>

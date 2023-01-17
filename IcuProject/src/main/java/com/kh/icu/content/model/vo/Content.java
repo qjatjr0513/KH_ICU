@@ -11,7 +11,7 @@ public class Content {
 	private String conKTitle;
 	private String conETitle;
 	private String conCategory;
-	private Date conDate;
+	private String conDate;
 	private String conAge;
 	private String conInfo;
 	private String conPreview;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="contentMapper">
+
+	<resultMap type="content" id="contentResultSet">
+		<result column="CON_NO" property="conNo"></result>
+		<result column="TABLE_CD" property="tableCd"></result>
+		<result column="CON_KTITLE" property="conKTitle"></result>
+		<result column="CON_ETITLE" property="conETitle"></result>
+		<result column="CON_CATEGORY" property="conCategory"></result>
+		<result column="CON_DATE" property="conDate"></result>
+		<result column="CON_AGE" property="conAge"></result>
+		<result column="CON_INFO" property="conInfo"></result>
+		<result column="CON_PREVIEW" property="conPreview"></result>
+		<result column="CON_DIRECTOR" property="conDirector"></result>
+		<result column="CON_ACTOR" property="conActor"></result>
+		<result column="CON_SYNOP" property="conSynop"></result>
+		<result column="ENROLL_DATE" property="enrollDate"></result>
+		<result column="STATUS" property="status"></result>
+	</resultMap>
+	
+	<select id="selectList" resultMap="contentResultSet">
+		SELECT *
+		FROM CONTENT
+	</select>
+	
+	<select id="selectContent" resultMap="contentResultSet">
+		SELECT *
+		FROM CONTENT
+		WHERE CON_NO = #{conNo}
+	</select>
+</mapper>

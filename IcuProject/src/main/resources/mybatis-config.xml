@@ -14,6 +14,7 @@
 	<typeAliases>
  		<typeAlias type="com.kh.icu.member.model.vo.Member" alias="member"/> 
 		<typeAlias type="com.kh.icu.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.icu.content.model.vo.Content" alias="content"/>
 <!-- 		<typeAlias type="com.kh.icu.board.model.vo.Reply" alias="reply"/> -->
 		
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatMessage" alias="chatMessage"/> -->
@@ -25,6 +26,7 @@
   <mappers>
      <mapper resource="/mappers/member-mapper.xml"/> 
      <mapper resource="/mappers/board-mapper.xml"/>
+     <mapper resource="/mappers/content-mapper.xml"/>
 <!--     <mapper resource="/mappers/chatting-mapper.xml"/> -->
   </mappers>
   
