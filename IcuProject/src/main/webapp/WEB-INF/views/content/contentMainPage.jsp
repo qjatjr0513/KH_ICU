@@ -243,7 +243,7 @@
 		});
 		
 		function movePage(cno){
-	 		location.href = '${contextPath}/content/detail?bno='+cno;
+	 		location.href = '${contextPath}/detail?conNo='+cno;
 	 	}
 	</script>
 </body>

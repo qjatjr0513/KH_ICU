@@ -6,8 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Content;
@@ -33,8 +33,9 @@ public class ContentController {
 		return "content/contentMainPage";
 	}
 	
-	@RequestMapping("content/detail/{conNo}")
-	public String contentDetail(@PathVariable("conNo") int conNo, HttpSession session, Model model) {
+	@RequestMapping("/detail")
+	public String contentDetail(@RequestParam(value = "conNo") int conNo
+			, HttpSession session, Model model) {
 		Content c = contentService.selectContent(conNo);
 		model.addAttribute("content", c);
 		System.out.println(c);
