@@ -13,6 +13,7 @@
 	
 	<typeAliases>
  		<typeAlias type="com.kh.icu.member.model.vo.Member" alias="member"/> 
+ 		<typeAlias type="com.kh.icu.member.model.vo.Sns" alias="sns"/> 
 		<typeAlias type="com.kh.icu.board.model.vo.Board" alias="board"/>
 <!-- 		<typeAlias type="com.kh.icu.board.model.vo.Reply" alias="reply"/> -->
 		

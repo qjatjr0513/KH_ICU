@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="ROLE" property="role"></result>
 	<result column="STATUS" property="status"></result>
 	<result column="B_STATUS" property="bStatus"></result>
+	<result column="SNS_TYPE" property="snsType"></result>
 </resultMap>
 	<!-- 회원가입  -->
 	<insert id="insertMember" parameterType="member">
@@ -62,4 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM MEMBER
 		WHERE MEM_ID = #{memId} AND STATUS = 'N'
 	</select>
+	
+	<!-- 카카오 로그인 정보 찾기 -->
+	<select id="findKakao" parameterType="java.util.HashMap" resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE MEM_NAME=#{nickname} AND MEM_ID=#{email} AND SNS_TYPE='K'
+	</select>
+
+	<!-- 카카오 로그인 정보 저장 -->
+	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+		INSERT INTO MEMBER(MEM_NO, MEM_NAME, MEM_NICKNAME, MEM_ID, SNS_TYPE)
+			values(SEQ_MEM.NEXTVAL, #{nickname}, #{name}, #{email}, 'K')
+	</insert>
+	
 </mapper>

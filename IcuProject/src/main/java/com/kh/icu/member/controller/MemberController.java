@@ -1,13 +1,22 @@
 package com.kh.icu.member.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
+import com.kh.icu.member.model.vo.Sns;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -26,6 +36,8 @@ public class MemberController {
 	
 	private BCryptPasswordEncoder bcryptPasswordEncoder; // 암호화
 	
+	@Autowired
+	private HttpSession session;
 	
 	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService;
@@ -49,13 +61,6 @@ public class MemberController {
 		return "member/memberEnrollForm";
 	}
 	
-	@RequestMapping("/loginForm.me/kakao-redirect")
-    public String kakaoLogin(@RequestParam(value = "code",required = false) String code){
-        if(code!=null){//카카오측에서 보내준 code가 있다면 출력합니다
-            System.out.println("code = " + code);
-        }
-        return "redirectPage"; //만들어둔 응답받을 View 페이지 redirectPage.html 리턴
-    }
 	
 	// 회원가입
 	@RequestMapping("insert.me")
@@ -139,4 +144,45 @@ public class MemberController {
 	public String find() {
 		return "member/memberFindForm";
 	}
+	
+
+	
+	
+	@RequestMapping(value="/kakaoLogin")
+    public String login(@RequestParam("code") String code, HttpSession session) {
+		System.out.println("code : " + code);
+
+        String access_Token = memberService.getAccessToken(code);
+        System.out.println("access_Token : " + access_Token);
+        
+        Member userInfo = memberService.getUserInfo(access_Token);
+        System.out.println("login Controller : " + userInfo);
+
+        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (userInfo.getMemId() != null) {
+            session.setAttribute("userId", userInfo.getMemId());
+            session.setAttribute("userNick", userInfo.getMemNickname());
+            session.setAttribute("access_Token", access_Token);
+        }
+
+        return "common/main";
+    }
+	
+	@RequestMapping(value="/logout")
+    public String logout(HttpSession session) {
+        String access_Token = (String)session.getAttribute("access_Token");
+
+        if(access_Token != null && !"".equals(access_Token)){
+            memberService.kakaoLogout(access_Token);
+            session.removeAttribute("access_Token");
+            session.removeAttribute("userId");
+            session.removeAttribute("userNick");
+        }else{
+            System.out.println("access_Token is null");
+            //return "redirect:/";
+        }
+        //return "index";
+        return "redirect:/";
+    }
+
 }

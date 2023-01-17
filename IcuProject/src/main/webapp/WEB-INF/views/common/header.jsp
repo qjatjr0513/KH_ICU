@@ -13,7 +13,7 @@
     <nav id="navbar">
       <div class="navbar__logo">
         <a href="#">
-          <img class="logoImg" src="../resources/images/navbarLogo.png" alt="cloudLogo" width="150px">
+          <img class="logoImg" src="resources/images/navbarLogo.png" alt="cloudLogo" width="150px">
         </a>
       </div>
       
@@ -27,6 +27,12 @@
         <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
         <li class="navbar__menu__item" data-link="#testimonials">
         <c:choose>
+          	<c:when test="${userId ne null}">
+        	<!-- 로그인 전 -->
+          		 <label>${userNick }님 환영합니다.</label>&nbsp;&nbsp;
+          		<a href="${contextPath }/myPage.me">마이페이지</a>
+				<a href="${contextPath }/logout">로그아웃</a>
+          	</c:when>
         	<c:when test="${ empty loginUser }">
         	<!-- 로그인 전 -->
           		<a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black;">로그인</a>
