@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,13 +111,23 @@
         </button>
       </div>
       <div class="kakao__button loginbtn">
-        <button type="button">
-          <img src="resources/images/kakaoLogo.png" />카카오톡 로그인
-          <a href=https://kauth.kakao.com/oauth/authorize?client_id=eeeeeeeeeeee&redirect_uri=http://localhost:8080/login/kakao-redirect&response_type=code">
-		    카카오로그인
-		  </a>
-        </button>
+      <!-- 카카오 로그인 -->
+      <c:if test="${userId eq null}">
+		<a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=faf6b25930399b2135403b6474fb775f&redirect_uri=http://localhost:8088/icu/kakaoLogin&response_type=code">
+			<img src="resources/images/kakao_login_large_wide.png" style="height:60px">
+		</a>
+	  </c:if>
+	  
+		<c:if test="${userId ne null}">
+	        <div class="kakao__button loginbtn">
+	       	   <button type="button" onclick="location.href='${contextPath}/logout'">
+	             <img src="resources/images/kakaoLogo.png" />카카오톡 로그아웃
+	           </button>
+		    </div>
+    	</c:if>
       </div>
+		
+  
     </div>
 	</form>
 	

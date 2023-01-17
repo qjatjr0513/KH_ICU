@@ -5,7 +5,6 @@ import java.sql.Date;
 import lombok.Data;
 
 
-
 @Data
 public class Member {
 
@@ -22,4 +21,5 @@ public class Member {
 	private String role;
 	private String status;
 	private String bStatus;
+	private String snsType;
 }

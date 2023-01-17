@@ -45,7 +45,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-    <jsp:include page="../common/header.jsp"/>
+    <jsp:include page="common/header.jsp"/>
     
     <!-- Home -->
     <section id="home">
@@ -214,7 +214,7 @@
     </section>    
     
 	<!-- Contact  -->
-    <jsp:include page="../common/footer.jsp"/>
+    <jsp:include page="common/footer.jsp"/>
     
     <!-- javascript -->
     <!-- defer : html 파일이 파싱 되는동안 js 파일을 동시에 다운받아서 html 파싱이 다 되면 js를 실행함 -->
