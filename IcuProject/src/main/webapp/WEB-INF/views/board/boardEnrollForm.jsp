@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,14 @@
 	<div class="content">
 		<br><br>
 		<div class="innerOuter" >
-			<h2>게시글 작성하기</h2>
+			<c:choose>
+				<c:when test="${b.boardNo eq null}">
+					<h2>게시글 작성하기</h2>
+				</c:when>
+				<c:otherwise>
+					<h2>게시글 수정하기</h2>
+				</c:otherwise>
+			</c:choose>
 			<br>
 			<form id="enrollForm" action="${contextPath }/insert.bo">
 				<div >
@@ -42,7 +50,14 @@
 				
 				<div align="center">
 					<a href="${contextPath }/list.bo" class="btn btn-danger">취소하기</a>
-					<button type="submit" class="btn btn-primary">등록하기</button>
+					<c:choose>
+						<c:when test="${b.boardNo eq null}">
+							<button type="submit" class="btn btn-primary">등록하기</button>
+						</c:when>
+						<c:otherwise>
+							<button type="submit" class="btn btn-primary">수정하기</button>
+						</c:otherwise>
+					</c:choose>	
 				</div>
 			</form>
 			

@@ -8,7 +8,7 @@ import lombok.Data;
 public class Party {
 	private int partyNo;
 	private int paName;
-	private String tableCode;
+	private String tableCd;
 	private int ottNo;
 	private String paTitle;
 	private int crewNum;

@@ -28,6 +28,8 @@ public interface BoardService {
 	
 	public int insertReply(Reply r);
 	
+	public int deleteBoard(int boardNo);
+	
 	
 	
 	

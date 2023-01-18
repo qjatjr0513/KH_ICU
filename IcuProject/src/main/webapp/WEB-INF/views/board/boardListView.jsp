@@ -96,11 +96,13 @@
 				</thead>
 				<tbody>
 					<c:if test="${empty list }">
-						<td colspan="5">게시글이 없습니다..</td>
+						<tr id="tableEmpty">
+							<td colspan="5">게시글이 없습니다..</td>
+						</tr>
 					</c:if>
 					
 					<c:forEach var="b" items="${list }" >
-					<tr onclick="movePage(bno)">
+					<tr>
 						<td class="bno">${b.boardNo }</td>
 						<td>${b.boardTitle }</td>
 						<td>${b.boardWriter }</td>
@@ -117,16 +119,17 @@
 			<script>
 			
 			$(function(){
-				$("#boardList>tbody>tr").click(function(){
-					
-						let bno = $(this).children().eq(0).text(); // 1, 2
-						// 현재 내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
-						
-						location.href="${contextPath}/detail.bo/"+bno;
-						
+	            $("#boardList>tbody>tr").click(function(){
+	               
+// 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
 
-				});
-			});
+	                  let bno = $(this).children().eq(0).text();
+	                  
+	                  location.href="${contextPath}/detail.bo/"+bno;
+// 	               } 
+
+	            });
+	         });
 			</script>
 			
 			

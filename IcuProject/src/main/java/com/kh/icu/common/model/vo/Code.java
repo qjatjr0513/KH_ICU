@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Code {
-	private String tableCode;
+	private String tableCd;
 	private String tableName;
 }

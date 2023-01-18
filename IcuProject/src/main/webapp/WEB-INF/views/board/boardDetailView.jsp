@@ -89,7 +89,7 @@
 						$.ajax({
 							url : "insertReply.bo",
 							data : {
-								refBno : '${b.boardNo}',
+								refTno : '${b.boardNo}',
 								replyContent : $("#replyContent").val()
 							},
 							
@@ -123,7 +123,7 @@
 									html += "<tr>"
 										+ "<td>" + reply.replyWriter+"</td>"
 										+ "<td>" + reply.replyContent+"</td>"
-										+ "<td>" + reply.createDate+"</td>"
+										
 								   + "</tr>";
 								}
 								$("#replyArea tbody").html(html);

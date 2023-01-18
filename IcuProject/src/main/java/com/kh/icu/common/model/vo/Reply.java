@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Reply {
 	private int replyNo;
-	private String tableCode;
+	private String tableCd;
 	private String replyWriter;
 	private int refTno;
 	private String replyContent;

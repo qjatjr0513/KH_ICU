@@ -145,11 +145,12 @@ public class BoardController {
 	// 댓글 등록
 	@RequestMapping("insertReply.bo")
 	@ResponseBody
-	public String insertReply(Reply r, HttpSession session) {
+	public String insertReply(Reply r, HttpSession session, Board b) {
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		if(m != null) {
-			r.setReplyWriter(m.getMemNickname()+"");
+			r.setReplyWriter(m.getMemNickname());
+//			r.setTableCd(b.getTableCd());
 		}
 		
 		int result = boardService.insertReply(r);
@@ -162,6 +163,21 @@ public class BoardController {
 			return "0";
 		}
 		
+	}
+	
+	@RequestMapping("delete.bo")
+	public String deleteBoard(@RequestParam(value="bno", required =false, defaultValue = "0") int boardNo,
+							  HttpSession session, Model model) {
+		
+		int result = boardService.deleteBoard(boardNo);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "게시글 삭제 성공");
+			return "redirect:list.bo";
+		} else {
+			model.addAttribute("errorMsg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	
