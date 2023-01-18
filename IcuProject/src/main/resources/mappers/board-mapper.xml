@@ -13,36 +13,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
+		<association property="member" javaType="member">
+        	<id     column="MEM_NO" property="memNo"/>
+        	<result column="MEM_NICKNAME" property="memNickname"/>
+      	</association>
+<!-- 		<collection property="memNickname" resultMap="memberResultSet"/> -->
 	</resultMap>
 	
 	<select id="selectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
-			BOARD_TITLE,
 			BOARD_WRITER,
+			BOARD_TITLE,
 			CREATE_DATE,
 			COUNT
-		FROM BOARD
-		WHERE STATUS = 'Y'
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		WHERE B.STATUS = 'N'
 		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM BOARD
-		WHERE STATUS = 'Y'
+		WHERE STATUS = 'N'
 	</select>
 	
 	<select id="searchSelectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
 			BOARD_TITLE,
-			BOARD_WRITER,
+			M.MEM_NICKNAME,
 			COUNT,
-			B.CREATE_DATE
+			CREATE_DATE
 		FROM BOARD B
-		LEFT JOIN MEMBER M ON (BOARD_WRITER = MEM_NO)
-		WHERE B.STATUS = 'Y'
+		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		WHERE B.STATUS = 'N'
 		<if test = "keyword != null and keyword != ''">
 			AND
 			<choose>
@@ -50,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					BOARD_TITLE LIKE '%${keyword}%'
 				</when>
 				<when test="condition == 'writer'">
-					USER_ID LIKE '%${keyword}%'
+					M.MEM_NICKNAME LIKE '%${keyword}%'
 				</when>
 				<when test="condition == 'content'">
 					BOARD_CONTENT LIKE '%${keyword}%'
@@ -63,8 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectSearchListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM BOARD B
-		LEFT JOIN MEMBER M ON (BOARD_WRITER = MEM_NO)
-		WHERE B.STATUS = 'Y'
+		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		WHERE B.STATUS = 'N'
 		<if test="keyword != null and keyword != ''">
 			AND
 			<choose>
@@ -72,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					BOARD_TITLE LIKE '%${keyword}%'
 				</when>
 				<when test="condition == 'writer'">
-					USER_ID LIKE '%${keyword}%'
+					M.MEM_NICKNAME LIKE '%${keyword}%'
 				</when>
 				<when test="condition == 'content'">
 					BOARD_CONTENT LIKE '%${keyword}%'
@@ -80,5 +86,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>
 		</if>
 	</select>
-
+	
+	<select id="selectBoard" parameterType="int" resultMap="boardResultSet">
+		SELECT
+			BOARD_NO,
+			M.MEM_NICKNAME,
+			BOARD_TITLE,
+			BOARD_CONTENT
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<insert id="insertBoard" parameterType="board" useGeneratedKeys="true">
+	
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			SELECT SEQ_BNO.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO BOARD(
+			BOARD_NO,
+			BOARD_TITLE,
+			BOARD_WRITER,
+			BOARD_CONTENT
+		) VALUES(
+			#{boardNo},
+			#{boardTitle},
+			#{boardWriter},
+			#{boardContent}	
+		)
+		
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARD
+		SET BOARD_TITLE = #{boatdTitle},
+			BOARD_CONTENT = #{boardContent},
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<update id="increaseCount" parameterType="int">
+		UPDATE BOARD
+		SET COUNT = COUNT +1
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
 </mapper>

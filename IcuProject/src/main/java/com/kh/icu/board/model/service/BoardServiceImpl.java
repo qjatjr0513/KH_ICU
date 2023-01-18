@@ -1,4 +1,4 @@
-package com.kh.icu.chat.model.service;
+package com.kh.icu.board.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +7,9 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.kh.icu.board.model.dao.BoardDao;
 import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
-import com.kh.icu.chat.model.dao.BoardDao;
 import com.kh.icu.common.template.Pagination;
 
 @Service
@@ -75,7 +75,36 @@ public class BoardServiceImpl implements BoardService{
 		return map;
 	}
 	
+	@Override
+	public Board selectBoard(int bno) {
+
+		return boardDao.selectBoard(sqlSession, bno);
+	}
 	
+	@Override
+	public int insertBoard(Board b) {
+		
+		int result = 0;
+		int boardNo = boardDao.insertBoard(sqlSession, b);
+		
+		if(boardNo > 0) {
+			
+			result = boardNo;
+		}
+		return result;
+	}
 	
+	@Override
+	public int updateBoard(Board b) {
+		
+		return boardDao.updateBoard(sqlSession, b);
+		
+	}
+	
+	@Override
+	public int increaseCount(int bno) {
+		
+		return boardDao.increaseCount(sqlSession, bno);
+	}
 	
 }

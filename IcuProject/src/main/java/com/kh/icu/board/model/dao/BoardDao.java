@@ -1,4 +1,4 @@
-package com.kh.icu.chat.model.dao;
+package com.kh.icu.board.model.dao;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -40,6 +40,36 @@ public class BoardDao {
 	public int selectSearchListCount(SqlSession sqlSession,Map<String,Object> paramMap) {
 		return sqlSession.selectOne("boardMapper.selectSearchListCount");
 	}
+	
+	public Board selectBoard(SqlSession sqlSession, int bno) {
+		return sqlSession.selectOne("boardMapper.selectBoard", bno);
+	}
+	
+	public int insertBoard(SqlSession sqlSession, Board b) {
+		int result = sqlSession.insert("boardMapper.insertBoard", b);
+		if(result > 0) {
+			result = b.getBoardNo();
+		}
+		return result;
+	}
+	
+	public int updateBoard(SqlSession sqlSession, Board b) {
+		
+		return sqlSession.update("boardMapper.updateBoard", b);
+	}
+	
+	public int increaseCount(SqlSession sqlSession, int bno) {
+		
+		return sqlSession.update("boardMapper.increaseCount", bno);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

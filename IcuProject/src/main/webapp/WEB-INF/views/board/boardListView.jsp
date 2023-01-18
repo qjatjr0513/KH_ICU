@@ -70,13 +70,11 @@
 			$(function(){
 				$("#boardList>tbody>tr").click(function(){
 					
-					if($(this.text() != $("#boardList").text(){ // 게시물이 없을경우 클릭방지기능
-						
 						let bno = $(this).children().eq(0).text(); // 1, 2
 						// 현재 내가클릭한 tr의 자손들중 0번째에 위치한 자식의 textnode내용을 가져온다.
 						
 						location.href="${contextPath}/board/detail.bo/"+bno;
-					}))
+						
 
 				});
 			});
