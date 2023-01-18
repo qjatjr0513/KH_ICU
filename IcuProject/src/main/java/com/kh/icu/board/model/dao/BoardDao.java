@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.model.vo.Reply;
 
 @Repository
 public class BoardDao {
@@ -63,7 +64,13 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.increaseCount", bno);
 	}
 	
+	public ArrayList<Reply> selectReplyList(SqlSession sqlSession, int bno) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", bno);
+	}
 	
+	public int insertReply(SqlSession sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertReply", r);
+	}
 	
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.icu.board.model.dao.BoardDao;
 import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.common.template.Pagination;
 
 @Service
@@ -105,6 +106,16 @@ public class BoardServiceImpl implements BoardService{
 	public int increaseCount(int bno) {
 		
 		return boardDao.increaseCount(sqlSession, bno);
+	}
+	
+	@Override
+	public ArrayList<Reply> selectReplyList(int bno) {
+		return boardDao.selectReplyList(sqlSession, bno);
+	}
+	
+	@Override
+	public int insertReply(Reply r) {
+		return boardDao.insertReply(sqlSession, r);
 	}
 	
 }

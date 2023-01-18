@@ -1,8 +1,10 @@
 package com.kh.icu.board.model.service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.model.vo.Reply;
 
 public interface BoardService {
 	
@@ -22,7 +24,9 @@ public interface BoardService {
 	
 	public int increaseCount(int bno);
 	
+	public ArrayList<Reply> selectReplyList(int bno);
 	
+	public int insertReply(Reply r);
 	
 	
 	

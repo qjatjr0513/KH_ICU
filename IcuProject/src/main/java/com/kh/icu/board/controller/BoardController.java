@@ -1,5 +1,6 @@
 package com.kh.icu.board.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,10 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.icu.board.model.service.BoardService;
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 
 @Controller
@@ -77,7 +82,7 @@ public class BoardController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "게시글 등록 성공");
-			return "redirect:../list.bo";
+			return "redirect:list.bo";
 		} else {
 			model.addAttribute("errorMsg", "게시글 등록 실패");
 			return "common/errorPage";
@@ -109,7 +114,7 @@ public class BoardController {
 				b.setCount(b.getCount()+1);
 			}
 			mv.addObject("b", b);
-			mv.setViewName("boardDetailView");
+			mv.setViewName("board/boardDetailView");
 			
 			
 		}else {
@@ -121,7 +126,43 @@ public class BoardController {
 		return mv;
 	}
 	
-	
+	// 댓글 목록 불러오기
+	// ResponseBody : 별도의 뷰페이지가 아니라 리턴값을 직접 지정해야 하는 경우 사용.
+	@RequestMapping("reply.bo")
+	@ResponseBody
+	public String selectReplyList(int bno) {
+		// 댓글목록 조회
+		ArrayList<Reply> list = boardService.selectReplyList(bno);
+		
+		// gson으로 파싱
+		Gson gson = new GsonBuilder().create();
+		
+		String result = gson.toJson(list);
+		
+		return result;
+	}
+    
+	// 댓글 등록
+	@RequestMapping("insertReply.bo")
+	@ResponseBody
+	public String insertReply(Reply r, HttpSession session) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		if(m != null) {
+			r.setReplyWriter(m.getMemNickname()+"");
+		}
+		
+		int result = boardService.insertReply(r);
+		
+		if( result > 0) {
+			
+			return "1";
+		} else {
+
+			return "0";
+		}
+		
+	}
 	
 	
 	

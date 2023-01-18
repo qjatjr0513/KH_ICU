@@ -15,6 +15,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="STATUS" property="status"/>
 	</resultMap>
 	
+	<resultMap type="reply" id="replyResultSet">
+		<id column="REPLY_NO" property="replyNo"/>
+		<result column="TABLE_CD" property="tableCd"/>
+		<result column="MEM_NICKNAME" property="replyWriter"/>
+		<result column="REF_TNO" property="refTno"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
 	<select id="selectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
@@ -115,8 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD
-		SET BOARD_TITLE = #{boatdTitle},
-			BOARD_CONTENT = #{boardContent},
+		SET BOARD_TITLE = #{boardTitle},
+			BOARD_CONTENT = #{boardContent}
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
@@ -126,5 +136,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<select id="selectReplyList" parameterType="int" resultMap="replyResultSet">
+		SELECT
+			REPLY_NO,
+			REPLY_CONTENT,
+			REF_TNO,
+			MEM_NICKNAME,
+			R.CREATE_DATE,
+			R.STATUS
+		FROM REPLY R
+		JOIN MEMBER M ON (R.REPLY_WRITER = M.MEM_NO)
+		WHERE R.STATUS = 'N'
+		AND REF_TNO = #{boardNo}
+	</select>
+
+	<insert id="insertReply" parameterType="reply" >
+		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, REF_TNO, REPLY_WRITER)
+		VALUES (SEQ_RNO.NEXTVAL, #{replyContent}, #{refTno}, #{replyWriter} )
+	</insert>
 	
 </mapper>
