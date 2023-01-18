@@ -96,6 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			BOARD_NO,
 			M.MEM_NICKNAME,
+			B.BOARD_WRITER,
 			BOARD_TITLE,
 			BOARD_CONTENT
 		FROM BOARD B
@@ -146,13 +147,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			R.STATUS
 		FROM REPLY R
 		JOIN MEMBER M ON (R.REPLY_WRITER = M.MEM_NO)
-		WHERE R.STATUS = 'N'
+		JOIN BOARD B ON (R.REPLY_WRITER = B.BOARD_WRITER)
+		WHERE R.STATUS = 'N' AND R.TABLE_CD = 'B'
 		AND REF_TNO = #{boardNo}
 	</select>
 
 	<insert id="insertReply" parameterType="reply" >
-		INSERT INTO REPLY(REPLY_NO, REPLY_CONTENT, REF_TNO, REPLY_WRITER)
-		VALUES (SEQ_RNO.NEXTVAL, #{replyContent}, #{refTno}, #{replyWriter} )
+		INSERT INTO REPLY(REPLY_NO, TABLE_CD, REPLY_WRITER, REF_TNO, REPLY_CONTENT)
+		VALUES (SEQ_RNO.NEXTVAL, 'B', #{replyWriter}, #{refTno}, #{replyContent})
 	</insert>
 	
 </mapper>

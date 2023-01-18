@@ -138,7 +138,7 @@ public class BoardController {
 		Gson gson = new GsonBuilder().create();
 		
 		String result = gson.toJson(list);
-		
+		System.out.println(result);
 		return result;
 	}
     

@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
 	table * {margin:5px;}
 	table {
@@ -17,6 +16,12 @@
 		border: 1px solid black;
 	} */
 </style>
+<!-- jQuery -->
+    <script
+        src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+        crossorigin="anonymous">
+    </script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
