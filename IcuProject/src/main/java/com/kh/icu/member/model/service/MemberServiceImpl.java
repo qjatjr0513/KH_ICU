@@ -54,6 +54,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public String findId(Member m) {
+		String memberId= memberDao.findId(sqlSession, m);	
+		return memberId ;
+	}
+	
+	@Override
 	public String getAccessToken (String authorize_code) {
 		String access_Token = "";
 		String refresh_Token = "";
@@ -119,7 +125,7 @@ public class MemberServiceImpl implements MemberService{
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		
 		// 닉네임 숫자 범위
-		String name = randomRange(100000, 999999);
+		String nickName = randomRange(100000, 999999);
 		
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
@@ -149,12 +155,12 @@ public class MemberServiceImpl implements MemberService{
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			String name = properties.getAsJsonObject().get("name").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 
-			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
 			userInfo.put("name", name);
+			userInfo.put("email", email);
+			userInfo.put("nickName", nickName);
 
 		} catch (IOException e) {
 			e.printStackTrace();

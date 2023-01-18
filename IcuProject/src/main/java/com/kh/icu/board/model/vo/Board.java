@@ -10,7 +10,7 @@ import lombok.Data;
 public class Board {
 	private int boardNo;
 	private String tableCD;
-	private int boardWriter;
+	private String boardWriter;
 	private String boardTitle;
 	private String boardContent;
 	private Date createDate;

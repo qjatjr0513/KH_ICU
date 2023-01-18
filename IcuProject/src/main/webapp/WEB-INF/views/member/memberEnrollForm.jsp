@@ -154,7 +154,7 @@
     	
     	$.ajax({
     		url : "${contextPath }/sendMessage.do",
-    		data : {phoneNum : "+82"+$sms.val()},
+    		data : {phoneNum : $sms.val()},
             success : function(result){	
             	
             	Swal.fire({

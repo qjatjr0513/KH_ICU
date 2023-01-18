@@ -10,18 +10,22 @@ input {
   border-radius: 8px;
   box-shadow: 0 0 3px 1px var(--color-orange);
 }
+.logoBox {
+  text-align: center;
+  margin-top: 100px;
+}
 .idPwdBtn {
   text-align: center;
-  background-color: rgb(192, 240, 224);
+  /* background-color: rgb(192, 240, 224); */
   display: flex;
   justify-content: space-around;
   width: 500px;
   margin: auto;
-  margin-top: 250px;
+  margin-top: 50px;
 }
 
 .idPwdBtn > button {
-  background-color: antiquewhite;
+  background-color: var(--color-orange);
   padding: 20px;
   width: 200px;
   border-radius: 10px;
@@ -30,12 +34,13 @@ input {
 }
 
 .input__info {
-  background-color: beige;
-  width: 600px;
+  box-shadow: 0 0 5px 1px lightgray;
+  border-radius: 10px;
+  width: 700px;
   margin: auto;
   font-size: 20px;
   font-weight: bold;
-  padding: 20px;
+  padding: 50px;
 }
 
 .tableBtn {
@@ -43,7 +48,7 @@ input {
   background-color: var(--color-purple);
   border: none;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 12px;
 }
 .tableBtn:hover {
   background-color: var(--color-purple);
@@ -67,4 +72,13 @@ input {
   border-radius: 10px;
   color: white;
   width: 150px;
+}
+.idPwdBtn > button {
+  color: white;
+}
+#findPwdBox {
+  display: none;
+}
+.findPwdBtn {
+  opacity: 0.3;
 }

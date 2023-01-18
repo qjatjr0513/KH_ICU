@@ -18,29 +18,58 @@
       </div>
       
       <ul class="navbar__menu">
-        <li class="navbar__menu__item active1" data-link="#home">파티만들기</li>
-        <li class="navbar__menu__item" data-link="#about">파티찾기</li>
+        <li class="navbar__menu__item active1" data-link="#home">
+        	<a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
+        <li class="navbar__menu__item" data-link="#about">
+        	 <a href="${contextPath }/findParty.py" style="text-decoration: none; color:black;">파티찾기</a></li>
+        </li>
         <li class="navbar__menu__item" data-link="#skills">
            <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
         </li>
 
         <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
-        <li class="navbar__menu__item" data-link="#testimonials">
+        <li class="navbar__menu__item">자유게시판</li>
+        <li class="navbar__menu__item">FAQ</li>
+        &nbsp;&nbsp;
+        <li>
         <c:choose>
           	<c:when test="${userId ne null}">
-        	<!-- 로그인 전 -->
-          		 <label>${userNick }님 환영합니다.</label>&nbsp;&nbsp;
-          		<a href="${contextPath }/myPage.me">마이페이지</a>
-				<a href="${contextPath }/logout">로그아웃</a>
+        		<div class="dropdown">
+		          <button
+		            class="btn btn-secondary dropdown-toggle profile"
+		            type="button"
+		            data-bs-toggle="dropdown"
+		            aria-expanded="false"
+		          >
+		            <i class="fa-solid fa-user fa-lg"></i>
+		          </button>
+		          <ul class="dropdown-menu">
+		            <li><span class="dropdown-item">${userNick }</span></li>
+		            <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
+		            <li><a class="dropdown-item" href="${contextPath }/logout">로그아웃</a></li>
+		          </ul>
+		        </div>
           	</c:when>
         	<c:when test="${ empty loginUser }">
         	<!-- 로그인 전 -->
           		<a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black;">로그인</a>
           	</c:when>
           	<c:otherwise>
-          		<label>${loginUser.memName }님 환영합니다.</label>&nbsp;&nbsp;
-          		<a href="${contextPath }/myPage.me">마이페이지</a>
-				<a href="${contextPath }/logout.me">로그아웃</a>
+          		<div class="dropdown">
+		          <button
+		            class="btn btn-secondary dropdown-toggle profile"
+		            type="button"
+		            data-bs-toggle="dropdown"
+		            aria-expanded="false"
+		          >
+		            <i class="fa-solid fa-user fa-lg"></i>
+		          </button>
+		          <ul class="dropdown-menu">
+		            <li><span class="dropdown-item">${loginUser.memName}</span></li>
+		            <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
+		            <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
+		          </ul>
+		        </div>
           	</c:otherwise>
           </c:choose>
         </li>

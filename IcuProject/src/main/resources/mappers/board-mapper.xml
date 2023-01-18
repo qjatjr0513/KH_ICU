@@ -7,35 +7,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="board" id="boardResultSet">
 		<id column="Board_NO" property="boardNo"/>
 		<result column="TABLE_CD" property="tableCd"/>
-		<result column="BOARD_WRITER" property="boardWriter"/>
+		<result column="MEM_NICKNAME" property="boardWriter"/>
 		<result column="BOARD_TITLE" property="boardTitle"/>
 		<result column="BOARD_CONTENT" property="boardContent"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<association property="member" javaType="member">
-        	<id     column="MEM_NO" property="memNo"/>
-        	<result column="MEM_NICKNAME" property="memNickname"/>
-      	</association>
-<!-- 		<collection property="memNickname" resultMap="memberResultSet"/> -->
 	</resultMap>
 	
 	<select id="selectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
-			BOARD_WRITER,
+			M.MEM_NICKNAME,
 			BOARD_TITLE,
 			CREATE_DATE,
 			COUNT
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
 		WHERE B.STATUS = 'N'
-		ORDER BY CREATE_DATE DESC
+		ORDER BY B.CREATE_DATE DESC
 	</select>
 	
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
-		FROM BOARD
+		FROM BOARD 
 		WHERE STATUS = 'N'
 	</select>
 	

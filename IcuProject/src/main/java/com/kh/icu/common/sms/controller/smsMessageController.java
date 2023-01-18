@@ -1,53 +1,54 @@
 package com.kh.icu.common.sms.controller;
 
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+
 
 @Controller
 public class smsMessageController {
-	// Find your Account Sid and Token at twilio.com/user/account
-	public static final String ACCOUNT_SID = "ACd86a0a4d8a02c40bbcbaabf0674eaa49";
-	public static final String AUTH_TOKEN = "f07f5f23e5d742fe3d3ea95cf6f334eb";
 
+	  @RequestMapping(value = "sendMessage.do")
+	  @ResponseBody
+		public int sendMessage(HttpServletRequest request, String phoneNum) throws Exception {
 
-	@RequestMapping("sendMessage.do")
-	@ResponseBody
-	public int sendMessage(String phoneNum) {
-		return sendSMS(phoneNum);
-	}
-	
-	// SMS 전송
-	  public static int sendSMS (String phoneNum) {
+		  String api_key = "NCSFBFI10CA2CJBD";
+		  String api_secret = "PM4NT0AX4AUTDTCPP3ZU7LAC0RSV7CGZ";
+		  Message coolsms = new Message(api_key, api_secret);
 
-		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-	    
-	    // 휴대폰 인증번호 생성
-	    int authNum = randomRange(100000, 999999);
-	    
-	    
-	    // 전송대상 휴대폰 번호
-	    String sendTarget = phoneNum;
-	    
-	    // 전송 메세지
-	    String authMsg = "인증번호는 [" + authNum + "] 입니다." ;
-	    
-	    
-	    Message message = Message.creator(
-	    	// to
-	    	new PhoneNumber(sendTarget),
-	        // from
-	    	new PhoneNumber("+17707621543"), 
-	        // message
-	    	authMsg).create();
-	    
-		return authNum;
-		
-	  }
+		  int authNum = randomRange(100000, 999999);
+		  
+
+		  HashMap<String, String> params = new HashMap<String, String>();
+			params.put("to", phoneNum);
+			params.put("from", "010-6274-7684");
+			params.put("type", "SMS");
+			params.put("text", "[ICU] 인증번호 [" + authNum + "] 를 입력하세요.");
+			params.put("app_version", "test app 1.2"); // application name and version
+
+			
+		  System.out.println(params);
+		  try {
+		  JSONObject result = coolsms.send(params); // 보내기&전송결과받기
+
+		  System.out.println(result.toString());
+	    } catch (CoolsmsException e) {
+	      System.out.println(e.getMessage());
+	      System.out.println(e.getCode());
+	    }
+
+		  return authNum;
+		}
+	  
 	  
 	// 인증번호 범위 지정
 	  public static int randomRange(int n1, int n2) {

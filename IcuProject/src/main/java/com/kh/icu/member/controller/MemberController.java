@@ -24,10 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 
 @Controller
 public class MemberController {
@@ -116,6 +112,17 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping("findId.me")
+	@ResponseBody
+	public String findId(String memName, String phone, Model model) {
+		Member m = new Member();
+		m.setMemName(memName);
+		m.setPhone(phone);
+		String memberId = memberService.findId(m);
+
+		model.addAttribute("memberId", memberId);
+		return memberId;
+	}
 
 	//로그인
 	@RequestMapping("login.me")
@@ -126,7 +133,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);
 			return "common/main";
 		}else {
-			model.addAttribute("errorMsg", "회원가입 실패");
+			model.addAttribute("errorMsg", "로그인 실패");
 			return "common/errorPage";
 		}
 	}

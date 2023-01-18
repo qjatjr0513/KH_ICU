@@ -20,5 +20,6 @@ public interface MemberService {
 	public Member getUserInfo(String access_Token);
 	
 	public void kakaoLogout(String access_Token);
-
+	
+	public String findId(Member m);
 }

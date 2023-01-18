@@ -27,6 +27,10 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);	
 	}
 	
+	public String findId(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+	
 	// 카카오 로그인 정보 저장
 	public void kakaoinsert(SqlSession sqlSession, HashMap<String, Object> userInfo) {
 		sqlSession.insert("memberMapper.kakaoInsert",userInfo);

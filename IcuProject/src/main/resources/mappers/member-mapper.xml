@@ -66,13 +66,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 카카오 로그인 정보 찾기 -->
 	<select id="findKakao" parameterType="java.util.HashMap" resultMap="memberResultSet">
-		SELECT * FROM MEMBER WHERE MEM_NAME=#{nickname} AND MEM_ID=#{email} AND SNS_TYPE='K'
+		SELECT * FROM MEMBER WHERE MEM_NAME=#{name} AND MEM_ID=#{email} AND SNS_TYPE='K'
 	</select>
 
 	<!-- 카카오 로그인 정보 저장 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
 		INSERT INTO MEMBER(MEM_NO, MEM_NAME, MEM_NICKNAME, MEM_ID, SNS_TYPE)
-			values(SEQ_MEM.NEXTVAL, #{nickname}, #{name}, #{email}, 'K')
+			values(SEQ_MEM.NEXTVAL, #{name}, #{nickName}, #{email}, 'K')
 	</insert>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="member" resultType="String">
+		SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{memName} AND PHONE=#{phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=#{id} AND PHONE=#{phone}
+	</select>
+	
+	<update id="updatePwd" parameterType="member">
+		UPDATE MEMBER
+		SET MEM_PWD = #{memPwd}
+		MODIFY_DATE = SYSDATE
+		WHERE MEM_ID=#{id} AND PHONE=#{phone}
+	</update>
 </mapper>
