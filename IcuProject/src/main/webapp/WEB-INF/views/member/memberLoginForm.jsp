@@ -105,12 +105,11 @@
       <div class="login__button loginbtn">
         <button type="submit">로그인</button>
       </div>
-        <div id="naver_id_login" style="text-align:center">
+        <div class="naver__button loginbtn" id="naver_id_login" style="text-align:center">
       	<a id="naverlogin" href="${url}">
-			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+			<img width="223" src="../image/naverLogo.png"/>
 	  	</a>
 	  </div>
-	  <br>
       <div class="kakao__button loginbtn">
       <!-- 카카오 로그인 -->
       <c:if test="${userId eq null}">
