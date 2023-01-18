@@ -254,13 +254,14 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body">비밀번호
             <input
               type="text"
               placeholder="비밀번호 입력"
               style="width: 450px"
             />
             <br /><br />
+            비밀번호 확인
             <input
               type="text"
               placeholder="비밀번호 재입력"

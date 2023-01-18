@@ -29,7 +29,7 @@
 
         <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
         <li class="navbar__menu__item">
-        	<a href="${contextPath }/board/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
+        	<a href="${contextPath }/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
         <li class="navbar__menu__item">FAQ</li>
         &nbsp;&nbsp;
         <li>

@@ -20,7 +20,7 @@
 		<div class="innerOuter" >
 			<h2>게시글 작성하기</h2>
 			<br>
-			<form id="enrollForm" action="${contextPath }/board/insert.bo">
+			<form id="enrollForm" action="${contextPath }/insert.bo">
 				<div >
 					<div>
 						<label for="title">제목 : </label>
@@ -41,7 +41,7 @@
 				<input type="hidden" name="boardNo" value="${empty b.boardNo ? 0 : b.boardNo}"/>
 				
 				<div align="center">
-					<a href="${contextPath }/board/list.bo" class="btn btn-danger">취소하기</a>
+					<a href="${contextPath }/list.bo" class="btn btn-danger">취소하기</a>
 					<button type="submit" class="btn btn-primary">등록하기</button>
 				</div>
 			</form>

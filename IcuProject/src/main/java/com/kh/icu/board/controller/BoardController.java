@@ -20,7 +20,6 @@ import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.member.model.vo.Member;
 
 @Controller
-@RequestMapping("/board")
 public class BoardController {
 	
 	@Autowired
@@ -78,7 +77,7 @@ public class BoardController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "게시글 등록 성공");
-			return "redirect:../board/list.bo";
+			return "redirect:../list.bo";
 		} else {
 			model.addAttribute("errorMsg", "게시글 등록 실패");
 			return "common/errorPage";
@@ -110,7 +109,7 @@ public class BoardController {
 				b.setCount(b.getCount()+1);
 			}
 			mv.addObject("b", b);
-			mv.setViewName("board/boardDetailView");
+			mv.setViewName("boardDetailView");
 			
 			
 		}else {
