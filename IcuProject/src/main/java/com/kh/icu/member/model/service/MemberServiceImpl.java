@@ -59,6 +59,7 @@ public class MemberServiceImpl implements MemberService{
 		return memberId ;
 	}
 	
+	//카카오 토큰 발급
 	@Override
 	public String getAccessToken (String authorize_code) {
 		String access_Token = "";
@@ -118,6 +119,7 @@ public class MemberServiceImpl implements MemberService{
 		return access_Token;
 	}
 	
+	// 카카오 정보확인
 	@Override
 	public Member getUserInfo(String access_Token) {
 
@@ -185,13 +187,9 @@ public class MemberServiceImpl implements MemberService{
         }
 	}
 	
-	// 닉네임 랜덤생성
-	public static String randomRange(int n1, int n2) {
-		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
-	    return (String) "K"+(int)(Math.floor(num));
-	  }
 	
 	
+	// 카카오 로그아웃
 	@Override
 	public void kakaoLogout(String access_Token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
@@ -218,4 +216,48 @@ public class MemberServiceImpl implements MemberService{
             e.printStackTrace();
         }
 	}
+	
+	//네이버 정보확인
+	@Override
+	public Member findMember(Member m) {
+		Member result = memberDao.findMember(sqlSession, m);
+		
+        // 저장되어있는지 확인
+        if(result == null) {
+            //result null 이면 정보가 저장 안되어있는거라서 저보를 저장.
+        	memberDao.getUserInfoN(sqlSession, m);
+            //저장하기위해 repository 로 이동
+            return memberDao.findMember(sqlSession, m);
+            // 정보 저장후 컨트롤러에 정보를 보냄
+            //result 를 리턴으로 보내면 null 이 리턴되므로 위코드를 사용.
+        }else {
+            return result;
+            //정보가 있으므로 result 를 리턴함
+        }
+	};
+	
+	//네이버 정보저장
+	/*
+	 * @Override public int getUserInfoN(Member m) { String nickname =
+	 * randomRangeN(100000, 999999); m.setMemNickname(nickname);
+	 * System.out.println(nickname);
+	 * 
+	 * int result = memberDao.getUserInfoN(sqlSession, m);
+	 * System.out.println(result); return result;
+	 * 
+	 * };
+	 */
+	
+	// 닉네임 랜덤생성 (naver)
+	public static String randomRangeN(int n1, int n2) {
+		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
+	    return (String) "N"+(int)(Math.floor(num));
+	  }
+	
+	// 닉네임 랜덤생성(kakao)
+	public static String randomRange(int n1, int n2) {
+		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
+	    return (String) "K"+(int)(Math.floor(num));
+	  }
+	
 }

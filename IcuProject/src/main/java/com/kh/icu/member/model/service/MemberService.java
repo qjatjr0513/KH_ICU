@@ -22,4 +22,8 @@ public interface MemberService {
 	public void kakaoLogout(String access_Token);
 	
 	public String findId(Member m);
+	
+	public Member findMember(Member m);
+	
+	/* public int getUserInfoN(Member m); */
 }

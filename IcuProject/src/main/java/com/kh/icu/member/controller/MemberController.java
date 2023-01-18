@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.member.model.service.MemberService;
+import com.kh.icu.member.model.service.NaverLoginBO;
 import com.kh.icu.member.model.vo.Member;
 
 @Controller
@@ -35,6 +37,15 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 	
+	/* NaverLoginBO */
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+	
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+	
 	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService;
 		this.bcryptPasswordEncoder = bcryptPasswordEncoder;
@@ -43,7 +54,15 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@RequestMapping("loginForm.me")
-	public String loginForm() {
+	public String loginForm(Model model, HttpSession session) {
+		
+		/* 네아로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		/* 인증요청문 확인 */
+		System.out.println("네이버:" + naverAuthUrl);
+		/* 객체 바인딩 */
+		model.addAttribute("url", naverAuthUrl);
+		
 		return "member/memberLoginForm";
 	}
 	
@@ -175,9 +194,11 @@ public class MemberController {
         return "common/main";
     }
 	
+	
 	@RequestMapping(value="/logout")
     public String logout(HttpSession session) {
         String access_Token = (String)session.getAttribute("access_Token");
+        String oauthToken = (String)session.getAttribute("signIn");
 
         if(access_Token != null && !"".equals(access_Token)){
             memberService.kakaoLogout(access_Token);
@@ -188,8 +209,66 @@ public class MemberController {
             System.out.println("access_Token is null");
             //return "redirect:/";
         }
+        
+        if(oauthToken != null && !"".equals(oauthToken)){
+            //memberService.naverLogout(oauthToken);
+            session.removeAttribute("signIn");
+            session.removeAttribute("userId");
+            session.removeAttribute("userNick");
+        }else{
+            System.out.println("oauthToken is null");
+            //return "redirect:/";
+        }
+        
         //return "index";
         return "redirect:/";
     }
+	
+	
+	
+	//네이버 로그인 성공시 callback호출 메소드
+	@RequestMapping(value = "/navercallback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callbackNaver(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+			throws Exception {
+		System.out.println("로그인 성공 callbackNaver");
+		OAuth2AccessToken oauthToken;
+        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		System.out.println("oauthToken : "+oauthToken);
+        //로그인 사용자 정보를 읽어온다.
+	    apiResult = naverLoginBO.getUserProfile(oauthToken);
+		System.out.println("apiResult : "+ apiResult);
+	    
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj;
+		
+		jsonObj = (JSONObject) jsonParser.parse(apiResult);
+		JSONObject response_obj = (JSONObject) jsonObj.get("response");	
+		
+		System.out.println("response_obj : "+response_obj);
+		
+		// 프로필 조회
+		String email = (String) response_obj.get("email");
+		String name = (String) response_obj.get("nickname");
+		
+		System.out.println("email : "+ email);
+		System.out.println("name : "+ name);
+        
+		
+		m.setMemId(email);
+		m.setMemName(name);
+		
+		Member userInfo = memberService.findMember(m);
+		
+		if (userInfo.getMemId() != null) {
+            session.setAttribute("userId", userInfo.getMemId());
+            session.setAttribute("userNick", userInfo.getMemNickname());
+            session.setAttribute("signIn", apiResult);
+        }
+
+		System.out.println("getMemNickname : "+ m.getMemNickname());
+        
+		return "common/main";
+	}
+
 
 }

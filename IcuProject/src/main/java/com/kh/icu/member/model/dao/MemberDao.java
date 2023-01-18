@@ -44,4 +44,18 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.findKakao", userInfo);
 	}
 	
+	// 네이버 로그인 정보 확인
+	public Member findMember(SqlSession sqlSession, Member m) {
+		System.out.println("Member(findMember/Dao):"+m);
+		Member result = sqlSession.selectOne("memberMapper.findMember", m);
+		System.out.println("result :"+result);
+		return result;
+	};
+	
+	// 네이버 로그인 정보 저장
+	public int getUserInfoN(SqlSession sqlSession, Member m) {
+		System.out.println(m.getMemNickname());
+		return sqlSession.insert("memberMapper.getUserInfoN", m);
+	};
+	
 }
