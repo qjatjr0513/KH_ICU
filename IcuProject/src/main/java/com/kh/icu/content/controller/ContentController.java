@@ -1,6 +1,8 @@
 package com.kh.icu.content.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
+import com.kh.icu.member.model.vo.Member;
 
 @Controller
 public class ContentController {
@@ -41,11 +44,18 @@ public class ContentController {
 	public String contentDetail(@RequestParam(value = "conNo") int conNo
 			, HttpSession session, Model model) {
 		Content c = contentService.selectContent(conNo);
+		Member loginUser = (Member)session.getAttribute("loginUser");		
+		int memNo =0;
+		if(loginUser != null) {
+			memNo = loginUser.getMemNo();
+		}
+		
 		ArrayList<String> genre = new ArrayList<String>();
 		genre = contentService.selectGenre(conNo);
+
 		model.addAttribute("content", c);
 		model.addAttribute("genre", genre);
-		System.out.println(genre);
+		model.addAttribute("memNo", memNo);
 		return "content/contentDetail";
 	}
 	
@@ -60,4 +70,45 @@ public class ContentController {
 		return result;
 	}
 	
+	@RequestMapping("/commentInsert.co")
+	@ResponseBody
+	public int insertReview(int conNo, int memNo, String cmtContent, int cmtScore) {
+		Coment c = new Coment();
+		c.setConNo(conNo);
+		c.setCmtWriter(Integer.toString(memNo));
+		c.setCmtContent(cmtContent);
+		c.setCmtStar(cmtScore);
+		
+		int result = contentService.insertReview(c);
+		
+		System.out.println(result);
+		return result;
+	}
+	
+	@RequestMapping("/starChange.co")
+	@ResponseBody
+	public double starChange(int conNo) {
+		double cmtStarWidth = 0.0;
+		
+		try {
+			cmtStarWidth = contentService.selectStar(conNo);
+		}
+		catch(NullPointerException e) {
+			cmtStarWidth = 0.0;
+		}
+		
+		return cmtStarWidth;
+	}
+	
+	@RequestMapping("/searchContent.co")
+	@ResponseBody
+	public int searchContent(@RequestParam(value="genre[]") ArrayList<String> genre,
+			@RequestParam(value="age[]") ArrayList<String> age) {
+		genre.remove(0);
+		age.remove(0);
+		
+		System.out.println(genre);
+		System.out.println(age);
+		return 1;
+	}
 }

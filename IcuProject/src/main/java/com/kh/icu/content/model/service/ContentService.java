@@ -11,4 +11,6 @@ public interface ContentService {
 	public Content selectContent(int conNo);
 	public ArrayList<String> selectGenre(int conNo);
 	public ArrayList<Coment> selectReview(int conNo);
+	public int insertReview(Coment c);
+	public double selectStar(int conNo);
 }

@@ -27,4 +27,12 @@ public class ContentDao {
 	public ArrayList<Coment> selectReview(SqlSession sqlSession, int conNo){
 		return (ArrayList)sqlSession.selectList("contentMapper.selectReview", conNo);
 	}
+	
+	public int insertReview(SqlSession sqlSession, Coment c) {
+		return sqlSession.insert("contentMapper.insertReview", c);
+	}
+	
+	public double selectStar(SqlSession sqlSession, int conNo) {
+		return sqlSession.selectOne("contentMapper.selectStar", conNo);
+	}
 }

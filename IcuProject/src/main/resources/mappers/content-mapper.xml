@@ -55,4 +55,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN MEMBER ON (CMT_WRITER = MEM_NO)
 		WHERE CON_NO = #{conNo}
 	</select>
+	
+	<insert id="insertReview" parameterType="coment">
+		INSERT INTO COMENT(CMT_NO, CMT_WRITER, CON_NO, CMT_CONTENT, CMT_STAR)
+		VALUES (SEQ_CMNO.NEXTVAL, #{cmtWriter}, #{conNo}, #{cmtContent}, #{cmtStar})
+	</insert>
+	
+	<select id="selectStar" resultType="double">
+		SELECT ROUND(AVG(CMT_STAR/20), 1)
+		FROM COMENT
+		WHERE CON_NO = #{conNo}
+	</select>
 </mapper>

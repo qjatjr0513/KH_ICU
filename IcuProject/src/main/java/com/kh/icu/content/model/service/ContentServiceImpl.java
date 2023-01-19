@@ -53,4 +53,14 @@ public class ContentServiceImpl implements ContentService{
 		ArrayList<Coment> list = contentDao.selectReview(sqlSession, conNo);
 		return list;
 	}
+	
+	@Override
+	public int insertReview(Coment c) {
+		return contentDao.insertReview(sqlSession, c);
+	}
+	
+	@Override
+	public double selectStar(int conNo) {
+		return contentDao.selectStar(sqlSession, conNo);
+	}
 }

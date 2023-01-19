@@ -5,6 +5,8 @@
 <c:set var="c" value="${content}"/>
 <c:set var="g" value="${genre }"/>
 <c:set var="size" value="${fn:length(genre)}" />
+<c:set var="memNo" value="${memNo }"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +58,7 @@
 	#reviewWrite{
 	  	margin: auto;
 		width: 800px;
-		height: 250px;
+		height: 200px;
   	}
   	.star {
 	    position: relative;
@@ -97,11 +99,14 @@
   		resize: none;
   	}
   	#reviewInput{
+  		height: 100px;
   		float: left;
+  		margin-bottom: 20px;
   	}
   	#submitBtn{
-  		margin-bottom: 70px;
-  		margin-left: 20px;
+  		width: 100px;
+  		height: 100px;
+  		margin-bottom: 90px;
   	}
   	#review{
   		margin: auto;
@@ -147,6 +152,19 @@
   		width: 100%;
   		height: 55%;
   	}
+  	.setStarTitle {
+    	position: relative;
+    	font-size: 2rem;
+    	color: #ddd;
+	}
+	.setStarTitle span {
+    	width: 0;
+    	position: absolute; 
+    	left: 0;
+    	color: red;
+    	overflow: hidden;
+    	pointer-events: none;
+	}
 </style>
 </head>
 <body>
@@ -211,7 +229,10 @@
 	    	<br>
 	    		<h2>&nbsp;&nbsp;${c.conKTitle}</h2>
 	    		<h4>&nbsp;&nbsp;${c.conETitle}, ${c.conDate }</h4>
-	    		<h4>&nbsp;&nbsp;★★★★★(미구현)</h4>
+	    		&nbsp;&nbsp;<span class='setStarTitle'>★★★★★ 
+					<span style='width:0%'>★★★★★</span>
+				</span>
+				<h4 id="scoreAvg">&nbsp;&nbsp;()</h4>
 	    		<br>
 	    		<h6>&nbsp;&nbsp;관람 연령 : ${c.conAge }</h6>
 	    		<h6>&nbsp;&nbsp;장르 : 
@@ -246,36 +267,33 @@
     </div>
     <div id="reviewWrite">
     	<br>
-    	<h6 id="average">평점</h6>
-		<span class="star">
-		★★★★★
-		<span>★★★★★</span>
-		<input type="range" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
-		</span>
+    	<c:if test="${memNo ne 0 }">
+	    	<h6 id="average">평점</h6>
+			<span class="star">
+			★★★★★
+			<span>★★★★★</span>
+			<input type="range" id="score" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+			</span>
+		</c:if>
 		<br><br>
 		<div id="reviewInput">
-			<textarea cols="70" rows="3" placeholder="내용을 입력해주세요" required></textarea>
-			<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg">제출</button>
+			<c:if test="${memNo ne 0 }">
+				<textarea cols="75" rows="4" id="cmtContent" placeholder="내용을 입력해주세요" required></textarea>
+				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" onclick="insertReview();">작성</button>
+			</c:if>
+			
+			<c:if test="${memNo eq 0 }">
+				<textarea cols="75" rows="4" placeholder="로그인 후 이용해주세요" disabled></textarea>
+				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" disabled>작성</button>
+			</c:if>
 		</div>
 		
     </div>
 	<div id="review">
 		<div id="writtenReview">
-			<div id="profileArea">
-				<div id="profile">
-					<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkEtR9%2FbtrgfMGHvbz%2FULwHeMTVRAhKiykodpkP6K%2Fimg.png">
-				</div>
-				<div id="userName">
-					<h5 align="center">닉네임</h5>
-				</div>
-			</div>
 			<div id="reviewContent">
-				<div id="scoreStar">
-					<span>★★★★★</span>
-				</div>
 				<div id="reviewText">
-					<h5>리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰
-					리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰</h5>
+					<h5>작성된 리뷰가 존재하지 않습니다</h5>
 				</div>
 			</div>
 		</div>
@@ -291,6 +309,7 @@
 	    }
     	
     	$(function(){
+    		starChange();
     		selectReview();
 		});
     	
@@ -322,12 +341,43 @@
 									"</div>"+
 								"</div>";
 						$("#writtenReview").html(html);
+						starChange();
 					}														
 				},error : function(req,sts,err){
 					console.log(req);
 					console.log(sts);
 					console.log(err);
 				} 
+    		})
+    		
+    	}
+    	
+    	function insertReview(){
+    		$.ajax({
+    			url : '${contextPath}/commentInsert.co',
+				data : {conNo : '${c.conNo}', memNo : '${memNo}'
+					, cmtContent : $("#cmtContent").val()
+					, cmtScore : ($("#score").val()) * 10},
+				success: function(result){
+					$("#cmtContent").val('');
+					$('.star>span').width('0%');
+					$('#average').text('평점');
+					selectReview();
+				}
+    		})
+    	}
+    	
+    	function starChange(){
+    		$.ajax({
+    			url : '${contextPath}/starChange.co',
+				data : {conNo : '${c.conNo}'},
+				success: function(result){
+					let percent = 0;
+			    	percent = result * 20 + '%';
+					$("#scoreAvg").text("\u00A0\u00A0("+result+")");
+					$('.setStarTitle>span').width(percent);
+					console.log(percent);
+				}
     		})
     	}
     </script>
