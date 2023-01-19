@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- bootstrap -->
+
+	<!-- bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -51,7 +51,7 @@
     />
 
     <!-- css -->
-<!--     <link rel="stylesheet" href="resources/css/05_enrollForm2.css" /> -->
+    <link rel="stylesheet" href="resources/css/myPage.css" />
 
     <!-- jQuery -->
     <script
@@ -62,12 +62,6 @@
 
     <!-- Alert 창  -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-<style>
-	#enrollForm>div{width:100%;}
-
-
-</style>
 </head>
 <body>
 	<!-- Navbar -->
@@ -77,59 +71,51 @@
     <div id="main__logo">
       <img src="resources/images/navbarLogo.png" />
     </div>
-	<br><br>
-	<div class="content">
-		<br><br>
-		<div class="innerOuter" >
-			<c:choose>
-				<c:when test="${b.boardNo eq null}">
-					<h2>게시글 작성하기</h2>
-				</c:when>
-				<c:otherwise>
-					<h2>게시글 수정하기</h2>
-				</c:otherwise>
-			</c:choose>
-			<br>
-			<form id="enrollForm" action="${contextPath }/insert.bo">
-				<div >
-					<div>
-						<label for="title">제목 : </label>
-						<input type="text" id="title" class="form-control" name="boardTitle" value="${b.boardTitle } " required>
-					</div>
-					<hr>
-					<div>
-						<label for="writer">작성자 : </label>
-						<input type="text" id="writer" class="form-control" value="${loginUser.memNickname}" name="memNickname" readonly>
-						<input type="hidden" name="boardWriter" value="${loginUser.memNo}">
-					</div>
-					<br>
-					<div>
-						<textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="boardContent" placeholder="내용을 입력해주세요." required></textarea>
-					</div>
-					<br>
-				<input type="hidden" name="mode" value="${param.mode }"/>
-				<input type="hidden" name="boardNo" value="${empty b.boardNo ? 0 : b.boardNo}"/>
-				
-				<div align="center">
-					<a href="${contextPath }/list.bo" class="btn btn-danger">취소하기</a>
-					<c:choose>
-						<c:when test="${b.boardNo eq null}">
-							<button type="submit" class="btn btn-primary">등록하기</button>
-						</c:when>
-						<c:otherwise>
-							<button type="submit" class="btn btn-primary">수정하기</button>
-						</c:otherwise>
-					</c:choose>	
-				</div>
-			</form>
-			
-			
-		</div>
-	
-	</div>
 
-	
-		
-	<jsp:include page="../common/footer.jsp"/>
+    <div id="whole">
+      <div id="imgAndInfo">
+        <div id="viewAndEnroll">
+          <div id="view" class="titleImg">
+          <!-- 올린 파일이 들어가는 자리 -->
+
+          </div>
+          <div id="enroll">
+            <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
+              <button type="submit" id="upfile" class="form-control" name="upfile">사진등록</button>
+              <input type="hidden" name="originName" value="${m.originName }"/>
+			  <input type="hidden" name="changeName" value="${m.changeName }"/>
+            </form>
+          </div>
+        </div>
+        <div id="info">
+          <h4><input type="text" name="memNickname" value="${loginUser.memNickname}"/></h4><br>
+          아이디 : <input type="text" name="memId" value="${loginUser.memId}"><br><br>
+          이름   : <input type="text" name="memName" value="${loginUser.memName}"><br><br>
+          연락처 : <input type="text" name="phone" value="${loginUser.phone}"><br><br>
+          이메일 : <input type="text" name="email" value="${loginUser.email}"><br><br>
+          가입일 : <input type="text" name="enrolldate" value="${loginUser.enrollDate}"><br><br>
+        </div>
+        <br>
+      </div>
+      <div id="updateButton">
+        <a class="btn" href="${contextPath}/memUpdate.me">정보 수정</a>
+      </div>
+      
+    </div>
+
+    <script>
+    function loadImg(inputFile, num){
+      if(inputFile.files.length != 0){
+
+          let reader = new FileReader();
+          reader.readAsDataURL(inputFile.files[0]);
+          
+          // 파일 읽기가 완료되었을때 실행할 함수 정의
+          reader.onload = function(e){
+              $(".titleImg").attr("src",e.target.result);
+          }
+      }
+    }
+    </script>
 </body>
 </html>

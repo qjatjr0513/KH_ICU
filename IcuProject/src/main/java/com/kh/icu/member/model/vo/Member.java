@@ -22,4 +22,7 @@ public class Member {
 	private String status;
 	private String bStatus;
 	private String snsType;
+	
+	private String originName;
+	private String changeName;
 }
