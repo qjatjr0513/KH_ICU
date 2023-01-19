@@ -109,18 +109,18 @@
       <tr>
         <td>서비스</td>
         <td>
-          <select name="" id="">
-            <option value="넷플릭스">넷플릭스</option>
-            <option value="왓챠">왓챠</option>
-            <option value="웨이브">웨이브</option>
-            <option value="디즈니 플러스">디즈니 플러스</option>
-            <option value="애플TV">애플TV</option>
+          <select name="ottChoice" id="ottChoice" onchange="ottChoice()">
+            <option value="1">넷플릭스</option>
+            <option value="2">왓챠</option>
+            <option value="3">웨이브</option>
+            <option value="4">디즈니 플러스</option>
+            <option value="5">애플TV</option>
           </select>
         </td>
       </tr>
       <tr>
         <td>서비스 가격</td>
-        <td>17,000원</td>
+        <td id="ottPrice"></td>
       </tr>
       <tr>
         <td>제목</td>
@@ -156,17 +156,17 @@
       <tr>
         <td>진행 기간</td>
         <td>
-          2023-01-01 ~ <input type="text" placeholder="종료일" />&nbsp; 예상기간
-          : 80일
+          <span id="sysdate"></span> ~ <input type="date" placeholder="종료일" id="endDate" onchange="remainedSpan()" pattern="\d{4}-\d{2}-\d{2}" />&nbsp; 예상기간
+          : <span id="period"></span>
         </td>
       </tr>
       <tr>
         <td>참여 금액</td>
-        <td>1인당 1일 142원</td>
+        <td>1인당 1일 <span id="pricePerDay"></span></td>
       </tr>
       <tr>
         <td>예상 금액</td>
-        <td>11,360원</td>
+        <td><span id="totalPrice"></span></td>
       </tr>
     </table>
 
@@ -174,5 +174,78 @@
       <button>초기화</button>
       <button>등록</button>
     </div>
+    
+   <script>
+     
+     var period = 0;
+     var price1 = 0;
+     
+  // ott 가격 
+	 function ottChoice(){
+		$.ajax({
+           url : '${contextPath}/ottChoice',
+           data : {ottNo : $("#ottChoice option:selected").val()},
+           success : function(price){
+               
+        	  var ppd = Math.round(price /4 /30, 1); 
+        	   
+              $("#ottPrice").html(price +"원");
+              $("#pricePerDay").html(ppd +"원");
+              
+              price1 = Math.round(price /4 /30, 1); 
+              
+           	  // 예상총금액
+      		  if(period != 0){
+    			//period = $("#period").val();
+    			
+    			console.log("price1" + price1);
+    			console.log("period" + period);
+    			
+    			$("#totalPrice").html(price1 * period +"원");
+    		  }
+            }
+         });
+
+	  }
+	 
+	// 오늘 날짜 & 날짜 선택 (오늘 ~ )
+	 $(function(){
+         var now_utc = Date.now()
+         var timeOff = new Date().getTimezoneOffset()*60000;
+         var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+         // 오늘날짜 
+         $("#sysdate").html(today);
+         // 날짜선택
+         document.getElementById("endDate").setAttribute("min", today);
+      });
+	
+	// 남은기간 & 일일금액
+     function remainedSpan(){
+        var now_utc = Date.now();
+        var timeOff = new Date().getTimezoneOffset()*60000;
+        var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+		
+		const date1 = new Date($("#endDate").val());
+  		const date2 = new Date(today);
+		
+		var diffDate = date1.getTime() - date2.getTime();
+		
+		period = diffDate/(1000 * 60 * 60 * 24)+1;
+		
+		$("#period").html(diffDate/(1000 * 60 * 60 * 24)+1 +"일");
+		
+		// 예상총금액
+		if(price1 != 0){
+  			$("#totalPrice").html(price1 * period +"원");
+  		}
+		
+      };
+
+	 </script>
+		
+    
+    
+    
+    
   </body>
 </html>
