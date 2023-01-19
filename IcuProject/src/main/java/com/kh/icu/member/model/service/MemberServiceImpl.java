@@ -5,11 +5,18 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -58,6 +65,84 @@ public class MemberServiceImpl implements MemberService{
 		String memberId= memberDao.findId(sqlSession, m);	
 		return memberId ;
 	}
+	
+//	@Override
+//	public int findPwd(Member m) {
+//		int result = memberDao.findPwd(sqlSession, m);
+//		return result;
+//	}
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Override
+	public void sendEmail(Member m, String div) throws Exception {
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "icu18780@gmail.com";
+		String subject = "";
+		String msg = "";
+
+		if(div.equals("findpw")) {
+			subject = "ICU 임시 비밀번호 입니다.";
+			msg += m.getMemId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.";
+			msg += "임시 비밀번호 : ";
+			msg += m.getMemPwd();
+		}
+
+		// 받는 사람 E-Mail 주소
+		String mail = m.getEmail();
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+
+			messageHelper.setFrom(fromEmail); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(mail); // 받는사람 이메일
+			messageHelper.setSubject(subject); // 메일제목은 생략이 가능하다
+			messageHelper.setText(msg); // 메일 내용
+
+			mailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
+	//비밀번호찾기
+	@Override
+	public void findPwd(HttpServletResponse response, Member m) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		Member result = memberDao.selectMember(sqlSession, m);
+		System.out.println(result);
+		System.out.println(m);
+		PrintWriter out = response.getWriter();
+		// 가입된 아이디가 없으면
+		if(memberDao.selectId(sqlSession, m) == null) {
+			out.print("등록되지 않은 아이디입니다.");
+			out.close();
+		}
+		// 가입된 이메일이 아니면
+		else if(!m.getEmail().equals(result.getEmail())) {
+			out.print("등록되지 않은 이메일입니다.");
+			out.close();
+		}else {
+			// 임시 비밀번호 생성
+			String pwd = "";
+			for (int i = 0; i < 12; i++) {
+				pwd += (char) ((Math.random() * 26) + 97);
+			}
+			m.setMemPwd(pwd);
+			// 비밀번호 변경
+			memberDao.updatePwd(sqlSession, m);
+			// 비밀번호 변경 메일 발송
+			sendEmail(m, "findpw");
+
+			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+			out.close();
+		}
+	}
+	
+	
 	
 	//카카오 토큰 발급
 	@Override

@@ -15,11 +15,14 @@ public class Member {
 	private String memNickname;
 	private String memName;
 	private String phone;
-	private String birthDay;
+	private String email;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String role;
 	private String status;
 	private String bStatus;
 	private String snsType;
+	
+	private String originName;
+	private String changeName;
 }

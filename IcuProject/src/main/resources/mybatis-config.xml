@@ -28,6 +28,7 @@
      <mapper resource="/mappers/member-mapper.xml"/> 
      <mapper resource="/mappers/board-mapper.xml"/>
      <mapper resource="/mappers/content-mapper.xml"/>
+     <mapper resource="/mappers/party-mapper.xml"/>
 <!--     <mapper resource="/mappers/chatting-mapper.xml"/> -->
   </mappers>
   

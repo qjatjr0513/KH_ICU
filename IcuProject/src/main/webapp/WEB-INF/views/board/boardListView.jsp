@@ -58,7 +58,7 @@
     />
 
     <!-- css -->
-    <link rel="stylesheet" href="resources/css/06_findId.css?1" />
+    <link rel="stylesheet" href="resources/css/07_boardList.css" />
 
     <!-- jQuery -->
     <script

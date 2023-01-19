@@ -18,11 +18,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="reply" id="replyResultSet">
 		<id column="REPLY_NO" property="replyNo"/>
 		<result column="TABLE_CD" property="tableCd"/>
-		<result column="MEM_NICKNAME" property="replyWriter"/>
+		<result column="MEM_NO" property="replyWriter"/>
 		<result column="REF_TNO" property="refTno"/>
 		<result column="REPLY_CONTENT" property="replyContent"/>
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="STATUS" property="status"/>
+		<association property="member" javaType="member">
+			<id     column="MEM_NO" property="memNo"/>
+	 		<result column="MEM_NICKNAME" property="memNickname"/>
+		</association>
 	</resultMap>
 	
 	<select id="selectList" resultMap="boardResultSet">
@@ -141,6 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			DISTINCT REPLY_NO,
 			REPLY_CONTENT,
 			REF_TNO,
+			MEM_NO,
 			MEM_NICKNAME,
 			R.CREATE_DATE,
 			R.STATUS
@@ -154,8 +159,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insertReply" parameterType="reply" >
-		INSERT INTO REPLY(REPLY_NO, TABLE_CD, REPLY_WRITER, REF_TNO, REPLY_CONTENT)
-		VALUES (SEQ_RNO.NEXTVAL, 'B', #{replyWriter}, #{refTno}, #{replyContent})
+		INSERT INTO REPLY(REPLY_NO, REPLY_WRITER, REF_TNO, REPLY_CONTENT , TABLE_CD)
+		VALUES (SEQ_RNO.NEXTVAL, #{replyWriter}, #{refTno}, #{replyContent} , 'B')
 	</insert>
 	
 	<update id="deleteBoard" parameterType="int">
