@@ -162,15 +162,15 @@
             <tr>
               <td>아이디</td>
               <td>
-                <input type="text" placeholder="아이디를 입력해주세요." />
+                <input type="text" placeholder="아이디를 입력해주세요." id="id" />
               </td>
             </tr>
 
             <tr>
-              <td>휴대폰 번호</td>
-              <td><input type="text" placeholder="010-0000-0000" id="phone" required/></td>
+              <td>이메일</td>
+              <td><input type="text" placeholder="가입된 이메일을 입력해주세요"  id="email" required/></td>
               <td>
-                <button
+                <!-- <button
                   type="button"
                   class="btn btn-primary tableBtn"
                   data-bs-toggle="modal"
@@ -178,20 +178,20 @@
                   onclick="sendMessage();"
                 >
                   인증번호 전송
-                </button>
+                </button> -->
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
 	          <td><label>인증번호</label></td>
 	          <td><input type="text" placeholder="인증번호 확인" id="authNum" required/></td>
 	          <td><font id="chkAuth" size="3"></font></td>
 	          <td></td>
-	        </tr>
+	        </tr> -->
           </table>
 
           <div class="btn__group">
             <button onclick="location.href='03_logIn.html'">이전</button>
-            <button data-bs-toggle="modal" data-bs-target="#pwdModal" name="findPwd">
+            <button data-bs-toggle="modal" data-bs-target="#pwdModal" id="findBtn">
               확인
             </button>
           </div>
@@ -255,18 +255,22 @@
             ></button>
           </div>
           <div class="modal-body">비밀번호
+          <form action="${contextPath}/findPwd.me">
             <input
-              type="text"
+              type="password"
+              name="memPwd"
               placeholder="비밀번호 입력"
               style="width: 450px"
             />
             <br /><br />
             비밀번호 확인
             <input
-              type="text"
+              type="password"
+              name="memPwdCheck"
               placeholder="비밀번호 재입력"
               style="width: 450px"
             />
+          </form>
           </div>
           <div class="modal-footer">
             <button
@@ -276,7 +280,7 @@
             >
               닫기
             </button>
-            <button type="button" class="btn btn-primary" id="btnAlert">
+            <button type="submit" class="btn btn-primary" id="btnAlert">
               확인
             </button>
           </div>
@@ -377,6 +381,23 @@
 	           }
 	        });
 	     }
+	 
+	 
+	 $(function(){
+			$("#findBtn").click(function(){
+				$.ajax({
+					url : "${contextPath}/findPwd.me",
+					type : "POST",
+					data : {
+						id : $("#id").val(),
+						email : $("#email").val()
+					},
+					success : function(result) {
+						alert(result);
+					},
+				})
+			});
+		})
 	</script>
     <script src="resources/js/06_findId.js" defer></script>
   </body>

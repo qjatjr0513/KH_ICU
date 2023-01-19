@@ -87,13 +87,14 @@
 				
 					function insertReply(){
 						$.ajax({
-							url : "insertReply.bo",
+							url : "${contextPath}/insertReply.bo",
 							data : {
-								refTno : '${b.boardNo}',
+								refTno : ${empty b.boardNo ? "" : b.boardNo},
 								replyContent : $("#replyContent").val()
 							},
-							
+							type : "post",
 							success : function(result){
+								$("#replyContent").val("");
 								if(result == "1"){
 									alertify.alert("서비스 요청 성공", '댓글등록성공')
 									
@@ -121,9 +122,9 @@
 								
 								for(let reply of result){
 									html += "<tr>"
-										+ "<td>" + reply.replyWriter+"</td>"
+										+ "<td>" + reply.member.memNickname+"</td>"
 										+ "<td>" + reply.replyContent+"</td>"
-										
+										+ "<td>" + reply.createDate+"</td>"
 								   + "</tr>";
 								}
 								$("#replyArea tbody").html(html);

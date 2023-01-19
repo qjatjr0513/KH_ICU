@@ -77,8 +77,8 @@
         <tr>
           <td><label>이름</label></td>
           <td><input type="text" placeholder="사용자 이름" name="memName" required/></td>
-          <td><label>&nbsp;&nbsp;생년월일</label></td>
-          <td><input type="date" name="birthDay"/></td>
+          <td><label>&nbsp;&nbsp;이메일</label></td>
+          <td><input type="text" name="email"/></td>
         </tr>
         <tr>
           <td><label for="">아이디</label></td>

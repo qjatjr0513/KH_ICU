@@ -105,9 +105,9 @@
       <div class="login__button loginbtn">
         <button type="submit">로그인</button>
       </div>
-        <div class="naver__button loginbtn" id="naver_id_login" style="text-align:center">
+        <div id="naver_id_login" style="text-align:center">
       	<a id="naverlogin" href="${url}">
-			<img width="223" src="../image/naverLogo.png"/>
+			<img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/>
 	  	</a>
 	  </div>
       <div class="kakao__button loginbtn">

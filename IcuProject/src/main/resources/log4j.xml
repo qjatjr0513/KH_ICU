@@ -13,6 +13,7 @@
 	<!-- Application Loggers -->
 	<logger name="com.kh.icu">
 		<level value="info" />
+		<appender-ref ref="console"/>
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,8 +35,9 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
-		<appender-ref ref="console" />
-	</root>
+      <priority value="info" />
+      <appender-ref ref="console" />
+      <appender-ref ref="dailyLog"/>
+   </root>
 	
 </log4j:configuration>

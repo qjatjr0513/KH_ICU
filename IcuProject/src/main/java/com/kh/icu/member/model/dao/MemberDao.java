@@ -31,6 +31,31 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.findId", m);
 	}
 	
+	public String selectId(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectId", m);
+	}
+	
+	/*
+	 * public int findPwd(SqlSession sqlSession, String memPwd) { return
+	 * sqlSession.update("memberMapper.updatePwd", memPwd); }
+	 */
+	
+	public int findPwd(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findPwd", m);
+	}
+	
+	//비밀번호변경
+	
+	public int updatePwd(SqlSession sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+	
+	//회원조회
+	public Member selectMember(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.selectMember", m);
+	}
+	
+	
 	// 카카오 로그인 정보 저장
 	public void kakaoinsert(SqlSession sqlSession, HashMap<String, Object> userInfo) {
 		sqlSession.insert("memberMapper.kakaoInsert",userInfo);

@@ -145,11 +145,11 @@ public class BoardController {
 	// 댓글 등록
 	@RequestMapping("insertReply.bo")
 	@ResponseBody
-	public String insertReply(Reply r, HttpSession session, Board b) {
+	public String insertReply(Reply r, HttpSession session) {
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		if(m != null) {
-			r.setReplyWriter(m.getMemNickname());
+			r.setReplyWriter(m.getMemNo());
 //			r.setTableCd(b.getTableCd());
 		}
 		

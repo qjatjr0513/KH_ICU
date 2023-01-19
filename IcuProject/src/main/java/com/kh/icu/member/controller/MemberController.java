@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -142,7 +143,16 @@ public class MemberController {
 		model.addAttribute("memberId", memberId);
 		return memberId;
 	}
-
+	
+	@RequestMapping("findPwd.me")
+	@ResponseBody
+	public void findPwd(String id, String email, HttpServletResponse response) throws Exception {
+		Member m = new Member();
+		m.setMemId(id);
+		m.setEmail(email);
+		memberService.findPwd(response, m);
+	}
+	
 	//로그인
 	@RequestMapping("login.me")
 	public String loginMember(Member m, HttpSession session, Model model) {

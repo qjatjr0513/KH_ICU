@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="MEM_NICKNAME" property="memNickname"></result>
 	<result column="MEM_NAME" property="memName"></result>
 	<result column="PHONE" property="phone"></result>
-	<result column="BIRTHDAY" property="birthDay"></result>
+	<result column="EMAIL" property="email"></result>
 	<result column="ENROLL_DATE" property="enrollDate"></result>
 	<result column="MODIFY_DATE" property="modifyDate"></result>
 	<result column="ROLE" property="role"></result>
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			MEM_NICKNAME,
 			MEM_NAME,
 			PHONE,
-			BIRTHDAY
+			EMAIL
 		) VALUES(
 			SEQ_MEM.NEXTVAL,
 			#{memId},
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{memNickname},
 			#{memName},
 			#{phone},
-			#{birthDay}
+			#{email}
 		)
 	</insert>
 	
@@ -80,17 +80,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT MEM_ID FROM MEMBER WHERE MEM_NAME=#{memName} AND PHONE=#{phone}
 	</select>
 	
-	<!-- 비밀번호 찾기 -->
-	<select id="findPwd" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=#{id} AND PHONE=#{phone}
+	<!-- 아이디 찾기 2 -->
+	<select id="selectId" parameterType="member" resultType="String">
+		SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{memId}
 	</select>
 	
-	<update id="updatePwd" parameterType="member">
-		UPDATE MEMBER
-		SET MEM_PWD = #{memPwd}
-		MODIFY_DATE = SYSDATE
-		WHERE MEM_ID=#{id} AND PHONE=#{phone}
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" >
+		UPDATE MEMBER SET MEM_PWD = #{memPwd}, MODIFY_DATE = SYSDATE WHERE MEM_ID = #{memId}
 	</update>
+	
+	<select id="selectMember"  resultMap="memberResultSet">
+		SELECT * FROM MEMBER WHERE MEM_ID=#{memId} AND EMAIL=#{email} AND STATUS='N'
+	</select>
 	
 	<!-- 네이버 로그인 정보 찾기 -->  
 	<select id="findMember" parameterType="member" resultMap="memberResultSet">
