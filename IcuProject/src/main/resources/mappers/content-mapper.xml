@@ -21,7 +21,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ENROLL_DATE" property="enrollDate"></result>
 		<result column="STATUS" property="status"></result>
 	</resultMap>
-	
+	<resultMap type="coment" id="commentResultSet">
+		<result column="CMT_NO" property="cmtNo"></result>
+		<result column="CMT_WRITER" property="cmtWriter"></result>
+		<result column="CON_NO" property="conNo"></result>
+		<result column="CMT_CONTENT" property="cmtContent"></result>
+		<result column="CMT_STAR" property="cmtStar"></result>
+		<result column="CREATE_DATE" property="createDate"></result>
+		<result column="STATUS" property="status"></result>
+		<result column="MEM_NICKNAME" property="memNickname"></result>
+	</resultMap>
 	<select id="selectList" resultMap="contentResultSet">
 		SELECT *
 		FROM CONTENT
@@ -30,6 +39,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectContent" resultMap="contentResultSet">
 		SELECT *
 		FROM CONTENT
+		WHERE CON_NO = #{conNo}
+	</select>
+	
+	<select id="selectGenre" resultType="String">
+		SELECT GEN_NAME
+		FROM GENRE
+		JOIN GENRE_STORAGE S USING (GEN_NO)
+		WHERE S.CON_NO = #{conNo}
+	</select>
+	
+	<select id="selectReview" resultMap="commentResultSet">
+		SELECT CMT_NO, CMT_WRITER, CON_NO, CMT_CONTENT, CMT_STAR, CREATE_DATE, C.STATUS, MEM_NICKNAME
+		FROM COMENT C
+		JOIN MEMBER ON (CMT_WRITER = MEM_NO)
 		WHERE CON_NO = #{conNo}
 	</select>
 </mapper>

@@ -1,13 +1,13 @@
 package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.kh.icu.content.model.dao.ContentDao;
+import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
 
 @Service
@@ -40,5 +40,17 @@ public class ContentServiceImpl implements ContentService{
 	public Content selectContent(int conNo) {
 		Content c = contentDao.selectContent(sqlSession, conNo);
 		return c;
+	}
+	
+	@Override
+	public ArrayList<String> selectGenre(int conNo) {
+		ArrayList<String> list = contentDao.selectGenre(sqlSession, conNo);
+		return list;
+	}
+	
+	@Override
+	public ArrayList<Coment> selectReview(int conNo){
+		ArrayList<Coment> list = contentDao.selectReview(sqlSession, conNo);
+		return list;
 	}
 }
