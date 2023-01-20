@@ -3,6 +3,7 @@ package com.kh.icu.party.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -72,17 +73,27 @@ public class PartyController {
 		
 	}
 	
-//	@RequestMapping("/findParty.py")
-//	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap) {
+	@RequestMapping("/findParty.py")
+	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
+		
+		List<Object> map = partyService.findPartyForm();
+			
+		model.addAttribute("map", map);
+		
+		return "board/boardListView";
+	}
+	
+//	@RequestMapping("/SerchParty.py")
+//	public String SerchParty(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
 //		
 //		Map<String, Object> map = new HashMap();
 //		
-//		map = partyService.findPartyForm();
+//		map = partyService.SerchParty();
 //			
 //		model.addAttribute("map", map);
 //		
 //		return "board/boardListView";
 //	}
-	
+//	
 	
 }
