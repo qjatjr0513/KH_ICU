@@ -47,17 +47,17 @@ tr {
   justify-content: space-around;
 }
 .tableBtn {
-  border-radius: 10px;
-  box-shadow: 0 0 3px 1px rgb(200, 200, 200);
-  background-color: white;
-  padding: 5px;
-  border: none;
-  font-weight: bold;
-  font-size: 18px;
-  color: var(--color-purple);
+  border-radius: 10px !important;
+  box-shadow: 0 0 3px 1px rgb(200, 200, 200) !important;
+  background-color: white !important;
+  padding: 5px !important;
+  border: none !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: var(--color-purple) !important;
 }
 .tableBtn:hover {
-  background-color: var(--color-orange);
+  background-color: var(--color-orange) !important;
 }
 .tableBtn:active {
   background-color: var(--color-orange) !important;

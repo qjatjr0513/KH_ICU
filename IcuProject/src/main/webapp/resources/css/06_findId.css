@@ -45,10 +45,10 @@ input {
 
 .tableBtn {
   height: 50px;
-  background-color: var(--color-purple);
-  border: none;
-  font-weight: bold;
-  font-size: 12px;
+  background-color: var(--color-purple) !important;
+  border: none !important;
+  font-weight: bold !important;
+  font-size: 12px !important;
 }
 .tableBtn:hover {
   background-color: var(--color-purple);

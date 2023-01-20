@@ -5,101 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>ICU - 아이디 / 비밀번호 찾기</title>
-	 <!-- bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- animate.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <!-- 웹사이트에 아이콘 추가 -->
-    <link rel="icon" type="image/png" href="resources/images/navbarLogo.png" />
-
-    <!-- Font Awesome cdn -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- css -->
-    <link rel="stylesheet" href="resources/css/06_findId.css?1" />
-
-    <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- sweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	 <!-- css -->
+    <link rel="stylesheet" href="resources/css/06_findId.css?" />
 </head>
 <body>
-    <!-- Navbar -->
-    <nav id="navbar">
-      <div class="navbar__logo">
-        <a href="#">
-          <img
-            class="logoImg"
-            src="resources/images/navbarLogo.png"
-            alt="cloudLogo"
-            width="150px"
-          />
-        </a>
-      </div>
-
-      <ul class="navbar__menu">
-        <li class="navbar__menu__item active1" data-link="#home">파티만들기</li>
-        <li class="navbar__menu__item">파티찾기</li>
-        <li class="navbar__menu__item">컨텐츠 찾기</li>
-        <li class="navbar__menu__item">자유게시판</li>
-        <li class="navbar__menu__item">FAQ</li>
-        &nbsp;&nbsp;
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle profile"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fa-solid fa-user fa-lg"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">사용자 닉네임</a></li>
-            <li><a class="dropdown-item" href="#">마이페이지</a></li>
-            <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
-          </ul>
-        </div>
-      </ul>
-    </nav>
+     <!-- Navbar -->
+    <jsp:include page="../common/header.jsp"/>
 
     <div class="logoBox">
       <img class="imgLogo" src="resources/images/navbarLogo.png" />
@@ -200,7 +111,7 @@
     </section>
 
     <!-- 휴대폰 인증번호 전송 모달창 -->
-    <div
+    <!-- <div
       class="modal fade"
       id="phoneModal"
       tabindex="-1"
@@ -231,10 +142,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- 비밀번호 변경 모달창 -->
-    <div
+    <%-- <div
       class="modal fade"
       id="pwdModal"
       tabindex="-1"
@@ -286,7 +197,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --%>
 
     <!-- 아이디 알려주는 모달창 -->
     <!-- <div
@@ -329,11 +240,20 @@
 	    		url : "${contextPath }/sendMessage.do",
 	    		data : {phoneNum : $sms.val()},
 	            success : function(result){	
+	            	if(result > 0){
+		            	Swal.fire({
+		                    icon: 'success',
+		                    title: '인증번호 전송완료!'                  
+		                });	
+	            	}else{
+	            		Swal.fire({
+	                        icon: 'error',
+	                        title: '인증번호 전송실패!'                  
+	                    });
+	            	}
 	            	
-	            	Swal.fire({
-	                    icon: 'success',
-	                    title: '인증번호 전송완료!'                  
-	                });
+	            	
+	            	
 	            	
 	            	$(function(){
 	             	$('#authNum').keyup(function(){
@@ -356,7 +276,10 @@
 	                });
 	            },
 	            error : function(){
-	                alert("인증번호 전송 실패");
+	            	Swal.fire({
+                        icon: 'error',
+                        title: '인증번호 전송실패!'                  
+                    });
 	             }
 	        });
 	     }
@@ -371,10 +294,18 @@
 	           data : {memName : $memberName.val(),
 	        	   	   phone : $phone.val()},
 	           success : function(result){
-	        	   Swal.fire({
-        		   		title:'회원 아이디',
-	        	   		text: result
-	        	   });	  
+	        	   console.log(result);
+	        	   if(result == ""){
+	        		   Swal.fire({
+	        		   		icon:'error',
+		        	   		title: "존재하지 않는 회원 입니다."
+		        	   });	
+	        	   }else{
+	        		   Swal.fire({
+	        		   		title:'회원 아이디',
+		        	   		text: result
+		        	   });	
+	        	   }     
 	           },
 	           error : function(){
 	              alert("아이디 중복체크용 ajax 통신 실패");
@@ -393,8 +324,23 @@
 						email : $("#email").val()
 					},
 					success : function(result) {
-						alert(result);
-					},
+						if(result == 0){
+							Swal.fire({
+		        		   		icon:'error',
+			        	   		title: "등록되지 않은 아이디 입니다."
+			        	   });
+						}else if(result == 1){
+							Swal.fire({
+		        		   		icon:'error',
+			        	   		title: "등록되지 않은 이메일 입니다."
+			        	   });
+						}else if(result == 2){
+							Swal.fire({
+		        		   		icon:'success',
+			        	   		title: "임시비밀번호가 이메일로 발송되었습니다."
+			        	   });
+						}
+					}
 				})
 			});
 		})

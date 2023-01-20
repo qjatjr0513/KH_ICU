@@ -199,8 +199,7 @@ public class MemberController {
 
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.getMemId() != null) {
-            session.setAttribute("userId", userInfo.getMemId());
-            session.setAttribute("userNick", userInfo.getMemNickname());
+        	session.setAttribute("loginUser", userInfo);
             session.setAttribute("access_Token", access_Token);
         }
 
@@ -216,8 +215,7 @@ public class MemberController {
         if(access_Token != null && !"".equals(access_Token)){
             memberService.kakaoLogout(access_Token);
             session.removeAttribute("access_Token");
-            session.removeAttribute("userId");
-            session.removeAttribute("userNick");
+            session.removeAttribute("loginUser");
         }else{
             System.out.println("access_Token is null");
             //return "redirect:/";
@@ -226,8 +224,7 @@ public class MemberController {
         if(oauthToken != null && !"".equals(oauthToken)){
             //memberService.naverLogout(oauthToken);
             session.removeAttribute("signIn");
-            session.removeAttribute("userId");
-            session.removeAttribute("userNick");
+            session.removeAttribute("loginUser");
         }else{
             System.out.println("oauthToken is null");
             //return "redirect:/";
@@ -273,8 +270,7 @@ public class MemberController {
 		Member userInfo = memberService.findMember(m);
 		
 		if (userInfo.getMemId() != null) {
-            session.setAttribute("userId", userInfo.getMemId());
-            session.setAttribute("userNick", userInfo.getMemNickname());
+			session.removeAttribute("loginUser");
             session.setAttribute("signIn", apiResult);
         }
 
