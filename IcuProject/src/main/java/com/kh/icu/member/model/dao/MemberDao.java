@@ -5,8 +5,8 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
 
 @Repository
 public class MemberDao {
@@ -75,12 +75,16 @@ public class MemberDao {
 		Member result = sqlSession.selectOne("memberMapper.findMember", m);
 		System.out.println("result :"+result);
 		return result;
-	};
+	}
 	
 	// 네이버 로그인 정보 저장
 	public int getUserInfoN(SqlSession sqlSession, Member m) {
 		System.out.println(m.getMemNickname());
 		return sqlSession.insert("memberMapper.getUserInfoN", m);
-	};
+	}
+	
+	public int insertImg(SqlSession sqlSession, Image image) {
+		return sqlSession.insert("memberMapper.insertImg", image);
+	}
 	
 }

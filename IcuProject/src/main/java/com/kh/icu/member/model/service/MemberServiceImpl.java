@@ -18,13 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kh.icu.common.Utils;
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.dao.MemberDao;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -345,4 +348,25 @@ public class MemberServiceImpl implements MemberService{
 	    return (String) "K"+(int)(Math.floor(num));
 	  }
 	
+	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
+	@Override
+	public int insertImg(Image image, MultipartFile upfile , String webPath, String serverFolderPath) throws IOException {
+		
+		int result = memberDao.insertImg(sqlSession, image);
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

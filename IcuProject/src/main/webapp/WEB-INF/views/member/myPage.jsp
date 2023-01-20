@@ -77,13 +77,19 @@
         <div id="viewAndEnroll">
           <div id="view" class="titleImg">
           <!-- 올린 파일이 들어가는 자리 -->
-
+          <img class='view-img' src="${contextPath }${profile}">
           </div>
           <div id="enroll">
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
-              <button type="submit" id="upfile" class="form-control" name="upfile">사진등록</button>
-              <input type="hidden" name="originName" value="${m.originName }"/>
-			  <input type="hidden" name="changeName" value="${m.changeName }"/>
+              <input type="file" id="upfile" class="form-control" name="upfile"/>
+              <input type="hidden" name="originName" value="${image.originName }"/>
+			  <input type="hidden" name="changeName" value="${image.changeName }"/>
+              <input type="hidden" name="mode" value="${param.mode }"/>
+              <div align="center">
+				<c:if test="${empty upfile }">       
+					<button type="submit" class="btn btn-primary">등록하기</button>
+				</c:if>
+			  </div>
             </form>
           </div>
         </div>
@@ -103,19 +109,5 @@
       
     </div>
 
-    <script>
-    function loadImg(inputFile, num){
-      if(inputFile.files.length != 0){
-
-          let reader = new FileReader();
-          reader.readAsDataURL(inputFile.files[0]);
-          
-          // 파일 읽기가 완료되었을때 실행할 함수 정의
-          reader.onload = function(e){
-              $(".titleImg").attr("src",e.target.result);
-          }
-      }
-    }
-    </script>
 </body>
 </html>

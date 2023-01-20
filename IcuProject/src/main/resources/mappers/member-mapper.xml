@@ -7,20 +7,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <resultMap type="member" id="memberResultSet">
-	<result column="MEM_NO" property="memNo"></result>
-	<result column="TABLE_CD" property="tableCd"></result>
-	<result column="MEM_ID" property="memId"></result>
-	<result column="MEM_PWD" property="memPwd"></result>
-	<result column="MEM_NICKNAME" property="memNickname"></result>
-	<result column="MEM_NAME" property="memName"></result>
-	<result column="PHONE" property="phone"></result>
-	<result column="EMAIL" property="email"></result>
-	<result column="ENROLL_DATE" property="enrollDate"></result>
-	<result column="MODIFY_DATE" property="modifyDate"></result>
-	<result column="ROLE" property="role"></result>
-	<result column="STATUS" property="status"></result>
-	<result column="B_STATUS" property="bStatus"></result>
-	<result column="SNS_TYPE" property="snsType"></result>
+	<result column="MEM_NO" property="memNo"/>
+	<result column="TABLE_CD" property="tableCd"/>
+	<result column="MEM_ID" property="memId"/>
+	<result column="MEM_PWD" property="memPwd"/>
+	<result column="MEM_NICKNAME" property="memNickname"/>
+	<result column="MEM_NAME" property="memName"/>
+	<result column="PHONE" property="phone"/>
+	<result column="EMAIL" property="email"/>
+	<result column="ENROLL_DATE" property="enrollDate"/>
+	<result column="MODIFY_DATE" property="modifyDate"/>
+	<result column="ROLE" property="role"/>
+	<result column="STATUS" property="status"/>
+	<result column="B_STATUS" property="bStatus"/>
+	<result column="SNS_TYPE" property="snsType"/>
+</resultMap>
+
+<resultMap type="image" id="imageResultSet">
+	<result column="FILE_NO" property="fileNo"/>
+	<result column="TABLE_CD" property="tableCd"/>
+	<result column="ORIGIN_NAME" property="originName"/>
+	<result column="CHANGE_NAME" property="changeName"/>
+	<result column="REF_TNO" property="refTno"/>
 </resultMap>
 	<!-- 회원가입  -->
 	<insert id="insertMember" parameterType="member">
@@ -104,4 +112,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO MEMBER(MEM_NO, MEM_NAME, MEM_NICKNAME, MEM_ID, SNS_TYPE)
 			values(SEQ_MEM.NEXTVAL, #{memName}, #{memNickname}, #{memId}, 'N')
 	</insert>
+	
+	<select id="seletImg" resultMap="imageResultSet">
+		SELECT *
+		FROM IMAGE
+		WHERE REF_TNO = #{memNo}
+		AND TABLE_CD = 'M'
+	</select>
+	
+	<insert id="insertImg" parameterType="image">
+		INSERT INTO IMAGE(FILE_NO,
+						  TABLE_CD,
+						  ORIGIN_NAME,
+						  CHANGE_NAME,
+						  REF_TNO)
+		VALUES(SEQ_FNO.NEXTVAL, 'M', #{originName}, #{changeName}, #{refTno})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

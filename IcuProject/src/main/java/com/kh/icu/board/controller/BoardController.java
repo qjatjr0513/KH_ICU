@@ -150,7 +150,6 @@ public class BoardController {
 		Member m = (Member)session.getAttribute("loginUser");
 		if(m != null) {
 			r.setReplyWriter(m.getMemNo());
-//			r.setTableCd(b.getTableCd());
 		}
 		
 		int result = boardService.insertReply(r);

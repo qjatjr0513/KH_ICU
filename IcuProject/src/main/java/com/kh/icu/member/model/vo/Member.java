@@ -2,6 +2,8 @@ package com.kh.icu.member.model.vo;
 
 import java.sql.Date;
 
+import com.kh.icu.common.model.vo.Image;
+
 import lombok.Data;
 
 
@@ -23,6 +25,7 @@ public class Member {
 	private String bStatus;
 	private String snsType;
 	
+	private Image image;
 	private String originName;
 	private String changeName;
 }

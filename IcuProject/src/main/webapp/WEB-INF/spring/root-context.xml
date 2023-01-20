@@ -62,4 +62,10 @@
 	            </props>
 	        </property>
 	    </bean>
+	<!-- 파일 업로드를 위한 MutipartResolver 구현체 CommonsMultipartResolver  bean 등록 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  <property name="maxUploadSize" value="104857600"/>
+	  <property name="maxUploadSizePerFile" value="104857600"/>
+	  <property name="maxInMemorySize" value="104857600"/>
+	</bean>
 </beans>

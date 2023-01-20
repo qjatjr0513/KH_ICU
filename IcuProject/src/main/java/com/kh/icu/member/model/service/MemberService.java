@@ -1,11 +1,14 @@
 package com.kh.icu.member.model.service;
 
-import java.util.HashMap;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
 
 public interface MemberService {
 	
@@ -39,4 +42,19 @@ public interface MemberService {
 	/* public int findPwd(String memPwd); */
 	
 	/* public int getUserInfoN(Member m); */
+	
+	public int insertImg(Image image, MultipartFile upfile, String webPath, String serverFolderPath) throws IOException ;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

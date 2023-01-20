@@ -2,7 +2,9 @@ package com.kh.icu.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.common.Utils;
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.service.NaverLoginBO;
 import com.kh.icu.member.model.vo.Member;
@@ -282,13 +287,28 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	@RequestMapping("insertImg.me")
-	public String insertImg(Member m,
-							MultipartFile upfile,
+	@PostMapping("insertImg.me")
+	public String insertImg(Image image,
+							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
-							Model model) {
+							Model model,
+							@RequestParam(value="mode", required=false, defaultValue="insert") String mode,
+							@RequestParam(value="deleteList" , required=false) String deleteList
+							) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		String webPath = "/resources/profileImg/";
 		String serverFolderPath = session.getServletContext().getRealPath(webPath);
+		
+		int memNo = 0;
+		int result = 0;
+		
+		if(loginUser != null) {
+			memNo = loginUser.getMemNo();
+		}
+		System.out.println("memNo : " + memNo);
+		image.setRefTno(memNo);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
@@ -301,19 +321,41 @@ public class MemberController {
 				logger.info(e.getMessage());
 			}
 			
-			m.setOriginName(upfile.getOriginalFilename());
-			m.setChangeName("/resources/profileImg/" + changeName) ;
+			image.setOriginName(upfile.getOriginalFilename());
+			image.setChangeName("/resources/profileImg/" + changeName) ;
 			
 		}
-		if(m.getOriginName() != null && m.getChangeName() != null) {
-			session.setAttribute("alertMsg", "사진 등록 성공");
-			return "redirect:myPage.me";
 		
-		}else {
-			model.addAttribute("errorMsg", "사진 등록 실패");
-			return "common/errorPage";
-		}
-		
+		if(mode.equals("insert")) {
+			
+			// db에 board테이블에 데이터 추가
+			try {
+				result = memberService.insertImg(image, upfile ,webPath, serverFolderPath);
+				
+				if(result > 0) {
+					session.setAttribute("profile", image.getChangeName());
+					return "redirect:myPage.me";
+				} 
+					
+				
+				
+			} catch (Exception e) {
+				logger.error("에러발생!! : "+e.getMessage());
+			}
+			
+		} 
+//			else { // 수정
+//			
+//			// 게시글 수정 서비스 호출
+//			// b객체 안에 boardNo
+//			try {
+//				result = memberService.updateImg(image, webPath, serverFolderPath, deleteList);
+//			} catch (Exception e) {
+//				logger.error("에러발생!! : "+e.getMessage());
+//			}
+//			
+//		}
+		return "redirect:/";
 	}
 
 }
