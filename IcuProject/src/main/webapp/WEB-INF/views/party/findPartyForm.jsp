@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="list" value="${map.list }"/>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +53,7 @@
     />
 
     <!-- css -->
-    <link rel="stylesheet" href="../css/08_findParty.css" />
+    <link rel="stylesheet" href="resources/css/08_findParty.css" />
 
     <!-- jQuery -->
     <script
@@ -69,7 +72,7 @@
         <a href="#">
           <img
             class="logoImg"
-            src="../image/navbarLogo.png"
+            src="resources/images/navbarLogo.png"
             alt="cloudLogo"
             width="150px"
           />
