@@ -1,5 +1,7 @@
 package com.kh.icu.party.model.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +32,10 @@ public class PartyServiceImpl implements PartyService{
 		System.out.println("dao result : " + result);
 		return result;
 	}
+	
+	@Override
+	public List<Object> findPartyForm() {
+		return partyDao.findPartyForm(sqlSession);
+	};
 	
 }

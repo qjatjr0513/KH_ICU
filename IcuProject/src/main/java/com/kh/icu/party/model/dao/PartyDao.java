@@ -1,5 +1,7 @@
 package com.kh.icu.party.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,9 @@ public class PartyDao {
 		return sqlSession.insert("partyMapper.insertParty", p);
 	}
 
+	public List<Object> findPartyForm(SqlSession sqlSession) {
+		return sqlSession.selectList("partyMapper.findPartyForm");
+	}
+	
+	
 }
