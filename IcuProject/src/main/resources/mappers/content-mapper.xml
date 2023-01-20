@@ -66,4 +66,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM COMENT
 		WHERE CON_NO = #{conNo}
 	</select>
+	
+	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
+		<if test="genre.size != 0 and age.size == 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			)
+		</if>
+		<if test="genre.size != 0 and age.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND CON_AGE IN(
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			)
+		</if>
+		<if test="genre.size == 0 and age.size != 0">
+			SELECT *
+			FROM CONTENT
+			WHERE CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			)
+		</if>
+		<if test="genre.size == 0 and age.size == 0">
+			SELECT *
+			FROM CONTENT
+		</if>
+			
+			
+	</select>
 </mapper>

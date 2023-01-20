@@ -166,66 +166,66 @@
           <tr>
             <td>장르</td>
             <td>
-              	<input id="action" type="checkbox" name="genre" value="action" />
+              	<input id="action" type="checkbox" name="genre" value="1" />
               	<label for="action">액션</label>
             </td>
             <td>
-              	<input id="drama" type="checkbox" name="genre" value="drama" />
+              	<input id="drama" type="checkbox" name="genre" value="2" />
               	<label for="drama">드라마</label>
             </td>
             <td>
-            	<input type="checkbox" id="sf" name="genre" value="sf">
+            	<input type="checkbox" id="sf" name="genre" value="3">
             	<label for="sf">SF</label>
             </td>
             <td>
-            	<input type="checkbox" id="fantasy" name="genre" value="fantasy">
+            	<input type="checkbox" id="fantasy" name="genre" value="4">
             	<label for="fantasy">판타지</label>
             </td>
             <td>
-            	<input type="checkbox" id="romance" name="genre" value="romance">
+            	<input type="checkbox" id="romance" name="genre" value="5">
             	<label for="romance">로맨스</label>
             </td>
             <td>
-              <input id="horror" type="checkbox" name="genre" value="horror" />
+              <input id="horror" type="checkbox" name="genre" value="6" />
               <label for="horror">공포</label>
             </td>
             <td>
-            	<input type="checkbox" id="thriller" name="genre" value="thriller">
+            	<input type="checkbox" id="thriller" name="genre" value="7">
             	<label for="thriller">스릴러</label>
             </td>
             <td>
-            	<input type="checkbox" id="family" name="genre" value="family">
+            	<input type="checkbox" id="family" name="genre" value="8">
             	<label for="family">가족</label>
             </td>
             <td>
-            	<input type="checkbox" id="animation" name="genre" value="animation">
+            	<input type="checkbox" id="animation" name="genre" value="9">
             	<label for="animation">애니메이션</label>
             </td>
             <td>
-              <input id="comedy" type="checkbox" name="genre" value="comedy" />
+              <input id="comedy" type="checkbox" name="genre" value="10" />
               <label for="comedy">코메디</label>
             </td>
             <td>
-            	<input type="checkbox" id="romance" name="genre" value="romance">
+            	<input type="checkbox" id="romance" name="genre" value="11">
             	<label for="romance">다큐</label>
             </td>
           </tr>
           <tr>
             <td>연령 제한</td>
             <td>
-              <input id="allage" type="checkbox" value="allage" name="age"/>
+              <input id="allage" type="checkbox" value="0" name="age"/>
               <label for="allage">모든 연령</label>
             </td>
             <td>
-              <input id="twelve" type="checkbox" value="twelve" name="age"/>
+              <input id="twelve" type="checkbox" value="12" name="age"/>
               <label for="twelve">12세</label>
             </td>
             <td>
-              <input id="fifteen" type="checkbox" value="fifteen" name="age"/>
+              <input id="fifteen" type="checkbox" value="15" name="age"/>
               <label for="fifteen">15세</label>
             </td>
             <td>
-              <input id="nineteen" type="checkbox" value="nineteen" name="age"/>
+              <input id="nineteen" type="checkbox" value="19" name="age"/>
               <label for="nineteen">19세 이상</label>
             </td>
           </tr>
@@ -255,7 +255,7 @@
 	                      src="https://images.justwatch.com/poster/176267183/s592/avatar"
 	                      onclick="movePage(${c.conNo });"
 	                    />
-	                    <br /><br />
+	                    <br><br>
 	                    <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
 	                    <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
 	                    <i class="fa-solid fa-star">4.0</i>
@@ -326,6 +326,7 @@
 	 	}
 		
 		let categorys = document.getElementsByName("genre");
+		
 		categorys.forEach( (item) => {
 			return item.addEventListener("click", searchContent) 
 		})
@@ -337,9 +338,7 @@
 		
 		function searchContent(e){
 			//console.log(e.target)
-			if(!e.target.checked){
-				return
-			}
+
 			var genreList = ['all'];
             var ageList = ['all'];
             
@@ -356,13 +355,88 @@
 // 			});
 			console.log(genreList);
 			console.log(ageList);
+			var cnt = 0;
 			$.ajax({
 				url : '${contextPath}/searchContent.co',
 				data : {
 					genre : genreList,
 					age : ageList	
 				},
+				dataType : 'json',
 				success: function(result){
+					let htmlUpside = "";
+					let htmlMid = "";
+					let htmlInfo = "";
+					//$('.carousel-inner').remove();
+					var carouselCnt = parseInt(result.length/8);
+					var movieBoxCnt = parseInt(result.length/4);
+					console.log(result.length);
+					if(result.length >= 8){
+						$('#carouselExampleControls').remove();
+						for(var i = 0; i < carouselCnt; i++){
+							htmlUpside += "<div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'>" +
+												"<div class='carousel-inner'>" +
+													"<div class='carousel-item active' data-bs-interval='100000'>" +
+													"</div>"+
+												"</div>"+
+											"</div>";
+							$("#party__container").html(htmlUpside);
+						}
+						htmlUpside = "";
+						
+						for(var j = 1; j <= movieBoxCnt; j++){
+							htmlMid += "<div id='movieBox"+ j +"' class='movieBox'>" +
+										"</div>";
+							$(".carousel-item").html(htmlMid);
+						}
+						htmlMid = "";
+						for(var j = 1; j <= movieBoxCnt; j++){
+							console.log(cnt);
+							while(cnt < j * 4){
+								console.log(cnt);
+								htmlInfo += "<div class='movieContainer'>" +
+												"<div class='movie__info'>" +
+													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[i].conNo +");'>" +
+													"<br><br>" +
+													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+cnt+")</span>" +
+													"<br>" +
+													"<i class='fa-solid fa-star'>4.0</i>"+
+												"</div>"+
+											"</div>";
+								$('#movieBox'+j).html(htmlInfo);
+								cnt += 1;
+							}
+							htmlInfo = "";
+						}
+					}
+					else if(result.length >= 4){
+						
+					}
+					else{
+						$('.carousel-inner').remove();
+						htmlMid += "<div class='carousel-inner'>" +
+									"<div class='carousel-item active' data-bs-interval='100000'>" +
+										"<div id='movieBox'>";
+						htmlMid += 		"</div>"+
+									"</div>"+
+								"</div>";
+						$("#carouselExampleControls").html(htmlMid);
+						
+						for(var i = 0 in result){
+							htmlInfo += "<div class='movieContainer'>" +
+											"<div class='movie__info'>" +
+												"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[i].conNo +");'>" +
+												"<br><br>" +
+												"<h4 onclick='movePage("+ result[i].conNo +");'>"+result[i].conKTitle+"</h4>" +
+												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate+")</span>" +
+												"<br>" +
+												"<i class='fa-solid fa-star'>4.0</i>"+
+											"</div>"+
+										"</div>";
+							$("#movieBox").html(htmlInfo);
+						}
+					}
 					//console.log(genre);
 				}
 			})

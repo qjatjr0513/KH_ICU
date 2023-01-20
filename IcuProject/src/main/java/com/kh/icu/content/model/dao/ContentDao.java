@@ -1,6 +1,8 @@
 package com.kh.icu.content.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -34,5 +36,17 @@ public class ContentDao {
 	
 	public double selectStar(SqlSession sqlSession, int conNo) {
 		return sqlSession.selectOne("contentMapper.selectStar", conNo);
+	}
+	
+	public ArrayList<Content> searchContentCategory(SqlSession sqlSession, Map<String, ArrayList<String>> map){
+		return (ArrayList)sqlSession.selectList("contentMapper.selectContentCategory", map);
+	}
+	
+	public ArrayList<Content> searchContentTwoCategory(SqlSession sqlSession, ArrayList<String> category1, ArrayList<String> category2){
+		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("category1", category1);
+		map.put("category2", category2);
+		
+		return (ArrayList)sqlSession.selectList("contentMapper.selectContentTwoCategory"); 
 	}
 }

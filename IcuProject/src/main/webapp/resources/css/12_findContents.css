@@ -127,16 +127,15 @@ td {
   opacity: 0.3;
 }
 
-#moiveBox {
+.moiveBox {
   /* background-color: burlywood; */
   padding: 20px;
-   display: flex;
+  display: flex;
   justify-content: space-evenly;
 }
 
-.movie__info {
-  padding: 20px;
-  box-shadow: 0 0 5px 1px gray;
+.movieContainer{
+	padding:22px 20px;
 }
 .movie__info > img {
   width: 200px;
@@ -145,9 +144,12 @@ td {
 .movie__info {
   border-radius: 15px;
   padding: 20px;
+  box-shadow: 0 0 5px 1px gray;
   box-shadow: 0 0 5px rgb(139, 137, 137);
   cursor: pointer;
   transition: all 0.1s linear;
+  width:220px;
+  height:378.8px;
 }
 .movie__info:hover {
   transform: scale(1.1);

@@ -2,6 +2,7 @@ package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
@@ -63,4 +64,16 @@ public class ContentServiceImpl implements ContentService{
 	public double selectStar(int conNo) {
 		return contentDao.selectStar(sqlSession, conNo);
 	}
+	
+	@Override
+	public ArrayList<Content> searchContentCategory(Map<String, ArrayList<String>> map){
+		ArrayList<Content> list = contentDao.searchContentCategory(sqlSession, map);
+		return list;
+	}
+	
+//	@Override
+//	public ArrayList<Content> searchContentTwoCategory(ArrayList<String> category1, ArrayList<String> category2){
+//		ArrayList<Content> list = contentDao.searchContentTwoCategory(sqlSession, category1, category2);
+//		return list;
+//	}
 }

@@ -1,6 +1,7 @@
 package com.kh.icu.content.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,13 +103,26 @@ public class ContentController {
 	
 	@RequestMapping("/searchContent.co")
 	@ResponseBody
-	public int searchContent(@RequestParam(value="genre[]") ArrayList<String> genre,
+	public String searchContent(@RequestParam(value="genre[]") ArrayList<String> genre,
 			@RequestParam(value="age[]") ArrayList<String> age) {
+		ArrayList<Content> list = new ArrayList<Content>();
+		Gson gson = new GsonBuilder().create();
+		
 		genre.remove(0);
 		age.remove(0);
 		
-		System.out.println(genre);
-		System.out.println(age);
-		return 1;
+		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("genre", genre);
+		map.put("age", age);
+		
+		System.out.println(map);
+
+		list = contentService.searchContentCategory(map);
+		
+		String result = gson.toJson(list);
+		System.out.println(list);
+		//System.out.println(genre);
+		//System.out.println(age);
+		return result;
 	}
 }
