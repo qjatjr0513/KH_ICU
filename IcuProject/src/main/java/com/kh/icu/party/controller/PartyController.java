@@ -2,13 +2,24 @@ package com.kh.icu.party.controller;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
+import com.kh.icu.party.model.vo.Party;
 
 @Controller
 public class PartyController {
@@ -38,14 +49,40 @@ public class PartyController {
 		return price;
 	}
 	
-	// 예상날짜 & 일일금액 & 예상금액 
-//	@RequestMapping("/endDate")
-//	@ResponseBody
-//	public String endDate(Date endDate) {
-//		System.out.println("endDate : "+endDate);
-//
-//		ArrayList <Object> list = new ArrayList <>();
-//	
+	// 파티 만들기
+	@RequestMapping("/insert.py")
+	public String insertParty(Party p, HttpSession session, Model model) {
+
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
+		p.setPaName(memNo);
+		
+		
+		System.out.println("p" + p);
+		
+		int result = partyService.insertParty(p);
+
+		if(result > 0) {
+			session.setAttribute("alertMsg", "파티 등록 성공");
+			return "redirect:findParty.py";
+		} else {
+			model.addAttribute("errorMsg", "파티 등록 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+//	@RequestMapping("/findParty.py")
+//	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap) {
+//		
+//		Map<String, Object> map = new HashMap();
+//		
+//		map = partyService.findPartyForm();
+//			
+//		model.addAttribute("map", map);
+//		
+//		return "board/boardListView";
 //	}
+	
 	
 }

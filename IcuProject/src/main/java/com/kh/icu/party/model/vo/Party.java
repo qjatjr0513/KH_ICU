@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class Party {
-	private int partyNo;
+	private int paNo;
 	private int paName;
 	private String tableCd;
 	private int ottNo;
@@ -15,7 +15,7 @@ public class Party {
 	private String ottId;
 	private String ottPwd;
 	private Date startDate;
-	private Date EndDate;
+	private Date endDate;
 	private int dayPrice;
 	private int account;
 	private int status;

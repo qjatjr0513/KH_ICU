@@ -105,92 +105,101 @@
       <h2>파티 등록</h2>
     </div>
     <!-- 등록 섹션 -->
-    <table class="enroll__party-table">
-      <tr>
-        <td>서비스</td>
-        <td>
-          <select name="ottChoice" id="ottChoice" onchange="ottChoice()">
-            <option value="1">넷플릭스</option>
-            <option value="2">왓챠</option>
-            <option value="3">웨이브</option>
-            <option value="4">디즈니 플러스</option>
-            <option value="5">애플TV</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>서비스 가격</td>
-        <td id="ottPrice"></td>
-      </tr>
-      <tr>
-        <td>제목</td>
-        <td>
-          <input type="text" placeholder="제목을 입력해주세요." />
-        </td>
-      </tr>
-      <tr>
-        <td>모집 인원</td>
-        <td>
-          <select name="" id="">
-            <option value="">1명</option>
-            <option value="">2명</option>
-            <option value="">3명</option>
-            <option value="">4명</option>
-            <option value="">5명</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>계정</td>
-        <td>
-          <input type="text" placeholder="계정 아이디(이메일)" />
-          <input type="text" placeholder="비밀번호" />
-        </td>
-      </tr>
-      <tr>
-        <td>계좌번호</td>
-        <td>
-          <input type="text" />
-        </td>
-      </tr>
-      <tr>
-        <td>진행 기간</td>
-        <td>
-          <span id="sysdate"></span> ~ <input type="date" placeholder="종료일" id="endDate" onchange="remainedSpan()" pattern="\d{4}-\d{2}-\d{2}" />&nbsp; 예상기간
-          : <span id="period"></span>
-        </td>
-      </tr>
-      <tr>
-        <td>참여 금액</td>
-        <td>1인당 1일 <span id="pricePerDay"></span></td>
-      </tr>
-      <tr>
-        <td>예상 금액</td>
-        <td><span id="totalPrice"></span></td>
-      </tr>
-    </table>
-
-    <div class="btnGroup">
-      <button>초기화</button>
-      <button>등록</button>
-    </div>
+    <form id="enrollForm" action="${contextPath }/insert.py">
+	    <%-- <input type="hidden" id="paName" value="${loginUser.memNo}"> --%>
+	    <table class="enroll__party-table">
+	      <tr>
+	        <td>서비스</td>
+	        <td>
+	          <select name="ottNo" id="ottNo">
+	            <option value="1">넷플릭스</option>
+	            <option value="2">왓챠</option>
+	            <option value="3">웨이브</option>
+	            <option value="4">디즈니 플러스</option>
+	            <option value="5">애플TV</option>
+	          </select>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>서비스 가격</td>
+	        <td id="ottPrice"></td>
+	      </tr>
+	      <tr>
+	        <td>제목</td>
+	        <td>
+	          <input type="text" name="paTitle" placeholder="제목을 입력해주세요." />
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>모집 인원</td>
+	        <td>
+	          <select name="crewNum" id="crewNum">
+	            <option value="1">1명</option>
+	            <option value="2">2명</option>
+	            <option value="3">3명</option>
+	            <option value="4">4명</option>
+	            <option value="5">5명</option>
+	          </select>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>계정</td>
+	        <td>
+	          <input type="text" name="ottId" placeholder="계정 아이디(이메일)" />
+	          <input type="text" name="ottPwd" placeholder="비밀번호" />
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>계좌번호</td>
+	        <td>
+	          <input type="text" name="account" />
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>진행 기간</td>
+	        <td>
+	          <span id="sysdate"></span> ~ <input type="date" placeholder="종료일" id="endDate" name="endDate" onchange="remainedSpan()" pattern="\d{4}-\d{2}-\d{2}" />&nbsp; 예상기간
+	          : <span id="period"></span>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>참여 금액</td>
+	        <td>1인당 1일 <span id="dayPrice"></span><span>원</span>
+	        <input type="hidden" name="dayPrice" id="dayPrice2">
+	        </td>
+	      </tr>
+	      <tr>
+	        <td>예상 금액</td>
+	        <td><span id="totalPrice"></span></td>
+	      </tr>
+	    </table>
+	
+	    <div class="btnGroup">
+	      <button type="reset">초기화</button>
+	      <button type="submit">등록</button>
+	    </div>
+	</form>
     
    <script>
      
      var period = 0;
      var price1 = 0;
      
+     const ottNo = document.querySelector("#ottNo");
+     ottNo.addEventListener('change' , ottChoice);
   // ott 가격 
 	 function ottChoice(){
 		$.ajax({
            url : '${contextPath}/ottChoice',
-           data : {ottNo : $("#ottChoice option:selected").val()},
+           data : {ottNo : $("#ottNo option:selected").val()},
            success : function(price){
                
         	  var ppd = Math.round(price /4 /30, 1); 
         	   
               $("#ottPrice").html(price +"원");
-              $("#pricePerDay").html(ppd +"원");
+              $("#dayPrice").html(ppd);
+              $("#dayPrice2").val(ppd);
+              console.log("ppd"+ppd);
               
               price1 = Math.round(price /4 /30, 1); 
               

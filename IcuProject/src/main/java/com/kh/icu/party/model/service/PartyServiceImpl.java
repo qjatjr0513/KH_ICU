@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.icu.party.model.dao.PartyDao;
+import com.kh.icu.party.model.vo.Party;
 
 
 @Service
@@ -22,4 +23,12 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.getPrice(sqlSession, ottNo);
 	};
 
+	@Override
+	public int insertParty(Party p) {
+		System.out.println("dao");
+		int result = partyDao.insertParty(sqlSession, p);
+		System.out.println("dao result : " + result);
+		return result;
+	}
+	
 }

@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.icu.content.model.vo.Content" alias="content"/>
  		<typeAlias type="com.kh.icu.common.model.vo.Reply" alias="reply"/>
 		<typeAlias type="com.kh.icu.content.model.vo.Coment" alias="coment"/>
+		<typeAlias type="com.kh.icu.party.model.vo.Party" alias="party"/>
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatMessage" alias="chatMessage"/> -->
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoom" alias="chatRoom"/> -->
 <!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/> -->
