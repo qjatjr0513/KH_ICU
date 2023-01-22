@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ICU - 회원가입</title>
+<title>ICU - 회원정보수정</title>
 <!-- bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -50,7 +50,7 @@
     />
 
     <!-- css -->
-    <link rel="stylesheet" href="resources/css/05_enrollForm2.css" />
+    <link rel="stylesheet" href="resources/css/24_memberUpdateForm.css" />
 
     <!-- jQuery -->
     <script
@@ -68,35 +68,28 @@
     
 	<!-- Logo -->
     <div id="main__logo">
-      <img src="resources/images/navbarLogo.png" />
+      <h2>회원정보수정</h2>
+      <hr><br>
     </div>
 
     <!-- 회원정보 입력 -->
-    <form id="memberEnroll" action="${contextPath }/insert.me" method="post">
+    <form id="memberUpdate" action="${contextPath }/memUpdate.me" method="post">
       <table>
         <tr>
           <td><label>이름</label></td>
-          <td><input type="text" placeholder="사용자 이름" name="memName" required/></td>
+          <td><input type="text" name="memName" value="${loginUser.memName}" readonly/></td>
           <td><label>&nbsp;&nbsp;이메일</label></td>
-          <td><input type="text" name="email"/></td>
+          <td><input type="email" name="email" placeholder="${loginUser.email}"/></td>
         </tr>
         <tr>
           <td><label for="">아이디</label></td>
-          <td><input type="text" placeholder="아이디" name="memId" required/></td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary tableBtn"
-              onclick="idCheck();"
-            >
-              중복확인
-            </button>
-          </td>
+          <td><input type="text" name="memId" value="${loginUser.memId}" readonly/></td>
+          <td></td>
           <td></td>
         </tr>
         <tr>
           <td><label>닉네임</label></td>
-          <td><input type="text" placeholder="닉네임" name="memNickname" required/></td>
+          <td><input type="text" placeholder="${loginUser.memNickname}" name="memNickname" required/></td>
           <td>
             <button
               type="button"
@@ -143,14 +136,14 @@
       </table>
 
       <div class="btn__group">
-        <button type="button" onclick="location.href='${contextPath }/loginForm.me'">취소</button>
-        <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
+        <button type="button" onclick="location.href='${contextPath }/myPage.me'">뒤로가기</button>
+        <button type="button" onclick="btnUpdate();" disabled name="enroll">회원정보 저장</button>
       </div>
     </form>
   </body>
     <script>
     function sendMessage(){
-    	let $sms = $("#memberEnroll input[name=phone]");
+    	let $sms = $("#memberUpdate input[name=phone]");
     	
     	$.ajax({
     		url : "${contextPath }/sendMessage.do",
@@ -187,71 +180,9 @@
         });
      }
 
-    function idCheck(){
-        // 아이디 입력하는 input 요소 객체
-        let $memberId = $("#memberEnroll input[name=memId]");
-        let regExp = /^[a-z][a-z\d]{3,11}$/;
-        
-        $.ajax({
-           url : "idCheck.me",
-           data : {checkId : $memberId.val()},
-           success : function(result){
-        	   
-        	   if($memberId.val() == "") {
-        		   
-        		   Swal.fire({
-                       icon: 'error',
-                       title: '아이디를 입력해주세요.'
-                       
-                   });
-
-                   $memberId.focus();
-                   
-               }
-        	   
-        	   else if(!regExp.test($memberId.val())){
-              	 Swal.fire({
-                       icon: 'error',
-                       title: '유효한 아이디를 입력해주세요.'                  
-                   });
-              	 
-               }else if(result == 1){ // 사용불가능한 아이디
-            	   
-            	   Swal.fire({
-                       icon: 'error',
-                       title: '이미 존재하는 아이디입니다.'
-                       
-                   });
-                 $memberId.focus();
-                 
-              }else{
-                 
-            	  Swal.fire({
-                      title: '사용가능한 아이디입니다.',
-                      text: '사용하시겠습니까?',
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: '사용',
-                      cancelButtonText: '취소'
-                  }).then((result) => {
-                	  if(result.isConfirmed){
-                          $("input[name=memId]").attr("readonly", true);
-                       }  
-                	  
-                  });
-              }
-           },
-           error : function(){
-              alert("아이디 중복체크용 ajax 통신 실패");
-           }
-        });
-     }
-    
     function nickCheck(){
         // 아이디 입력하는 input 요소 객체
-        let $memberNick = $("#memberEnroll input[name=memNickname]");
+        let $memberNick = $("#memberUpdate input[name=memNickname]");
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
         
         $.ajax({
@@ -330,7 +261,7 @@
         });
     });
     
-    function btnEnroll(){
+    function btnUpdate(){
         
    	 let regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*]).{8,15}$/i;
    	 
@@ -340,30 +271,15 @@
                title: '이름을 입력해주세요.'                  
            });
   		 
-  		} else if($('input[name=birthDay]').val() == ""){
-  	   		 Swal.fire({
-                 icon: 'error',
-                 title: '생년월일을 입력해주세요.'                  
-             });
-      	}else if($('input[name=memId]').val() == ""){
-  	   		 Swal.fire({
-                 icon: 'error',
-                 title: '아이디를 입력해주세요.'                  
-             });
-      	}else if($('input[name=memNickname]').val() == ""){
-  	   		 Swal.fire({
-                 icon: 'error',
-                 title: '닉네임을 입력해주세요.'                  
-             });
-      	} else if(!regExp.test($('input[name=memPwd]').val())){
+  		} else if(!regExp.test($('input[name=memPwd]').val())){
             Swal.fire({
                 icon: 'error',
                 title: '유효한 비밀번호를 입력해주세요.'                  
             });
             $('input[name=memPwd]').val()="";
             $('input[name=memPwd]').focus();
-        }   else if($('input[name=memPwd]').val() == ""){
-   		 Swal.fire({
+        } else if($('input[name=memPwd]').val() == ""){
+   		      Swal.fire({
                 icon: 'error',
                 title: '비밀번호를 입력해주세요.'                  
             });
@@ -384,7 +300,7 @@
              });
          }else {
    		 Swal.fire({
-                title: '회원가입 하시겠습니까?',
+                title: '회원정보를 수정 하시겠습니까?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -394,7 +310,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                          title: '가입이 완료되었습니다.',
+                          title: '수정이 완료되었습니다.',
                           text: '로그인 화면으로 이동합니다.',
                           icon:'success',
                           customClass: {
@@ -405,7 +321,7 @@
                    	 
                        if(result.isConfirmed){
                        	
-                        $("#memberEnroll").submit();
+                        $("#memberUpdate").submit();
                        }                                   
                     });
                 }

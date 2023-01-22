@@ -73,15 +73,15 @@ public class PartyController {
 		
 	}
 	
-	@RequestMapping("/findParty.py")
-	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
-		
-		List<Object> map = partyService.findPartyForm();
-			
-		model.addAttribute("map", map);
-		
-		return "board/boardListView";
-	}
+//	@RequestMapping("/findParty.py")
+//	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
+//		
+//		List<Object> map = partyService.findPartyForm();
+//			
+//		model.addAttribute("map", map);
+//		
+//		return "board/boardListView";
+//	}
 	
 //	@RequestMapping("/SerchParty.py")
 //	public String SerchParty(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {

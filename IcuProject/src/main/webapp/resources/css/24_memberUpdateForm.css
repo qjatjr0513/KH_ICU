@@ -1,0 +1,81 @@
+@import url('main.css');
+
+table {
+  margin: auto;
+  margin-top: 50px;
+  width: 920px;
+  height: 500px;
+  font-size: 20px;
+  font-weight: bold;
+}
+input {
+  height: 50px;
+  width: 300px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 0 3px 1px var(--color-orange);
+}
+
+/* table,
+td,
+tr {
+  border: 1px solid black;
+  border-spacing: 0;
+} */
+
+#main__logo {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.member__info {
+  background-color: rgb(93, 177, 133);
+  width: 700px;
+  margin: auto;
+}
+
+.nameAndBirth {
+  display: flex;
+}
+
+.btn__group {
+  margin: auto;
+  margin-top: 40px;
+  width: 600px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+.tableBtn {
+  border-radius: 10px !important;
+  box-shadow: 0 0 3px 1px rgb(200, 200, 200) !important;
+  background-color: white !important;
+  padding: 5px !important;
+  border: none !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+  color: var(--color-purple) !important;
+}
+.tableBtn:hover {
+  background-color: var(--color-orange) !important;
+}
+.tableBtn:active {
+  background-color: var(--color-orange) !important;
+}
+
+.btn__group > button {
+  width: 200px;
+  height: 60px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px 1px lightgray;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn__group > button:first-child {
+  background-color: gray;
+}
+.btn__group > button:nth-child(2) {
+  background-color: var(--color-purple);
+}

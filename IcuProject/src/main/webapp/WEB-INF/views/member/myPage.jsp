@@ -94,17 +94,17 @@
           </div>
         </div>
         <div id="info">
-          <h4><input type="text" name="memNickname" value="${loginUser.memNickname}"/></h4><br>
-          아이디 : <input type="text" name="memId" value="${loginUser.memId}"><br><br>
-          이름   : <input type="text" name="memName" value="${loginUser.memName}"><br><br>
-          연락처 : <input type="text" name="phone" value="${loginUser.phone}"><br><br>
-          이메일 : <input type="text" name="email" value="${loginUser.email}"><br><br>
-          가입일 : <input type="text" name="enrolldate" value="${loginUser.enrollDate}"><br><br>
+          <h4><input type="text" name="memNickname" value="${loginUser.memNickname}" readonly/></h4><br>
+          아이디 : <input type="text" name="memId" value="${loginUser.memId}" readonly><br><br>
+          이름   : <input type="text" name="memName" value="${loginUser.memName}" readonly><br><br>
+          연락처 : <input type="text" name="phone" value="${loginUser.phone}" readonly><br><br>
+          이메일 : <input type="text" name="email" value="${loginUser.email}" readonly><br><br>
+          가입일 : <input type="text" name="enrolldate" value="${loginUser.enrollDate}" readonly><br><br>
         </div>
         <br>
       </div>
       <div id="updateButton">
-        <a class="btn" href="${contextPath}/memUpdate.me">정보 수정</a>
+        <a class="btn" href="${contextPath}/memUpdateForm.me">정보 수정</a>
       </div>
       
     </div>

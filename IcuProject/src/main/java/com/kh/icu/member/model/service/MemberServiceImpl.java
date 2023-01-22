@@ -354,7 +354,13 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
-	
+	@Override
+	public int updateMember(Member m) {
+		
+		int updateMember = memberDao.updateMember(sqlSession, m);
+		
+		return updateMember;
+	}
 	
 	
 	

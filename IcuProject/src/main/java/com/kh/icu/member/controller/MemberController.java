@@ -353,5 +353,37 @@ public class MemberController {
 //		}
 		return "redirect:/";
 	}
-
+	
+	@RequestMapping("memUpdateForm.me")
+	public String memberUpdateForm() {
+		return "member/memberUpdateForm";
+	}
+	
+	@RequestMapping("memUpdate.me")
+    public String updateMember(Member m, HttpSession session, Model model) {
+       // 1. 회원정보 업데이트
+          
+       // 암호화 작업
+       String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+       
+       // 암호화된 비밀번호 Memeber m에 넣음
+       m.setMemPwd(encPwd);
+    
+       int result = memberService.updateMember(m);
+       
+       
+       if(result > 0) {
+          Member updateMem = memberService.loginMember(m);
+          
+          //업데이트 성공했으니 디비에 등록된 변경된 정보 가져오기
+          session.setAttribute("loginUser", updateMem);
+          session.setAttribute("alertMsg", "회원정보수정 성공!");
+          
+          return "redirect:/";
+       } else {
+          // 3. 업데이트 실패시 -> 에러메세지 추가, 에러페이지 이동
+          model.addAttribute("errorMsg","회원정보수정 실패");
+          return "common/errorPage";
+       }
+	}
 }
