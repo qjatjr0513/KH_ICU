@@ -305,7 +305,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '가입',
+                confirmButtonText: '수정',
                 cancelButtonText: '취소'
             }).then((result) => {
                 if (result.isConfirmed) {
