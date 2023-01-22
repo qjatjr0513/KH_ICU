@@ -25,6 +25,7 @@
 	        <td>서비스</td>
 	        <td>
 	          <select name="ottNo" id="ottNo">
+	            <option value="0"> 선택 </option>
 	            <option value="1">넷플릭스</option>
 	            <option value="2">왓챠</option>
 	            <option value="3">웨이브</option>
@@ -58,20 +59,20 @@
 	      <tr>
 	        <td>계정</td>
 	        <td>
-	          <input type="text" name="ottId" placeholder="계정 아이디(이메일)" />
-	          <input type="text" name="ottPwd" placeholder="비밀번호" />
+	          <input type="text" name="ottId" placeholder="계정 아이디(이메일)" required/>
+	          <input type="text" name="ottPwd" placeholder="비밀번호" required/>
 	        </td>
 	      </tr>
 	      <tr>
 	        <td>계좌번호</td>
 	        <td>
-	          <input type="text" name="account" />
+	          <input type="text" name="account" required/>
 	        </td>
 	      </tr>
 	      <tr>
 	        <td>진행 기간</td>
 	        <td>
-	          <span id="sysdate"></span> ~ <input type="date" placeholder="종료일" id="endDate" name="endDate" onchange="remainedSpan()" pattern="\d{4}-\d{2}-\d{2}" />&nbsp; 예상기간
+	          <span id="sysdate"></span> ~ <input type="date" placeholder="종료일" id="endDate" name="endDate" onchange="remainedSpan()" pattern="\d{4}-\d{2}-\d{2}" required/>&nbsp; 예상기간
 	          : <span id="period"></span>
 	        </td>
 	      </tr>
@@ -88,7 +89,7 @@
 	    </table>
 	
 	    <div class="btnGroup">
-	      <button type="reset">초기화</button>
+	      <button type="button" onclick="history_back();">이전</button>
 	      <button type="submit">등록</button>
 	    </div>
 	</form>
@@ -163,6 +164,10 @@
 		
       };
 
+      
+     	function history_back(){
+     		history.back();
+     	}
 	 </script>
 		
     

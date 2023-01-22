@@ -43,9 +43,12 @@ public interface MemberService {
    /* public int getUserInfoN(Member m); */
 
 	
-	public int insertImg(Image image, MultipartFile upfile, String webPath, String serverFolderPath) throws IOException ;
-	
 	public int updateMember(Member m);
+
+	public int insertImg(Image image);
+
+	public int updateImg(Image image, String webPath, String serverFolderPath);
+	
 	
 	
 	

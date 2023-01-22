@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -287,24 +288,15 @@ public class MemberController {
 	public String insertImg(Image image,
 							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
-							Model model,
-							@RequestParam(value="mode", required=false, defaultValue="insert") String mode,
-							@RequestParam(value="deleteList" , required=false) String deleteList
-							) {
+							Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		String webPath = "/resources/profileImg/";
-		String serverFolderPath = session.getServletContext().getRealPath(webPath);
-		
-		int memNo = 0;
-		int result = 0;
-		
+
 		if(loginUser != null) {
-			memNo = loginUser.getMemNo();
+			int memNo = loginUser.getMemNo();
+			System.out.println("memNo : " + memNo);
+			image.setRefTno(memNo);
 		}
-		System.out.println("memNo : " + memNo);
-		image.setRefTno(memNo);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
 			
@@ -314,45 +306,66 @@ public class MemberController {
 			try {
 				upfile.transferTo(new File(savePath+changeName));
 			} catch (IllegalStateException | IOException e) {
-				logger.info(e.getMessage());
+				logger.error(e.getMessage());
 			}
 			
 			image.setOriginName(upfile.getOriginalFilename());
 			image.setChangeName("/resources/profileImg/" + changeName) ;
 			
+			}
+		int result = memberService.insertImg(image);
+		
+		if(result > 0) {
+			session.setAttribute("image", image);
+			return "redirect:myPage.me";
+		}else {
+			model.addAttribute("errorMsg","게시글 작성 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@Autowired
+	private ServletContext application;
+	
+	@RequestMapping("updateImg.me")
+	public String updateImg(Image image,
+							MultipartFile upfile, 
+							HttpSession session,
+							Model model) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String webPath = "/resources/profileImg/";
+		String serverFolderPath  = session.getServletContext().getRealPath(webPath);
+		
+		if(loginUser != null) {
+			int memNo = loginUser.getMemNo();
+			System.out.println("memNo : " + memNo);
+			image.setRefTno(memNo);
 		}
 		
-		if(mode.equals("insert")) {
+		if(!upfile.getOriginalFilename().equals("")) {
 			
-			// db에 board테이블에 데이터 추가
-			try {
-				result = memberService.insertImg(image, upfile ,webPath, serverFolderPath);
-				
-				if(result > 0) {
-					session.setAttribute("profile", image.getChangeName());
-					return "redirect:myPage.me";
-				} 
-					
-				
-				
-			} catch (Exception e) {
-				logger.error("에러발생!! : "+e.getMessage());
+			String savePath = session.getServletContext().getRealPath("/resources/profileImg/");
+			String changeName = Utils.saveFile(upfile, savePath);
+			image.setOriginName(upfile.getOriginalFilename());
+			image.setChangeName("/resources/profileImg/" + changeName) ;
+			
+			if(upfile.getName() != null && !upfile.getName().equals("") ) {
+				File path = new File(application.getRealPath("/resources/profileImg"));
+				new File(path+upfile.getOriginalFilename()).delete();
 			}
-			
-		} 
-//			else { // 수정
-//			
-//			// 게시글 수정 서비스 호출
-//			// b객체 안에 boardNo
-//			try {
-//				result = memberService.updateImg(image, webPath, serverFolderPath, deleteList);
-//			} catch (Exception e) {
-//				logger.error("에러발생!! : "+e.getMessage());
-//			}
-//			
-//		}
-		return "redirect:/";
+		}
+		int result = memberService.updateImg(image, webPath, serverFolderPath);
+		
+		if(result > 0) {
+			session.setAttribute("image", image);
+			return "redirect:myPage.me";
+		}else {
+			model.addAttribute("errorMsg","게시글 작성 실패");
+			return "common/errorPage";
+		}
 	}
+
 	
 	@RequestMapping("memUpdateForm.me")
 	public String memberUpdateForm() {
@@ -387,3 +400,4 @@ public class MemberController {
        }
 	}
 }
+

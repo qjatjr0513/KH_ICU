@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -32,5 +33,12 @@ public class HomeController {
 	public String main() {
 		return "common/main";
 	}
+	
+	/*
+	 * @RequestMapping(value = "/rate") public String rateHandler(HttpServletRequest
+	 * request) { //your controller code String referer =
+	 * request.getHeader("Referer"); System.out.println(referer); return
+	 * "redirect:"+ referer; }
+	 */
 	
 }

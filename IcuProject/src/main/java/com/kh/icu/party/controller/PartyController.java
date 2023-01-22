@@ -32,7 +32,7 @@ public class PartyController {
 		return "party/partyEnrollForm";
 	}
 	
-	@RequestMapping("findParty.py")
+	@RequestMapping("findPartyForm.py")
 	public String findPartyForm() {
 		return "party/findPartyForm";
 	}
@@ -46,8 +46,12 @@ public class PartyController {
 	@RequestMapping("/ottChoice")
 	@ResponseBody
 	public int getPrice(String ottNo) {
-		int price = partyService.getPrice(ottNo);
-		return price;
+		if(!ottNo.equals("0")) {
+			int price = partyService.getPrice(ottNo);
+			return price;			
+		}else {
+			return 0;
+		}
 	}
 	
 	// 파티 만들기

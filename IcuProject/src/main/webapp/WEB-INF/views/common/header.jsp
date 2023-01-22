@@ -62,8 +62,13 @@
 
     <!-- sweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <!-- Toastr -->
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+	
 	<!-- Navbar -->
     <nav id="navbar">
       <div class="navbar__logo">
@@ -76,7 +81,7 @@
         <li class="navbar__menu__item active1" data-link="#home">
         	<a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
         <li class="navbar__menu__item" data-link="#about">
-        	 <a href="${contextPath }/findParty.py" style="text-decoration: none; color:black;">파티찾기</a></li>
+        	 <a href="${contextPath }/findPartyForm.py" style="text-decoration: none; color:black;">파티찾기</a></li>
         </li>
         <li class="navbar__menu__item" data-link="#skills">
            <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
@@ -119,11 +124,70 @@
           </c:choose>
         </li>
       </ul>
-      
       <!-- Toggle button -->
       <button class="navbar__toggle-btn">
         <i class="fa-solid fa-bars"></i>
       </button>
     </nav>
+      <!-- <div id="socketAlert" class="alert alert-success" role="alert" style="display:none; margin-top:90px;"></div> -->
+    <!-- sockjs  -->
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script>
+		var socket = null;
+		const contextPath = "${contextPath}";
+		
+		$(document).ready(function(){
+			connectWS();
+		});
+		
+		function connectWS(){
+			var ws = new SockJS(contextPath+"/alram");
+			socket = ws;
+			
+			ws.onopen = function(){ // 커넥션이 연결되면 실행
+				console.log('Info: connection opend.');
+				
+			};
+			
+			ws.onmessage = function (event){
+				console.log("ReceiveMessage:", event.data+'\n');
+				/* let $socketAlert =  $('div#socketAlert');
+				$socketAlert.html(event.data);
+				$socketAlert.css('display', 'block');
+				
+				setTimeout( function(){
+					$socketAlert.css('display', 'none');
+				}, 5000);*/
+				
+				toastr.options = {
+						"closeButton": false,
+						  "debug": false,
+						  "newestOnTop": false,
+						  "progressBar": true,
+						  "positionClass": "toast-bottom-right",
+						  "preventDuplicates": false,
+						  "onclick": null,
+						  "showDuration": "100",
+						  "hideDuration": "1000",
+						  "timeOut": "5000",
+						  "extendedTimeOut": "5000",
+						  "showEasing": "swing",
+						  "hideEasing": "linear",
+						  "showMethod": "fadeIn",
+						  "hideMethod": "fadeOut"
+	                  };
+				toastr.options.onclick = function() { location.href="${contextPath}/list.bo" }
+				toastr.success(event.data);
+			};
+			
+			ws.onclose = function (event) { 
+				console.log('Info: connection closed.');
+				//setTimeout(function(){ connect();}, 1000); // retry connection()!!
+			};
+			ws.onerror = function (err) { console.log('Error:;', err);};
+			
+		}
+		
+	</script>
 </body>
 </html>

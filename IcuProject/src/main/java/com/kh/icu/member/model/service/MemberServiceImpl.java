@@ -347,7 +347,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
 	@Override
-	public int insertImg(Image image, MultipartFile upfile , String webPath, String serverFolderPath) throws IOException {
+	public int insertImg(Image image){
 		
 		int result = memberDao.insertImg(sqlSession, image);
 		
@@ -362,6 +362,12 @@ public class MemberServiceImpl implements MemberService{
 		return updateMember;
 	}
 	
+	public int updateImg(Image image, String webPath, String serverFolderPath){
+		
+		int result = memberDao.updateImg(sqlSession, image);
+		
+		return result;
+	}
 	
 	
 	

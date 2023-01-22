@@ -31,7 +31,7 @@
     <div id="main__logo">
       <img src="resources/images/navbarLogo.png" />
     </div>
-   <br><br>
+   <br>
    <div class="content">
       <br><br>
       <div class="innerOuter">
@@ -77,7 +77,7 @@
                    <li class="list-group-item">
                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요";></textarea>
                   <c:if test="${not empty loginUser}">
-                  <button type="button" class="btn btn-dark mt-3" onClick="insertReply();">댓글 입력</button>
+                  <button type="button"  class="btn btn-dark mt-3" onClick="insertReply();">댓글 입력</button>
                   </c:if>
                    </li>
                </ul>
@@ -96,6 +96,9 @@
             </tbody>
          </table>
             <script>
+            const replyWriter = "${loginUser.memNickname}";
+            const boardWriter = "${b.boardWriter}";
+            const boardNo = "${b.boardNo}";
                $(function(){
                selectReplyList();
                   
@@ -112,6 +115,17 @@
                      success : function(result){
                         $("#replyContent").val("");
                         if(result == "1"){
+                        	console.log("reply::socket>>", socket);
+                        	
+                        	if(socket){
+                        		if(replyWriter != boardWriter ){
+                        		let socketMsg = "reply,"+ replyWriter + "," + boardWriter + "," + boardNo;
+                        		console.log("sssssssmsg>>", socketMsg);
+                        		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
+                        		socket.send(socketMsg)                        			
+                        		}
+                        	}
+                        	
                            Swal.fire({
                                    icon:'success',
                                    title: "댓글등록 성공"
@@ -158,9 +172,15 @@
                   });
                }
                
-         
+         $('#btnSend').on('click', function(evt){
+        	 evt.preventDefault();
+        	 if(socket.readyState !== 1) return;
+        	 
+        	 let msg = $("textarea#replyContent").val();
+        	 socket.send(msg);
+         });
             </script>
-                  
+            
       </div>
    </div>
    

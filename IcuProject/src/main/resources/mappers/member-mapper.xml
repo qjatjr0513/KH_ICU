@@ -142,6 +142,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE MEM_ID = #{memId}
 	</update>
 	
+
+	<update id="updateImg" parameterType="image">
+		UPDATE IMAGE
+		SET  ORIGIN_NAME = #{originName},
+			 CHANGE_NAME = #{changeName}
+		WHERE REF_TNO = #{refTno} AND TABLE_CD = 'M'
+	</update>
+
 	
 	
 	

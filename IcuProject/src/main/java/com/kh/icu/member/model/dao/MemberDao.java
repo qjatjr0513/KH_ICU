@@ -99,5 +99,8 @@ public class MemberDao {
 	}
 	
 	
-	
+	public int updateImg(SqlSession sqlSession, Image image) {
+		return sqlSession.update("memberMapper.updateImg", image);
+	}
+
 }
