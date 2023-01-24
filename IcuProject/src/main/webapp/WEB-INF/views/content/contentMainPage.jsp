@@ -368,8 +368,8 @@
 					let htmlMid = "";
 					let htmlInfo = "";
 					//$('.carousel-inner').remove();
-					var carouselCnt = parseInt(result.length/8);
-					var movieBoxCnt = parseInt(result.length/4);
+					var carouselCnt = parseInt(result.length/8) + 1;
+					var movieBoxCnt = parseInt(result.length/4) + 1;
 					console.log(result.length);
 					if(result.length >= 8){
 						$('#carouselExampleControls').remove();
@@ -396,7 +396,7 @@
 								console.log(cnt);
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
-													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[i].conNo +");'>" +
+													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br><br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
 													"<span onclick='movePage("+ result[cnt].conNo +");'>("+cnt+")</span>" +
@@ -409,9 +409,46 @@
 							}
 							htmlInfo = "";
 						}
+						cnt = 0;
 					}
 					else if(result.length >= 4){
+						$('.carousel-inner').remove();
 						
+						htmlMid += "<div class='carousel-inner'>" +
+						"<div class='carousel-item active' data-bs-interval='100000'>" +
+							"</div>"+
+						"</div>";
+						$("#carouselExampleControls").html(htmlMid);
+						
+						htmlMid = "";
+						console.log("box : "+movieBoxCnt);
+						for(var j = 1; j <= movieBoxCnt; j++){
+							htmlMid += "<div id='movieBox"+ j +"' class='movieBox'>" +
+										"</div>";
+							$(".carousel-item").html(htmlMid);
+						}
+						
+						htmlMid = "";
+						for(var j = 1; j <= movieBoxCnt; j++){
+							console.log(cnt);
+							while(cnt < j * 4){
+								console.log(cnt);
+								htmlInfo += "<div class='movieContainer'>" +
+												"<div class='movie__info'>" +
+													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +
+													"<br><br>" +
+													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+cnt+")</span>" +
+													"<br>" +
+													"<i class='fa-solid fa-star'>4.0</i>"+
+												"</div>"+
+											"</div>";
+								$('#movieBox'+j).html(htmlInfo);
+								cnt += 1;
+							}
+							htmlInfo = "";
+						}
+						cnt = 0;
 					}
 					else{
 						$('.carousel-inner').remove();
