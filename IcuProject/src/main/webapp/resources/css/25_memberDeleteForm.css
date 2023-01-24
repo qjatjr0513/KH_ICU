@@ -1,0 +1,21 @@
+@import url('main.css');
+
+#main__logo {
+  text-align: center;
+  margin-top: 95px;
+}
+
+#whole{
+  padding: 10%;
+  padding-left: 21%;
+  font-size: 13;
+}
+
+span{
+  font-size: 14;
+}
+
+.fa-check{
+  color: hotpink;
+}
+

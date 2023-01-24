@@ -66,7 +66,6 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-	<!-- Logo -->
     <div id="main__logo">
       <h2>회원정보수정</h2>
       <hr><br>
@@ -137,7 +136,7 @@
 
       <div class="btn__group">
         <button type="button" onclick="location.href='${contextPath }/myPage.me'">뒤로가기</button>
-        <button type="button" onclick="btnUpdate();" disabled name="enroll">회원정보 저장</button>
+        <button type="button" onclick="btnUpdate();" disabled name="update">회원정보 저장</button>
       </div>
     </form>
   </body>
@@ -168,7 +167,7 @@
                       } else{
                         $('#chkAuth').html('인증번호 일치함');
                         $('#chkAuth').attr('color', '#01DF01');
-                        $("button:button[name=enroll]").attr("disabled",false);
+                        $("button:button[name=update]").attr("disabled",false);
                       }
 
                   });	

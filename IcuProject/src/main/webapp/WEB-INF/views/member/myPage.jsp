@@ -32,7 +32,7 @@
               <input type="hidden" name="originName" value="${image.originName }"/>
 			  <input type="hidden" name="changeName" value="${image.changeName }"/>
               <div align="center">   
-					<button type="submit" class="btn btn-primary">등록하기</button>
+					<button id="enrollBtn" type="submit" class="btn btn-primary">등록하기</button>
 			  </div>
             </form>
           </div>
@@ -46,9 +46,9 @@
           가입일 : <input type="text" name="enrolldate" value="${loginUser.enrollDate}" readonly><br><br>
         </div>
         <br>
-      </div>
-      <div id="updateButton">
-        <a class="btn" href="${contextPath}/memUpdateForm.me">정보 수정</a>
+        <div id="updateButton">
+          <a class="btn" href="${contextPath}/memUpdateForm.me">정보 수정</a>
+        </div>
       </div>
       
     </div>
