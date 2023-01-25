@@ -177,8 +177,22 @@
         </div>
         
       </div>
-    </section>    
-    
+    </section>
+    <script>
+    $(function(){
+      if('${flag2}' == 'showAlert2'){
+        Swal.fire({
+              title: '지금까지 ICU를 이용해주셔서 감사합니다.',
+              text: '시작페이지로 이동합니다.',
+              icon:'success',
+              customClass: {
+              confirmButton: 'swal2-confirm swal2-styled swal2-jong',
+              cancelButton: 'btn btn-danger'
+              } 
+        });
+      }
+    });    
+    </script>
 	<!-- Contact  -->
     <jsp:include page="common/footer.jsp"/>
     
@@ -186,5 +200,6 @@
     <!-- defer : html 파일이 파싱 되는동안 js 파일을 동시에 다운받아서 html 파싱이 다 되면 js를 실행함 -->
     <script src="resources/js/01_startPage.js" defer></script>
     <script src="resources/js/main.js" defer></script>
+
   </body>
 </html>

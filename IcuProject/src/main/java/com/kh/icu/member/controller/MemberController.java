@@ -429,7 +429,7 @@ public class MemberController {
 				
 				redirectAttributes.addFlashAttribute("flag2","showAlert2");
 				session.removeAttribute("loginUser");
-				return "redirect:loginForm.me";
+				return "redirect:/";
 				
 			} else {
 				

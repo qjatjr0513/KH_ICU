@@ -137,19 +137,7 @@
         });
     }
   });
-  $(function(){
-    if('${flag2}' == 'showAlert2'){
-      Swal.fire({
-            title: '지금까지 ICU를 이용해주셔서 감사합니다.',
-            text: '로그인 화면으로 이동합니다.',
-            icon:'success',
-            customClass: {
-            confirmButton: 'swal2-confirm swal2-styled swal2-jong',
-            cancelButton: 'btn btn-danger'
-            }    
-      })
-    }
-  });
+  
   $(function(){
     if('${flag3}' == 'showAlert3'){
       Swal.fire({
