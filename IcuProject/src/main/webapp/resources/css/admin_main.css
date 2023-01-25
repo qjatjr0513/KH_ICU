@@ -1,0 +1,32 @@
+#vertical-navbar {
+  position: fixed;
+  top: 110px;
+  left: 100px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 5px 1px var(--color-purple);
+}
+li {
+  box-sizing: border-box;
+  padding: 12px;
+  color: rgb(74, 14, 14);
+  font-size: 20px;
+  border: 1px solid transparent;
+}
+.contents__manage a,
+.faq__manage a,
+.pay__manage a,
+.inquiry__manage a {
+  color: rgb(74, 14, 14);
+  cursor: pointer;
+}
+#vertical-navbar h2 {
+  padding: 10px;
+  color: var(--color-orange);
+}
+
+li > a:hover {
+  color: rgb(74, 14, 14);
+}

@@ -33,4 +33,8 @@ public class FaqDao {
 	public int updateFaq(SqlSession sqlSession, Faq f) {
 		return sqlSession.update("faqMapper.updateFaq", f);
 	}
+	
+	public Faq selectFaq(SqlSession sqlSession, int fno) {
+		return sqlSession.selectOne("faqMapper.selectFaq", fno);
+	}
 }

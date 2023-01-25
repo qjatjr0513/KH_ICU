@@ -25,7 +25,7 @@
       <br><br>
       <div class="innerOuter" >
          <c:choose>
-            <c:when test="${b.boardNo eq null}">
+            <c:when test="${f.faqNo eq null}">
                <h2>FAQ 작성하기</h2>
             </c:when>
             <c:otherwise>
@@ -33,11 +33,11 @@
             </c:otherwise>
          </c:choose>
          <br>
-         <form id="enrollForm" action="${contextPath }/enrollForm.fq">
-            <div >
+         <form id="enrollForm" action="${contextPath }/insert.fq">
+            <div>
                <div>
                   <label for="title">제목 : </label>
-                  <input type="text" id="title" class="form-control" name="faqTitle" value="${b.boardTitle } " required>
+                  <input type="text" id="title" class="form-control" name="faqTitle" value="${f.faqTitle } " required>
                </div>
                <hr>
                <div>
@@ -51,22 +51,23 @@
                </div>
                <br>
                <div>
-                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="faqContent" placeholder="내용을 입력해주세요." required></textarea>
+                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="faqContent"  placeholder="내용을 입력해주세요." required>${f.faqContent }</textarea>
                </div>
                <br>
             <input type="hidden" name="mode" value="${param.mode }"/>
-            <input type="hidden" name="boardNo" value="${empty b.boardNo ? 0 : b.boardNo}"/>
+            <input type="hidden" name="faqNo" value="${empty f.faqNo ? 0 : f.faqNo}"/>
             
             <div align="center">
-               <a href="${contextPath }/list.bo" class="btn btn-danger">취소하기</a>
+               <a href="${contextPath }/faqList.fq" class="btn btn-danger">취소하기</a>
                <c:choose>
-                  <c:when test="${b.boardNo eq null}">
+                  <c:when test="${f.faqNo eq null}">
                      <button type="submit" class="btn btn-primary">등록하기</button>
                   </c:when>
                   <c:otherwise>
                      <button type="submit" class="btn btn-primary">수정하기</button>
                   </c:otherwise>
                </c:choose>   
+            </div>
             </div>
          </form>
          

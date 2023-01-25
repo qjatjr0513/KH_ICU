@@ -274,7 +274,7 @@ public class MemberController {
 		Member userInfo = memberService.findMember(m);
 		
 		if (userInfo.getMemId() != null) {
-			session.removeAttribute("loginUser");
+			session.setAttribute("loginUser", userInfo);
             session.setAttribute("signIn", apiResult);
         }
 

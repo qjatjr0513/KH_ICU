@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			FAQ_NO,
 			FAQ_TYPE,
-			FAQ_TITLE
+			FAQ_TITLE,
+			FAQ_CONTENT
 		FROM FAQ 
 		WHERE STATUS = 'N'
 	</select>
@@ -34,7 +35,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateFaq" parameterType="faq">
 		UPDATE FAQ
 		SET FAQ_TITLE = #{faqTitle},
+			FAQ_TYPE = #{faqType},
 			FAQ_CONTENT = #{faqContent}
 		WHERE FAQ_NO = #{faqNo}
 	</update>
+	
+	
+	<select id="selectFaq" parameterType="int" resultMap="faqResultSet">
+		SELECT
+			FAQ_NO, 
+			FAQ_TYPE,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO = #{faqNo} AND STATUS = 'N'
+	</select>
 </mapper>

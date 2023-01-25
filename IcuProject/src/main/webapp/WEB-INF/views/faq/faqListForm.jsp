@@ -69,9 +69,9 @@
 	               
 // 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
 
-	                  let bno = $(this).children().eq(0).text();
+	                  let fno = $(this).children().eq(0).text();
 	                  
-	                  location.href="${contextPath}/detail.bo/"+bno;
+	                  location.href="${contextPath}/detail.fq/"+fno;
 // 	               } 
 
 	            });

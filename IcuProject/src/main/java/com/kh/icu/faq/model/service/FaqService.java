@@ -14,5 +14,6 @@ public interface FaqService {
 	
 	public int updateFaq(Faq f);
 	
+	public Faq selectFaq(int fno);
 	
 }

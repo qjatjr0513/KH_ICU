@@ -1,0 +1,47 @@
+@import url('main.css');
+@import url('admin_main.css');
+
+/* 회원정보조회 */
+#memberInfo {
+  margin: auto;
+  margin-top: 300px;
+  padding-left: 200px;
+  width: 60%;
+  /* background-color: antiquewhite; */
+}
+#memberInfo > table {
+  background-color: white;
+  text-align: center;
+}
+#memberInfo > table td,
+#memberInfo > table th {
+  padding: 10px;
+}
+.pagination {
+  margin: auto;
+}
+
+#blackList {
+  margin: auto;
+  margin-top: 300px;
+  padding-left: 200px;
+  width: 60%;
+  /* background-color: antiquewhite; */
+}
+td button {
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 5px;
+  padding: 0 3px;
+  background-color: rgb(150, 150, 150);
+  color: white;
+}
+
+#blackList > table td,
+#blackList > table th {
+  padding: 10px;
+}
+
+#blackList > table {
+  background-color: white;
+  text-align: center;
+}

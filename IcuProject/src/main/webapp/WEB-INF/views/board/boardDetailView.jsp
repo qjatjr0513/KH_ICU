@@ -88,10 +88,10 @@
             <tbody>
               <c:forEach var="r" items="${b.list }" varStatus="i">
 				<tr>
-					<td id="rWriter${i.count }">${r.replyWriter }</td>
-					<td id="rContent${i.count }">${r.replyContent }</td>
+					<td id="rWriter">${r.replyWriter }</td>
+					<td id="rContent">${r.replyContent }</td>
 					<td>${r.createDate }</td>
-					<td><input type="hidden" id="rno${i.count }" value="${r.replyNo }"/></td>
+					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
 					<c:if test="${r.replyWriter == loginUser.memNickname }">
 					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
 					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.bo?rno=${r.replyNo }&boardNo=${b.boardNo}'">삭제</button></td>

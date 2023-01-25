@@ -35,19 +35,28 @@
    <div class="content">
       <br><br>
       <div class="innerOuter">
-         <h2>${b.boardTitle }</h2>
+         <h2>${f.faqTitle }</h2>
          <div style="float:left;">
-            <span id="writer" class="form-control" name="memNickname">${b.boardWriter}</span>
-            <input type="hidden" name="boardWriter" value="${loginUser.memNo}">
+         	<c:choose>
+				<c:when test="${f.faqType == 'AC' }">
+				<span>계정문의</span>
+				</c:when>
+				<c:when test="${f.faqType == 'PY' }">
+				<span>파티문의</span>
+				</c:when>
+				<c:otherwise>
+				<span>결제문의</span>
+				</c:otherwise>
+			</c:choose>
+            <input type="hidden" name="faqNo" value="${f.faqNo}">
          </div>
          <div style="float:right;">
-            <c:if test="${not empty loginUser && loginUser.memNickname eq b.boardWriter }">
-               <a class="btn btn-primary" href="${contextPath}/enrollForm.bo?mode=update&bno=${b.boardNo}">수정하기</a>
-               <a class="btn btn-danger" href="${contextPath}/delete.bo?bno=${b.boardNo }">삭제하기</a>
-            </c:if>
+               <a class="btn btn-primary" href="${contextPath}/enrollForm.fq?mode=update&fno=${f.faqNo}">수정하기</a>
+               <a class="btn btn-danger" href="${contextPath}/delete.fq?fno=$${f.faqNo}">삭제하기</a>
          </div>
          <br><br>
-         
+      </div>
+    </div>
          <table id="contentArea" class="table">
             
             <tr>
@@ -56,13 +65,13 @@
                </td>
             </tr>
             <tr>
-               <td colspan="4"><p style="height:150px;">${b.boardContent }</p></td>
+               <td colspan="4"><p style="height:150px;">${f.faqContent }</p></td>
             </tr>
          </table>
          <br>
          
          <div align="center">
-            <a class="btn btn-primary" href="${contextPath }/list.bo">목록으로</a>
+            <a class="btn btn-primary" href="${contextPath }/faqList.fq">목록으로</a>
          </div>
          <br><br>
          
