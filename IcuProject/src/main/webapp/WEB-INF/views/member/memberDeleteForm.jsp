@@ -95,67 +95,94 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</span>
       <br><br>
-      <button type="button" onclick="btnDelete();" name="delete">확인</button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        확인
+      </button>
     </div>
     <br>
 
-    <form id="memberDelete" action="${contextPath }/memDelete.me" method="post">
-      <label>비밀번호 입력 : </label>
-      <input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/>
-      <input type="hidden" id="memPwdCheck" value="${loginUser.memPwd}"/>
-      
-      <div class="btn__group">
-        <button type="button" onclick="location.href='${contextPath }/memDeleteForm.me'">취소</button>
-        <button type="button" onclick="btnDelete();" name="delete">탈퇴하기</button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">회원탈퇴</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="memberDelete" action="${contextPath }/memDelete.me" method="post">
+              <label>비밀번호 입력 : </label>
+              <input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/>
+              <input type="hidden" id="memPwdCheck" value="${member.getMemPwd}"/>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >취소</button>
+            <button type="button" class="btn btn-primary" onclick="btnDelete();" name="delete">확인</button>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 
 
 </body>
 <script> 
+  $(function(){
+    if('${flag}' == 'showAlert'){
+      Swal.fire({
+            icon:'error',
+            title: "비밀번호가 일치하지 않습니다."
+        });
+    }
+  });
+  $(function(){
+    if('${flag2}' == 'showAlert2'){
+      Swal.fire({
+            title: '지금까지 ICU를 이용해주셔서 감사합니다.',
+            text: '로그인 화면으로 이동합니다.',
+            icon:'success',
+            customClass: {
+            confirmButton: 'swal2-confirm swal2-styled swal2-jong',
+            cancelButton: 'btn btn-danger'
+            }    
+      })
+    }
+  });
+  $(function(){
+    if('${flag3}' == 'showAlert3'){
+      Swal.fire({
+            icon:'error',
+            title: "회원 탈퇴 실패하였습니다."
+        });
+    }
+  });
+  
   function btnDelete(){
-     if($('#memPwd').val() != $('#memPwdCheck').val()){
-          Swal.fire({
-              icon: 'error',
-              title: '유효한 비밀번호를 입력해주세요.'                  
-          });
-          $('input[name=memPwd]').val()="";
-          $('input[name=memPwd]').focus();
-      } else if($('input[name=memPwd]').val() == ""){
+    
+    if($('input[name=memPwd]').val() == ""){
            Swal.fire({
               icon: 'error',
               title: '비밀번호를 입력해주세요.'                  
           });
     } else {
       Swal.fire({
-              title: '회원탈퇴 하시겠습니까?',
+              title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
               icon: 'warning',
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: '탈퇴',
-              cancelButtonText: '취소'
+              cancelButtonText: '취소',
+              confirmButtonText: '탈퇴'
           }).then((result) => {
               if (result.isConfirmed) {
-                  Swal.fire({
-                        title: '지금까지 ICU를 이용해주셔서 감사합니다.',
-                        text: '로그인 화면으로 이동합니다.',
-                        icon:'success',
-                        customClass: {
-                            confirmButton: 'swal2-confirm swal2-styled swal2-jong',
-                            cancelButton: 'btn btn-danger'
-                          },    
-                  }).then((result) => {
-                    
-                     if(result.isConfirmed){
-                       
-                      $("#memberDelete").submit();
-                     }                                   
-                  });
+                $("#memberDelete").submit();
+                  
               }
           });
     }
+    
    }
   
   </script>

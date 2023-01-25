@@ -51,6 +51,7 @@ public interface MemberService {
 	
 	public int updateImg(Image image, String webPath, String serverFolderPath);
 	
+	public int deleteMember(String memId);
 	
 	
 	

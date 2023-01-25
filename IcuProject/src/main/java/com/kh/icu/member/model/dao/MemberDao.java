@@ -106,5 +106,9 @@ public class MemberDao {
 	public int updateImg(SqlSession sqlSession, Image image) {
 		return sqlSession.update("memberMapper.updateImg", image);
 	}
+	
+	public int deleteMember(SqlSession sqlSession, String memId) {
+		return sqlSession.update("memberMapper.deleteMember", memId);
+	}
 
 }

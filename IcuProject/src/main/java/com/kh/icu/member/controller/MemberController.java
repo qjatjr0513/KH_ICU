@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.common.Utils;
@@ -415,5 +416,34 @@ public class MemberController {
 	public String memberDeleteForm() {
 		return "member/memberDeleteForm";
 	}
+	
+	@RequestMapping("memDelete.me")
+	public String deleteMember(String memPwd, HttpSession session, RedirectAttributes redirectAttributes) {
+		String encPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+		
+		if(bcryptPasswordEncoder.matches(memPwd, encPwd)) {
+			
+			int result = memberService.deleteMember(memId);
+			if(result > 0) {
+				
+				redirectAttributes.addFlashAttribute("flag2","showAlert2");
+				session.removeAttribute("loginUser");
+				return "redirect:loginForm.me";
+				
+			} else {
+				
+				redirectAttributes.addFlashAttribute("flag3","showAlert3");
+				return "redirect:memDeleteForm.me";
+				
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("flag","showAlert");
+			
+			return "redirect:memDeleteForm.me";
+		}
+		
+	}
+	
 }
 

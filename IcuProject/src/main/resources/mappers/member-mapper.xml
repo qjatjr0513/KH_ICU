@@ -149,7 +149,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 CHANGE_NAME = #{changeName}
 		WHERE REF_TNO = #{refTno} AND TABLE_CD = 'M'
 	</update>
-
+	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="string">
+		UPDATE MEMBER
+		SET STATUS = 'Y',
+			MODIFY_DATE = SYSDATE
+		WHERE MEM_ID = #{memId}
+	</update>
 	
 	
 	

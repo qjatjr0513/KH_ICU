@@ -376,7 +376,12 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
-	
+	public int deleteMember(String memId) {
+		
+		int result = memberDao.deleteMember(sqlSession, memId);
+		
+		return result;
+	}
 	
 	
 	
