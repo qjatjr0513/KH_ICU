@@ -50,4 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM FAQ
 		WHERE FAQ_NO = #{faqNo} AND STATUS = 'N'
 	</select>
+	
+	<update id="deleteFaq" parameterType="int">
+	 	UPDATE FAQ
+	 	SET STATUS ='Y'
+	 	WHERE FAQ_NO = #{fno}
+	</update>
 </mapper>

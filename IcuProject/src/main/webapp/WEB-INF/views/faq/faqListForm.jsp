@@ -40,7 +40,7 @@
 					</c:if>
 					
 					<c:forEach var="f" items="${list }" >
-					<tr>
+					<tr onclick="movePage(${f.faqNo});">
 						<td>${f.faqNo}</td>
 						<c:choose>
 							<c:when test="${f.faqType == 'AC' }">
@@ -64,7 +64,7 @@
 			 -->			
 			<script>
 			
-			$(function(){
+			/* $(function(){
 	            $("#boardList>tbody>tr").click(function(){
 	               
 // 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
@@ -75,7 +75,7 @@
 // 	               } 
 
 	            });
-	         });
+	         }); */
 			</script>
 			
 
@@ -108,7 +108,31 @@
 			</div>
 		</div>
 		<br><br>
+		
+	<script>
 	
+	function movePage(fno){
+ 		location.href = "${contextPath}/detail.fq/"+fno;
+ 	}
+	
+	$(function(){
+        if('${flag}' == 'showAlert'){
+       	 Swal.fire({
+                icon:'success',
+                title: "FAQ 삭제 성공"
+          		});
+       	}
+    });
+	 
+	 $(function(){
+        if('${flag2}' == 'showAlert2'){
+       	 Swal.fire({
+                icon:'success',
+                title: "FAQ 등록 성공"
+          		});
+       	}
+    });
+	</script>
 	</div>
 </body>
 </html>

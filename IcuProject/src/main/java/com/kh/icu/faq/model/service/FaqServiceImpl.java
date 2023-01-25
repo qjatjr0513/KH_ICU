@@ -64,4 +64,9 @@ public class FaqServiceImpl implements FaqService{
 	public Faq selectFaq(int fno) {
 		return faqDao.selectFaq(sqlSession, fno);
 	}
+	
+	@Override
+	public int deleteFaq(int fno) {
+		return faqDao.deleteFaq(sqlSession, fno);
+	}
 }

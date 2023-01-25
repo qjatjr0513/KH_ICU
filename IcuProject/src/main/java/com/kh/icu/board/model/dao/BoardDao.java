@@ -21,7 +21,7 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectList", rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null ,  rowBounds);
 	}
 	
 	public int selectListCount(SqlSession sqlSession) {

@@ -19,7 +19,7 @@ public class FaqDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("faqMapper.selectList", rowBounds);
+		return (ArrayList)sqlSession.selectList("faqMapper.selectList", null , rowBounds);
 	}
 	
 	public int selectListCount(SqlSession sqlSession) {
@@ -36,5 +36,9 @@ public class FaqDao {
 	
 	public Faq selectFaq(SqlSession sqlSession, int fno) {
 		return sqlSession.selectOne("faqMapper.selectFaq", fno);
+	}
+	
+	public int deleteFaq(SqlSession sqlSession, int fno) {
+		return sqlSession.update("faqMapper.deleteFaq", fno);
 	}
 }

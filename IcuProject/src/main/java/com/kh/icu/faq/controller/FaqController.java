@@ -69,7 +69,7 @@ public class FaqController {
 	      }
 	      
 	      if(result > 0) {
-	    	  redirectAttributes.addFlashAttribute("flag","showAlert");
+	    	  redirectAttributes.addFlashAttribute("flag2","showAlert2");
 	         return "redirect:faqList.fq";
 	      } else {
 	         model.addAttribute("errorMsg", "게시글 등록 실패");
@@ -99,6 +99,21 @@ public class FaqController {
 	      
 	      return mv;
 	   }
-	 
+	
+	@RequestMapping("delete.fq")
+	   public String deleteBoard(@RequestParam(value="fno", required =false, defaultValue = "0") int fno,
+	                       HttpSession session, Model model,
+	                       RedirectAttributes redirectAttributes) {
+	      
+	      int result = faqservice.deleteFaq(fno);
+	      
+	      if(result > 0) {
+	    	  redirectAttributes.addFlashAttribute("flag","showAlert");
+	         return "redirect:faqList.fq";
+	      } else {
+	         model.addAttribute("errorMsg", "FAQ 삭제 실패");
+	         return "common/errorPage";
+	      }
+	   }
 	
 }

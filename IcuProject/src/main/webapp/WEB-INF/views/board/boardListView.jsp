@@ -50,7 +50,7 @@
 					</c:if>
 					
 					<c:forEach var="b" items="${list }" >
-					<tr>
+					<tr onclick="movePage(${b.boardNo });">
 						<td class="bno">${b.boardNo }</td>
 						<td>${b.boardTitle }</td>
 						<td>${b.boardWriter }</td>
@@ -66,7 +66,11 @@
 			 -->			
 			<script>
 			
-			$(function(){
+			function movePage(bno){
+		 		location.href = "${contextPath}/detail.bo/"+bno;
+		 	}
+			
+			/* $(function(){
 	            $("#boardList>tbody>tr").click(function(){
 	               
 // 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
@@ -77,7 +81,7 @@
 // 	               } 
 
 	            });
-	         });
+	         }); */
 			</script>
 			
 			
@@ -98,16 +102,16 @@
 			</form>
 			<br><br><br><br>
 
-			<c:set var = "url" value="cpage="/>
+			<c:set var = "url" value="?cpage="/>
 			<!-- 페이지 이동기능 구현 -->
 			<div id="pagingArea">
 				<ul class="pagination">
 					<c:choose>
 						<c:when test="${pi.currentPage eq 1 }">
-							<li class="page-item disabled"><a class="page-link" href="#">&lt</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&lt</a></li>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&laquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 					
@@ -117,10 +121,10 @@
 					
 					<c:choose>
 						<c:when test="${pi.currentPage eq pi.maxPage }">
-							<li class="page-item disabled"><a class="page-link" href="#">&gt</a></li>
+							<li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&gt</a></li>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&raquo;</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

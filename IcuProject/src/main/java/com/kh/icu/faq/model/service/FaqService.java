@@ -16,4 +16,6 @@ public interface FaqService {
 	
 	public Faq selectFaq(int fno);
 	
+	public int deleteFaq(int fno);
+	
 }
