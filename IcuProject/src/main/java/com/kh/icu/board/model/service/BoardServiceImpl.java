@@ -125,6 +125,10 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public int deleteReply(int rno) {
+		return boardDao.deleteReply(sqlSession, rno);
+	}
 	
 	
 	

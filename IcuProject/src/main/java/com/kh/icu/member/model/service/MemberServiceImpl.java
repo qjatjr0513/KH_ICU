@@ -344,6 +344,12 @@ public class MemberServiceImpl implements MemberService{
        return (String) "K"+(int)(Math.floor(num));
      }
 
+   @Override
+   public String selectProfile(Member m) {
+	   String profile = memberDao.selectProfile(sqlSession, m);
+	   System.out.println("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"+profile);
+	   return profile;
+   }
 	
 	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
 	@Override
@@ -353,6 +359,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+	
 	
 	@Override
 	public int updateMember(Member m) {

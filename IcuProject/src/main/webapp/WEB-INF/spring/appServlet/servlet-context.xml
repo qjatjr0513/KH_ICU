@@ -30,11 +30,15 @@
 	<context:component-scan base-package="com.kh.icu" />
 	
 
-
+	<!-- 댓글 알림 핸들러 -->
 	<beans:bean id="alramHandler" class="com.kh.icu.common.socket.AlramHandler"/>
+	
+	<!-- 실시간 문의 핸들러 -->
+	<beans:bean id="chatHandler" class="com.kh.icu.common.socket.ChatHandler"/>
 
 	<websocket:handlers>
 		<websocket:mapping handler="alramHandler" path="/alram"/>
+		<websocket:mapping handler="chatHandler" path="/chat"/>
 		<websocket:handshake-interceptors>
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>

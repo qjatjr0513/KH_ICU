@@ -13,20 +13,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
+		<collection property="list" resultMap="replyResultSet"></collection>
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">
 		<id column="REPLY_NO" property="replyNo"/>
-		<result column="TABLE_CD" property="tableCd"/>
-		<result column="MEM_NO" property="replyWriter"/>
-		<result column="REF_TNO" property="refTno"/>
 		<result column="REPLY_CONTENT" property="replyContent"/>
-		<result column="CREATE_DATE" property="createDate"/>
+		<result column="REPLY_MEM_NICKNAME" property="replyWriter"/>
+		<result column="REPLY_CREATE_DATE" property="createDate"/>
+		<result column="REF_TNO" property="refTno"/>
+		<result column="TABLE_CD" property="tableCd"/>
 		<result column="STATUS" property="status"/>
-		<association property="member" javaType="member">
-			<id     column="MEM_NO" property="memNo"/>
-	 		<result column="MEM_NICKNAME" property="memNickname"/>
-		</association>
 	</resultMap>
 	
 	<select id="selectList" resultMap="boardResultSet">
@@ -101,10 +98,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BOARD_NO,
 			M.MEM_NICKNAME,
 			BOARD_TITLE,
-			BOARD_CONTENT
+			BOARD_CONTENT,
+			REPLY_NO,
+			REPLY_CONTENT,
+			M2.MEM_NICKNAME AS REPLY_MEM_NICKNAME,
+			R.CREATE_DATE AS REPLY_CREATE_DATE
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
-		WHERE BOARD_NO = #{boardNo}
+		LEFT JOIN REPLY R ON (BOARD_NO = REF_TNO)
+		LEFT JOIN MEMBER M2 ON (REPLY_WRITER = M2.MEM_NO)
+		WHERE BOARD_NO = #{boardNo} AND B.STATUS='N' AND R.STATUS = 'N'
 	</select>
 	
 	<insert id="insertBoard" parameterType="board" useGeneratedKeys="true">
@@ -167,6 +170,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE BOARD
         SET STATUS = 'Y'
         WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	<update id="deleteReply" parameterType="int">
+		UPDATE REPLY
+        SET STATUS = 'Y'
+        WHERE REPLY_NO = #{rno}
 	</update>
 	
 </mapper>

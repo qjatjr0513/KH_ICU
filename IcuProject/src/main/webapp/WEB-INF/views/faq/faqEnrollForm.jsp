@@ -6,10 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-    <!-- css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/06_findId.css" />
-
 <style>
    #enrollForm>div{width:100%;}
 
@@ -20,33 +16,42 @@
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <div class="content" style="margin-top: 50px;">
+   <!-- Logo -->
+    <div id="main__logo">
+      <img src="resources/images/navbarLogo.png" />
+    </div>
+   <br><br>
+   <div class="content">
       <br><br>
       <div class="innerOuter" >
          <c:choose>
             <c:when test="${b.boardNo eq null}">
-               <h2>게시글 작성하기</h2>
+               <h2>FAQ 작성하기</h2>
             </c:when>
             <c:otherwise>
-               <h2>게시글 수정하기</h2>
+               <h2>FAQ 수정하기</h2>
             </c:otherwise>
          </c:choose>
          <br>
-         <form id="enrollForm" action="${contextPath }/insert.bo">
+         <form id="enrollForm" action="${contextPath }/enrollForm.fq">
             <div >
                <div>
                   <label for="title">제목 : </label>
-                  <input type="text" id="title" class="form-control" name="boardTitle" value="${b.boardTitle } " required>
+                  <input type="text" id="title" class="form-control" name="faqTitle" value="${b.boardTitle } " required>
                </div>
                <hr>
                <div>
-                  <label for="writer">작성자 : </label>
-                  <input type="text" id="writer" class="form-control" value="${loginUser.memNickname}" name="memNickname" readonly>
-                  <input type="hidden" name="boardWriter" value="${loginUser.memNo}">
+               	  <label for="type">분류 : </label>
+                  <select name="faqType" id="faqType">
+		            <option> 선택 </option>
+		            <option value="AC">계정 문의</option>
+		            <option value="PY">파티 문의</option>
+		            <option value="PA">결제 문의</option>
+		          </select>
                </div>
                <br>
                <div>
-                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="boardContent" placeholder="내용을 입력해주세요." required></textarea>
+                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="faqContent" placeholder="내용을 입력해주세요." required></textarea>
                </div>
                <br>
             <input type="hidden" name="mode" value="${param.mode }"/>
@@ -69,9 +74,7 @@
       </div>
    
    </div>
-
-   
-      
-   <jsp:include page="../common/footer.jsp"/>
+</body>
+</html>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/07_boardList.css" />
+ <link rel="stylesheet" href="${contextPath}/resources/css/07_boardList.css" />
 
 <title>Insert title here</title>
 
@@ -19,9 +19,10 @@
 
 </head>
 <body>
+	<!-- Navbar -->
 	<jsp:include page="../common/header.jsp"/>
-	<br><br>
-	<div class="content">
+	
+	<div class="content" style="margin-top: 50px;">
 		<br><br>
 		<div class="innerOuter" style="padding: 5% 10%;">
 			<h2>자유게시판</h2>
@@ -129,7 +130,25 @@
 	
 	</div>
 	
-	
+	<script>
+		 $(function(){
+	         if('${flag}' == 'showAlert'){
+	        	 Swal.fire({
+	                 icon:'success',
+	                 title: "게시글 삭제 성공"
+	           		});
+	        	}
+	     });
+		 
+		 $(function(){
+	         if('${flag2}' == 'showAlert2'){
+	        	 Swal.fire({
+	                 icon:'success',
+	                 title: "게시글 등록 성공"
+	           		});
+	        	}
+	     });
+	</script>
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

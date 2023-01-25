@@ -160,8 +160,13 @@ public class MemberController {
 		Member loginUser = memberService.loginMember(m);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
-			session.setAttribute("loginUser", loginUser);
-			return "common/main";
+			if(loginUser.getMemId().equals("admin")) {
+				session.setAttribute("loginUser", loginUser);
+				return "admin/memberListForm";
+			}else {
+				session.setAttribute("loginUser", loginUser);
+				return "common/main";				
+			}
 		}else {
 			model.addAttribute("errorMsg", "로그인 실패");
 			return "common/errorPage";
@@ -277,8 +282,16 @@ public class MemberController {
 		return "common/main";
 	}
 	@RequestMapping("myPage.me")
-	public String myPage() {
-		return "member/myPage";
+	public String myPage(Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		String profile = memberService.selectProfile(m);
+		System.out.println(m);
+		if(profile != "") {
+			model.addAttribute("profile", profile);
+			return "member/myPage";			
+		}else {
+			return "common/errorPage";
+		}
 	}
 	
 	@PostMapping("insertImg.me")
@@ -288,7 +301,7 @@ public class MemberController {
 							Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
-
+		
 		if(loginUser != null) {
 			int memNo = loginUser.getMemNo();
 			System.out.println("memNo : " + memNo);
@@ -313,7 +326,9 @@ public class MemberController {
 		int result = memberService.insertImg(image);
 		
 		if(result > 0) {
-			session.setAttribute("image", image);
+			
+			loginUser.setImage(image);
+			session.setAttribute("loginUser", loginUser);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");
@@ -355,7 +370,6 @@ public class MemberController {
 		int result = memberService.updateImg(image, webPath, serverFolderPath);
 		
 		if(result > 0) {
-			session.setAttribute("image", image);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");

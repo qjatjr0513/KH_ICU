@@ -46,8 +46,12 @@ public class AlramHandler extends TextWebSocketHandler {
 		//특정 유저에게 보내기
 		//protocol: cmd, 댓글 작성자, 게시글 작성자, bno (ex: reply, user2, user1, 234)
 		String msg = message.getPayload();
+		
+		System.out.println("전달된 메세지 : " + message.getPayload());
+		
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = msg.split(",");
+			System.out.println(strs);
 			if(strs != null && strs.length == 4) {
 				String cmd = strs[0];
 				String replyWriter = strs[1];
@@ -56,8 +60,7 @@ public class AlramHandler extends TextWebSocketHandler {
 				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
 				if("reply".equals(cmd) && boardWriterSession != null) {
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 " 
-							+"<a href='/icu/detail.bo/"+ bno +"'>"+ bno +"</a>번 게시글에 댓글을 달았습니다!");
+					TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+replyWriter +"님이 게시글에 댓글을 달았습니다!"+"</a>");
 					boardWriterSession.sendMessage(tmpMsg);
 				}
 			}

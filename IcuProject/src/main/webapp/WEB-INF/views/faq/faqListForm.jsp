@@ -1,239 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pi" value="${map.pi }"/>
+<c:set var="list" value="${map.list }"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>Insert title here</title>
 
-<style>
-    .title:hover{
-        cursor: pointer;
-    }
-    .content {
-        display:  none;
-    }
-    #collapse-container{
-        width:60%;
-        margin:auto;
-        /* background-color: antiquewhite; */
-    }
-    
-    .btn__account, .btn__party, .btn__pay {
-		 background-color: var(--color-purple) !important;
-		  padding: 10px !important;
-		  width: 200px !important;
-		  border-radius: 10px !important;
-		  font-size: 20px !important;
-		  font-weight: bold !important;
-		}
-		
-	.faq > button:hover {
-		  background-color: var(--color-purple);
-		}
-	.faq > button:active {
-		  background-color: var(--color-purple) !important;
-		}
-    #FAQ > h1 {
-	  margin-top: 180px;
-	  /* background-color: aquamarine; */
-	}
-</style>
 </head>
 <body>
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
-    
-	<!-- Logo -->
-    <div id="FAQ">
-      <h1 style="text-align: center;">FAQ</h1>
-    </div>
+<br><br>
+	<div class="content">
+		<br><br>
+		<div class="innerOuter" style="padding: 5% 10%;">
+			<h2>FAQ</h2>
+			<br>
+			<!-- 로그인시에만 보이는 글쓰기 버튼. -->
+			<c:if test="${ not empty loginUser }">
+				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.fq">작성하기</a>
+			</c:if>
+			<br><br><br>
+			<table id="boardList" class="table table-hover" align="center">
+				<thead>
+					<tr>
+						<th>글번호</th>
+						<th>분류</th>
+						<th>질문</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${empty list }">
+						<tr id="tableEmpty">
+							<td colspan="5">목록이 없습니다..</td>
+						</tr>
+					</c:if>
+					
+					<c:forEach var="f" items="${list }" >
+					<tr>
+						<td>${f.faqNo}</td>
+						<c:choose>
+							<c:when test="${f.faqType == 'AC' }">
+							<td>계정문의</td>
+							</c:when>
+							<c:when test="${f.faqType == 'PY' }">
+							<td>파티문의</td>
+							</c:when>
+							<c:otherwise>
+							<td>결제문의</td>
+							</c:otherwise>
+						</c:choose>
+						<td>${f.faqTitle }</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>			
+			
+			<!-- 
+				게시글 클릭했을때 게시글 상세보기화면으로 이동하는 스크립트 구현.
+			 -->			
+			<script>
+			
+			$(function(){
+	            $("#boardList>tbody>tr").click(function(){
+	               
+// 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
+
+	                  let bno = $(this).children().eq(0).text();
+	                  
+	                  location.href="${contextPath}/detail.bo/"+bno;
+// 	               } 
+
+	            });
+	         });
+			</script>
+			
+
+			<c:set var = "url" value="cpage="/>
+			<!-- 페이지 이동기능 구현 -->
+			<div id="pagingArea">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${pi.currentPage eq 1 }">
+							<li class="page-item disabled"><a class="page-link" href="#">&lt</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&lt</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+						<li class="page-item"><a class="page-link" href="${url }${item }${sUrl}">${item}</a></li>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${pi.currentPage eq pi.maxPage }">
+							<li class="page-item disabled"><a class="page-link" href="#">&gt</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&gt</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+		</div>
+		<br><br>
 	
-	<br>
-	<div style="text-align: center;">
-	    <p class="faq">
-	        <button class="btn btn-primary btn__account"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	            계정 문의
-	        </button>
-	        <button class="btn btn-primary btn__party" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-	            파티 문의
-	        </button>
-	        <button class="btn btn-primary btn__pay" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-	            결제 문의
-	        </button>
-	      </p>
-	
-	    <section id="collapse-container">
-	      <div class="collapse" id="collapseExample" >
-	        <div class="card card-body card__display1">
-	            <h1 style="text-align:left;">계정 문의</h1>
-	            <div class="accordion" id="accordionExample">
-	                <div class="accordion-item">
-	                  <h2 class="accordion-header" id="headingOne">
-	                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accountOne" aria-expanded="true" aria-controls="accountOne">
-	                        <div class="accordion-body">
-	                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                          </div>
-	                    </button>
-	                  </h2>
-	                  <div id="accountOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-	                    <div class="accordion-body">
-	                      <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                    </div>
-	                  </div>
-	                </div>
-	                <div class="accordion-item">
-	                  <h2 class="accordion-header" id="headingTwo">
-	                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accountTwo" aria-expanded="false" aria-controls="accountTwo">
-	                      Accordion Item #2
-	                    </button>
-	                  </h2>
-	                  <div id="accountTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-	                    <div class="accordion-body">
-	                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                    </div>
-	                  </div>
-	                </div>
-	                <div class="accordion-item">
-	                  <h2 class="accordion-header" id="headingThree">
-	                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accountThree" aria-expanded="false" aria-controls="accountThree">
-	                      Accordion Item #3
-	                    </button>
-	                  </h2>
-	                  <div id="accountThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-	                    <div class="accordion-body">
-	                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
-	        </div> 
-	      </div>
-	    
-	      
-	      
-	   
-	    <div class="collapse" id="collapseExample2" >
-	      <div class="card card-body card__display2">
-	      	<h1 style="text-align:left;">파티 문의</h1>
-	          <div class="accordion" id="accordionExample">
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingOne">
-	                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#partyOne" aria-expanded="true" aria-controls="partyOne">
-	                    파티문의
-	                  </button>
-	                </h2>
-	                <div id="partyOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingTwo">
-	                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#partyTwo" aria-expanded="false" aria-controls="partyTwo">
-	                    Accordion Item #2
-	                  </button>
-	                </h2>
-	                <div id="partyTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingThree">
-	                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#partyThree" aria-expanded="false" aria-controls="partyThree">
-	                    Accordion Item #3
-	                  </button>
-	                </h2>
-	                <div id="partyThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	      </div> 
-	    </div>
-	
-	    
-	   
-	    <div class="collapse" id="collapseExample3" >
-	      <div class="card card-body card__display3">
-	      <h1 style="text-align:left;">결제 문의</h1>
-	          <div class="accordion" id="accordionExample">
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingOne">
-	                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#payOne" aria-expanded="true" aria-controls="payOne">
-	                    결제 문의
-	                  </button>
-	                </h2>
-	                <div id="payOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingTwo">
-	                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payTwo" aria-expanded="false" aria-controls="payTwo">
-	                    Accordion Item #2
-	                  </button>
-	                </h2>
-	                <div id="payTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="accordion-item">
-	                <h2 class="accordion-header" id="headingThree">
-	                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payThree" aria-expanded="false" aria-controls="payThree">
-	                    Accordion Item #3
-	                  </button>
-	                </h2>
-	                <div id="payThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-	                  <div class="accordion-body">
-	                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	      </div> 
-	    </div>
 	</div>
-	</section>
-<!-- <script>
-    const cardDisplay1 = document.querySelector('.card__display1');
-    const cardDisplay2 = document.querySelector('.card__display2');
-    const cardDisplay3 = document.querySelector('.card__display3');
-    
-    let btnAccount = document.querySelector('.btn__account');
-    let btnParty = document.querySelector('.btn__party');
-    let btnPay = document.querySelector('.btn__pay');
-
-    btnParty.addEventListener('click', () => {
-        cardDisplay1.style.display = 'none';
-        cardDisplay3.style.display = 'none';
-        cardDisplay2.style.display = 'block';
-        // cardDisplay2.style.transition = 'all 1s ease-in-out';
-    })
-    btnAccount.addEventListener('click', () => {
-        cardDisplay2.style.display = 'none';
-        cardDisplay3.style.display = 'none';
-        cardDisplay1.style.display = 'block';
-        // cardDisplay1.style.transition = 'all 1s ease-in-out';
-    })
-    btnPay.addEventListener('click', () => {
-        cardDisplay1.style.display = 'none';
-        cardDisplay2.style.display = 'none';
-        cardDisplay3.style.display = 'block';
-        // cardDisplay3.style.transition = 'all 1s ease-in-out';
-    })
-
-
-</script> -->
 </body>
 </html>

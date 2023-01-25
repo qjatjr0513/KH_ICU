@@ -1,7 +1,9 @@
 package com.kh.icu.board.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
+import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 
 import lombok.Data;
@@ -20,4 +22,6 @@ public class Board {
 	private Member member;
 	private int memNo;
 	private String memNickname;
+	
+	private ArrayList<Reply> list;
 }

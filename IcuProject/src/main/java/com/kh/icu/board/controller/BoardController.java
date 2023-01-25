@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -72,7 +73,8 @@ public class BoardController {
    
    @RequestMapping("/insert.bo")
    public String insertBoard(Board b, HttpSession session, Model model,
-                        @RequestParam(value="mode", required=false, defaultValue="insert") String mode) {
+                        @RequestParam(value="mode", required=false, defaultValue="insert") String mode,
+                        RedirectAttributes redirectAttributes) {
       int result =0;
       if(mode.equals("insert")) {
          result = boardService.insertBoard(b);
@@ -81,7 +83,7 @@ public class BoardController {
       }
       
       if(result > 0) {
-         session.setAttribute("alertMsg", "게시글 등록 성공");
+    	  redirectAttributes.addFlashAttribute("flag2","showAlert2");
          return "redirect:list.bo";
       } else {
          model.addAttribute("errorMsg", "게시글 등록 실패");
@@ -138,7 +140,6 @@ public class BoardController {
       Gson gson = new GsonBuilder().create();
       
       String result = gson.toJson(list);
-      System.out.println(result);
       return result;
    }
     
@@ -149,7 +150,8 @@ public class BoardController {
       System.out.println(r);
       Member m = (Member)session.getAttribute("loginUser");
       if(m != null) {
-         r.setReplyWriter(m.getMemNo());
+    	  String memNo = Integer.toString(m.getMemNo());
+         r.setReplyWriter(memNo);
 //         r.setTableCd(b.getTableCd());
       }
       if(r.getReplyContent() == "") {
@@ -169,16 +171,34 @@ public class BoardController {
    
    @RequestMapping("delete.bo")
    public String deleteBoard(@RequestParam(value="bno", required =false, defaultValue = "0") int boardNo,
-                       HttpSession session, Model model) {
+                       HttpSession session, Model model,
+                       RedirectAttributes redirectAttributes) {
       
       int result = boardService.deleteBoard(boardNo);
       
       if(result > 0) {
-         session.setAttribute("alertMsg", "게시글 삭제 성공");
+    	  redirectAttributes.addFlashAttribute("flag","showAlert");
          return "redirect:list.bo";
       } else {
          model.addAttribute("errorMsg", "게시글 삭제 실패");
          return "common/errorPage";
       }
+   }
+   
+   @RequestMapping("deleteReply.bo")
+   public String deleteReply(@RequestParam("rno") int rno, @RequestParam("boardNo") int boardNo,
+		                     HttpSession session, Model model,
+		                     RedirectAttributes redirectAttributes) {
+	   int result = boardService.deleteReply(rno);
+	   
+	   if(result > 0) {
+		   redirectAttributes.addFlashAttribute("flag","showAlert");
+	         return "redirect:detail.bo/"+boardNo;
+	      } else {
+	         model.addAttribute("errorMsg", "댓글 삭제 실패");
+	         return "common/errorPage";
+	      }
+	   
+	   
    }
 }

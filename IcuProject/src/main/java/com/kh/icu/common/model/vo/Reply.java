@@ -10,7 +10,7 @@ import lombok.Data;
 public class Reply {
 	private int replyNo;
 	private String tableCd;
-	private int replyWriter;
+	private String replyWriter;
 	private int refTno;
 	private String replyContent;
 	private Date createDate;

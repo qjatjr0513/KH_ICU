@@ -3,10 +3,12 @@ package com.kh.icu.chat.model.vo;
 import lombok.Data;
 
 @Data
-public class Chat {
+public class ChatRoom {
 	
-	private int chatNo;
+	private int chatRoomNo;
+	private String title;
 	private int memNo;
+	private String memNickname;
 	private String status;
 
 }

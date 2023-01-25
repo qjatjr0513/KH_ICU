@@ -20,11 +20,9 @@
 		<typeAlias type="com.kh.icu.content.model.vo.Coment" alias="coment"/>
 		<typeAlias type="com.kh.icu.party.model.vo.Party" alias="party"/>
 		<typeAlias type="com.kh.icu.common.model.vo.Image" alias="image"/>
-		
-
-<!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatMessage" alias="chatMessage"/> -->
-<!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoom" alias="chatRoom"/> -->
-<!-- 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoomJoin" alias="chatRoomJoin"/> -->
+		<typeAlias type="com.kh.icu.chat.model.vo.ChatMessage" alias="chatMessage"/> 
+		<typeAlias type="com.kh.icu.chat.model.vo.ChatRoom" alias="chatRoom"/> 
+		<typeAlias type="com.kh.icu.faq.model.vo.Faq" alias="faq"/> 
 	</typeAliases>
   	
 
@@ -33,7 +31,8 @@
      <mapper resource="/mappers/board-mapper.xml"/>
      <mapper resource="/mappers/content-mapper.xml"/>
      <mapper resource="/mappers/party-mapper.xml"/>
-<!--     <mapper resource="/mappers/chatting-mapper.xml"/> -->
+     <mapper resource="/mappers/chatting-mapper.xml"/>
+     <mapper resource="/mappers/faq-mapper.xml"/>
   </mappers>
   
   

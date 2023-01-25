@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chattingMapper">
+	<resultMap type="chatRoom" id="chatRoomResultSet">
+		<id property="chatRoomNo" column="CHAT_ROOM_NO"/>
+		<result property="memNo" column="MEM_NO"/>
+		<result property="memNickname" column="MEM_NICKNAME"/>
+		<result property="status" column="STATUS"/>
+		<result property="title" column="TITLE"/>
+	</resultMap>
+	
+	<resultMap type="chatMessage" id="chatMessageResultSet">
+		<id property="cmNo" column="CM_NO"/>
+		<result property="memNo" column="MEM_NO"/>
+		<result property="memNickname" column="MEM_NICKNAME"/>
+		<result property="chatRoomNo" column="CHAT_ROOM_NO"/>
+		<result property="message" column="MESSAGE"/>
+		<result property="createDate" column="CREATE_DATE"/>
+	</resultMap>
+	
+	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
+		SELECT
+			CHAT_ROOM_NO,
+			MEM_NICKNAME,
+			TITLE
+		FROM CHAT_ROOM A
+		JOIN MEMBER M USING(MEM_NO)
+		WHERE A.STATUS = 'N'
+		ORDER BY CHAT_ROOM_NO DESC
+	</select>
+	
+	<insert id="openChatRoom" useGeneratedKeys="true">
+		
+		<selectKey keyProperty="chatRoomNo" resultType="int" order="BEFORE">
+			SELECT SEQ_CHAT.NEXTVAL FROM DUAL
+		</selectKey>
+		
+		INSERT INTO CHAT_ROOM VALUES
+		(#{chatRoomNo},#{memNo},DEFAULT,#{title})
+	</insert>
+	
+	<insert id="insertMessage" parameterType="chatMessage">
+		INSERT INTO CHAT_MESSAGE
+		VALUES(SEQ_CMNO.NEXTVAL, #{memNo}, #{chatRoomNo}, #{message}, SYSDATE)
+	</insert>
+	
+	<select id="selectChatList" resultMap="chatMessageResultSet">
+		SELECT 
+			MESSAGE,
+			CREATE_DATE,
+			MEM_NO,
+			MEM_NICKNAME
+		FROM CHAT_MESSAGE
+		JOIN MEMBER USING(MEM_NO)
+		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+		ORDER BY CM_NO
+	</select>
+	
+	<update id="closeChatRoom" parameterType="chatRoom">
+		UPDATE CHAT_ROOM
+		SET STATUS = 'Y'
+		WHERE CHAT_ROOM_NO = #{chatRoomNo} AND MEM_NO = #{memNo}
+	</update>
+</mapper>
