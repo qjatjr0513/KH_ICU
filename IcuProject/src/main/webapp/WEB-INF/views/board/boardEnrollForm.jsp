@@ -20,12 +20,7 @@
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <!-- Logo -->
-    <div id="main__logo">
-      <img src="resources/images/navbarLogo.png" />
-    </div>
-   <br><br>
-   <div class="content">
+   <div class="content" style="margin-top: 50px;">
       <br><br>
       <div class="innerOuter" >
          <c:choose>

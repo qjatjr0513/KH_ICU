@@ -94,6 +94,10 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertImg", image);
 	}
 	
+	public String selectProfile(SqlSession sqlSession, Member loginUser) {
+		return sqlSession.selectOne("memberMapper.selectProfile", loginUser);
+	}
+	
 	public int updateMember(SqlSession sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
@@ -101,6 +105,10 @@ public class MemberDao {
 	
 	public int updateImg(SqlSession sqlSession, Image image) {
 		return sqlSession.update("memberMapper.updateImg", image);
+	}
+	
+	public int deleteMember(SqlSession sqlSession, String memId) {
+		return sqlSession.update("memberMapper.deleteMember", memId);
 	}
 
 }

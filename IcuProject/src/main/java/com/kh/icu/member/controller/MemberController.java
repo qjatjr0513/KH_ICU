@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.common.Utils;
@@ -160,8 +161,13 @@ public class MemberController {
 		Member loginUser = memberService.loginMember(m);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
-			session.setAttribute("loginUser", loginUser);
-			return "common/main";
+			if(loginUser.getMemId().equals("admin")) {
+				session.setAttribute("loginUser", loginUser);
+				return "admin/memberListForm";
+			}else {
+				session.setAttribute("loginUser", loginUser);
+				return "common/main";				
+			}
 		}else {
 			model.addAttribute("errorMsg", "로그인 실패");
 			return "common/errorPage";
@@ -268,7 +274,7 @@ public class MemberController {
 		Member userInfo = memberService.findMember(m);
 		
 		if (userInfo.getMemId() != null) {
-			session.removeAttribute("loginUser");
+			session.setAttribute("loginUser", userInfo);
             session.setAttribute("signIn", apiResult);
         }
 
@@ -277,8 +283,16 @@ public class MemberController {
 		return "common/main";
 	}
 	@RequestMapping("myPage.me")
-	public String myPage() {
-		return "member/myPage";
+	public String myPage(Model model) {
+		Member m = (Member)session.getAttribute("loginUser");
+		String profile = memberService.selectProfile(m);
+		System.out.println(m);
+		if(profile != "") {
+			model.addAttribute("profile", profile);
+			return "member/myPage";			
+		}else {
+			return "common/errorPage";
+		}
 	}
 	
 	@PostMapping("insertImg.me")
@@ -288,7 +302,7 @@ public class MemberController {
 							Model model) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
-
+		
 		if(loginUser != null) {
 			int memNo = loginUser.getMemNo();
 			System.out.println("memNo : " + memNo);
@@ -313,7 +327,9 @@ public class MemberController {
 		int result = memberService.insertImg(image);
 		
 		if(result > 0) {
-			session.setAttribute("image", image);
+			
+			loginUser.setImage(image);
+			session.setAttribute("loginUser", loginUser);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");
@@ -355,7 +371,6 @@ public class MemberController {
 		int result = memberService.updateImg(image, webPath, serverFolderPath);
 		
 		if(result > 0) {
-			session.setAttribute("image", image);
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");
@@ -401,5 +416,34 @@ public class MemberController {
 	public String memberDeleteForm() {
 		return "member/memberDeleteForm";
 	}
+	
+	@RequestMapping("memDelete.me")
+	public String deleteMember(String memPwd, HttpSession session, RedirectAttributes redirectAttributes) {
+		String encPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+		
+		if(bcryptPasswordEncoder.matches(memPwd, encPwd)) {
+			
+			int result = memberService.deleteMember(memId);
+			if(result > 0) {
+				
+				redirectAttributes.addFlashAttribute("flag2","showAlert2");
+				session.removeAttribute("loginUser");
+				return "redirect:/";
+				
+			} else {
+				
+				redirectAttributes.addFlashAttribute("flag3","showAlert3");
+				return "redirect:memDeleteForm.me";
+				
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("flag","showAlert");
+			
+			return "redirect:memDeleteForm.me";
+		}
+		
+	}
+	
 }
 

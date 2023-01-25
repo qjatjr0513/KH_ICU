@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,9 +37,12 @@ public class MemberServiceImpl implements MemberService{
    
    private SqlSession sqlSession;
    
-   public MemberServiceImpl(MemberDao memberDao, SqlSession sqlSession) {
+   private BCryptPasswordEncoder bcryptPasswordEncoder;
+   
+   public MemberServiceImpl(MemberDao memberDao, SqlSession sqlSession, BCryptPasswordEncoder bcryptPasswordEncoder) {
       this.memberDao = memberDao;
       this.sqlSession = sqlSession;
+      this.bcryptPasswordEncoder = bcryptPasswordEncoder;
    }
    
    @Override
@@ -131,7 +135,9 @@ public class MemberServiceImpl implements MemberService{
          for (int i = 0; i < 12; i++) {
             pwd += (char) ((Math.random() * 26) + 97);
          }
-         m.setMemPwd(pwd);
+         
+         String encPwd = bcryptPasswordEncoder.encode(pwd);
+         m.setMemPwd(encPwd);
          // 비밀번호 변경
          memberDao.updatePwd(sqlSession, m);
          // 비밀번호 변경 메일 발송
@@ -344,6 +350,12 @@ public class MemberServiceImpl implements MemberService{
        return (String) "K"+(int)(Math.floor(num));
      }
 
+   @Override
+   public String selectProfile(Member m) {
+	   String profile = memberDao.selectProfile(sqlSession, m);
+	   System.out.println("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"+profile);
+	   return profile;
+   }
 	
 	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
 	@Override
@@ -353,6 +365,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+	
 	
 	@Override
 	public int updateMember(Member m) {
@@ -369,7 +382,12 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
-	
+	public int deleteMember(String memId) {
+		
+		int result = memberDao.deleteMember(sqlSession, memId);
+		
+		return result;
+	}
 	
 	
 	

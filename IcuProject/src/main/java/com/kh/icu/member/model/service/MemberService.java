@@ -42,13 +42,16 @@ public interface MemberService {
    
    /* public int getUserInfoN(Member m); */
 
+    public String selectProfile(Member m);
 	
 	public int updateMember(Member m);
 
 	public int insertImg(Image image);
 
+	
 	public int updateImg(Image image, String webPath, String serverFolderPath);
 	
+	public int deleteMember(String memId);
 	
 	
 	

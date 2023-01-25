@@ -27,12 +27,7 @@
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <!-- Logo -->
-    <div id="main__logo">
-      <img src="resources/images/navbarLogo.png" />
-    </div>
-   <br>
-   <div class="content">
+   <div class="content" style="margin-top: 50px;">
       <br><br>
       <div class="innerOuter">
          <h2>${b.boardTitle }</h2>
@@ -87,22 +82,61 @@
          <table id="replyArea" class="table" align="center">
             <thead>
                <tr>
-                  <td colspan="3">댓글(<span id="rcount"></span>)</td>
+                  <td colspan="3"><b>댓글(${b.list.size()})</b></td>
                </tr>
             </thead>
             <tbody>
-               <!-- 스크립트 구문으로 댓글 추가 -->
-            
+              <c:forEach var="r" items="${b.list }" varStatus="i">
+				<tr>
+					<td id="rWriter">${r.replyWriter }</td>
+					<td id="rContent">${r.replyContent }</td>
+					<td>${r.createDate }</td>
+					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
+					<c:if test="${r.replyWriter == loginUser.memNickname }">
+					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
+					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.bo?rno=${r.replyNo }&boardNo=${b.boardNo}'">삭제</button></td>
+					</c:if>
+				</tr>
+			</c:forEach>
+               
             </tbody>
          </table>
+         
+         <!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title fs-5" id="exampleModalLabel">댓글 수정창</h4>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <div class="form-group">
+                  <label for="replyNo">댓글 번호</label>
+                  <input class="form-control" id="replyNo" name="replyNo" readonly>
+	              </div>
+	              <div class="form-group">
+	                  <label for="replyText">댓글 내용</label>
+	                  <input class="form-control" id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요">
+	              </div>
+	              <div class="form-group">
+	                  <input type="hidden" class="form-control" name="replyWriter" readonly>
+	              </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+		        <button type="button" class="btn btn-success">수정</button>
+		        <button type="button" class="btn btn-danger">삭제</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
             <script>
             const replyWriter = "${loginUser.memNickname}";
             const boardWriter = "${b.boardWriter}";
             const boardNo = "${b.boardNo}";
-               $(function(){
-               selectReplyList();
-                  
-               });
+            	
+
             
                function insertReply(){
                   $.ajax({
@@ -129,16 +163,16 @@
                            Swal.fire({
                                    icon:'success',
                                    title: "댓글등록 성공"
-                             });
+                             }).then(function(){
+                            	 location.href=contextPath+"/detail.bo/"+boardNo;
+                             })
                            
                         }else{
                            Swal.fire({
                                    icon:'error',
                                    title: "댓글등록 실패"
                              });
-                           
                         }
-                        selectReplyList();
                      },
                      complete : function(){
                         $("#replyContent").val("");
@@ -146,39 +180,38 @@
                   });
                }
          
-               function selectReplyList(){
-                  $.ajax({
-                     url : "${contextPath}/reply.bo",
-                     data : {bno : ${b.boardNo}},
-                     dataType : "json",
-                     success : function(result){
-                        console.log("성공");
-                        console.log(result);
-                        let html = "";
-                        
-                        for(let reply of result){
-                           html += "<tr>"
-                              + "<td>" + reply.member.memNickname+"</td>"
-                              + "<td>" + reply.replyContent+"</td>"
-                              + "<td>" + reply.createDate+"</td>"
-                           + "</tr>";
-                        }
-                        $("#replyArea tbody").html(html);
-                        $("#rcount").html(result.length);
-                     },
-                     error : function(){
-                        console.log("댓글리스트조회용 ajax통신 실패!");
-                     }
-                  });
-               }
+              
                
          $('#btnSend').on('click', function(evt){
         	 evt.preventDefault();
         	 if(socket.readyState !== 1) return;
         	 
         	 let msg = $("textarea#replyContent").val();
+        	 console.log(msg);
         	 socket.send(msg);
          });
+         
+         $(function(){
+	         if('${flag}' == 'showAlert'){
+	        	 Swal.fire({
+                     icon:'success',
+                     title: "댓글삭제 성공"
+               		});
+	        	}
+         });
+         
+         /*$("#replyUpdate").click(function () {
+
+        	 
+        	 var replyNo = document.getElementById("rno"+i).value;
+       	     var replyText = document.getElementById("rContent"+i).innerText;
+       	     var replyWriter = document.getElementById("rWriter"+i).innerText;
+       	     
+       	     $("#replyNo").val(replyNo);
+       	     $("#replyText").val(replyText);
+       	     $("#replyWriter").val(replyWriter);
+
+        	});*/
             </script>
             
       </div>

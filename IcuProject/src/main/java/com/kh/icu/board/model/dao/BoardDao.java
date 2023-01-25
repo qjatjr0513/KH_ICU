@@ -21,7 +21,7 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectList", rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectList", null ,  rowBounds);
 	}
 	
 	public int selectListCount(SqlSession sqlSession) {
@@ -76,6 +76,9 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
 	
+	public int deleteReply(SqlSession sqlSession, int rno) {
+		return sqlSession.update("boardMapper.deleteReply", rno);
+	}
 	
 	
 	

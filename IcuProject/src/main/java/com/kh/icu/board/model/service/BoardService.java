@@ -30,6 +30,7 @@ public interface BoardService {
 	
 	public int deleteBoard(int boardNo);
 	
+	public int deleteReply(int rno);
 	
 	
 	

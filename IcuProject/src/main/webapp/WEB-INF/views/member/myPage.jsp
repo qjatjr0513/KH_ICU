@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,18 +25,20 @@
         <div id="viewAndEnroll">
           <div id="view" class="titleImg">
           <!-- 올린 파일이 들어가는 자리 -->
-          <img class='view-img' src="${contextPath }${image.changeName}">
+          <img class='view-img' src="${contextPath }${profile}">
           </div>
+          <c:if test="${empty profile}">
           <div id="enroll">
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
-              <input type="file" id="upfile" class="form-control" name="upfile"/>
+              <input type="file" id="upfile" class="form-control" name="upfile" onchange="validate()"/>
               <input type="hidden" name="originName" value="${image.originName }"/>
 			  <input type="hidden" name="changeName" value="${image.changeName }"/>
-              <div align="center">   
-					<button id="enrollBtn" type="submit" class="btn btn-primary">등록하기</button>
-			  </div>
+              <div align="center">
+                  <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>등록하기</button>
+              </div>
             </form>
           </div>
+          </c:if>
         </div>
         <div id="info">
           <h4><input type="text" name="memNickname" value="${loginUser.memNickname}" readonly/></h4><br>
@@ -52,6 +55,13 @@
       </div>
       
     </div>
-
+    <script>
+        function validate() {
+          var fileInput = document.getElementById("upfile");
+          if (fileInput.val != "" ) {
+            $("#enrollBtn").attr("disabled",false);
+          }
+        }
+    </script>
 </body>
 </html>

@@ -87,11 +87,13 @@
            <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
         </li>
 
-        <li class="navbar__menu__item" data-link="#work">자주 묻는 질문</li>
+        <li class="navbar__menu__item" data-link="#work">
+        	<a href="${contextPath }/chat/chatRoomList" style="text-decoration: none; color:black;">실시간 문의</a>
+        	</li>
         <li class="navbar__menu__item">
         	<a href="${contextPath }/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
         <li class="navbar__menu__item">
-        <a href="${contextPath }/faq.fa" style="text-decoration: none; color:black;">FAQ</a></li>
+        <a href="${contextPath }/faq.fq" style="text-decoration: none; color:black;">FAQ</a></li>
         &nbsp;&nbsp;
         <li>
         </c:if>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="faqMapper">
+	<resultMap type="faq" id="faqResultSet">
+		<id column="FAQ_NO" property="faqNo"/>
+		<result column="FAQ_TYPE" property="faqType"/>
+		<result column="FAQ_TITLE" property="faqTitle"/>
+		<result column="FAQ_CONTENT" property="faqContent"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM FAQ 
+		WHERE STATUS = 'N'
+	</select>
+	
+	<select id="selectList" resultMap="faqResultSet">
+		SELECT
+			FAQ_NO,
+			FAQ_TYPE,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ 
+		WHERE STATUS = 'N'
+	</select>
+
+	<insert id="insertFaq" parameterType="faq">
+		INSERT INTO FAQ(FAQ_NO, FAQ_TYPE, FAQ_TITLE, FAQ_CONTENT)
+		VALUES(SEQ_FNO.NEXTVAL, #{faqType}, #{faqTitle}, #{faqContent})
+	</insert>
+	
+	<update id="updateFaq" parameterType="faq">
+		UPDATE FAQ
+		SET FAQ_TITLE = #{faqTitle},
+			FAQ_TYPE = #{faqType},
+			FAQ_CONTENT = #{faqContent}
+		WHERE FAQ_NO = #{faqNo}
+	</update>
+	
+	
+	<select id="selectFaq" parameterType="int" resultMap="faqResultSet">
+		SELECT
+			FAQ_NO, 
+			FAQ_TYPE,
+			FAQ_TITLE,
+			FAQ_CONTENT
+		FROM FAQ
+		WHERE FAQ_NO = #{faqNo} AND STATUS = 'N'
+	</select>
+	
+	<update id="deleteFaq" parameterType="int">
+	 	UPDATE FAQ
+	 	SET STATUS ='Y'
+	 	WHERE FAQ_NO = #{fno}
+	</update>
+</mapper>
