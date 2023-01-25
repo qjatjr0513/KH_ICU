@@ -119,44 +119,52 @@
 	
 	<section id="click__movie-drama">
       <div class="movie_drama_Btn">
-        <button class="movieBtn">영화</button>
-        <button class="dramaBtn">드라마</button>
+        <button class="movieBtn" id="movie" name="mv">영화</button>
+        <input id="mv" type="checkbox" name="category" value="1" />
+        <button class="dramaBtn" id="drama" name="dr">드라마</button>
+        <input id="dr" type="checkbox" name="category" value="2" />
       </div>
       <br>
     </section>
     
     <div class="about__majors">
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="1" id="ott" name="netflix">
             <div class="major__icon netfilx"></div>
           </button>
+          <input id="netflix" type="checkbox" name="ott" value="1" />
           <h2 class="major__title">Netflix</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="2" id="ott" name="watcha">
             <div class="major__icon watcha"></div>
           </button>
+          <input id="watcha" type="checkbox" name="ott" value="2" />
           <h2 class="major__title">Watcha</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="3" id="ott" name="wavve">
             <div class="major__icon wavve"></div>
           </button>
+          <input id="wavve" type="checkbox" name="ott" value="3" />
           <h2 class="major__title">Wavve</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="4" id="ott" name="disney">
             <div class="major__icon disney"></div>
           </button>
+          <input id="disney" type="checkbox" name="ott" value="4" />
           <h2 class="major__title">Disney +</h2>
         </div>
+        
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="5" id="ott" name="apple">
             <div class="major__icon appleTv"></div>
           </button>
+          <input id="apple" type="checkbox" name="ott" value="5" />
           <h2 class="major__title">Apple TV</h2>
         </div>
     </div>
@@ -328,19 +336,71 @@
 		let categorys = document.getElementsByName("genre");
 		
 		categorys.forEach( (item) => {
-			return item.addEventListener("click", searchContent) 
-		})
+			return item.addEventListener("click", searchContent);
+		});
 		
 		let ages = document.getElementsByName("age");
 		ages.forEach( (item) => {
-			return item.addEventListener("click", searchContent) 
-		})
+			return item.addEventListener("click", searchContent);
+		});
+		
+		let platforms = document.getElementsByClassName("major_btn");
+		
+		for(var i = 0; i < platforms.length; i++){
+			platforms[i].addEventListener("click", searchContent);
+		}
+		
+		let movieBtn = document.getElementById("movie");
+		let dramaBtn = document.getElementById("drama");
+		
+		movieBtn.addEventListener("click", searchContent);
+		dramaBtn.addEventListener("click", searchContent);
 		
 		function searchContent(e){
-			//console.log(e.target)
+			//console.log($(this).attr('id'));
 
 			var genreList = ['all'];
             var ageList = ['all'];
+            var ottList = ['all'];
+            var categoryList = ['all'];
+            
+            if($(this).attr('id') == 'movie'){
+            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
+            	}
+            	else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
+            			&& $('input[id="dr"]').is(':checked') == true){
+            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            		$('input[id="dr"]').prop("checked", false);
+            	}
+            	else{
+            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            	}
+            }
+            
+            else if($(this).attr('id') == 'drama'){
+            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
+            	}
+            	else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
+            			&& $('input[id="mv"]').is(':checked') == true){
+            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            		$('input[id="mv"]').prop("checked", false);
+            	}
+            	else{
+            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            	}
+            }
+            
+            if($(this).attr('id') == 'ott'){
+            	//ottList.push($(this).val());
+            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
+            	}
+            	else{
+            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            	}
+            }
             
             $('input[name="genre"]:checked').each(function(i){
             	genreList.push($(this).val());
@@ -349,18 +409,32 @@
             $('input[name="age"]:checked').each(function(i){
             	ageList.push($(this).val());
             });
+            
+            $('input[name="ott"]:checked').each(function(i){
+            	ottList.push($(this).val());
+            });
+            
+            $('input[name="category"]:checked').each(function(i){
+            	categoryList.push($(this).val());
+            });
 // 			let genre = document.querySelectorAll("input[name=genre]:checked");		
 // 			genre = [].map.call(genre, function(item){
 // 			    return item.value
 // 			});
+
 			console.log(genreList);
 			console.log(ageList);
+			console.log(ottList);
+			console.log(categoryList);
+			
 			var cnt = 0;
 			$.ajax({
 				url : '${contextPath}/searchContent.co',
 				data : {
 					genre : genreList,
-					age : ageList	
+					age : ageList,
+					ott : ottList,
+					category : categoryList
 				},
 				dataType : 'json',
 				success: function(result){
@@ -370,7 +444,7 @@
 					//$('.carousel-inner').remove();
 					var carouselCnt = parseInt(result.length/8) + 1;
 					var movieBoxCnt = parseInt(result.length/4) + 1;
-					console.log(result.length);
+					//console.log(result.length);
 					if(result.length >= 8){
 						$('#carouselExampleControls').remove();
 						for(var i = 0; i < carouselCnt; i++){
@@ -391,9 +465,7 @@
 						}
 						htmlMid = "";
 						for(var j = 1; j <= movieBoxCnt; j++){
-							console.log(cnt);
 							while(cnt < j * 4){
-								console.log(cnt);
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +
@@ -421,7 +493,6 @@
 						$("#carouselExampleControls").html(htmlMid);
 						
 						htmlMid = "";
-						console.log("box : "+movieBoxCnt);
 						for(var j = 1; j <= movieBoxCnt; j++){
 							htmlMid += "<div id='movieBox"+ j +"' class='movieBox'>" +
 										"</div>";
@@ -430,9 +501,7 @@
 						
 						htmlMid = "";
 						for(var j = 1; j <= movieBoxCnt; j++){
-							console.log(cnt);
 							while(cnt < j * 4){
-								console.log(cnt);
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +

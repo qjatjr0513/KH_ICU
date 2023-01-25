@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
-		<if test="genre.size != 0 and age.size == 0">
+		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT *
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
@@ -78,7 +78,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</foreach>
 			)
 		</if>
-		<if test="genre.size != 0 and age.size != 0">
+		
+		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size == 0">
 			SELECT *
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
@@ -92,7 +93,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</foreach>
 			)
 		</if>
-		<if test="genre.size == 0 and age.size != 0">
+		
+		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size == 0">
 			SELECT *
 			FROM CONTENT
 			WHERE CON_AGE IN (
@@ -101,7 +103,206 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</foreach>
 			)
 		</if>
-		<if test="genre.size == 0 and age.size == 0">
+		
+		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size == 0">
+			SELECT *
+			FROM CONTENT
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size == 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			) AND 
+		</if>
+		
+		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size == 0">
+			SELECT *
+			FROM CONTENT
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+		</if>
+		
+		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size == 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			) CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND CON_AGE IN(
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			WHERE CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			)
+			AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			JOIN GENRE_STORAGE G USING(CON_NO)
+			JOIN OTT_STORAGE O USING(CON_NO)
+			WHERE GEN_NO IN (
+			<foreach collection="genre" item="c" separator=",">
+				${c}
+			</foreach>
+			) AND OTT_NO IN (
+			<foreach collection="ott" item="o" separator=",">
+				${o}
+			</foreach>
+			) AND CON_AGE IN (
+			<foreach collection="age" item="a" separator=",">
+				${a}
+			</foreach>
+			) AND CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size != 0">
+			SELECT *
+			FROM CONTENT
+			WHERE CON_CATEGORY IN(
+			<foreach collection="category" item="g" separator=",">
+				${g}
+			</foreach>
+			)
+		</if>
+		
+		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT *
 			FROM CONTENT
 		</if>

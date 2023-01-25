@@ -104,16 +104,22 @@ public class ContentController {
 	@RequestMapping("/searchContent.co")
 	@ResponseBody
 	public String searchContent(@RequestParam(value="genre[]") ArrayList<String> genre,
-			@RequestParam(value="age[]") ArrayList<String> age) {
+			@RequestParam(value="age[]") ArrayList<String> age,
+			@RequestParam(value="ott[]") ArrayList<String> ott,
+			@RequestParam(value="category[]") ArrayList<String> category) {
 		ArrayList<Content> list = new ArrayList<Content>();
 		Gson gson = new GsonBuilder().create();
 		
 		genre.remove(0);
 		age.remove(0);
+		ott.remove(0);
+		category.remove(0);
 		
 		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		map.put("genre", genre);
 		map.put("age", age);
+		map.put("ott", ott);
+		map.put("category", category);
 		
 		System.out.println(map);
 
