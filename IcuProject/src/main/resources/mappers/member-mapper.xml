@@ -162,6 +162,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*)
 		FROM MEMBER
 		WHERE STATUS = 'N'
+		AND ROLE = 'C'
 	</select>
 	
 	<select id="selectMemList" resultMap="memberResultSet">
@@ -178,6 +179,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY ENROLL_DATE DESC
 	</select>
 	
+	<select id="selectBlackListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS = 'N'
+		AND ROLE = 'C'
+		AND B_STATUS = 'Y'
+	</select>
+	
+	<select id="selectBlackList" resultMap="memberResultSet">
+		SELECT
+			MEM_NO,
+			MEM_NAME,
+			MEM_NICKNAME,
+			EMAIL,
+			PHONE,
+			ENROLL_DATE
+		FROM MEMBER
+		WHERE STATUS = 'N'
+		AND ROLE = 'C'
+		AND B_STATUS = 'Y'
+		ORDER BY ENROLL_DATE DESC
+	</select>
+	
+	<update id="blackCancel" parameterType="int">
+		UPDATE MEMBER
+		SET B_STATUS = 'N'
+		WHERE MEM_NO = #{memNo}
+	</update>
 	
 	
 </mapper>
