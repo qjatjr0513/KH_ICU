@@ -114,7 +114,7 @@
             <form id="memberDelete" action="${contextPath }/memDelete.me" method="post">
               <label>비밀번호 입력 : </label>
               <input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/>
-              <input type="hidden" id="memPwdCheck" value="${member.getMemPwd}"/>
+              <!-- <input type="hidden" id="memPwdCheck" value="${member.getMemPwd}"/> -->
             </form>
           </div>
           <div class="modal-footer">

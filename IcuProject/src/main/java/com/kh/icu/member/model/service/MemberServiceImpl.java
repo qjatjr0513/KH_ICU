@@ -5,10 +5,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
@@ -20,15 +21,15 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.common.model.vo.Image;
+import com.kh.icu.common.template.Pagination;
 import com.kh.icu.member.model.dao.MemberDao;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -36,13 +37,15 @@ public class MemberServiceImpl implements MemberService{
    private MemberDao memberDao;
    
    private SqlSession sqlSession;
+   private Pagination pagination;
    
    private BCryptPasswordEncoder bcryptPasswordEncoder;
    
-   public MemberServiceImpl(MemberDao memberDao, SqlSession sqlSession, BCryptPasswordEncoder bcryptPasswordEncoder) {
+   public MemberServiceImpl(MemberDao memberDao, SqlSession sqlSession, BCryptPasswordEncoder bcryptPasswordEncoder, Pagination pagination) {
       this.memberDao = memberDao;
       this.sqlSession = sqlSession;
       this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+      this.pagination = pagination;
    }
    
    @Override
@@ -374,14 +377,14 @@ public class MemberServiceImpl implements MemberService{
 		
 		return updateMember;
 	}
-	
+	@Override
 	public int updateImg(Image image, String webPath, String serverFolderPath){
 		
 		int result = memberDao.updateImg(sqlSession, image);
 		
 		return result;
 	}
-	
+	@Override
 	public int deleteMember(String memId) {
 		
 		int result = memberDao.deleteMember(sqlSession, memId);
@@ -389,7 +392,30 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
+	@Override
+	public int selectMemListCount() {
+		return memberDao.selectMemListCount(sqlSession);
+	}
 	
+	@Override
+	public Map<String, Object> selectMemList(int currentPage){
+		
+		Map<String, Object> map = new HashMap();
+		
+		// 1. 페이징처리
+		int listCount = selectMemListCount();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+					
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		map.put("pi", pi);
+		
+		ArrayList<Member> list = memberDao.selectMemList(sqlSession, pi);
+		map.put("list", list);
+		
+		return map;
+	}
 	
 	
 	

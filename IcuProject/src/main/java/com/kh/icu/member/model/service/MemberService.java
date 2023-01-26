@@ -1,6 +1,7 @@
 package com.kh.icu.member.model.service;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,7 +55,9 @@ public interface MemberService {
 	public int deleteMember(String memId);
 	
 	
+	public Map<String, Object> selectMemList(int currentPage);
 	
+	public int selectMemListCount();
 	
 	
 	

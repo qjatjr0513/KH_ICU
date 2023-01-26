@@ -2,6 +2,8 @@ package com.kh.icu.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -163,7 +165,7 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
 			if(loginUser.getMemId().equals("admin")) {
 				session.setAttribute("loginUser", loginUser);
-				return "admin/memberListForm";
+				return "redirect:memListForm.me";
 			}else {
 				session.setAttribute("loginUser", loginUser);
 				return "common/main";				
@@ -444,6 +446,23 @@ public class MemberController {
 		}
 		
 	}
+	
+	@RequestMapping("memListForm.me")
+	public String memberList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
+            				 @RequestParam Map<String, Object> paramMap) {
+		
+		Map<String, Object> map = new HashMap();
+	        
+	    map = memberService.selectMemList(currentPage);
+	         
+	    model.addAttribute("map", map);
+		
+		return "admin/memberListForm";
+	}
+	
+	
+	
+	
 	
 }
 

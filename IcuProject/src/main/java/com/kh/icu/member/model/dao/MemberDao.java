@@ -1,13 +1,15 @@
 package com.kh.icu.member.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.vo.Member;
-import com.kh.icu.member.model.vo.Sns;
 
 @Repository
 public class MemberDao {
@@ -110,5 +112,18 @@ public class MemberDao {
 	public int deleteMember(SqlSession sqlSession, String memId) {
 		return sqlSession.update("memberMapper.deleteMember", memId);
 	}
-
+	
+	public int selectMemListCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectMemListCount");
+	}
+	
+	public ArrayList<Member> selectMemList(SqlSession sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectMemList", null ,  rowBounds);
+	}
 }

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="list" value="${map.list }"/>
+<c:set var="pi" value="${map.pi }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,67 +29,57 @@
           <tr>
             <th scope="col">회원번호</th>
             <th scope="col">이름 (닉네임)</th>
-            <th scope="col">생년월일</th>
+            <th scope="col">이메일</th>
             <th scope="col">휴대폰 번호</th>
             <th scope="col">가입일</th>
           </tr>
         </thead>
         <tbody>
+          <c:if test="${empty list }">
+            <tr id="tableEmpty">
+              <td colspan="5">조회할 회원이 없습니다</td>
+            </tr>
+          </c:if>
+          <c:forEach var="m" items="${list }" >
           <tr>
-            <th scope="row">1</th>
-            <td>이범석 (aaa)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-            <td>2023-01-01</td>
+            <th scope="row">${m.memNo}</th>
+            <td>${m.memName}(${m.memNickname})</td>
+            <td>${m.email}</td>
+            <td>${m.phone}</td>
+            <td>${m.enrollDate}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>서경주 (bbb)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-            <td>2023-01-01</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>이상엽 (ccc)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-            <td>2023-01-01</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>한대웅 (ddd)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-            <td>2023-01-01</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>황종수 (fff)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-            <td>2023-01-01</td>
-          </tr>
+          </c:forEach>
+
         </tbody>
       </table>
 
+      <c:set var = "url" value="?cpage="/>
       <div aria-label="Page navigation example" class="pagination">
         <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
+          <c:choose>
+			<c:when test="${pi.currentPage eq 1 }">
+				<li class="page-item disabled" ><a class="page-link" aria-label="Previous" href="#">&laquo;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item" ><a class="page-link" aria-label="Previous" href="${url }${pi.currentPage -1 }">&laquo;</a></li>
+			</c:otherwise>
+		  </c:choose>
+          
+          <c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+			<li class="page-item"><a class="page-link" href="${url }${item }">${item}</a></li>
+		  </c:forEach>
+
+          <c:choose>
+			<c:when test="${pi.currentPage eq pi.maxPage }">
+				<li class="page-item disabled"><a class="page-link" aria-label="Next" href="#">&raquo;</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item"><a class="page-link" aria-label="Next" href="${url }${pi.currentPage +1 }">&raquo;</a></li>
+			</c:otherwise>
+		  </c:choose>
         </ul>
       </div>
     </section>
+    
 </body>
 </html>

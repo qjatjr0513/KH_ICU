@@ -158,8 +158,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE MEM_ID = #{memId}
 	</update>
 	
+	<select id="selectMemListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE STATUS = 'N'
+	</select>
 	
-	
+	<select id="selectMemList" resultMap="memberResultSet">
+		SELECT
+			MEM_NO,
+			MEM_NAME,
+			MEM_NICKNAME,
+			EMAIL,
+			PHONE,
+			ENROLL_DATE
+		FROM MEMBER
+		WHERE STATUS = 'N'
+		AND ROLE = 'C'
+		ORDER BY ENROLL_DATE DESC
+	</select>
 	
 	
 	
