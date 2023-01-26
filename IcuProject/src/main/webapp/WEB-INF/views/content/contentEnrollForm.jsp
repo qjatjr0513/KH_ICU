@@ -25,8 +25,7 @@
         <div class="leftBox">
           <div class="left-box1">
             <select class="form-select" aria-label="Default select example">
-              <option selected>장르 선택</option>
-              <option value="1">영화</option>
+              <option value="1" selected>영화</option>
               <option value="2">드라마</option>
             </select>
             <div class="input__title">
@@ -37,28 +36,44 @@
           </div>
 
           <!-- 영화 left-box2 -->
-          <div class="left-box2">
+          <div class="left-box-movie">
             <span>개봉 연도 : </span
             ><select class="form-select" aria-label="Default select example">
-              <option selected>장르 선택</option>
-              <option value="1">영화</option>
+              <option selected>연도 선택</option>
+              <option value="1">액션</option>
               <option value="2">드라마</option>
             </select>
             <span>관람 연령 : </span
             ><select class="form-select" aria-label="Default select example">
-              <option selected>장르 선택</option>
-              <option value="1">영화</option>
-              <option value="2">드라마</option>
+              <option selected>연령 제한 선택</option>
+              <option value="0">전체이용가</option>
+              <option value="12">12세 미만 관람불가</option>
+              <option value="15">15세 미만 관람불가</option>
+              <option value="19">19세 미만 관람불가</option>
             </select>
             <span>장르</span>
-            <input id="action" type="checkbox" />
-            <label for="action">액션</label>
-            <input id="action" type="checkbox" />
-            <label for="action">드라마</label>
-            <input id="action" type="checkbox" />
-            <label for="action">코미디</label>
-            <input id="action" type="checkbox" />
-            <label for="action">공포</label>
+            <input id="action" type="checkbox" name="genre" value="1" />
+            <label for="action">액션</label>
+            <input id="drama" type="checkbox" name="genre" value="2" />
+            <label for="drama">드라마</label>
+            <input type="checkbox" id="sf" name="genre" value="3">
+            <label for="sf">SF</label>
+            <input type="checkbox" id="fantasy" name="genre" value="4">
+            <label for="fantasy">판타지</label>
+            <input type="checkbox" id="romance" name="genre" value="5">
+            <label for="romance">로맨스</label>
+            <input id="horror" type="checkbox" name="genre" value="6" />
+            <label for="horror">공포</label>
+            <input type="checkbox" id="thriller" name="genre" value="7">
+            <label for="thriller">스릴러</label><br>
+            <input type="checkbox" id="family" name="genre" value="8">
+            <label for="family">가족</label>
+            <input type="checkbox" id="animation" name="genre" value="9">
+           	<label for="animation">애니메이션</label>
+            <input id="comedy" type="checkbox" name="genre" value="10" />
+            <label for="comedy">코메디</label>
+            <input type="checkbox" id="romance" name="genre" value="11">
+            <label for="romance">다큐</label>
             <br />
             <span>상영시간 : <input type="text" /></span><br />
             <span>개봉날짜 : <input type="text" /></span>
@@ -67,7 +82,7 @@
           <br />
 
           <!-- 드라마 left-box2 -->
-          <div class="left-box2">
+          <div class="left-box-drama">
             <span>방영 연도 : </span
             ><select class="form-select" aria-label="Default select example">
               <option selected>장르 선택</option>
@@ -76,27 +91,43 @@
             </select>
             <span>관람 연령 : </span
             ><select class="form-select" aria-label="Default select example">
-              <option selected>장르 선택</option>
-              <option value="1">영화</option>
-              <option value="2">드라마</option>
+              <option selected>연령 제한 선택</option>
+              <option value="0">전체이용가</option>
+              <option value="12">12세 미만 관람불가</option>
+              <option value="15">15세 미만 관람불가</option>
+              <option value="19">19세 미만 관람불가</option>
             </select>
             <span>장르</span>
-            <input id="action" type="checkbox" />
-            <label for="action">액션</label>
-            <input id="action" type="checkbox" />
-            <label for="action">드라마</label>
-            <input id="action" type="checkbox" />
-            <label for="action">코미디</label>
-            <input id="action" type="checkbox" />
-            <label for="action">공포</label>
+            <input id="action" type="checkbox" name="genre" value="1" />
+            <label for="action">액션</label>
+            <input id="drama" type="checkbox" name="genre" value="2" />
+            <label for="drama">드라마</label>
+            <input type="checkbox" id="sf" name="genre" value="3">
+            <label for="sf">SF</label>
+            <input type="checkbox" id="fantasy" name="genre" value="4">
+            <label for="fantasy">판타지</label>
+            <input type="checkbox" id="romance" name="genre" value="5">
+            <label for="romance">로맨스</label>
+            <input id="horror" type="checkbox" name="genre" value="6" />
+            <label for="horror">공포</label>
+            <input type="checkbox" id="thriller" name="genre" value="7">
+            <label for="thriller">스릴러</label><br>
+            <input type="checkbox" id="family" name="genre" value="8">
+            <label for="family">가족</label>
+            <input type="checkbox" id="animation" name="genre" value="9">
+           	<label for="animation">애니메이션</label>
+            <input id="comedy" type="checkbox" name="genre" value="10" />
+            <label for="comedy">코메디</label>
+            <input type="checkbox" id="romance" name="genre" value="11">
+            <label for="romance">다큐</label>
             <br />
             <span>상영시간 : <input type="text" /></span><br />
             <span>개봉날짜 : <input type="text" /></span>
           </div>
         </div>
         <div class="right-box">
-          <input type="file" /><br />
-          <img src="https://images.justwatch.com/poster/176267183/s592/avatar" />
+          <input type="file" id="imgInput"/><br />
+          <img id="image_section" src="https://images.justwatch.com/poster/176267183/s592/avatar" />
         </div>
       </div>
       <hr />
@@ -122,5 +153,39 @@
         <button class="contents-btn">저장</button>
       </div>
     </section>
+    
+    <script>
+    	$(function(){
+    		$(".left-box-drama").css('display', 'none');
+    		
+    		$(".form-select").change(function(){
+    			if($(".form-select option:selected").val() == 1){
+		    		$(".left-box-movie").css('display', 'block');	
+		    		$(".left-box-drama").css('display', 'none');
+    			}
+    			else{
+    				$(".left-box-movie").css('display', 'none');
+    				$(".left-box-drama").css('display', 'block');
+    			}
+    		});
+    	})
+    	
+    	function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+			  
+				reader.onload = function (e) {
+					$('#image_section').attr('src', e.target.result);  
+				}
+			  
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+			 
+			
+		$("#imgInput").change(function(){
+			readURL(this);
+		});
+    </script>
   </body>
 </html>
