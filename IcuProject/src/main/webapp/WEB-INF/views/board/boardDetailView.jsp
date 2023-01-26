@@ -16,6 +16,11 @@
    /* div{
       border: 1px solid black;
    } */
+   #writer-img{
+        vertical-align: middle;
+        width: 100%;
+        border-radius: 50%;
+   }
 </style>
 
     <!-- css -->
@@ -70,7 +75,7 @@
             <div class="card-body">
                <ul class="list-group list-group-flush">
                    <li class="list-group-item">
-                  <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요";></textarea>
+                  <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요"; style="resize: none;"></textarea>
                   <c:if test="${not empty loginUser}">
                   <button type="button"  class="btn btn-dark mt-3" onClick="insertReply();">댓글 입력</button>
                   </c:if>
@@ -88,6 +93,16 @@
             <tbody>
               <c:forEach var="r" items="${list }" varStatus="i">
 				<tr>
+               <td style="width: 30px;">
+                  <c:choose>
+                     <c:when test="${!empty profile}">
+                        <img id="writer-img" class='view-img' src="${contextPath }${profile}">
+                     </c:when>
+                     <c:otherwise>
+                        <i class="fa-solid fa-user fa-lg"></i>
+                     </c:otherwise>
+                  </c:choose>
+               </td>
 					<td id="rWriter">${r.replyWriter }</td>
 					<td id="rContent">${r.replyContent }</td>
 					<td>${r.createDate }</td>

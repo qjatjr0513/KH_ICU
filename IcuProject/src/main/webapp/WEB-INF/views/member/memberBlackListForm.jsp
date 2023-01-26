@@ -49,7 +49,7 @@
           <td>${m.email}</td>
           <td>${m.phone}</td>
           <td>${m.enrollDate}</td>
-          <td><button type="submit">취소</button></td>
+          <td><button type="submit" class="btn btn-danger ">취소</button></td>
           <input type="hidden" name="memNo" value="${m.memNo}">
           </form>
         </tr>

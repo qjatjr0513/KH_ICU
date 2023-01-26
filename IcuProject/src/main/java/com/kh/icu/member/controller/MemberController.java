@@ -459,12 +459,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("blackCancel.me")
-	public String blackCancel(int memNo, Model model) {
+	public String blackCancel(int memNo) {
 		
 		int result = memberService.blackCancel(memNo);
 		System.out.println("memNo :" + memNo);
-		
-//		model.addAttribute("memNo", result);
 		
 		return "redirect:memBlackListForm.me";
 		

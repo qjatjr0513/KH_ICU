@@ -66,6 +66,18 @@
     <!-- Toastr -->
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+      #profile-img{
+        vertical-align: middle;
+        width: 200%;
+        height: 150%;
+        border-radius: 50%;
+        left: -52%;
+        position: relative;
+        top: -21%;
+      }
+    </style>
 </head>
 <body>
 	
@@ -114,7 +126,14 @@
 		            data-bs-toggle="dropdown"
 		            aria-expanded="false"
 		          >
-		            <i class="fa-solid fa-user fa-lg"></i>
+              <c:choose>
+                <c:when test="${!empty profile}">
+                  <img id="profile-img" class='view-img' src="${contextPath }${profile}">
+                </c:when>
+                <c:otherwise>
+                  <i class="fa-solid fa-user fa-lg"></i>
+                </c:otherwise>
+              </c:choose>
 		          </button>
 		          <ul class="dropdown-menu">
 		            <li><span class="dropdown-item">${loginUser.memNickname}</span></li>

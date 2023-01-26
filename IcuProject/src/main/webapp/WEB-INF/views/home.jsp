@@ -187,7 +187,6 @@
               icon:'success',
               customClass: {
               confirmButton: 'swal2-confirm swal2-styled swal2-jong',
-              cancelButton: 'btn btn-danger'
               } 
         });
       }
