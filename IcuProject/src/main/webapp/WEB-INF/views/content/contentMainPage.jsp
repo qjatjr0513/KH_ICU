@@ -102,11 +102,6 @@
   		height: 100%;
   		border-radius: 50%;
   	}
-  	#movie, #drama{
-  		background-color: mediumorchid;
-  		color: white;
-  		border: none;
-  	}
   	#info>h4, h5{
   		margin:auto;
   	}
@@ -137,26 +132,26 @@
         </div>
 
         <div class="major">
-          <button class="major_btn" value="2" id="ott" name="watcha">
+          <button class="major_btn" value="4" id="ott" name="watcha">
             <div class="major__icon watcha"></div>
           </button>
-          <input id="watcha" type="checkbox" name="ott" value="2" />
+          <input id="watcha" type="checkbox" name="ott" value="4" />
           <h2 class="major__title">Watcha</h2>
         </div>
 
         <div class="major">
-          <button class="major_btn" value="3" id="ott" name="wavve">
+          <button class="major_btn" value="2" id="ott" name="wavve">
             <div class="major__icon wavve"></div>
           </button>
-          <input id="wavve" type="checkbox" name="ott" value="3" />
+          <input id="wavve" type="checkbox" name="ott" value="2" />
           <h2 class="major__title">Wavve</h2>
         </div>
 
         <div class="major">
-          <button class="major_btn" value="4" id="ott" name="disney">
+          <button class="major_btn" value="3" id="ott" name="disney">
             <div class="major__icon disney"></div>
           </button>
-          <input id="disney" type="checkbox" name="ott" value="4" />
+          <input id="disney" type="checkbox" name="ott" value="3" />
           <h2 class="major__title">Disney +</h2>
         </div>
         
@@ -178,7 +173,7 @@
               	<label for="action">액션</label>
             </td>
             <td>
-              	<input id="drama" type="checkbox" name="genre" value="2" />
+              	<input id="dramaCh" type="checkbox" name="genre" value="2" />
               	<label for="drama">드라마</label>
             </td>
             <td>
@@ -260,13 +255,13 @@
 	                  <div class="movie__info">
 	                    <img
 	                      id="poster"
-	                      src="https://images.justwatch.com/poster/176267183/s592/avatar"
+	                      src="${c.changeName }"
 	                      onclick="movePage(${c.conNo });"
 	                    />
 	                    <br><br>
 	                    <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
 	                    <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
-	                    <i class="fa-solid fa-star">4.0</i>
+	                    <i class="fa-solid fa-star">${c.cmtStar }</i>
 	                  </div>
 	    			</div>
     			</c:forEach>
@@ -304,26 +299,34 @@
 			$('#movie').click(function(){
 				console.log(mvClicked)
 				if(mvClicked == false){
-		    		$(this).css('background', 'plum');
-		    		$('#drama').css('background', 'mediumorchid');
+		    		$(this).css('background', 'var(--color-orange)');
+		    		$(this).css('opacity', '0.3');
+		    		$('#drama').css('background', 'var(--color-orange)');
+		    		$('#drama').css('opacity', '1');
+		    		
 		    		mvClicked = true;
 		    		drClicked = false;
 				}
 				else{
-					$(this).css('background', 'mediumorchid');
+					$(this).css('background', 'var(--color-orange)');
+		    		$(this).css('opacity', '1');
 					mvClicked = false;
 				}		    	
 		  	});
 			
 			$('#drama').click(function(){				
 				if(drClicked == false){
-		    		$(this).css('background', 'plum');
-		    		$('#movie').css('background', 'mediumorchid');
+					$(this).css('background', 'var(--color-orange)');
+		    		$(this).css('opacity', '0.3');
+		    		$('#movie').css('background', 'var(--color-orange)');
+		    		$('#movie').css('opacity', '1');
+		    		
 		    		drClicked = true;
 		    		mvClicked = false;
 				}
 				else{
-					$(this).css('background', 'mediumorchid');
+					$(this).css('background', 'var(--color-orange)');
+		    		$(this).css('opacity', '1');
 					drClicked = false;
 				}
 		  	});
@@ -441,83 +444,83 @@
 					let htmlUpside = "";
 					let htmlMid = "";
 					let htmlInfo = "";
+					let html = "";
 					//$('.carousel-inner').remove();
-					var carouselCnt = parseInt(result.length/8) + 1;
-					var movieBoxCnt = parseInt(result.length/4) + 1;
+					var carouselCnt = parseInt(result.length/8);
+					var movieBoxCnt = parseInt(result.length/4);
+					var movieContainerCnt = parseInt(result.length/2) + 1;
+					var cnt2 = 1;
+					console.log(result);
+// 					for(var i = 0; i < result.length; i++){
+						
+// 					}
 					//console.log(result.length);
 					if(result.length >= 8){
-						$('#carouselExampleControls').remove();
-						for(var i = 0; i < carouselCnt; i++){
-							htmlUpside += "<div id='carouselExampleControls' class='carousel slide' data-bs-ride='carousel'>" +
-												"<div class='carousel-inner'>" +
-													"<div class='carousel-item active' data-bs-interval='100000'>" +
-													"</div>"+
-												"</div>"+
-											"</div>";
-							$("#party__container").html(htmlUpside);
-						}
-						htmlUpside = "";
-						
-						for(var j = 1; j <= movieBoxCnt; j++){
-							htmlMid += "<div id='movieBox"+ j +"' class='movieBox'>" +
-										"</div>";
-							$(".carousel-item").html(htmlMid);
-						}
-						htmlMid = "";
+						$('.carousel-item').remove();
+						for(var i = 1; i <= carouselCnt; i++){
+							if(i > 1){
+								html += "<div class='carousel-item' data-bs-interval='100000'>";
+							}
+							else{
+								html += "<div class='carousel-item active' data-bs-interval='100000'>";
+							}
+							for(var j = 0; j < carouselCnt; j++){
+								html += "<div id='movieBox"+ cnt2 +"' class='movieBox'></div>";
+								cnt2 += 1;
+							}
+							html += "</div>";
+						}						
+						$(".carousel-inner").html(html);
 						for(var j = 1; j <= movieBoxCnt; j++){
 							while(cnt < j * 4){
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
-													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +
+													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br><br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+cnt+")</span>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate+")</span>" +
 													"<br>" +
-													"<i class='fa-solid fa-star'>4.0</i>"+
+													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
 												"</div>"+
 											"</div>";
-								$('#movieBox'+j).html(htmlInfo);
+								$('#movieBox'+j).html(htmlInfo);									
+
 								cnt += 1;
 							}
 							htmlInfo = "";
 						}
 						cnt = 0;
+						cnt2 = 0;
 					}
 					else if(result.length >= 4){
-						$('.carousel-inner').remove();
+						$('.carousel-item').remove();
+						html += "<div class='carousel-item active' data-bs-interval='100000'>";
+						console.log(carouselCnt);
+						html += "<div id='movieBox1' class='movieBox'></div>";
+						html += "<div id='movieBox2' class='movieBox'></div>";
+						html += "</div>";
 						
-						htmlMid += "<div class='carousel-inner'>" +
-						"<div class='carousel-item active' data-bs-interval='100000'>" +
-							"</div>"+
-						"</div>";
-						$("#carouselExampleControls").html(htmlMid);
-						
-						htmlMid = "";
-						for(var j = 1; j <= movieBoxCnt; j++){
-							htmlMid += "<div id='movieBox"+ j +"' class='movieBox'>" +
-										"</div>";
-							$(".carousel-item").html(htmlMid);
-						}
-						
-						htmlMid = "";
+						$(".carousel-inner").html(html);
 						for(var j = 1; j <= movieBoxCnt; j++){
 							while(cnt < j * 4){
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
-													"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[cnt].conNo +");'>" +
+													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br><br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+cnt+")</span>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate+")</span>" +
 													"<br>" +
-													"<i class='fa-solid fa-star'>4.0</i>"+
+													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
 												"</div>"+
 											"</div>";
-								$('#movieBox'+j).html(htmlInfo);
+								$('#movieBox'+j).html(htmlInfo);									
+
 								cnt += 1;
 							}
 							htmlInfo = "";
 						}
 						cnt = 0;
+						cnt2 = 0;
 					}
 					else{
 						$('.carousel-inner').remove();
@@ -532,12 +535,12 @@
 						for(var i = 0 in result){
 							htmlInfo += "<div class='movieContainer'>" +
 											"<div class='movie__info'>" +
-												"<img id='poster' src='https://images.justwatch.com/poster/176267183/s592/avatar' onclick='movePage("+ result[i].conNo +");'>" +
+												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
 												"<br><br>" +
 												"<h4 onclick='movePage("+ result[i].conNo +");'>"+result[i].conKTitle+"</h4>" +
 												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate+")</span>" +
 												"<br>" +
-												"<i class='fa-solid fa-star'>4.0</i>"+
+												"<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
 											"</div>"+
 										"</div>";
 							$("#movieBox").html(htmlInfo);

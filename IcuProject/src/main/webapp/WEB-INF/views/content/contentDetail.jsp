@@ -234,7 +234,12 @@
 				</span>
 				<h4 id="scoreAvg">&nbsp;&nbsp;()</h4>
 	    		<br>
-	    		<h6>&nbsp;&nbsp;관람 연령 : ${c.conAge }</h6>
+	    		<c:if test="${c.conAge ne 0}">
+	    			<h6>&nbsp;&nbsp;관람 연령 : ${c.conAge }세 미만 관람 불가</h6>
+	    		</c:if>
+	    		<c:if test="${c.conAge eq 0}">
+	    			<h6>&nbsp;&nbsp;관람 연령 : 전체이용가</h6>
+	    		</c:if>
 	    		<h6>&nbsp;&nbsp;장르 : 
 		    		<c:forEach var="genre" items="${g }" varStatus="status">
 		    			${genre }<c:if test="${status.count ne size}">, </c:if>
@@ -249,7 +254,7 @@
 	    		<h6>&nbsp;&nbsp;방영 날짜 : ${c.conDate }</h6>
 	    	</div>
 	    	<div id="poster">
-	    		<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkEtR9%2FbtrgfMGHvbz%2FULwHeMTVRAhKiykodpkP6K%2Fimg.png">
+	    		<img src="${c.changeName }">
 	    	</div>
     	</div>
     	

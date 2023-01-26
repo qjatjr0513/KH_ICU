@@ -35,9 +35,18 @@ public class ContentController {
 //		System.out.println("====================");
 //		System.out.println("list : "+list2);
 //		System.out.println("====================");
+		double cmtStar = 0.0;
 		
+		for(int i = 0; i < list2.size(); i++) {
+			try {
+				cmtStar = contentService.selectStar(list2.get(i).getConNo());
+			}
+			catch(NullPointerException e) {
+				cmtStar = 0.0;
+			}
+			list2.get(i).setCmtStar(cmtStar);
+		}
 		model.addAttribute("list", list2);
-		
 		return "content/contentMainPage";
 	}
 	
@@ -124,6 +133,18 @@ public class ContentController {
 		System.out.println(map);
 
 		list = contentService.searchContentCategory(map);
+		
+		double cmtStar = 0.0;
+		
+		for(int i = 0; i < list.size(); i++) {
+			try {
+				cmtStar = contentService.selectStar(list.get(i).getConNo());
+			}
+			catch(NullPointerException e) {
+				cmtStar = 0.0;
+			}
+			list.get(i).setCmtStar(cmtStar);
+		}
 		
 		String result = gson.toJson(list);
 		System.out.println(list);
