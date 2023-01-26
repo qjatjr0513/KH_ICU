@@ -306,7 +306,7 @@ public class MemberController {
 							HttpSession session,
 							Model model,
 							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode,
-							HttpServletRequest httpServletRequest) {
+							String changefile) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = 0;
@@ -329,6 +329,14 @@ public class MemberController {
 				logger.error(e.getMessage());
 			}
 			
+
+			if(upfile.getName() != null && !upfile.getName().equals("") ) {
+				File path = new File(application.getRealPath("/resources/uploadFiles"));
+				System.out.println("파일 이름 : "+changefile);
+				new File(path+File.separator+changefile).delete();
+			}
+	
+
 			
 			image.setOriginName(upfile.getOriginalFilename());
 			image.setChangeName("/resources/profileImg/" + changeName) ;

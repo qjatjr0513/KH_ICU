@@ -1,0 +1,41 @@
+@import url('main.css');
+@import url('admin_main.css');
+
+#blackList {
+  margin: auto;
+  margin-top: 300px;
+  padding-left: 200px;
+  width: 60%;
+  /* background-color: antiquewhite; */
+}
+td button {
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 5px;
+  padding: 0 3px;
+  background-color: rgb(150, 150, 150);
+  color: white;
+}
+
+#blackList > table td,
+#blackList > table th {
+  padding: 10px;
+}
+
+#blackList > table {
+  background-color: white;
+  text-align: center;
+}
+
+.pagination {
+  margin: auto;
+}
+.contents__enrollBtn {
+  width: 150px;
+  background-color: var(--color-purple);
+  padding: 15px 5px;
+  border-radius: 8px;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  float: right;
+}

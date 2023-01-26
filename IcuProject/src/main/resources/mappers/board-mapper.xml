@@ -13,14 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
-		<collection property="list" resultMap="replyResultSet"></collection>
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">
 		<id column="REPLY_NO" property="replyNo"/>
 		<result column="REPLY_CONTENT" property="replyContent"/>
-		<result column="REPLY_MEM_NICKNAME" property="replyWriter"/>
-		<result column="REPLY_CREATE_DATE" property="createDate"/>
+		<result column="MEM_NICKNAME" property="replyWriter"/>
+		<result column="CREATE_DATE" property="createDate"/>
 		<result column="REF_TNO" property="refTno"/>
 		<result column="TABLE_CD" property="tableCd"/>
 		<result column="STATUS" property="status"/>
@@ -98,16 +97,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BOARD_NO,
 			M.MEM_NICKNAME,
 			BOARD_TITLE,
-			BOARD_CONTENT,
-			REPLY_NO,
-			REPLY_CONTENT,
-			M2.MEM_NICKNAME AS REPLY_MEM_NICKNAME,
-			R.CREATE_DATE AS REPLY_CREATE_DATE
+			BOARD_CONTENT
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
-		LEFT JOIN REPLY R ON (BOARD_NO = REF_TNO)
-		LEFT JOIN MEMBER M2 ON (REPLY_WRITER = M2.MEM_NO)
-		WHERE BOARD_NO = #{boardNo} AND B.STATUS='N' AND R.STATUS = 'N'
+		WHERE BOARD_NO = #{boardNo} AND B.STATUS='N' 
+	</select>
+	
+	<select id="selectReply" parameterType="int" resultMap="replyResultSet">
+		SELECT 
+			R.REF_TNO,
+			R.REPLY_NO,
+			R.REPLY_CONTENT,
+			MEM_NICKNAME,
+			R.CREATE_DATE
+		FROM REPLY R
+		LEFT JOIN BOARD  ON (BOARD_NO = R.REF_TNO)
+		LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = MEM_NO)
+		WHERE BOARD_NO = #{boardNo} AND  R.STATUS = 'N'
 	</select>
 	
 	<insert id="insertBoard" parameterType="board" useGeneratedKeys="true">
@@ -143,23 +149,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
-	<select id="selectReplyList" parameterType="int" resultMap="replyResultSet">
-		SELECT
-			DISTINCT REPLY_NO,
-			REPLY_CONTENT,
-			REF_TNO,
-			MEM_NO,
-			MEM_NICKNAME,
-			R.CREATE_DATE,
-			R.STATUS
-		FROM REPLY R
-		JOIN MEMBER M ON (R.REPLY_WRITER = M.MEM_NO)
-		JOIN BOARD B ON (R.REPLY_WRITER = B.BOARD_WRITER)
-		WHERE R.STATUS = 'N'
-		AND R.TABLE_CD = 'B'
-		AND REF_TNO = #{boardNo}
-		ORDER BY REPLY_NO ASC
-	</select>
 
 	<insert id="insertReply" parameterType="reply" >
 		INSERT INTO REPLY(REPLY_NO, REPLY_WRITER, REF_TNO, REPLY_CONTENT , TABLE_CD)

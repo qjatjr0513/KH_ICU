@@ -82,11 +82,11 @@
          <table id="replyArea" class="table" align="center">
             <thead>
                <tr>
-                  <td colspan="3"><b>댓글(${b.list.size()})</b></td>
+                  <td colspan="3"><b>댓글(${list.size()})</b></td>
                </tr>
             </thead>
             <tbody>
-              <c:forEach var="r" items="${b.list }" varStatus="i">
+              <c:forEach var="r" items="${list }" varStatus="i">
 				<tr>
 					<td id="rWriter">${r.replyWriter }</td>
 					<td id="rContent">${r.replyContent }</td>

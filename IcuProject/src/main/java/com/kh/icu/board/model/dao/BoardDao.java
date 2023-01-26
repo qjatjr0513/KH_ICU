@@ -65,7 +65,7 @@ public class BoardDao {
 	}
 	
 	public ArrayList<Reply> selectReplyList(SqlSession sqlSession, int bno) {
-		return (ArrayList)sqlSession.selectList("boardMapper.selectReplyList", bno);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReply", bno);
 	}
 	
 	public int insertReply(SqlSession sqlSession, Reply r) {

@@ -98,10 +98,12 @@ public class BoardController {
                            ModelAndView mv
                            ) {
       Board b = boardService.selectBoard(boardNo);
+      ArrayList<Reply> list = boardService.selectReplyList(boardNo);
       
       if(b != null) {
          // 상세조회 성공
          Member loginUser = (Member)session.getAttribute("loginUser");
+         
          
          int memNo =0;
          if(loginUser != null) {
@@ -116,6 +118,7 @@ public class BoardController {
             b.setCount(b.getCount()+1);
          }
          mv.addObject("b", b);
+         mv.addObject("list", list );
          mv.setViewName("board/boardDetailView");
          
          
@@ -128,20 +131,6 @@ public class BoardController {
       return mv;
    }
    
-   // 댓글 목록 불러오기
-   // ResponseBody : 별도의 뷰페이지가 아니라 리턴값을 직접 지정해야 하는 경우 사용.
-   @RequestMapping("reply.bo")
-   @ResponseBody
-   public String selectReplyList(int bno) {
-      // 댓글목록 조회
-      ArrayList<Reply> list = boardService.selectReplyList(bno);
-      
-      // gson으로 파싱
-      Gson gson = new GsonBuilder().create();
-      
-      String result = gson.toJson(list);
-      return result;
-   }
     
    // 댓글 등록
    @RequestMapping("insertReply.bo")

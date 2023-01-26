@@ -8,13 +8,17 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.maven.shared.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.kh.icu.board.model.service.BoardService;
 import com.kh.icu.common.interceptor.SessionNames;
+import com.kh.icu.common.model.vo.Alarm;
+import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
 
 public class AlramHandler extends TextWebSocketHandler {
@@ -22,6 +26,8 @@ public class AlramHandler extends TextWebSocketHandler {
 	
 	Map<String, WebSocketSession> userSessions = new HashMap<>();
 	
+	 @Autowired 
+	 private BoardService boardservice;
 	// 클라이언트가 서버로 연결시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
@@ -58,8 +64,13 @@ public class AlramHandler extends TextWebSocketHandler {
 				String boardWriter = strs[2];
 				String bno = strs[3];
 				
+				
+				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
 				if("reply".equals(cmd) && boardWriterSession != null) {
+					Alarm a = new Alarm();
+			
+//					Alarm a = boardservice.insertBoard(a);
 					TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+replyWriter +"님이 게시글에 댓글을 달았습니다!"+"</a>");
 					boardWriterSession.sendMessage(tmpMsg);
 				}

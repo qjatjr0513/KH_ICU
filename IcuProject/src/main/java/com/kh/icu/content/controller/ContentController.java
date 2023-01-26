@@ -152,4 +152,14 @@ public class ContentController {
 		//System.out.println(age);
 		return result;
 	}
+	
+	@RequestMapping("/contentListForm.co")
+	public String contentList() {
+		return "content/contentListForm";
+	}
+	
+	@RequestMapping("/contentEnrollForm.co")
+	public String contentEnroll() {
+		return "content/contentEnrollForm";
+	}
 }

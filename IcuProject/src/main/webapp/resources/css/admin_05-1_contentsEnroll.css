@@ -1,0 +1,100 @@
+@import url('main.css');
+@import url('admin_main.css');
+
+#contentsEnroll {
+  margin-left: 500px;
+  margin-top: 120px;
+  width: 60%;
+  background-color: white;
+  padding: 20px;
+}
+
+.form-select {
+  width: 200px;
+}
+
+.input__title {
+  padding: 20px;
+}
+.input__title > input[type='text'] {
+  padding: 10px;
+}
+.header-box {
+  /* background-color: aquamarine; */
+  display: flex;
+  padding: 20px;
+}
+.leftBox {
+  /* background-color: coral; */
+  width: 50%;
+}
+.left-box1 {
+  /* border: 1px solid black; */
+  /* background-color: antiquewhite; */
+}
+
+.right-box {
+  /* border: 1px solid black; */
+  /* background-color: burlywood; */
+  width: 50%;
+  text-align: center;
+}
+.right-box img {
+  width: 240px;
+}
+.right-box input {
+  border: 1px solid black;
+}
+
+/* 예고편 */
+.trailer-container {
+  /* background-color: cornflowerblue; */
+  text-align: center;
+  padding: 20px;
+}
+.trailer-container > input {
+  margin: auto;
+  height: 40px;
+}
+
+.formControl {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  width: 700px;
+}
+.formControl:focus {
+  outline: none !important;
+  border-color: var(--color-orange);
+  box-shadow: 0 0 5px 1px rgb(255, 213, 134);
+}
+
+/* 감독, 배우, 줄거리 */
+.contents-info {
+  /* background-color: rgb(112, 122, 142); */
+  padding: 20px;
+}
+
+.btnGroup {
+  width: 800px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.contents-btn:first-child,
+.contents-btn:nth-child(2) {
+  padding: 10px;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+}
+.contents-btn:first-child {
+  background-color: gray;
+}
+.contents-btn:nth-child(2) {
+  background-color: var(--color-purple);
+  color: white;
+}
