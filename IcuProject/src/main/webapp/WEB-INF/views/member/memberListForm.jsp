@@ -32,6 +32,7 @@
             <th scope="col">이메일</th>
             <th scope="col">휴대폰 번호</th>
             <th scope="col">가입일</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -42,7 +43,7 @@
           </c:if>
           <c:forEach var="m" items="${list }" >
           <tr>
-            <th scope="row">${m.memNo}</th>
+            <th scope="row" name="memNo">${m.memNo}</th>
             <td>${m.memName}(${m.memNickname})</td>
             <td>${m.email}</td>
             <td>${m.phone}</td>

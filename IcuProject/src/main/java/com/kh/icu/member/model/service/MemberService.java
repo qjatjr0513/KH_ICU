@@ -59,7 +59,11 @@ public interface MemberService {
 	
 	public int selectMemListCount();
 	
+	public Map<String, Object> selectBlackList(int currentPage);
 	
+	public int selectBlackListCount();
+	
+	public int blackCancel(int memNo);
 	
 	
 	

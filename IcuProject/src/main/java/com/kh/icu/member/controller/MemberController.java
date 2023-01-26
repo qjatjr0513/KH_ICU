@@ -434,12 +434,32 @@ public class MemberController {
 	         
 	    model.addAttribute("map", map);
 		
-		return "admin/memberListForm";
+		return "member/memberListForm";
 	}
 	
-	@RequestMapping("memBlakcListForm.me")
-	public String memberBlackList(){
+	@RequestMapping("memBlackListForm.me")
+	public String memberBlackList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
+			 						@RequestParam Map<String, Object> paramMap){
+		
+		Map<String, Object> map = new HashMap();
+        
+	    map = memberService.selectBlackList(currentPage);
+	         
+	    model.addAttribute("map", map);
+		
 		return "member/memberBlackListForm";
+	}
+	
+	@RequestMapping("blackCancel.me")
+	public String blackCancel(int memNo, Model model) {
+		
+		int result = memberService.blackCancel(memNo);
+		System.out.println("memNo :" + memNo);
+		
+//		model.addAttribute("memNo", result);
+		
+		return "redirect:memBlackListForm.me";
+		
 	}
 	
 	

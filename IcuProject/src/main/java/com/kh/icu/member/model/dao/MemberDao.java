@@ -126,4 +126,34 @@ public class MemberDao {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectMemList", null ,  rowBounds);
 	}
+	
+	public int selectBlackListCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectBlackListCount");
+	}
+	
+	public ArrayList<Member> selectBlackList(SqlSession sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.selectBlackList", null ,  rowBounds);
+	}
+	
+	public int blackCancel(SqlSession sqlSession, int memNo) {
+		
+		int result = sqlSession.update("memberMapper.blackCancel", memNo);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

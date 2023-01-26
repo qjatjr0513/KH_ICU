@@ -418,6 +418,39 @@ public class MemberServiceImpl implements MemberService{
 		return map;
 	}
 	
+	@Override
+	public int selectBlackListCount() {
+		return memberDao.selectBlackListCount(sqlSession);
+	}
+	
+	@Override
+	public Map<String, Object> selectBlackList(int currentPage){
+		
+		Map<String, Object> map = new HashMap();
+		
+		// 1. 페이징처리
+		int listCount = selectBlackListCount();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+		
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		map.put("pi", pi);
+		
+		ArrayList<Member> list = memberDao.selectBlackList(sqlSession, pi);
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	@Override
+	public int blackCancel(int memNo) {
+		
+		int result = memberDao.blackCancel(sqlSession, memNo);
+		
+		return result;
+		
+	}
 	
 	
 	
