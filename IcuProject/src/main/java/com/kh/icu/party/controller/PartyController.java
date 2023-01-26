@@ -32,10 +32,10 @@ public class PartyController {
 		return "party/partyEnrollForm";
 	}
 	
-	@RequestMapping("findPartyForm.py")
-	public String findPartyForm() {
-		return "party/findPartyForm";
-	}
+//	@RequestMapping("findParty.py")
+//	public String findPartyForm() {
+//		return "party/findPartyForm";
+//	}
 	
 	@RequestMapping("partyDetail.py")
 	public String partyDetailForm() {
@@ -46,12 +46,8 @@ public class PartyController {
 	@RequestMapping("/ottChoice")
 	@ResponseBody
 	public int getPrice(String ottNo) {
-		if(!ottNo.equals("0")) {
-			int price = partyService.getPrice(ottNo);
-			return price;			
-		}else {
-			return 0;
-		}
+		int price = partyService.getPrice(ottNo);
+		return price;
 	}
 	
 	// 파티 만들기
@@ -77,15 +73,16 @@ public class PartyController {
 		
 	}
 	
-//	@RequestMapping("/findParty.py")
-//	public String findPartyForm(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
-//		
-//		List<Object> map = partyService.findPartyForm();
-//			
-//		model.addAttribute("map", map);
-//		
-//		return "board/boardListView";
-//	}
+	@RequestMapping("/findParty.py")
+	public String findPartyForm(Model model /*, int ottNo, int startMon, int endMon*/) {
+		System.out.println("controller");
+		List<Party> list = partyService.findPartyForm();
+			
+		model.addAttribute("list", list);
+		System.out.println("list" + list);
+		
+		return "party/findPartyForm";
+	}
 	
 //	@RequestMapping("/SerchParty.py")
 //	public String SerchParty(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {

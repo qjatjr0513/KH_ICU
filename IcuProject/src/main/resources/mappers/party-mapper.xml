@@ -5,30 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="partyMapper">
 
-<resultMap type="party" id="partyResultSet">
-	<result column="PA_NO" property="paNo"></result>
-	<result column="PA_NAME" property="paName"></result>
-	<result column="TABLE_CD" property="tableCd"></result>
-	<result column="OTT_NO" property="ottNo"></result>
-	<result column="PA_TITLE" property="paTitle"></result>
-	<result column="CREW_NUM" property="crewNum"></result>
-	<result column="OTT_ID" property="ottId"></result>
-	<result column="OTT_PWD" property="ottPwd"></result>
-	<result column="START_DATE" property="startDate"></result>
-	<result column="END_DATE" property="endDate"></result>
-	<result column="DAY_PRICE" property="dayPrice"></result>
-	<result column="ACCOUNT" property="account"></result>
-	<result column="STATUS" property="status"></result>
-</resultMap>
+	<resultMap type="party" id="partyResultSet">
+		<result column="PA_NO" property="paNo"></result>
+		<result column="PA_NAME" property="paName"></result>
+		<result column="TABLE_CD" property="tableCd"></result>
+		<result column="OTT_NO" property="ottNo"></result>
+		<result column="PA_TITLE" property="paTitle"></result>
+		<result column="CREW_NUM" property="crewNum"></result>
+		<result column="OTT_ID" property="ottId"></result>
+		<result column="OTT_PWD" property="ottPwd"></result>
+		<result column="START_DATE" property="startDate"></result>
+		<result column="END_DATE" property="endDate"></result>
+		<result column="DAY_PRICE" property="dayPrice"></result>
+		<result column="ACCOUNT" property="account"></result>
+		<result column="STATUS" property="status"></result>
+		<result column="LEFT_DATE" property="leftDate"></result>
+	</resultMap>
 
 	<select id="getPrice" parameterType="String" resultType="int">
 		SELECT OTT_PRICE 
 		FROM OTT 
 		WHERE OTT_NO = #{ottNo}
 	</select>
-	
-	
-	<select id="insertParty" parameterType="Party">
+
+	<insert id="insertParty" parameterType="Party">
 		INSERT INTO PARTY(
 			PA_NO,
 			PA_NAME,
@@ -52,7 +52,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{dayPrice},
 			#{account}
 		)
-		
+	</insert>
+	
+	<select id="findPartyForm" resultMap="partyResultSet">
+		SELECT PA_NO,
+			   OTT_NO,
+			   PA_TITLE,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE
+		FROM PARTY
 	</select>
+	
 
 </mapper>

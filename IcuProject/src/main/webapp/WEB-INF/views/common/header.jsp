@@ -81,7 +81,7 @@
         <li class="navbar__menu__item active1" data-link="#home">
         	<a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
         <li class="navbar__menu__item" data-link="#about">
-        	 <a href="${contextPath }/findPartyForm.py" style="text-decoration: none; color:black;">파티찾기</a></li>
+        	 <a href="${contextPath }/findParty.py" style="text-decoration: none; color:black;">파티찾기</a></li>
         </li>
         <li class="navbar__menu__item" data-link="#skills">
            <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>

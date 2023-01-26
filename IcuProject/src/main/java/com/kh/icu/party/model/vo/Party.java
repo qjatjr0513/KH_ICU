@@ -19,4 +19,5 @@ public class Party {
 	private int dayPrice;
 	private int account;
 	private int status;
+	private int leftDate;
 }

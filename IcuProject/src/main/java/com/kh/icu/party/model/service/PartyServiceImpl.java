@@ -21,21 +21,20 @@ public class PartyServiceImpl implements PartyService{
 	
 	// ott가격 표시
 	public int getPrice(String ottNo) {
-		System.out.print(ottNo);
 		return partyDao.getPrice(sqlSession, ottNo);
 	};
 
 	@Override
 	public int insertParty(Party p) {
-		System.out.println("dao");
-		int result = partyDao.insertParty(sqlSession, p);
-		System.out.println("dao result : " + result);
-		return result;
+		return partyDao.insertParty(sqlSession, p);
 	}
 	
 	@Override
-	public List<Object> findPartyForm() {
-		return partyDao.findPartyForm(sqlSession);
+	public List<Party> findPartyForm() {
+		System.out.println("service");
+		List<Party> result = partyDao.findPartyForm(sqlSession);
+		System.out.println("servecic result : " + result);
+		return result;
 	};
 	
 }

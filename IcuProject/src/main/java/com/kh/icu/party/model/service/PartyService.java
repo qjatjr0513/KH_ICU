@@ -10,6 +10,6 @@ public interface PartyService {
 	
 	public int insertParty(Party p);
 	
-	public List<Object> findPartyForm();
+	public List<Party> findPartyForm();
 
 }

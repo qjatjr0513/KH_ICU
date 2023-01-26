@@ -19,8 +19,11 @@ public class PartyDao {
 		return sqlSession.insert("partyMapper.insertParty", p);
 	}
 
-	public List<Object> findPartyForm(SqlSession sqlSession) {
-		return sqlSession.selectList("partyMapper.findPartyForm");
+	public List<Party> findPartyForm(SqlSession sqlSession) {
+		System.out.println("dao");
+		List<Party> result = sqlSession.selectList("partyMapper.findPartyForm");
+		System.out.println("dao result : " + result);
+		return result;
 	}
 	
 	
