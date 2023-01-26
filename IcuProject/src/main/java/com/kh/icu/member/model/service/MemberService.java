@@ -50,7 +50,7 @@ public interface MemberService {
 	public int insertImg(Image image);
 
 	
-	public int updateImg(Image image, String webPath, String serverFolderPath);
+	public int updateImg(Image image);
 	
 	public int deleteMember(String memId);
 	

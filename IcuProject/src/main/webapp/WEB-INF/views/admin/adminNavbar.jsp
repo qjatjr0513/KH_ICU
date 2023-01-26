@@ -17,7 +17,7 @@
           <h2>회원 정보 관리</h2>
           <ul>
             <li><a href="admin_01_manageMember.html">회원정보조회</a></li>
-            <li><a href="admin_02_blackList.html">블랙리스트 관리</a></li>
+            <li><a href="${contextPath}/memBlakcListForm.me">블랙리스트 관리</a></li>
           </ul>
           <hr />
         </div>

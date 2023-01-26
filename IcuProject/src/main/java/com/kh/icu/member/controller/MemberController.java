@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -165,7 +166,9 @@ public class MemberController {
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
 			if(loginUser.getMemId().equals("admin")) {
 				session.setAttribute("loginUser", loginUser);
+
 				return "redirect:memListForm.me";
+
 			}else {
 				session.setAttribute("loginUser", loginUser);
 				return "common/main";				
@@ -285,12 +288,12 @@ public class MemberController {
 		return "common/main";
 	}
 	@RequestMapping("myPage.me")
-	public String myPage(Model model) {
+	public String myPage() {
 		Member m = (Member)session.getAttribute("loginUser");
 		String profile = memberService.selectProfile(m);
 		System.out.println(m);
 		if(profile != "") {
-			model.addAttribute("profile", profile);
+			session.setAttribute("profile", profile);
 			return "member/myPage";			
 		}else {
 			return "common/errorPage";
@@ -301,9 +304,12 @@ public class MemberController {
 	public String insertImg(Image image,
 							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
-							Model model) {
+							Model model,
+							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode,
+							HttpServletRequest httpServletRequest) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		int result = 0;
 		
 		if(loginUser != null) {
 			int memNo = loginUser.getMemNo();
@@ -316,17 +322,27 @@ public class MemberController {
 			String savePath = session.getServletContext().getRealPath("/resources/profileImg/");
 			String changeName = Utils.saveFile(upfile, savePath);
 			
+			
 			try {
 				upfile.transferTo(new File(savePath+changeName));
 			} catch (IllegalStateException | IOException e) {
 				logger.error(e.getMessage());
 			}
 			
+			
 			image.setOriginName(upfile.getOriginalFilename());
 			image.setChangeName("/resources/profileImg/" + changeName) ;
 			
-			}
-		int result = memberService.insertImg(image);
+			
+		}
+		
+		if(mode.equals("insert")) {
+			result = memberService.insertImg(image);
+		}else {
+			
+			result = memberService.updateImg(image); 
+		}
+		
 		
 		if(result > 0) {
 			
@@ -341,45 +357,6 @@ public class MemberController {
 	
 	@Autowired
 	private ServletContext application;
-	
-	@RequestMapping("updateImg.me")
-	public String updateImg(Image image,
-							MultipartFile upfile, 
-							HttpSession session,
-							Model model) {
-		
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		String webPath = "/resources/profileImg/";
-		String serverFolderPath  = session.getServletContext().getRealPath(webPath);
-		
-		if(loginUser != null) {
-			int memNo = loginUser.getMemNo();
-			System.out.println("memNo : " + memNo);
-			image.setRefTno(memNo);
-		}
-		
-		if(!upfile.getOriginalFilename().equals("")) {
-			
-			String savePath = session.getServletContext().getRealPath("/resources/profileImg/");
-			String changeName = Utils.saveFile(upfile, savePath);
-			image.setOriginName(upfile.getOriginalFilename());
-			image.setChangeName("/resources/profileImg/" + changeName) ;
-			
-			if(upfile.getName() != null && !upfile.getName().equals("") ) {
-				File path = new File(application.getRealPath("/resources/profileImg"));
-				new File(path+upfile.getOriginalFilename()).delete();
-			}
-		}
-		int result = memberService.updateImg(image, webPath, serverFolderPath);
-		
-		if(result > 0) {
-			return "redirect:myPage.me";
-		}else {
-			model.addAttribute("errorMsg","게시글 작성 실패");
-			return "common/errorPage";
-		}
-	}
-
 	
 	@RequestMapping("memUpdateForm.me")
 	public String memberUpdateForm() {
@@ -397,7 +374,7 @@ public class MemberController {
        m.setMemPwd(encPwd);
     
        int result = memberService.updateMember(m);
-       
+             
        
        if(result > 0) {
           Member updateMem = memberService.loginMember(m);
@@ -458,6 +435,11 @@ public class MemberController {
 	    model.addAttribute("map", map);
 		
 		return "admin/memberListForm";
+	}
+	
+	@RequestMapping("memBlakcListForm.me")
+	public String memberBlackList(){
+		return "member/memberBlackListForm";
 	}
 	
 	

@@ -377,8 +377,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return updateMember;
 	}
+
 	@Override
-	public int updateImg(Image image, String webPath, String serverFolderPath){
+	public int updateImg(Image image){
 		
 		int result = memberDao.updateImg(sqlSession, image);
 		
