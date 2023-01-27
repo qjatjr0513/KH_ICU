@@ -20,6 +20,7 @@
     <jsp:include page="../common/header.jsp"/>
 
     <!-- header -->
+    <form id="joinPartyMember" action="${contextPath }/joinPartyMember">
     <section id="service-title">
       <div class="netfilx">
         <h2>${p.ottName}</h2>
@@ -28,12 +29,13 @@
       <div class="info__partyOwner">
         <i class="fa-solid fa-user fa-lg">&nbsp;${p.memNickname}</i>
         <span>파티번호 : ${p.paNo}</span>
+        <input type="hidden" name="paNo" value="${p.paNo}">
       </div>
       <hr />
       <div class="info__date">
         <span>종료일자 : ${p.endDate} (${p.leftDate}일)</span> <br />
         <span>금액 : ${p.totalPrice}원</span>
-        <button id="joinMem">참여 신청</button>
+        <button id="join"> 참여 신청</button>
       </div>
     </section>
     <!-- User Profile -->
@@ -43,7 +45,7 @@
           <div class="userInformation">
             <div class="userPhoto"><i class="fa-solid fa-user fa-3x"></i></div>
             <br />
-            <div class="userNickName">
+            <div class="userNickName"> 
               <h4>(파티장) ${p.memNickname}</h4>
               <span>${p.startDate} 생성</span>
             </div>
@@ -118,30 +120,15 @@
         </div>
       </div>
     </section>
+    </form>
     
     <script>
-    	document.getElementById("joinMem").addEventListener('click', joinPartyMember());
-    	
-		function joinPartyMember(){
- 		    console.log("실행!!");
- 		    console.log("${loginUser} : " +${loginUser.memNo});
-		    console.log("${p.paNo} : " + ${p.paNo});
-			
-		    $.ajax({
-	           url : '${contextPath}/joinPartyMember',
-	           data : {memNo : ${loginUser.memNo},
-	        	       paNo : ${p.paNo}},
-	           success : function(result){
-                   //좋아요 등
-                   if(result == 1){
-                      alert("파티에 참여합니다.");
-                      location.reload();
-                   }else{
-                      alert("파티 참여에 실패했습니다. ");
-                   }
- 				}
-			});
-		}
+	    $(function(){
+	    	// 파티장일 경우 참여하기 버튼 가리기 
+	    	if(${loginUser.memNo} == ${p.paName}){
+	    		document.getElementById("join").style.display = "none";
+	    	}
+	    });
     </script>
   </body>
 </html>

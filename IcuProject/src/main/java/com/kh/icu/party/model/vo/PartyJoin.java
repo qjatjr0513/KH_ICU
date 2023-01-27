@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class PartyJoin {
 	private int paNo;
-	private String memNo;
+	private int memNo;
 	private String memNickname;
 	private Date joinDate;
 }

@@ -84,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="partyDetailForm" parameterType="int" resultMap="partyResultSet">
         SELECT OTT_NAME,
                PA_TITLE,
+               PA_NAME,
                MEM_NICKNAME,
                PA_NO,
                END_DATE,

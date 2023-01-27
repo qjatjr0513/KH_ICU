@@ -1,5 +1,6 @@
 package com.kh.icu.party.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -45,7 +46,6 @@ public class PartyController {
 		int result = partyService.insertParty(p);
 
 		if(result > 0) {
-			session.setAttribute("alertMsg", "파티 등록 성공");
 			return "redirect:findParty.py";
 		} else {
 			model.addAttribute("errorMsg", "파티 등록 실패");
@@ -95,15 +95,45 @@ public class PartyController {
 	
 	// 파티 참여하기
 	@RequestMapping("/joinPartyMember")
-	@ResponseBody
-	public int joinPartyMember(PartyJoin pj) {
-		System.out.println("con");
-		System.out.println("pj : "+ pj);
+	public String joinPartyMember(Party p, int paNo, HttpSession session, Model model) {
 		
-		int result = partyService.joinPartyMember(pj);
-		System.out.println("result(con)" + result);
+		System.out.println("*** paNo" + paNo);
+		int num = partyService.partyJoinMem(paNo).size();
+		System.out.println("*** num" + num);
 		
-		return result;
+		// 인원수 제한
+		if(num < 3) {
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			int logMemNo = loginUser.getMemNo();
+			System.out.println("*** logMemNo" + logMemNo);
+			
+			List<PartyJoin> pj1 = partyService.partyJoinMem(paNo);
+			System.out.println("*** pj1" + pj1);
+			int i = 0;
+			
+			for(PartyJoin p1 : pj1) {
+				i = p1.getMemNo();
+				System.out.println("*** i - 1" + i);
+	 		    for(int j=0; j<num; j++){
+	 			    if(logMemNo == i) {
+	 					System.out.println("*** i - 2" + i);
+	 				    model.addAttribute("errorMsg", "이미 가입한 파티입니다.");
+						return "common/errorPage";
+	 			    } 
+	 		    }
+			} 
+			 
+			p = partyService.partyDetailForm(paNo);
+			System.out.println("p" + p);
+			model.addAttribute("p", p); 
+			return "party/partyJoinForm";
+			
+		}else {
+			model.addAttribute("errorMsg", "파티 정원이 찼습니다. 다른 파티를 찾아보세요.");
+			return "common/errorPage";
+		}
 	}
+	
+	
 	
 }

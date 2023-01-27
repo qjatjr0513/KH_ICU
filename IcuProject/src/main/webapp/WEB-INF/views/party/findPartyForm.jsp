@@ -21,6 +21,14 @@
 
     <section id="about" class="section section__container">
       <div class="about__majors">
+      
+        <div class="major">
+          <div class="major__icon netfilx"></div>
+          <input type="checkbox" onclick="show(this)" >
+          <h2 class="major__title">Netfilx</h2>
+        </div>
+      
+      
         <div class="major">
           <button onclick="show(this)">
             <div class="major__icon netfilx"></div>
@@ -60,8 +68,10 @@
     <!-- 이용기간 -->
     <section id="periodOfUse">
       <div class="periodOfUse-container">
-        <p>이용기간(개월)</p>
-        <input type="range" value="0" /> <br />
+        <span>이용기간 &nbsp;:  &nbsp;</span>
+        <input type="range" name="points" min="1" max="12" step="1" value="0" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <span id="value1">개월수</span>
+        <br><br><br>
         <button>검색</button>
       </div>
     </section>
