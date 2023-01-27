@@ -1,10 +1,6 @@
 package com.kh.icu.party.controller;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,14 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
+import com.kh.icu.party.model.vo.PartyJoin;
 
 @Controller
 public class PartyController {
@@ -30,16 +24,6 @@ public class PartyController {
 	@RequestMapping("partyEnroll.py")
 	public String partyEnrollForm() {
 		return "party/partyEnrollForm";
-	}
-	
-//	@RequestMapping("findParty.py")
-//	public String findPartyForm() {
-//		return "party/findPartyForm";
-//	}
-	
-	@RequestMapping("partyDetail.py")
-	public String partyDetailForm() {
-		return "party/partyDetailForm";
 	}
 	
 	// ott가격 표시
@@ -58,9 +42,6 @@ public class PartyController {
 		int memNo = loginUser.getMemNo();
 		p.setPaName(memNo);
 		
-		
-		System.out.println("p" + p);
-		
 		int result = partyService.insertParty(p);
 
 		if(result > 0) {
@@ -73,9 +54,10 @@ public class PartyController {
 		
 	}
 	
+	// 파티 찾기
 	@RequestMapping("/findParty.py")
-	public String findPartyForm(Model model /*, int ottNo, int startMon, int endMon*/) {
-		System.out.println("controller");
+	public String findPartyForm(Model model) {
+		
 		List<Party> list = partyService.findPartyForm();
 			
 		model.addAttribute("list", list);
@@ -83,7 +65,7 @@ public class PartyController {
 		
 		return "party/findPartyForm";
 	}
-	
+//  // 파티 검색 	
 //	@RequestMapping("/SerchParty.py")
 //	public String SerchParty(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
 //		
@@ -96,5 +78,32 @@ public class PartyController {
 //		return "board/boardListView";
 //	}
 //	
+	
+	// 파티 디테일
+	@RequestMapping("partyDetail.py/{paNo}")
+	public String partyDetailForm(Model model, @PathVariable("paNo") int paNo) {
+		
+		Party p = partyService.partyDetailForm(paNo);
+		List<PartyJoin> pj = partyService.partyJoinMem(paNo);
+		
+		model.addAttribute("p", p);
+		model.addAttribute("pj", pj);
+		System.out.println("pj : "+ pj);
+		
+		return "party/partyDetailForm";
+	}
+	
+	// 파티 참여하기
+	@RequestMapping("/joinPartyMember")
+	@ResponseBody
+	public int joinPartyMember(PartyJoin pj) {
+		System.out.println("con");
+		System.out.println("pj : "+ pj);
+		
+		int result = partyService.joinPartyMember(pj);
+		System.out.println("result(con)" + result);
+		
+		return result;
+	}
 	
 }

@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="PA_NO" property="paNo"></result>
 		<result column="PA_NAME" property="paName"></result>
 		<result column="TABLE_CD" property="tableCd"></result>
+		<result column="OTT_NAME" property="ottName"></result>
 		<result column="OTT_NO" property="ottNo"></result>
 		<result column="PA_TITLE" property="paTitle"></result>
 		<result column="CREW_NUM" property="crewNum"></result>
@@ -20,7 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ACCOUNT" property="account"></result>
 		<result column="STATUS" property="status"></result>
 		<result column="LEFT_DATE" property="leftDate"></result>
+		<result column="JOIN_NUM" property="joinNum"></result>
+		<result column="TOTAL_PRICE" property="totalPrice"></result>
+		<result column="MEM_NICKNAME" property="memNickname"></result>
 	</resultMap>
+	
+	<resultMap type="partyJoin" id="partyJoinResultSet">
+		<result column="PA_NO" property="paNo"></result>
+		<result column="MEM_NO" property="memNo"></result>
+		<result column="MEM_NICKNAME" property="memNickname"></result>
+		<result column="JOIN_DATE" property="joinDate"></result>
+	</resultMap>
+	
+	
 
 	<select id="getPrice" parameterType="String" resultType="int">
 		SELECT OTT_PRICE 
@@ -55,13 +68,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="findPartyForm" resultMap="partyResultSet">
-		SELECT PA_NO,
-			   OTT_NO,
+		SELECT P.PA_NO,
+			   O.OTT_NAME,
 			   PA_TITLE,
 			   END_DATE,
-			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE
-		FROM PARTY
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+			   (SELECT COUNT(*)
+                FROM PARTY_JOIN
+                WHERE PA_NO = P.PA_NO) AS JOIN_NUM
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
 	</select>
+	
+		
+	<select id="partyDetailForm" parameterType="int" resultMap="partyResultSet">
+        SELECT OTT_NAME,
+               PA_TITLE,
+               MEM_NICKNAME,
+               PA_NO,
+               END_DATE,
+               START_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+               TRUNC(END_DATE-SYSDATE+2,0) * DAY_PRICE AS TOTAL_PRICE
+        FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        JOIN MEMBER M ON P.PA_NAME = M.MEM_NO
+        WHERE PA_NO = #{paNo}
+	</select>
+	
+	<select id="partyJoinMem" parameterType="int" resultMap="partyJoinResultSet">
+        SELECT MEM_NO,
+        	   MEM_NICKNAME,
+               JOIN_DATE
+        FROM PARTY_JOIN P
+        JOIN MEMBER USING(MEM_NO)
+        WHERE PA_NO = #{paNo}
+	</select>
+	
+	<insert id="joinPartyMember" parameterType="PartyJoin">
+		INSERT INTO PARTY_JOIN
+		VALUES (#{paNo},#{memNo},SYSDATE)
+	</insert>
+	
 	
 
 </mapper>

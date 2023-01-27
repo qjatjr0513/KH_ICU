@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.icu.chat.model.vo.ChatMessage" alias="chatMessage"/> 
 		<typeAlias type="com.kh.icu.chat.model.vo.ChatRoom" alias="chatRoom"/> 
 		<typeAlias type="com.kh.icu.faq.model.vo.Faq" alias="faq"/> 
+		<typeAlias type="com.kh.icu.party.model.vo.PartyJoin" alias="partyJoin"/> 
 	</typeAliases>
   	
 
