@@ -72,6 +72,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CON_NO = #{conNo}
 	</select>
 	
+	<insert id="insertContent" parameterType="content">
+		INSERT INTO CONTENT(CON_NO, CON_KTITLE, CON_ETITLE, CON_CATEGORY, 
+		CON_DATE, CON_AGE, CON_INFO, CON_PREVIEW, CON_DIRECTOR, CON_ACTOR, CON_SYNOP)
+		VALUES (SEQ_CON.NEXTVAL, #{conKTitle}, #{conETitle}, #{conCategory}, #{conDate},
+		#{conAge}, #{conInfo}, #{conPreview}, #{conDirector}, #{conActor}, #{conSynop})
+	</insert>
+	
+	<select id="selectConNo" resultType="int">
+		SELECT CON_NO
+		FROM CONTENT
+		WHERE CON_KTITLE = #{conKTitle}
+	</select>
+	
+	<insert id="insertGenre" parameterType="map">
+		INSERT ALL
+		<foreach collection="conNo" item="conNo" separator=" ">
+		 	<foreach collection="genre" item="g" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+				INTO GENRE_STORAGE(GEN_NO, CON_NO)
+				VALUES (${g} , ${conNo})
+		 	</foreach>	
+	 	</foreach>
+	 	SELECT * FROM DUAL	
+	</insert>
+	
+	<insert id="insertOtt" parameterType="map">
+		INSERT ALL
+		<foreach collection="conNo" item="conNo" separator=" ">
+			<foreach collection="ott" item="o" index="index" separator=" ">
+				INTO OTT_STORAGE(CON_NO, OTT_NO)
+				VALUES (${conNo}, ${o})
+		 	</foreach>
+	 	</foreach>
+	 	SELECT * FROM DUAL
+	</insert>
+	
+	<insert id="insertImg" parameterType="image">
+		INSERT INTO IMAGE(FILE_NO,
+						  TABLE_CD,
+						  ORIGIN_NAME,
+						  CHANGE_NAME,
+						  REF_TNO,
+						  FILE_PATH)
+		VALUES(SEQ_FNO.NEXTVAL, 'C', #{originName}, #{changeName}, #{refTno}, #{filePath})
+	</insert>
+	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT *

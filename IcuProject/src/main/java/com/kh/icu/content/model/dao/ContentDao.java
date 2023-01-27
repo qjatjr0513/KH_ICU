@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
 
@@ -49,4 +50,25 @@ public class ContentDao {
 		
 		return (ArrayList)sqlSession.selectList("contentMapper.selectContentTwoCategory"); 
 	}
+	
+	public int insertContent(SqlSession sqlSession, Content c) {
+		return sqlSession.insert("contentMapper.insertContent", c);
+	}
+	
+	public int insertGenre(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.insert("contentMapper.insertGenre", map);
+	}
+	
+	public int insertOtt(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.insert("contentMapper.insertOtt", map);
+	}
+	
+	public int insertImg(SqlSession sqlSession, Image image) {
+		return sqlSession.insert("contentMapper.insertImg", image);
+	}
+	
+	public int selectConNo(SqlSession sqlSession, String conKTitle) {
+		return sqlSession.selectOne("contentMapper.selectConNo", conKTitle);
+	}
+
 }

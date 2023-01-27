@@ -1,28 +1,38 @@
 package com.kh.icu.content.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.icu.common.Utils;
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
+import com.kh.icu.member.controller.MemberController;
+import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
 
 @Controller
 public class ContentController {
 	private ContentService contentService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	public ContentController(ContentService contentService) {
 		this.contentService = contentService;
@@ -159,7 +169,64 @@ public class ContentController {
 	}
 	
 	@RequestMapping("/contentEnrollForm.co")
-	public String contentEnroll() {
+	public String contentEnrollForm() {
 		return "content/contentEnrollForm";
+	}
+	
+	@RequestMapping("/contentEnroll.co")
+	public String contentEnroll(Content c, 
+								@RequestParam("genre") ArrayList<String> genre,
+								Image image,
+								@RequestParam("poster") MultipartFile poster,
+								@RequestParam("ott") ArrayList<String> ott,
+								HttpSession session,
+								Model model) {
+		int resultImage = 0;
+		int resultContent = 0;
+		int resultGenre = 0;
+		int resultOtt = 0;
+		
+		resultContent = contentService.insertContent(c);
+		
+		int conNo = contentService.selectConNo(c.getConKTitle());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("conNo", conNo);
+		map.put("genre", genre);
+		map.put("ott", ott);
+		
+		String filePath = "/resources/posterImg";
+		
+		
+		if(!poster.getOriginalFilename().equals("")) {			
+			String savePath = session.getServletContext().getRealPath("/resources/posterImg/");
+			String changeName = Utils.saveFile(poster, savePath);
+
+			try {
+				poster.transferTo(new File(savePath+changeName));
+			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getMessage());
+			}
+
+			image.setOriginName(poster.getOriginalFilename());
+			image.setChangeName("/"+changeName);
+			image.setFilePath(filePath);
+			image.setRefTno(c.getConNo());
+			
+			resultImage = contentService.insertImg(image);
+		}
+				
+		resultGenre = contentService.insertGenre(map);
+		resultOtt = contentService.insertOtt(map);
+		
+		if(resultContent > 0 && resultImage > 0 && resultGenre > 0 && resultOtt > 0) {
+			return "content/contentEnrollForm";	
+		}		
+		else {
+			model.addAttribute("errorMsg","컨텐츠 등록 실패");
+			return "common/errorPage";
+		}
+		
 	}
 }

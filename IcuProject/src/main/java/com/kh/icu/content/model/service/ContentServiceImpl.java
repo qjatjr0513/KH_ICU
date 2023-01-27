@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.content.model.dao.ContentDao;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
@@ -71,9 +72,29 @@ public class ContentServiceImpl implements ContentService{
 		return list;
 	}
 	
-//	@Override
-//	public ArrayList<Content> searchContentTwoCategory(ArrayList<String> category1, ArrayList<String> category2){
-//		ArrayList<Content> list = contentDao.searchContentTwoCategory(sqlSession, category1, category2);
-//		return list;
-//	}
+	@Override
+	public int insertContent(Content c) {
+		return contentDao.insertContent(sqlSession, c);
+	}
+	
+	@Override
+	public int insertGenre(Map<String, Object> map) {
+		return contentDao.insertGenre(sqlSession, map);
+	}
+	
+	@Override
+	public int insertOtt(Map<String, Object> map) {
+		return contentDao.insertOtt(sqlSession, map);
+	}
+	
+	@Override
+	public int insertImg(Image image) {
+		return contentDao.insertImg(sqlSession, image);
+	}
+	
+	@Override
+	public int selectConNo(String conKTitle) {
+		return contentDao.selectConNo(sqlSession, conKTitle);
+	}
+
 }
