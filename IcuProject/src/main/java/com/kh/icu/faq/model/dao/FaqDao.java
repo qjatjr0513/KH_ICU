@@ -1,6 +1,7 @@
 package com.kh.icu.faq.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,10 @@ import com.kh.icu.faq.model.vo.Faq;
 @Repository
 public class FaqDao {
 
+	public List<Faq> selectFaqList(SqlSession sqlSession){
+		return sqlSession.selectList("faqMapper.selectList");
+	}
+	
 	public ArrayList<Faq> selectList(SqlSession sqlSession, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();

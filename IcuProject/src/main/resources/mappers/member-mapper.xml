@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="ORIGIN_NAME" property="originName"/>
 	<result column="CHANGE_NAME" property="changeName"/>
 	<result column="MEM_NO" property="refTno"/>
+	<result column="FILE_PATH" property="filePath"/>
 </resultMap>
 	<!-- 회원가입  -->
 	<insert id="insertMember" parameterType="member">
@@ -113,8 +114,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			values(SEQ_MEM.NEXTVAL, #{memName}, #{memNickname}, #{memId}, 'N')
 	</insert>
 	
-	<select id="selectProfile" parameterType="member" resultType="String">
-		SELECT CHANGE_NAME
+	<select id="selectProfile" parameterType="int" resultMap="imageResultSet">
+		SELECT *
 		FROM IMAGE
 		WHERE REF_TNO = #{memNo}
 		AND TABLE_CD = 'M'
@@ -125,8 +126,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						  TABLE_CD,
 						  ORIGIN_NAME,
 						  CHANGE_NAME,
-						  REF_TNO)
-		VALUES(SEQ_FNO.NEXTVAL, 'M', #{originName}, #{changeName}, #{refTno})
+						  REF_TNO,
+						  FILE_PATH)
+		VALUES(SEQ_FNO.NEXTVAL, 'M', #{originName}, #{changeName}, #{refTno}, #{filePath})
 	</insert>
 	
 	<!-- 회원정보 수정 -->

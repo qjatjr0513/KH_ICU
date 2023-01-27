@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 	<!-- css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin_main.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin_main.css?" />
 </head>
 <body>
 	<!-- 왼쪽 수직 navbar -->

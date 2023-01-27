@@ -25,7 +25,9 @@
         <div id="viewAndEnroll">
           <div id="view" class="titleImg">
           <!-- 올린 파일이 들어가는 자리 -->
-          <img class='view-img' src="${contextPath }${profile}">
+          <c:if test="${!empty profile}">
+          <img class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
+          </c:if>
           </div>
           <div id="enroll">
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">

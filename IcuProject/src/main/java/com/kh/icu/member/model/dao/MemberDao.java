@@ -96,8 +96,10 @@ public class MemberDao {
 		return sqlSession.insert("memberMapper.insertImg", image);
 	}
 	
-	public String selectProfile(SqlSession sqlSession, Member loginUser) {
-		return sqlSession.selectOne("memberMapper.selectProfile", loginUser);
+	public Image selectProfile(SqlSession sqlSession, int memNo) {
+		Image profile = sqlSession.selectOne("memberMapper.selectProfile", memNo);
+		
+		return profile;
 	}
 	
 	public int updateMember(SqlSession sqlSession, Member m) {

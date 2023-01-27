@@ -354,8 +354,8 @@ public class MemberServiceImpl implements MemberService{
      }
 
    @Override
-   public String selectProfile(Member m) {
-	   String profile = memberDao.selectProfile(sqlSession, m);
+   public Image selectProfile(int memNo) {
+	   Image profile = memberDao.selectProfile(sqlSession, memNo);
 	   System.out.println("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"+profile);
 	   return profile;
    }

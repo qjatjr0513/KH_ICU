@@ -2,6 +2,7 @@ package com.kh.icu.faq.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +26,11 @@ public class FaqServiceImpl implements FaqService{
 	
 	@Autowired
 	private Pagination pagination;
+	
+	@Override
+	public List<Faq> selectFaqList(){
+		return faqDao.selectFaqList(sqlSession);
+	}
 	
 	@Override
 	public Map<String, Object> selectList(int currentPage){

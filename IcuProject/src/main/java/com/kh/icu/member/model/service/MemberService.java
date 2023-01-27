@@ -43,7 +43,7 @@ public interface MemberService {
    
    /* public int getUserInfoN(Member m); */
 
-    public String selectProfile(Member m);
+    public Image selectProfile(int memNo);
 	
 	public int updateMember(Member m);
 

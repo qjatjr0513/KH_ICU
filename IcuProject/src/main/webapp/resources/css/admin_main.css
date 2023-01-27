@@ -8,18 +8,20 @@
   text-align: center;
   box-shadow: 0 0 5px 1px var(--color-purple);
 }
-li {
+li,
+li > a {
   box-sizing: border-box;
   padding: 12px;
   color: rgb(74, 14, 14);
   font-size: 20px;
   border: 1px solid transparent;
 }
+
 .contents__manage a,
 .faq__manage a,
 .pay__manage a,
 .inquiry__manage a {
-  color: rgb(74, 14, 14);
+  color: var(--color-orange);
   cursor: pointer;
 }
 #vertical-navbar h2 {

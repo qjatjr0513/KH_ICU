@@ -56,21 +56,23 @@
       <div class="login__button loginbtn">
         <button type="submit">로그인</button>
       </div>
-        <div id="naver_id_login" style="text-align:center">
-      	<a id="naverlogin" href="${url}">
-			<img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/>
-	  	</a>
-	  </div>
-      <div class="kakao__button loginbtn">
-      <!-- 카카오 로그인 -->
-		<a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=faf6b25930399b2135403b6474fb775f&redirect_uri=http://localhost:8088/icu/kakaoLogin&response_type=code">
-			<img src="resources/images/kakao_login_large_wide.png" style="height:60px">
-		</a>
-      </div>
-		
-  
     </div>
 	</form>
+	
+    <div id="naver_id_login" style="text-align:center">
+      <a id="naverlogin" href="${url}">
+	  <img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/>
+  	  </a>
+    </div>
+	  
+    <div class="kakao__button loginbtn" style="text-align:center">
+     <!-- 카카오 로그인 -->
+	 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=faf6b25930399b2135403b6474fb775f&redirect_uri=http://localhost:8088/icu/kakaoLogin&response_type=code">
+		<img src="resources/images/kakao_login_large_wide.png" style="height:60px">
+	 </a>
+    </div>
+		
+  
 	
     <script src="resources/js/02_mainPage.js" defer></script>
     <script src="resources/js/main.js" defer></script>

@@ -128,7 +128,7 @@
 		          >
               <c:choose>
                 <c:when test="${!empty profile}">
-                  <img id="profile-img" class='view-img' src="${contextPath }${profile}">
+                  <img id="profile-img" class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
                 </c:when>
                 <c:otherwise>
                   <i class="fa-solid fa-user fa-lg"></i>

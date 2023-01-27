@@ -162,8 +162,11 @@ public class MemberController {
 	@RequestMapping("login.me")
 	public String loginMember(Member m, HttpSession session, Model model) {
 		Member loginUser = memberService.loginMember(m);
+		int memNo = loginUser.getMemNo();
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
+			Image profile = memberService.selectProfile(memNo);
+
 			if(loginUser.getMemId().equals("admin")) {
 				session.setAttribute("loginUser", loginUser);
 
@@ -171,6 +174,7 @@ public class MemberController {
 
 			}else {
 				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("profile", profile);
 				return "common/main";				
 			}
 		}else {
@@ -183,7 +187,7 @@ public class MemberController {
 	public String logoutMember(HttpSession session) {
 		
 		session.removeAttribute("loginUser");
-		
+		session.removeAttribute("profile");
 		return "home";
 	}	
 	
@@ -205,11 +209,15 @@ public class MemberController {
         
         Member userInfo = memberService.getUserInfo(access_Token);
         System.out.println("login Controller : " + userInfo);
-
+        
+        int memNo = userInfo.getMemNo();
+        Image profile = memberService.selectProfile(memNo);
+        
         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
         if (userInfo.getMemId() != null) {
         	session.setAttribute("loginUser", userInfo);
             session.setAttribute("access_Token", access_Token);
+            session.setAttribute("profile", profile);
         }
 
         return "common/main";
@@ -225,6 +233,7 @@ public class MemberController {
             memberService.kakaoLogout(access_Token);
             session.removeAttribute("access_Token");
             session.removeAttribute("loginUser");
+            session.removeAttribute("profile");
         }else{
             System.out.println("access_Token is null");
             //return "redirect:/";
@@ -234,6 +243,7 @@ public class MemberController {
             //memberService.naverLogout(oauthToken);
             session.removeAttribute("signIn");
             session.removeAttribute("loginUser");
+            session.removeAttribute("profile");
         }else{
             System.out.println("oauthToken is null");
             //return "redirect:/";
@@ -278,9 +288,13 @@ public class MemberController {
 		
 		Member userInfo = memberService.findMember(m);
 		
+		int memNo = userInfo.getMemNo();
+		Image profile = memberService.selectProfile(memNo);
+		
 		if (userInfo.getMemId() != null) {
 			session.setAttribute("loginUser", userInfo);
             session.setAttribute("signIn", apiResult);
+            session.setAttribute("profile", profile);
         }
 
 		System.out.println("getMemNickname : "+ m.getMemNickname());
@@ -288,16 +302,17 @@ public class MemberController {
 		return "common/main";
 	}
 	@RequestMapping("myPage.me")
-	public String myPage() {
-		Member m = (Member)session.getAttribute("loginUser");
-		String profile = memberService.selectProfile(m);
-		System.out.println(m);
-		if(profile != "") {
+	public String myPage(HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
+		
+		Image profile = memberService.selectProfile(memNo);
+		
+		if(profile != null) {
 			session.setAttribute("profile", profile);
-			return "member/myPage";			
-		}else {
-			return "common/errorPage";
 		}
+		return "member/myPage";				
+		
 	}
 	
 	@PostMapping("insertImg.me")
@@ -305,10 +320,13 @@ public class MemberController {
 							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
 							Model model,
-							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode,
-							String changefile) {
+							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		Image profile = (Image) session.getAttribute("profile");
+		
+		String filePath = "/resources/profileImg";
+		
 		int result = 0;
 		
 		if(loginUser != null) {
@@ -321,26 +339,22 @@ public class MemberController {
 			
 			String savePath = session.getServletContext().getRealPath("/resources/profileImg/");
 			String changeName = Utils.saveFile(upfile, savePath);
-			
+		
 			
 			try {
 				upfile.transferTo(new File(savePath+changeName));
 			} catch (IllegalStateException | IOException e) {
 				logger.error(e.getMessage());
 			}
-			
-
-			if(upfile.getName() != null && !upfile.getName().equals("") ) {
-				File path = new File(application.getRealPath("/resources/uploadFiles"));
-				System.out.println("파일 이름 : "+changefile);
-				new File(path+File.separator+changefile).delete();
+					
+			if(upfile.getName() != null && !upfile.getName().equals("") && profile != null ) {
+				File path = new File(application.getRealPath("/resources/profileImg"));
+				new File(path+profile.getChangeName()).delete();
 			}
-	
-
 			
 			image.setOriginName(upfile.getOriginalFilename());
-			image.setChangeName("/resources/profileImg/" + changeName) ;
-			
+			image.setChangeName("/"+changeName);
+			image.setFilePath(filePath);
 			
 		}
 		

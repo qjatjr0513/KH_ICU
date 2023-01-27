@@ -1,6 +1,7 @@
 package com.kh.icu.faq.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,11 @@ public class FaqController {
 	@Autowired
 	private FaqService faqservice;
 	@RequestMapping("faq.fq")
-	public String faq() {
+	public String faq(Model model) {
+		List<Faq> list = faqservice.selectFaqList(); 
+		
+		model.addAttribute("list", list);
+		
 		return "faq/faqForm";
 	}
 	
