@@ -1,0 +1,54 @@
+@import url('main.css');
+
+#application {
+  /* background-color: aquamarine; */
+  margin: auto;
+  margin-top: 105px;
+  width: 50%;
+  padding: 20px;
+  background-color: white;
+}
+
+table,
+td {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+.first-table {
+  margin: auto;
+  height: 350px;
+}
+td {
+  width: 220px;
+}
+td span {
+  border-bottom: 1px solid black;
+}
+
+.second-table {
+  margin: auto;
+  height: 250px;
+}
+
+.btn-group2 {
+  /* background-color: rgb(188, 188, 247); */
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+.btn-group2 > button:nth-child(1),
+.btn-group2 > button:nth-child(2) {
+  padding: 12px;
+  width: 120px;
+  border-radius: 8px;
+  color: white;
+}
+.btn-group2 > button:nth-child(1) {
+  background-color: gray;
+}
+.btn-group2 > button:nth-child(2) {
+  background-color: var(--color-purple);
+}

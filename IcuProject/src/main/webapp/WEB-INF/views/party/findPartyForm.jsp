@@ -21,6 +21,14 @@
 
     <section id="about" class="section section__container">
       <div class="about__majors">
+      
+        <div class="major">
+          <div class="major__icon netfilx"></div>
+          <input type="checkbox" onclick="show(this)" >
+          <h2 class="major__title">Netfilx</h2>
+        </div>
+      
+      
         <div class="major">
           <button onclick="show(this)">
             <div class="major__icon netfilx"></div>
@@ -60,8 +68,10 @@
     <!-- 이용기간 -->
     <section id="periodOfUse">
       <div class="periodOfUse-container">
-        <p>이용기간(개월)</p>
-        <input type="range" value="0" /> <br />
+        <span>이용기간 &nbsp;:  &nbsp;</span>
+        <input type="range" name="points" min="1" max="12" step="1" value="0" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <span id="value1">개월수</span>
+        <br><br><br>
         <button>검색</button>
       </div>
     </section>
@@ -83,20 +93,31 @@
         <div class="carousel-inner">
          <!-- 8*3개 -->
           <c:forEach begin="0" end="${fn:length(list)/8 * 1.0}" step="1" varStatus="x">
-          <div class="carousel-item active" data-bs-interval="100000"> <!-- 8개 -->
+          <c:choose>
+         	 <c:when test="${count == 0}">
+            	<div class="carousel-item" data-bs-interval="100000"> <!-- 8개 -->
+         	 </c:when>
+         	 <c:otherwise>
+            	<div class="carousel-item active" data-bs-interval="100000"> <!-- 8개 -->
+         	 </c:otherwise>
+          </c:choose>
           <c:forEach begin="${x.begin * 2}" end="${x.begin *2+1}" step="1" varStatus="j">
             <div class="partyCard"> <!-- 4개 -->
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 				  <div class="cardBox"> <!-- 1개 -->
-	                  <h4>${list[count].ottNo}</h4>
+	                  <h4>${list[count].ottName}</h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
-	                  <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-	                  <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-	                  <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-	                  <span><i class="fa-regular fa-user fa-lg"></i></span>
-	                  <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-	                  <button class="joinBtn" onclick="">참여하기</button>
+	                  
+		              <c:forEach begin="1" end="${list[count].joinNum+1}" step="1">
+		              <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
+		              </c:forEach>
+
+	                  <c:forEach begin="1" end="${3-list[count].joinNum}" step="1">
+	                  <span><i class="fa-regular fa-user fa-lg"></i></span>&nbsp;&nbsp;
+	                  </c:forEach>
+	                    
+	                  <button class="joinBtn" onclick="movePage(${list[count].paNo});">참여하기</button>
 	              </div>
 				  <c:set var="count" value="${count+1 }"/>
 		      </c:forEach> 
@@ -129,6 +150,10 @@
       </div>
     </section>
 
-    <script></script>
+    <script>
+		function movePage(paNo){
+	 		location.href = "${contextPath}/partyDetail.py/"+paNo;
+	 	}
+    </script>
   </body>
 </html>

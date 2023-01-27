@@ -9,6 +9,7 @@ public class Party {
 	private int paNo;
 	private int paName;
 	private String tableCd;
+	private String ottName;
 	private int ottNo;
 	private String paTitle;
 	private int crewNum;
@@ -20,4 +21,7 @@ public class Party {
 	private int account;
 	private int status;
 	private int leftDate;
+	private int joinNum;
+	private int totalPrice;
+	private String memNickname;
 }
