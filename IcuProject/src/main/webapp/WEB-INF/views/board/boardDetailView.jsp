@@ -16,10 +16,15 @@
    /* div{
       border: 1px solid black;
    } */
-   #writer-img{
+   #replyWriter-img{
         vertical-align: middle;
         width: 100%;
         border-radius: 50%;
+   }
+   #boardWriter-img{
+      vertical-align: middle;
+      width: 5%;
+      border-radius: 50%;
    }
 </style>
 
@@ -37,6 +42,16 @@
       <div class="innerOuter">
          <h2>${b.boardTitle }</h2>
          <div style="float:left;">
+            <span>
+               <c:choose>
+                  <c:when test="${!empty b.changeName}">
+                     <img id="boardWriter-img" class='view-img' src="${contextPath }${b.filePath }${b.changeName}">
+                  </c:when>
+                  <c:otherwise>
+                     <i class="fa-solid fa-user fa-lg"></i>
+                </c:otherwise>
+               </c:choose>
+            </span>
             <span id="writer" class="form-control" name="memNickname">${b.boardWriter}</span>
             <input type="hidden" name="boardWriter" value="${loginUser.memNo}">
          </div>
@@ -94,16 +109,16 @@
               <c:forEach var="r" items="${list }" varStatus="i">
 				<tr>
                <td style="width: 30px;">
-                  <c:choose>
-                     <c:when test="${!empty profile}">
-                        <img id="writer-img" class='view-img' src="${contextPath }${profile}">
-                     </c:when>
-                     <c:otherwise>
-                        <i class="fa-solid fa-user fa-lg"></i>
-                     </c:otherwise>
-                  </c:choose>
+               <c:choose>
+                  <c:when test="${!empty r.changeName}">
+                     <img id="replyWriter-img" class='view-img' src="${contextPath }${r.filePath }${r.changeName}">
+                  </c:when>
+                  <c:otherwise>
+                     <i class="fa-solid fa-user fa-lg"></i>
+                </c:otherwise>
+               </c:choose>
                </td>
-					<td id="rWriter">${r.replyWriter }</td>
+               <td id="rWriter">${r.replyWriter }</td>
 					<td id="rContent">${r.replyContent }</td>
 					<td>${r.createDate }</td>
 					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>

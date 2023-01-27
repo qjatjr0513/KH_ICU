@@ -83,6 +83,10 @@
           <td></td>
         </tr>
       </table>
+      <div class="btn__group">
+        <button type="button" onclick="location.href='${contextPath }/myPage.me'">뒤로가기</button>
+        <button type="button" onclick="btnUpdate();" disabled name="update">회원정보 저장</button>
+      </div>
     </form>
        
 

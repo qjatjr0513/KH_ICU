@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -360,7 +360,7 @@ public class MemberController {
 		
 		if(mode.equals("insert")) {
 			result = memberService.insertImg(image);
-		}else {
+		}else if(mode.equals("update")) {
 			
 			result = memberService.updateImg(image); 
 		}
@@ -375,6 +375,22 @@ public class MemberController {
 			model.addAttribute("errorMsg","게시글 작성 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("deleteImg.me")
+	@ResponseBody
+	public String deleteImg(String changeName) {
+		
+		int result = memberService.deleteImg(changeName);
+		
+		if(result > 0) {
+			
+			return "1";
+		} else {
+			
+			return "0";
+		}
+		
 	}
 	
 	@Autowired

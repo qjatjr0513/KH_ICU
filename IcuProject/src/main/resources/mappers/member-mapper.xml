@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="CHANGE_NAME" property="changeName"/>
 	<result column="MEM_NO" property="refTno"/>
 	<result column="FILE_PATH" property="filePath"/>
+	<result column="STATUS" property="status"/>
 </resultMap>
 	<!-- 회원가입  -->
 	<insert id="insertMember" parameterType="member">

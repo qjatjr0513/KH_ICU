@@ -24,4 +24,6 @@ public class Board {
 	private String memNickname;
 	
 	private ArrayList<Reply> list;
+	private String changeName;
+	private String filePath;
 }

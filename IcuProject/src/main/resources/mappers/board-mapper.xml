@@ -13,6 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="COUNT" property="count"/>
 		<result column="STATUS" property="status"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">
@@ -22,6 +24,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"/>
 		<result column="REF_TNO" property="refTno"/>
 		<result column="TABLE_CD" property="tableCd"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap type="image" id="imageResultSet">
+		<result column="FILE_NO" property="fileNo"/>
+		<result column="TABLE_CD" property="tableCd"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="MEM_NO" property="refTno"/>
+		<result column="FILE_PATH" property="filePath"/>
 		<result column="STATUS" property="status"/>
 	</resultMap>
 	
@@ -97,23 +111,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BOARD_NO,
 			M.MEM_NICKNAME,
 			BOARD_TITLE,
-			BOARD_CONTENT
+			BOARD_CONTENT,
+			I.CHANGE_NAME AS "CHANGE_NAME",
+         	I.FILE_PATH AS "FILE_PATH"
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		LEFT JOIN IMAGE I ON(I.REF_TNO = M.MEM_NO)
 		WHERE BOARD_NO = #{boardNo} AND B.STATUS='N' 
 	</select>
 	
 	<select id="selectReply" parameterType="int" resultMap="replyResultSet">
-		SELECT 
-			R.REF_TNO,
-			R.REPLY_NO,
-			R.REPLY_CONTENT,
-			MEM_NICKNAME,
-			R.CREATE_DATE
-		FROM REPLY R
-		LEFT JOIN BOARD  ON (BOARD_NO = R.REF_TNO)
-		LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = MEM_NO)
-		WHERE BOARD_NO = #{boardNo} AND  R.STATUS = 'N'
+	  SELECT 
+         R.REF_TNO,
+         R.REPLY_NO,
+         R.REPLY_CONTENT,
+         MEM_NICKNAME,
+         R.CREATE_DATE,
+         I.CHANGE_NAME AS "CHANGE_NAME",
+         I.FILE_PATH AS "FILE_PATH"
+      FROM REPLY R
+      LEFT JOIN BOARD  ON (BOARD_NO = R.REF_TNO)
+      LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = MEM_NO)
+	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER)
+      WHERE BOARD_NO = #{boardNo} AND  R.STATUS = 'N'
 	</select>
 	
 	<insert id="insertBoard" parameterType="board" useGeneratedKeys="true">

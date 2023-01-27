@@ -147,7 +147,8 @@
 	        </div> 
 	      </div>
 	    </section>
-<!-- <script>
+	</div>
+<script>
     const cardDisplay1 = document.querySelector('.card__display1');
     const cardDisplay2 = document.querySelector('.card__display2');
     const cardDisplay3 = document.querySelector('.card__display3');
@@ -176,6 +177,6 @@
     })
 
 
-</script> -->
+</script>
 </body>
 </html>

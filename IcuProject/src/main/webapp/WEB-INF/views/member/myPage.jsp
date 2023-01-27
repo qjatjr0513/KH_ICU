@@ -33,18 +33,21 @@
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
               <input type="file" id="upfile" class="form-control" name="upfile" onchange="validate()"/>
               <input type="hidden" name="originName" value="${image.originName }"/>
-			  <input type="hidden" name="changefile" value="${image.changeName }"/>
+			        <input type="hidden" name="changefile" value="${image.changeName }"/>
               <div align="center">
-          <c:if test="${empty profile}">
-                  <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>등록하기</button>
-          </c:if>
-          <c:if test="${!empty profile}">
-          		  <input type="hidden" name="mode" value="update"/>
-          		  <input type="hidden" name="profile" value="${profile }"/>
+                <c:if test="${empty profile}">
+                    <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>등록하기</button>
+                </c:if>
+                <c:if test="${!empty profile}">
+                  <input type="hidden" name="mode" value="update"/>                   
+                  <input type="hidden" name="profile" value="${profile }"/>  
                   <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>수정하기</button>
-          </c:if>
+                </c:if>
               </div>
             </form>
+            <c:if test="${!empty profile}">
+              <button id="deleteBtn" type="button" class="btn btn-danger" onclick="deleteBtn()" >삭제하기</button>
+            </c:if>
           </div>
         </div>
         <div id="info">
@@ -68,6 +71,29 @@
           if (fileInput.val != "" ) {
             $("#enrollBtn").attr("disabled",false);
           }
+        };
+
+        function deleteBtn(){
+          console.log("${profile.fileNo}");
+          $.ajax({
+              url : "${contextPath}/deleteImg.me",
+              data : {
+                  fileNo : "${profile.fileNo}"
+              },
+              type : "post",
+              success : function(result){
+                if(result == "1"){
+                  return "redirect:myPage.me";
+
+                } else{
+                  Swal.fire({
+                       icon: 'error',
+                       title: '프로필 삭제 실패.'
+                   });
+                }
+              }
+              
+          });
         }
     </script>
 </body>

@@ -10,4 +10,5 @@ public class Image {
 	private String changeName;
 	private int refTno;
 	private String filePath;
+	private String status;
 }

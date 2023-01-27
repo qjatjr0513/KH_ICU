@@ -1,6 +1,7 @@
 package com.kh.icu.common.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import com.kh.icu.member.model.vo.Member;
 
@@ -16,4 +17,8 @@ public class Reply {
 	private Date createDate;
 	private String status;
 	private Member member;
+
+	private String changeName;
+	private String filePath;
+	
 }
