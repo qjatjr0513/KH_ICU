@@ -73,6 +73,10 @@
           }
         };
 
+        function refreshProfile(){
+          location.reload();
+        }
+
         function deleteBtn(){
           console.log("${profile.fileNo}");
           $.ajax({
@@ -83,17 +87,21 @@
               type : "post",
               success : function(result){
                 if(result == "1"){
+                  
                   return "redirect:myPage.me";
-
+                  
+                  
                 } else{
                   Swal.fire({
-                       icon: 'error',
-                       title: '프로필 삭제 실패.'
-                   });
+                    icon: 'error',
+                    title: '프로필 삭제 실패.'
+                  });
                 }
               }
               
-          });
+            });
+            refreshProfile();
+
         }
     </script>
 </body>

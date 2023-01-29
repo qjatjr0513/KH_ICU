@@ -49,6 +49,7 @@ public interface MemberService {
 
 	public int insertImg(Image image);
 
+	public int deleteImg(int fileNo);
 	
 	public int updateImg(Image image);
 	
@@ -64,6 +65,7 @@ public interface MemberService {
 	public int selectBlackListCount();
 	
 	public int blackCancel(int memNo);
+	
 	
 	
 	

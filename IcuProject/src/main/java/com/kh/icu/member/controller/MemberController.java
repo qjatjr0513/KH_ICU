@@ -33,8 +33,10 @@ import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.service.NaverLoginBO;
 import com.kh.icu.member.model.vo.Member;
 
+
 @Controller
 public class MemberController {
+	
 	
 	private MemberService memberService;
 	
@@ -52,6 +54,7 @@ public class MemberController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
+	@Autowired
 	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
 		this.memberService = memberService;
 		this.bcryptPasswordEncoder = bcryptPasswordEncoder;
@@ -360,8 +363,7 @@ public class MemberController {
 		
 		if(mode.equals("insert")) {
 			result = memberService.insertImg(image);
-		}else if(mode.equals("update")) {
-			
+		}else {
 			result = memberService.updateImg(image); 
 		}
 		
@@ -379,17 +381,26 @@ public class MemberController {
 	
 	@RequestMapping("deleteImg.me")
 	@ResponseBody
-	public String deleteImg(String changeName) {
+	public String deleteImg(int fileNo, HttpSession session, MultipartFile upfile) {
 		
-		int result = memberService.deleteImg(changeName);
+//		Image profile = (Image) session.getAttribute("profile");
+//		
+//		File file = new File(profile.getChangeName());
+//		System.out.println("FILE"+file);
+//		
+		int result = memberService.deleteImg(fileNo);
 		
 		if(result > 0) {
-			
+			session.removeAttribute("profile");
+//			if(file.exists()) {
+//				file.delete();
+//			}
 			return "1";
 		} else {
 			
 			return "0";
 		}
+	
 		
 	}
 	

@@ -369,6 +369,14 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
+	@Override
+	public int deleteImg(int fileNo) {
+		
+		int result = memberDao.deleteImg(sqlSession, fileNo);
+		
+		return result;
+	}
+	
 	
 	@Override
 	public int updateMember(Member m) {
