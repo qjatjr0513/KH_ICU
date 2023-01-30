@@ -1,7 +1,9 @@
 package com.kh.icu.party.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.icu.member.model.vo.Member;
@@ -56,28 +59,27 @@ public class PartyController {
 	
 	// 파티 찾기
 	@RequestMapping("/findParty.py")
-	public String findPartyForm(Model model) {
+	public String findPartyForm(Model model,
+								@RequestParam(value="ottList[]", defaultValue="") List<Integer> ottList,
+								@RequestParam(value="month", defaultValue="") String month) {
 		
-		List<Party> list = partyService.findPartyForm();
-			
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("ottList", ottList);
+		map.put("month", month);
+		
+		System.out.println("***ottList" + ottList);
+		System.out.println("***month" + month);
+		
+		List<Party> list = new ArrayList<>(); 
+		
+		list = partyService.searchParty(map);
+		
 		model.addAttribute("list", list);
-		System.out.println("list" + list);
+		System.out.println("***list(con/list)" + list);
 		
 		return "party/findPartyForm";
 	}
-//  // 파티 검색 	
-//	@RequestMapping("/SerchParty.py")
-//	public String SerchParty(Model model,@RequestParam Map<String, Object> paramMap, int ottNo, int startMon, int endMon) {
-//		
-//		Map<String, Object> map = new HashMap();
-//		
-//		map = partyService.SerchParty();
-//			
-//		model.addAttribute("map", map);
-//		
-//		return "board/boardListView";
-//	}
-//	
 	
 	// 파티 디테일
 	@RequestMapping("partyDetail.py/{paNo}")

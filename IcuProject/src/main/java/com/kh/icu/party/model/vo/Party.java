@@ -1,6 +1,9 @@
 package com.kh.icu.party.model.vo;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.kh.icu.ott.model.vo.Ott;
 
 import lombok.Data;
 
@@ -24,4 +27,6 @@ public class Party {
 	private int joinNum;
 	private int totalPrice;
 	private String memNickname;
+	private List<Ott> ott;
+	private String month;
 }

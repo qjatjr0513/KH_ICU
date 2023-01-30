@@ -22,57 +22,57 @@
     <section id="about" class="section section__container">
       <div class="about__majors">
       
-        <div class="major">
-          <div class="major__icon netfilx"></div>
-          <input type="checkbox" onclick="show(this)" >
-          <h2 class="major__title">Netfilx</h2>
-        </div>
-      
-      
-        <div class="major">
-          <button onclick="show(this)">
+
+       	<div class="major">
+          <button class="major_btn" value="1" id="netflix" name="netflix">
             <div class="major__icon netfilx"></div>
           </button>
-          <h2 class="major__title">Netfilx</h2>
+          <input id="netflix" type="checkbox" name="ottList" value="1" />
+          <h2 class="major__title">Netflix</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="2" id="watcha" name="watcha">
             <div class="major__icon watcha"></div>
           </button>
+          <input id="watcha" type="checkbox" name="ottList" value="2" />
           <h2 class="major__title">Watcha</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="3" id="wavve" name="wavve">
             <div class="major__icon wavve"></div>
           </button>
+          <input id="wavve" type="checkbox" name="ottList" value="3" />
           <h2 class="major__title">Wavve</h2>
         </div>
 
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="4" id="disney" name="disney">
             <div class="major__icon disney"></div>
           </button>
+          <input id="disney" type="checkbox" name="ottList" value="4" />
           <h2 class="major__title">Disney +</h2>
         </div>
+        
         <div class="major">
-          <button onclick="show(this)">
+          <button class="major_btn" value="5" id="appleTV" name="appleTV">
             <div class="major__icon appleTv"></div>
           </button>
+          <input id="appleTV" type="checkbox" name="ottList" value="5" />
           <h2 class="major__title">Apple TV</h2>
         </div>
       </div>
-    </section>
+    </section> 
 
     <!-- 이용기간 -->
     <section id="periodOfUse">
       <div class="periodOfUse-container">
         <span>이용기간 &nbsp;:  &nbsp;</span>
-        <input type="range" name="points" min="1" max="12" step="1" value="0" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <input type="range" id="month" name="month" min="1" max="12" step="1" value="0" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
         <span id="value1">개월수</span>
         <br><br><br>
-        <button>검색</button>
+        <button onclick="searchParty">검색</button>
       </div>
     </section>
     
@@ -153,7 +153,20 @@
     <script>
 		function movePage(paNo){
 	 		location.href = "${contextPath}/partyDetail.py/"+paNo;
-	 	}
+	 	};
+	 	
+	
+		$("#netflix, #watcha, #wavve, #disney, #appleTV").click(function(){
+			console.log("실행");
+			if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+               $('input[id='+$(this).attr('name')+']').prop("checked", false);
+            }
+            else{
+               $('input[id='+$(this).attr('name')+']').prop("checked", true);
+            }
+		});
+		
+		
     </script>
   </body>
 </html>

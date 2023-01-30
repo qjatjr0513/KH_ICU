@@ -1,11 +1,14 @@
 package com.kh.icu.party.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.icu.ott.model.vo.Ott;
 import com.kh.icu.party.model.dao.PartyDao;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
@@ -31,10 +34,16 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.insertParty(sqlSession, p);
 	}
 	
-	// 파티 찾기
+	// 파티 찾기 (리스트)
 	@Override
 	public List<Party> findPartyForm() {
 		return partyDao.findPartyForm(sqlSession);
+	};
+	
+	// 파티 검색 (리스트)
+	@Override
+	public List<Party> searchParty(HashMap<String, Object> map){
+		return partyDao.searchParty(sqlSession, map);
 	};
 	
 	// 파티 디테일
@@ -50,6 +59,7 @@ public class PartyServiceImpl implements PartyService{
 	};
 	
 	// 파티 참여하기
+	@Override
 	public int joinPartyMember(PartyJoin pj) {
 		return partyDao.joinPartyMember(sqlSession, pj);
 	}
