@@ -254,7 +254,12 @@
 	    		<h6>&nbsp;&nbsp;방영 날짜 : ${c.conDate }</h6>
 	    	</div>
 	    	<div id="poster">
-	    		<img src="${c.changeName }">
+	    		<c:if test="${c.filePath eq '' }">
+					<img src="${c.filePath}${c.changeName}"/>
+				</c:if>
+				<c:if test="${c.filePath ne '' }">
+					<img src="${contextPath}/${c.filePath}${c.changeName}"/>
+				</c:if>
 	    	</div>
     	</div>
     	

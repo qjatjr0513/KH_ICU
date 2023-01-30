@@ -67,8 +67,8 @@ public class ContentDao {
 		return sqlSession.insert("contentMapper.insertImg", image);
 	}
 	
-	public int selectConNo(SqlSession sqlSession, String conKTitle) {
-		return sqlSession.selectOne("contentMapper.selectConNo", conKTitle);
+	public int selectConNo(SqlSession sqlSession) {
+		return sqlSession.selectOne("contentMapper.selectConNo");
 	}
 
 }

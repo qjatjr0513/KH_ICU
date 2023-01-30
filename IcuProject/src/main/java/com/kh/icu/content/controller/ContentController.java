@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,9 @@ public class ContentController {
 		this.contentService = contentService;
 	}
 	
+	@Autowired
+	private ServletContext application;
+	
 	@RequestMapping("contentList.co")
 	public String contentList(HttpSession session, Model model) {
 		//Map<String, Object> list = contentService.selectList();
@@ -55,6 +60,12 @@ public class ContentController {
 				cmtStar = 0.0;
 			}
 			list2.get(i).setCmtStar(cmtStar);
+		}
+		
+		for(int i = 0; i < list2.size(); i++) {
+			if(list2.get(i).getFilePath() == null) {
+				list2.get(i).setFilePath("");
+			}
 		}
 		model.addAttribute("list", list2);
 		return "content/contentMainPage";
@@ -187,12 +198,13 @@ public class ContentController {
 		int resultOtt = 0;
 		
 		resultContent = contentService.insertContent(c);
-		
-		int conNo = contentService.selectConNo(c.getConKTitle());
+		ArrayList<Integer> conNoList = new ArrayList<Integer>();
+		int conNo = contentService.selectConNo();
+		conNoList.add(conNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("conNo", conNo);
+		map.put("conNo", conNoList);
 		map.put("genre", genre);
 		map.put("ott", ott);
 		
@@ -201,18 +213,20 @@ public class ContentController {
 		
 		if(!poster.getOriginalFilename().equals("")) {			
 			String savePath = session.getServletContext().getRealPath("/resources/posterImg/");
+			System.out.println("savePath : "+savePath);
 			String changeName = Utils.saveFile(poster, savePath);
-
+			File file = new File(savePath+changeName);
 			try {
-				poster.transferTo(new File(savePath+changeName));
+				poster.transferTo(file);
+				//System.out.println("save poster : "+file.exists());
 			} catch (IllegalStateException | IOException e) {
 				logger.error(e.getMessage());
 			}
-
+			
 			image.setOriginName(poster.getOriginalFilename());
 			image.setChangeName("/"+changeName);
+			image.setRefTno(conNo);
 			image.setFilePath(filePath);
-			image.setRefTno(c.getConNo());
 			
 			resultImage = contentService.insertImg(image);
 		}

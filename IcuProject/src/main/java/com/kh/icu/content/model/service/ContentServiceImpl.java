@@ -93,8 +93,8 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
-	public int selectConNo(String conKTitle) {
-		return contentDao.selectConNo(sqlSession, conKTitle);
+	public int selectConNo() {
+		return contentDao.selectConNo(sqlSession);
 	}
 
 }

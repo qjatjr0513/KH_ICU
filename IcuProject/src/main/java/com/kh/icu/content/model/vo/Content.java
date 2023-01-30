@@ -21,5 +21,6 @@ public class Content {
 	private Date enrollDate;
 	private String status;
 	private String changeName;
+	private String filePath;
 	private double cmtStar;
 }

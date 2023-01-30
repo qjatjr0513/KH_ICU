@@ -21,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="ENROLL_DATE" property="enrollDate"></result>
 		<result column="STATUS" property="status"></result>
 		<result column="CHANGE_NAME" property="changeName"></result>
+		<result column="FILE_PATH" property="filePath"></result>
 	</resultMap>
 	
 	<resultMap type="coment" id="commentResultSet">
@@ -80,15 +81,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectConNo" resultType="int">
-		SELECT CON_NO
-		FROM CONTENT
-		WHERE CON_KTITLE = #{conKTitle}
+			SELECT CON_NO
+			FROM (SELECT * FROM CONTENT ORDER BY CON_NO DESC)
+			<![CDATA[WHERE ROWNUM <= 1]]>
 	</select>
 	
 	<insert id="insertGenre" parameterType="map">
 		INSERT ALL
 		<foreach collection="conNo" item="conNo" separator=" ">
-		 	<foreach collection="genre" item="g" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		 	<foreach collection="genre" item="g" index="index" separator=" ">
 				INTO GENRE_STORAGE(GEN_NO, CON_NO)
 				VALUES (${g} , ${conNo})
 		 	</foreach>	

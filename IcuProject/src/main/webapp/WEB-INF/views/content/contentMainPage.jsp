@@ -246,29 +246,114 @@
           class="carousel slide"
           data-bs-ride="carousel"
         >
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="100000">
-            <c:forEach var="cnt" begin="0" end="${size }" step="4">
-              <div id="moiveBox">
-                <c:forEach var="c" items="${list }" begin="${ cnt}" end="${ cnt + 3}">
-	                <div class="movieContainer">
-	                  <div class="movie__info">
-	                    <img
-	                      id="poster"
-	                      src="${c.changeName }"
-	                      onclick="movePage(${c.conNo });"
-	                    />
-	                    <br><br>
-	                    <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-	                    <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
-	                    <i class="fa-solid fa-star">${c.cmtStar }</i>
-	                  </div>
-	    			</div>
-    			</c:forEach>
-    			</div>
-    		</c:forEach>
-    		</div>
-    		</div>
+	          <div class="carousel-inner">
+	          	<c:if test="${size ge 8}">
+		          	<c:forEach var="cnt" begin="0" end="${size }" step="8">
+		          		<c:if test="${cnt eq 0 }">
+				            <div class="carousel-item active" data-bs-interval="100000">
+				        </c:if>
+				        <c:if test="${cnt ne 0 }">
+				            <div class="carousel-item" data-bs-interval="100000">
+				        </c:if>
+				        	<c:if test="${cnt eq 0 }">				    
+						    	<c:forEach var="cnt2" begin="0" end="1">
+						        	<div id="moiveBox">					        		
+							            <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
+								        	<div class="movieContainer">
+									            <div class="movie__info">
+										            <c:if test="${c.filePath eq '' }">
+											        	<img
+											             id="poster"
+											             src="${c.filePath}${c.changeName}"
+											             onclick="movePage(${c.conNo });"
+											            />
+										            </c:if>
+										            <c:if test="${c.filePath ne '' }">
+											        	<img
+											             id="poster"
+											             src="${contextPath}/${c.filePath}${c.changeName}"
+											             onclick="movePage(${c.conNo });"
+											        	/>
+										            </c:if>
+										            <br><br>
+										            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+										            <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+										            <i class="fa-solid fa-star">${c.cmtStar }</i>
+									            </div>
+								    		</div>
+							    		</c:forEach>
+					    			</div>	    			
+					    			</c:forEach>  
+				    			</c:if>
+				    			<c:if test="${cnt ne 0 }">				    
+						    		<c:forEach var="cnt2" begin="1" end="2">
+							        	<div id="moiveBox">					        		
+								            <c:forEach var="c" items="${list }" begin="${cnt2 * 8}" end="${(cnt2 * 8) + 3}">
+									        	<div class="movieContainer">
+										            <div class="movie__info">
+											            <c:if test="${c.filePath eq '' }">
+												        	<img
+												             id="poster"
+												             src="${c.filePath}${c.changeName}"
+												             onclick="movePage(${c.conNo });"
+												            />
+											            </c:if>
+											            <c:if test="${c.filePath ne '' }">
+												        	<img
+												             id="poster"
+												             src="${contextPath}/${c.filePath}${c.changeName}"
+												             onclick="movePage(${c.conNo });"
+												        	/>
+											            </c:if>
+											            <br><br>
+											            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+											            <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+											            <i class="fa-solid fa-star">${c.cmtStar }</i>
+										            </div>
+									    		</div>
+								    		</c:forEach>
+						    			</div>	    			
+					    			</c:forEach>  
+				    			</c:if> 		 		
+				    		</div>
+		    		</c:forEach>
+	    		</c:if>
+	    		
+	    		<c:if test="${size lt 8}">
+					<div class="carousel-item active" data-bs-interval="100000">
+						<c:forEach var="cnt2" begin="0" end="1">
+							<div id="moiveBox">					        		
+								<c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
+									<div class="movieContainer">
+										<div class="movie__info">
+											<c:if test="${c.filePath eq '' }">
+												<img
+												id="poster"
+												src="${c.filePath}${c.changeName}"
+												onclick="movePage(${c.conNo });"
+												/>
+											</c:if>
+											<c:if test="${c.filePath ne '' }">
+												<img
+												id="poster"
+												src="${contextPath}/${c.filePath}${c.changeName}"
+												onclick="movePage(${c.conNo });"
+												/>
+											</c:if>
+											<br><br>
+											<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+											<span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+											<i class="fa-solid fa-star">${c.cmtStar }</i>
+										</div>
+									</div>
+								</c:forEach>
+							</div>	    			
+						</c:forEach>
+					</div>  
+				</c:if> 		 		
+				</div>
+	    		
+	    	</div>
     	</div>
     	<button
             class="carousel-control-prev"

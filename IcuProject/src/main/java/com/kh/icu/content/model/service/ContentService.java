@@ -20,5 +20,5 @@ public interface ContentService {
 	public int insertGenre(Map<String, Object> map);
 	public int insertOtt(Map<String, Object> map);
 	public int insertImg(Image image);
-	public int selectConNo(String conKTitle);
+	public int selectConNo();
 }
