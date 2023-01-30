@@ -1,5 +1,6 @@
 package com.kh.icu.party.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.icu.party.model.vo.Party;
@@ -12,6 +13,8 @@ public interface PartyService {
 	public int insertParty(Party p);
 	
 	public List<Party> findPartyForm();
+	
+	public List<Party> searchParty(HashMap<String, Object> map);
 	
 	public Party partyDetailForm(int paNo);
 	
