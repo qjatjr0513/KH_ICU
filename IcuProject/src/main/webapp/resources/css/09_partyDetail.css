@@ -128,3 +128,10 @@
 .photoImg > i {
   color: white;
 }
+
+#replyWriter-img {
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    border-radius: 50%;
+}

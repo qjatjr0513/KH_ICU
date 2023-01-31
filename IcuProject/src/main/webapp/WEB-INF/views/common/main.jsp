@@ -127,7 +127,7 @@
      <section id="party">
       <h2>나의 파티</h2>
        <div class="party__box">
-         <div class="party__box-left" onclick="location.href=''">
+         <div class="party__box-left" onclick="location.href='${contextPath}/partyEnroll.py'">
            <div class="plus-icon">
              <i
                class="fa-regular fa-square-plus fa-2x"
@@ -144,7 +144,7 @@
              ></span>
            </div>
          </div>
-         <div class="party__box-right" onclick="location.href=''">
+         <div class="party__box-right" onclick="location.href='${contextPath}/findParty.py'">
            <div class="plus-icon">
              <i
                class="fa-regular fa-square-plus fa-2x"

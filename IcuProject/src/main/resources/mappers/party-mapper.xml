@@ -99,9 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
 			   (SELECT COUNT(*)
                 FROM PARTY_JOIN
-                WHERE PA_NO = P.PA_NO) AS JOIN_NUM 
+                WHERE PA_NO = P.PA_NO) AS JOIN_NUM,
+                START_DATE
 		FROM PARTY P
         JOIN OTT O USING(OTT_NO)
+        
         
         <if test="!ottList.isEmpty() or month != ''"> 
         	WHERE 
@@ -125,6 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        </choose>
 	       </if>
 	   </if>
+	   ORDER BY START_DATE DESC
 	</select>
 
 
@@ -172,7 +175,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       LEFT JOIN PARTY P ON (P.PA_NO = R.REF_TNO)
       LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = M.MEM_NO)
 	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER)
-      WHERE P.PA_NO = #{paNo} AND  R.STATUS = 'N'
+      WHERE P.PA_NO = #{paNo} AND  R.STATUS = 'N' AND R.TABLE_CD = 'P'
 	</select>
 	
 	<insert id="insertReply" parameterType="reply" >

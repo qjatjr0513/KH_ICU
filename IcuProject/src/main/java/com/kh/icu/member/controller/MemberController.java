@@ -31,6 +31,7 @@ import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.service.NaverLoginBO;
+import com.kh.icu.member.model.service.kakaoLoginBO;
 import com.kh.icu.member.model.vo.Member;
 
 
@@ -71,6 +72,11 @@ public class MemberController {
 		System.out.println("네이버:" + naverAuthUrl);
 		/* 객체 바인딩 */
 		model.addAttribute("url", naverAuthUrl);
+		
+//		/* 카카오 URL */
+//		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+//		System.out.println("카카오:" + kakaoAuthUrl);		
+//		model.addAttribute("urlKakao", kakaoAuthUrl);
 		
 		return "member/memberLoginForm";
 	}

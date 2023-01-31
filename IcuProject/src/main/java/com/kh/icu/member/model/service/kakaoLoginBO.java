@@ -13,12 +13,12 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
-public class KakaoLoginBO {
+public class kakaoLoginBO {
 
 	// 카카오 로그인 정보
-	private final static String KAKAO_CLIENT_ID = "클라이언트 ID, REST API키";
-	private final static String KAKAO_CLIENT_SECRET = "클라이언트 시크릿";
-	private final static String KAKAO_REDIRECT_URI = "http://localhost:8081/web/callbackKakao.do"; //Redirect URL
+	private final static String KAKAO_CLIENT_ID = "faf6b25930399b2135403b6474fb775f";
+	private final static String KAKAO_CLIENT_SECRET = "GwCwQ4ZIp3oTsp6aGjijZgMjfSsuyxTi";
+	private final static String KAKAO_REDIRECT_URI = "http://localhost:8088/icu/kakaoLogin"; //Redirect URL
 	private final static String SESSION_STATE = "kakao_oauth_state";
 	private final static String PROFILE_API_URL = "https://kapi.kakao.com/v2/user/me";
 

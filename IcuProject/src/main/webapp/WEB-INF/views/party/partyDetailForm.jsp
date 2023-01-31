@@ -111,7 +111,7 @@
                <td style="width: 30px;">
                <c:choose>
                   <c:when test="${!empty r.changeName}">
-                     <img id="replyWriter-img"  src="${contextPath }${r.filePath }${r.changeName}">
+                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
                   </c:when>
                   <c:otherwise>
                      <i class="fa-solid fa-user fa-lg"></i>
