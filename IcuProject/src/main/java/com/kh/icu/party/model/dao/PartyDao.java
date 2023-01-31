@@ -55,13 +55,18 @@ public class PartyDao {
 	public int insertReply(SqlSession sqlSession, Reply r) {
 		return sqlSession.insert("partyMapper.insertReply", r);
 	}
-	
+
 	public List<Party> partyList(SqlSession sqlSession){
 		return sqlSession.selectList("partyMapper.findPartyForm");
 	}
 	
 	public int endParty(SqlSession sqlSession, int paNo) {
 		return sqlSession.update("partyMapper.endParty", paNo);
+	}
+	
+	// 댓글 삭제하기 
+	public int deleteReply(SqlSession sqlSession, int rno) {
+		return sqlSession.update("partyMapper.deleteReply", rno);
 	}
 	
 	

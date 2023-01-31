@@ -184,6 +184,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE PARTY
 		SET STATUS = 'Y'
 		WHERE PA_NO = #{paNo} AND STATUS = 'N'
+
+	<update id="deleteReply" parameterType="int">
+		UPDATE REPLY
+        SET STATUS = 'Y'
+        WHERE REPLY_NO = #{rno}
 	</update>
 	
 	

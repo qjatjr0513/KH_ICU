@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
@@ -103,8 +104,7 @@ public class PartyController {
 		
 		model.addAttribute("p", p);
 		model.addAttribute("pj", pj);
-		System.out.println("list : "+ list); 
-		System.out.println("pj : "+ pj); 
+		model.addAttribute("list", list);
 		
 		return "party/partyDetailForm";
 	}
@@ -184,7 +184,23 @@ public class PartyController {
        }
     }
 
-	
+    // 댓글 삭제하기
+    @RequestMapping("deleteReply.py")
+    public String deleteReply(@RequestParam("rno") int rno, @RequestParam("paNo") int paNo,
+ 		                     HttpSession session, Model model,
+ 		                     RedirectAttributes redirectAttributes) {
+ 	   int result = partyService.deleteReply(rno);
+ 	   
+ 	   if(result > 0) {
+ 		   redirectAttributes.addFlashAttribute("flag","showAlert");
+ 	         return "redirect:partyDetail.py/"+paNo;
+ 	      } else {
+ 	         model.addAttribute("errorMsg", "댓글 삭제 실패");
+ 	         return "common/errorPage";
+ 	      }
+ 	   
+ 	   
+    }
 	
 	
 	

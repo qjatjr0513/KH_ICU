@@ -74,6 +74,11 @@ public class PartyServiceImpl implements PartyService{
 	@Override
 	public List<Party> partyList(){
 		return partyDao.partyList(sqlSession);
+
+	// 댓글 삭제 
+	@Override
+	public int deleteReply(int rno) {
+		return partyDao.deleteReply(sqlSession, rno);
 	}
 	
 	@Override

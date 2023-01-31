@@ -124,7 +124,7 @@
 					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
 					<c:if test="${r.replyWriter == loginUser.memNickname }">
 					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
-					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.bo?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
+					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.py?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
 					</c:if>
 				</tr>
 			</c:forEach>
@@ -142,7 +142,6 @@
 	    	}
 	    });
 	    
-	    
 		// 댓글 
 	    const replyWriter = "${loginUser.memNo}";
         const memNickname = "${p.memNickname}";
@@ -156,7 +155,7 @@
            $.ajax({
               url : "${contextPath}/insertReply.pa",
               data : {
-                 refTno : ${p.paNo},
+                 refTno : paNo,
                  replyContent : $("#replyContent").val()
               },
               type : "post",
@@ -174,7 +173,7 @@
                  		}
                  	}
                  	
-                    Swal.fire(
+                    Swal.fire({
                             icon:'success',
                             title: "댓글등록 성공"
                       }).then(function(){
@@ -203,7 +202,14 @@
 	    	 socket.send(msg);
 	     });
 	     
-
+	     $(function(){
+	         if('${flag}' == 'showAlert'){
+	        	 Swal.fire({
+	                 icon:'success',
+	                 title: "댓글삭제 성공"
+	           		});
+	        	}
+	     });
     </script>
   </body>
 </html>

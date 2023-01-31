@@ -22,7 +22,7 @@ public interface PartyService {
 	public List<PartyJoin> partyJoinMem(int paNo);
 	
 	public int joinPartyMember(PartyJoin pj);
-	
+
 	public ArrayList<Reply> selectReplyList(int paNo);
 
 	public int insertReply(Reply r);
@@ -30,4 +30,7 @@ public interface PartyService {
 	public List<Party> partyList();
 	
 	public int endParty(int paNo);
+
+	public int deleteReply(int rno);
+
 }
