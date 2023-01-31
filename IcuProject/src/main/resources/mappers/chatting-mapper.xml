@@ -8,7 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="memNo" column="MEM_NO"/>
 		<result property="memNickname" column="MEM_NICKNAME"/>
 		<result property="status" column="STATUS"/>
-		<result property="title" column="TITLE"/>
 	</resultMap>
 	
 	<resultMap type="chatMessage" id="chatMessageResultSet">
@@ -23,8 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
 		SELECT
 			CHAT_ROOM_NO,
-			MEM_NICKNAME,
-			TITLE
+			MEM_NICKNAME
 		FROM CHAT_ROOM A
 		JOIN MEMBER M USING(MEM_NO)
 		WHERE A.STATUS = 'N'
@@ -38,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 		
 		INSERT INTO CHAT_ROOM VALUES
-		(#{chatRoomNo},#{memNo},DEFAULT,#{title})
+		(#{chatRoomNo},#{memNo},DEFAULT)
 	</insert>
 	
 	<insert id="insertMessage" parameterType="chatMessage">
@@ -47,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectChatList" resultMap="chatMessageResultSet">
-		SELECT 
+		SELECT
 			MESSAGE,
 			CREATE_DATE,
 			MEM_NO,
@@ -63,4 +61,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET STATUS = 'Y'
 		WHERE CHAT_ROOM_NO = #{chatRoomNo} AND MEM_NO = #{memNo}
 	</update>
+	
+	<select id="selectChatRoom" parameterType="int" resultMap="chatRoomResultSet">
+		SELECT *
+		FROM CHAT_ROOM
+		WHERE MEM_NO = #{memNo} AND STATUS = 'N'
+	</select>
 </mapper>

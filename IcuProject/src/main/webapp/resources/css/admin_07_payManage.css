@@ -1,0 +1,31 @@
+@import url('admin_main.css');
+@import url('main.css');
+
+#payList {
+  margin: auto;
+  margin-top: 300px;
+  padding-left: 200px;
+  width: 60%;
+  /* background-color: antiquewhite; */
+}
+td button {
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 5px;
+  padding: 0 3px;
+  background-color: rgb(150, 150, 150);
+  color: white;
+}
+
+#payList > table td,
+#payList > table th {
+  padding: 10px;
+}
+
+#payList > table {
+  background-color: white;
+  text-align: center;
+}
+
+.pagination {
+  margin: auto;
+}

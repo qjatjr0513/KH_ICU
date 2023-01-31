@@ -106,9 +106,9 @@
       	const memNickname = "${loginUser.memNickname}";
       	const chatRoomNo = "${chatRoomNo}";
 		
-		let chatSocket = new SockJS(contextPath+"/chat");
+ 		
 	</script>
 	
-	<script src="${contextPath }/resources/js/chat.js"></script>
+	<script src="${contextPath }/resources/js/chat.js?1"></script>
 </body>
 </html>

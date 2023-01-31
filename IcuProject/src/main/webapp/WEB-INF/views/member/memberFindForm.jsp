@@ -324,20 +324,21 @@
 						email : $("#email").val()
 					},
 					success : function(result) {
-						if(result == 0){
+						if(result == 2){
 							Swal.fire({
-		        		   		icon:'error',
-			        	   		title: "등록되지 않은 아이디 입니다."
+		        		   		icon:'success',
+			        	   		title: "임시비밀번호가 이메일로 발송되었습니다."
 			        	   });
+							
 						}else if(result == 1){
 							Swal.fire({
 		        		   		icon:'error',
 			        	   		title: "등록되지 않은 이메일 입니다."
 			        	   });
-						}else if(result == 2){
+						}else if(result == 0){
 							Swal.fire({
-		        		   		icon:'success',
-			        	   		title: "임시비밀번호가 이메일로 발송되었습니다."
+		        		   		icon:'error',
+			        	   		title: "등록되지 않은 아이디 입니다."
 			        	   });
 						}
 					}

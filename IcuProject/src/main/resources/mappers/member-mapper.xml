@@ -92,13 +92,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 아이디 찾기 2 -->
 	<select id="selectId" parameterType="member" resultType="String">
-		SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{memId}
+		SELECT MEM_ID FROM MEMBER WHERE MEM_ID=#{memId} 
 	</select>
 	
 	<!-- 임시비밀번호 변경 -->
 	<update id="updatePwd" >
 		UPDATE MEMBER SET MEM_PWD = #{memPwd}, MODIFY_DATE = SYSDATE WHERE MEM_ID = #{memId}
 	</update>
+	
+	<!-- 이메일 조회 -->
+	<select id="selectEmail" parameterType="member" resultType="String">
+		SELECT EMAIL FROM MEMBER
+		WHERE EMAIL = #{email} 
+	</select>
 	
 	<select id="selectMember"  resultMap="memberResultSet">
 		SELECT * FROM MEMBER WHERE MEM_ID=#{memId} AND EMAIL=#{email} AND STATUS='N'

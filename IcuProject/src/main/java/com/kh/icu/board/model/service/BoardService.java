@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.common.model.vo.Reply;
 
 public interface BoardService {
@@ -33,7 +34,7 @@ public interface BoardService {
 	public int deleteReply(int rno);
 	
 	
-	
+	public int insertBoardAlarm(Alarm a);
 	
 	
 	

@@ -58,21 +58,31 @@ public class AlramHandler extends TextWebSocketHandler {
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = msg.split(",");
 			System.out.println(strs);
-			if(strs != null && strs.length == 4) {
+			if(strs != null && strs.length == 5) {
 				String cmd = strs[0];
 				String replyWriter = strs[1];
 				String boardWriter = strs[2];
-				String bno = strs[3];
+				String boardWriterNo = strs[3];
+				String bno = strs[4];
 				
 				
 				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
+				System.out.println("============"+boardWriterSession);
 				if("reply".equals(cmd) && boardWriterSession != null) {
+					String content = "게시글에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
-			
-//					Alarm a = boardservice.insertBoard(a);
-					TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+replyWriter +"님이 게시글에 댓글을 달았습니다!"+"</a>");
-					boardWriterSession.sendMessage(tmpMsg);
+					a.setMemNo(Integer.parseInt(boardWriterNo));
+					a.setSendMemNo(Integer.parseInt(replyWriter));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(bno));
+					a.setTableCd("B");
+									
+					int result = boardservice.insertBoardAlarm(a);
+					if(result > 0) {
+						TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+content+"</a>");
+						boardWriterSession.sendMessage(tmpMsg);						
+					}
 				}
 			}
 		}

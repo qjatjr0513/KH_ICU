@@ -16,4 +16,6 @@ public interface ChatService {
 	public List<ChatMessage> selectChatMessage(ChatRoom join);
 	
 	public int exitChatRoom(ChatRoom join);
+	
+	public ChatRoom selectChatRoom(int memNo);
 }

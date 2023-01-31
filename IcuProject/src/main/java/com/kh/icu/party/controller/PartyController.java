@@ -136,6 +136,16 @@ public class PartyController {
 		}
 	}
 	
+	@RequestMapping("current.py")
+	public String currentPartyList() {
+		return "party/currentPartyListForm";
+	}
+	
+	@RequestMapping("end.py")
+	public String endPartyList() {
+		return "party/endPartyListForm";
+	}
+	
 	
 	
 }

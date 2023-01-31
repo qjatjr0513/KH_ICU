@@ -1,0 +1,67 @@
+@import url('main.css');
+@import url('admin_main.css');
+
+#party__container {
+  width: 80%;
+  margin: auto;
+  margin-top: 230px;
+  padding-left: 200px;
+  /* background-color: rgb(193, 200, 200); */
+}
+.partyCard {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cardBox {
+  border: 2px solid black;
+  width: 250px;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+.carousel-inner {
+  width: 80%;
+  margin: auto;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: var(--color-orange);
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+}
+.joinBtn {
+  border-radius: 8px;
+  position: absolute;
+  bottom: 8px;
+  right: 6px;
+  padding: 8px;
+  background-color: var(--color-purple);
+  color: white;
+  font-weight: bold;
+}
+
+.joinBtn:hover {
+  transform: scale(1.1);
+}
+
+.noneContainer {
+  display: none;
+}
+
+.modal-body {
+  text-align: center;
+}
+.firstBtn,
+.secondBtn {
+  width: 150px;
+  color: white;
+  border-radius: 8px;
+}
+.firstBtn {
+  background-color: rgb(65, 65, 247);
+}
+.secondBtn {
+  background-color: rgb(235, 65, 65);
+}

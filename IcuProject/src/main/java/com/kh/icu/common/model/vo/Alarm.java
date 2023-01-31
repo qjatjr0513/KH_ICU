@@ -9,7 +9,7 @@ public class Alarm {
 	private int mesNo;
 	private int memNo;
 	private String tableCd;
-	private String mesTitle;
+	private int sendMemNo;
 	private String mesContent;
 	private int refTno;
 	private Date createDate;

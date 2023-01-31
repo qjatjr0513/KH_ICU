@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 /**
  * Servlet Filter implementation class InitFilter
  */
-@WebFilter("/*")
 public class InitFilter implements Filter {
 	
 	private Logger logger = LoggerFactory.getLogger(InitFilter.class);

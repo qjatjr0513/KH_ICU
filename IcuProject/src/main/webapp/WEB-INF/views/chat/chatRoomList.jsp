@@ -22,7 +22,6 @@
 				<thead>
 					<tr>
 						<th>방번호</th>
-						<th>질문 주제</th>
 						<th>개설자</th>
 					</tr>
 				</thead>
@@ -43,16 +42,13 @@
 								<tr>
 									<td>${chatRoom.chatRoomNo }</td>
 									<td>
-										${chatRoom.title }
+										${chatRoom.memNickname }
 										
 										<c:if test="${loginUser.memNickname == chatRoom.memNickname || loginUser.memNickname == '관리자' }">
 											<button class="btn btn-primary" onclick="location.href='${contextPath}/chat/room/${chatRoom.chatRoomNo}'">참여</button>
 										</c:if>
 									</td>
 									
-									<td>
-										${chatRoom.memNickname }
-									</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

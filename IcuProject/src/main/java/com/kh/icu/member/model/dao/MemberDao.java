@@ -35,7 +35,10 @@ public class MemberDao {
    }
    
    public String selectId(SqlSession sqlSession, Member m) {
-      return sqlSession.selectOne("memberMapper.selectId", m);
+	   String result = sqlSession.selectOne("memberMapper.selectId", m);
+	   System.out.println("아이디 : "+result);
+	   
+	   return result;
    }
    
    /*
@@ -59,8 +62,11 @@ public class MemberDao {
    }
    
    //이메일 조회
-   public Member selectEmail(SqlSession sqlSession, Member m) {
-      return sqlSession.selectOne("memberMapper.selectEmail", m);
+   public String selectEmail(SqlSession sqlSession, Member m) {
+	   String result = sqlSession.selectOne("memberMapper.selectEmail", m);
+	   System.out.println("이메일 : "+result);
+	   
+      return result;
    }
    
    

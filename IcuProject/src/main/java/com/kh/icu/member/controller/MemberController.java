@@ -101,7 +101,7 @@ public class MemberController {
 		// 암호화된 비밀번호 Memeber m에 넣음
 		m.setMemPwd(encPwd);
 		
-		System.out.println("암호화 후 비밀버호 : "+m.getMemPwd());
+		System.out.println("암호화 후 비밀번호 : "+m.getMemPwd());
 		
 
 		if(result1 == 0 && result2 == 0) {
@@ -154,11 +154,12 @@ public class MemberController {
 	
 	@RequestMapping("findPwd.me")
 	@ResponseBody
-	public void findPwd(String id, String email, HttpServletResponse response) throws Exception {
+	public int findPwd(String id, String email, HttpServletResponse response) throws Exception {
 		Member m = new Member();
 		m.setMemId(id);
 		m.setEmail(email);
-		memberService.findPwd(response, m);
+		int result = memberService.findPwd(response, m);
+		return result;
 	}
 	
 	//로그인

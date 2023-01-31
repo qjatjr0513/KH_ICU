@@ -18,6 +18,7 @@ public class Board {
 	private Date createDate;
 	private int count;
 	private String status;
+	private int boardWriterNo;
 	
 	private Member member;
 	private int memNo;

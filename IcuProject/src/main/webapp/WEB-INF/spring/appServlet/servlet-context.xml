@@ -32,8 +32,8 @@
 
 	<!-- 댓글 알림 핸들러 -->
 	<beans:bean id="alramHandler" class="com.kh.icu.common.socket.AlramHandler"/>
-	
-	<!-- 실시간 문의 핸들러 -->
+		
+	<!-- 실시간 문의2 핸들러 -->
 	<beans:bean id="chatHandler" class="com.kh.icu.common.socket.ChatHandler"/>
 
 	<websocket:handlers>

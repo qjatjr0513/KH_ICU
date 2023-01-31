@@ -2,6 +2,8 @@ package com.kh.icu.chat.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +20,7 @@ import com.kh.icu.chat.model.service.ChatService;
 import com.kh.icu.chat.model.vo.ChatMessage;
 import com.kh.icu.chat.model.vo.ChatRoom;
 import com.kh.icu.member.model.vo.Member;
+import org.springframework.web.socket.WebSocketSession;
 
 @Controller
 @SessionAttributes({"loginUser", "chatRoomNo"})
@@ -36,23 +40,39 @@ public class ChattingController {
 	
 	// 채팅방 만들기
 	@PostMapping("chat/openChatRoom")
-	public String openChatRoom(@ModelAttribute("loginUser") Member loginUser, 
+	@ResponseBody
+	public int openChatRoom(int memNo, 
 			                   Model model, 
 			                   ChatRoom room, 
-			                   RedirectAttributes ra) {
-		room.setMemNo(loginUser.getMemNo());
+			                   RedirectAttributes ra, HttpSession session
+								) throws Exception {
+		 
+		System.out.println("================"+memNo);
+		room.setMemNo(memNo);
 		
 		int chatRoomNo = chatservice.openChatRoom(room);
-		String path = "redirect:/chat/";
+//		String path = "redirect:/chat/";
 		
 		if(chatRoomNo > 0) {
+			model.addAttribute("chatRoomNo", chatRoomNo);
+			//session.setAttribute("chatRoomNo", chatRoomNo);
 			System.out.println("채팅방 만들기 성공");
-			path += "chatRoomList";
+			
+//			path += "chatRoomList";
+			return chatRoomNo;
 		}else {
 			model.addAttribute("errorMsg", "채팅방 만들기 실패");
-			return "common/errorPage";
+			return 0;
 		}
-		return path;
+//		return path;
+	}
+	
+	@RequestMapping("chatSession")
+	@ResponseBody
+	@ModelAttribute("chatRoomNo")
+	public int chatSession(int chatNo) {
+		System.out.println("?????????????"+chatNo);
+		return chatNo;	
 	}
 	
 	// 채팅방 입장
@@ -61,22 +81,25 @@ public class ChattingController {
 			                   Model model, 
 			                   @PathVariable("chatRoomNo") int chatRoomNo,
 			                   ChatRoom join,
-			                   RedirectAttributes ra) {
+			                   RedirectAttributes ra,
+			                   HttpSession session) {
 		join.setMemNo(loginUser.getMemNo());
 		List<ChatMessage> list = chatservice.selectChatMessage(join);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("chatRoomNo", chatRoomNo);
+		//session.setAttribute("chatRoomNo", chatRoomNo);
 		
 		return "chat/chatRoom";
 	}
 	
 	// 채팅방 나가기
-	@GetMapping("/chat/exit")
+	@RequestMapping("/chat/exit")
 	@ResponseBody
-	public int exitChatRoom(@ModelAttribute("loginUesr") Member loginUser, 
+	public int exitChatRoom(int memNo, int chatRoomNo, 
 			                ChatRoom join) {
-		join.setMemNo(loginUser.getMemNo());
+		join.setMemNo(memNo);
+		join.setChatRoomNo(chatRoomNo);
 		return chatservice.exitChatRoom(join);
 	}
 }

@@ -15,6 +15,9 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
+    <!-- 왼쪽 수직 navbar -->
+    <jsp:include page="../member/myNavbar.jsp"/>
+    
 	<!-- Logo -->
     <div id="main__logo">
       <img src="resources/images/navbarLogo.png" />

@@ -126,6 +126,7 @@
 		            data-bs-toggle="dropdown"
 		            aria-expanded="false"
 		          >
+		 
               <c:choose>
                 <c:when test="${!empty profile}">
                   <img id="profile-img" class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
@@ -141,6 +142,17 @@
 		            <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
 		          </ul>
 		        </div>
+		        
+		      <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle alert" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bell"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">알림1</a></li>
+                <li><a class="dropdown-item" href="#">알림2</a></li>
+                <li><a class="dropdown-item" href="#">알림3</a></li>
+              </ul>
+            </div>
           	</c:otherwise>
           </c:choose>
         </li>
@@ -156,6 +168,8 @@
 	<script>
 		var socket = null;
 		const contextPath = "${contextPath}";
+		let chatWs;
+		let chatSocket = new SockJS(contextPath+"/chat"); 
 		
 		$(document).ready(function(){
 			connectWS();
@@ -208,6 +222,9 @@
 			ws.onerror = function (err) { console.log('Error:;', err);};
 			
 		}
+		
+		
+		
 		
 	</script>
 </body>

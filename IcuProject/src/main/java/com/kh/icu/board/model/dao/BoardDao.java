@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.common.model.vo.Reply;
 
 @Repository
@@ -80,7 +81,9 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteReply", rno);
 	}
 	
-	
+	public int insertBoardAlarm(SqlSession sqlSession, Alarm a) {
+		return sqlSession.insert("boardMapper.insertBoardAlarm", a);
+	}
 	
 	
 	

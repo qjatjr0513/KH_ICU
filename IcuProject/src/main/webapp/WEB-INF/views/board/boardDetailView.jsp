@@ -162,10 +162,10 @@
 		  </div>
 		</div>
             <script>
-            const replyWriter = "${loginUser.memNickname}";
+            const replyWriter = "${loginUser.memNo}";
             const boardWriter = "${b.boardWriter}";
             const boardNo = "${b.boardNo}";
-            	
+            const boardWriterNo = "${b.boardWriterNo}";	
 
             
                function insertReply(){
@@ -183,7 +183,7 @@
                         	
                         	if(socket){
                         		if(replyWriter != boardWriter ){
-                        		let socketMsg = "reply,"+ replyWriter + "," + boardWriter + "," + boardNo;
+                        		let socketMsg = "reply,"+ replyWriter + "," + boardWriter + "," +boardWriterNo + "," + boardNo;
                         		console.log("sssssssmsg>>", socketMsg);
                         		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
                         		socket.send(socketMsg)                        			

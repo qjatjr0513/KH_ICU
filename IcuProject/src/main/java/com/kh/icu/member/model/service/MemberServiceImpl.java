@@ -122,9 +122,8 @@ public class MemberServiceImpl implements MemberService{
    @Override
    public int findPwd(HttpServletResponse response, Member m) throws Exception {
       response.setContentType("text/html;charset=utf-8");
-      Member result = memberDao.selectMember(sqlSession, m);
-      System.out.println(result);
-      System.out.println(m);
+      System.out.println("?????????????????"+m);
+      
       // 가입된 아이디가 없으면
       if(memberDao.selectId(sqlSession, m) == null) {
          return 0;
@@ -137,16 +136,17 @@ public class MemberServiceImpl implements MemberService{
          String pwd = "";
          for (int i = 0; i < 12; i++) {
             pwd += (char) ((Math.random() * 26) + 97);
+            
+            
          }
-         
          String encPwd = bcryptPasswordEncoder.encode(pwd);
          m.setMemPwd(encPwd);
          // 비밀번호 변경
          memberDao.updatePwd(sqlSession, m);
          // 비밀번호 변경 메일 발송
          sendEmail(m, "findpw");
-         
          return 2;
+         
       }
    }
    

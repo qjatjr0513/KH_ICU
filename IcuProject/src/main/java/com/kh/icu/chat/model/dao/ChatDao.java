@@ -42,4 +42,8 @@ public class ChatDao {
 	public int closeChatRoom(SqlSession sqlSession, ChatRoom join) {
 		return sqlSession.update("chattingMapper.closeChatRoom", join);
 	}
+	
+	public ChatRoom selectChatRoom(SqlSession sqlSession, int memNo) {
+		return sqlSession.selectOne("chattingMapper.selectChatRoom", memNo);
+	}
 }

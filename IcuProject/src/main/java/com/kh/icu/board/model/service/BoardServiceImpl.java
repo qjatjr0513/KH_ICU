@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.icu.board.model.dao.BoardDao;
 import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.common.template.Pagination;
 
@@ -130,7 +131,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.deleteReply(sqlSession, rno);
 	}
 	
-	
+	@Override
+	public int insertBoardAlarm(Alarm a) {
+		return boardDao.insertBoardAlarm(sqlSession, a);
+	}
 	
 	
 	
