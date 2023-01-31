@@ -72,9 +72,9 @@
 	  
     <div class="kakao__button loginbtn" style="text-align:center">
      <!-- 카카오 로그인 -->
-	 <a class="kakao" href="https://kauth.kakao.com/oauth/authorize?client_id=faf6b25930399b2135403b6474fb775f&redirect_uri=http://localhost:8088/icu/kakaoLogin&response_type=code">
-		<img src="resources/images/kakao_login_large_wide.png" style="height:60px">
-	 </a>
+	 <button type ="button" class = "btn" onclick="location.href='${urlKakao}'">
+	 	<img class='kakaoImg' src="resources/images/kakao_login_large_wide.png">
+	 </button>
     </div>
     
     <br><br>

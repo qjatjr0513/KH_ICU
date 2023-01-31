@@ -28,7 +28,7 @@
 	<beans:bean id="naverLoginBO" class="com.kh.icu.member.model.service.NaverLoginBO" />
 	
 	<!-- KakaoLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="kakaoLoginBO" class="com.kh.icu.member.model.service.KakaoLoginBO" />
+	<beans:bean id="kakaoLoginBO" class="com.kh.icu.member.model.service.kakaoLoginBO" />
 	
 	<context:component-scan base-package="com.kh.icu" />
 	

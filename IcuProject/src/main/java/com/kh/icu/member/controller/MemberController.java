@@ -50,6 +50,10 @@ public class MemberController {
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
 	
+	/* KakaoLogin */
+	@Autowired
+	private kakaoLoginBO kakaoLoginBO;
+	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
@@ -73,10 +77,10 @@ public class MemberController {
 		/* 객체 바인딩 */
 		model.addAttribute("url", naverAuthUrl);
 		
-//		/* 카카오 URL */
-//		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
-//		System.out.println("카카오:" + kakaoAuthUrl);		
-//		model.addAttribute("urlKakao", kakaoAuthUrl);
+		/* 카카오 URL */
+		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+		System.out.println("카카오:" + kakaoAuthUrl);		
+		model.addAttribute("urlKakao", kakaoAuthUrl);
 		
 		return "member/memberLoginForm";
 	}
@@ -209,29 +213,67 @@ public class MemberController {
 	
 
 	
-	
-	@RequestMapping(value="/kakaoLogin")
-    public String login(@RequestParam("code") String code, HttpSession session) {
-		System.out.println("code : " + code);
-
-        String access_Token = memberService.getAccessToken(code);
-        System.out.println("access_Token : " + access_Token);
-        
-        Member userInfo = memberService.getUserInfo(access_Token);
-        System.out.println("login Controller : " + userInfo);
-        
-        int memNo = userInfo.getMemNo();
-        Image profile = memberService.selectProfile(memNo);
-        
-        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-        if (userInfo.getMemId() != null) {
-        	session.setAttribute("loginUser", userInfo);
-            session.setAttribute("access_Token", access_Token);
+	// 카카오 로그인 성공시 callback
+	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
+			throws Exception {
+		System.out.println("로그인 성공 callbackKako");
+		OAuth2AccessToken oauthToken;
+		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
+		// 로그인 사용자 정보를 읽어온다
+		apiResult = kakaoLoginBO.getUserProfile(oauthToken);
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj;
+		
+		jsonObj = (JSONObject) jsonParser.parse(apiResult);
+		JSONObject response_obj = (JSONObject) jsonObj.get("kakao_account");	
+		JSONObject response_obj2 = (JSONObject) response_obj.get("profile");
+		// 프로필 조회
+		String email = (String) response_obj.get("email");
+		String name = (String) response_obj2.get("nickname");
+		
+		// 세션에 사용자 정보 등록
+		m.setMemId(email);
+		m.setMemName(name);
+		
+		Member userInfo = memberService.findMember(m);
+		
+		int memNo = userInfo.getMemNo();
+		Image profile = memberService.selectProfile(memNo);
+		
+		if (userInfo.getMemId() != null) {
+			session.setAttribute("loginUser", userInfo);
+            session.setAttribute("signIn", apiResult);
             session.setAttribute("profile", profile);
         }
 
-        return "common/main";
-    }
+		return "common/main";
+	}
+	
+	
+//	@RequestMapping(value="/kakaoLogin")
+//    public String login(@RequestParam("code") String code, HttpSession session, Member m) {
+//		System.out.println("code : " + code);
+//
+//        String access_Token = memberService.getAccessToken(code);
+//        System.out.println("access_Token : " + access_Token);
+//        
+//        Member userInfo = memberService.getUserInfo(access_Token);
+//        System.out.println("login Controller : " + userInfo);
+//        
+//        int memNo = userInfo.getMemNo();
+//        Image profile = memberService.selectProfile(memNo);
+//        
+//        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+//        if (userInfo.getMemId() != null) {
+//        	session.setAttribute("loginUser", userInfo);
+//            session.setAttribute("access_Token", access_Token);
+//            session.setAttribute("profile", profile);
+//        }
+//
+//        return "common/main";
+//    }
 	
 	
 	@RequestMapping(value="/logout")
