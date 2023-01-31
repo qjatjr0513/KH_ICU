@@ -58,7 +58,7 @@
       <br />
       <div class="btn-group2">
         <button>이전</button>
-        <button type="button" id="payBtn" onclick="requestPay();">결제</button>
+        <button type="button" id="payBtn">결제</button>
       </div>
     </section>
 
@@ -72,22 +72,15 @@
       let email = "${loginUser.email}";
       let phone = "${loginUser.phone}";
 
-      function requestPay() {
-        var IMP = window.IMP;
+      $(document).ready(function(){
+   	   	  
+    	var IMP = window.IMP;
         var code = "imp20075413";
-        IMP.init(code);
-        $.ajax({
-          url: "${contextPath}/accountOfPayment.pe",
-          data:{
-            paNo : paNo,
-            payment : "card",
-            price : totalPrice
-          },
-          type: "post",
-          success: function (data) {
-            
-            // IMP.request_pay(param, callback) 결제창 호출
-            IMP.request_pay({ // param
+   		IMP.init(code);
+   		
+   		$("#payBtn").click(function(e){
+   			//결제요청
+   			IMP.request_pay({ // param
                 pg: "html5_inicis",
                 pay_method: "card",
                 merchant_uid: paNo +"번 파티"+totalPrice+"원 결제",
@@ -97,30 +90,41 @@
                 buyer_name: memName,
                 buyer_tel: phone
                 // m_redirect_url: '${contextPath}/payManageListForm.pe' // 결제내역 페이지로 (url변동가능)
-            }, function (rsp) { // callback
-                if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-                  // jQuery로 HTTP 요청
-                  jQuery.ajax({
-                      url: "${contextPath}/paymentVerify.pe",
-                      method: "POST",
-                      headers: { "Content-Type": "application/json" },
-                      data: {
-                          imp_uid: rsp.imp_uid,
-                          merchant_uid: rsp.merchant_uid
-                      }
-                  }).done(function (data) {
-                    // 가맹점 서버 결제 API 성공시 로직
-                    alertInfo();
-                  })
-                } else {
-                  alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-                }
-              });
-              
-            }
-        });
-          
-        }
+            }, function(rsp){
+   				if(rsp.success){//결제 성공시
+   					var msg = '결제가 완료되었습니다';
+   					console.log("결제성공 " + msg);
+   					$.ajax({
+   						url : '${contextPath}/accountOfPayment.pe', 
+   				        type :'POST',
+	   				     data:{
+	   			            paNo : paNo,
+	   			            payment : "card",
+	   			            price : totalPrice
+	   			          },
+   				        success: function(res){
+   				        			        	
+   				          if(res == 1){
+   							 console.log("추가성공");				           
+   				          }else{
+   				             console.log("Insert Fail!!!");
+   				          }
+   				        },
+   				        error:function(){
+   				          console.log("Insert ajax 통신 실패!!!");
+   				        }
+   					}) //ajax
+   					
+   				}
+   				else{//결제 실패시
+   					var msg = '결제에 실패했습니다';
+   					msg += '에러 : ' + rsp.error_msg
+   				}
+   				console.log(msg);
+   			});//pay
+   		}); //check1 클릭 이벤트
+   	}); //doc.ready
+     
         
         function alertInfo() {
           alert(totalPrice + "원 결제되었습니다.");

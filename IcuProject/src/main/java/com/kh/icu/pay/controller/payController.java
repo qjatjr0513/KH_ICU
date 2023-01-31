@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ public class payController {
 	
 	@RequestMapping("accountOfPayment.pe")
 	@ResponseBody
-	public void accountOfPayment(HttpSession session,
+	public int accountOfPayment(HttpSession session,
 								Pay p, int paNo, String payment, int price,
 								PartyJoin pj) {
 		
@@ -44,12 +45,18 @@ public class payController {
 	
 		int result = payService.accountOfPayment(p);
 		System.out.println("*****result : "+result); 
-		if(result > 0) {
+		if(result == 1) {
 			
 			partyService.joinPartyMember(pj);
 		}
+		
+		return result;
 
 	}
+	
+	
+	
+	
 	
 	@RequestMapping("payManageListForm.pe")
 	public String payManageListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
