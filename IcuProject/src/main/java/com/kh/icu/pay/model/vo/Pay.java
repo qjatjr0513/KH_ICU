@@ -14,4 +14,9 @@ public class Pay {
 	private Date payDate;
 	private String remitStatus;
 	
+	private String memName;
+	private String memNickName;
+	private String ottName;
+	private String account;
+	private String paTitle;
 }

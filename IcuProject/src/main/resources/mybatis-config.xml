@@ -25,6 +25,8 @@
 		<typeAlias type="com.kh.icu.faq.model.vo.Faq" alias="faq"/> 
 		<typeAlias type="com.kh.icu.party.model.vo.PartyJoin" alias="partyJoin"/>
 		<typeAlias type="com.kh.icu.common.model.vo.Alarm" alias="alarm"/>  
+		<typeAlias type="com.kh.icu.pay.model.vo.Pay" alias="pay"/> 
+
 	</typeAliases>
   	
 
@@ -35,6 +37,7 @@
      <mapper resource="/mappers/party-mapper.xml"/>
      <mapper resource="/mappers/chatting-mapper.xml"/>
      <mapper resource="/mappers/faq-mapper.xml"/>
+     <mapper resource="/mappers/pay-mapper.xml"/>
   </mappers>
   
   

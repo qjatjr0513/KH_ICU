@@ -21,7 +21,7 @@ public class Party {
 	private Date startDate;
 	private Date endDate;
 	private int dayPrice;
-	private int account;
+	private Long account;
 	private int status;
 	private int leftDate;
 	private int joinNum;

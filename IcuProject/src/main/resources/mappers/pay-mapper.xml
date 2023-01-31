@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="payMapper">
+	
+	<resultMap type="pay" id="payResultSet">
+		<result column="PAY_NO" property="payNo"/>
+		<result column="PA_NO" property="paNo"/>
+		<result column="PAY_MEM_NO" property="payMemNo"/>
+		<result column="PAYMENT" property="payment"/>
+		<result column="PRICE" property="price"/>
+		<result column="PAY_DATE" property="payDate"/>
+		<result column="REMIT_STATUS" property="remitStatus"/>
+		
+		<result column="MEM_NAME" property="memName"/>
+		<result column="MEM_NICKNAME" property="memNickName"/>
+		<result column="PA_TITLE" property="paTitle"/>
+		<result column="OTT_NAME" property="ottName"/>
+		<result column="ACCOUNT" property="account"/>
+	
+	</resultMap>
+	
+	<insert id="accountOfPayment" parameterType="pay">
+	INSERT INTO PAY
+	VALUES (SEQ_PAY.NEXTVAL,
+			#{paNo},
+			#{payMemNo},
+			#{payment},
+			#{price},
+			SYSDATE,
+			'N')
+	</insert>
+	
+	<select id="selectPayManageListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PAY
+	</select>
+	
+	<select id="selectPayManageList" resultMap="payResultSet">
+		SELECT
+			P.PAY_NO,
+			P.PAY_DATE,
+			PA.PA_TITLE,
+			M.MEM_NAME,
+			M.MEM_NICKNAME,
+			O.OTT_NAME,
+			P.PAYMENT,
+			P.PRICE,
+			PA.ACCOUNT,
+			P.REMIT_STATUS
+		FROM PAY P
+		LEFT JOIN MEMBER M ON (P.PAY_MEM_NO = M.MEM_NO)
+		LEFT JOIN PARTY PA ON (P.PA_NO = PA.PA_NO)
+		LEFT JOIN OTT O ON (O.OTT_NO = PA.OTT_NO)
+		ORDER BY P.PAY_NO DESC
+	</select>
+	
+	<update id="remitConfirm" parameterType="int">
+		UPDATE PAY
+		SET REMIT_STATUS = 'Y'
+		WHERE PAY_NO = #{payNo}
+	</update>
+	
+	<select id="selectMyPayListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PAY
+		WHERE PAY_MEM_NO = #{payMemNo}
+	</select>
+	
+	<select id="selectMyPayList" resultType="int" resultMap="payResultSet">
+		SELECT
+			P.PAY_NO,
+			P.PAY_MEM_NO,
+			P.PAY_DATE,
+			PA.PA_TITLE,
+			O.OTT_NAME,
+			P.PAYMENT,
+			P.PRICE
+		FROM PAY P
+		LEFT JOIN PARTY PA ON (P.PA_NO = PA.PA_NO)
+		LEFT JOIN OTT O ON (O.OTT_NO = PA.OTT_NO)
+		WHERE P.PAY_MEM_NO = #{payMemNo}
+		ORDER BY P.PAY_NO DESC
+	</select>
+	
+</mapper>

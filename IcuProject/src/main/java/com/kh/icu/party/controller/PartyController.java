@@ -3,7 +3,6 @@ package com.kh.icu.party.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +18,7 @@ import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
+import com.kh.icu.pay.model.vo.Pay;
 
 @Controller
 public class PartyController {
@@ -136,6 +136,7 @@ public class PartyController {
 		}
 	}
 	
+
 	@RequestMapping("current.py")
 	public String currentPartyList() {
 		return "party/currentPartyListForm";
@@ -145,6 +146,8 @@ public class PartyController {
 	public String endPartyList() {
 		return "party/endPartyListForm";
 	}
+	
+	
 	
 	
 	

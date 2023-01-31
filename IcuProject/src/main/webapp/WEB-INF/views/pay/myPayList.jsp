@@ -17,52 +17,39 @@
     <jsp:include page="../common/header.jsp"/>
     
     <!-- 왼쪽 수직 navbar -->
-    <jsp:include page="../admin/adminNavbar.jsp"/>
+    <jsp:include page="../member/myNavbar.jsp"/>
+
    
- <!-- 결제관리 -->
+ <!-- 결제내역 -->
     <section id="payList">
-      <h2>결제 관리</h2>
+      <h2>결제 내역</h2>
       <hr />
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">결제일자</th>
             <th scope="col">파티명</th>
-            <th scope="col">이름 (닉네임)</th>
             <th scope="col">서비스</th>
             <th scope="col">결제 수단</th>
             <th scope="col">결제 금액</th>
-            <th scope="col">파티장 계좌번호</th>
-            <th scope="col">송금</th>
           </tr>
         </thead>
         <tbody>
           <c:if test="${empty list }">
             <tr id="tableEmpty">
-              <td colspan="8">조회할 회원이 없습니다</td>
+              <td colspan="5">조회할 회원이 없습니다</td>
             </tr>
           </c:if>
           <c:forEach var="p" items="${list }" >
             <tr>
-              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe" method="post">
               <th scope="row">${p.payDate}</th>
               <td>${p.paTitle}</td>
-              <td>${p.memName}(${p.memNickName})</td> 
               <td>${p.ottName}</td> 
               <td>${p.payment}</td>
               <td>${p.price}</td>
-              <td>${p.account}</td>
-              <c:choose>
-                  <c:when test="${p.remitStatus eq 'N'}">
-                    <td><button type="submit" class="btn btn-danger ">취소</button></td>
-                  </c:when>
-                  <c:otherwise>
-                    <td>확인완료</td>
-                  </c:otherwise>
-              </c:choose>
               <input type="hidden" name="payNo" value="${p.payNo}">
-              <input type="hidden" name="remitStatus" value="${p.remitStatus}">
-              </form>
+              <input type="hidden" name="payMemNo" value="${p.payMemNo}">
+                  
             </tr>
           </c:forEach>
         </tbody>

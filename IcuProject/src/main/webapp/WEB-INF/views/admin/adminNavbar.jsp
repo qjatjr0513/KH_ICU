@@ -38,7 +38,7 @@
           <hr />
         </div>
         <div class="pay__manage">
-          <h2><a href="${contextPath }/payManage.pe">결제 관리</a></h2>
+          <h2><a href="${contextPath }/payManageListForm.pe">결제 관리</a></h2>
           <hr />
         </div>
         <div class="inquiry__manage">

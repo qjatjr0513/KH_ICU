@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
+import com.kh.icu.pay.model.vo.Pay;
 
 public interface PartyService {
 	
@@ -21,5 +22,6 @@ public interface PartyService {
 	public List<PartyJoin> partyJoinMem(int paNo);
 	
 	public int joinPartyMember(PartyJoin pj);
+	
 
 }

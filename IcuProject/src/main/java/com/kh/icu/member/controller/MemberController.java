@@ -504,6 +504,7 @@ public class MemberController {
 	public String blackCancel(int memNo) {
 		
 		int result = memberService.blackCancel(memNo);
+		
 		System.out.println("memNo :" + memNo);
 		
 		return "redirect:memBlackListForm.me";

@@ -29,7 +29,7 @@
           <hr />
         </div>
         <div class="pay__manage">
-          <h2><a href="${contextPath }/payManage.pe">결제 내역</a></h2>
+          <h2><a href="${contextPath }/myPayListForm.pe">결제 내역</a></h2>
         </div>
       </div>
     </section>

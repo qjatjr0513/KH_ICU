@@ -2,14 +2,13 @@ package com.kh.icu.party.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.icu.ott.model.vo.Ott;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
+import com.kh.icu.pay.model.vo.Pay;
 
 @Repository
 public class PartyDao {
@@ -49,6 +48,7 @@ public class PartyDao {
 		return sqlSession.insert("partyMapper.joinPartyMember", pj);
 		
 	}
+	
 	
 	
 	

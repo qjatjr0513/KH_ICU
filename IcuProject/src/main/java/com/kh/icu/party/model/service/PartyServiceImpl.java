@@ -12,6 +12,7 @@ import com.kh.icu.ott.model.vo.Ott;
 import com.kh.icu.party.model.dao.PartyDao;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
+import com.kh.icu.pay.model.vo.Pay;
 
 
 @Service
@@ -63,6 +64,8 @@ public class PartyServiceImpl implements PartyService{
 	public int joinPartyMember(PartyJoin pj) {
 		return partyDao.joinPartyMember(sqlSession, pj);
 	}
+	
+	
 	
 	
 }
