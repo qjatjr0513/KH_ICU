@@ -79,56 +79,131 @@
       <hr style="width: 50%; margin: auto" />
     </section>
     <br />
-    <!-- 댓글 -->
-    <section id="comment">
-      <div class="comment__text">
-        <textarea name="" id="" cols="60" rows="4"></textarea> &nbsp;
-        <button>입력</button>
-      </div>
-      <hr />
-      <div class="member__comment">
-        <div class="first-box">
-          <div class="member__photo">
-            <div class="photoImg">
-              <i class="fa-solid fa-user fa-2x"></i>
+    
+             <!-- 댓글등록기능 -->
+         
+         <div class="card mb-2" id="comment">
+            <div class="card-header bg-light">
+                    <i class="fa fa-comment fa"></i> REPLY
             </div>
-            <h4>파티원</h4>
-          </div>
-          <div class="party__comment">
-            <p>
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-            </p>
-          </div>
-        </div>
-        <br />
-        <div class="first-box">
-          <div class="member__photo">
-            <div class="photoImg">
-              <i class="fa-solid fa-user fa-2x"></i>
+            <div class="card-body">
+               <ul class="list-group list-group-flush">
+                   <li class="list-group-item">
+                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+                   <c:if test="${not empty loginUser}">
+                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
+                   </c:if>
+                   </li>
+               </ul>
             </div>
-            <h4>파티원</h4>
-          </div>
-          <div class="party__comment">
-            <p>
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-              너무재밌어요! 정말 재밌어서 다시 한번 꼭 봐보고싶을 정도에요!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    </form>
+         </div>
+         
+         <div id="comment">
+         <table id="replyArea" class="table" align="center" >
+            <thead>
+               <tr>
+                  <td colspan="3"><b>댓글(${list.size()})</b></td>
+               </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="r" items="${list }" varStatus="i">
+				<tr>
+               <td style="width: 30px;">
+               <c:choose>
+                  <c:when test="${!empty r.changeName}">
+                     <img id="replyWriter-img" class='view-img' src="${contextPath }${r.filePath }${r.changeName}">
+                  </c:when>
+                  <c:otherwise>
+                     <i class="fa-solid fa-user fa-lg"></i>
+                </c:otherwise>
+               </c:choose>
+               </td>
+               <td id="rWriter">${r.replyWriter }</td>
+					<td id="rContent">${r.replyContent }</td>
+					<td>${r.createDate }</td>
+					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
+					<c:if test="${r.replyWriter == loginUser.memNickname }">
+					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
+					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.bo?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
+					</c:if>
+				</tr>
+			</c:forEach>
+               
+            </tbody>
+         </table>
+         </div>
     
     <script>
+
+		// 파티장일 경우 참여하기 버튼 가리기 
 	    $(function(){
-	    	// 파티장일 경우 참여하기 버튼 가리기 
 	    	if(${loginUser.memNo} == ${p.paName}){
 	    		document.getElementById("join").style.display = "none";
 	    	}
 	    });
+	    
+	    
+		// 댓글 
+	    const replyWriter = "${loginUser.memNo}";
+        const memNickname = "${p.memNickname}";
+        const paNo = "${p.paNo}";
+        const paName = "${p.paName}";	
+
+        
+        function insertReply(){
+           console.log("댓글버튼 실행");
+           
+           $.ajax({
+              url : "${contextPath}/insertReply.pa",
+              data : {
+                 refTno : ${p.paNo},
+                 replyContent : $("#replyContent").val()
+              },
+              type : "post",
+              success : function(result){
+                 $("#replyContent").val("");
+                 if(result == "1"){
+                 	console.log("reply::socket>>", socket);
+                 	
+                 	if(socket){
+                 		if(replyWriter != memNickname ){
+                 		let socketMsg = "reply,"+ replyWriter + "," + memNickname + "," +paName + "," + paNo;
+                 		console.log("sssssssmsg>>", socketMsg);
+                 		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
+                 		socket.send(socketMsg)                        			
+                 		}
+                 	}
+                 	
+                    Swal.fire(
+                            icon:'success',
+                            title: "댓글등록 성공"
+                      }).then(function(){
+                     	 location.href=contextPath+"/partyDetail.py/"+paNo;
+                      })
+                    
+                 }else{
+                    Swal.fire({
+                            icon:'error',
+                            title: "댓글등록 실패"
+                      });
+                 }
+              },
+              complete : function(){
+                 $("#replyContent").val("");
+              }
+           });
+        }
+           
+	     $('#btnSend').on('click', function(evt){
+	    	 evt.preventDefault();
+	    	 if(socket.readyState !== 1) return;
+	    	 
+	    	 let msg = $("textarea#replyContent").val();
+	    	 console.log(msg);
+	    	 socket.send(msg);
+	     });
+	     
+
     </script>
   </body>
 </html>

@@ -33,6 +33,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="JOIN_DATE" property="joinDate"></result>
 	</resultMap>
 	
+	<resultMap type="reply" id="replyResultSet">
+		<id column="REPLY_NO" property="replyNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="MEM_NICKNAME" property="replyWriter"/>
+		<result column="CREATE_DATE" property="createDate"/>
+		<result column="REF_TNO" property="refTno"/>
+		<result column="TABLE_CD" property="tableCd"/>
+		<result column="STATUS" property="status"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
 	<select id="getPrice" parameterType="String" resultType="int">
 		SELECT OTT_PRICE 
 		FROM OTT 
@@ -78,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN OTT O USING(OTT_NO)
 	</select>
 	
-	<select id="searchParty" parameterType="map" resultMap="partyResultSet">
+	<select id="findParty" parameterType="map" resultMap="partyResultSet">
 		SELECT P.PA_NO,
 			   O.OTT_NAME,
 			   PA_TITLE,
@@ -103,12 +115,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        
 			<if test="month != ''">
 	        <choose>
-				<when test="month != '12'">
-	        		<![CDATA[PA_NO IN (SELECT PA_NO FROM PARTY WHERE TRUNC(END_DATE-SYSDATE+2,0) < TO_NUMBER(#{month})*30)]]>
-	        	</when>
-				<when test="month == '12'"> 
+	        	<when test="month == '12' || month == '0'"> 
 					1 = 1
 	        	</when>
+				<otherwise>
+	        		<![CDATA[PA_NO IN (SELECT PA_NO FROM PARTY WHERE TRUNC(END_DATE-SYSDATE+2,0) < TO_NUMBER(#{month})*30)]]>
+	        	</otherwise>
 	        </choose>
 	       </if>
 	   </if>
@@ -144,6 +156,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="joinPartyMember" parameterType="PartyJoin">
 		INSERT INTO PARTY_JOIN
 		VALUES (#{paNo},#{memNo},SYSDATE)
+	</insert>
+	
+	<select id="selectReply" parameterType="int" resultMap="replyResultSet">
+	  SELECT 
+         R.REF_TNO,
+         R.REPLY_NO,
+         R.REPLY_CONTENT,
+         M.MEM_NICKNAME,
+         R.CREATE_DATE,
+         I.CHANGE_NAME AS "CHANGE_NAME",
+         I.FILE_PATH AS "FILE_PATH"
+      FROM REPLY R
+      LEFT JOIN PARTY P ON (P.PA_NO = R.REF_TNO)
+      LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = M.MEM_NO)
+	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER)
+      WHERE P.PA_NO = #{paNo} AND  R.STATUS = 'N'
+	</select>
+	
+	<insert id="insertReply" parameterType="reply" >
+		INSERT INTO REPLY(REPLY_NO, REPLY_WRITER, REF_TNO, REPLY_CONTENT , TABLE_CD)
+		VALUES (SEQ_RNO.NEXTVAL, #{replyWriter}, #{refTno}, #{replyContent} , 'P')
 	</insert>
 	
 	

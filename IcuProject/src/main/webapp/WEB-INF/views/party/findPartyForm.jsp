@@ -19,44 +19,46 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
 
+	<form action="${contextPath}/findParty.py">
     <section id="about" class="section section__container">
       <div class="about__majors">
       
 
        	<div class="major">
-          <button class="major_btn" value="1" id="netflix" name="netflix">
+          <button type='button' class="major_btn" value="1" id="netflix" name="netflix">
             <div class="major__icon netfilx"></div>
           </button>
           <input id="netflix" type="checkbox" name="ottList" value="1" />
           <h2 class="major__title">Netflix</h2>
         </div>
-
+        
         <div class="major">
-          <button class="major_btn" value="2" id="watcha" name="watcha">
-            <div class="major__icon watcha"></div>
-          </button>
-          <input id="watcha" type="checkbox" name="ottList" value="2" />
-          <h2 class="major__title">Watcha</h2>
-        </div>
-
-        <div class="major">
-          <button class="major_btn" value="3" id="wavve" name="wavve">
+          <button type='button' class="major_btn" value="2" id="wavve" name="wavve">
             <div class="major__icon wavve"></div>
           </button>
-          <input id="wavve" type="checkbox" name="ottList" value="3" />
+          <input id="wavve" type="checkbox" name="ottList" value="2" />
           <h2 class="major__title">Wavve</h2>
+        </div>
+        
+        
+        <div class="major">
+          <button type='button' class="major_btn" value="3" id="disney" name="disney">
+            <div class="major__icon disney"></div>
+          </button>
+          <input id="disney" type="checkbox" name="ottList" value="3" />
+          <h2 class="major__title">Disney +</h2>
         </div>
 
         <div class="major">
-          <button class="major_btn" value="4" id="disney" name="disney">
-            <div class="major__icon disney"></div>
+          <button type='button' class="major_btn" value="4" id="watcha" name="watcha">
+            <div class="major__icon watcha"></div>
           </button>
-          <input id="disney" type="checkbox" name="ottList" value="4" />
-          <h2 class="major__title">Disney +</h2>
+          <input id="watcha" type="checkbox" name="ottList" value="4" />
+          <h2 class="major__title">Watcha</h2>
         </div>
         
         <div class="major">
-          <button class="major_btn" value="5" id="appleTV" name="appleTV">
+          <button type='button' class="major_btn" value="5" id="appleTV" name="appleTV">
             <div class="major__icon appleTv"></div>
           </button>
           <input id="appleTV" type="checkbox" name="ottList" value="5" />
@@ -69,12 +71,13 @@
     <section id="periodOfUse">
       <div class="periodOfUse-container">
         <span>이용기간 &nbsp;:  &nbsp;</span>
-        <input type="range" id="month" name="month" min="1" max="12" step="1" value="0" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <input type="range" id="month" name="month" min="0" max="12" step="1" value="12" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
         <span id="value1">개월수</span>
         <br><br><br>
-        <button onclick="searchParty">검색</button>
+        <button>검색</button>
       </div>
     </section>
+    </form>
     
     <!-- 파티 카드 -->
     <section id="party__container">
@@ -83,7 +86,8 @@
 			<td colspan="5">파티방이 없습니다. 원하는 파티를 만들어보세요. </td>
 		 </tr>
 	  </c:if>
-				
+		
+		<c:set var="doneLoop" value="false"/>
 		<c:set var="count" value="0"/>
         <div
         id="carouselExampleControls"
@@ -95,15 +99,19 @@
           <c:forEach begin="0" end="${fn:length(list)/8 * 1.0}" step="1" varStatus="x">
           <c:choose>
          	 <c:when test="${count == 0}">
-            	<div class="carousel-item" data-bs-interval="100000"> <!-- 8개 -->
+            	<div class="carousel-item active" data-bs-interval="100000"> <!-- 8개 -->
          	 </c:when>
          	 <c:otherwise>
-            	<div class="carousel-item active" data-bs-interval="100000"> <!-- 8개 -->
+            	<div class="carousel-item" data-bs-interval="100000"> <!-- 8개 -->
          	 </c:otherwise>
           </c:choose>
+          
           <c:forEach begin="${x.begin * 2}" end="${x.begin *2+1}" step="1" varStatus="j">
+          <c:if test="${not doneLoop}">
             <div class="partyCard"> <!-- 4개 -->
+		      
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
+			  <c:if test="${not doneLoop}">
 				  <div class="cardBox"> <!-- 1개 -->
 	                  <h4>${list[count].ottName}</h4>
 	                  <span>${list[count].paTitle}</span> <br />
@@ -120,9 +128,20 @@
 	                  <button class="joinBtn" onclick="movePage(${list[count].paNo});">참여하기</button>
 	              </div>
 				  <c:set var="count" value="${count+1 }"/>
+			      
+				  <c:if test="${count > fn:length(list)-1}">	 
+					<c:set var="doneLoop" value="true"/>
+				  </c:if> 
+			  </c:if>
 		      </c:forEach> 
+		      
 		    </div>  
+		    <c:if test="${count > fn:length(list)-1}">	 
+			    <c:set var="doneLoop" value="true"/>
+			</c:if> 
+		  </c:if>
 		  </c:forEach>
+		  
 		  <br>
 		  </div>
 		  </c:forEach>
@@ -167,6 +186,21 @@
 		});
 		
 		
+ 		function searchParty(){
+			var ottList = [];
+			  $("input[name='ottList']:checked").each(function(i){
+				 ottList.push($(this).val());
+			  });
+			  
+
+	 		console.log("! : " +ottList);
+			
+			$.ajax({
+		           url : '${contextPath}/findParty.py',
+		           data : {ottList : ottList,
+		        	   	   month : $("#month").val()}
+			})
+		};
     </script>
   </body>
 </html>

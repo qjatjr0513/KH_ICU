@@ -1,9 +1,11 @@
 package com.kh.icu.party.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
@@ -57,28 +61,36 @@ public class PartyController {
 		
 	}
 	
-	// 파티 찾기
+	// 파티 찾기 (리스트 & 검색)
 	@RequestMapping("/findParty.py")
-	public String findPartyForm(Model model,
-								@RequestParam(value="ottList[]", defaultValue="") List<Integer> ottList,
+	public ModelAndView findPartyForm(ModelAndView mav,
+								HttpServletRequest req,
 								@RequestParam(value="month", defaultValue="") String month) {
+		String ottListarr [] = req.getParameterValues("ottList");
+		String ottList = "";
+		
+		if(ottListarr != null) {
+		 ottList = String.join(",",ottListarr);
+		}
+		
+
+		System.out.println("***ottList" + ottList);
+		System.out.println("***month" + month);
 		
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("ottList", ottList);
 		map.put("month", month);
-		
-		System.out.println("***ottList" + ottList);
-		System.out.println("***month" + month);
-		
+		 
 		List<Party> list = new ArrayList<>(); 
 		
-		list = partyService.searchParty(map);
+		list = partyService.findParty(map);
 		
-		model.addAttribute("list", list);
+		mav.addObject("list", list);
+		mav.setViewName("party/findPartyForm");
 		System.out.println("***list(con/list)" + list);
 		
-		return "party/findPartyForm";
+		return mav;
 	}
 	
 	// 파티 디테일
@@ -87,10 +99,12 @@ public class PartyController {
 		
 		Party p = partyService.partyDetailForm(paNo);
 		List<PartyJoin> pj = partyService.partyJoinMem(paNo);
+	    ArrayList<Reply> list = partyService.selectReplyList(paNo);
 		
 		model.addAttribute("p", p);
 		model.addAttribute("pj", pj);
-		System.out.println("pj : "+ pj);
+		System.out.println("list : "+ list); 
+		System.out.println("pj : "+ pj); 
 		
 		return "party/partyDetailForm";
 	}
@@ -147,6 +161,29 @@ public class PartyController {
 		return "party/endPartyListForm";
 	}
 	
+    // 댓글 등록
+    @RequestMapping("insertReply.pa")
+    @ResponseBody
+    public String insertReply(Reply r, HttpSession session) {
+       System.out.println("***r : "+r);
+       Member m = (Member)session.getAttribute("loginUser");
+       if(m != null) {
+     	  String memNo = Integer.toString(m.getMemNo());
+          r.setReplyWriter(memNo);
+       }
+       if(r.getReplyContent() == "") {
+          return "0";
+       }else {
+          int result = partyService.insertReply(r);
+          
+          if( result > 0) {
+             return "1";
+          } else { 
+             return "0";
+          }
+       }
+    }
+
 	
 	
 	

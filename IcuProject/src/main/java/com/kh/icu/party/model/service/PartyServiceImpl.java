@@ -1,14 +1,14 @@
 package com.kh.icu.party.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.icu.ott.model.vo.Ott;
+import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.party.model.dao.PartyDao;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyJoin;
@@ -35,16 +35,10 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.insertParty(sqlSession, p);
 	}
 	
-	// 파티 찾기 (리스트)
+	// 파티 찾기 (리스트 & 검색)
 	@Override
-	public List<Party> findPartyForm() {
-		return partyDao.findPartyForm(sqlSession);
-	};
-	
-	// 파티 검색 (리스트)
-	@Override
-	public List<Party> searchParty(HashMap<String, Object> map){
-		return partyDao.searchParty(sqlSession, map);
+	public List<Party> findParty(HashMap<String, Object> map){
+		return partyDao.findParty(sqlSession, map);
 	};
 	
 	// 파티 디테일
@@ -63,6 +57,18 @@ public class PartyServiceImpl implements PartyService{
 	@Override
 	public int joinPartyMember(PartyJoin pj) {
 		return partyDao.joinPartyMember(sqlSession, pj);
+	}
+	
+	// 댓글 불러오기 (리스트)
+	@Override
+	public ArrayList<Reply> selectReplyList(int paNo) {
+		return partyDao.selectReplyList(sqlSession, paNo);
+	}
+
+	// 댓글 등록
+	@Override
+	public int insertReply(Reply r) {
+		return partyDao.insertReply(sqlSession, r);
 	}
 	
 	
