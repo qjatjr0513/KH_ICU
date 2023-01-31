@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!-- 왼쪽 수직 navbar -->
-    <section id="vertical-navbar">
+    <section id="vertical-navbar" >
       <div class="navbar-container">
         <div class="member__manage">
           <h2>회원정보</h2>

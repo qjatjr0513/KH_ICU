@@ -6,6 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>ICU 헤더</title>
+<!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+      integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+      integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
 <!-- bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -43,45 +70,30 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
 
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css?family=Poor+Story:400" rel="stylesheet">
 
     <!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
 
-    <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
+    
 
     <!-- sweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
     <!-- Toastr -->
-    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <style>
-      #profile-img{
-        vertical-align: middle;
-        width: 200%;
-        height: 150%;
-        border-radius: 50%;
-        left: -52%;
-        position: relative;
-        top: -21%;
-      }
-    </style>
 </head>
 <body>
-	
-	<!-- Navbar -->
+   
+   <!-- Navbar -->
     <nav id="navbar">
       <div class="navbar__logo">
         <a href="${contextPath }/main">
@@ -90,44 +102,46 @@
       </div>
       <ul class="navbar__menu">
       <c:if test="${loginUser.memId != 'admin'}">
-        <li class="navbar__menu__item active1" data-link="#home">
-        	<a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
+        <li class="navbar__menu__item active1">
+           <a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
         <li class="navbar__menu__item" data-link="#about">
-        	 <a href="${contextPath }/findParty.py" style="text-decoration: none; color:black;">파티찾기</a></li>
+            <a href="${contextPath }/findParty.py" style="text-decoration: none; color:black;">파티찾기</a></li>
         </li>
-        <li class="navbar__menu__item" data-link="#skills">
+        <li class="navbar__menu__item">
            <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
         </li>
 
-        <li class="navbar__menu__item" data-link="#work">
-        	<a href="${contextPath }/chat/chatRoomList" style="text-decoration: none; color:black;">실시간 문의</a>
-        	</li>
         <li class="navbar__menu__item">
-        	<a href="${contextPath }/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
+           <a href="${contextPath }/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
         <li class="navbar__menu__item">
         <a href="${contextPath }/faq.fq" style="text-decoration: none; color:black;">FAQ</a></li>
-        &nbsp;&nbsp;
-        <li>
+        
+       
         </c:if>
         <c:choose>
-        	<c:when test="${ empty loginUser }">
-        	<!-- 로그인 전 -->
-          		<a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black;">로그인</a>
-          	</c:when>
-          	<c:when test="${ loginUser.memId == 'admin' }">
-        	<!-- 로그인 전 -->
-          		<a href="${contextPath }/logout.me" style="text-decoration: none; color:black;">로그아웃</a>
-          	</c:when>
-          	<c:otherwise>
-          		<div class="dropdown">
-		          <button
-		            class="btn btn-secondary dropdown-toggle profile"
-		            type="button"
-		            data-bs-toggle="dropdown"
-		            aria-expanded="false"
-		          >
-		 
-              <c:choose>
+           <c:when test="${ empty loginUser }">
+           <!-- 로그인 전 -->
+           <li class="navbar__menu__item">
+                <a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black; margin-top:16px;">로그인</a>
+             </li>
+             </c:when>
+             <c:when test="${ loginUser.memId == 'admin' }">
+           <!-- 로그인 전 -->
+           <li>
+                <a href="${contextPath }/logout.me" style="text-decoration: none; color:black;">로그아웃</a>
+             </li>
+             </c:when>
+             <c:otherwise>
+             <li class='navbar__icon'>
+                <div class="dropdown">
+                <button
+                  class="btn btn-secondary profile"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                
+                <c:choose>
                 <c:when test="${!empty profile}">
                   <img id="profile-img" class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
                 </c:when>
@@ -135,17 +149,21 @@
                   <i class="fa-solid fa-user fa-lg"></i>
                 </c:otherwise>
               </c:choose>
-		          </button>
-		          <ul class="dropdown-menu">
-		            <li><span class="dropdown-item">${loginUser.memNickname}</span></li>
-		            <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
-		            <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
-		          </ul>
-		        </div>
-		        
-		      <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle alert" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-bell"></i>
+                
+                  
+                </button>
+                <ul class="dropdown-menu">
+                  <li><span class="dropdown-item">${loginUser.memNickname}</span></li>
+                  <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
+                  <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
+                </ul>
+              </div>
+             </li>
+             &nbsp;
+             <li class='navbar__icon'>
+              <div class="dropdown">
+              <button class="btn btn-secondary alert" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bell fa-lg"></i>
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">알림1</a></li>
@@ -153,79 +171,74 @@
                 <li><a class="dropdown-item" href="#">알림3</a></li>
               </ul>
             </div>
-          	</c:otherwise>
+            </li>
+             </c:otherwise>
           </c:choose>
-        </li>
+        
       </ul>
-      <!-- Toggle button -->
-      <button class="navbar__toggle-btn">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      
     </nav>
       <!-- <div id="socketAlert" class="alert alert-success" role="alert" style="display:none; margin-top:90px;"></div> -->
     <!-- sockjs  -->
-	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-	<script>
-		var socket = null;
-		const contextPath = "${contextPath}";
-		let chatWs;
-		let chatSocket = new SockJS(contextPath+"/chat"); 
-		
-		$(document).ready(function(){
-			connectWS();
-		});
-		
-		function connectWS(){
-			var ws = new SockJS(contextPath+"/alram");
-			socket = ws;
-			
-			ws.onopen = function(){ // 커넥션이 연결되면 실행
-				console.log('Info: connection opend.');
-				
-			};
-			
-			ws.onmessage = function (event){
-				console.log("ReceiveMessage:", event.data+'\n');
-				/* let $socketAlert =  $('div#socketAlert');
-				$socketAlert.html(event.data);
-				$socketAlert.css('display', 'block');
-				
-				setTimeout( function(){
-					$socketAlert.css('display', 'none');
-				}, 5000);*/
-				
-				toastr.options = {
-						"closeButton": false,
-						  "debug": false,
-						  "newestOnTop": false,
-						  "progressBar": true,
-						  "positionClass": "toast-bottom-right",
-						  "preventDuplicates": false,
-						  "onclick": null,
-						  "showDuration": "100",
-						  "hideDuration": "1000",
-						  "timeOut": "5000",
-						  "extendedTimeOut": "5000",
-						  "showEasing": "swing",
-						  "hideEasing": "linear",
-						  "showMethod": "fadeIn",
-						  "hideMethod": "fadeOut"
-	                  };
-				toastr.options.onclick = function() { location.href="${contextPath}/list.bo" }
-				toastr.success(event.data);
-			};
-			
-			ws.onclose = function (event) { 
-				console.log('Info: connection closed.');
-				//setTimeout(function(){ connect();}, 1000); // retry connection()!!
-			};
-			ws.onerror = function (err) { console.log('Error:;', err);};
-			
-		}
-		
-		
-		
-		
-	</script>
+   <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+   <script>
+      var socket = null;
+      const contextPath = "${contextPath}";
+	  let chatWs;
+	  let chatSocket = new SockJS(contextPath+"/chat"); 
+      
+      $(document).ready(function(){
+         connectWS();
+      });
+      
+      function connectWS(){
+         var ws = new SockJS(contextPath+"/alram");
+         socket = ws;
+         
+         ws.onopen = function(){ // 커넥션이 연결되면 실행
+            console.log('Info: connection opend.');
+            
+         };
+         
+         ws.onmessage = function (event){
+            console.log("ReceiveMessage:", event.data+'\n');
+            /* let $socketAlert =  $('div#socketAlert');
+            $socketAlert.html(event.data);
+            $socketAlert.css('display', 'block');
+            
+            setTimeout( function(){
+               $socketAlert.css('display', 'none');
+            }, 5000);*/
+            
+            toastr.options = {
+                  "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "5000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                     };
+            toastr.options.onclick = function() { location.href="${contextPath}/list.bo" }
+            toastr.success(event.data);
+         };
+         
+         ws.onclose = function (event) { 
+            console.log('Info: connection closed.');
+            //setTimeout(function(){ connect();}, 1000); // retry connection()!!
+         };
+         ws.onerror = function (err) { console.log('Error:;', err);};
+         
+      }
+      
+   </script>
 </body>
 </html>

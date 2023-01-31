@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+table {
+	background-color:white;
+}
+
+.joinButton{
+	background-color: gray;
+	color:white;
+	border-radius:5px;
+}
+
+.form-controll{
+	border:none;
+	border-bottom:1px solid gray;
+}
+
+.form-controll:focus{
+	outline:none;
+	border:none;
+	border-bottom:1px solid gray;
+}
+
+/* 모달창 css */
+.modal-title{
+	font-weight:bold;
+}
+
+.modal-body{
+	height:100px;
+	text-align:center;
+	margin-top:35px;
+}
+
+.titleText{
+	font-size:20px;
+}

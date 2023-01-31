@@ -1,5 +1,9 @@
 @import url('main.css');
 
+a {
+	text-decoration : none;
+}
+
 #main__logo,
 #input__container,
 #loginButton {
@@ -8,7 +12,7 @@
 
 /* 로고 */
 #main__logo {
-  margin-top: 180px;
+  margin-top: 130px;
   /* background-color: aquamarine; */
 }
 
@@ -16,55 +20,99 @@
 #input__container {
   /* background-color: bisque; */
   padding: 20px;
+
+}
+#input__container i{
+	color:var(--color-orange);
+
 }
 
 .info {
   width: 400px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
   border: none;
-  box-shadow: 0 0 7px 1px lightgray;
+  background-color:white;
 }
 
 .input__id,
 .input__pwd {
-  padding: 13px;
-  padding-right: 110px;
+  padding: 5px;
+  border:none;
+  box-shadow:0 0 3px 1px rgb(177, 176, 176);
+  width:400px;
+  margin:auto;
+  border-radius:8px;
+  background-color:white;
+}
+.input__pwd{
+    margin-top: 8px;	
+}
+.input__id>input,
+.input__pwd>input{
+	width:300px;
+}
+
+.input__id>input:focus,
+.input__pwd>input:focus{
+	outline:none;
+}
+
+.input__id>input::placeholder,
+.input__pwd>input::placeholder{
+	padding:2px;
 }
 
 .input__id > span,
 .input__pwd > span {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .join-container {
   /* background-color: rgb(252, 220, 220); */
   padding: 10px;
+  text-align:center;
 }
 .join-container > a {
   color: black;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
+}
+.join-container > a:hover{
+	color:black;
 }
 
 /* 소셜로그인, 홈페이지 로그인 */
-#loginButton {
-  /* background-color: rgb(182, 225, 227); */
-  /* padding: 20px; */
-}
+
 .loginbtn {
   padding: 4px;
 }
 
-.loginbtn > button {
+.loginbtn > button, #naverlogin {
   border: 1px solid black;
   border-radius: 10px;
   width: 400px;
   height: 55px;
 }
+#naverlogin{
+ background-color: rgb(98, 202, 98);	
+ position:relative;
+}
+#naverlogin > span {
+	position:absolute;
+	top:12px;
+	left:150px;
+}
+#naverlogin > img {
+  width: 50px;
+  position: absolute;
+  top: 2.3px;
+  left: 3px;
+  border-radius: 10px;
+}
 .login__button > button,
-.naver__button > button,
+#naverlogin ,
 .kakao__button > button {
   color: #ffff;
   font-weight: 900;
@@ -102,3 +150,5 @@
   top: 8px;
   left: 3px;
 }
+
+

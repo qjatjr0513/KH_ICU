@@ -56,6 +56,7 @@ ul {
   padding-left: 0;
 }
 
+
 /* Typography */
 h1 {
   font-size: var(--font-large);
@@ -105,19 +106,21 @@ button {
   color: var(--color-black);
   padding: 16px;
   transition: all 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 10000;
+  font-family:'Poor Story', cursive;
 }
 
 .navbar__menu {
   display: flex;
   font-weight: var(--weight-bold);
   margin-bottom: 0;
-}
+  font-size:18px;
+}     
 
 #navbar.navbar--dark {
   background-color: white;
   padding: 6px;
-  z-index: 2;
+  z-index: 10000;
   height: 95px;
 }
 .navbar__logo {
@@ -127,55 +130,133 @@ button {
 }
 
 .navbar__menu__item {
-  padding: 8px 12px;
+  padding: 20px 12px;
   margin: 0 4px;
   cursor: pointer;
   border-radius: var(--size-border-radius);
   border: 1px solid transparent;
   /* 배경과 같은색 테두리를 줘서 일그러짐 방지 */
-  transition: all var(--animation-duration) ease-out;
+  transition: all 0.1s;
   z-index: 1;
 }
 
 .navbar__menu__item:hover {
   border-color: var(--color-white);
-  background-color: var(--color-orange);
   border-radius: 4px;
+  transform:scale(1.1);
 }
 
-.navbar__toggle-btn {
-  position: absolute;
-  top: 22px;
-  right: 32px;
-  font-size: 24px;
-  color: var(--color-white);
-  display: none;
-}
 #navbar {
   background-color: white;
   z-index: 100;
 }
-.navbar__menu__item {
-  margin-top: 7px;
-}
-.dropdown {
-  margin-top: 3px;
-}
+
+
 .profile {
   border-radius: 50%;
-  border: 1px solid rgb(244, 240, 240);
-  width: 50px;
-  height: 50px;
+  border: 1px solid var(--color-orange);
+  width: 43px;
+  height: 43px;
   background-color: var(--color-orange);
+  transition:all 0.1s;
 }
 .profile:hover {
-  border-radius: 50%;
-  transform: scale(1.1);
   background-color: var(--color-orange);
-  border: none;
+  border:1px solid var(--color-orange);
 }
-
+.dropdown-item{
+	font-weight:bold;
+}
 .dropdown-item:hover {
   background-color: var(--color-orange);
   color: #ffffff;
+}
+
+/* Contact */
+#contact {
+  background-color: var(--color-grey);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.contact__title {
+  color: var(--color-white);
+  padding-left: 200px;
+}
+.contact__email {
+  font-size: 14px;
+  color: var(--color-white);
+}
+.contact__email,
+.contact__links,
+.contact__rights {
+  text-align: center;
+  color: var(--color-white);
+}
+.contact__title {
+  margin-bottom: 32px;
+  margin-top: -16px;
+}
+
+.contact__rights {
+  margin-bottom: -4px;
+  font-size: var(--font-small);
+}
+
+.contact__links {
+  font-size: var(--font-large);
+  margin: 24px 0;
+}
+.contact__links a:hover {
+  color: white;
+}
+.contact__links i:hover {
+  transform: scale(1.1);
+}
+
+.contact__links img:hover {
+  transform: scale(1.1);
+}
+
+.contact__box {
+  text-align: left;
+  width: 400px;
+  margin-left: 200px;
+}
+.contact__content {
+  color: var(--color-white);
+  font-size: 12px;
+}
+
+
+.alert {
+  border-radius:50%;
+  width: 43px;
+  height: 43px;
+  transition:all 0.1s;
+  background-color:var(--color-orange);
+  color:white;
+  position:relative;
+  
+}
+.alert > i {
+	position:absolute;
+	top:20px;
+	left:12px;
+}
+.alert:hover {
+  border:1px solid var(--color-orange);
+  background-color:var(--color-orange);
+}
+
+.navbar__icon{
+	margin-top:12px;
+}
+.view-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position:absolute;
+	top:0;
+	left:0;
+	border:2px solid black;
 }

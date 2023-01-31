@@ -13,7 +13,7 @@
 <body>
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
-    
+    <br>
 	<!-- Logo -->
     <div id="main__logo">
       <img src="resources/images/navbarLogo.png" />
@@ -24,13 +24,15 @@
       <table>
         <tr>
           <td><label>이름</label></td>
-          <td><input type="text" placeholder="사용자 이름" name="memName" required/></td>
-          <td><label>&nbsp;&nbsp;이메일</label></td>
-          <td><input type="email" name="email"/></td>
+          <td><input type="text"  name="memName" required/></td>
+        </tr>
+        <tr>
+          <td><label>이메일</label></td>
+          <td><input type="email" name="email" /></td>
         </tr>
         <tr>
           <td><label for="">아이디</label></td>
-          <td><input type="text" placeholder="아이디" name="memId" required/></td>
+          <td><input type="text"  name="memId" required/></td>
           <td>
             <button
               type="button"
@@ -44,7 +46,7 @@
         </tr>
         <tr>
           <td><label>닉네임</label></td>
-          <td><input type="text" placeholder="닉네임" name="memNickname" required/></td>
+          <td><input type="text"  name="memNickname" required/></td>
           <td>
             <button
               type="button"
@@ -54,23 +56,23 @@
               중복확인
             </button>
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/></td>
+          <td><input type="password" id="memPwd" name="memPwd" required/></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
           <td><label></label>비밀번호 확인</td>
-          <td><input type="password" id="memPwdCheck" placeholder="비밀번호 확인" /></td>
-          <td><font id="chkNotice" size="3"></font></td>
+          <td><input type="password" id="memPwdCheck" /></td>
+          <td><font id="chkNotice" size="3" style="font-size:14px;"></font></td>
           <td></td>
         </tr>
         <tr>
           <td><label>휴대폰 번호</label></td>
-          <td><input type="text" placeholder="010-0000-0000" name="phone" required/></td>
+          <td><input type="text" placeholder="전화번호 입력" name="phone" required/></td>
           <td>
             <button
               type="button"
@@ -85,7 +87,7 @@
         <tr>
           <td><label>인증번호</label></td>
           <td><input type="text" placeholder="인증번호 확인" id="authNum" required/></td>
-          <td><font id="chkAuth" size="3"></font></td>
+          <td><font id="chkAuth" size="2" style="font-size:14px;"></font></td>
           <td></td>
         </tr>
       </table>
@@ -124,10 +126,10 @@
                   $('#authNum').keyup(function(){
 
                       if($('#authNum').val() != result ){
-                        $('#chkAuth').html('인증번호 일치하지 않음');
+                        $('#chkAuth').html('인증번호 불일치');
                         $('#chkAuth').attr('color', '#FF0000');
                       } else{
-                        $('#chkAuth').html('인증번호 일치함');
+                        $('#chkAuth').html('인증번호 일치');
                         $('#chkAuth').attr('color', '#01DF01');
                         $("button:button[name=enroll]").attr("disabled",false);
                       }
@@ -277,11 +279,13 @@
         $('#memPwdCheck').keyup(function(){
 
             if($('#memPwd').val() != $('#memPwdCheck').val()){
-              $('#chkNotice').html('비밀번호 일치하지 않음');
+              $('#chkNotice').html('비밀번호 불일치');
               $('#chkNotice').attr('color', '#FF0000');
+              
             } else{
-              $('#chkNotice').html('비밀번호 일치함');
+              $('#chkNotice').html('비밀번호 일치');
               $('#chkNotice').attr('color', '#01DF01');
+             
             }
 
         });

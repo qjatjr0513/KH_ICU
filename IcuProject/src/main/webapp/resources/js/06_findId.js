@@ -6,10 +6,10 @@ let findPwdBox = document.querySelector('#findPwdBox');
 findPwdBtn.addEventListener('click', () => {
   findIdBtn.style.backgroundColor = 'var(--color-orange)';
   findIdBtn.style.opacity = '0.3';
-
   findPwdBtn.style.backgroundColor = 'var(--color-orange)';
   findPwdBox.style.display = 'block';
   findPwdBtn.style.opacity = '1';
+  findPwdBtn.style.boxShadow = '0 0 5px var(--color-orange)';
   findIdBox.style.display = 'none';
 });
 
@@ -17,6 +17,7 @@ findIdBtn.addEventListener('click', () => {
   findPwdBtn.style.opacity = '0.3';
   findIdBox.style.display = 'block';
   findIdBtn.style.opacity = '1';
+  findIdBtn.style.boxShadow = '0 0 5px var(--color-orange)';
   findPwdBox.style.display = 'none';
 });
 

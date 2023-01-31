@@ -17,16 +17,16 @@
   width: 550px !important;
   height: 50px;
   margin: auto;
+  margin-top:-18px;
 }
 .formControl {
-  border: 1px solid lightgrey;
+  border: 2px solid lightgray;
   border-radius: 5px;
   width: 90%;
 }
 .formControl:focus {
   outline: none !important;
-  border-color: var(--color-orange);
-  box-shadow: 0 0 5px 1px rgb(255, 213, 134);
+  box-shadow: 0 0 5px lightgray;
 }
 .btn-outline-secondary > i {
   color: coral;
@@ -38,6 +38,14 @@
 .btn-outline-secondary:hover {
   background-color: white;
 }
+.btn3 {
+	background-color:white !important;
+	border:2px solid lightgray !important;
+}
+.btn3:hover{
+	background-color:white !important;
+}
+
 .first-box {
   background: linear-gradient(45deg, rgb(157, 34, 157), Orange);
   height: 30vh;
@@ -138,6 +146,9 @@
   margin: auto;
   text-align: center;
 }
+#party > h2{
+	text-align:left;
+}
 .party__box {
   display: flex;
   height: 100%;
@@ -151,6 +162,18 @@
   height: 100%;
   position: relative;
   cursor: pointer;
+  font-family: 'Poor Story', cursive;
+}
+
+.party__box-left,
+.party__box-right{
+	transition:all 0.2s;
+}
+.party__box-left:hover {
+	box-shadow:0 0 5px 1px var(--color-purple);
+}
+.party__box-right:hover{
+	box-shadow:0 0 5px 1px var(--color-orange);
 }
 
 .party__box-left,
@@ -199,27 +222,38 @@
 }
 
 /* About ICU */
+
 .wonder__box {
   background-color: rgb(237, 211, 97);
   margin: auto;
   width: 770px;
   height: 110px;
-  margin-top: 18px;
+  margin-top: 70px;
   display: flex;
   align-items: center;
   padding-left: 30px;
   position: relative;
   cursor: pointer;
+  font-family: 'Poor Story', cursive;
 }
+
 .wonder-text {
   color: rgb(130, 130, 130);
   font-size: 22px;
   font-weight: 600;
   margin-left: -20px;
 }
+
 .about-img {
   position: absolute;
-  right: 0;
+  right:5px;
+}
+
+.wonder-img{
+	transition:all 0.1s;
+}
+.wonder-img:hover{
+	transform:scale(1.1);
 }
 /* 추천콘텐츠 */
 #recommend {

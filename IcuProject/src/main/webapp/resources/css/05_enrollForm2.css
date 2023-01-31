@@ -1,27 +1,32 @@
 @import url('main.css');
 
+
+
 table {
   margin: auto;
-  margin-top: 50px;
-  width: 920px;
+  margin-top: 30px;
+  width: 550px;
   height: 500px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
 }
-input {
-  height: 50px;
-  width: 300px;
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 0 3px 1px var(--color-orange);
+label{
+	padding-left:25px;
 }
 
-/* table,
-td,
-tr {
-  border: 1px solid black;
-  border-spacing: 0;
-} */
+input {
+  height: 40px;
+  width: 280px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 3px  var(--color-orange);
+}
+input:focus{
+	outline:none;
+}
+input::placeholder {
+	padding:3px;
+}
 
 #main__logo {
   text-align: center;
@@ -53,19 +58,20 @@ tr {
   padding: 5px !important;
   border: none !important;
   font-weight: bold !important;
-  font-size: 18px !important;
+  font-size: 16px !important;
   color: var(--color-purple) !important;
 }
 .tableBtn:hover {
   background-color: var(--color-orange) !important;
+  color:white !important;
 }
 .tableBtn:active {
   background-color: var(--color-orange) !important;
 }
 
 .btn__group > button {
-  width: 200px;
-  height: 60px;
+  width: 180px;
+  height: 50px;
   border-radius: 10px;
   box-shadow: 0 0 5px 1px lightgray;
   color: white;

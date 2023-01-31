@@ -26,7 +26,7 @@
           <i class="fa-brands fa-github"></i>
         </a>
         <a href="https://www.instagram.com/jjongsta9ram/?hl=ko" target="_blank">
-          <img src="../resources/images/Notion-logo-removebg-preview.png" style="width:50px; margin-bottom:6px;">
+          <img src="resources/images/Notion-logo-removebg-preview.png" style="width:50px; margin-bottom:6px;">
         </a>
       </div>
       <p class="contact__rights">Copyright © 2023 ICU Inc. All rights reserved.</p> <br>

@@ -30,7 +30,7 @@
            aria-describedby="button-addon2"
          />
          <button
-           class="btn btn-outline-secondary"
+           class="btn btn-outline-secondary btn3"
            type="button"
            id="button-addon2"
          >
@@ -72,14 +72,14 @@
                      class="our-story-card-animation"
                      data-uia="our-story-card-animation"
                    >
-                     <img class="img-popcorn" src="../image/popcorn.jpg" />
+                     <img class="img-popcorn" src="resources/images/popcorn.jpg" />
                    </div>
                  </div>
                </div>
              </div>
            </div>
 
-           <div class="carousel-item">
+	           <div class="carousel-item">
              <div class="second-box">
                <div class="head__left-box2">
                  <h2>
@@ -125,6 +125,7 @@
 
      <!-- 파티찾기, 파티만들기 -->
      <section id="party">
+      <h2>나의 파티</h2>
        <div class="party__box">
          <div class="party__box-left" onclick="location.href=''">
            <div class="plus-icon">
@@ -135,7 +136,7 @@
            </div>
            <div class="party__text">
              <h3>파티 만들기</h3>
-             <span>팀을 위한 파티장이 되어보세요!</span>
+             <span><b>팀을 위한 파티장이 되어보세요!</b></span>
            </div>
            <div class="party__makeParty">
              <span
@@ -152,7 +153,7 @@
            </div>
            <div class="party__text">
              <h3>파티 찾기</h3>
-             <span>나에게 딱 맞는 파티를 찾아보세요!</span>
+             <span><b>나에게 딱 맞는 파티를 찾아보세요!</b>	</span>
            </div>
            <div class="party__makeParty">
              <span style="color: var(--color-orange)"
@@ -166,11 +167,11 @@
      <!-- icu가 궁금하셈? -->
      <section id="wondering">
        <div class="wonder__box">
-         <a
+         <a class='wonder__a'
            target="_blank"
            href="https://tame-suggestion-7b3.notion.site/baf766587b9f4b9fa26834ab04a33463"
          >
-           <img src="resources/images/navbarLogo.png" style="width: 180px" />
+           <img class='wonder-img' src="resources/images/navbarLogo.png" style="width: 180px" />
            <span class="wonder-text"
              >가&nbsp;&nbsp;&nbsp;
              <span class="wonder-text" style="color: var(--color-purple)"
@@ -300,8 +301,12 @@
        </div>
      </section>
      
+     <br><br>
+     
      <!-- 실시간 문의 -->
     <jsp:include page="../common/chatForm.jsp"/>
+    
+    <jsp:include page="../common/footer.jsp"/>
     
      <script src="resources/js/main.js" defer></script>
    </div>

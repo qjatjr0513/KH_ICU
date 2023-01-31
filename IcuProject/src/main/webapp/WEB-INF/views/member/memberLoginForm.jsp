@@ -25,30 +25,28 @@
    <form id="memberLogin" action="${contextPath }/login.me" method="post">
     <div id="input__container">
       <div class="input__id">
-        <span>아이디</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa-regular fa-user"></i>
         <input
           class="info-id info"
           type="text"
-          placeholder="아이디를 입력해주세요."
+          placeholder="아이디"
           id="memId"
           name="memId"
           
         />
       </div>
+      
       <div class="input__pwd">
-        <span>비밀번호</span> &nbsp;&nbsp;
+        <i class="fa-solid fa-lock"></i>
         <input
           class="info-pwd info"
           type="password"
-          placeholder="비밀번호를 입력해주세요."
+          placeholder="비밀번호"
            id="memPwd"
           name="memPwd"
         />
       </div>
-      <div class="join-container">
-        <a href="${contextPath }/agreeForm.me">회원가입 &nbsp;|&nbsp; </a>
-        <a href="${contextPath }/find.me">아이디 / 비밀번호 찾기</a>
-      </div>
+      
     </div>
 
     <!-- login , naver , kakao -->
@@ -57,11 +55,18 @@
         <button type="submit">로그인</button>
       </div>
     </div>
+    
+    <div class="join-container">
+        <a href="${contextPath }/agreeForm.me">회원가입 &nbsp;|&nbsp; </a>
+        <a href="${contextPath }/find.me">아이디 / 비밀번호 찾기</a>
+      </div>
 	</form>
-	
+	<br>
+	<!-- 네이버 로그인  -->
     <div id="naver_id_login" style="text-align:center">
       <a id="naverlogin" href="${url}">
-	  <img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/>
+	  <!-- <img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/> -->
+	  <img src="resources/images/naverLogo.png" /><span>네이버 로그인</span>
   	  </a>
     </div>
 	  
@@ -71,7 +76,10 @@
 		<img src="resources/images/kakao_login_large_wide.png" style="height:60px">
 	 </a>
     </div>
+    
+    <br><br>
 		
+	<p class="contact__rights" style='color:gray;'>Copyright © 2023 <span style='color:var(--color-orange)'>ICU</span> Inc. All rights reserved.</p>	
   
 	
     <script src="resources/js/02_mainPage.js" defer></script>

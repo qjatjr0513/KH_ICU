@@ -1,32 +1,57 @@
 @import url('main.css');
 
+table{
+	margin:auto;
+}
 td {
-  width: 150px;
   padding: 10px;
 }
-input {
-  height: 50px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 0 3px 1px var(--color-orange);
+td > span {
+	font-size:18px;
 }
+
+input {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 3px var(--color-orange);
+  font-size:14px;
+}
+input:focus{
+	outline:none;
+}
+input::placeholder{
+	font-size: 14px;
+}
+
 .logoBox {
   text-align: center;
   margin-top: 100px;
 }
+.findIdBtn{
+	box-shadow: 0 0 5px var(--color-orange);
+}
+.findIdBtn, .findPwdBtn{
+	transition:all 0.1s;
+}
+.findIdBtn:hover, .findPwdBtn:hover{
+	transform:scale(1.05);
+}
+
 .idPwdBtn {
   text-align: center;
   /* background-color: rgb(192, 240, 224); */
   display: flex;
   justify-content: space-around;
   width: 500px;
+  height:50px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .idPwdBtn > button {
   background-color: var(--color-orange);
-  padding: 20px;
+  padding: 12px;
   width: 200px;
   border-radius: 10px;
   font-size: 20px;
@@ -41,14 +66,16 @@ input {
   font-size: 20px;
   font-weight: bold;
   padding: 50px;
+  background-color:white;
 }
 
 .tableBtn {
-  height: 50px;
+	width:130px;
+  height: 40px;
   background-color: var(--color-purple) !important;
   border: none !important;
   font-weight: bold !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
 }
 .tableBtn:hover {
   background-color: var(--color-purple);
@@ -61,11 +88,11 @@ input {
   text-align: center;
   padding-top: 50px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
-.btn__group > button {
+.btn-enter,
+.btn-previous{
   height: 50px;
-  background-color: var(--color-purple);
   border: none;
   font-weight: bold;
   font-size: 16px;
@@ -73,6 +100,14 @@ input {
   color: white;
   width: 150px;
 }
+.btn-previous{
+	background-color:gray;
+}
+.btn-enter {
+  background-color: var(--color-purple);
+}
+
+
 .idPwdBtn > button {
   color: white;
 }
