@@ -71,7 +71,15 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.insertReply(sqlSession, r);
 	}
 	
+	@Override
+	public List<Party> partyList(){
+		return partyDao.partyList(sqlSession);
+	}
 	
+	@Override
+	public int endParty(int paNo) {
+		return partyDao.endParty(sqlSession, paNo);
+	}
 	
 	
 }

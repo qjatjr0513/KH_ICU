@@ -88,6 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 WHERE PA_NO = P.PA_NO) AS JOIN_NUM
 		FROM PARTY P
         JOIN OTT O USING(OTT_NO)
+        WHERE STATUS = 'N'
 	</select>
 	
 	<select id="findParty" parameterType="map" resultMap="partyResultSet">
@@ -179,7 +180,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES (SEQ_RNO.NEXTVAL, #{replyWriter}, #{refTno}, #{replyContent} , 'P')
 	</insert>
 	
-	
+	<update id="endParty" parameterType="int">
+		UPDATE PARTY
+		SET STATUS = 'Y'
+		WHERE PA_NO = #{paNo} AND STATUS = 'N'
+	</update>
 	
 	
 

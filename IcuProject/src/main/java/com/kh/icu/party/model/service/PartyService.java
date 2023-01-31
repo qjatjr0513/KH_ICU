@@ -23,8 +23,11 @@ public interface PartyService {
 	
 	public int joinPartyMember(PartyJoin pj);
 	
-
 	public ArrayList<Reply> selectReplyList(int paNo);
 
 	public int insertReply(Reply r);
+	
+	public List<Party> partyList();
+	
+	public int endParty(int paNo);
 }

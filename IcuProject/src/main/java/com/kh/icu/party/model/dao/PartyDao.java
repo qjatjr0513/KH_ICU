@@ -56,7 +56,13 @@ public class PartyDao {
 		return sqlSession.insert("partyMapper.insertReply", r);
 	}
 	
+	public List<Party> partyList(SqlSession sqlSession){
+		return sqlSession.selectList("partyMapper.findPartyForm");
+	}
 	
+	public int endParty(SqlSession sqlSession, int paNo) {
+		return sqlSession.update("partyMapper.endParty", paNo);
+	}
 	
 	
 }
