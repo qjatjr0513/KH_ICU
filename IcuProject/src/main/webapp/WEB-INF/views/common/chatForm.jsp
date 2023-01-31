@@ -62,7 +62,6 @@
     			console.log(chatRoomNo);
     			chatWs =   new SockJS(contextPath+"/chat")
     			chatting(chatWs);
-    			chatSession();
              },	
              error : function(){
             	 
@@ -70,13 +69,6 @@
          })
      });
 
-     function chatSession(){
-    	 $.ajax({
-      		url : "${contextPath }/chatSession",
-      		type: "post",
-      		data : {chatNo : chatRoomNo}
-          })
-     } 
      
      
      $("#close").click(function(){

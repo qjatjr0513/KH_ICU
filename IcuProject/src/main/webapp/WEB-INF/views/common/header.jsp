@@ -185,7 +185,6 @@
       var socket = null;
       const contextPath = "${contextPath}";
 	  let chatWs;
-	  let chatSocket = new SockJS(contextPath+"/chat"); 
       
       $(document).ready(function(){
          connectWS();

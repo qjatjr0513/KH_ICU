@@ -139,12 +139,13 @@ public class MemberServiceImpl implements MemberService{
             
             
          }
+         m.setMemPwd(pwd);
+         sendEmail(m, "findpw");
          String encPwd = bcryptPasswordEncoder.encode(pwd);
          m.setMemPwd(encPwd);
          // 비밀번호 변경
          memberDao.updatePwd(sqlSession, m);
          // 비밀번호 변경 메일 발송
-         sendEmail(m, "findpw");
          return 2;
          
       }
