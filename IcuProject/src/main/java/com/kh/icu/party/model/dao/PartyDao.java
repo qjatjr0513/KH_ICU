@@ -69,5 +69,14 @@ public class PartyDao {
 		return sqlSession.update("partyMapper.deleteReply", rno);
 	}
 	
+	// 관리자페이지 - 진행중인 파티 
+	public List<Party> currentPartyList(SqlSession sqlSession){
+		return sqlSession.selectList("partyMapper.currentPartyList");
+	};
+	
+	// 관리자페이지 - 종료된 파티 
+	public List<Party> endPartyList(SqlSession sqlSession){
+		return sqlSession.selectList("partyMapper.endPartyList");
+	};
 	
 }

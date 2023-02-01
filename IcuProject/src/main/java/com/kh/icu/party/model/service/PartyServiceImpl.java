@@ -87,5 +87,17 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.endParty(sqlSession, paNo);
 	}
 	
+	// 관리자페이지 - 진행중인 파티 
+	@Override
+	public List<Party> currentPartyList(){
+		return partyDao.currentPartyList(sqlSession);
+	};
+	
+	// 관리자페이지 - 종료된 파티 
+	@Override
+	public List<Party> endPartyList(){
+		return partyDao.endPartyList(sqlSession);
+	};
+	
 	
 }

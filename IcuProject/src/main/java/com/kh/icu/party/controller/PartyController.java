@@ -150,17 +150,6 @@ public class PartyController {
 		}
 	}
 	
-
-	@RequestMapping("current.py")
-	public String currentPartyList() {
-		return "party/currentPartyListForm";
-	}
-	
-	@RequestMapping("end.py")
-	public String endPartyList() {
-		return "party/endPartyListForm";
-	}
-	
     // 댓글 등록
     @RequestMapping("insertReply.pa")
     @ResponseBody
@@ -198,10 +187,10 @@ public class PartyController {
  	         model.addAttribute("errorMsg", "댓글 삭제 실패");
  	         return "common/errorPage";
  	      }
- 	   
- 	   
     }
+    
 	
+
 	@RequestMapping("CurrentParty.py")
 	public String currentParty() {
 		return "party/memberCurrentParty";
@@ -212,4 +201,31 @@ public class PartyController {
 		return "party/memberLastParty";
 	}
 	
+
+    // 관리자페이지 - 진행중인 파티 
+	@RequestMapping("current.py")
+	public ModelAndView currentPartyList(ModelAndView mav) {
+		
+		List<Party> list = partyService.currentPartyList();
+		
+		mav.addObject("list", list);
+		mav.setViewName("party/currentPartyListForm");
+		System.out.println("***list(con/list)" + list);
+		
+		return mav;
+	}
+	
+	// 관리자페이지 - 종료된 파티 
+	@RequestMapping("end.py")
+	public ModelAndView endPartyList(ModelAndView mav) {
+		
+		List<Party> list = partyService.endPartyList();
+		
+		mav.addObject("list", list);
+		mav.setViewName("party/endPartyListForm");
+		System.out.println("***list(con/list)" + list);
+		
+		return mav;
+	}
+
 }

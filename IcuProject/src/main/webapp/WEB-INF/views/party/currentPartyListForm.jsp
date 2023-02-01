@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="list" value="${list}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,410 +20,81 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
     
     
-<!-- 파티 카드 -->
+    <!-- 파티 카드 -->
     <section id="party__container">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+   	  <c:if test="${empty list }">
+		 <tr id="tableEmpty">
+			<td colspan="5">파티방이 없습니다. 원하는 파티를 만들어보세요. </td>
+		 </tr>
+	  </c:if>
+		
+		<c:set var="doneLoop" value="false"/>
+		<c:set var="count" value="0"/>
+        <div
+        id="carouselExampleControls"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="100000">
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
+         <!-- 8*3개 -->
+          <c:forEach begin="0" end="${fn:length(list)/12 * 1.0}" step="1" varStatus="x">
+          <c:choose>
+         	 <c:when test="${count == 0}">
+            	<div class="carousel-item active" data-bs-interval="100000"> <!-- 8개 -->
+         	 </c:when>
+         	 <c:otherwise>
+            	<div class="carousel-item" data-bs-interval="100000"> <!-- 8개 -->
+         	 </c:otherwise>
+          </c:choose>
+          
+          <c:forEach begin="${x.begin * 3}" end="${x.begin *3+2}" step="1" varStatus="j">
+          <c:if test="${not doneLoop}">
+            <div class="partyCard"> <!-- 4개 -->
+		      
+		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
+			  <c:if test="${not doneLoop}">
+				  <div class="cardBox"> <!-- 1개 -->
+	                  <h4><b>${list[count].ottName}</b></h4>
+	                  <span>${list[count].paTitle}</span> <br />
+	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
+	                  <br>
+	              </div>
+				  <c:set var="count" value="${count+1 }"/>
+			      
+				  <c:if test="${count > fn:length(list)-1}">	 
+					<c:set var="doneLoop" value="true"/>
+				  </c:if> 
+			  </c:if>
+		      </c:forEach> 
+		    </div>  
+		    <c:if test="${count > fn:length(list)-1}">	 
+			    <c:set var="doneLoop" value="true"/>
+			</c:if> 
+		  </c:if>
+		  <br>
+		  </c:forEach>
+		  
+		  <br>
+		  </div>
+		  </c:forEach>
+		</div>
+		
 
-            <br />
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-
-            <br />
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="100000">
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-            <br />
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-            <br />
-
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="100000">
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-            <br />
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-            <br />
-            <div class="partyCard">
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>넷플릭스</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-              <div class="cardBox">
-                <h4>${casdfasdf}</h4>
-                <span>있으며 인생을 풍부하게</span> <br />
-                <span>2023.10.10까지 (100일)</span> <br /><br />
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
-                <span><i class="fa-regular fa-user fa-lg"></i></span>
-                <!-- 인원이 없으면 <i class="fa-light fa-user"></i> 쓰면됨. -->
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>

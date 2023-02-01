@@ -26,6 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="MEM_NICKNAME" property="memNickname"></result>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
+		<result column="LIKE_COUNT" property="likeCount"/>
+		<result column="BAD_COUNT" property="badCount"/>
 	</resultMap>
 	
 	<resultMap type="partyJoin" id="partyJoinResultSet">
@@ -204,6 +206,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SET STATUS = 'Y'
         WHERE REPLY_NO = #{rno}
 	</update>
+	
+	<select id="currentPartyList" resultMap="partyResultSet">
+		SELECT P.PA_NO,
+			   O.OTT_NAME,
+			   PA_TITLE,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        WHERE STATUS = 'N'
+    </select>
+    
+    <select id="endPartyList" resultMap="partyResultSet">
+		SELECT PA_NO,
+        	   M.MEM_NICKNAME,
+			   O.OTT_NAME,
+			   P.PA_TITLE,
+			   P.END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+               LIKE_COUNT,
+               BAD_COUNT
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        JOIN MEMBER M ON (MEM_NO = PA_NAME)
+        LEFT JOIN PARTY_EVALUATE USING (PA_NO) 
+        WHERE P.STATUS = 'Y'
+    </select>
+    
 	
 	
 

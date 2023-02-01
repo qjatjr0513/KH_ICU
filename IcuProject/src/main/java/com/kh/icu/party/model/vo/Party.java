@@ -31,4 +31,7 @@ public class Party {
 	private String month;
 	private String changeName;
 	private String filePath;
+	private int likeCount;
+	private int badCount;
+	
 }

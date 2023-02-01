@@ -32,5 +32,9 @@ public interface PartyService {
 	public int endParty(int paNo);
 
 	public int deleteReply(int rno);
+	
+	public List<Party> currentPartyList();
+	
+	public List<Party> endPartyList();
 
 }
