@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="STATUS" property="status"/>
 	</resultMap>
 	
+	<!-- 
+		자유게시판 리스트 조회 + 페이징처리
+	 -->
 	<select id="selectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
@@ -52,12 +55,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY B.CREATE_DATE DESC
 	</select>
 	
+	<!--
+		게시글 리스트 개수 카운트
+	 -->
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM BOARD 
 		WHERE STATUS = 'N'
 	</select>
 	
+	<!--
+		게시글 검색후 리스트 조회(페이징처리 paramMap에 포함)
+	 -->
 	<select id="searchSelectList" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
@@ -85,6 +94,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY B.CREATE_DATE DESC
 	</select>
 	
+	<!--
+		게시글 검색후 개수 카운트
+	 -->
 	<select id="selectSearchListCount" resultType="int">
 		SELECT COUNT(*)
 		FROM BOARD B
@@ -106,6 +118,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+	<!--
+		게시글 선택후 상세페이지
+	 -->
 	<select id="selectBoard" parameterType="int" resultMap="boardResultSet">
 		SELECT
 			BOARD_NO,
@@ -116,10 +131,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          	I.FILE_PATH AS "FILE_PATH"
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
-		LEFT JOIN IMAGE I ON(I.REF_TNO = M.MEM_NO)
+		LEFT JOIN IMAGE I ON(I.REF_TNO = M.MEM_NO) AND I.TABLE_CD = 'M'
 		WHERE BOARD_NO = #{boardNo} AND B.STATUS='N' 
 	</select>
 	
+	<!--
+		게시글 댓글 리스트 조회
+	 -->
 	<select id="selectReply" parameterType="int" resultMap="replyResultSet">
 	  SELECT 
          R.REF_TNO,
@@ -132,10 +150,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       FROM REPLY R
       LEFT JOIN BOARD  ON (BOARD_NO = R.REF_TNO)
       LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = MEM_NO)
-	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER)
+	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER) AND I.TABLE_CD = 'M'
       WHERE BOARD_NO = #{boardNo} AND  R.STATUS = 'N'
 	</select>
 	
+	<!--
+		게시글 작성하기
+	 -->
 	<insert id="insertBoard" parameterType="board" useGeneratedKeys="true">
 	
 		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
@@ -156,6 +177,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</insert>
 	
+	<!--
+		게시글 수정하기
+	 -->
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD
 		SET BOARD_TITLE = #{boardTitle},
@@ -163,24 +187,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!--
+		게시글 조회수 증가
+	 -->
 	<update id="increaseCount" parameterType="int">
 		UPDATE BOARD
 		SET COUNT = COUNT +1
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
-
+	<!--
+		게시글 댓글 작성하기
+	 -->
 	<insert id="insertReply" parameterType="reply" >
 		INSERT INTO REPLY(REPLY_NO, REPLY_WRITER, REF_TNO, REPLY_CONTENT , TABLE_CD)
 		VALUES (SEQ_RNO.NEXTVAL, #{replyWriter}, #{refTno}, #{replyContent} , 'B')
 	</insert>
 	
+	<!--
+		게시글 삭제하기
+	 -->
 	<update id="deleteBoard" parameterType="int">
 		UPDATE BOARD
         SET STATUS = 'Y'
         WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!--
+		게시글 댓글 삭제하기
+	 -->
 	<update id="deleteReply" parameterType="int">
 		UPDATE REPLY
         SET STATUS = 'Y'

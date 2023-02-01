@@ -39,7 +39,7 @@
         <tbody>
           <c:if test="${empty list }">
             <tr id="tableEmpty">
-              <td colspan="8">조회할 회원이 없습니다</td>
+              <td colspan="8">조회할 결제내역이 없습니다</td>
             </tr>
           </c:if>
           <c:forEach var="p" items="${list }" >

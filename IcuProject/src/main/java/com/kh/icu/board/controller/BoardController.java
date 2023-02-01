@@ -32,7 +32,9 @@ public class BoardController {
    private BoardService boardService;
    
    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-   
+   /**
+    * 자유게시판 리스트 조회
+    */
    @RequestMapping("/list.bo")
    public String selectList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
                       @RequestParam Map<String, Object> paramMap) {
@@ -55,6 +57,9 @@ public class BoardController {
       return "board/boardListView";
    }
    
+   /**
+    * 게시글 등록페이지
+    */
    @RequestMapping("/enrollForm.bo")
    public String boardEnrollForm(Model model,
                            @RequestParam(value="mode", required =false, defaultValue = "insert") String mode,
@@ -71,6 +76,9 @@ public class BoardController {
       return "board/boardEnrollForm";
    }
    
+   /**
+    * 게시글 등록하기
+    */
    @RequestMapping("/insert.bo")
    public String insertBoard(Board b, HttpSession session, Model model,
                         @RequestParam(value="mode", required=false, defaultValue="insert") String mode,
@@ -92,6 +100,9 @@ public class BoardController {
       
    }
    
+   /**
+    * 게시글 번호에 따라 게시글 상세페이지
+    */
    @RequestMapping("detail.bo/{boardNo}")
    public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
                            HttpSession session,
@@ -132,7 +143,9 @@ public class BoardController {
    }
    
     
-   // 댓글 등록
+   /**
+    * 게시글 댓글 등록
+    */
    @RequestMapping("insertReply.bo")
    @ResponseBody
    public String insertReply(Reply r, HttpSession session) {
@@ -158,6 +171,9 @@ public class BoardController {
       }
    }
    
+   /**
+    * 게시글 삭제
+    */
    @RequestMapping("delete.bo")
    public String deleteBoard(@RequestParam(value="bno", required =false, defaultValue = "0") int boardNo,
                        HttpSession session, Model model,
@@ -174,6 +190,9 @@ public class BoardController {
       }
    }
    
+   /**
+    * 게시글 댓글 삭제
+    */
    @RequestMapping("deleteReply.bo")
    public String deleteReply(@RequestParam("rno") int rno, @RequestParam("boardNo") int boardNo,
 		                     HttpSession session, Model model,

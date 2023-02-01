@@ -48,21 +48,33 @@ public class MemberServiceImpl implements MemberService{
       this.pagination = pagination;
    }
    
+   /**
+    * 회원가입
+    */
    @Override
    public int insertMember(Member m) {
       return memberDao.insertMember(sqlSession, m);
    }
    
+   /**
+    * 아이디 중복확인
+    */
    @Override
    public int idCheck(String checkId) {
       return memberDao.idCheck(sqlSession, checkId);
    }
    
+   /**
+    * 닉네임 중복확인
+    */
    @Override
    public int nickCheck(String checkNick) {
       return memberDao.nickCheck(sqlSession, checkNick);
    }
    
+   /**
+    * 로그인한 멤버객체 가져오기
+    */
    @Override
    public Member loginMember(Member m) {
       Member loginUser = memberDao.loginMember(sqlSession, m);
@@ -70,6 +82,9 @@ public class MemberServiceImpl implements MemberService{
       return loginUser;
    }
    
+   /**
+    * 아이디찾기
+    */
    @Override
    public String findId(Member m) {
       String memberId= memberDao.findId(sqlSession, m);   
@@ -85,6 +100,9 @@ public class MemberServiceImpl implements MemberService{
    @Autowired
    private JavaMailSender mailSender;
    
+   /**
+    * 이메일로 비밀번호찾기
+    */
    @Override
    public void sendEmail(Member m, String div) throws Exception {
 
@@ -118,7 +136,9 @@ public class MemberServiceImpl implements MemberService{
       }
    }
    
-   //비밀번호찾기
+   /**
+    * 비밀번호찾기
+    */
    @Override
    public int findPwd(HttpServletResponse response, Member m) throws Exception {
       response.setContentType("text/html;charset=utf-8");
@@ -151,9 +171,9 @@ public class MemberServiceImpl implements MemberService{
       }
    }
    
-   
-   
-   //카카오 토큰 발급
+   /**
+    * 카카오 토큰 발급
+    */
    @Override
    public String getAccessToken (String authorize_code) {
       String access_Token = "";
@@ -213,7 +233,9 @@ public class MemberServiceImpl implements MemberService{
       return access_Token;
    }
    
-   // 카카오 정보확인
+   /**
+    * 카카오 정보 확인
+    */
    @Override
    public Member getUserInfo(String access_Token) {
 
@@ -281,9 +303,9 @@ public class MemberServiceImpl implements MemberService{
         }
    }
    
-   
-   
-   // 카카오 로그아웃
+   /**
+    * 카카오계정 로그아웃
+    */
    @Override
    public void kakaoLogout(String access_Token) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
@@ -311,7 +333,9 @@ public class MemberServiceImpl implements MemberService{
         }
    }
    
-   //네이버 정보확인
+   /**
+    * 회원조회
+    */   
    @Override
    public Member findMember(Member m) {
       Member result = memberDao.findMember(sqlSession, m);
@@ -353,7 +377,10 @@ public class MemberServiceImpl implements MemberService{
       double num = (((Math.random() * (n2 - n1 + 1)) + n1));
        return (String) "K"+(int)(Math.floor(num));
      }
-
+   
+   /**
+    * 프로필이미지 가져오기
+    */
    @Override
    public Image selectProfile(int memNo) {
 	   Image profile = memberDao.selectProfile(sqlSession, memNo);
@@ -361,6 +388,9 @@ public class MemberServiceImpl implements MemberService{
 	   return profile;
    }
 	
+	/**
+	 * 프로필이미지 넣기 
+	 */
 	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
 	@Override
 	public int insertImg(Image image){
@@ -370,6 +400,9 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
+	/**
+	 * 프로필이미지 삭제
+	 */
 	@Override
 	public int deleteImg(int fileNo) {
 		
@@ -378,7 +411,9 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
-	
+    /**
+     * 회원정보수정
+     */
 	@Override
 	public int updateMember(Member m) {
 		
@@ -387,6 +422,9 @@ public class MemberServiceImpl implements MemberService{
 		return updateMember;
 	}
 
+	/**
+	 * 프로필이미지 수정
+	 */
 	@Override
 	public int updateImg(Image image){
 		
@@ -394,6 +432,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+	/**
+	 * 회원탈퇴
+	 */
 	@Override
 	public int deleteMember(String memId) {
 		
@@ -402,11 +443,17 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 	
+	/**
+	 * 관리자 회원 리스트 개수 
+	 */
 	@Override
 	public int selectMemListCount() {
 		return memberDao.selectMemListCount(sqlSession);
 	}
 	
+	/**
+	 * 관리자 회원 리스트 조회
+	 */
 	@Override
 	public Map<String, Object> selectMemList(int currentPage){
 		
@@ -427,11 +474,17 @@ public class MemberServiceImpl implements MemberService{
 		return map;
 	}
 	
+	/**
+	 * 관리자 블랙 리스트 개수
+	 */
 	@Override
 	public int selectBlackListCount() {
 		return memberDao.selectBlackListCount(sqlSession);
 	}
 	
+	/**
+	 * 관리자 블랙 리스트 조회
+	 */
 	@Override
 	public Map<String, Object> selectBlackList(int currentPage){
 		
@@ -452,6 +505,9 @@ public class MemberServiceImpl implements MemberService{
 		return map;
 	}
 	
+	/**
+	 * 관리자 블랙 리스트 해제
+	 */
 	@Override
 	public int blackCancel(int memNo) {
 		

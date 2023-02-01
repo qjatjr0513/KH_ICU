@@ -67,6 +67,9 @@ public class MemberController {
 	  
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	/**
+	 * 로그인 페이지
+	 */
 	@RequestMapping("loginForm.me")
 	public String loginForm(Model model, HttpSession session) {
 		
@@ -85,18 +88,24 @@ public class MemberController {
 		return "member/memberLoginForm";
 	}
 	
+	/**
+	 * 약관 동의 페이지
+	 */
 	@RequestMapping("agreeForm.me")
 	public String agreeForm() {
 		return "member/memberAgreeForm";
 	}
-	
+	/**
+	 * 회원가입페이지 이동
+	 */
 	@RequestMapping("enrollForm.me")
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
 	
-	
-	// 회원가입
+	/**
+	 * 회원가입
+	 */
 	@RequestMapping("insert.me")
 	public String insertMember(Member m, HttpSession session, Model model, String checkId, String checkNick) {
 		int result1 = memberService.idCheck(checkId);
@@ -131,8 +140,9 @@ public class MemberController {
 		}
 	}
 	
-
-	// 닉네임 아이디 검사
+	/**
+	 * 닉네임 아이디 검사
+	 */
 	@RequestMapping("idCheck.me")
 	@ResponseBody
 	public int idCheck(String checkId) {
@@ -140,9 +150,9 @@ public class MemberController {
 		return result;
 	}
 	
-
-	// 닉네임 중복 검사
-
+	/**
+	 * 닉네임중복검사
+	 */
 	@RequestMapping("nickCheck.me")
 	@ResponseBody
 	public int nickCheck(String checkNick) {
@@ -150,6 +160,9 @@ public class MemberController {
 		return result;
 	}
 	
+	/**
+	 * 아이디 찾기
+	 */
 	@RequestMapping("findId.me")
 	@ResponseBody
 	public String findId(String memName, String phone, Model model) {
@@ -162,6 +175,9 @@ public class MemberController {
 		return memberId;
 	}
 	
+	/**
+	 * 비밀번호 찾기
+	 */
 	@RequestMapping("findPwd.me")
 	@ResponseBody
 	public int findPwd(String id, String email, HttpServletResponse response) throws Exception {
@@ -172,7 +188,9 @@ public class MemberController {
 		return result;
 	}
 	
-	//로그인
+	/**
+	 * 로그인
+	 */
 	@RequestMapping("login.me")
 	public String loginMember(Member m, HttpSession session, Model model) {
 		Member loginUser = memberService.loginMember(m);
@@ -196,7 +214,10 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-
+	
+	/**
+	 * 로그아웃
+	 */
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		
@@ -205,7 +226,9 @@ public class MemberController {
 		return "home";
 	}	
 	
-	  
+	/**
+	 * 아이디, 비밀번호 찾기 페이지
+	 */
 	@RequestMapping("find.me")
 	public String find() {
 		return "member/memberFindForm";
@@ -213,7 +236,9 @@ public class MemberController {
 	
 
 	
-	// 카카오 로그인 성공시 callback
+	/**
+	 * 카카오 로그인 성공시 callback
+	 */
 	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
 			throws Exception {
@@ -307,7 +332,9 @@ public class MemberController {
 	
 	
 	
-	//네이버 로그인 성공시 callback호출 메소드
+	/**
+	 * 네이버 로그인 성공시 callback호출 메소드
+	 */ 
 	@RequestMapping(value = "/navercallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackNaver(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
@@ -353,6 +380,10 @@ public class MemberController {
         
 		return "common/main";
 	}
+	
+	/**
+	 * 마이페이지
+	 */
 	@RequestMapping("myPage.me")
 	public String myPage(HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
@@ -367,6 +398,9 @@ public class MemberController {
 		
 	}
 	
+	/**
+	 * 프로필사진 넣기
+	 */
 	@PostMapping("insertImg.me")
 	public String insertImg(Image image,
 							MultipartFile upfile, // 일반게시판 첨부파일
@@ -428,6 +462,9 @@ public class MemberController {
 		}
 	}
 	
+	/**
+	 * 프로필사진 삭제
+	 */
 	@RequestMapping("deleteImg.me")
 	@ResponseBody
 	public String deleteImg(int fileNo, HttpSession session, MultipartFile upfile) {
@@ -456,11 +493,17 @@ public class MemberController {
 	@Autowired
 	private ServletContext application;
 	
+	/**
+	 * 회원정보수정 페이지
+	 */
 	@RequestMapping("memUpdateForm.me")
 	public String memberUpdateForm() {
 		return "member/memberUpdateForm";
 	}
 	
+	/**
+	 * 회원정보수정
+	 */
 	@RequestMapping("memUpdate.me")
     public String updateMember(Member m, HttpSession session, Model model) {
        // 1. 회원정보 업데이트
@@ -489,11 +532,17 @@ public class MemberController {
        }
 	}
 	
+	/**
+	 * 회원탈퇴페이지
+	 */
 	@RequestMapping("memDeleteForm.me")
 	public String memberDeleteForm() {
 		return "member/memberDeleteForm";
 	}
 	
+	/**
+	 * 회원탈퇴
+	 */
 	@RequestMapping("memDelete.me")
 	public String deleteMember(String memPwd, HttpSession session, RedirectAttributes redirectAttributes) {
 		String encPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
@@ -522,6 +571,9 @@ public class MemberController {
 		
 	}
 	
+	/**
+	 * 관리자 회원리스트
+	 */
 	@RequestMapping("memListForm.me")
 	public String memberList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
             				 @RequestParam Map<String, Object> paramMap) {
@@ -535,6 +587,9 @@ public class MemberController {
 		return "member/memberListForm";
 	}
 	
+	/**
+	 * 관리자 블랙리스트
+	 */
 	@RequestMapping("memBlackListForm.me")
 	public String memberBlackList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
 			 						@RequestParam Map<String, Object> paramMap){
@@ -548,6 +603,9 @@ public class MemberController {
 		return "member/memberBlackListForm";
 	}
 	
+	/**
+	 * 관리자 블랙리스트 해제
+	 */
 	@RequestMapping("blackCancel.me")
 	public String blackCancel(int memNo) {
 		

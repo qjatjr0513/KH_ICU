@@ -26,12 +26,17 @@ public class BoardServiceImpl implements BoardService{
 		this.sqlSession = sqlSession;
 		this.pagination = pagination;
 	}
-
+	/**
+	 * 게시글 리스트 개수 카운트
+	 */
 	@Override
 	public int selectListCount() {
 		return boardDao.selectListCount(sqlSession);
 	}
 	
+	/**
+	 * 자유게시판 리스트 조회 + 페이징처리
+	 */	
 	@Override
 	public Map<String, Object> selectList(int currentPage){
 		Map<String, Object> map = new HashMap();
@@ -51,10 +56,17 @@ public class BoardServiceImpl implements BoardService{
 		return map;
 	}
 	
+	/**
+	 * 게시글 검색후 개수 카운트
+	 */
 	@Override
 	public int selectSearchListCount(Map<String,Object> paramMap) {
 		return boardDao.selectSearchListCount(sqlSession, paramMap);
 	}
+	
+	/**
+	 * 게시글 검색후 리스트 조회(페이징처리 paramMap에 포함)
+	 */
 	@Override
 	public Map<String, Object> searchSelectList(Map<String, Object> paramMap){
 		
@@ -77,12 +89,18 @@ public class BoardServiceImpl implements BoardService{
 		return map;
 	}
 	
+	/**
+	 * 게시글 선택후 상세페이지
+	 */
 	@Override
 	public Board selectBoard(int bno) {
 
 		return boardDao.selectBoard(sqlSession, bno);
 	}
 	
+	/**
+	 * 게시글 작성하기
+	 */
 	@Override
 	public int insertBoard(Board b) {
 		
@@ -96,6 +114,9 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 	
+	/**
+	 * 게시글 수정하기
+	 */
 	@Override
 	public int updateBoard(Board b) {
 		
@@ -103,29 +124,42 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 	
+	/**
+	 * 게시글 조회수 증가
+	 */
 	@Override
 	public int increaseCount(int bno) {
 		
 		return boardDao.increaseCount(sqlSession, bno);
 	}
 	
+	/**
+	 * 게시글 댓글 리스트 조회
+	 */
 	@Override
 	public ArrayList<Reply> selectReplyList(int bno) {
 		return boardDao.selectReplyList(sqlSession, bno);
 	}
 	
+	/**
+	 * 게시글 댓글 작성하기
+	 */
 	@Override
 	public int insertReply(Reply r) {
 		return boardDao.insertReply(sqlSession, r);
 	}
 	
+	/**
+	 * 게시글 삭제하기
+	 */
 	@Override
 	public int deleteBoard(int boardNo) {
-		
 		return boardDao.deleteBoard(sqlSession, boardNo);
-		
 	}
 
+	/**
+	 * 게시글 댓글 삭제하기
+	 */
 	@Override
 	public int deleteReply(int rno) {
 		return boardDao.deleteReply(sqlSession, rno);

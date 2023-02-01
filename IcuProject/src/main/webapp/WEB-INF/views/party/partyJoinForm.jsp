@@ -105,7 +105,8 @@
    				        success: function(res){
    				        			        	
    				          if(res == 1){
-   							 console.log("추가성공");				           
+                      console.log("추가성공");
+                      // alertInfo();		           
    				          }else{
    				             console.log("Insert Fail!!!");
    				          }
@@ -125,11 +126,25 @@
    		}); //check1 클릭 이벤트
    	}); //doc.ready
      
+     function alertInfo() {
+       alert(totalPrice + "원 결제되었습니다.");
+       location.href = '${contextPath}/partyDetail.py/'+paNo;
+     }
         
-        function alertInfo() {
-          alert(totalPrice + "원 결제되었습니다.");
-          location.href = '${contextPath}/partyDetail.py/paNo';
-        }
+  //   $(function(){
+  //   if('${flag}' == 'showAlert'){
+  //     Swal.fire({
+  //           icon:'success',
+  //           title: totalPrice + "원이 결제되었습니다.",
+  //           confirmButtonColor: '#3085d6',
+  //       }).then((result) => {
+  //         if (result.isConfirmed){
+  //           location.href = '${contextPath}/partyDetail.py/'+paNo;
+  //         }
+  //       });
+  //   }
+  // });
+
     </script>
 </body>
 </html>
