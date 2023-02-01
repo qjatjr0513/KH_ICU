@@ -108,7 +108,7 @@
           
           <c:forEach begin="${x.begin * 2}" end="${x.begin *2+1}" step="1" varStatus="j">
           <c:if test="${not doneLoop}">
-            <div class="partyCard"> <!-- 4개 -->
+            <div class="partyCard" style="float:left;"> <!-- 4개 -->
 		      
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 			  <c:if test="${not doneLoop}">
@@ -134,12 +134,12 @@
 				  </c:if> 
 			  </c:if>
 		      </c:forEach> 
-		      
 		    </div>  
 		    <c:if test="${count > fn:length(list)-1}">	 
 			    <c:set var="doneLoop" value="true"/>
 			</c:if> 
 		  </c:if>
+		  <br>
 		  </c:forEach>
 		  
 		  <br>

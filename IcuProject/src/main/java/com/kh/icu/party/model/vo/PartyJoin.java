@@ -10,4 +10,6 @@ public class PartyJoin {
 	private int memNo;
 	private String memNickname;
 	private Date joinDate;
+	private String changeName;
+	private String filePath;
 }

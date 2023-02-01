@@ -29,4 +29,6 @@ public class Party {
 	private String memNickname;
 	private List<Ott> ott;
 	private String month;
+	private String changeName;
+	private String filePath;
 }
