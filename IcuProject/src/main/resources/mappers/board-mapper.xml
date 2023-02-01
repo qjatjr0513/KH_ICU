@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="STATUS" property="status"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
+		<result column="BOARD_WRITER" property="boardWriterNo"/>
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">
@@ -128,7 +129,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			BOARD_TITLE,
 			BOARD_CONTENT,
 			I.CHANGE_NAME AS "CHANGE_NAME",
-         	I.FILE_PATH AS "FILE_PATH"
+         	I.FILE_PATH AS "FILE_PATH",
+         	BOARD_WRITER
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
 		LEFT JOIN IMAGE I ON(I.REF_TNO = M.MEM_NO) AND I.TABLE_CD = 'M'
@@ -221,5 +223,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SET STATUS = 'Y'
         WHERE REPLY_NO = #{rno}
 	</update>
-	
 </mapper>

@@ -165,10 +165,7 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.deleteReply(sqlSession, rno);
 	}
 	
-	@Override
-	public int insertBoardAlarm(Alarm a) {
-		return boardDao.insertBoardAlarm(sqlSession, a);
-	}
+	
 	
 	
 	

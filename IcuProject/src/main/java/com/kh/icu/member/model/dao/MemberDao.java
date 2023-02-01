@@ -121,12 +121,14 @@ public class MemberDao {
       return result;
    }
    
+
 	/**
 	 * 네이버 로그인 정보 저장
 	 */
-   public int getUserInfoN(SqlSession sqlSession, Member m) {
+   // 네이버 로그인 정보 저장
+   public int getUserInfo(SqlSession sqlSession, Member m) {
       System.out.println(m.getMemNickname());
-      return sqlSession.insert("memberMapper.getUserInfoN", m);
+      return sqlSession.insert("memberMapper.getUserInfo", m);
    }
 
 	/**

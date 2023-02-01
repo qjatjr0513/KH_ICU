@@ -17,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.kh.icu.board.model.service.BoardService;
 import com.kh.icu.common.interceptor.SessionNames;
+import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
@@ -27,7 +28,10 @@ public class AlramHandler extends TextWebSocketHandler {
 	Map<String, WebSocketSession> userSessions = new HashMap<>();
 	
 	 @Autowired 
-	 private BoardService boardservice;
+	 private AlarmService alarmService;
+	 
+	 
+	 
 	// 클라이언트가 서버로 연결시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
@@ -69,7 +73,7 @@ public class AlramHandler extends TextWebSocketHandler {
 				
 				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
 				System.out.println("============"+boardWriterSession);
-				if("reply".equals(cmd) && boardWriterSession != null) {
+				if("reply".equals(cmd) && !replyWriter.equals(boardWriterNo)) {
 					String content = "게시글에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
 					a.setMemNo(Integer.parseInt(boardWriterNo));
@@ -78,9 +82,23 @@ public class AlramHandler extends TextWebSocketHandler {
 					a.setRefTno(Integer.parseInt(bno));
 					a.setTableCd("B");
 									
-					int result = boardservice.insertBoardAlarm(a);
-					if(result > 0) {
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && boardWriterSession != null) {
 						TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+content+"</a>");
+						boardWriterSession.sendMessage(tmpMsg);						
+					}
+				}else if("party".equals(cmd) && !replyWriter.equals(boardWriterNo)) {
+					String content = "파티에 댓글이 달렸습니다!";
+					Alarm a = new Alarm();
+					a.setMemNo(Integer.parseInt(boardWriterNo));
+					a.setSendMemNo(Integer.parseInt(replyWriter));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(bno));
+					a.setTableCd("P");
+									
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && boardWriterSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ bno +"'>"+content+"</a>");
 						boardWriterSession.sendMessage(tmpMsg);						
 					}
 				}

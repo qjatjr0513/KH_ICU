@@ -13,5 +13,5 @@ public class Alarm {
 	private String mesContent;
 	private int refTno;
 	private Date createDate;
-	private String check;
+	private String status;
 }

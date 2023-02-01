@@ -111,15 +111,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM MEMBER WHERE MEM_ID=#{memId} AND EMAIL=#{email} AND STATUS='N'
 	</select>
 	
-	<!-- 네이버 로그인 정보 찾기 -->  
+	<!-- SNS 로그인 정보 찾기 -->  
 	<select id="findMember" parameterType="member" resultMap="memberResultSet">
-		SELECT * FROM MEMBER WHERE MEM_NAME=#{memName} AND MEM_ID=#{memId} AND SNS_TYPE='N'
+		SELECT * FROM MEMBER WHERE MEM_NAME=#{memName} AND EMAIL=#{email} AND SNS_TYPE IN('N', 'K') AND STATUS = 'N'
 	</select>
 
-	<!-- 네이버 로그인 정보 저장 -->  
-	<insert id="getUserInfoN" parameterType="member" >
-		INSERT INTO MEMBER(MEM_NO, MEM_NAME, MEM_NICKNAME, MEM_ID, SNS_TYPE)
-			values(SEQ_MEM.NEXTVAL, #{memName}, #{memNickname}, #{memId}, 'N')
+	<!-- SNS 로그인 정보 저장 -->  
+	<insert id="getUserInfo" parameterType="member" >
+		INSERT INTO MEMBER(MEM_NO, MEM_NAME, MEM_NICKNAME, MEM_ID, EMAIL, SNS_TYPE)
+			values(SEQ_MEM.NEXTVAL, #{memName}, #{memNickname}, #{memId}, #{email}, #{snsType})
 	</insert>
 	
 	<!-- 프로필이미지 가져오기 -->

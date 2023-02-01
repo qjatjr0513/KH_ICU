@@ -179,11 +179,11 @@
               success : function(result){
                  $("#replyContent").val("");
                  if(result == "1"){
-                 	console.log("reply::socket>>", socket);
+                 	console.log("party::socket>>", socket);
                  	
                  	if(socket){
                  		if(replyWriter != memNickname ){
-                 		let socketMsg = "reply,"+ replyWriter + "," + memNickname + "," +paName + "," + paNo;
+                 		let socketMsg = "party,"+ replyWriter + "," + memNickname + "," +paName + "," + paNo;
                  		console.log("sssssssmsg>>", socketMsg);
                  		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
                  		socket.send(socketMsg)                        			

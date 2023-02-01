@@ -38,6 +38,7 @@
      <mapper resource="/mappers/chatting-mapper.xml"/>
      <mapper resource="/mappers/faq-mapper.xml"/>
      <mapper resource="/mappers/pay-mapper.xml"/>
+     <mapper resource="/mappers/alarm-mapper.xml"/>
   </mappers>
   
   

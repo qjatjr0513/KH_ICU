@@ -113,9 +113,7 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteReply", rno);
 	}
 	
-	public int insertBoardAlarm(SqlSession sqlSession, Alarm a) {
-		return sqlSession.insert("boardMapper.insertBoardAlarm", a);
-	}
+	
 	
 	
 	

@@ -41,6 +41,7 @@ public interface MemberService {
     * 카카오 정보 확인
     */
    public Member getUserInfo(String access_Token);
+
    
    /**
     * 카카오계정 로그아웃

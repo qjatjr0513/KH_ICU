@@ -236,71 +236,6 @@ public class MemberController {
 	
 
 	
-	/**
-	 * 카카오 로그인 성공시 callback
-	 */
-	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
-			throws Exception {
-		System.out.println("로그인 성공 callbackKako");
-		OAuth2AccessToken oauthToken;
-		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
-		// 로그인 사용자 정보를 읽어온다
-		apiResult = kakaoLoginBO.getUserProfile(oauthToken);
-		
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObj;
-		
-		jsonObj = (JSONObject) jsonParser.parse(apiResult);
-		JSONObject response_obj = (JSONObject) jsonObj.get("kakao_account");	
-		JSONObject response_obj2 = (JSONObject) response_obj.get("profile");
-		// 프로필 조회
-		String email = (String) response_obj.get("email");
-		String name = (String) response_obj2.get("nickname");
-		
-		// 세션에 사용자 정보 등록
-		m.setMemId(email);
-		m.setMemName(name);
-		
-		Member userInfo = memberService.findMember(m);
-		
-		int memNo = userInfo.getMemNo();
-		Image profile = memberService.selectProfile(memNo);
-		
-		if (userInfo.getMemId() != null) {
-			session.setAttribute("loginUser", userInfo);
-            session.setAttribute("signIn", apiResult);
-            session.setAttribute("profile", profile);
-        }
-
-		return "common/main";
-	}
-	
-	
-//	@RequestMapping(value="/kakaoLogin")
-//    public String login(@RequestParam("code") String code, HttpSession session, Member m) {
-//		System.out.println("code : " + code);
-//
-//        String access_Token = memberService.getAccessToken(code);
-//        System.out.println("access_Token : " + access_Token);
-//        
-//        Member userInfo = memberService.getUserInfo(access_Token);
-//        System.out.println("login Controller : " + userInfo);
-//        
-//        int memNo = userInfo.getMemNo();
-//        Image profile = memberService.selectProfile(memNo);
-//        
-//        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
-//        if (userInfo.getMemId() != null) {
-//        	session.setAttribute("loginUser", userInfo);
-//            session.setAttribute("access_Token", access_Token);
-//            session.setAttribute("profile", profile);
-//        }
-//
-//        return "common/main";
-//    }
-	
-	
 	@RequestMapping(value="/logout")
     public String logout(HttpSession session) {
         String access_Token = (String)session.getAttribute("access_Token");
@@ -357,13 +292,16 @@ public class MemberController {
 		// 프로필 조회
 		String email = (String) response_obj.get("email");
 		String name = (String) response_obj.get("nickname");
-		
+		String nickname = randomRangeN(100000, 999999); 
 		System.out.println("email : "+ email);
 		System.out.println("name : "+ name);
         
 		
-		m.setMemId(email);
+		m.setMemId(nickname);
+		m.setEmail(email);
 		m.setMemName(name);
+		m.setSnsType("N");
+		m.setMemNickname(nickname);
 		
 		Member userInfo = memberService.findMember(m);
 		
@@ -381,9 +319,67 @@ public class MemberController {
 		return "common/main";
 	}
 	
+
 	/**
 	 * 마이페이지
 	 */
+	// 카카오 로그인 성공시 callback
+	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
+			throws Exception {
+		System.out.println("로그인 성공 callbackKako");
+		OAuth2AccessToken oauthToken;
+		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
+		// 로그인 사용자 정보를 읽어온다
+		apiResult = kakaoLoginBO.getUserProfile(oauthToken);
+		
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj;
+		
+		jsonObj = (JSONObject) jsonParser.parse(apiResult);
+		JSONObject response_obj = (JSONObject) jsonObj.get("kakao_account");	
+		JSONObject response_obj2 = (JSONObject) response_obj.get("profile");
+		// 프로필 조회
+		String email = (String) response_obj.get("email");
+		String name = (String) response_obj2.get("nickname");
+		String nickname = randomRangeK(100000, 999999);
+		
+		// 세션에 사용자 정보 등록
+		m.setMemId(nickname);
+		m.setEmail(email);
+		m.setMemName(name);
+		m.setMemNickname(nickname);
+		m.setSnsType("K");
+		
+		Member userInfo = memberService.findMember(m);
+		
+		int memNo = userInfo.getMemNo();
+		Image profile = memberService.selectProfile(memNo);
+		
+		if (userInfo.getMemId() != null) {
+			session.setAttribute("loginUser", userInfo);
+            session.setAttribute("signIn", apiResult);
+            session.setAttribute("profile", profile);
+        }
+
+		return "common/main";
+	}
+	
+	
+	// 닉네임 랜덤생성 (naver)
+	public static String randomRangeN(int n1, int n2) {
+		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
+		return (String) "N"+(int)(Math.floor(num));
+	}
+	
+	// 닉네임 랜덤생성(kakao)
+	public static String randomRangeK(int n1, int n2) {
+		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
+		return (String) "K"+(int)(Math.floor(num));
+	}
+	
+	
+
 	@RequestMapping("myPage.me")
 	public String myPage(HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
@@ -469,18 +465,18 @@ public class MemberController {
 	@ResponseBody
 	public String deleteImg(int fileNo, HttpSession session, MultipartFile upfile) {
 		
-//		Image profile = (Image) session.getAttribute("profile");
-//		
-//		File file = new File(profile.getChangeName());
-//		System.out.println("FILE"+file);
-//		
+		Image profile = (Image) session.getAttribute("profile");
+		
 		int result = memberService.deleteImg(fileNo);
 		
+				
+		
 		if(result > 0) {
+			File path = new File(application.getRealPath("/resources/profileImg"));
+			new File(path+profile.getChangeName()).delete();
+			
 			session.removeAttribute("profile");
-//			if(file.exists()) {
-//				file.delete();
-//			}
+			
 			return "1";
 		} else {
 			

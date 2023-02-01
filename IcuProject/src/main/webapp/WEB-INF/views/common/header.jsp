@@ -162,13 +162,19 @@
              &nbsp;
              <li class='navbar__icon'>
               <div class="dropdown">
-              <button class="btn btn-secondary alert" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">알림1</a></li>
-                <li><a class="dropdown-item" href="#">알림2</a></li>
-                <li><a class="dropdown-item" href="#">알림3</a></li>
+              <c:forEach var="a" items="${alarmList}" >
+              <c:if test="${a.tableCd.equals('B') }">
+                <li><a class="dropdown-item" href="${contextPath }/detail.bo/${a.refTno}">${a.mesContent }</a></li>
+                <input type="hidden" value="${a.mesNo }">
+              </c:if>
+              <c:if test="${a.tableCd.equals('P') }">
+                <li><a class="dropdown-item"  href="${contextPath }/partyDetail.py/${a.refTno}">${a.mesContent }</a></li>
+              </c:if>
+              </c:forEach>
               </ul>
             </div>
             </li>
@@ -238,6 +244,42 @@
          
       }
       
+      $("#alarm").click(function(){
+       	
+       	$.ajax({
+       		url : "${contextPath }/alarm",
+       		type: "post",
+       		data : {memNo : ${loginUser.memNo}},
+               success : function(result){	
+              	 
+               },	
+               error : function(){
+              	 
+                }
+           })
+       });
+      
+      
+      
+     
+      
+     	   function readAlarm(mesNo){
+    		  var mesNo = mesNo.value;
+    		   console.log(mesNo);
+	         	$.ajax({
+	         		url : "${contextPath }/readAlarm",
+	         		type: "post",
+	         		data : {mesNo : mesNo},
+	                 success : function(result){	
+	                	 
+	                 },	
+	                 error : function(){
+	                	 
+	                  }
+	             })
+    		   
+    	   } 
+    	   
    </script>
 </body>
 </html>

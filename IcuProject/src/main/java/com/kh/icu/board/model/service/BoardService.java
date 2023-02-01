@@ -70,8 +70,6 @@ public interface BoardService {
 	 */
 	public int deleteReply(int rno);
 	
-	public int insertBoardAlarm(Alarm a);
-	
 	
 	
 	

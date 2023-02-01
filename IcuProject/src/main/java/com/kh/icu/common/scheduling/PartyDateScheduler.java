@@ -17,12 +17,13 @@ public class PartyDateScheduler {
 	
 	@Autowired
 	private PartyService partyService;
+	
 
 	@Scheduled(cron = "0 */10 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
 		LocalDate today = LocalDate.now();
-		ArrayList<Integer> oneWeek = new ArrayList<Integer>();
+		ArrayList<Party> oneWeek = new ArrayList<Party>();
 		
 		System.out.println("=========파티 날짜 조회 시작=========");
 		for(int i=0; i < p.size(); i++) {
@@ -35,7 +36,11 @@ public class PartyDateScheduler {
 				Period pe = Period.between(today, endDate);
 				System.out.println(p.get(i).getPaNo()+"번 파티 기한 : " +pe.getDays()+"일");
 				if(pe.getDays() == 7) {
-					oneWeek.add(p.get(i).getPaNo());
+					oneWeek.add(p.get(i));
+					String cmd = "party";
+					String memNo = oneWeek.get(i).getMemNickname();
+				
+					
 				}
 			}
 		}
