@@ -173,7 +173,7 @@
          >
            <img class='wonder-img' src="resources/images/navbarLogo.png" style="width: 180px" />
            <span class="wonder-text"
-             >가&nbsp;&nbsp;&nbsp;
+             >가&nbsp;&nbsp;&nbsp;&nbsp;
              <span class="wonder-text" style="color: var(--color-purple)"
                >궁금</span class="wonder-text"
              >하신가요?</span

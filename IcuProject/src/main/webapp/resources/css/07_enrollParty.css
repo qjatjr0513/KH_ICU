@@ -6,6 +6,9 @@
 }
 .header__title > h2 {
   color: var(--color-orange);
+  font-family:'Poor Story', cursive;
+  font-size:35px;
+  text-shadow: 3px 2px 1px lightgray;
 }
 
 .enroll__party-table {
@@ -16,26 +19,92 @@
   font-size: 16px;
   font-weight: bold;
   background-color:white;
+  box-shadow : 0 0 5px 1px lightgray;
+  border-radius:10px;
+}
+.pl option {
+	font-family:'Poor Story', cursive;
+	font-weight:bold;
+}
+.enroll__party-table  td:first-child{
+	font-family:'Poor Story', cursive;
+	font-size:20px;
+	padding:20px 0;
+	padding-left:75px;
+	
 }
 
 .enroll__party-table  td { 
+  width:50px;
   height: 70px;
-  padding: 20px;
 }
 
-/* .enroll__party-table,
-.enroll__party-table > td {
-  border: 1px solid gray;
-} */
+.enroll__party-table input{
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-bottom:2px solid var(--color-purple);
+}
+.enroll__party-table input:focus {
+	outline:none;
+}
+.enroll__party-table input::placeholder{
+	font-size:14px;
+}
+
+.datepicker{
+	width:150px;
+	cursor:pointer;
+}
+.datepicker::placeholder{
+	text-align:center;
+}
 
 .btnGroup {
   text-align: center;
-  padding: 50px;
+  padding: 40px;
+  width:500px;
+  display:flex;
+  justify-content:space-around;
+  margin:auto;
 }
 .btnGroup > button {
-  background-color: bisque;
-  padding: 20px;
-  width: 250px;
+  width: 150px;
+  height:50px;
+  color:white;
+  border-radius:8px;
+  font-weight:bold;
+}
+.btnGroup > button[type=button] {
+	background-color:gray;
+}
+.btnGroup > button[type=submit] {
+	background-color:var(--color-purple);
+}
+.form-select{
+	width:300px !important;
+}
+.form-select:focus{
+	border:none;
+}
+.pl{
+    width: 200px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.pl:focus{
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 2px solid #f8c77e;
+    border-radius: 10px;
 }
 
 
