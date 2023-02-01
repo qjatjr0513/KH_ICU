@@ -245,26 +245,26 @@
 		    			${genre }<c:if test="${status.count ne size}">, </c:if>
 		    		</c:forEach>
 	    		</h6>
-	    		<c:if test="${c.conCategory eq '드라마'}">
-	    			<h6>&nbsp;&nbsp;방영 회차 : ${c.conInfo }</h6>
+	    		<c:if test="${c.conCategory eq 2}">
+	    			<h6>&nbsp;&nbsp;방영 회차 : ${c.conInfo }부작</h6>
 	    		</c:if>
-	    		<c:if test="${c.conCategory eq '영화'}">
-	    			<h6>&nbsp;&nbsp;상영 시간 : ${c.conInfo }</h6>
+	    		<c:if test="${c.conCategory eq 1}">
+	    			<h6>&nbsp;&nbsp;상영 시간 : ${c.conInfo }분</h6>
 	    		</c:if>
 	    		<h6>&nbsp;&nbsp;방영 날짜 : ${c.conDate }</h6>
 	    	</div>
 	    	<div id="poster">
-	    		<c:if test="${c.filePath eq '' }">
+	    		<c:if test="${c.filePath eq '' or c.filePath eq null}">
 					<img src="${c.filePath}${c.changeName}"/>
 				</c:if>
-				<c:if test="${c.filePath ne '' }">
+				<c:if test="${c.filePath ne '' and c.filePath ne null}">
 					<img src="${contextPath}/${c.filePath}${c.changeName}"/>
 				</c:if>
 	    	</div>
     	</div>
     	
     	<div id="preview">
-    		<iframe width="600" height="300" src="https://${c.conPreview }" title="YouTube video player" 
+    		<iframe width="600" height="300" src="${c.conPreview }" title="YouTube video player" 
     		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     	</div>
     	

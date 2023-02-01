@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="list" value="${list}"/>
 <c:set var="size" value="${fn:length(list)}" />
+<c:set var="cCount" value="2"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -189,8 +190,8 @@
             	<label for="romance">로맨스</label>
             </td>
             <td>
-              <input id="horror" type="checkbox" name="genre" value="6" />
-              <label for="horror">공포</label>
+              <input id="entertain" type="checkbox" name="genre" value="6" />
+              <label for="entertain">예능</label>
             </td>
             <td>
             	<input type="checkbox" id="thriller" name="genre" value="7">
@@ -248,14 +249,14 @@
         >
 	          <div class="carousel-inner">
 	          	<c:if test="${size ge 8}">
-		          	<c:forEach var="cnt" begin="0" end="${size }" step="8">
-		          		<c:if test="${cnt eq 0 }">
+		          	<c:forEach var="cnt" begin="1" end="${size }" step="8">
+		          		<c:if test="${cnt eq 1 }">
 				            <div class="carousel-item active" data-bs-interval="100000">
 				        </c:if>
-				        <c:if test="${cnt ne 0 }">
+				        <c:if test="${cnt ne 1 }">
 				            <div class="carousel-item" data-bs-interval="100000">
 				        </c:if>
-				        	<c:if test="${cnt eq 0 }">				    
+				        	<c:if test="${cnt eq 1 }">				    
 						    	<c:forEach var="cnt2" begin="0" end="1">
 						        	<div id="moiveBox">					        		
 							            <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
@@ -285,10 +286,10 @@
 					    			</div>	    			
 					    			</c:forEach>  
 				    			</c:if>
-				    			<c:if test="${cnt ne 0 }">				    
+				    			<c:if test="${cnt ne 1 }">				    
 						    		<c:forEach var="cnt2" begin="1" end="2">
-							        	<div id="moiveBox">					        		
-								            <c:forEach var="c" items="${list }" begin="${cnt2 * 8}" end="${(cnt2 * 8) + 3}">
+							        	<div id="moiveBox">						        							        		
+								            <c:forEach var="c" items="${list }" begin="${cCount * 4}" end="${(cCount * 4) + 3}">
 									        	<div class="movieContainer">
 										            <div class="movie__info">
 											            <c:if test="${c.filePath eq '' }">
@@ -312,6 +313,7 @@
 										            </div>
 									    		</div>
 								    		</c:forEach>
+								    		<c:set var="cCount" value="${cCount + 1}"></c:set>
 						    			</div>	    			
 					    			</c:forEach>  
 				    			</c:if> 		 		
@@ -535,11 +537,7 @@
 					var movieBoxCnt = parseInt(result.length/4);
 					var movieContainerCnt = parseInt(result.length/2) + 1;
 					var cnt2 = 1;
-					console.log(result);
-// 					for(var i = 0; i < result.length; i++){
-						
-// 					}
-					//console.log(result.length);
+					console.log(carouselCnt);
 					if(result.length >= 8){
 						$('.carousel-item').remove();
 						for(var i = 1; i <= carouselCnt; i++){
@@ -549,7 +547,7 @@
 							else{
 								html += "<div class='carousel-item active' data-bs-interval='100000'>";
 							}
-							for(var j = 0; j < carouselCnt; j++){
+							for(var j = 0; j < 2; j++){
 								html += "<div id='movieBox"+ cnt2 +"' class='movieBox'></div>";
 								cnt2 += 1;
 							}
@@ -586,7 +584,7 @@
 						html += "</div>";
 						
 						$(".carousel-inner").html(html);
-						for(var j = 1; j <= movieBoxCnt; j++){
+						for(var j = 1; j <= 2; j++){
 							while(cnt < j * 4){
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
