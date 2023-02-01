@@ -120,6 +120,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(SEQ_FNO.NEXTVAL, 'C', #{originName}, #{changeName}, #{refTno}, #{filePath})
 	</insert>
 	
+	<select id="recommendContents" resultMap="contentResultSet">
+		SELECT CT.CON_NO, I.CHANGE_NAME, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+		FROM CONTENT CT
+		LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+		JOIN IMAGE I ON(I.REF_TNO = CT.CON_NO) AND I.TABLE_CD = 'C'
+		GROUP BY CT.CON_NO, I.CHANGE_NAME, CT.CON_DATE
+		ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
+	</select>
+	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH

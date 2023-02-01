@@ -96,5 +96,10 @@ public class ContentServiceImpl implements ContentService{
 	public int selectConNo() {
 		return contentDao.selectConNo(sqlSession);
 	}
+	
+	@Override
+	public ArrayList<Content> recommendContents(){
+		return contentDao.recommendContents(sqlSession);
+	}
 
 }

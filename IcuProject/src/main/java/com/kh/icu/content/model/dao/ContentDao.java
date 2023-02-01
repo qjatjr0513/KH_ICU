@@ -70,5 +70,9 @@ public class ContentDao {
 	public int selectConNo(SqlSession sqlSession) {
 		return sqlSession.selectOne("contentMapper.selectConNo");
 	}
+	
+	public ArrayList<Content> recommendContents(SqlSession sqlSession) {
+		return (ArrayList)sqlSession.selectList("contentMapper.recommendContents");
+	}
 
 }

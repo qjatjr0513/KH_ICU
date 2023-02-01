@@ -21,4 +21,5 @@ public interface ContentService {
 	public int insertOtt(Map<String, Object> map);
 	public int insertImg(Image image);
 	public int selectConNo();
+	public ArrayList<Content> recommendContents();
 }

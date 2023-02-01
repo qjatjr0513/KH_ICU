@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="r" value="${recommend}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,51 +198,51 @@
            <div class="recommend__box-first movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(0).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/302149335/s592/deo-geulrori"
+               src="${r.get(0).getChangeName()} "
              />
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(1).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/301084087/s592/ceinso-maen"
+               src="${r.get(1).getChangeName()} "
              />
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(2).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/282734134/s592/hwanhon"
+               src="${r.get(2).getChangeName()}"
              />
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(3).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/302060373/s592/keonegteu"
+               src="${r.get(3).getChangeName()}"
              />
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(4).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/302111369/s592/kajino"
+               src="${r.get(4).getChangeName()}"
              />
            </div>
          </div>
@@ -250,51 +252,51 @@
            <div class="recommend__box-first movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(5).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/176267183/s592/avatar"
+               src="${r.get(5).getChangeName()}"
              />
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(6).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/292757027/s592/the-roundup"
+               src="${r.get(6).getChangeName()}"
              />
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(7).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/281440055/s592/jongiyi-jib-gongdonggyeongjeguyeog"
+               src="${r.get(7).getChangeName()}"
              />
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(8).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/255482634/s592/roki"
+               src="${r.get(8).getChangeName()}"
              />
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black">
-                 <span class="overlay-text">보러가기</span>
+                 <span class="overlay-text" onclick="movePage(${r.get(9).getConNo() });">보러가기</span>
                </div>
              </div>
              <img
-               src="https://images.justwatch.com/poster/301110682/s592/heonteu-2022"
+               src="${r.get(9).getChangeName()}"
              />
            </div>
          </div>
@@ -310,5 +312,11 @@
     
      <script src="resources/js/main.js" defer></script>
    </div>
+   
+   <script>
+	function movePage(cno){
+ 		location.href = '${contextPath}/detail?conNo='+cno;
+ 	}
+   </script>
 </body>
 </html>

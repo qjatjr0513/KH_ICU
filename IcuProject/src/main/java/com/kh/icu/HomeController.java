@@ -1,6 +1,7 @@
 package com.kh.icu;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -15,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.icu.content.model.service.ContentService;
+import com.kh.icu.content.model.vo.Content;
+
 /**
  * Handles requests for the application home page.
  */
@@ -23,14 +27,22 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	private ContentService contentService;
+	
+	public HomeController(ContentService contentService) {
+		this.contentService = contentService;
+	}
+	
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model, HttpServletResponse res) {
-		
 		return "home";	
 	}
 	
 	@RequestMapping("main")
-	public String main() {
+	public String main(HttpSession session) {
+		ArrayList<Content> recommend = contentService.recommendContents();
+		session.setAttribute("recommend", recommend);
+		
 		return "common/main";
 	}
 	
