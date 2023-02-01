@@ -23,8 +23,8 @@
         <div class="party__manage">
           <h2>파티 메뉴</h2>
           <ul>
-            <li><a href="${contextPath }/current.py">참여중인 파티</a></li>
-            <li><a href="${contextPath }/end.py">참여했던 파티</a></li>
+            <li><a href="${contextPath }/CurrentParty.py">참여중인 파티</a></li>
+            <li><a href="${contextPath }/LastParty.py">참여했던 파티</a></li>
           </ul>
           <hr />
         </div>

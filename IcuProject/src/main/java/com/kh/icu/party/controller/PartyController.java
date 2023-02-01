@@ -202,6 +202,14 @@ public class PartyController {
  	   
     }
 	
+	@RequestMapping("CurrentParty.py")
+	public String currentParty() {
+		return "party/memberCurrentParty";
+	}
 	
+	@RequestMapping("LastParty.py")
+	public String lastParty() {
+		return "party/memberLastParty";
+	}
 	
 }
