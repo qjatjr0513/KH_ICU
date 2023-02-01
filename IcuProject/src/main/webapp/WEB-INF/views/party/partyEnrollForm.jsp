@@ -16,7 +16,7 @@
     <jsp:include page="../common/header.jsp"/>
 
     <div class="header__title">
-      <h2>파티 등록</h2>
+      <h2>< 파티 등록 ></h2>
     </div>
     <!-- 등록 섹션 -->
     <form id="enrollForm" action="${contextPath }/insert.py">
@@ -25,14 +25,16 @@
 	      <tr>
 	        <td>서비스</td>
 	        <td>
-	          <select name="ottNo" id="ottNo">
-	            <option value="0"> 선택 </option>
+	        
+		     <select name="ottNo" id="ottNo" class="pl">
+	            <option value="0" selected><span>선택</span></option>
 	            <option value="1">넷플릭스</option>
 	            <option value="2">왓챠</option>
 	            <option value="3">웨이브</option>
 	            <option value="4">디즈니 플러스</option>
 	            <option value="5">애플TV</option>
-	          </select>
+	        </select>
+	        
 	        </td>
 	      </tr>
 	      <tr>
@@ -60,7 +62,7 @@
 	        <td>계정</td>
 	        <td>
 	          <input type="text" name="ottId" placeholder="계정 아이디(이메일)" required/>
-	          <input type="text" name="ottPwd" placeholder="비밀번호" required/>
+	          <input type="password" name="ottPwd" placeholder="비밀번호" required/>
 	        </td>
 	      </tr>
 	      <tr>
@@ -72,8 +74,8 @@
 	      <tr>
 	        <td>진행 기간</td>
 	        <td>
-	           <span id="sysdate"></span> ~ <input  class="datepicker"  placeholder="종료일" id="endDate" name="endDate" onchange="remainedSpan()" required/>&nbsp; 예상기간
-	          : <span id="period"></span> 
+	           <span id="sysdate"></span> ~ &nbsp;&nbsp; <input  class="datepicker"  placeholder="날짜 클릭" id="endDate" name="endDate" onchange="remainedSpan()" required/> &nbsp;&nbsp; 예상기간
+	          : <span id="period" style="color:var(--color-orange)"></span> 
 	        </td>
 	      </tr>
 	      <tr>

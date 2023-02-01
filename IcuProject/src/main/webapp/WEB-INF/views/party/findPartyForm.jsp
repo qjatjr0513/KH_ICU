@@ -28,16 +28,16 @@
           <button type='button' class="major_btn" value="1" id="netflix" name="netflix">
             <div class="major__icon netfilx"></div>
           </button>
-          <input id="netflix" type="checkbox" name="ottList" value="1" />
-          <h2 class="major__title">Netflix</h2>
+          <input class='input__check' id="netflix" type="checkbox" name="ottList" value="1"/>
+          <h2 class="major__title" id='netflix'>Netflix</h2>
         </div>
         
         <div class="major">
           <button type='button' class="major_btn" value="2" id="wavve" name="wavve">
             <div class="major__icon wavve"></div>
           </button>
-          <input id="wavve" type="checkbox" name="ottList" value="2" />
-          <h2 class="major__title">Wavve</h2>
+          <input class='input__check' id="wavve" type="checkbox" name="ottList" value="2" />
+          <h2 class="major__title" id='wavve'>Wavve</h2>
         </div>
         
         
@@ -45,24 +45,24 @@
           <button type='button' class="major_btn" value="3" id="disney" name="disney">
             <div class="major__icon disney"></div>
           </button>
-          <input id="disney" type="checkbox" name="ottList" value="3" />
-          <h2 class="major__title">Disney +</h2>
+          <input class='input__check' id="disney" type="checkbox" name="ottList" value="3" />
+          <h2 class="major__title" id='disney'>Disney +</h2>
         </div>
 
         <div class="major">
           <button type='button' class="major_btn" value="4" id="watcha" name="watcha">
             <div class="major__icon watcha"></div>
           </button>
-          <input id="watcha" type="checkbox" name="ottList" value="4" />
-          <h2 class="major__title">Watcha</h2>
+          <input class='input__check' id="watcha" type="checkbox" name="ottList" value="4" />
+          <h2 class="major__title" id='watcha'>Watcha</h2>
         </div>
         
         <div class="major">
           <button type='button' class="major_btn" value="5" id="appleTV" name="appleTV">
             <div class="major__icon appleTv"></div>
           </button>
-          <input id="appleTV" type="checkbox" name="ottList" value="5" />
-          <h2 class="major__title">Apple TV</h2>
+          <input class='input__check' id="appleTV" type="checkbox" name="ottList" value="5" />
+          <h2 class="major__title" id='appleTV'>Apple TV</h2>
         </div>
       </div>
     </section> 
@@ -108,12 +108,12 @@
           
           <c:forEach begin="${x.begin * 2}" end="${x.begin *2+1}" step="1" varStatus="j">
           <c:if test="${not doneLoop}">
-            <div class="partyCard" style="float:left;"> <!-- 4개 -->
+            <div class="partyCard"> <!-- 4개 -->
 		      
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 			  <c:if test="${not doneLoop}">
 				  <div class="cardBox"> <!-- 1개 -->
-	                  <h4>${list[count].ottName}</h4>
+	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
 	                  
@@ -170,6 +170,7 @@
     </section>
 
     <script>
+    
 		function movePage(paNo){
 	 		location.href = "${contextPath}/partyDetail.py/"+paNo;
 	 	};
@@ -177,18 +178,24 @@
 	
 		$("#netflix, #watcha, #wavve, #disney, #appleTV").click(function(){
 			console.log("실행");
-			if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
-               $('input[id='+$(this).attr('name')+']').prop("checked", false);
+			
+			if($('input[id=' + $(this).attr('name') + ']').is(':checked') == true){
+				
+               $('input[id= '+ $(this).attr('name') + ']').prop("checked", false); 
+               $('h2[id= '+ $(this).attr('name') + ']').removeClass('colorOrange');
             }
             else{
                $('input[id='+$(this).attr('name')+']').prop("checked", true);
+               $('h2[id= '+ $(this).attr('name') + ']').addClass('colorOrange');
             }
 		});
 		
 		
  		function searchParty(){
+ 			
 			var ottList = [];
-			  $("input[name='ottList']:checked").each(function(i){
+			
+			  $(".input__check:checked").each(function(i){
 				 ottList.push($(this).val());
 			  });
 			  
