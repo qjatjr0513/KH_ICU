@@ -31,6 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="MEM_NO" property="memNo"></result>
 		<result column="MEM_NICKNAME" property="memNickname"></result>
 		<result column="JOIN_DATE" property="joinDate"></result>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">

@@ -22,7 +22,7 @@
     <!-- header -->
     <form id="joinPartyMember" action="${contextPath }/joinPartyMember">
     <section id="service-title">
-      <div class="netfilx">
+      <div class="${p.ottName} ott__name">
         <h2>${p.ottName}</h2>
         <h4>${p.paTitle}</h4>
       </div>
@@ -80,8 +80,7 @@
     </section>
     <br />
     
-             <!-- 댓글등록기능 -->
-         
+         <!-- 댓글등록기능 -->
          <div class="card mb-2" id="comment">
             <div class="card-header bg-light">
                     <i class="fa fa-comment fa"></i> REPLY
