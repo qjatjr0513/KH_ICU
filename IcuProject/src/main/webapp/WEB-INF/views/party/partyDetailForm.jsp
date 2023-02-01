@@ -43,7 +43,16 @@
       <div class="containerBox">
         <div class="photo-container">
           <div class="userInformation">
-            <div class="userPhoto"><i class="fa-solid fa-user fa-3x"></i></div>
+            <div class="userPhoto">
+            <c:choose>
+				<c:when test="${!empty p.changeName}">
+                     <img id="replyWriter-img" src="${contextPath }${p.filePath }${p.changeName}">
+                </c:when>
+                <c:otherwise>
+                     <i class="fa-solid fa-user fa-3x"></i>
+                </c:otherwise>
+            </c:choose>
+			</div>
             <br />
             <div class="userNickName"> 
               <h4>(파티장) ${p.memNickname}</h4>
@@ -53,7 +62,16 @@
           
           <c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1">
           <div class="userInformation">
-            <div class="userPhoto"><i class="fa-solid fa-user fa-3x"></i></div>
+            <div class="userPhoto">
+            <c:choose>
+            	<c:when test="${!empty pj.changeName}">
+                     <img id="replyWriter-img" src="${contextPath }${pj.filePath }${pj.changeName}">
+                  </c:when>
+                  <c:otherwise>
+                     <i class="fa-solid fa-user fa-3x"></i>
+                </c:otherwise>
+            </c:choose>
+            </div>
             <br />
             <div class="userNickName">
               <h4>${pj.memNickname}</h4>
