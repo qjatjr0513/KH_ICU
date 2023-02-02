@@ -3,13 +3,18 @@ package com.kh.icu.common.scheduling;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.kh.icu.common.socket.AlramHandler;
+import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
 
@@ -22,6 +27,8 @@ public class PartyDateScheduler {
 	
 	@Autowired
 	private AlramHandler alramHandler;
+	
+
 	
 	@Scheduled(cron = "0 */1 * * * *")
 	public void partyDateCheck() {
@@ -48,6 +55,23 @@ public class PartyDateScheduler {
 					int paNo =  oneWeek.get(i).getPaNo();
 					String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + paNo;
 					System.out.println(message);
+					TextMessage msg = new TextMessage(message);
+				
+					List<WebSocketSession> WSsessions = new ArrayList<>();
+					Map<String, WebSocketSession> userSessions = new HashMap<>();
+					WebSocketSession SenderSession = userSessions.get(receiveNickname);
+					for(WebSocketSession s : WSsessions) {
+							try {
+								alramHandler.handleTextMessage(s, msg);
+								s.sendMessage(msg);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						
+					}
+					
 				}
 				
 			}

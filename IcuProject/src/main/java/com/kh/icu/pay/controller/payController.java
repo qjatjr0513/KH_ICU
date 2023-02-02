@@ -1,6 +1,8 @@
 package com.kh.icu.pay.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.kh.icu.common.socket.AlramHandler;
+import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.PartyJoin;
@@ -29,6 +34,9 @@ public class payController {
 	
 	@Autowired
 	private PartyService partyService;
+	
+	@Autowired
+	private AlramHandler alramHandler;
 	
 	@RequestMapping("accountOfPayment.pe")
 	@ResponseBody
@@ -82,11 +90,27 @@ public class payController {
 		int result = payService.remitConfirm(payNo);
 		System.out.println("payNo :" + payNo);
 		
+		
 		int sendId = loginUser.getMemNo();
 		String receiveNickname = paMemNickName;
 		int receiveId = paName;
 		String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + payNo;
 		System.out.println(message);
+		TextMessage msg = new TextMessage(message);
+		Map<String, WebSocketSession> userSessions = new HashMap<>();
+		WebSocketSession boardWriterSession = userSessions.get(receiveNickname);
+		
+		
+		try {
+			alramHandler.handleTextMessage(boardWriterSession, msg);
+			boardWriterSession.sendMessage(msg);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+			
+		
 		return "redirect:payManageListForm.pe";
 		
 	}

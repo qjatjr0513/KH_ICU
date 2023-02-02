@@ -25,9 +25,7 @@ import com.kh.icu.member.model.vo.Member;
 
 @Component
 public class AlramHandler extends TextWebSocketHandler {
-	static List<WebSocketSession> sessions = new ArrayList<>(); 
-	
-	static Map<String, WebSocketSession> userSessions = new HashMap<>();
+
 	
 	 @Autowired 
 	 private AlarmService alarmService;
@@ -38,17 +36,17 @@ public class AlramHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
 		System.out.println("afterConnection : "+ session);
-		sessions.add(session); // 접속된 유저들을 sessions에 모두 담는다.
+		Sessions.WSsessions.add(session); // 접속된 유저들을 sessions에 모두 담는다.
 		
 		// 접속한 유저의 httpsession을 조회해서 id 얻어오기
 		String senderId = getMemberId(session);
 		
-		userSessions.put(senderId, session);
+		Sessions.userSessions.put(senderId, session);
 	}
 	
 	// 클라이언트가 Data 전송시
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
+	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
 		System.out.println("handleTextMessage:" + session + " : "+ message);
 		String senderId = getMemberId(session);
 //		for(WebSocketSession sess : sessions) { // 세션에 접속된 모든 사람들에게 메세지 전송
@@ -73,7 +71,7 @@ public class AlramHandler extends TextWebSocketHandler {
 				
 				
 				
-				WebSocketSession boardWriterSession = userSessions.get(boardWriter);
+				WebSocketSession boardWriterSession = Sessions.userSessions.get(boardWriter);
 				System.out.println("============"+boardWriterSession);
 				if("reply".equals(cmd) && !replyWriter.equals(boardWriterNo)) {
 					String content = "게시글에 댓글이 달렸습니다!";
@@ -139,4 +137,5 @@ public class AlramHandler extends TextWebSocketHandler {
 			return loginUser.getMemNickname();
 		}
 	}
+
 }

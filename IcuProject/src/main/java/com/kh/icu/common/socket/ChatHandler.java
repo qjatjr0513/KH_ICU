@@ -72,19 +72,20 @@ public class ChatHandler extends TextWebSocketHandler{
          for(WebSocketSession s : Sessions.sessions) {
             
             // 반복을 진행중인 websocketsession안에 담겨있는 방번호.
-           int chatRoomNo = (Integer) s.getAttributes().get("chatRoomNo");
-           Member loginUser = (Member) s.getAttributes().get("loginUser");
-            System.out.println("챗봇"+ chatRoomNo);
-            System.out.println("2222222222"+ chatMessage.getChatRoomNo());
-            System.out.println(loginUser.getMemNickname());
-            // 메세제에 담겨있는 채팅방 번호와 chatRoomNo가 같은지 비교
-            if(chatMessage.getChatRoomNo() == chatRoomNo && !loginUser.getMemNickname().equals(chatMessage.getMemNickname())) {
-               // 같은방 클라이언트에게 JSON형식으로 메세지를 보냄.
-               // s.sendMessage(new TextMessage(message.getPayload()));
-            	s.sendMessage(new TextMessage(new Gson().toJson(chatMessage)));
-            	System.out.println(chatMessage);
-            	
-           } 
+			int chatRoomNo = (Integer) s.getAttributes().get("chatRoomNo");
+			Member loginUser = (Member) s.getAttributes().get("loginUser");
+			System.out.println("챗봇" + chatRoomNo);
+			System.out.println("2222222222" + chatMessage.getChatRoomNo());
+			System.out.println(loginUser.getMemNickname());
+			// 메세제에 담겨있는 채팅방 번호와 chatRoomNo가 같은지 비교
+			if (chatMessage.getChatRoomNo() == chatRoomNo
+					&& !loginUser.getMemNickname().equals(chatMessage.getMemNickname())) {
+				// 같은방 클라이언트에게 JSON형식으로 메세지를 보냄.
+				// s.sendMessage(new TextMessage(message.getPayload()));
+				s.sendMessage(new TextMessage(new Gson().toJson(chatMessage)));
+				System.out.println(chatMessage);
+
+			}
          }
 	    }
 

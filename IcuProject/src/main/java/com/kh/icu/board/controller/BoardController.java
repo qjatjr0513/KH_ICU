@@ -111,7 +111,7 @@ public class BoardController {
    public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
                            HttpSession session,
                            ModelAndView mv,
-                           @RequestParam("mesNo") int mesNo
+                           @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo
                            ) {
       Board b = boardService.selectBoard(boardNo);
       ArrayList<Reply> list = boardService.selectReplyList(boardNo);
