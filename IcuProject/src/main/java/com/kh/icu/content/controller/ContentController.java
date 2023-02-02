@@ -182,12 +182,36 @@ public class ContentController {
 	}
 	
 	@RequestMapping("/contentListForm.co")
-	public String contentList() {
+	public String contentList(Model model) {
+		ArrayList<Content> list = contentService.getWrittenContent();
+		ArrayList<String> ottName = new ArrayList<String>();
+		String full = "";
+		
+		for(int i = 0; i < list.size(); i++) {			
+			ottName = contentService.getWrittenContentOtt(list.get(i).getConNo());
+			for(int j = 0; j < ottName.size(); j++) {	
+				full += ottName.get(j);
+				if(j != ottName.size() - 1) {
+					full += ", ";					
+				}				
+			}
+			list.get(i).setOttName(full);
+			full = "";
+			if(list.get(i).getConCategory().equals("1")) {
+				list.get(i).setConCategory("영화");
+			}
+			else {
+				list.get(i).setConCategory("드라마");
+			}
+		}
+		model.addAttribute("list", list);
+		
+		System.out.println(list);
 		return "content/contentListForm";
 	}
 	
 	@RequestMapping("/contentEnrollForm.co")
-	public String contentEnrollForm() {
+	public String contentEnrollForm() {		
 		return "content/contentEnrollForm";
 	}
 	
@@ -207,6 +231,7 @@ public class ContentController {
 		resultContent = contentService.insertContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
 		int conNo = contentService.selectConNo();
+		 
 		conNoList.add(conNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -242,12 +267,41 @@ public class ContentController {
 		resultOtt = contentService.insertOtt(map);
 		
 		if(resultContent > 0 && resultImage > 0 && resultGenre > 0 && resultOtt > 0) {
-			return "content/contentEnrollForm";	
+			Content cInfo = contentService.selectContent(conNo);
+			
+			model.addAttribute("info", cInfo);
+			
+			return "content/contentListForm";	
 		}		
 		else {
 			model.addAttribute("errorMsg","컨텐츠 등록 실패");
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping("/searchByKeyword.co")
+	public String searchByKeyword(@RequestParam(value = "searchNo") int searchNo,
+								@RequestParam(value = "keyword") String keyword,
+								HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("searchNo", searchNo);
+		map.put("keyword", keyword);
+		
+		ArrayList<Content> list = contentService.searchByKeyword(map);
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getFilePath() == null) {
+				list.get(i).setFilePath("");
+			}
+		}
+		
+		System.out.println(list);
+		
+		model.addAttribute("list", list);
+		
+		return "content/searchContent";
 	}
 }

@@ -23,22 +23,31 @@
      <!-- input, carousel -->
 
      <section id="home">
+	 <form id="memberEnroll" action="${contextPath }/searchByKeyword.co" method="post">
        <div class="input-group mb-3 sizing">
-         <input
-           type="text"
-           class="formControl"
-           placeholder="내용을 입력해주세요."
-           aria-label="Recipient's username"
-           aria-describedby="button-addon2"
-         />
-         <button
-           class="btn btn-outline-secondary btn3"
-           type="button"
-           id="button-addon2"
-         >
-           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-         </button>
+	       	 <select name="searchNo" id="search">
+		     	<option value="0" selected><span>전체</span></option>
+		     	<option value="1">제목</option>
+		     	<option value="2">감독/배우</option>
+		     </select>
+	         <input
+	           type="text"
+	           class="formControl"
+	           placeholder="내용을 입력해주세요."
+	           name="keyword"
+	           aria-label="Recipient's username"
+	           aria-describedby="button-addon2"
+	           required
+	         />
+	         <button
+	           class="btn btn-outline-secondary btn3"
+	           type="submit"
+	           id="button-addon2"
+	         >
+	           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+	         </button>
        </div>
+	   </form>
 
        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" >
          <div class="carousel-indicators">

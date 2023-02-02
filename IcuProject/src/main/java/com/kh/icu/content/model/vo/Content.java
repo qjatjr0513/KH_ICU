@@ -23,4 +23,5 @@ public class Content {
 	private String changeName;
 	private String filePath;
 	private double cmtStar;
+	private String ottName;
 }

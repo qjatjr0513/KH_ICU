@@ -22,4 +22,7 @@ public interface ContentService {
 	public int insertImg(Image image);
 	public int selectConNo();
 	public ArrayList<Content> recommendContents();
+	public ArrayList<Content> searchByKeyword(Map<String, Object> map);
+	public ArrayList<Content> getWrittenContent();
+	public ArrayList<String> getWrittenContentOtt(int conNo);
 }

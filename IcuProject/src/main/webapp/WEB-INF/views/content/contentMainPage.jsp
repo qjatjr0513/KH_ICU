@@ -185,7 +185,7 @@
 										            </c:if>
 										            <br><br>
 										            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-										            <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+										            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 										            <i class="fa-solid fa-star">${c.cmtStar }</i>
 									            </div>
 								    		</div>
@@ -215,7 +215,7 @@
 											            </c:if>
 											            <br><br>
 											            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-											            <span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+											            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 											            <i class="fa-solid fa-star">${c.cmtStar }</i>
 										            </div>
 									    		</div>
@@ -251,7 +251,7 @@
 											</c:if>
 											<br><br>
 											<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-											<span onclick="movePage(${c.conNo });">(${ c.conDate})</span><br />
+											<span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 											<i class="fa-solid fa-star">${c.cmtStar }</i>
 										</div>
 									</div>
@@ -469,7 +469,7 @@
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br><br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate+")</span>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
 													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
 												"</div>"+
@@ -499,7 +499,7 @@
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br><br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate+")</span>" +
+													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
 													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
 												"</div>"+
@@ -529,7 +529,7 @@
 												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
 												"<br><br>" +
 												"<h4 onclick='movePage("+ result[i].conNo +");'>"+result[i].conKTitle+"</h4>" +
-												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate+")</span>" +
+												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
 												"<br>" +
 												"<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
 											"</div>"+

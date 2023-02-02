@@ -80,9 +80,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertContent" parameterType="content">
 		INSERT INTO CONTENT(CON_NO, CON_KTITLE, CON_ETITLE, CON_CATEGORY, 
-		CON_DATE, CON_AGE, CON_INFO, CON_PREVIEW, CON_DIRECTOR, CON_ACTOR, CON_SYNOP)
+		CON_DATE, CON_AGE, CON_INFO, CON_PREVIEW, CON_DIRECTOR, CON_ACTOR, CON_SYNOP, WRITTEN)
 		VALUES (SEQ_CON.NEXTVAL, #{conKTitle}, #{conETitle}, #{conCategory}, #{conDate},
-		#{conAge}, #{conInfo}, #{conPreview}, #{conDirector}, #{conActor}, #{conSynop})
+		#{conAge}, #{conInfo}, #{conPreview}, #{conDirector}, #{conActor}, #{conSynop}, 'Y')
 	</insert>
 	
 	<select id="selectConNo" resultType="int">
@@ -130,6 +130,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN IMAGE I ON(I.REF_TNO = CT.CON_NO) AND I.TABLE_CD = 'C'
 		GROUP BY CT.CON_NO, I.CHANGE_NAME, CT.CON_DATE
 		ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
+	</select>
+	
+	<select id="getWrittenContent" resultMap="contentResultSet">
+		SELECT CT.CON_NO, CON_CATEGORY, CON_KTITLE
+		FROM CONTENT CT
+		ORDER BY CON_NO
+	</select>
+	
+	<select id="getWrittenContentOtt" resultType="string">
+		SELECT OTT_NAME
+		FROM OTT_STORAGE OS
+		JOIN OTT O ON (OS.OTT_NO = O.OTT_NO)
+		WHERE CON_NO = #{conNo}
+	</select>
+	
+	<select id="searchByKeyword" parameterType="map" resultMap="contentResultSet">
+		SELECT *
+		FROM CONTENT
+		JOIN IMAGE I ON(I.REF_TNO = CON_NO) AND I.TABLE_CD = 'C'
+		WHERE
+		<if test="searchNo == 0">
+			CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ETITLE LIKE '%'||#{keyword}||'%'
+			OR
+			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ACTOR LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="searchNo == 1">
+			CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ETITLE LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="searchNo == 2">
+			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ACTOR LIKE '%'||#{keyword}||'%'
+		</if>
 	</select>
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">

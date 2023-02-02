@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="list" value="${list }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,43 +30,21 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">회원번호</th>
-            <th scope="col">이름 (닉네임)</th>
-            <th scope="col">생년월일</th>
-            <th scope="col">휴대폰 번호</th>
+            <th scope="col">컨텐츠번호</th>
+            <th scope="col">분류</th>
+            <th scope="col">제목</th>
+            <th scope="col">플랫폼</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>이범석 (aaa)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>서경주 (bbb)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>이상엽 (ccc)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>한대웅 (ddd)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>황종수 (fff)</td>
-            <td>2023-01-01</td>
-            <td>010-1111-2222</td>
-          </tr>
+          <c:forEach var="l" items="${list }">   
+	          <tr onclick="movePage(${l.conNo });">
+	            <th scope="row">${l.conNo }</th>
+	            <td>${l.conCategory }</td>
+	            <td>${l.conKTitle }</td>
+	            <td>${l.ottName }</td>
+	          </tr>
+          </c:forEach> 
         </tbody>
       </table>
 
@@ -86,5 +66,10 @@
         </ul>
       </div>
     </section>
+    <script>
+		function movePage(cno){
+	 		location.href = '${contextPath}/detail?conNo='+cno;
+	 	}
+    </script>
   </body>
 </html>

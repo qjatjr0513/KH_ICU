@@ -74,5 +74,16 @@ public class ContentDao {
 	public ArrayList<Content> recommendContents(SqlSession sqlSession) {
 		return (ArrayList)sqlSession.selectList("contentMapper.recommendContents");
 	}
-
+	
+	public ArrayList<Content> searchByKeyword(SqlSession sqlSession, Map<String, Object> map){
+		return (ArrayList) sqlSession.selectList("contentMapper.searchByKeyword", map);
+	}
+	
+	public ArrayList<Content> getWrittenContent(SqlSession sqlSession){
+		return (ArrayList)sqlSession.selectList("contentMapper.getWrittenContent");
+	}
+	
+	public ArrayList<String> getWrittenContentOtt(SqlSession sqlSession, int conNo){
+		return (ArrayList)sqlSession.selectList("contentMapper.getWrittenContentOtt", conNo);
+	}
 }

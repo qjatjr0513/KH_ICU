@@ -102,4 +102,18 @@ public class ContentServiceImpl implements ContentService{
 		return contentDao.recommendContents(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Content> searchByKeyword(Map<String, Object> map){
+		return contentDao.searchByKeyword(sqlSession, map);
+	}
+	
+	@Override
+	public ArrayList<Content> getWrittenContent(){
+		return contentDao.getWrittenContent(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<String> getWrittenContentOtt(int conNo){
+		return contentDao.getWrittenContentOtt(sqlSession, conNo);
+	}
 }
