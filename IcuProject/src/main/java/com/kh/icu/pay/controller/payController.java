@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.WebSocketMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
@@ -74,11 +76,17 @@ public class payController {
 	}
 	
 	@RequestMapping("remitConfirm.pe")
-	public String remitConfirm(int payNo) {
-		
+	public String remitConfirm(int payNo, HttpSession session, @RequestParam("paName") int paName, 
+								@RequestParam("paMemNickName") String paMemNickName) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = payService.remitConfirm(payNo);
 		System.out.println("payNo :" + payNo);
 		
+		int sendId = loginUser.getMemNo();
+		String receiveNickname = paMemNickName;
+		int receiveId = paName;
+		String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + payNo;
+		System.out.println(message);
 		return "redirect:payManageListForm.pe";
 		
 	}

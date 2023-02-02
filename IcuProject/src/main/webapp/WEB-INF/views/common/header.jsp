@@ -165,16 +165,25 @@
               <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" id="alarmList">
+              <c:if test="${empty alarmList }">
+              	<li><span>알림이 없습니다.</span></li>
+              </c:if>
+              <c:if test="${!empty alarmList }">
               <c:forEach var="a" items="${alarmList}" >
-              <c:if test="${a.tableCd.equals('B') }">
-                <li><a class="dropdown-item" href="${contextPath }/detail.bo/${a.refTno}">${a.mesContent }</a></li>
-                <input type="hidden" value="${a.mesNo }">
-              </c:if>
-              <c:if test="${a.tableCd.equals('P') }">
-                <li><a class="dropdown-item"  href="${contextPath }/partyDetail.py/${a.refTno}">${a.mesContent }</a></li>
-              </c:if>
+              <c:choose>
+	              <c:when test="${a.tableCd.equals('B') }">
+	                <li><a class="dropdown-item" href="${contextPath }/detail.bo/${a.refTno}?mesNo=${a.mesNo }">${a.mesContent }</a></li>
+	              </c:when>
+	              <c:when test="${a.tableCd.equals('P') }">
+	                <li><a class="dropdown-item"  href="${contextPath }/partyDetail.py/${a.refTno}?mesNo=${a.mesNo }">${a.mesContent }</a></li>
+	              </c:when>
+	              <c:otherwise>
+	              	<li><span>알림이 없습니다.</span></li>
+	              </c:otherwise>
+              </c:choose>
               </c:forEach>
+              </c:if>
               </ul>
             </div>
             </li>
@@ -244,20 +253,24 @@
          
       }
       
-      $("#alarm").click(function(){
-       	
-       	$.ajax({
+
+	       
+    $("#alarm").click(function(){
+
+    	$.ajax({
        		url : "${contextPath }/alarm",
        		type: "post",
        		data : {memNo : ${loginUser.memNo}},
                success : function(result){	
-              	 
+            	   //location.reload();
+            	   // list로 반복문 돌려서 동적으로 html요소추가
+            	   
                },	
                error : function(){
-              	 
+            	   console.log("에러");
                 }
            })
-       });
+      	});
       
       
       

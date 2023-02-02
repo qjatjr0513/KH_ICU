@@ -21,19 +21,14 @@ public class AlarmController {
 	
 	@RequestMapping("alarm")
 	@ResponseBody
-	public void alram(int memNo, HttpSession session) {
+	public String alram(int memNo, HttpSession session) {
 		
 		List<Alarm> alarmList = alarmService.selectAlarmList(memNo);
 		session.setAttribute("alarmList", alarmList);
 		
-	}
-	
-	@RequestMapping("readAlarm")
-	@ResponseBody
-	public void readAlram(String mesNo, HttpSession session) {
-		System.out.println("???????????????????"+mesNo);
+		// 1. 모델로 alarmList
 		
-		
+		return "redirect:";
 	}
 	
 }

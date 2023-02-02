@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.kh.icu.common.socket.AlramHandler;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
 
@@ -18,8 +19,11 @@ public class PartyDateScheduler {
 	@Autowired
 	private PartyService partyService;
 	
-
-	@Scheduled(cron = "0 */10 * * * *")
+	
+	@Autowired
+	private AlramHandler alramHandler;
+	
+	@Scheduled(cron = "0 */1 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
 		LocalDate today = LocalDate.now();
@@ -37,14 +41,19 @@ public class PartyDateScheduler {
 				System.out.println(p.get(i).getPaNo()+"번 파티 기한 : " +pe.getDays()+"일");
 				if(pe.getDays() == 7) {
 					oneWeek.add(p.get(i));
-					String cmd = "party";
-					String memNo = oneWeek.get(i).getMemNickname();
-				
 					
+					int sendId = oneWeek.get(i).getPaName();
+					String receiveNickname = oneWeek.get(i).getMemNickname();
+					int receiveId = oneWeek.get(i).getMemNo();
+					int paNo =  oneWeek.get(i).getPaNo();
+					String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + paNo;
+					System.out.println(message);
 				}
+				
 			}
 		}
 		System.out.println("일주일 남은 파티 : " +oneWeek);
 		System.out.println("=========파티 날짜 조회 끝=========");
+
 	}
 }

@@ -27,4 +27,9 @@ public class AlarmServiceImpl implements AlarmService{
 	public List<Alarm> selectAlarmList(int memNo) {
 		return alarmDao.selectAlarmList(sqlSession, memNo);
 	}
+	
+	@Override
+	public int readAlarm(int mesNo) {
+		return alarmDao.readAlarm(sqlSession, mesNo);
+	}
 }

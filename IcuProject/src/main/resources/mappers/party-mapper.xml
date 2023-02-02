@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="JOIN_NUM" property="joinNum"></result>
 		<result column="TOTAL_PRICE" property="totalPrice"></result>
 		<result column="MEM_NICKNAME" property="memNickname"></result>
+		<result column="MEM_NO" property="memNo"></result>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
 		<result column="LIKE_COUNT" property="likeCount"/>
@@ -91,10 +92,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
 			   (SELECT COUNT(*)
                 FROM PARTY_JOIN
-                WHERE PA_NO = P.PA_NO) AS JOIN_NUM
+                WHERE PA_NO = P.PA_NO) AS JOIN_NUM,
+                PA_NAME,
+                PJ.MEM_NO,
+                M.MEM_NICKNAME
 		FROM PARTY P
         JOIN OTT O USING(OTT_NO)
-        WHERE STATUS = 'N'
+        JOIN PARTY_JOIN PJ ON(PJ.PA_NO = P.PA_NO)
+        JOIN MEMBER M ON(PJ.MEM_NO = M.MEM_NO)
+        WHERE P.STATUS = 'N'
 	</select>
 	
 	<select id="findParty" parameterType="map" resultMap="partyResultSet">

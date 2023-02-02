@@ -27,6 +27,7 @@ public class Party {
 	private int joinNum;
 	private int totalPrice;
 	private String memNickname;
+	private int memNo;
 	private List<Ott> ott;
 	private String month;
 	private String changeName;

@@ -44,7 +44,7 @@
           </c:if>
           <c:forEach var="p" items="${list }" >
             <tr>
-              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe" method="post">
+              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}" method="post">
               <th scope="row">${p.payDate}</th>
               <td>${p.paTitle}</td>
               <td>${p.memName}(${p.memNickName})</td> 
@@ -54,10 +54,10 @@
               <td>${p.account}</td>
               <c:choose>
                   <c:when test="${p.remitStatus eq 'N'}">
-                    <td><button type="submit" class="btn btn-danger ">취소</button></td>
+                    <td><button type="submit" class="btn btn-primary ">송금</button></td>
                   </c:when>
                   <c:otherwise>
-                    <td>확인완료</td>
+                    <td>송금완료</td>
                   </c:otherwise>
               </c:choose>
               <input type="hidden" name="payNo" value="${p.payNo}">
