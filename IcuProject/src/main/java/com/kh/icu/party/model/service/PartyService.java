@@ -33,8 +33,14 @@ public interface PartyService {
 
 	public int deleteReply(int rno);
 	
+	// 관리자 페이지
 	public List<Party> currentPartyList();
-	
 	public List<Party> endPartyList();
+	
+	// 사용자 마이페이지
+	public List<Party> memCurrentPartyListI(int memNo);
+	public List<Party> memCurrentPartyListO(int memNo);
+	public List<Party> memEndPartyListI(int memNo);
+	public List<Party> memEndPartyListO(int memNo);
 
 }

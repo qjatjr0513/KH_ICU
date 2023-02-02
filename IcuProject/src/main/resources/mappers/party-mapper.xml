@@ -115,10 +115,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 START_DATE
 		FROM PARTY P
         JOIN OTT O USING(OTT_NO)
-        
+        WHERE P.STATUS = 'N'
         
         <if test="!ottList.isEmpty() or month != ''"> 
-        	WHERE 
+        	AND
        
 			<if test="!ottList.isEmpty()">
 	        	OTT_NO IN (${ottList})
@@ -240,7 +240,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE P.STATUS = 'Y'
     </select>
     
-	
+	<select id="memCurrentPartyListI" parameterType="int" resultMap="partyResultSet">
+		SELECT P.PA_NO,
+			   O.OTT_NAME,
+			   PA_TITLE,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+			   OTT_ID,
+			   OTT_PWD
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        WHERE STATUS = 'N' AND PA_NAME = #{memNo}
+    </select>
+    
+        
+	<select id="memCurrentPartyListO" parameterType="int" resultMap="partyResultSet">
+		SELECT PA_NO,
+			   O.OTT_NAME,
+			   P.PA_TITLE,
+			   P.END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+			   OTT_ID,
+			   OTT_PWD
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        WHERE P.STATUS = 'N' AND PA_NAME != #{memNo}
+          AND PA_NO IN (SELECT DISTINCT(PA_NO) FROM PARTY_JOIN WHERE MEM_NO = #{memNo})
+    </select>
+    
+    <select id="memEndPartyListI" parameterType="int" resultMap="partyResultSet">
+		SELECT P.PA_NO,
+			   O.OTT_NAME,
+			   PA_TITLE,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        WHERE STATUS = 'Y' AND PA_NAME = #{memNo}
+    </select>
+    
+	<select id="memEndPartyListO" parameterType="int" resultMap="partyResultSet">
+		SELECT PA_NO,
+        	   M.MEM_NICKNAME,
+			   O.OTT_NAME,
+			   P.PA_TITLE,
+			   P.END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        JOIN MEMBER M ON (MEM_NO = PA_NAME)
+        WHERE P.STATUS = 'Y' AND PA_NAME != #{memNo}
+          AND PA_NO IN (SELECT DISTINCT(PA_NO) FROM PARTY_JOIN WHERE MEM_NO = #{memNo})
+    </select>
 	
 
 </mapper>

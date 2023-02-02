@@ -79,4 +79,25 @@ public class PartyDao {
 		return sqlSession.selectList("partyMapper.endPartyList");
 	};
 	
+	// 마이페이지 - 진행중인 파티  - 내가 만든 파티
+	public List<Party> memCurrentPartyListI(SqlSession sqlSession, int memNo){
+		return sqlSession.selectList("partyMapper.memCurrentPartyListI", memNo);
+	};
+	
+	// 마이페이지 - 진행중인 파티  - 내가 참여한 파티
+	public List<Party> memCurrentPartyListO(SqlSession sqlSession, int memNo){
+		return sqlSession.selectList("partyMapper.memCurrentPartyListO", memNo);
+	};
+	
+	// 마이페이지 - 종료된 파티  - 내가 만든 파티
+	public List<Party> memEndPartyListI(SqlSession sqlSession, int memNo){
+		return sqlSession.selectList("partyMapper.memEndPartyListI", memNo);
+	};
+	
+	// 마이페이지 - 종료된 파티  - 내가 참여한 파티
+	public List<Party> memEndPartyListO(SqlSession sqlSession, int memNo){
+		return sqlSession.selectList("partyMapper.memEndPartyListO", memNo);
+	};
+	
+	
 }

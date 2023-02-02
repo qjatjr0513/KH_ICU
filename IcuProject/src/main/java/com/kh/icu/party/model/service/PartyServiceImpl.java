@@ -99,5 +99,29 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.endPartyList(sqlSession);
 	};
 	
+	// 마이페이지 - 진행중인 파티  - 내가 만든 파티
+	@Override
+	public List<Party> memCurrentPartyListI(int memNo){
+		return partyDao.memCurrentPartyListI(sqlSession, memNo);
+	};
+	
+	// 마이페이지 - 진행중인 파티  - 내가 참여한 파티
+	@Override
+	public List<Party> memCurrentPartyListO(int memNo){
+		return partyDao.memCurrentPartyListO(sqlSession, memNo);
+	};
+	
+	// 마이페이지 - 종료된 파티  - 내가 만든 파티
+	@Override
+	public List<Party> memEndPartyListI(int memNo){
+		return partyDao.memEndPartyListI(sqlSession, memNo);	
+	};
+	
+	// 마이페이지 - 종료된 파티  - 내가 참여한 파티
+	@Override
+	public List<Party> memEndPartyListO(int memNo){
+		return partyDao.memEndPartyListO(sqlSession, memNo);
+	};
+	
 	
 }

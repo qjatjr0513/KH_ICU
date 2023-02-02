@@ -188,19 +188,6 @@ public class PartyController {
  	         return "common/errorPage";
  	      }
     }
-    
-	
-
-	@RequestMapping("CurrentParty.py")
-	public String currentParty() {
-		return "party/memberCurrentParty";
-	}
-	
-	@RequestMapping("LastParty.py")
-	public String lastParty() {
-		return "party/memberLastParty";
-	}
-	
 
     // 관리자페이지 - 진행중인 파티 
 	@RequestMapping("current.py")
@@ -224,6 +211,52 @@ public class PartyController {
 		mav.addObject("list", list);
 		mav.setViewName("party/endPartyListForm");
 		System.out.println("***list(con/list)" + list);
+		
+		return mav;
+	}	
+	
+    // 사용자페이지 - 진행중인 파티 (내가 만든 / 내가 참여한)
+	@RequestMapping("CurrentParty.py")
+	public ModelAndView memCurrentPartyList(ModelAndView mav, HttpSession session) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		int memNo = m.getMemNo();
+		System.out.println("****memNo" + memNo);
+		
+		// 내가 만든 파티 listI / 내가 참여한 파티 listO
+		List<Party> listI = partyService.memCurrentPartyListI(memNo);
+		List<Party> listO = partyService.memCurrentPartyListO(memNo);
+		
+		mav.addObject("listI", listI);
+		mav.addObject("listO", listO);
+
+		System.out.println("****listI" + listI);
+		System.out.println("****listO" + listO);
+		
+		mav.setViewName("party/memberCurrentParty");
+		
+		return mav;
+	}
+	 
+	// 사용자페이지 - 종료된 파티 (내가 만든 / 내가 참여한)
+	@RequestMapping("LastParty.py")
+	public ModelAndView memEndPartyList(ModelAndView mav, HttpSession session) {
+		
+		Member m = (Member)session.getAttribute("loginUser");
+		int memNo = m.getMemNo();
+		System.out.println("****memNo" + memNo);
+		
+		// 내가 만든 파티 listI / 내가 참여한 파티 listO
+		List<Party> listI = partyService.memEndPartyListI(memNo);
+		List<Party> listO = partyService.memEndPartyListO(memNo);
+		
+		mav.addObject("listI", listI);
+		mav.addObject("listO", listO);
+
+		System.out.println("****listI" + listI);
+		System.out.println("****listO" + listO);
+		
+		mav.setViewName("party/memberLastParty");
 		
 		return mav;
 	}
