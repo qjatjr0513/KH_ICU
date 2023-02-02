@@ -207,7 +207,7 @@ public class MemberController {
 			}else {
 				session.setAttribute("loginUser", loginUser);
 				session.setAttribute("profile", profile);
-				return "common/main";				
+				return "redirect:main";				
 			}
 		}else {
 			model.addAttribute("errorMsg", "로그인 실패");
@@ -316,7 +316,7 @@ public class MemberController {
 
 		System.out.println("getMemNickname : "+ m.getMemNickname());
         
-		return "common/main";
+		return "redirect:main";
 	}
 	
 
@@ -362,7 +362,7 @@ public class MemberController {
             session.setAttribute("profile", profile);
         }
 
-		return "common/main";
+		return "redirect:main";
 	}
 	
 	

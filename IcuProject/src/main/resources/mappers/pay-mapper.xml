@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<result column="MEM_NAME" property="memName"/>
 		<result column="MEM_NICKNAME" property="memNickName"/>
+		<result column="PA_NAME" property="paName"/>
+		<result column="PA_NICKNAME" property="paMemNickName"/>
 		<result column="PA_TITLE" property="paTitle"/>
 		<result column="OTT_NAME" property="ottName"/>
 		<result column="ACCOUNT" property="account"/>
@@ -45,6 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			PA.PA_TITLE,
 			M.MEM_NAME,
 			M.MEM_NICKNAME,
+			PA.PA_NAME,
+            M2.MEM_NICKNAME AS PA_NICKNAME,
 			O.OTT_NAME,
 			P.PAYMENT,
 			P.PRICE,
@@ -54,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN MEMBER M ON (P.PAY_MEM_NO = M.MEM_NO)
 		LEFT JOIN PARTY PA ON (P.PA_NO = PA.PA_NO)
 		LEFT JOIN OTT O ON (O.OTT_NO = PA.OTT_NO)
+        LEFT JOIN MEMBER M2 ON (PA.PA_NAME = M2.MEM_NO)
 		ORDER BY P.PAY_NO DESC
 	</select>
 	

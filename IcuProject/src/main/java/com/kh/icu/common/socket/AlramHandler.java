@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.maven.shared.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -22,10 +23,11 @@ import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
 
+@Component
 public class AlramHandler extends TextWebSocketHandler {
-	List<WebSocketSession> sessions = new ArrayList<>(); 
+	static List<WebSocketSession> sessions = new ArrayList<>(); 
 	
-	Map<String, WebSocketSession> userSessions = new HashMap<>();
+	static Map<String, WebSocketSession> userSessions = new HashMap<>();
 	
 	 @Autowired 
 	 private AlarmService alarmService;

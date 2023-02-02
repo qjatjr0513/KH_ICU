@@ -23,4 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAlarmList" parameterType="int" resultMap="alarmResultSet">
 		SELECT * FROM ALARM WHERE MEM_NO = #{memNo} AND STATUS = 'N'
 	</select>
+	
+	<update id="readAlarm" parameterType="int" >
+		UPDATE ALARM
+		SET STATUS = 'Y'
+		WHERE MES_NO = #{mesNo}
+	</update>
 </mapper>

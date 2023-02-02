@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.icu.board.model.service.BoardService;
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 
@@ -30,6 +31,9 @@ public class BoardController {
    
    @Autowired
    private BoardService boardService;
+   
+   @Autowired
+   private AlarmService alarmService;
    
    private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
    /**
@@ -106,14 +110,21 @@ public class BoardController {
    @RequestMapping("detail.bo/{boardNo}")
    public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
                            HttpSession session,
-                           ModelAndView mv
+                           ModelAndView mv,
+                           @RequestParam("mesNo") int mesNo
                            ) {
       Board b = boardService.selectBoard(boardNo);
       ArrayList<Reply> list = boardService.selectReplyList(boardNo);
       
+      int result2 = alarmService.readAlarm(mesNo);
+     
+      
       if(b != null) {
          // 상세조회 성공
          Member loginUser = (Member)session.getAttribute("loginUser");
+         
+         // 알림 조회 상태 변경
+        
          
          
          int memNo =0;

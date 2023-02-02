@@ -17,4 +17,8 @@ public class AlarmDao {
 	public List<Alarm> selectAlarmList(SqlSession sqlSession, int memNo) {
 		return sqlSession.selectList("alarmMapper.selectAlarmList", memNo);
 	}
+	
+	public int readAlarm(SqlSession sqlSession, int mesNo) {
+		return sqlSession.update("alarmMapper.readAlarm", mesNo);
+	}
 }

@@ -9,4 +9,6 @@ public interface AlarmService {
 	public int insertBoardAlarm(Alarm a);
 	
 	public List<Alarm> selectAlarmList(int memNo);
+	
+	public int readAlarm(int mesNo);
 }
