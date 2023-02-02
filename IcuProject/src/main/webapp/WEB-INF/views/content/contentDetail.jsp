@@ -166,9 +166,7 @@
     	pointer-events: none;
 	}
 </style>
-</head>
-<body>
-	    <link
+	<link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
@@ -186,40 +184,20 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
-
-    <!-- animate.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <!-- 웹사이트에 아이콘 추가 -->
-    <link rel="icon" type="image/png" href="resources/images/navbarLogo.png" />
-
-    <!-- Font Awesome cdn -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
       integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- css -->
-    <link rel="stylesheet" href="resources/css/04_enrollForm1.css" />
-
-    <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
+    />>
+</head>
+<body>
     
     <jsp:include page="../common/header.jsp"/>
     
@@ -331,10 +309,11 @@
 				success: function(result){
 					console.log(result);
 					let html ="";
+					let img = "";
 					for(let comment of result){
 						html += "<div id='profileArea'>" +
 									"<div id='profile'>" +
-										"<img src='https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkEtR9%2FbtrgfMGHvbz%2FULwHeMTVRAhKiykodpkP6K%2Fimg.png'>" +
+										"<img src='"+${contextPath}/+comment.filePath+comment.changeName+"'>" +
 									"</div>" +
 									"<div id='userName'>" +
 										"<h5 align='center'>"+comment.memNickname+"</h5>" +

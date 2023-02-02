@@ -14,4 +14,6 @@ public class Coment {
 	private Date createDate;
 	private String status;
 	private String memNickname;
+	private String changeName;
+	private String filePath;
 }

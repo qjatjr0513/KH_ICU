@@ -94,6 +94,13 @@ public class ContentController {
 	@ResponseBody
 	public String selectReview(int conNo) {
 		ArrayList<Coment> list = contentService.selectReview(conNo);
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getFilePath() == null && list.get(i).getChangeName() == null) {
+				list.get(i).setFilePath("/resources/profileImg");
+				list.get(i).setChangeName("/orange.jpg");
+				
+			}
+		}
 		Gson gson = new GsonBuilder().create();
 
 		String result = gson.toJson(list);

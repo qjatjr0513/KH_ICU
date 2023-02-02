@@ -33,6 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="CREATE_DATE" property="createDate"></result>
 		<result column="STATUS" property="status"></result>
 		<result column="MEM_NICKNAME" property="memNickname"></result>
+		<result column="CHANGE_NAME" property="changeName"></result>
+		<result column="FILE_PATH" property="filePath"></result>
 	</resultMap>
 	
 	<select id="selectList" resultMap="contentResultSet">
@@ -58,9 +60,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectReview" resultMap="commentResultSet">
-		SELECT CMT_NO, CMT_WRITER, CON_NO, CMT_CONTENT, CMT_STAR, CREATE_DATE, C.STATUS, MEM_NICKNAME
+		SELECT CMT_NO, CMT_WRITER, CON_NO, CMT_CONTENT, CMT_STAR, CREATE_DATE, C.STATUS, MEM_NICKNAME, CHANGE_NAME, FILE_PATH
 		FROM COMENT C
-		JOIN MEMBER ON (CMT_WRITER = MEM_NO)
+		JOIN MEMBER M ON (CMT_WRITER = MEM_NO)
+		LEFT JOIN IMAGE I ON (I.REF_TNO = M.MEM_NO) AND I.TABLE_CD = 'M'
 		WHERE CON_NO = #{conNo}
 	</select>
 	
