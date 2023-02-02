@@ -15,5 +15,5 @@ public class Sessions {
 	 
 	  static List<WebSocketSession> WSsessions = new ArrayList<>(); 
 		
-	  static Map<String, WebSocketSession> userSessions = new HashMap<>();
+	  static public Map<String, WebSocketSession> userSessions = new HashMap<>();
 }

@@ -1,11 +1,15 @@
 package com.kh.icu.pay.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.OnMessage;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.kh.icu.common.model.service.AlarmService;
+import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.common.socket.AlramHandler;
 import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.member.model.vo.Member;
@@ -27,6 +33,7 @@ import com.kh.icu.pay.model.service.PayService;
 import com.kh.icu.pay.model.vo.Pay;
 
 @Controller
+@ServerEndpoint(value="/alram")
 public class payController {
 	
 	@Autowired
@@ -36,7 +43,11 @@ public class payController {
 	private PartyService partyService;
 	
 	@Autowired
+	private AlarmService alarmService;
+	
+	@Autowired
 	private AlramHandler alramHandler;
+	
 	
 	@RequestMapping("accountOfPayment.pe")
 	@ResponseBody
@@ -97,16 +108,28 @@ public class payController {
 		String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + payNo;
 		System.out.println(message);
 		TextMessage msg = new TextMessage(message);
-		Map<String, WebSocketSession> userSessions = new HashMap<>();
-		WebSocketSession boardWriterSession = userSessions.get(receiveNickname);
 		
+		//Map<String, WebSocketSession> userSessions = new HashMap<>();
+		WebSocketSession boardWriterSession = Sessions.userSessions.get(receiveNickname);
+		System.out.println(boardWriterSession);
 		
-		try {
-			alramHandler.handleTextMessage(boardWriterSession, msg);
-			boardWriterSession.sendMessage(msg);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String content = receiveNickname+"님이 송금하였습니다!";
+		Alarm a = new Alarm();
+		a.setMemNo(paName);
+		a.setSendMemNo(loginUser.getMemNo());
+		a.setMesContent(content);
+		a.setRefTno(payNo);
+		a.setTableCd("P");
+		
+		int result2 = alarmService.insertBoardAlarm(a);
+		if(result2 > 0 && boardWriterSession != null) {
+			try {
+				alramHandler.handleTextMessage(boardWriterSession, msg);
+				boardWriterSession.sendMessage(msg);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
 		
 			
@@ -114,6 +137,17 @@ public class payController {
 		return "redirect:payManageListForm.pe";
 		
 	}
+	
+	 @OnMessage  
+	 public void onMessage(Session session, String msg) throws IOException {
+
+
+
+	}
+	
+	
+	
+	
 	
 	@RequestMapping("myPayListForm.pe")
 	public String myPayListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
