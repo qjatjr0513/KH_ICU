@@ -110,6 +110,50 @@ td {
   color: white;
   width: 150px;
 }
+
+#searchContent{
+		margin: auto;
+		margin-top: 100px;
+		width: 800px;
+		height: 500px;
+		font-size: 20px;
+		font-weight: bold;
+  	}
+  	#whole{
+	  	margin: auto;
+		margin-top: 20px;
+		width: 810px;
+		height: 700px;
+		border: 1px solid black;
+  	}
+  	#card{
+  		margin: auto;
+  		width: 200px;
+		height: 350px;
+		float: left;
+  	}
+  	tr, td{
+  		padding: 15px;
+  		margin: auto;
+  	}
+  	#poster{
+  		width: 180px;
+  		height: 230px;
+  	}
+  	.btn_netflix{
+  		width: 100px;
+  		height: 100px;
+  	}
+  	.btn_netflix>img{
+  		width: 100%;
+  		height: 100%;
+  		border-radius: 50%;
+  	}
+  	#info>h4, h5{
+  		margin:auto;
+  	}
+
+
 .movie_drama_Btn > button {
   color: white;
 }
@@ -127,7 +171,7 @@ td {
   opacity: 0.3;
 }
 
-.moiveBox {
+.movieBox {
   /* background-color: burlywood; */
   padding: 20px;
   display: flex;
@@ -169,3 +213,5 @@ td {
 .carousel-control-next-icon {
   margin-right: -200px;
 }
+
+

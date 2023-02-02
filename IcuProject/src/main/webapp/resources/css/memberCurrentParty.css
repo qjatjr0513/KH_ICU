@@ -1,11 +1,10 @@
 @charset "UTF-8";
+@import url('main.css');
 
-#idPwdSection{
+#partySection{
 	margin-top : 200px;
-
 }
 
-@import url('main.css');
 
 table{
 	margin:auto;

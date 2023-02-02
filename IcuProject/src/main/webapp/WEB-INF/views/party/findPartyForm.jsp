@@ -19,6 +19,10 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
 
+<div class="header__title">
+      <h2>< 파티 찾기 ></h2>
+    </div>
+
 	<form action="${contextPath}/findParty.py">
     <section id="about" class="section section__container">
       <div class="about__majors">
@@ -65,13 +69,17 @@
           <h2 class="major__title" id='appleTV'>Apple TV</h2>
         </div>
       </div>
+      <div class="textbox">
+      	<span > * 원하시는 아이콘을 클릭해주세요.</span>
+      </div>
     </section> 
 
     <!-- 이용기간 -->
     <section id="periodOfUse">
       <div class="periodOfUse-container">
-        <span>이용기간 &nbsp;:  &nbsp;</span>
-        <input type="range" id="month" name="month" min="0" max="12" step="1" value="12" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <span class='use-period'>이용기간 &nbsp;:  &nbsp;</span>
+        <input type="range" id="month" name="month" min="1" max="12" step="1" value="12" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
+        <Br>
         <span id="value1">개월수</span>
         <br><br><br>
         <button>검색</button>
@@ -183,10 +191,12 @@
 				
                $('input[id= '+ $(this).attr('name') + ']').prop("checked", false); 
                $('h2[id= '+ $(this).attr('name') + ']').removeClass('colorOrange');
+               
             }
             else{
                $('input[id='+$(this).attr('name')+']').prop("checked", true);
                $('h2[id= '+ $(this).attr('name') + ']').addClass('colorOrange');
+               
             }
 		});
 		

@@ -10,103 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- animate.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-
-    <link rel="icon" type="image/png" href="../image/navbarLogo.png" />
-
-    <!-- Font Awesome cdn -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/12_findContents.css" />
 
-    <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- sweetAlert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<style>
-	#searchContent{
-		margin: auto;
-		margin-top: 100px;
-		width: 800px;
-		height: 500px;
-		font-size: 20px;
-		font-weight: bold;
-  	}
-  	#whole{
-	  	margin: auto;
-		margin-top: 20px;
-		width: 810px;
-		height: 700px;
-		border: 1px solid black;
-  	}
-  	#card{
-  		margin: auto;
-  		width: 200px;
-		height: 350px;
-		float: left;
-  	}
-  	tr, td{
-  		padding: 15px;
-  		margin: auto;
-  	}
-  	#poster{
-  		width: 180px;
-  		height: 230px;
-  	}
-  	.btn_netflix{
-  		width: 100px;
-  		height: 100px;
-  	}
-  	.btn_netflix>img{
-  		width: 100%;
-  		height: 100%;
-  		border-radius: 50%;
-  	}
-  	#info>h4, h5{
-  		margin:auto;
-  	}
-</style>
 </head>
 <body>
 
@@ -258,7 +165,7 @@
 				        </c:if>
 				        	<c:if test="${cnt eq 1 }">				    
 						    	<c:forEach var="cnt2" begin="0" end="1">
-						        	<div id="moiveBox">					        		
+						        	<div id="movieBox" class="movieBox">					        		
 							            <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
 								        	<div class="movieContainer">
 									            <div class="movie__info">
@@ -288,7 +195,7 @@
 				    			</c:if>
 				    			<c:if test="${cnt ne 1 }">				    
 						    		<c:forEach var="cnt2" begin="1" end="2">
-							        	<div id="moiveBox">						        							        		
+							        	<div id="movieBox" class="movieBox">						        							        		
 								            <c:forEach var="c" items="${list }" begin="${cCount * 4}" end="${(cCount * 4) + 3}">
 									        	<div class="movieContainer">
 										            <div class="movie__info">
@@ -324,7 +231,7 @@
 	    		<c:if test="${size lt 8}">
 					<div class="carousel-item active" data-bs-interval="100000">
 						<c:forEach var="cnt2" begin="0" end="1">
-							<div id="moiveBox">					        		
+							<div id="movieBox" class="movieBox">					        		
 								<c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
 									<div class="movieContainer">
 										<div class="movie__info">
@@ -387,9 +294,9 @@
 				console.log(mvClicked)
 				if(mvClicked == false){
 		    		$(this).css('background', 'var(--color-orange)');
-		    		$(this).css('opacity', '0.3');
+		    		$(this).css('opacity', '1');
 		    		$('#drama').css('background', 'var(--color-orange)');
-		    		$('#drama').css('opacity', '1');
+		    		$('#drama').css('opacity', '0.3');
 		    		
 		    		mvClicked = true;
 		    		drClicked = false;
@@ -397,6 +304,7 @@
 				else{
 					$(this).css('background', 'var(--color-orange)');
 		    		$(this).css('opacity', '1');
+		    		
 					mvClicked = false;
 				}		    	
 		  	});
@@ -404,9 +312,9 @@
 			$('#drama').click(function(){				
 				if(drClicked == false){
 					$(this).css('background', 'var(--color-orange)');
-		    		$(this).css('opacity', '0.3');
+		    		$(this).css('opacity', '1');
 		    		$('#movie').css('background', 'var(--color-orange)');
-		    		$('#movie').css('opacity', '1');
+		    		$('#movie').css('opacity', '0.3');
 		    		
 		    		drClicked = true;
 		    		mvClicked = false;
@@ -609,7 +517,7 @@
 						$('.carousel-inner').remove();
 						htmlMid += "<div class='carousel-inner'>" +
 									"<div class='carousel-item active' data-bs-interval='100000'>" +
-										"<div id='movieBox'>";
+										"<div id='movieBox' class='movieBox'>";
 						htmlMid += 		"</div>"+
 									"</div>"+
 								"</div>";
@@ -634,5 +542,7 @@
 			})
 		}
 	</script>
+	
+	<script src="resources/js/main.js" defer></script>
 </body>
 </html>

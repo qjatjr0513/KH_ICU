@@ -19,8 +19,8 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../member/myNavbar.jsp"/>
     
-        <!-- id찾기 화면 -->
-    <section id="idPwdSection">
+    <!-- 파티 섹션 -->
+    <section id="partySection">
     
       <div class="PartyBtnGroup">
         <button class="makeParty">내가 만든 파티</button>
@@ -28,6 +28,7 @@
       </div>
       <br />
 
+	  <!-- 내가 만든 파티  -->
       <div id="makePartyBox">
        
        <section id="party__container" class="party-container-first">
@@ -90,7 +91,7 @@
        
       </div>
 
-      <!-- 비밀번호 -->
+      <!-- 내가 참여한 파티 -->
       <div id="lastPartyBox">
       
         <!-- 파티 카드 -->
