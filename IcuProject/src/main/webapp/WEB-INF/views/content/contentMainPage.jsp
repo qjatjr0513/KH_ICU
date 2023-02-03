@@ -20,23 +20,36 @@
     
 	<jsp:include page="../common/header.jsp"/>
 	
+	<img src='resources/images/findContents.png' style="width:1898px; height:523px; margin-top:50px;">
+	
+	<div class='sl-in2' style=' padding:10px; margin-top:10px;'>
+	<h2 class='titleText' style='font-size:3rem;'>< 컨텐츠 찾기 ></h2>
+	</div>
+	
+	<br>
+	
+	<section id='body-container' class='sl-in2'>
+	
 	<section id="click__movie-drama">
       <div class="movie_drama_Btn">
         <button class="movieBtn" id="movie" name="mv">영화</button>
         <input id="mv" type="checkbox" name="category" value="1" />
-        <button class="dramaBtn" id="drama" name="dr">드라마</button>
+       </div>
+       <div class="movie_drama_Btn"> 
+        <button class="dramaBtn" id="drama" name="dr">드라마</button>
         <input id="dr" type="checkbox" name="category" value="2" />
       </div>
       <br>
     </section>
     
+    <div class='second-container'>
     <div class="about__majors">
         <div class="major">
           <button class="major_btn" value="1" id="ott" name="netflix">
             <div class="major__icon netfilx"></div>
           </button>
           <input id="netflix" type="checkbox" name="ott" value="1" />
-          <h2 class="major__title">Netflix</h2>
+          <h2 class="major__title" id="netflix">Netflix</h2>
         </div>
 
         <div class="major">
@@ -44,7 +57,7 @@
             <div class="major__icon watcha"></div>
           </button>
           <input id="watcha" type="checkbox" name="ott" value="4" />
-          <h2 class="major__title">Watcha</h2>
+          <h2 class="major__title" id="watcha">Watcha</h2>
         </div>
 
         <div class="major">
@@ -52,7 +65,7 @@
             <div class="major__icon wavve"></div>
           </button>
           <input id="wavve" type="checkbox" name="ott" value="2" />
-          <h2 class="major__title">Wavve</h2>
+          <h2 class="major__title" id="wavve">Wavve</h2>
         </div>
 
         <div class="major">
@@ -60,7 +73,7 @@
             <div class="major__icon disney"></div>
           </button>
           <input id="disney" type="checkbox" name="ott" value="3" />
-          <h2 class="major__title">Disney +</h2>
+          <h2 class="major__title" id="disney">Disney +</h2>
         </div>
         
         <div class="major">
@@ -68,86 +81,89 @@
             <div class="major__icon appleTv"></div>
           </button>
           <input id="apple" type="checkbox" name="ott" value="5" />
-          <h2 class="major__title">Apple TV</h2>
+          <h2 class="major__title" id="apple">Apple TV</h2>
         </div>
     </div>
+    <div style='text-align:right; padding:5px;'>
+   	 <span class='span'>* 원하는 서비스를 클릭 후 장르와 연령 제한을 선택해주세요.</span>
+    </div>
+    
+    <br>
     
     <div class="checkbox__select">
         <table>
           <tr>
-            <td>장르</td>
+            <td class='table-title'>장르</td>
             <td>
-              	<input id="action" type="checkbox" name="genre" value="1" />
-              	<label for="action">액션</label>
+              	<input id='action' type='checkbox' name='genre' value='1' />
+              	<label id='genre' for='action'>액션</label>
             </td>
             <td>
-              	<input id="dramaCh" type="checkbox" name="genre" value="2" />
-              	<label for="drama">드라마</label>
+              	<!-- <input id="dramaCh" type="checkbox" name="genre" value="2" />
+              	<label for="dramaCh">드라마</label> -->
+              	<input id='dramaCh' type='checkbox' name='genre' value='2' />
+              	<label id='genre' for='dramaCh'>드라마</label>
             </td>
             <td>
             	<input type="checkbox" id="sf" name="genre" value="3">
-            	<label for="sf">SF</label>
+            	<label id='genre' for="sf">SF</label>
             </td>
             <td>
             	<input type="checkbox" id="fantasy" name="genre" value="4">
-            	<label for="fantasy">판타지</label>
+            	<label id='genre' for="fantasy">판타지</label>
             </td>
             <td>
             	<input type="checkbox" id="romance" name="genre" value="5">
-            	<label for="romance">로맨스</label>
+            	<label  for="romance">로맨스</label>
             </td>
             <td>
               <input id="entertain" type="checkbox" name="genre" value="6" />
-              <label for="entertain">예능</label>
+              <label id='genre' for="entertain">예능</label>
             </td>
             <td>
             	<input type="checkbox" id="thriller" name="genre" value="7">
-            	<label for="thriller">스릴러</label>
+            	<label id='genre' for="thriller">스릴러</label>
             </td>
             <td>
             	<input type="checkbox" id="family" name="genre" value="8">
-            	<label for="family">가족</label>
+            	<label id='genre' for="family">가족</label>
             </td>
             <td>
             	<input type="checkbox" id="animation" name="genre" value="9">
-            	<label for="animation">애니메이션</label>
+            	<label id='genre' for="animation">애니메이션</label>
             </td>
             <td>
-              <input id="comedy" type="checkbox" name="genre" value="10" />
-              <label for="comedy">코메디</label>
+              <input id='comedy' type='checkbox' name='genre' value='10'/>
+              <label id='genre' for='comedy'>코메디</label>
             </td>
             <td>
-            	<input type="checkbox" id="romance" name="genre" value="11">
-            	<label for="romance">다큐</label>
+            	<input type="checkbox" id="docu" name="genre" value="11">
+            	<label for="docu">다큐</label>
             </td>
           </tr>
           <tr>
-            <td>연령 제한</td>
+            <td class='table-title'>연령 제한</td>
             <td>
-              <input id="allage" type="checkbox" value="0" name="age"/>
-              <label for="allage">모든 연령</label>
+              <input id='allage' type='checkbox' value='0' name='age' />
+              <label id='age' for='allage'>모든 연령</label>
             </td>
             <td>
               <input id="twelve" type="checkbox" value="12" name="age"/>
-              <label for="twelve">12세</label>
+              <label id='age' for="twelve">12세</label>
             </td>
             <td>
               <input id="fifteen" type="checkbox" value="15" name="age"/>
-              <label for="fifteen">15세</label>
+              <label id='age' for="fifteen">15세</label>
             </td>
             <td>
               <input id="nineteen" type="checkbox" value="19" name="age"/>
-              <label for="nineteen">19세 이상</label>
+              <label id='age' for="nineteen">19세 이상</label>
             </td>
           </tr>
         </table>
       </div>
       
-      <div class="btn__group">
-        <button>검색</button>
-      </div>
-      <br /><br />	
-      
+   
 	<section id="party__container">
         <div
           id="carouselExampleControls"
@@ -183,7 +199,7 @@
 											             onclick="movePage(${c.conNo });"
 											        	/>
 										            </c:if>
-										            <br><br>
+										            <br>
 										            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
 										            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 										            <i class="fa-solid fa-star">${c.cmtStar }</i>
@@ -213,7 +229,7 @@
 												             onclick="movePage(${c.conNo });"
 												        	/>
 											            </c:if>
-											            <br><br>
+											            <br>
 											            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
 											            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 											            <i class="fa-solid fa-star">${c.cmtStar }</i>
@@ -249,7 +265,7 @@
 												onclick="movePage(${c.conNo });"
 												/>
 											</c:if>
-											<br><br>
+											<br>
 											<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
 											<span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 											<i class="fa-solid fa-star">${c.cmtStar }</i>
@@ -284,8 +300,13 @@
           </button>
     	</div>
     </section>
+    </div>
+    
+    </section>
 
-	<script>		
+	<script>
+	
+	
 		$(function() {
 			let mvClicked = false;
 			let drClicked = false;
@@ -293,16 +314,16 @@
 			$('#movie').click(function(){
 				console.log(mvClicked)
 				if(mvClicked == false){
-		    		$(this).css('background', 'var(--color-orange)');
+		    		$(this).css('background', 'white');
 		    		$(this).css('opacity', '1');
-		    		$('#drama').css('background', 'var(--color-orange)');
+		    		$('#drama').css('background', 'white');
 		    		$('#drama').css('opacity', '0.3');
 		    		
 		    		mvClicked = true;
 		    		drClicked = false;
 				}
 				else{
-					$(this).css('background', 'var(--color-orange)');
+					$(this).css('background', 'white');
 		    		$(this).css('opacity', '1');
 		    		
 					mvClicked = false;
@@ -311,9 +332,9 @@
 			
 			$('#drama').click(function(){				
 				if(drClicked == false){
-					$(this).css('background', 'var(--color-orange)');
+					$(this).css('background', 'white');
 		    		$(this).css('opacity', '1');
-		    		$('#movie').css('background', 'var(--color-orange)');
+		    		$('#movie').css('background', 'white');
 		    		$('#movie').css('opacity', '0.3');
 		    		
 		    		drClicked = true;
@@ -390,13 +411,22 @@
             	}
             }
             
+         
+            
             if($(this).attr('id') == 'ott'){
             	//ottList.push($(this).val());
             	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
             		$('input[id='+$(this).attr('name')+']').prop("checked", false);
+            		console.log('안녕');
+            		$('h2[id='+$(this).attr('name')+']').removeClass('colorOrange');
+            		
+            		console.log('안녕2');
             	}
             	else{
             		$('input[id='+$(this).attr('name')+']').prop("checked", true);
+            		console.log('안녕3');
+            		$('h2[id='+$(this).attr('name')+']').addClass('colorOrange');
+            		console.log('안녕4');
             	}
             }
             
@@ -467,7 +497,7 @@
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
-													"<br><br>" +
+													"<br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
 													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
@@ -497,7 +527,7 @@
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
-													"<br><br>" +
+													"<br>" +
 													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
 													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
@@ -527,7 +557,7 @@
 							htmlInfo += "<div class='movieContainer'>" +
 											"<div class='movie__info'>" +
 												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
-												"<br><br>" +
+												"<br>" +
 												"<h4 onclick='movePage("+ result[i].conNo +");'>"+result[i].conKTitle+"</h4>" +
 												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
 												"<br>" +

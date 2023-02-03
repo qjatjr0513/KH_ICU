@@ -93,6 +93,43 @@ button {
   outline: none;
 }
 
+.sl-in2 {
+	  animation: change1 1s ease forwards;
+}
+	
+@keyframes change1 {
+  from {
+    transform: translateY(50%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.titleText {
+  font-family: 'Poor Story', 'cursive';
+  font-size: 4rem;
+  font-weight:  bold;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #f35626;
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 7s infinite linear;
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+
 /* Navbar */
 #navbar {
   position: fixed;

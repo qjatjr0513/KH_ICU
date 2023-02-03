@@ -1,7 +1,13 @@
 @import url('main.css');
 
+.titleImg{
+	margin-top:50px; 
+}
+
+
+
 .header__title {
-  margin-top: 120px;
+  margin-top: 100px;
   text-align: center;
 }
 .header__title > h2 {
@@ -81,12 +87,7 @@
 .btnGroup > button[type=submit] {
 	background-color:var(--color-purple);
 }
-.form-select{
-	width:300px !important;
-}
-.form-select:focus{
-	border:none;
-}
+
 .pl{
     width: 200px;
     border: 1px solid #C4C4C4;

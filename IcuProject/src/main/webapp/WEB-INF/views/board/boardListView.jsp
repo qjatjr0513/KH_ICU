@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
  <link rel="stylesheet" href="${contextPath}/resources/css/07_boardList.css" />
 
-<title>Insert title here</title>
+<title>ICU - 자유게시판</title>
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/07_boardList.css" />
@@ -22,16 +22,19 @@
 	<!-- Navbar -->
 	<jsp:include page="../common/header.jsp"/>
 	
-	<div class="content" style="margin-top: 50px;">
+	<img class='titleImg' src='resources/images/board3.jpg' >
+	
+	<div class="content">
 		<br><br>
 		<div class="innerOuter" style="padding: 5% 10%;">
-			<h2>자유게시판</h2>
-			<br>
+			<h2 class='titleText'>< 자유게시판 ></h2>
+			
 			<!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">
-				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.bo">글쓰기</a>
+				<a class="btn btn-secondary" style="float:right; margin-right:20px;" href="${contextPath }/enrollForm.bo">글쓰기</a>
 			</c:if>
-			<br><br><br>
+			<br><br>
+			<div class='table-container'>
 			<table id="boardList" class="table table-hover" align="center">
 				<thead>
 					<tr>
@@ -59,7 +62,8 @@
 					</tr>
 					</c:forEach>
 				</tbody>
-			</table>			
+			</table>
+			</div>			
 			
 			<!-- 
 				게시글 클릭했을때 게시글 상세보기화면으로 이동하는 스크립트 구현.
@@ -89,16 +93,16 @@
 			<br clear="both"><br>
 			<form id = "searchForm" method="get" align="center">
 				<div class="select">
-					<select class="custom-select" name="condition">
+					<select class="custom-select pl" name="condition">
 						<option value="title">제목</option>
 						<option value="writer">작성자</option>
 						<option value="content">내용</option>
 					</select>
 				</div>
 				<div class="text">
-					<input type="text" class="form-control" name="keyword">
+					<input type="text" class="formControl" name="keyword">
 				</div>
-				<button type="submit" class="searchBtn btn btn-secondary">검색</button>
+				<button type="submit" class="searchBtn btn btn-secondary" style=" border:none; font-family:'Poor Story', 'cursive';">검색</button>
 			</form>
 			<br><br><br><br>
 

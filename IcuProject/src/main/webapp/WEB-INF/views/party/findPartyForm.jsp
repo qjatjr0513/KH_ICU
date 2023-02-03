@@ -19,12 +19,15 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
 
-<div class="header__title">
-      <h2>< 파티 찾기 ></h2>
-    </div>
+<img src='resources/images/faqImg.png' style="width:1898px; margin-top:50px;">
 
+<div class="header__title titleText sl-in2"  style=' padding:10px; margin-top:20px;'>
+      <h2>< 파티 찾기 ></h2>
+</div>
+<br>
+	<section id='body-container' class='sl-in2'>
 	<form action="${contextPath}/findParty.py">
-    <section id="about" class="section section__container">
+    <section id="about" class="section section__container ">
       <div class="about__majors">
       
 
@@ -70,7 +73,7 @@
         </div>
       </div>
       <div class="textbox">
-      	<span > * 원하시는 아이콘을 클릭해주세요.</span>
+      	<span > * 원하는 아이콘을 클릭 후 이용기간을 설정해주세요.</span>
       </div>
     </section> 
 
@@ -80,7 +83,7 @@
         <span class='use-period'>이용기간 &nbsp;:  &nbsp;</span>
         <input type="range" id="month" name="month" min="1" max="12" step="1" value="12" oninput="document.getElementById('value1').innerHTML=this.value + '개월';">
         <Br>
-        <span id="value1">개월수</span>
+        <span id="value1">12개월</span>
         <br><br><br>
         <button>검색</button>
       </div>
@@ -176,8 +179,15 @@
         </button>
       </div>
     </section>
+    
+    </section>
 
     <script>
+    
+    document.querySelector('#month').addEventListener('input',function(event){
+      	var gradient_value = 100 / event.target.attributes.max.value;
+        event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
+      });
     
 		function movePage(paNo){
 	 		location.href = "${contextPath}/partyDetail.py/"+paNo;

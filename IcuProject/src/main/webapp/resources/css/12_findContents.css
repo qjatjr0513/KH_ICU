@@ -2,38 +2,91 @@
 
 table {
   margin: auto;
+  font-family:'Poor Story', 'cursive';
+  font-weight:bold;
+  font-size:18px;
+}
+tr{
+	border:1px solid black;
 }
 td {
-  /* width: 150px; */
   padding: 10px;
-  background-color: rgb(210, 240, 240);
-  border: 1px solid pink;
+}
+label{
+	cursor:pointer;
+}
+label:hover{
+	color:gray;
+}
+table input[type=checkbox]{
+	display:none;
+}
+
+.span{
+	font-family: 'Poor Story', 'cursive' !important;
+	color:gray;
+	font-weight:bold;
+}
+
+.table-title {
+	color: var(--color-orange);
+}
+.colorOrange {
+	color:var(--color-orange) !important;
+	font-family: 'Poor Story', 'cursive' !important;
+	transition:all 0.3s;
+}
+
+
+.titleText{
+	background-color:white;
+}
+
+#body-container{
+	display:flex;
+	margin-left:80px;
 }
 
 #click__movie-drama {
-  margin: auto;
-  margin-top: 150px;
-  background-color: white;
-  width: 60%;
+  width: 15%;
+ 
+}
+
+.about__majors input[type=checkbox] {
+   display:none;  
+}
+
+.major{
+	background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 1px lightgrey;
+}
+
+.major__title {
+	color:lightgray;
+	font-family: 'Poor Story', 'cursive';
+	font-size:36px;
 }
 
 .movie_drama_Btn {
   text-align: center;
-  /* background-color: rgb(192, 240, 224); */
-  display: flex;
-  justify-content: space-around;
-  width: 500px;
+  width: 300px;
   margin: auto;
-  margin-top: 50px;
 }
-
+.movie_drama_Btn input[type=checkbox]{
+	display:none;
+}
 .movie_drama_Btn > button {
-  background-color: var(--color-orange);
-  padding: 20px;
-  width: 200px;
+  background-color: white;
+  box-shadow:0 0 5px 1px lightgray;
+  padding: 10px;
+  width: 150px;
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
+  font-family:'Poor Story', 'cursive';
+  color:black !important;
 }
 
 .netfilx {
@@ -56,10 +109,24 @@ td {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAACwCAMAAACYaRRsAAAAS1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGBgYAAAAAAAAAAAAAAAAAAAAAAAD///8qKirt7e1KSkqioqJra2uFhYXU1NTBwcHaZ/8TAAAAD3RSTlMArypDDVudG8r2d4zl1/oacEULAAAFJElEQVR42t1d25KsKgxtRBHUNnj3/7/0OJfu3TM9NdOQEMlZjz5Yq1JhJUBILhc61LpqWmU7uKOzqm0qXV9yQ6kbY3v4Gcf33ppGl5mQrStzhZdwNdXpti4aC0GwTXEeW206iEBn9CmOoBxEw6mK2aMrC0hYRjOXTQcE6BoeK9etg56CMPSuTa8ahaEhe+Ns0oqGVkAOlc6Zy7aHBOjbRL5cdZAIXQoj1woSQpGvvsZBUriG1rwWksMSGrlywABXUYmDARb0vSGRi+IKbLCFFHegc4sWmNHi3FcBO1SZt5pR6lt9hVNwrWXxjWV8Ht84xnUHIInxmfZ9ZxyoFeXJfA+tCGNs4XTYEL4GMoAJyNYhC7yc02vIBC9u9QqXC2FXyBCIQHFTkBHUCwk7ZIU/E/ra5UX4Tze2kBmsCAV+WY2LPj/CfSHJId4IW1EO8atSlF2ehLsylzMI5FlF3edKuK/zTYIDUuOiz5fwj9KWLOkZlnmb6ZOgIhXd2R/AEoaCy8Cr9ySEFY9EDNsHX7+SC0USDR7GT75+odbi0iXl6we0hV2Zfp+x3/lu5BlFijRtvvMl8IhvSVsKTRv+8R1JflgkXnIPBl5Jfvi47LqkBt5o/tilPZtaPZ1EPJ1cpcjTtjvfiT5nSyHC9Hz/+YROqBHjRPhTnVAjBkp9+K4TKaLG9GbdeaD96WfsqJOcia3LQP/XkjCPcNOyHiSf1+/xfd73dZkIlnZF5sLLPdHZ1kdi00O88/tE48R4F15G/4j5Rmza/FdsE4ETl2TbiodsZ52mdR79M3aHdmJNoAcBGFFrUeNPABcfCgzjBr1dDufrN4RXGOyam3wEZtyqw6wCN0bwxaQXDhnn5hi+qFVXo0RiYOd7yAQmMO/sfI/g3PAaGBudG8z2aGUViJuuIWQ4QiLQGZtCEB5OMPBBOD5uRAQ5fE5vEWco4SJMcKJyRRAOFzWCLWmHiMwju6a9x+b4qwJ/BuH+AoyEKfbR8gj3sgj3iEXnz1l0HaNKLBSyFk94OyEyH4TjQ3N44CC4nLGI5Gc+w4kx2dp6TrYWn8BHZGt4YTOILVLMDgmdrzWYTWjMoQQ2Yasw2/yITTNaizXmICXGibGM6wsi+xk8P2PcYeAYx3iP1wqLu7edvWc2ssEdaA+xhOd4kcBdGWyRhKd4kcBdysTpBCIJKpHXXi5u2a2YNYerllijCEfvclrs1a1zvHccFf5yfGZN2Wp8+QHrEaalKPAI9uIxfp/ekpTQbHyphCYpUhrYUnhHVAa2cG2SDFWh3c6049BUpYwB8Q6zp+voikVfviJHXSu2hOW4CwPfrw8NsHU/z2q87SPtwY+lLSlfvlYpfZhyWDaisgP4XlKOL9qfbgYdv0SG4V6qhCwT/Fa0T1C85pZ9HPf5OZAt877v6KrGVszbtA88v1BTeRNWbI+niFBk/ib/bwMLfAAo7omlvEes4p4Jy3uInVszjJ+ziOybCfzaYUJcuwZxDTHktRzJqCvRZ9Ja/9/a5shrTCSv9ZO45lry2pfJaxAnrwVfFvFDhfDNQCpCG1+e3qgzvLWosFao8prNymvnK69hsryW1PKafstrqy6wcT3vaIAryYSZki0VMlSzWjSLW3RU4y0EDhCRN6JF4BCctGOGqksSSBvk9KbJKUZlpZ3uJWwY2fvqa8kEg2Pc27svyxqo96EY+JGF1YUX2mCGQppThm+KGrt5Ew1Rg00/VUPU6NibbrwN5/1NbnMazvtga47xx/8BJVGfeZOhOccAAAAASUVORK5CYII=)
     center center / 150px 150px no-repeat;
 }
+
+.second-container{
+	border:none;
+	box-shadow : 0 0 5px 1px lightgray;
+	border-radius: 15px;
+	padding:20px;
+	background-color:white;
+	width: 1200px;
+}
 .about__majors {
   display: flex;
   justify-content: space-around;
   padding: 50px;
+      width: 100%;
+    margin: auto;
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 30px;
+    border-radius: 12px;
 }
 
 .major__icon {
@@ -70,16 +137,23 @@ td {
   color: var(--color-blue);
   border-radius: 50%;
   margin-bottom: 16px;
+  transition: all 0.1s ease-in;
 }
 
 .major__icon:hover {
   cursor: pointer;
   transform: scale(1.1);
-  transition: all 0.1s ease-in;
+
 }
 .major__title {
   text-align: center;
 }
+
+.checkbox__select{
+	background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+	border-radius:12px;
+}
+
 .tableBtn {
   height: 50px;
   background-color: var(--color-purple);
@@ -137,8 +211,8 @@ td {
   		margin: auto;
   	}
   	#poster{
-  		width: 180px;
-  		height: 230px;
+  		width: 200px;
+  		height: 270px;
   	}
   	.btn_netflix{
   		width: 100px;
@@ -159,8 +233,8 @@ td {
 }
 #party__container {
   padding: 20px;
-  width:60%;
   margin:auto;
+  width:1150px;
 }
 #party__container2 {
   display: none;
@@ -169,6 +243,10 @@ td {
 }
 .dramaBtn {
   opacity: 0.3;
+}
+
+.movieBtn, .dramaBtn{
+	margin-left:95px;
 }
 
 .movieBox {
@@ -181,22 +259,55 @@ td {
 .movieContainer{
 	padding:22px 20px;
 }
-.movie__info > img {
-  width: 200px;
-}
+
 
 .movie__info {
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 0 5px 1px gray;
   box-shadow: 0 0 5px rgb(139, 137, 137);
   cursor: pointer;
   transition: all 0.1s linear;
   width:220px;
   height:378.8px;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 .movie__info:hover {
   transform: scale(1.1);
+}
+.movie__info h4 {
+	font-size: 18px;
+}
+.movie__info span {
+	color:gray;
+	font-size:16px;
+}
+.movie__info > i {
+	color:var(--color-blue);
+}
+.movie__info h4, .movie__info span {
+	padding-top:10px;
+	padding-left:7px;
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold;
+}
+.movie__info > i{
+	padding-left:7px;
+}
+.carousel-control-prev, 
+.carousel-control-next {
+	width:150px !important;
+	height:150px;
+	background-color:blue;
+	top:910px !important;
+}
+
+.carousel-control-prev{
+	left:240px !important;
+}
+
+.carousel-control-next{
+	right:320px !important;
 }
 
 .carousel-control-prev-icon,
@@ -205,13 +316,7 @@ td {
   border-radius: 50%;
   width: 4rem;
   height: 4rem;
-}
 
-.carousel-control-prev-icon {
-  margin-left: -200px;
-}
-.carousel-control-next-icon {
-  margin-right: -200px;
 }
 
 

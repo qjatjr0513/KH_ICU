@@ -5,53 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FAQ</title>
+<title>ICU - FAQ</title>
 
-<style>
-    .title:hover{
-        cursor: pointer;
-    }
-    .content {
-        display:  none;
-    }
-    #collapse-container{
-        width:60%;
-        margin:auto;
-        /* background-color: antiquewhite; */
-    }
-    
-    .btn__account, .btn__party, .btn__pay {
-		 background-color: var(--color-purple) !important;
-		  padding: 10px !important;
-		  width: 200px !important;
-		  border-radius: 10px !important;
-		  font-size: 20px !important;
-		  font-weight: bold !important;
-		}
-		
-	.faq > button:hover {
-		  background-color: var(--color-purple);
-		}
-	.faq > button:active {
-		  background-color: var(--color-purple) !important;
-		}
-    #FAQ > h1 {
-	  margin-top: 180px;
-	  /* background-color: aquamarine; */
-	}
-</style>
+<!-- css -->
+<link rel="stylesheet" href="resources/css/faqForm.css" />
+
 </head>
 <body>
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
+    <div class='titleImg' style='width:1898px; height:523px; margin-top:50px;'></div>
+    
 	<!-- Logo -->
     <div id="FAQ">
-      <h1 style="text-align: center;">FAQ</h1>
+      <h1 class='titleText' style="text-align: center;">FAQ</h1>
     </div>
 	
 	<br>
-	<div style="text-align: center;">
+	<div style="text-align: center; height:500px;">
 	    <p class="faq">
 	        <button class="btn btn-primary btn__account"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 	            계정 문의
@@ -149,33 +121,33 @@
 	    </section>
 	</div>
 <script>
-    const cardDisplay1 = document.querySelector('.card__display1');
-    const cardDisplay2 = document.querySelector('.card__display2');
-    const cardDisplay3 = document.querySelector('.card__display3');
+    const cardDisplay1 = document.querySelector('#collapseExample');
+    const cardDisplay2 = document.querySelector('#collapseExample2');
+    const cardDisplay3 = document.querySelector('#collapseExample3');
     
     let btnAccount = document.querySelector('.btn__account');
     let btnParty = document.querySelector('.btn__party');
     let btnPay = document.querySelector('.btn__pay');
 
     btnParty.addEventListener('click', () => {
-        cardDisplay1.style.display = 'none';
-        cardDisplay3.style.display = 'none';
-        cardDisplay2.style.display = 'block';
-        // cardDisplay2.style.transition = 'all 1s ease-in-out';
-    })
-    btnAccount.addEventListener('click', () => {
-        cardDisplay2.style.display = 'none';
-        cardDisplay3.style.display = 'none';
-        cardDisplay1.style.display = 'block';
-        // cardDisplay1.style.transition = 'all 1s ease-in-out';
-    })
+        cardDisplay1.classList.remove('show'); 
+  	    cardDisplay2.classList.add('show');
+        cardDisplay3.classList.remove('show');
+  })
+    
     btnPay.addEventListener('click', () => {
-        cardDisplay1.style.display = 'none';
-        cardDisplay2.style.display = 'none';
-        cardDisplay3.style.display = 'block';
-        // cardDisplay3.style.transition = 'all 1s ease-in-out';
+    	  cardDisplay3.classList.add('show');
+          cardDisplay1.classList.remove('show');
+          cardDisplay2.classList.remove('show');
     })
+   
 
+    btnAccount.addEventListener('click', () => {
+        cardDisplay1.classList.add('show');
+        cardDisplay2.classList.remove('show');
+        cardDisplay3.classList.remove('show');
+      
+    })
 
 </script>
 </body>

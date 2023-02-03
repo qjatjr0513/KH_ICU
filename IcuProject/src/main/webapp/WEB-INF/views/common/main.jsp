@@ -22,10 +22,11 @@
      <!-- mainForm -->
      <!-- input, carousel -->
 
+	
      <section id="home">
-	 <form id="contentSearch" action="${contextPath }/searchByKeyword.co" method="post">
+     <form id="contentSearch" action="${contextPath }/searchByKeyword.co" method="post">
        <div class="input-group mb-3 sizing">
-	       	 <select name="searchNo" id="search">
+        <select name="searchNo" id="search">
 		     	<option value="0" selected><span>전체</span></option>
 		     	<option value="1">제목</option>
 		     	<option value="2">감독/배우</option>
@@ -47,7 +48,7 @@
 	           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 	         </button>
        </div>
-	   </form>
+       </form>
 
        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" >
          <div class="carousel-indicators">
@@ -90,7 +91,7 @@
              </div>
            </div>
 
-	           <div class="carousel-item">
+              <div class="carousel-item">
              <div class="second-box">
                <div class="head__left-box2">
                  <h2>
@@ -164,7 +165,7 @@
            </div>
            <div class="party__text">
              <h3>파티 찾기</h3>
-             <span><b>나에게 딱 맞는 파티를 찾아보세요!</b>	</span>
+             <span><b>나에게 딱 맞는 파티를 찾아보세요!</b>   </span>
            </div>
            <div class="party__makeParty">
              <span style="color: var(--color-orange)"
@@ -206,8 +207,8 @@
          <div class="recommend__box">
            <div class="recommend__box-first movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(0).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -216,8 +217,8 @@
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(1).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(1).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -226,8 +227,8 @@
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(2).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -236,8 +237,8 @@
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(3).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -246,8 +247,8 @@
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(4).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -260,8 +261,8 @@
          <div class="recommend__box">
            <div class="recommend__box-first movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(5).getConNo() });">보러가기</span>
+               <div class="overlay-black"  onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -270,8 +271,8 @@
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(6).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -280,8 +281,8 @@
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(7).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -290,8 +291,8 @@
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(8).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -300,8 +301,8 @@
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black">
-                 <span class="overlay-text" onclick="movePage(${r.get(9).getConNo() });">보러가기</span>
+               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+                 <span class="overlay-text">보러가기</span>
                </div>
              </div>
              <img
@@ -323,9 +324,9 @@
    </div>
    
    <script>
-	function movePage(cno){
- 		location.href = '${contextPath}/detail?conNo='+cno;
- 	}
+   function movePage(cno){
+       location.href = '${contextPath}/detail?conNo='+cno;
+    }
    </script>
 </body>
 </html>

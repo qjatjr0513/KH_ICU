@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+@import url('main.css');
+
+.titleImg{
+	
+	background: linear-gradient(
+           to bottom,
+           rgba(20, 20, 20, 0) 10%,
+           rgba(20, 20, 20, 0.2) 25%,
+           rgb(244, 244, 250)  100%
+         ),
+         url('../images/question.png') ;
+       background-size: cover;
+}
+
+
+#FAQ > h1 {
+  margin-top: -100px;
+}
+
+
+.title:hover{
+    cursor: pointer;
+}
+
+.content {
+    display:  none;
+}
+#collapse-container{
+    width:60%;
+    margin:auto;
+}
+   
+.btn__account, .btn__party, .btn__pay {
+ background-color: var(--color-purple) !important;
+  padding: 10px !important;
+  width: 200px !important;
+  border-radius: 10px !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.faq > button:hover {
+	  background-color: var(--color-purple);
+	}
+.faq > button:active {
+	  background-color: var(--color-purple) !important;
+	}

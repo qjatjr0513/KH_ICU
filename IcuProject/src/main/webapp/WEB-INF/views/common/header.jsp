@@ -116,6 +116,7 @@
         <li class="navbar__menu__item">
         <a href="${contextPath }/faq.fq" style="text-decoration: none; color:black;">FAQ</a></li>
         
+        &nbsp;
        
         </c:if>
         <c:choose>
@@ -126,7 +127,7 @@
              </li>
              </c:when>
              <c:when test="${ loginUser.memId == 'admin' }">
-           <!-- 로그인 전 -->
+           <!-- 로그인 후 -->
            <li>
                 <a href="${contextPath }/logout.me" style="text-decoration: none; color:black;">로그아웃</a>
              </li>
@@ -159,7 +160,7 @@
                 </ul>
               </div>
              </li>
-             &nbsp;
+             &nbsp;&nbsp;
              <li class='navbar__icon'>
               <div class="dropdown">
               <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
