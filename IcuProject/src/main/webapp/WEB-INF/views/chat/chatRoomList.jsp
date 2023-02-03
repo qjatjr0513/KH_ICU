@@ -5,34 +5,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>실시간 문의 리스트</title>
+	<!-- css -->
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin_09_chatManage.css" />
 </head>
 <body>
 
-	<!-- Navbar -->
+   <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
 
-	<div class="content">
-		<br><br>
-		<div class="innerOuter" style="padding: 5% 10%;">
-			<h2>실시간 문의</h2>
-			<br><br>
-			<table class="table table-hover" align="center">
-				<thead>
-					<tr>
-						<th>방번호</th>
-						<th>개설자</th>
-					</tr>
-				</thead>
-				
-				<tbody>
+    <!-- 왼쪽 수직 navbar -->
+    <jsp:include page="../admin/adminNavbar.jsp"/>
+
+    <!-- 결제관리 -->
+    <section id="chatList">
+      <h2>실시간 문의</h2>
+      <hr />
+      <!-- 로그인시에만 보이는 글쓰기 버튼. -->
+			<c:if test="${ not empty loginUser }">
+				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.fq">작성하기</a>
+			</c:if>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">방번호</th>
+            <th scope="col">개설자</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
 					<c:choose>
 						
 						<%-- 채팅목록이 없을때 --%>
 						<c:when test="${empty chatRoomList}">
 							<tr>
-								<td colspan="4">존재하는 채팅방이 없습니다.</td>
+								<td colspan="3">존재하는 채팅방이 없습니다.</td>
 							</tr>
 						</c:when>
 						
@@ -44,10 +51,10 @@
 									<td>
 										${chatRoom.memNickname }
 										
-										<c:if test="${loginUser.memNickname == chatRoom.memNickname || loginUser.memNickname == '관리자' }">
-											<button class="btn btn-primary" onclick="location.href='${contextPath}/chat/room/${chatRoom.chatRoomNo}'">참여</button>
-										</c:if>
 									</td>
+										<c:if test="${loginUser.memNickname == chatRoom.memNickname || loginUser.memNickname == '관리자' }">
+											<td><button class="btn btn-primary" onclick="location.href='${contextPath}/chat/room/${chatRoom.chatRoomNo}'">참여</button></td>
+										</c:if>
 									
 								</tr>
 							</c:forEach>
@@ -55,41 +62,34 @@
 					</c:choose>
 				</tbody>
 			</table>
-			
-			<!-- 로그인이 되어있는 경우 --> 
-			<c:if test="${!empty loginUser && loginUser.memId != 'admin' }">
-				<div class="btn-area">
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#chatModal">
-					  채팅방만들기
-					</button>
-				</div>
-			</c:if>
-		</div>
-		<br><br>
-	</div>
-	
-	<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <!-- 모달 해더 -->
-	      <div class="modal-header">
-	        <h4 class="modal-title fs-5" id="exampleModalLabel">채팅방 만들기</h4>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <form action="${contextPath }/chat/openChatRoom" method="post">
-	      	  <!--  모달 바디 -->
-		      <div class="modal-body">
-		         <label for="title" class="mr-sm-2">제목</label>
-	             <input type="text" class="form-controll mb-2 mr-sm-2" placeholder="질문 제목" id="title" name="title"> 
-		      </div>
-		      <!-- 모달 푸터 -->
-		      <div class="modal-footer">
-		        <button type="submit" class="btn btn-primary">만들기</button>
-	            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
-		      </div>
-		   </form>
-	    </div>
-	  </div>
-	</div>
+
+      <c:set var = "url" value="cpage="/>
+			<!-- 페이지 이동기능 구현 -->
+			<div id="pagingArea">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${pi.currentPage eq 1 }">
+							<li class="page-item disabled"><a class="page-link" href="#">&lt</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&lt</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+						<li class="page-item"><a class="page-link" href="${url }${item }${sUrl}">${item}</a></li>
+					</c:forEach>
+					
+					<c:choose>
+						<c:when test="${pi.currentPage eq pi.maxPage }">
+							<li class="page-item disabled"><a class="page-link" href="#">&gt</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&gt</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
+    
 </body>
 </html>

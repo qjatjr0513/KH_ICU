@@ -4,15 +4,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Alarm;
-import com.kh.icu.party.model.vo.PartyJoin;
+import com.kh.icu.member.model.vo.Member;
 
 @Controller
 public class AlarmController {
@@ -21,14 +23,17 @@ public class AlarmController {
 	
 	@RequestMapping("alarm")
 	@ResponseBody
-	public String alram(int memNo, HttpSession session) {
-		
+	public String alram(HttpSession session, Model model) {
+		 Member loginUser = (Member)session.getAttribute("loginUser");
+		 int memNo = loginUser.getMemNo();
 		List<Alarm> alarmList = alarmService.selectAlarmList(memNo);
-		session.setAttribute("alarmList", alarmList);
-		
+		System.out.println("??????????"+alarmList);
+		model.addAttribute("alarmList",alarmList);
+		String list = new Gson().toJson(alarmList);
+		System.out.println(list);
+		//model.addAttribute("list", list);
 		// 1. 모델로 alarmList
-		
-		return "redirect:";
+		return list;
 	}
 	
 }

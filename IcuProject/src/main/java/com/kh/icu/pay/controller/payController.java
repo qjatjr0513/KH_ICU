@@ -105,32 +105,22 @@ public class payController {
 		int sendId = loginUser.getMemNo();
 		String receiveNickname = paMemNickName;
 		int receiveId = paName;
-		String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + payNo;
-		System.out.println(message);
-		TextMessage msg = new TextMessage(message);
+		
+		String message = "pay,"+ sendId + "," + receiveNickname + "," +receiveId + "," + payNo;
 		
 		//Map<String, WebSocketSession> userSessions = new HashMap<>();
-		WebSocketSession boardWriterSession = Sessions.userSessions.get(receiveNickname);
-		System.out.println(boardWriterSession);
+		WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+		System.out.println(receiveSession);
 		
-		String content = receiveNickname+"님이 송금하였습니다!";
-		Alarm a = new Alarm();
-		a.setMemNo(paName);
-		a.setSendMemNo(loginUser.getMemNo());
-		a.setMesContent(content);
-		a.setRefTno(payNo);
-		a.setTableCd("P");
 		
-		int result2 = alarmService.insertBoardAlarm(a);
-		if(result2 > 0 && boardWriterSession != null) {
+		TextMessage msg = new TextMessage(message);
+		
 			try {
-				alramHandler.handleTextMessage(boardWriterSession, msg);
-				boardWriterSession.sendMessage(msg);
+				alramHandler.handleTextMessage(receiveSession, msg);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
-		}
 		
 			
 		
