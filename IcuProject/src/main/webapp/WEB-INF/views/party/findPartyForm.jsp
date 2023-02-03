@@ -19,7 +19,7 @@
 	<!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
 
-<img src='resources/images/faqImg.png' style="width:1898px; margin-top:50px;">
+<img src='resources/images/faqImg.png' style="width:1898px; height:500px;">
 
 <div class="header__title titleText sl-in2"  style=' padding:10px; margin-top:20px;'>
       <h2>< 파티 찾기 ></h2>

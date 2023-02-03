@@ -267,6 +267,9 @@ table input[type=checkbox]{
 
 .movieContainer{
 	padding:22px 20px;
+	background-color: #f1f1f1;
+    border-radius: 20px;
+    box-shadow:0 0 5px 1px lightgray;
 }
 
 
@@ -308,7 +311,7 @@ table input[type=checkbox]{
 	width:150px !important;
 	height:150px;
 	background-color:blue;
-	top:910px !important;
+	top:920px !important;
 }
 
 .carousel-control-prev{

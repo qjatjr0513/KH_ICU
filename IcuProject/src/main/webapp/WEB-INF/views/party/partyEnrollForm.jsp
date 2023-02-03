@@ -19,13 +19,14 @@
 		<img class='titleImg' src='resources/images/findParty.png'>
 	</div>
 
-    <div class="header__title sl-in2">
+    <div class="header__title titleText sl-in2">
       <h2>< 파티 등록 ></h2>
     </div>
     <!-- 등록 섹션 -->
     <form id="enrollForm" action="${contextPath }/insert.py">
 	    <%-- <input type="hidden" id="paName" value="${loginUser.memNo}"> --%>
-	    <table class="enroll__party-table sl-in2">
+	    <div class='tableBox  sl-in2'>
+	    <table class="enroll__party-table">
 	      <tr>
 	        <td>서비스</td>
 	        <td>
@@ -93,7 +94,7 @@
 	        <td><span id="totalPrice"></span></td>
 	      </tr>
 	    </table>
-	    
+	    </div>
 	  
 	
 	    <div class="btnGroup">

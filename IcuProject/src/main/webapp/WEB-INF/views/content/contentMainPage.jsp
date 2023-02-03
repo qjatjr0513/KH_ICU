@@ -20,7 +20,7 @@
     
 	<jsp:include page="../common/header.jsp"/>
 	
-	<img src='resources/images/findContents.png' style="width:1898px; height:523px; margin-top:50px;">
+	<img src='resources/images/findContents.png' style="width:1898px; height:500px;">
 
 	
 	<div class='sl-in2' style=' padding:10px; margin-top:10px;'>
