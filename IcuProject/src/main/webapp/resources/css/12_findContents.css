@@ -49,7 +49,6 @@ table input[type=checkbox]{
 
 #click__movie-drama {
   width: 15%;
- 
 }
 
 .about__majors input[type=checkbox] {
@@ -241,6 +240,16 @@ table input[type=checkbox]{
   padding: 20px;
   /* background-color: cadetblue; */
 }
+
+.movie_drama_Btn:first-child{
+	position:sticky;
+	top:400px;
+}
+.movie_drama_Btn:nth-child(2){
+	position:sticky;
+	top:450px;
+}
+
 .dramaBtn {
   opacity: 0.3;
 }
