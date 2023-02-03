@@ -163,28 +163,11 @@
              &nbsp;&nbsp;
              <li class='navbar__icon'>
               <div class="dropdown">
-              <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" onclick="alarm()" aria-expanded="false">
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
-              <ul class="dropdown-menu" id="alarmList">
-              <c:if test="${empty alarmList }">
-              	<li><span>알림이 없습니다.</span></li>
-              </c:if>
-              <c:if test="${!empty alarmList }">
-              <c:forEach var="a" items="${alarmList}" >
-              <c:choose>
-	              <c:when test="${a.tableCd.equals('B') }">
-	                <li><a class="dropdown-item" href="${contextPath }/detail.bo/${a.refTno}?mesNo=${a.mesNo }">${a.mesContent }</a></li>
-	              </c:when>
-	              <c:when test="${a.tableCd.equals('P') }">
-	                <li><a class="dropdown-item"  href="${contextPath }/partyDetail.py/${a.refTno}?mesNo=${a.mesNo }">${a.mesContent }</a></li>
-	              </c:when>
-	              <c:otherwise>
-	              	<li><span>알림이 없습니다.</span></li>
-	              </c:otherwise>
-              </c:choose>
-              </c:forEach>
-              </c:if>
+              <ul class="dropdown-menu" id="msg">
+              
               </ul>
             </div>
             </li>
@@ -195,6 +178,8 @@
       
     </nav>
       <!-- <div id="socketAlert" class="alert alert-success" role="alert" style="display:none; margin-top:90px;"></div> -->
+   
+   
     <!-- sockjs  -->
    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
    <script>
@@ -253,49 +238,42 @@
          ws.onerror = function (err) { console.log('Error:;', err);};
          
       }
-      
-
-	       
-    $("#alarm").click(function(){
-
+	   
+    function alarm(){
     	$.ajax({
        		url : "${contextPath }/alarm",
-       		type: "post",
-       		data : {memNo : ${loginUser.memNo}},
-               success : function(result){	
+       		type: 'POST',
+       		dataType: 'json',      // 호출 했을 때 결과타입
+			contentType: "application/json",
+               success : function(list){
             	   //location.reload();
             	   // list로 반복문 돌려서 동적으로 html요소추가
-            	   
+            	   var html = "";
+            	   for(let a of list){
+      				let tableCd = a.tableCd;
+      				if($.trim(tableCd) == "B"){
+		            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail.bo/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
+		            	$("#msg").html(html);
+      				}else if($.trim(tableCd) == "P"){
+      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+      					$("#msg").html(html);
+      				}
+            	   }
+                   
                },	
                error : function(){
             	   console.log("에러");
                 }
            })
-      	});
+      	};
       
       
       
      
       
-     	   function readAlarm(mesNo){
-    		  var mesNo = mesNo.value;
-    		   console.log(mesNo);
-	         	$.ajax({
-	         		url : "${contextPath }/readAlarm",
-	         		type: "post",
-	         		data : {mesNo : mesNo},
-	                 success : function(result){	
-	                	 
-	                 },	
-	                 error : function(){
-	                	 
-	                  }
-	             })
-    		   
-    	   } 
+     	   
     	   
    </script>
-   
    <script src="resources/js/main.js" defer></script>
 </body>
 </html>

@@ -7,32 +7,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>FAQ 관리 페이지</title>
+	<!-- css -->
+    <link rel="stylesheet" href="resources/css/admin_08_faqManage.css" />
 </head>
 <body>
-	<!-- Navbar -->
+    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
-<br><br>
-	<div class="content">
-		<br><br>
-		<div class="innerOuter" style="padding: 5% 10%;">
-			<h2>FAQ</h2>
-			<br>
-			<!-- 로그인시에만 보이는 글쓰기 버튼. -->
+
+    <!-- 왼쪽 수직 navbar -->
+    <jsp:include page="../admin/adminNavbar.jsp"/>
+
+    <!-- 결제관리 -->
+    <section id="faqList">
+      <h2>FAQ 관리</h2>
+      <hr />
+      <!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">
 				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.fq">작성하기</a>
 			</c:if>
-			<br><br><br>
-			<table id="boardList" class="table table-hover" align="center">
-				<thead>
-					<tr>
-						<th>글번호</th>
-						<th>분류</th>
-						<th>질문</th>
-					</tr>
-				</thead>
-				<tbody>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">글번호</th>
+            <th scope="col">질문</th>
+            <th scope="col">분류</th>
+          </tr>
+        </thead>
+        <tbody>
 					<c:if test="${empty list }">
 						<tr id="tableEmpty">
 							<td colspan="5">목록이 없습니다..</td>
@@ -57,29 +59,9 @@
 					</tr>
 					</c:forEach>
 				</tbody>
-			</table>			
-			
-			<!-- 
-				게시글 클릭했을때 게시글 상세보기화면으로 이동하는 스크립트 구현.
-			 -->			
-			<script>
-			
-			/* $(function(){
-	            $("#boardList>tbody>tr").click(function(){
-	               
-// 	               if($(this.text() != $("#tableEmpty").text()){ // 클릭방지 기능 구현중.
+			</table>
 
-	                  let fno = $(this).children().eq(0).text();
-	                  
-	                  location.href="${contextPath}/detail.fq/"+fno;
-// 	               } 
-
-	            });
-	         }); */
-			</script>
-			
-
-			<c:set var = "url" value="cpage="/>
+      <c:set var = "url" value="cpage="/>
 			<!-- 페이지 이동기능 구현 -->
 			<div id="pagingArea">
 				<ul class="pagination">
@@ -133,6 +115,5 @@
        	}
     });
 	</script>
-	</div>
 </body>
 </html>

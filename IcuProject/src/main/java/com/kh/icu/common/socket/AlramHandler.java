@@ -47,8 +47,8 @@ public class AlramHandler extends TextWebSocketHandler {
 	// 클라이언트가 Data 전송시
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
-		System.out.println("handleTextMessage:" + session + " : "+ message);
-		String senderId = getMemberId(session);
+		System.out.println("handleTextMessage:"+ message);
+		//String senderId = getMemberId(session);
 //		for(WebSocketSession sess : sessions) { // 세션에 접속된 모든 사람들에게 메세지 전송
 //			sess.sendMessage(new TextMessage(senderId+ ":" + message.getPayload())); //실제로 보낸 내용 : message.getPayload()
 //		}
@@ -64,42 +64,70 @@ public class AlramHandler extends TextWebSocketHandler {
 			System.out.println(strs);
 			if(strs != null && strs.length == 5) {
 				String cmd = strs[0];
-				String replyWriter = strs[1];
-				String boardWriter = strs[2];
-				String boardWriterNo = strs[3];
-				String bno = strs[4];
+				String sendId = strs[1];
+				String receiveNickname = strs[2];
+				String receiveId = strs[3];
+				String refTno = strs[4];
 				
 				
 				
-				WebSocketSession boardWriterSession = Sessions.userSessions.get(boardWriter);
-				System.out.println("============"+boardWriterSession);
-				if("reply".equals(cmd) && !replyWriter.equals(boardWriterNo)) {
+				WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+				System.out.println("============"+receiveSession);
+				if("reply".equals(cmd) && !sendId.equals(receiveSession)) {
 					String content = "게시글에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
-					a.setMemNo(Integer.parseInt(boardWriterNo));
-					a.setSendMemNo(Integer.parseInt(replyWriter));
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
 					a.setMesContent(content);
-					a.setRefTno(Integer.parseInt(bno));
+					a.setRefTno(Integer.parseInt(refTno));
 					a.setTableCd("B");
 									
 					int result = alarmService.insertBoardAlarm(a);
-					if(result > 0 && boardWriterSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ bno +"'>"+content+"</a>");
-						boardWriterSession.sendMessage(tmpMsg);						
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ refTno +"'>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
 					}
-				}else if("party".equals(cmd) && !replyWriter.equals(boardWriterNo)) {
+				}else if("party".equals(cmd) && !sendId.equals(receiveId)) {
 					String content = "파티에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
-					a.setMemNo(Integer.parseInt(boardWriterNo));
-					a.setSendMemNo(Integer.parseInt(replyWriter));
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
 					a.setMesContent(content);
-					a.setRefTno(Integer.parseInt(bno));
+					a.setRefTno(Integer.parseInt(refTno));
 					a.setTableCd("P");
 									
 					int result = alarmService.insertBoardAlarm(a);
-					if(result > 0 && boardWriterSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ bno +"'>"+content+"</a>");
-						boardWriterSession.sendMessage(tmpMsg);						
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
+					}
+				}else if("pay".equals(cmd) && !sendId.equals(receiveId)) {
+					String content = receiveNickname+"님이 송금하였습니다!";
+					Alarm a = new Alarm();
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(refTno));
+					a.setTableCd("P");
+									
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a href=''>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
+					}
+				}else if("endParty".equals(cmd) && !sendId.equals(receiveId)) {
+					String content = "일주일 후 파티가 종료됩니다!";
+					Alarm a = new Alarm();
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(refTno));
+					a.setTableCd("P");
+									
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
 					}
 				}
 			}

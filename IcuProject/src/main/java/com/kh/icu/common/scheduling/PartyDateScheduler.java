@@ -30,7 +30,7 @@ public class PartyDateScheduler {
 	
 
 	
-	@Scheduled(cron = "0 */1 * * * *")
+	@Scheduled(cron = "0 */10 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
 		LocalDate today = LocalDate.now();
@@ -53,24 +53,21 @@ public class PartyDateScheduler {
 					String receiveNickname = oneWeek.get(i).getMemNickname();
 					int receiveId = oneWeek.get(i).getMemNo();
 					int paNo =  oneWeek.get(i).getPaNo();
-					String message = "pay,"+ sendId + "," + receiveNickname + "," + receiveId + "," + paNo;
+					String message = "endParty,"+ sendId + "," + receiveNickname + "," + receiveId + "," + paNo;
 					System.out.println(message);
 					TextMessage msg = new TextMessage(message);
 				
-					List<WebSocketSession> WSsessions = new ArrayList<>();
-					Map<String, WebSocketSession> userSessions = new HashMap<>();
-					WebSocketSession SenderSession = userSessions.get(receiveNickname);
-					for(WebSocketSession s : WSsessions) {
-							try {
-								alramHandler.handleTextMessage(s, msg);
-								s.sendMessage(msg);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+					WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+
+						try {
+							alramHandler.handleTextMessage(receiveSession, msg);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 							
 						
-					}
+					
 					
 				}
 				
