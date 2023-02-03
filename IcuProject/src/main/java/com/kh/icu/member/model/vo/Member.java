@@ -22,9 +22,9 @@ public class Member {
 	private Date modifyDate;
 	private String role;
 	private String status;
-	private String bStatus;
+	private String bkStatus;
 	private String snsType;
-	private int eCount;
+	private int evCount;
 	
 	private Image image;
 	private String originName;

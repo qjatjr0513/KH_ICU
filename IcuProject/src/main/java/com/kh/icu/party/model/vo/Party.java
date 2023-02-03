@@ -37,5 +37,5 @@ public class Party {
 	
 	private int likeSum;
 	private int badSum;
-	private int eCount;
+	private int evCount;
 }

@@ -19,9 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="MODIFY_DATE" property="modifyDate"/>
 	<result column="ROLE" property="role"/>
 	<result column="STATUS" property="status"/>
-	<result column="B_STATUS" property="bStatus"/>
+	<result column="B_STATUS" property="bkStatus"/>
 	<result column="SNS_TYPE" property="snsType"/>
-	<result column="E_COUNT" property="eCount"/>
+	<result column="E_COUNT" property="evCount"/>
 </resultMap>
 
 <resultMap type="image" id="imageResultSet">

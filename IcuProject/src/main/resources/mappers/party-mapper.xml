@@ -322,7 +322,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="blackCheck" parameterType="partyEvaluate">
 		UPDATE MEMBER
 		SET B_STATUS = 'Y'
-		WHERE E_COUNT &lt; -10
+		WHERE E_COUNT &lt; -9
 	</update>
 	
 	<update id="memberLikeEvaluate">
