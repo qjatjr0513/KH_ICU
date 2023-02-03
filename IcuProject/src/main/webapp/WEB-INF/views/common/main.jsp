@@ -23,7 +23,7 @@
      <!-- input, carousel -->
 
      <section id="home">
-	 <form id="memberEnroll" action="${contextPath }/searchByKeyword.co" method="post">
+	 <form id="contentSearch" action="${contextPath }/searchByKeyword.co" method="post">
        <div class="input-group mb-3 sizing">
 	       	 <select name="searchNo" id="search">
 		     	<option value="0" selected><span>전체</span></option>

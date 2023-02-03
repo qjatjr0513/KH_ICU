@@ -6,7 +6,7 @@
 <c:set var="g" value="${genre }"/>
 <c:set var="size" value="${fn:length(genre)}" />
 <c:set var="memNo" value="${memNo }"/>
-
+<c:set var="memId" value="${memId }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -251,7 +251,12 @@
 	    	<h6>&nbsp;&nbsp;감독 : ${c.conDirector }</h6>
 	    	<h6>&nbsp;&nbsp;배우 : ${c.conActor }</h6>
 	    	<h6 class="wideLineHeight">&nbsp;&nbsp;줄거리 : ${c.conSynop }</h6>
+	    	<c:if test="${memId eq 'admin'}">
+	    		<button type="submit" id="updateBtn" class="btn btn-outline-primary btn-lg" onclick="movePage(${c.conNo});">수정하기</button>
+	    		<button type="submit" id="deleteBtn" class="btn btn-outline-primary btn-lg" onclick="deleteContent(${c.conNo});">삭제하기</button>
+	    	</c:if>
     	</div>
+    	
     </div>
     <div id="reviewWrite">
     	<br>
@@ -287,6 +292,17 @@
 		</div>
 	</div>
     <script>
+		function movePage(cno){
+	 		location.href = '${contextPath}/contentUpdateForm?conNo='+cno;
+	 	}
+		function deleteContent(cno){
+			if(confirm('컨텐츠를 삭제하시겠습니까?') == true){
+	 			location.href = '${contextPath}/contentDelete?conNo='+cno;
+			}
+			else{
+				return false;
+			}
+	 	}
     	 function drawStar(target){
 	    	let percent = 0;
 	    	percent = target.value * 10+'%';

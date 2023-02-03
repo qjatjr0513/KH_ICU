@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectContent" resultMap="contentResultSet">
 		SELECT *
 		FROM CONTENT
-		JOIN IMAGE ON (CON_NO = REF_TNO)
+		JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 		WHERE CON_NO = #{conNo}
 	</select>
 	
@@ -57,6 +57,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM GENRE
 		JOIN GENRE_STORAGE S USING (GEN_NO)
 		WHERE S.CON_NO = #{conNo}
+	</select>
+	
+	<select id="selectOtt" resultType="String">
+		SELECT OTT_NO
+		FROM OTT_STORAGE
+		WHERE CON_NO = #{conNo}
 	</select>
 	
 	<select id="selectReview" resultMap="commentResultSet">
@@ -80,16 +86,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertContent" parameterType="content">
 		INSERT INTO CONTENT(CON_NO, CON_KTITLE, CON_ETITLE, CON_CATEGORY, 
-		CON_DATE, CON_AGE, CON_INFO, CON_PREVIEW, CON_DIRECTOR, CON_ACTOR, CON_SYNOP, WRITTEN)
+		CON_DATE, CON_AGE, CON_INFO, CON_PREVIEW, CON_DIRECTOR, CON_ACTOR, CON_SYNOP)
 		VALUES (SEQ_CON.NEXTVAL, #{conKTitle}, #{conETitle}, #{conCategory}, #{conDate},
-		#{conAge}, #{conInfo}, #{conPreview}, #{conDirector}, #{conActor}, #{conSynop}, 'Y')
+		#{conAge}, #{conInfo}, #{conPreview}, #{conDirector}, #{conActor}, #{conSynop})
 	</insert>
+	
+	<update id="updateContent" parameterType="content">
+		UPDATE CONTENT
+		SET CON_KTITLE = #{conKTitle},
+		CON_ETITLE = #{conETitle},
+		CON_CATEGORY = #{conCategory},
+		CON_DATE = #{conDate},
+		CON_AGE = #{conAge},
+		CON_INFO = #{conInfo},
+		CON_PREVIEW = #{conPreview},
+		CON_DIRECTOR = #{conDirector},
+		CON_ACTOR = #{conActor},
+		CON_SYNOP = #{conSynop}
+		WHERE CON_NO = #{conNo}
+	</update>
 	
 	<select id="selectConNo" resultType="int">
 			SELECT CON_NO
 			FROM (SELECT * FROM CONTENT ORDER BY CON_NO DESC)
 			<![CDATA[WHERE ROWNUM <= 1]]>
 	</select>
+	
+	<update id="deleteContent" parameterType="int">
+		UPDATE CONTENT
+		SET STATUS = 'Y'
+		WHERE CON_NO = #{conNo}
+	</update>
 	
 	<insert id="insertGenre" parameterType="map">
 		INSERT ALL
@@ -113,6 +140,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	SELECT * FROM DUAL
 	</insert>
 	
+	<delete id="deleteGenre" parameterType="map">
+		DELETE FROM GENRE_STORAGE
+		<foreach collection="conNo" item="conNo" separator=" ">
+			WHERE CON_NO = ${conNo}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteOtt" parameterType="map">
+		DELETE FROM OTT_STORAGE
+		<foreach collection="conNo" item="conNo" separator=" ">
+			WHERE CON_NO = ${conNo}
+		</foreach>
+	</delete>
+	
 	<insert id="insertImg" parameterType="image">
 		INSERT INTO IMAGE(FILE_NO,
 						  TABLE_CD,
@@ -123,6 +164,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(SEQ_FNO.NEXTVAL, 'C', #{originName}, #{changeName}, #{refTno}, #{filePath})
 	</insert>
 	
+	<update id="updateImg" parameterType="image">
+		UPDATE IMAGE
+		SET ORIGIN_NAME = #{originName},
+		CHANGE_NAME = #{changeName},
+		FILE_PATH = #{filePath}
+		WHERE REF_TNO = #{refTno}
+	</update>
+	
 	<select id="recommendContents" resultMap="contentResultSet">
 		SELECT CT.CON_NO, I.CHANGE_NAME, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
 		FROM CONTENT CT
@@ -132,9 +181,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 	</select>
 	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM CONTENT
+		WHERE STATUS = 'N'
+	</select>
+	
 	<select id="getWrittenContent" resultMap="contentResultSet">
 		SELECT CT.CON_NO, CON_CATEGORY, CON_KTITLE
 		FROM CONTENT CT
+		WHERE STATUS = 'N'
 		ORDER BY CON_NO
 	</select>
 	

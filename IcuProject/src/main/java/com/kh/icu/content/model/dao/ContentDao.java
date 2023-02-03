@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
@@ -25,6 +27,10 @@ public class ContentDao {
 	
 	public ArrayList<String> selectGenre(SqlSession sqlSession, int conNo){
 		return (ArrayList)sqlSession.selectList("contentMapper.selectGenre", conNo);
+	}
+	
+	public ArrayList<String> selectOtt(SqlSession sqlSession, int conNo){
+		return (ArrayList)sqlSession.selectList("contentMapper.selectOtt", conNo);
 	}
 	
 	public ArrayList<Coment> selectReview(SqlSession sqlSession, int conNo){
@@ -55,6 +61,10 @@ public class ContentDao {
 		return sqlSession.insert("contentMapper.insertContent", c);
 	}
 	
+	public int updateContent(SqlSession sqlSession, Content c) {
+		return sqlSession.update("contentMapper.updateContent", c);
+	}
+	
 	public int insertGenre(SqlSession sqlSession, Map<String, Object> map) {
 		return sqlSession.insert("contentMapper.insertGenre", map);
 	}
@@ -63,12 +73,28 @@ public class ContentDao {
 		return sqlSession.insert("contentMapper.insertOtt", map);
 	}
 	
+	public int deleteGenre(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.delete("contentMapper.deleteGenre", map);
+	}
+	
+	public int deleteOtt(SqlSession sqlSession, Map<String, Object> map) {
+		return sqlSession.delete("contentMapper.deleteOtt", map);
+	}
+	
 	public int insertImg(SqlSession sqlSession, Image image) {
 		return sqlSession.insert("contentMapper.insertImg", image);
 	}
 	
+	public int updateImg(SqlSession sqlSession, Image image) {
+		return sqlSession.update("contentMapper.updateImg", image);
+	}
+	
 	public int selectConNo(SqlSession sqlSession) {
 		return sqlSession.selectOne("contentMapper.selectConNo");
+	}
+	
+	public int deleteContent(SqlSession sqlSession, int conNo) {
+		return sqlSession.update("contentMapper.deleteContent", conNo);
 	}
 	
 	public ArrayList<Content> recommendContents(SqlSession sqlSession) {
@@ -79,8 +105,17 @@ public class ContentDao {
 		return (ArrayList) sqlSession.selectList("contentMapper.searchByKeyword", map);
 	}
 	
-	public ArrayList<Content> getWrittenContent(SqlSession sqlSession){
-		return (ArrayList)sqlSession.selectList("contentMapper.getWrittenContent");
+	public int selectListCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("contentMapper.selectListCount");
+	}
+	
+	public ArrayList<Content> getWrittenContent(SqlSession sqlSession, PageInfo pi){
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("contentMapper.getWrittenContent", null ,  rowBounds);
 	}
 	
 	public ArrayList<String> getWrittenContentOtt(SqlSession sqlSession, int conNo){

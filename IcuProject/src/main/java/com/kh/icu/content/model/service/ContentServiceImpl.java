@@ -1,13 +1,17 @@
 package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.common.model.vo.Image;
+import com.kh.icu.common.template.Pagination;
 import com.kh.icu.content.model.dao.ContentDao;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
@@ -15,12 +19,13 @@ import com.kh.icu.content.model.vo.Content;
 @Service
 public class ContentServiceImpl implements ContentService{
 	private ContentDao contentDao;
-	
 	private SqlSession sqlSession;
+	private Pagination pagination;
 	
-	public ContentServiceImpl(ContentDao contentDao, SqlSession sqlSession) {
+	public ContentServiceImpl(ContentDao contentDao, SqlSession sqlSession, Pagination pagination) {
 		this.contentDao = contentDao;
 		this.sqlSession = sqlSession;
+		this.pagination = pagination;
 	}
 	
 //	@Override
@@ -47,6 +52,12 @@ public class ContentServiceImpl implements ContentService{
 	@Override
 	public ArrayList<String> selectGenre(int conNo) {
 		ArrayList<String> list = contentDao.selectGenre(sqlSession, conNo);
+		return list;
+	}
+	
+	@Override
+	public ArrayList<String> selectOtt(int conNo){
+		ArrayList<String> list = contentDao.selectOtt(sqlSession, conNo);
 		return list;
 	}
 	
@@ -78,6 +89,11 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
+	public int updateContent(Content c) {
+		return contentDao.updateContent(sqlSession, c);
+	}
+	
+	@Override
 	public int insertGenre(Map<String, Object> map) {
 		return contentDao.insertGenre(sqlSession, map);
 	}
@@ -88,13 +104,33 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
+	public int deleteGenre(Map<String, Object> map) {
+		return contentDao.deleteGenre(sqlSession, map);
+	}
+	
+	@Override
+	public int deleteOtt(Map<String, Object> map) {
+		return contentDao.deleteOtt(sqlSession, map);
+	}
+	
+	@Override
 	public int insertImg(Image image) {
 		return contentDao.insertImg(sqlSession, image);
 	}
 	
 	@Override
+	public int updateImg(Image image) {
+		return contentDao.updateImg(sqlSession, image);
+	}
+	
+	@Override
 	public int selectConNo() {
 		return contentDao.selectConNo(sqlSession);
+	}
+	
+	@Override
+	public int deleteContent(int conNo) {
+		return contentDao.deleteContent(sqlSession, conNo);
 	}
 	
 	@Override
@@ -108,8 +144,26 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
-	public ArrayList<Content> getWrittenContent(){
-		return contentDao.getWrittenContent(sqlSession);
+	public int selectListCount() {
+		return contentDao.selectListCount(sqlSession);
+	}
+	
+	@Override
+	public Map<String, Object> getWrittenContent(int currentPage){
+		Map<String, Object> map = new HashMap();
+		
+		int listCount = selectListCount();
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+					
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		map.put("pi", pi);
+		
+		ArrayList<Content> list = contentDao.getWrittenContent(sqlSession, pi);
+		map.put("list", list);
+		
+		return map;
 	}
 	
 	@Override

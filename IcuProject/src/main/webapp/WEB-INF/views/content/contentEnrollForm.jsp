@@ -125,8 +125,7 @@
     
     <script>
     	$(function(){
-    		$("[name=ott]").attr("required", true);
-    		$("[name=genre]").attr("required", true);
+
     		$("[name=conAge]").attr("required", true);
     		
     		$("#category").change(function(){

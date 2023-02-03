@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
+import com.kh.icu.common.template.Pagination;
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
@@ -33,7 +34,7 @@ import com.kh.icu.member.model.vo.Member;
 @Controller
 public class ContentController {
 	private ContentService contentService;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	public ContentController(ContentService contentService) {
@@ -42,6 +43,7 @@ public class ContentController {
 	
 	@Autowired
 	private ServletContext application;
+	
 	
 	@RequestMapping("contentList.co")
 	public String contentList(HttpSession session, Model model) {
@@ -77,8 +79,10 @@ public class ContentController {
 		Content c = contentService.selectContent(conNo);
 		Member loginUser = (Member)session.getAttribute("loginUser");		
 		int memNo =0;
+		String memId = "";
 		if(loginUser != null) {
 			memNo = loginUser.getMemNo();
+			memId = loginUser.getMemId();
 		}
 		
 		ArrayList<String> genre = new ArrayList<String>();
@@ -87,6 +91,8 @@ public class ContentController {
 		model.addAttribute("content", c);
 		model.addAttribute("genre", genre);
 		model.addAttribute("memNo", memNo);
+		model.addAttribute("memId", memId);
+		
 		return "content/contentDetail";
 	}
 	
@@ -182,10 +188,15 @@ public class ContentController {
 	}
 	
 	@RequestMapping("/contentListForm.co")
-	public String contentList(Model model) {
-		ArrayList<Content> list = contentService.getWrittenContent();
+	public String contentList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model
+							,@RequestParam Map<String, Object> paramMap) {
+		
+		Map<String, Object> map = new HashMap();
+		map = contentService.getWrittenContent(currentPage);
 		ArrayList<String> ottName = new ArrayList<String>();
 		String full = "";
+		ArrayList<Content> list = (ArrayList<Content>) map.get("list");
+		map.remove("list");
 		
 		for(int i = 0; i < list.size(); i++) {			
 			ottName = contentService.getWrittenContentOtt(list.get(i).getConNo());
@@ -204,15 +215,37 @@ public class ContentController {
 				list.get(i).setConCategory("드라마");
 			}
 		}
-		model.addAttribute("list", list);
+		map.put("list", list);
 		
-		System.out.println(list);
+		model.addAttribute("list", list);
+		model.addAttribute("map", map);
+		
+		System.out.println(map);
 		return "content/contentListForm";
 	}
 	
 	@RequestMapping("/contentEnrollForm.co")
-	public String contentEnrollForm() {		
+	public String contentEnrollForm() {			
 		return "content/contentEnrollForm";
+	}
+	
+	@RequestMapping("/contentUpdateForm")
+	public String contentUpdateForm(@RequestParam(value = "conNo") int conNo
+			, HttpSession session, Model model) {
+		
+		Content c = contentService.selectContent(conNo);
+
+		ArrayList<String> genre = new ArrayList<String>();
+		ArrayList<String> ott = new ArrayList<String>();
+		
+		genre = contentService.selectGenre(conNo);
+		ott = contentService.selectOtt(conNo);
+		
+		model.addAttribute("content", c);
+		model.addAttribute("genre", genre);
+		model.addAttribute("ott", ott);
+		
+		return "content/contentUpdateForm";
 	}
 	
 	@RequestMapping("/contentEnroll.co")
@@ -278,6 +311,99 @@ public class ContentController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	@RequestMapping("/contentUpdate.co")
+	public String contentUpdate(Content c, 
+								@RequestParam("genre") ArrayList<String> genre,
+								Image image,
+								@RequestParam("poster") MultipartFile poster,
+								@RequestParam("ott") ArrayList<String> ott,
+								HttpSession session,
+								Model model) {
+		int resultImage = 0;
+		int resultContent = 0;
+		int resultGenre = 0;
+		int resultOtt = 0;
+		int resultDeleteGenre = 0;
+		int resultDeleteOtt = 0;
+		
+		resultContent = contentService.updateContent(c);
+		ArrayList<Integer> conNoList = new ArrayList<Integer>();
+		int conNo = contentService.selectConNo();
+		 
+		conNoList.add(conNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("conNo", conNoList);
+		map.put("genre", genre);
+		map.put("ott", ott);
+		
+		String filePath = "/resources/posterImg";
+		
+		
+		if(!poster.getOriginalFilename().equals("")) {			
+			String savePath = session.getServletContext().getRealPath("/resources/posterImg/");
+			System.out.println("savePath : "+savePath);
+			String changeName = Utils.saveFile(poster, savePath);
+			File file = new File(savePath+changeName);
+			try {
+				poster.transferTo(file);
+				//System.out.println("save poster : "+file.exists());
+			} catch (IllegalStateException | IOException e) {
+				logger.error(e.getMessage());
+			}
+			
+			image.setOriginName(poster.getOriginalFilename());
+			image.setChangeName("/"+changeName);
+			image.setRefTno(conNo);
+			image.setFilePath(filePath);
+			
+			resultImage = contentService.updateImg(image);
+		}
+		
+		resultDeleteGenre = contentService.deleteGenre(map);
+		resultDeleteOtt = contentService.deleteOtt(map);
+		
+		if(resultDeleteGenre > 0 && resultDeleteOtt > 0) {
+			resultGenre = contentService.insertGenre(map);
+			resultOtt = contentService.insertOtt(map);
+		}
+		
+		System.out.println(resultContent);
+		System.out.println(resultImage);
+		System.out.println(resultGenre);
+		System.out.println(resultOtt);
+		
+		if(resultContent > 0 && resultImage > 0 && resultGenre > 0 && resultOtt > 0) {
+			Content cInfo = contentService.selectContent(conNo);
+			
+			model.addAttribute("info", cInfo);
+			
+			return "content/contentListForm";	
+		}		
+		else {
+			model.addAttribute("errorMsg","컨텐츠 수정 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	@RequestMapping("/contentDelete")
+	public String contentDelete(@RequestParam(value = "conNo") int conNo
+			, HttpSession session, Model model) {
+		
+		int resultDelete = contentService.deleteContent(conNo);
+
+		
+		if(resultDelete > 0) {
+			return "content/contentListForm";
+		}
+		else {
+			model.addAttribute("errorMsg","컨텐츠 수정 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	@RequestMapping("/searchByKeyword.co")
