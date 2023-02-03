@@ -412,11 +412,22 @@ public class ContentController {
 								HttpSession session, Model model) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		double cmtStar = 0.0;
 		
 		map.put("searchNo", searchNo);
 		map.put("keyword", keyword);
 		
 		ArrayList<Content> list = contentService.searchByKeyword(map);
+		
+		for(int i = 0; i < list.size(); i++) {
+			try {
+				cmtStar = contentService.selectStar(list.get(i).getConNo());
+			}
+			catch(NullPointerException e) {
+				cmtStar = 0.0;
+			}
+			list.get(i).setCmtStar(cmtStar);
+		}
 		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getFilePath() == null) {

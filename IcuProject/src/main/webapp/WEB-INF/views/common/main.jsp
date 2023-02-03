@@ -227,7 +227,7 @@
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(2).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -237,7 +237,7 @@
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(3).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -247,7 +247,7 @@
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(4).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -261,7 +261,7 @@
          <div class="recommend__box">
            <div class="recommend__box-first movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black"  onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black"  onclick="movePage(${r.get(5).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -271,7 +271,7 @@
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(6).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -281,7 +281,7 @@
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(7).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -291,7 +291,7 @@
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(8).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
@@ -301,7 +301,7 @@
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
-               <div class="overlay-black" onclick="movePage(${r.get(0).getConNo() });">
+               <div class="overlay-black" onclick="movePage(${r.get(9).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>

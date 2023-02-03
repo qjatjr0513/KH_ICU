@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *
 		FROM CONTENT
 		JOIN IMAGE I ON (CON_NO = REF_TNO)
-		WHERE I.TABLE_CD = 'C'
+		WHERE I.TABLE_CD = 'C' AND STATUS = 'N'
 		ORDER BY CON_NO
 	</select>
 	
@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectConNo" resultType="int">
 			SELECT CON_NO
 			FROM (SELECT * FROM CONTENT ORDER BY CON_NO DESC)
-			<![CDATA[WHERE ROWNUM <= 1]]>
+			<![CDATA[WHERE ROWNUM <= 1 AND STATUS = 'N']]> 
 	</select>
 	
 	<update id="deleteContent" parameterType="int">
@@ -177,6 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM CONTENT CT
 		LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
 		JOIN IMAGE I ON(I.REF_TNO = CT.CON_NO) AND I.TABLE_CD = 'C'
+		WHERE CT.STATUS = 'N'
 		GROUP BY CT.CON_NO, I.CHANGE_NAME, CT.CON_DATE
 		ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 	</select>
@@ -207,23 +208,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN IMAGE I ON(I.REF_TNO = CON_NO) AND I.TABLE_CD = 'C'
 		WHERE
 		<if test="searchNo == 0">
-			CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
 			OR
 			CON_ETITLE LIKE '%'||#{keyword}||'%'
 			OR
 			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
 			OR
-			CON_ACTOR LIKE '%'||#{keyword}||'%'
+			CON_ACTOR LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
 		</if>
 		<if test="searchNo == 1">
-			CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
 			OR
-			CON_ETITLE LIKE '%'||#{keyword}||'%'
+			CON_ETITLE LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
 		</if>
 		<if test="searchNo == 2">
-			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
+			(CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
 			OR
-			CON_ACTOR LIKE '%'||#{keyword}||'%'
+			CON_ACTOR LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
 		</if>
 	</select>
 	
@@ -232,19 +236,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -253,30 +257,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE OTT_NO IN (
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size == 0">
@@ -284,7 +288,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -293,14 +297,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			) AND 
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -309,6 +313,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size == 0">
@@ -316,7 +321,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -325,18 +330,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			) CON_AGE IN (
+			) AND CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size != 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -345,14 +350,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size != 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -365,13 +370,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size != 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -380,14 +385,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size != 0">
 			SELECT DISTINCT CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE OTT_NO IN (
 			<foreach collection="ott" item="o" separator=",">
 				${o}
@@ -396,7 +401,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size != 0">
@@ -404,7 +409,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -417,14 +422,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size != 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -433,12 +438,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			)
-			AND CON_CATEGORY IN(
+			) AND CON_CATEGORY IN(
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size != 0">
@@ -446,7 +450,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM CONTENT
 			JOIN GENRE_STORAGE G USING(CON_NO)
 			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -463,24 +467,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size != 0">
 			SELECT DISTINCT CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_CATEGORY IN(
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			)
+			) AND STATUS = 'N'
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
-			JOIN IMAGE ON (CON_NO = REF_TNO)
+			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			WHERE STATUS = 'N'
 		</if>
 			
 			
