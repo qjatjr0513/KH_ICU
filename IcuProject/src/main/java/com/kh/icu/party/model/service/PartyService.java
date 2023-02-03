@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.party.model.vo.Party;
+import com.kh.icu.party.model.vo.PartyEvaluate;
 import com.kh.icu.party.model.vo.PartyJoin;
 import com.kh.icu.pay.model.vo.Pay;
 
@@ -42,5 +43,20 @@ public interface PartyService {
 	public List<Party> memCurrentPartyListO(int memNo);
 	public List<Party> memEndPartyListI(int memNo);
 	public List<Party> memEndPartyListO(int memNo);
+	
+	public int checkPartyEvaluate(PartyEvaluate pe);
+	
+	public int partyLikeEvaluate(PartyEvaluate pe);
+	
+	public int partyBadEvaluate(PartyEvaluate pe);
 
+	public int blackCheck(PartyEvaluate pe);
+	
+	
+	
+	
+	
+	
+	
+	
 }

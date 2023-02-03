@@ -71,11 +71,11 @@
 		                  <span>${listI[count].paTitle}</span> <br />
 		                  <span id="endDate">${listI[count].endDate}까지 (${listI[count].leftDate}일)</span><br/><br/>
 		                  <br>
-		                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal">ID / PWD 보기</button>
+		                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__1">ID / PWD 보기</button>
 		              </div>
 		              
 		                <!-- 모달창 -->
-					    <div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal fade" id="idModal__1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					      <div class="modal-dialog modal-dialog-centered">
 					        <div class="modal-content">
 					          <div class="modal-header">
@@ -88,7 +88,6 @@
 					          </div>
 					          <div class="modal-footer">
 					            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					            <button type="button" class="btn btn-primary">확인</button>
 					          </div>
 					        </div>
 					      </div>
@@ -177,30 +176,28 @@
 		                  <span>${listO[countO].paTitle}</span> <br />
 		                  <span id="endDate">${listO[countO].endDate}까지 (${listO[countO].leftDate}일)</span><br/><br/>
 		                  <br>
-	                  	  <button class="joinBtn2" data-bs-toggle="modal" data-bs-target="#idModal">파티장평가</button>
+						  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__2">ID / PWD 보기</button>
 		              </div>
-		           
-		                <!-- 파티장 평가 모달창 -->
-					    <div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					      <div class="modal-dialog modal-dialog-centered">
-					        <div class="modal-content">
-					          <div class="modal-header">
-					            <h1 class="modal-title fs-5" id="exampleModalLabel">파티장 평가</h1>
-					            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					          </div>
-					          <div class="modal-body">
-					            <h2>파티장 닉네임 : 파티장 닉네임</h2>
-					            <br /><br />
-					            <button class="firstBtn"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-					            <button class="secondBtn"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
-					          </div>
-					          <div class="modal-footer">
-					            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					            <button type="button" class="btn btn-primary">확인</button>
-					          </div>
-					        </div>
-					      </div>
-					    </div>
+					
+					  <!-- 모달창 -->
+					  <div class="modal fade" id="idModal__2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <h1 class="modal-title fs-5" id="exampleModalLabel">계정 정보</h1>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+							  <h2>계정 아이디 : ${listO[countO].ottId}</h2>
+							  <h2>계정 비밀번호 : ${listO[countO].ottPwd}</h2>     
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+							</div>
+						  </div>
+						</div>
+					  </div>
+		                
 		              
 					  <c:set var="countO" value="${countO+1 }"/>
 				      

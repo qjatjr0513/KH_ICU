@@ -119,7 +119,6 @@
       <!-- 내가 참여한 파티 -->
       <div id="lastPartyBox">
 
-      <div id="lastPartyBox">
 	    <!-- 파티 카드 -->
 	    <section id="party__container">
 	   	  <c:if test="${empty listO }">
@@ -148,21 +147,24 @@
 	          </c:choose>
 	          
 	          <c:forEach begin="${x.begin * 3}" end="${x.begin *3+2}" step="1" varStatus="j">
-	          <c:if test="${not doneLoopO}">
-	            <div class="partyCard"> <!-- 4개 -->
-			      
-			      <c:forEach var="p" items="${listO}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 				  <c:if test="${not doneLoopO}">
-					  <div class="cardBox"> <!-- 1개 -->
-		                  <h4><b>${listO[countO].ottName}</b></h4>
-		                  <span>${listO[countO].paTitle}</span> <br />
-		                  <span id="endDate">파티 종료일 : ${listO[countO].endDate}</span><br/><br/>
+					  <div class="partyCard"> <!-- 4개 -->
+						
+						<c:forEach var="p" items="${listO}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
+							<c:if test="${not doneLoopO}">
+								<div class="cardBox"> <!-- 1개 -->
+								
+									<h4><b>${listO[countO].ottName}</b></h4>
+									<span>${listO[countO].paTitle}</span> <br />
+									<span id="endDate">파티 종료일 : ${listO[countO].endDate}</span><br/><br/>
+									
+									
 		                  <br>
-	                  	  <button class="joinBtn2" data-bs-toggle="modal" data-bs-target="#idModal">파티장평가</button>
+	                  	  <button class="joinBtn2" data-bs-toggle="modal" data-bs-target="#idModal${countO}">파티장평가</button>
 		              </div>
-		           
+					  <input type="hidden" id="paNo${countO}" value="${listO[countO].paNo}"/>
 		                <!-- 파티장 평가 모달창 -->
-					    <div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal fade" id="idModal${countO}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					      <div class="modal-dialog modal-dialog-centered">
 					        <div class="modal-content">
 					          <div class="modal-header">
@@ -170,18 +172,22 @@
 					            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					          </div>
 					          <div class="modal-body">
+								
 					            <h2>파티장 닉네임 : ${listO[countO].memNickname}</h2>
 					            <br /><br />
-					            <button class="firstBtn"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
-					            <button class="secondBtn"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
+								<c:set var="paNo" value="${listO[countO].paNo}"/>
+								
+								<button type="button" class="firstBtn" onclick="likeBtn(${paNo});"><i class="fa-regular fa-thumbs-up fa-2x"></i></button>
+								<button type="button" class="secondBtn" onclick="badBtn(${paNo});"><i class="fa-regular fa-thumbs-down fa-2x"></i></button>
+								
 					          </div>
 					          <div class="modal-footer">
 					            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
 					          </div>
 					        </div>
 					      </div>
 					    </div>
+						
 		              
 					  <c:set var="countO" value="${countO+1 }"/>
 				      
@@ -225,6 +231,48 @@
 	    </section>
       </div>
     </section>
+	<script>
+		function likeBtn(paNo){
+			console.log(paNo+"번방 실행됨");
+			location.href = "${contextPath}/partyLikeEvaluate.py?paNo="+paNo;			
+		}
+
+		function badBtn(paNo){
+			console.log(paNo+"번방 실행됨");
+			location.href = "${contextPath}/partyBadEvaluate.py?paNo="+paNo;
+		}
+
+		$(function(){
+			if('${flag}' == 'showAlert'){
+				Swal.fire({
+					icon:'error',
+					title: "이미 평가하셨습니다."
+				});
+			} else if ('${flag2}' == 'showAlert2'){
+				Swal.fire({
+					icon:'success',
+					title: "좋아요 등록 완료."
+				});
+			} else if ('${flag3}' == 'showAlert3'){
+				Swal.fire({
+						icon:'error',
+						title: "좋아요 등록 실패."
+				});
+			} else if ('${flag4}' == 'showAlert4'){
+				Swal.fire({
+					icon:'success',
+					title: "싫어요 등록 완료."
+				});
+			} else if ('${flag5}' == 'showAlert5') { 
+				Swal.fire({
+						icon:'error',
+						title: "싫어요 등록 실패."
+				});
+			}
+			});
+
+	</script>
+	
     
     <script src="resources/js/memberCurrentParty.js" defer></script>
 	

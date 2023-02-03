@@ -45,7 +45,9 @@
       <span style="color: #f25042;">탈퇴 후에는 아이디 <span style="color:#004643;" ><b>${loginUser.memId}</b></span>로 다시 가입할 수 없으며
       아이디와 데이터는 복구할 수 없습니다.<br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.</span>
+      게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.<br><br>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SNS계정은 비밀번호 설정 후 탈퇴하실 수 있습니다.</span>
       <br><br>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

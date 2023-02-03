@@ -24,8 +24,10 @@ public class Member {
 	private String status;
 	private String bStatus;
 	private String snsType;
+	private int eCount;
 	
 	private Image image;
 	private String originName;
 	private String changeName;
+	
 }

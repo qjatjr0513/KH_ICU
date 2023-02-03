@@ -29,6 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="FILE_PATH" property="filePath"/>
 		<result column="LIKE_COUNT" property="likeCount"/>
 		<result column="BAD_COUNT" property="badCount"/>
+		
+		<result column="LIKE_SUM" property="likeSum"/>
+		<result column="BAD_SUM" property="badSum"/>
 	</resultMap>
 	
 	<resultMap type="partyJoin" id="partyJoinResultSet">
@@ -38,6 +41,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="JOIN_DATE" property="joinDate"></result>
 		<result column="CHANGE_NAME" property="changeName"/>
 		<result column="FILE_PATH" property="filePath"/>
+	</resultMap>
+	
+	<resultMap type="partyEvaluate" id="partyEvaluateResultSet">
+		<result column="PA_NO" property="paNO"/>
+		<result column="MEM_NO" property="memNO"/>
+		<result column="LIKE_COUNT" property="likeCount"/>
+		<result column="BAD_COUNT" property="badCount"/>
+		
 	</resultMap>
 	
 	<resultMap type="reply" id="replyResultSet">
@@ -225,18 +236,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="endPartyList" resultMap="partyResultSet">
-		SELECT PA_NO,
+		SELECT P.PA_NO,
         	   M.MEM_NICKNAME,
 			   O.OTT_NAME,
 			   P.PA_TITLE,
 			   P.END_DATE,
 			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
-               LIKE_COUNT,
-               BAD_COUNT
+               (SELECT SUM(LIKE_COUNT) FROM PARTY_EVALUATE WHERE PA_NO = P.PA_NO) AS LIKE_SUM,
+               (SELECT SUM(BAD_COUNT) FROM PARTY_EVALUATE WHERE PA_NO = P.PA_NO) AS BAD_SUM
 		FROM PARTY P
         JOIN OTT O USING(OTT_NO)
-        JOIN MEMBER M ON (MEM_NO = PA_NAME)
-        LEFT JOIN PARTY_EVALUATE USING (PA_NO) 
+        JOIN MEMBER M ON (MEM_NO = PA_NAME) 
         WHERE P.STATUS = 'Y'
     </select>
     
@@ -293,5 +303,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           AND PA_NO IN (SELECT DISTINCT(PA_NO) FROM PARTY_JOIN WHERE MEM_NO = #{memNo})
     </select>
 	
+	<select id="checkPartyEvaluate" parameterType="partyEvaluate" resultType="int">
+		SELECT COUNT(*)
+		FROM PARTY_EVALUATE
+		WHERE MEM_NO = #{memNo} AND PA_NO = #{paNo}
+	</select>
+	
+	<insert id="partyLikeEvaluate" parameterType="partyEvaluate">
+		INSERT INTO PARTY_EVALUATE
+		VALUES (#{paNo}, #{memNo}, 1, 0)
+	</insert>
+	
+	<insert id="partyBadEvaluate" parameterType="partyEvaluate">
+		INSERT INTO PARTY_EVALUATE
+		VALUES (#{paNo}, #{memNo}, 0, 1)
+	</insert>
+
+	<update id="blackCheck" parameterType="partyEvaluate">
+		UPDATE MEMBER
+		SET B_STATUS = 'Y'
+		WHERE E_COUNT &lt; -10
+	</update>
+	
+	<update id="memberLikeEvaluate">
+		UPDATE MEMBER
+		SET E_COUNT = E_COUNT +1
+		WHERE MEM_NO IN (SELECT PA_NAME
+						 FROM PARTY
+						 WHERE PA_NO = #{paNo})
+	</update>
+	
+	<update id="memberBadEvaluate">
+		UPDATE MEMBER
+		SET E_COUNT = E_COUNT -1
+		WHERE MEM_NO IN (SELECT PA_NAME
+						 FROM PARTY
+						 WHERE PA_NO = #{paNo})
+	</update>
+
+
+
+
 
 </mapper>

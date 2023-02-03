@@ -23,7 +23,7 @@
     <section id="party__container">
    	  <c:if test="${empty list }">
 		 <tr id="tableEmpty">
-			<td colspan="5">파티방이 없습니다. 원하는 파티를 만들어보세요. </td>
+			<td colspan="5">종료된 파티방이 없습니다. </td>
 		 </tr>
 	  </c:if>
 		
@@ -55,14 +55,14 @@
 				  <div class="cardBox"> <!-- 1개 -->
 	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
-	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
+	                  <span id="endDate">${list[count].endDate}까지</span><br/><br/>
 	                  <br>
-	                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal" id="${count}"}>파티장평가</button>
+	                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal${count}" id="${count}"}>파티장평가</button>
 	              </div>
 	              
 	              
 	                <!-- 파티장 평가 모달창 -->
-				    <div class="modal fade" id="idModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				    <div class="modal fade" id="idModal${count}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				      <div class="modal-dialog modal-dialog-centered">
 				        <div class="modal-content">
 				          <div class="modal-header">
@@ -72,8 +72,8 @@
 				          <div class="modal-body">
 				            <h2>파티장 닉네임 : ${list[count].memNickname}</h2>
 				            <br /><br />
-				            <button class="firstBtn"><i class="fa-regular fa-thumbs-up fa-2x"></i>${list[count].likeCount}</button>
-				            <button class="secondBtn"><i class="fa-regular fa-thumbs-down fa-2x"></i>${list[count].badCount}</button>
+				            <button class="firstBtn"><i class="fa-regular fa-thumbs-up fa-2x"></i>${list[count].likeSum}</button>
+				            <button class="secondBtn"><i class="fa-regular fa-thumbs-down fa-2x"></i>${list[count].badSum}</button>
 				          </div>
 				          <div class="modal-footer">
 				            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

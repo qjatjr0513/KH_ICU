@@ -35,4 +35,7 @@ public class Party {
 	private int likeCount;
 	private int badCount;
 	
+	private int likeSum;
+	private int badSum;
+	private int eCount;
 }

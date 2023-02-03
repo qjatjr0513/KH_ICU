@@ -8,4 +8,6 @@ public class PartyEvaluate {
 	private int memNo;
 	private int likeCount;
 	private int badCount;
+	
+	
 }

@@ -22,6 +22,7 @@ import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
+import com.kh.icu.party.model.vo.PartyEvaluate;
 import com.kh.icu.party.model.vo.PartyJoin;
 import com.kh.icu.pay.model.vo.Pay;
 
@@ -249,7 +250,7 @@ public class PartyController {
 		// 내가 만든 파티 listI / 내가 참여한 파티 listO
 		List<Party> listI = partyService.memEndPartyListI(memNo);
 		List<Party> listO = partyService.memEndPartyListO(memNo);
-		
+		 
 		mav.addObject("listI", listI);
 		mav.addObject("listO", listO);
 
@@ -260,5 +261,77 @@ public class PartyController {
 		
 		return mav;
 	}
+	
+	/**
+	 * 사용자페이지 파티장 평가
+	 */
+	@RequestMapping("partyLikeEvaluate.py")
+	public String partyLikeEvaluate(PartyEvaluate pe, @RequestParam("paNo") int paNo, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
+		pe.setMemNo(memNo);
+		pe.setPaNo(paNo);
+		System.out.println("******pe:"+pe);
+		
+		int cpe = partyService.checkPartyEvaluate(pe);
+		System.out.println("******cpe : "+ cpe);
+		int result = 0;
+		if(cpe == 1) {
+			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
+			return "redirect:LastParty.py";
+		} else {
+			result = partyService.partyLikeEvaluate(pe);
+			
+			System.out.println("******result : "+ result);
+			if(result > 0 ) {
+				redirectAttributes.addFlashAttribute("flag2","showAlert2"); // 좋아요 성공하셨습니다.
+				return "redirect:LastParty.py";
+			} else {
+				redirectAttributes.addFlashAttribute("flag3","showAlert3"); // 좋아요 실패하셨습니다.
+				return "redirect:LastParty.py";
+			}
+		}
+		
+	}
+	
+	/**
+	 * 사용자페이지 파티장 평가
+	 */
+	@RequestMapping("partyBadEvaluate.py")
+	public String partyBadEvaluate(PartyEvaluate pe, @RequestParam("paNo") int paNo, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memNo = loginUser.getMemNo();
+		pe.setMemNo(memNo);
+		pe.setPaNo(paNo);
+		System.out.println("******pe:"+pe);
+		
+		int cpe = partyService.checkPartyEvaluate(pe);
+		System.out.println("******cpe : "+ cpe);
+		int result = 0;
+		if(cpe == 1) {
+			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
+			return "redirect:LastParty.py";
+		} else {
+			result = partyService.partyBadEvaluate(pe);
+			System.out.println("******result : "+ result);
+			if(result > 0 ) {
+				redirectAttributes.addFlashAttribute("flag4","showAlert4"); // 싫어요에 성공하셨습니다.
+				partyService.blackCheck(pe);
+				return "redirect:LastParty.py";
+			} else {
+				redirectAttributes.addFlashAttribute("flag5","showAlert5"); // 싫어요에 실패하셨습니다.
+				return "redirect:LastParty.py";
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 
 }

@@ -541,6 +541,7 @@ public class MemberController {
 	 */
 	@RequestMapping("memDelete.me")
 	public String deleteMember(String memPwd, HttpSession session, RedirectAttributes redirectAttributes) {
+		
 		String encPwd = ((Member)session.getAttribute("loginUser")).getMemPwd();
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
 		

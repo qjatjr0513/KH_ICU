@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.party.model.dao.PartyDao;
 import com.kh.icu.party.model.vo.Party;
+import com.kh.icu.party.model.vo.PartyEvaluate;
 import com.kh.icu.party.model.vo.PartyJoin;
 import com.kh.icu.pay.model.vo.Pay;
 
@@ -122,6 +123,44 @@ public class PartyServiceImpl implements PartyService{
 	public List<Party> memEndPartyListO(int memNo){
 		return partyDao.memEndPartyListO(sqlSession, memNo);
 	};
+	
+	@Override
+	public int checkPartyEvaluate(PartyEvaluate pe) {
+		return partyDao.checkPartyEvaluate(sqlSession, pe);
+	}
+	
+	@Override
+	public int partyLikeEvaluate(PartyEvaluate pe) {
+		int result1 = partyDao.partyLikeEvaluate(sqlSession, pe);
+		int result2 = partyDao.memberLikeEvaluate(sqlSession, pe);
+		int result = result1 * result2;
+		
+		if(result > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	@Override
+	public int partyBadEvaluate(PartyEvaluate pe) {
+		int result1 = partyDao.partyBadEvaluate(sqlSession, pe);
+		int result2 = partyDao.memberBadEvaluate(sqlSession, pe);
+		int result = result1 * result2;
+		
+		if(result > 0) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	@Override
+	public int blackCheck(PartyEvaluate pe) {
+		return partyDao.blackCheck(sqlSession, pe);
+	}
+	
+	
 	
 	
 }

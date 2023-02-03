@@ -24,7 +24,7 @@
     <section id="party__container">
    	  <c:if test="${empty list }">
 		 <tr id="tableEmpty">
-			<td colspan="5">파티방이 없습니다. 원하는 파티를 만들어보세요. </td>
+			<td colspan="5">진행중인 파티방이 없습니다. </td>
 		 </tr>
 	  </c:if>
 		

@@ -28,7 +28,7 @@
           <td><label>이름</label></td>
           <td><input type="text" name="memName" value="${loginUser.memName}" readonly/></td>
           <td><label>&nbsp;&nbsp;이메일</label></td>
-          <td><input type="email" name="email" placeholder="${loginUser.email}"/></td>
+          <td><input type="email" name="email" value="${loginUser.email}"/></td>
         </tr>
         <tr>
           <td><label for="">아이디</label></td>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td><label>닉네임</label></td>
-          <td><input type="text" placeholder="${loginUser.memNickname}" name="memNickname" required/></td>
+          <td><input type="text" name="memNickname" value="${loginUser.memNickname}" required/></td>
           <td>
             <button
               type="button"

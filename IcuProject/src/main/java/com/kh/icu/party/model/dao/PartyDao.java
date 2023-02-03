@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.party.model.vo.Party;
+import com.kh.icu.party.model.vo.PartyEvaluate;
 import com.kh.icu.party.model.vo.PartyJoin;
 import com.kh.icu.pay.model.vo.Pay;
 
@@ -98,6 +99,38 @@ public class PartyDao {
 	public List<Party> memEndPartyListO(SqlSession sqlSession, int memNo){
 		return sqlSession.selectList("partyMapper.memEndPartyListO", memNo);
 	};
+	
+	public int checkPartyEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
+		System.out.println("*****************pe: "+pe);
+		int result = sqlSession.selectOne("partyMapper.checkPartyEvaluate", pe);
+		System.out.println("**************result : "+result);
+		return result;
+	}
+	
+	public int partyLikeEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
+		return sqlSession.insert("partyMapper.partyLikeEvaluate", pe);
+	}
+	
+	public int partyBadEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
+		return sqlSession.insert("partyMapper.partyBadEvaluate", pe);
+	}
+	
+	public int blackCheck(SqlSession sqlSession, PartyEvaluate pe) {
+		
+		return sqlSession.update("partyMapper.blackCheck", pe);
+	}
+	
+	public int memberLikeEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
+		return sqlSession.update("partyMapper.memberLikeEvaluate", pe);
+	}
+	
+	public int memberBadEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
+		return sqlSession.update("partyMapper.memberBadEvaluate", pe);
+	}
+	
+	
+	
+	
 	
 	
 }
