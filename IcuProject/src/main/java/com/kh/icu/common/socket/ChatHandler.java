@@ -31,19 +31,21 @@ public class ChatHandler extends TextWebSocketHandler{
 	 @Autowired
 	 private ChatService chatService;
 	 
+	 private Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
+	 
 	// 클라이언트가 서버로 연결시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session)throws Exception {
 		// WebSocketSession : 웹소켓에 접속/요청한 클라이언트의 세션
       System.out.println(session.getId() + "연결됨"); // 세션 아이디 확인
       
-      Sessions.sessions.add(session);
+      sessions.add(session);
 	}
 	
 	// 연결 해제될 때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		Sessions.sessions.remove(session);
+		sessions.remove(session);
 	}
 
 	// 클라이언트가 Data 전송시
@@ -69,7 +71,7 @@ public class ChatHandler extends TextWebSocketHandler{
 	    int result = chatService.insertMessage(chatMessage);
 	    if(result > 0) {
          // 같은방에 접속중인 클라이언트에게 전달받은 메세지를 보내기.
-         for(WebSocketSession s : Sessions.sessions) {
+         for(WebSocketSession s : sessions) {
             
             // 반복을 진행중인 websocketsession안에 담겨있는 방번호.
 			int chatRoomNo = (Integer) s.getAttributes().get("chatRoomNo");

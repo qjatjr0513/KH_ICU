@@ -116,7 +116,6 @@ public class BoardController {
       Board b = boardService.selectBoard(boardNo);
       ArrayList<Reply> list = boardService.selectReplyList(boardNo);
       
-      int result2 = alarmService.readAlarm(mesNo);
      
       
       if(b != null) {
@@ -124,6 +123,7 @@ public class BoardController {
          Member loginUser = (Member)session.getAttribute("loginUser");
          
          // 알림 조회 상태 변경
+         int result2 = alarmService.readAlarm(mesNo);
         
          
          

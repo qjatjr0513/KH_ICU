@@ -42,7 +42,8 @@ public class ChattingController {
 	@PostMapping("chat/openChatRoom")
 	@ResponseBody
 	public int openChatRoom(int memNo, 
-			                   ChatRoom room, 
+			                   ChatRoom room,
+			                   Model model,
 			                   RedirectAttributes ra, HttpSession session
 								) throws Exception {
 		 
@@ -52,9 +53,9 @@ public class ChattingController {
 		int chatRoomNo = chatservice.openChatRoom(room);
 //		String path = "redirect:/chat/";
 		
-		//model.addAttribute("chatRoomNo", chatRoomNo);
 		if(chatRoomNo > 0) {
-			session.setAttribute("chatRoomNo", chatRoomNo);
+			model.addAttribute("chatRoomNo", chatRoomNo);
+			//session.setAttribute("chatRoomNo", chatRoomNo);
 			System.out.println("채팅방 만들기 성공");
 			
 //			path += "chatRoomList";

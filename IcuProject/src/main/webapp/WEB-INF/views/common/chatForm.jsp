@@ -24,11 +24,11 @@
            <hr />
            <span><i class="fa-solid fa-user"></i>&nbsp;&nbsp;관리자</span
            ><br />
-           <span>무엇을 도와드릴까요? 2020-02-02 17:00</span>
+           <span id="cdate"></span>
          </div>
 
          
-         <div class="inner" id="msg"></div>
+         <div class="inner" id="mg"></div>
 
          <input 
          type="text" 
@@ -141,7 +141,7 @@
          '</p><span class="time">' +
          currentTime() +
          '</span></div></div>';
-   		$("#msg").append(html);
+   		$("#mg").append(html);
    		 };
    				
    		socket.onclose = function (e) { 
@@ -151,7 +151,9 @@
     }
 	
 			
- 	 
+      $(document).ready(function(){
+    	  $("#cdate").append("무엇을 도와드릴까요? "+currentTime());
+       });
  	 
  	 
  	 

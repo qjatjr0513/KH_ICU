@@ -167,7 +167,9 @@
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
               <ul class="dropdown-menu" id="msg">
-              
+	              <c:if test="${empty list}">
+	              	<li><p>알림이 없습니다.</p></li>
+	              </c:if>
               </ul>
             </div>
             </li>
@@ -251,13 +253,13 @@
             	   var html = "";
             	   for(let a of list){
       				let tableCd = a.tableCd;
+      				
       				if($.trim(tableCd) == "B"){
 		            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail.bo/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
-		            	$("#msg").html(html);
       				}else if($.trim(tableCd) == "P"){
       					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
-      					$("#msg").html(html);
       				}
+      				$("#msg").html(html);
             	   }
                    
                },	

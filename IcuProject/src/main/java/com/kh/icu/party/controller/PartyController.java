@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
@@ -30,6 +31,9 @@ import com.kh.icu.pay.model.vo.Pay;
 public class PartyController {
 	@Autowired
 	private PartyService partyService;
+	
+	 @Autowired
+	 private AlarmService alarmService;
 	
 	@RequestMapping("partyEnroll.py")
 	public String partyEnrollForm() {
@@ -97,12 +101,15 @@ public class PartyController {
 	
 	// 파티 디테일
 	@RequestMapping("partyDetail.py/{paNo}")
-	public String partyDetailForm(Model model, @PathVariable("paNo") int paNo) {
+	public String partyDetailForm(Model model, @PathVariable("paNo") int paNo,
+			                      @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo) {
 		
 		Party p = partyService.partyDetailForm(paNo);
 		List<PartyJoin> pj = partyService.partyJoinMem(paNo);
 	    ArrayList<Reply> list = partyService.selectReplyList(paNo);
 		
+	    int result = alarmService.readAlarm(mesNo);
+	    
 		model.addAttribute("p", p);
 		model.addAttribute("pj", pj);
 		model.addAttribute("list", list);

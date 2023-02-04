@@ -18,7 +18,7 @@ closeBtn.addEventListener('click', function () {
   chatDiv.classList.remove('animate__fadeOutDown');
   chatDiv.style.display = 'none';
   chatClick.style.display = 'block';
-  $('#msg').empty();
+  $('#mg').empty();
 });
 
 

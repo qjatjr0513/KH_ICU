@@ -11,7 +11,7 @@ import java.util.Set;
 import org.springframework.web.socket.WebSocketSession;
 
 public class Sessions {
-	 static Set<WebSocketSession> sessions = Collections.synchronizedSet(new HashSet<WebSocketSession>());
+	 
 	 
 	  static List<WebSocketSession> WSsessions = new ArrayList<>(); 
 		

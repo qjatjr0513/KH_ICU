@@ -21,10 +21,6 @@
     <section id="chatList">
       <h2>실시간 문의</h2>
       <hr />
-      <!-- 로그인시에만 보이는 글쓰기 버튼. -->
-			<c:if test="${ not empty loginUser }">
-				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.fq">작성하기</a>
-			</c:if>
       <table class="table table-hover">
         <thead>
           <tr>

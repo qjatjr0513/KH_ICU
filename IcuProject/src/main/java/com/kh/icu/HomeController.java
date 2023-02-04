@@ -39,9 +39,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping("main")
-	public String main(HttpSession session) {
+	public String main(Model model) {
 		ArrayList<Content> recommend = contentService.recommendContents();
-		session.setAttribute("recommend", recommend);
+		model.addAttribute("recommend", recommend);
 		
 		return "common/main";
 	}
