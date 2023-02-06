@@ -56,7 +56,7 @@ public class BoardController {
          map = boardService.searchSelectList(paramMap);
       }
       model.addAttribute("map", map);
-      System.out.println(map);
+
       return "board/boardListView";
    }
    
