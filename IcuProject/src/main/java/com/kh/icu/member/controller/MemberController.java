@@ -244,7 +244,7 @@ public class MemberController {
 	
 
 	
-	@RequestMapping(value="/logout")
+	@RequestMapping(value="logout")
     public String logout(HttpSession session) {
         String access_Token = (String)session.getAttribute("access_Token");
         String oauthToken = (String)session.getAttribute("signIn");
@@ -276,7 +276,7 @@ public class MemberController {
 	/**
 	 * 네이버 로그인 성공시 callback호출 메소드
 	 */ 
-	@RequestMapping(value = "/navercallback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "navercallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackNaver(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
 		System.out.println("로그인 성공 callbackNaver");
@@ -331,7 +331,7 @@ public class MemberController {
 	 * 마이페이지
 	 */
 	// 카카오 로그인 성공시 callback
-	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
 			throws Exception {
 		System.out.println("로그인 성공 callbackKako");
@@ -388,7 +388,7 @@ public class MemberController {
 	}
 	
 	//SNS 로그인 회원탈퇴
-	@GetMapping("/remove")
+	@GetMapping("remove")
 	public String removeNaver(HttpSession session, HttpServletRequest request, Model model,
 			                  @RequestParam(value="mode", defaultValue= "naver") String mode) {
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
@@ -552,25 +552,15 @@ public class MemberController {
 		
 		if(mode.equals("insert")) {
 			result = memberService.insertImg(image);
-		}else if(mode.equals("update")){
+		}else {
 			result = memberService.updateImg(image); 
-		}else if(mode.equals("delete")){
-			result = memberService.deleteImg(profile.getFileNo());
 		}
 		
-		System.out.println("result : " +result);
-		System.out.println("mode : " +mode);
 		
-		if(result > 0 && !mode.equals("delete")) {
+		if(result > 0) {
+			
 			loginUser.setImage(image);
 			session.setAttribute("loginUser", loginUser);
-			return "redirect:myPage.me";
-		}
-		else if(result > 0 && mode.equals("delete")) {			
-			File path = new File(application.getRealPath("/resources/profileImg"));
-			new File(path+profile.getChangeName()).delete();
-			
-			session.removeAttribute("profile");			
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");

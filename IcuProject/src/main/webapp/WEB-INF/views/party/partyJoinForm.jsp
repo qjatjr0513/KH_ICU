@@ -109,7 +109,8 @@
    				        			        	
    				          if(res == 1){
                       console.log("추가성공");
-                      // alertInfo();		           
+
+                      alertInfo();       
    				          }else{
    				             console.log("Insert Fail!!!");
    				          }
