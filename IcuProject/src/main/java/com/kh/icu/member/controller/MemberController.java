@@ -552,15 +552,25 @@ public class MemberController {
 		
 		if(mode.equals("insert")) {
 			result = memberService.insertImg(image);
-		}else {
+		}else if(mode.equals("update")){
 			result = memberService.updateImg(image); 
+		}else if(mode.equals("delete")){
+			result = memberService.deleteImg(profile.getFileNo());
 		}
 		
+		System.out.println("result : " +result);
+		System.out.println("mode : " +mode);
 		
-		if(result > 0) {
-			
+		if(result > 0 && !mode.equals("delete")) {
 			loginUser.setImage(image);
 			session.setAttribute("loginUser", loginUser);
+			return "redirect:myPage.me";
+		}
+		else if(result > 0 && mode.equals("delete")) {			
+			File path = new File(application.getRealPath("/resources/profileImg"));
+			new File(path+profile.getChangeName()).delete();
+			
+			session.removeAttribute("profile");			
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");

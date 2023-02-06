@@ -42,15 +42,13 @@
                     <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>등록하기</button>
                 </c:if>
                 <c:if test="${!empty profile}">
-                  <input type="hidden" name="mode" value="update"/>                   
+                  <input type="hidden" id="mode" name="mode" value="update"/>                   
                   <input type="hidden" name="profile" value="${profile }"/>  
-                  <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>수정하기</button>
+                  <button id="enrollBtn" type="submit" class="btn btn-primary" disabled onclick="modeUpdate();">수정하기</button>
+	              <button id="deleteBtn" type="submit" class="btn btn-danger" onclick="modeDelete();">삭제하기</button>
                 </c:if>
               </div>
             </form>
-            <c:if test="${!empty profile}">
-              <button id="deleteBtn" type="button" class="btn btn-danger" onclick="deleteBtn()" >삭제하기</button>
-            </c:if>
           </div>
         </div>
         <div id="info">
@@ -73,6 +71,16 @@
     <jsp:include page="../common/chatForm.jsp"/>
     
     <script>
+    	function modeUpdate(){
+			$('#mode').val('update');
+			//console.log($('#mode').val());
+    	}
+    	
+    	function modeDelete(){
+			$('#mode').val('delete');
+			//console.log($('#mode').val());
+    	}
+    	
         function validate() {
           var fileInput = document.getElementById("upfile");
           if (fileInput.val != "" ) {
