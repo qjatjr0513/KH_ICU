@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.common.socket.AlramHandler;
@@ -66,7 +68,7 @@ public class PartyController {
 		int result = partyService.insertParty(p);
 
 		if(result > 0) {
-			return "redirect:findParty.py";
+			return "redirect:findPartyForm.py";
 		} else {
 			model.addAttribute("errorMsg", "파티 등록 실패");
 			return "common/errorPage";
@@ -91,29 +93,33 @@ public class PartyController {
 	
 	// 파티 찾기 (검색)
 	@RequestMapping("/findParty.py")
-	public ModelAndView findParty(ModelAndView mav,
-								HttpServletRequest req,
-								@RequestParam(value="ottList[]") ArrayList<String> ottList,
-								@RequestParam(value="month", defaultValue="") String month) {
+	@ResponseBody
+	public String findParty(@RequestParam(value="ottList[]", defaultValue="") String ottListarr,
+							@RequestParam(value="month", defaultValue="") String month) {
 		
-
+		String ottList = "";
+		
+		if(ottListarr != null) {
+			ottList = String.join(",",ottListarr);
+		}
+		
 		System.out.println("***ottList" + ottList);
 		System.out.println("***month" + month);
-		
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("ottList", ottList);
 		map.put("month", month);
 		 
 		List<Party> list = new ArrayList<>(); 
+		Gson gson = new GsonBuilder().create();
 		
 		list = partyService.findParty(map);
 		
-		mav.addObject("list", list);
-		mav.setViewName("party/findPartyForm");
-		System.out.println("***list(con/list)" + list);
+		String result = gson.toJson(list);
 		
-		return mav;
+		System.out.println("***list(con/list)" + list);
+		System.out.println("***result" + result);
+		return result;
 	}
 	
 	// 파티 디테일
@@ -160,7 +166,7 @@ public class PartyController {
 	 					System.out.println("*** i - 2" + i);
 	 				    model.addAttribute("errorMsg", "이미 가입한 파티입니다.");
 						return "common/errorPage";
-	 			    } 
+	 			    }
 	 		    }
 			} 
 			 

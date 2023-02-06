@@ -27,7 +27,16 @@
         <h4>${p.paTitle}</h4>
       </div>
       <div class="info__partyOwner">
-        <i class="fa-solid fa-user fa-lg">&nbsp;${p.memNickname}</i>
+           <c:choose>
+			   <c:when test="${!empty p.changeName}">
+                    <img id="replyWriter-img" src="${contextPath }${p.filePath }${p.changeName}">
+               </c:when>
+               <c:otherwise>
+                    <i class="fa-solid fa-user fa-3x"></i>
+               </c:otherwise>
+           </c:choose>
+           &nbsp;${p.memNickname}
+     
         <span>파티번호 : ${p.paNo}</span>
         <input type="hidden" name="paNo" value="${p.paNo}">
       </div>
@@ -42,23 +51,7 @@
     <section id="userProfile">
       <div class="containerBox">
         <div class="photo-container">
-          <div class="userInformation">
-            <div class="userPhoto">
-            <c:choose>
-				<c:when test="${!empty p.changeName}">
-                     <img id="replyWriter-img" src="${contextPath }${p.filePath }${p.changeName}">
-                </c:when>
-                <c:otherwise>
-                     <i class="fa-solid fa-user fa-3x"></i>
-                </c:otherwise>
-            </c:choose>
-			</div>
-            <br />
-            <div class="userNickName"> 
-              <h4>(파티장) ${p.memNickname}</h4>
-              <span>${p.startDate} 생성</span>
-            </div>
-          </div>
+
           
           <c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1">
           <div class="userInformation">

@@ -126,7 +126,7 @@
 	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
-		              <c:forEach begin="1" end="${list[count].joinNum+1}" step="1">
+		              <c:forEach begin="1" end="${list[count].joinNum}" step="1">
 		              <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
 		              </c:forEach>
 
@@ -194,28 +194,23 @@
 	 		location.href = "${contextPath}/partyDetail.py/"+paNo;
 	 	};
 	
-	 	
-		let ottList = document.getElementsByName("ottList");
-		ottList.forEach( (item) => {
-			return item.addEventListener("click", searchContent);
-		});
-		
+		let ottList = document.getElementsByClassName("major_btn");
 		let month = document.getElementById("month");
-		month.addEventListener("input", searchContent);
 		
-	
+		for(var i = 0; i < ottList.length; i++){
+			ottList[i].addEventListener("click", searchParty);
+		}
+		month.addEventListener("input", searchParty);
 		
- 		function searchContent(e){
+		
+		
+ 		function searchParty(e){
  			
- 			var ottList = [];
- 			  $(".input__check:checked").each(function(){
- 				 ottList.push($(this).val());
- 			  });
-
- 	 		console.log("searchContent 실행 ! : " +ottList);
- 			  
- 			if($(this).attr('name') == 'ottList'){
- 				console.log("실행");
+ 	 		console.log("searchParty 실행 !");
+ 			
+ 	 		var ottList = [];
+ 	 		
+ 			if($(this).attr('class') == 'major_btn'){
  				if($('input[id=' + $(this).attr('name') + ']').is(':checked') == true){
  	               $('input[id= '+ $(this).attr('name') + ']').prop("checked", false); 
  	               $('h2[id= '+ $(this).attr('name') + ']').removeClass('colorOrange');
@@ -225,14 +220,66 @@
  	               $('h2[id= '+ $(this).attr('name') + ']').addClass('colorOrange');
  	            }
  			}
-			
-	 		console.log("! : " +ottList);
+ 			
+ 	 		 
+		    $('input[name="ottList"]:checked').each(function(i){
+			   ottList.push($(this).val());
+		    });
+		    var month = $("#month").val()
+
+ 	 		console.log("ottList : " + ottList);
+ 	 		console.log("month : " + month);
+
 			$.ajax({
 		           url : '${contextPath}/findParty.py',
 		           data : {ottList : ottList,
-		        	   	   month : $("#month").val()},
-		           success : function(list){
-		        	   console.log("!!잘받음"+list );
+		        	   	   month : month},
+		           dataType : 'json',
+		           success : function(result){
+		        	   	  console.log("result.length : " + result.length);
+		        	   	  console.log("result.length/8 : " + result.length/8);
+		        		  var firstBoxCnt = parseInt(result.length/8);
+
+		        		  $('.carousel-item').remove();
+		        		  
+		        		  var html = "";
+		        		  for(var i = 0; i <= firstBoxCnt; i++){
+		        			   console.log("i : "+i)
+		        		  		if(i > 0){
+		        		  			html += "<div class='carousel-item' data-bs-interval='100000'>";
+		        		  		}else{
+		        					html += "<div class='carousel-item active' data-bs-interval='100000'>";
+		        				}
+		        				for(var j = 2*i; j <= 2*i + 1; j++){
+		        					if(j >= result.length){
+										break;
+									}
+		        					html += "<div class='partyCard'>";
+		        					for(var x = 4*j; x <= 4*j + 3; x++){
+		        						console.log("x : "+x)
+		        						if(x >= result.length){
+											break;
+										}
+		        						html += "<div class='cardBox'>" +
+		        										"<h4><b>" + result[x].ottName + "</b></h4>" +
+		        		                  				"<span>" + result[x].paTitle + "</span> <br />" +
+		        		                  				"<span id='endDate'>" + result[x].endDate + "까지 (" + result[x].leftDate + "일)</span><br/><br/>"
+		        			              	         		
+		        								for(var a = 0; a <= parseInt(result[x].joinNum -1); a++){
+		    		        						html += "<span><i class='fa-solid fa-user fa-lg'></i></span>&nbsp;&nbsp;"
+		        								}
+
+		        								for(var b = 0; b <= (result[x].crewNum - result[x].joinNum -1); b++){
+		    		        						html += "<span><i class='fa-regular fa-user fa-lg'></i></span>&nbsp;&nbsp;"
+		        								}
+												html += "<button class='joinBtn' onclick='movePage(" + result[x].paNo + ");' >참여하기</button>"
+												+ "</div>"
+		        					}
+		        					html += "</div><br>";
+		        				}
+		        				html += "<br></div>";
+		        		  }	
+		        		  $(".carousel-inner").html(html);
 		           }
 			})
 		};
