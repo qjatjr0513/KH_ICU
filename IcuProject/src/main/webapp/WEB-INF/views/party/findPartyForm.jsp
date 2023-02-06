@@ -85,7 +85,6 @@
         <Br>
         <span id="value1">12개월</span>
         <br><br><br>
-        <button>검색</button>
       </div>
     </section>
     </form>
@@ -127,15 +126,14 @@
 	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
-	                  
 		              <c:forEach begin="1" end="${list[count].joinNum+1}" step="1">
 		              <span><i class="fa-solid fa-user fa-lg"></i></span>&nbsp;&nbsp;
 		              </c:forEach>
 
-	                  <c:forEach begin="1" end="${3-list[count].joinNum}" step="1">
+	                  <c:forEach begin="1" end="${list[count].crewNum-list[count].joinNum}" step="1">
 	                  <span><i class="fa-regular fa-user fa-lg"></i></span>&nbsp;&nbsp;
 	                  </c:forEach>
-	                    
+	              
 	                  <button class="joinBtn" onclick="movePage(${list[count].paNo});">참여하기</button>
 	              </div>
 				  <c:set var="count" value="${count+1 }"/>
@@ -187,48 +185,55 @@
 
     <script>
     
-    document.querySelector('#month').addEventListener('input',function(event){
+    	document.querySelector('#month').addEventListener('input',function(event){
       	var gradient_value = 100 / event.target.attributes.max.value;
         event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
-      });
+      	});
     
 		function movePage(paNo){
 	 		location.href = "${contextPath}/partyDetail.py/"+paNo;
 	 	};
-	 	
 	
-		$("#netflix, #watcha, #wavve, #disney, #appleTV").click(function(){
-			console.log("실행");
-			
-			if($('input[id=' + $(this).attr('name') + ']').is(':checked') == true){
-				
-               $('input[id= '+ $(this).attr('name') + ']').prop("checked", false); 
-               $('h2[id= '+ $(this).attr('name') + ']').removeClass('colorOrange');
-               
-            }
-            else{
-               $('input[id='+$(this).attr('name')+']').prop("checked", true);
-               $('h2[id= '+ $(this).attr('name') + ']').addClass('colorOrange');
-               
-            }
+	 	
+		let ottList = document.getElementsByName("ottList");
+		ottList.forEach( (item) => {
+			return item.addEventListener("click", searchContent);
 		});
 		
+		let month = document.getElementById("month");
+		month.addEventListener("input", searchContent);
 		
- 		function searchParty(){
+	
+		
+ 		function searchContent(e){
  			
-			var ottList = [];
-			
-			  $(".input__check:checked").each(function(i){
-				 ottList.push($(this).val());
-			  });
-			  
+ 			var ottList = [];
+ 			  $(".input__check:checked").each(function(){
+ 				 ottList.push($(this).val());
+ 			  });
 
-	 		console.log("! : " +ottList);
+ 	 		console.log("searchContent 실행 ! : " +ottList);
+ 			  
+ 			if($(this).attr('name') == 'ottList'){
+ 				console.log("실행");
+ 				if($('input[id=' + $(this).attr('name') + ']').is(':checked') == true){
+ 	               $('input[id= '+ $(this).attr('name') + ']').prop("checked", false); 
+ 	               $('h2[id= '+ $(this).attr('name') + ']').removeClass('colorOrange');
+ 	            }
+ 	            else{
+ 	               $('input[id='+$(this).attr('name')+']').prop("checked", true);
+ 	               $('h2[id= '+ $(this).attr('name') + ']').addClass('colorOrange');
+ 	            }
+ 			}
 			
+	 		console.log("! : " +ottList);
 			$.ajax({
 		           url : '${contextPath}/findParty.py',
 		           data : {ottList : ottList,
-		        	   	   month : $("#month").val()}
+		        	   	   month : $("#month").val()},
+		           success : function(list){
+		        	   console.log("!!잘받음"+list );
+		           }
 			})
 		};
     </script>

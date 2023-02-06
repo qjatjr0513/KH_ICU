@@ -36,7 +36,13 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.insertParty(sqlSession, p);
 	}
 	
-	// 파티 찾기 (리스트 & 검색)
+	// 파티 찾기 (리스트)
+	@Override
+	public List<Party> findPartyForm(){
+		return partyDao.findPartyForm(sqlSession);
+	};
+	
+	// 파티 찾기 (검색)
 	@Override
 	public List<Party> findParty(HashMap<String, Object> map){
 		return partyDao.findParty(sqlSession, map);

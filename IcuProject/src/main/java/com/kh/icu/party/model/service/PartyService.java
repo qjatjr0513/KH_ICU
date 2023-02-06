@@ -16,6 +16,8 @@ public interface PartyService {
 	
 	public int insertParty(Party p);
 	
+	public List<Party> findPartyForm();
+	
 	public List<Party> findParty(HashMap<String, Object> map);
 	
 	public Party partyDetailForm(int paNo);

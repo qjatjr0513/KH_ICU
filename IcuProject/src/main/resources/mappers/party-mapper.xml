@@ -96,10 +96,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<select id="findPartyForm" resultMap="partyResultSet">
+	<select id="partyList" resultMap="partyResultSet">
 		SELECT P.PA_NO,
 			   O.OTT_NAME,
 			   PA_TITLE,
+			   CREW_NUM,
 			   END_DATE,
 			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
 			   (SELECT COUNT(*)
@@ -117,10 +118,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE P.STATUS = 'N'
 	</select>
 	
+	<select id="findPartyForm" resultMap="partyResultSet">
+		SELECT P.PA_NO,
+			   O.OTT_NAME,
+			   PA_TITLE,
+			   CREW_NUM,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
+			   (SELECT COUNT(*)
+                FROM PARTY_JOIN
+                WHERE PA_NO = P.PA_NO) AS JOIN_NUM,
+                START_DATE
+		FROM PARTY P
+        JOIN OTT O USING(OTT_NO)
+        WHERE P.STATUS = 'N'
+	    ORDER BY START_DATE DESC
+	</select>
+	
 	<select id="findParty" parameterType="map" resultMap="partyResultSet">
 		SELECT P.PA_NO,
 			   O.OTT_NAME,
 			   PA_TITLE,
+			   CREW_NUM,
 			   END_DATE,
 			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE,
 			   (SELECT COUNT(*)
@@ -161,6 +180,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="partyDetailForm" parameterType="int" resultMap="partyResultSet">
        SELECT OTT_NAME,
                PA_TITLE,
+			   CREW_NUM,
                PA_NAME,
                MEM_NICKNAME,
                PA_NO,

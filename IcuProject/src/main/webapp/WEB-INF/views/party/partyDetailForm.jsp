@@ -66,8 +66,8 @@
             <c:choose>
             	<c:when test="${!empty pj.changeName}">
                      <img id="replyWriter-img" src="${contextPath }${pj.filePath }${pj.changeName}">
-                  </c:when>
-                  <c:otherwise>
+                </c:when>
+                <c:otherwise>
                      <i class="fa-solid fa-user fa-3x"></i>
                 </c:otherwise>
             </c:choose>
@@ -78,9 +78,9 @@
               <span>${pj.joinDate} 참여</span>
             </div>
           </div>
-          </c:forEach>
+          </c:forEach>          
           
-          <c:forEach begin="1" end="${3-fn:length(pj)}" step="1">
+          <c:forEach begin="1" end="${p.crewNum - fn:length(pj)}" step="1">
           <div class="userInformation">
             <div class="userPhoto"><i class="fa-solid fa-user fa-3x"></i></div>
             <br />

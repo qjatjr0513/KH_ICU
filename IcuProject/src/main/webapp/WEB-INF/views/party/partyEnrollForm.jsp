@@ -140,8 +140,6 @@
      $('.datepicker').datepicker();
    });
 
-   
-     
      var period = 0;
      var price1 = 0;
      

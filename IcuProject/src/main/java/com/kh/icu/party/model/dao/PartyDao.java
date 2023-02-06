@@ -26,7 +26,12 @@ public class PartyDao {
 		return sqlSession.insert("partyMapper.insertParty", p);
 	}
 	
-	// 파티 찾기 (리스트 & 검색) 
+	// 파티 찾기 (리스트) 
+	public List<Party> findPartyForm(SqlSession sqlSession) {
+		return sqlSession.selectList("partyMapper.findPartyForm");
+	}
+	
+	// 파티 찾기 (검색) 
 	public List<Party> findParty(SqlSession sqlSession, HashMap<String, Object> map) {
 		return sqlSession.selectList("partyMapper.findParty", map);
 	}
@@ -58,7 +63,7 @@ public class PartyDao {
 	}
 
 	public List<Party> partyList(SqlSession sqlSession){
-		return sqlSession.selectList("partyMapper.findPartyForm");
+		return sqlSession.selectList("partyMapper.partyList");
 	}
 	
 	public int endParty(SqlSession sqlSession, int paNo) {

@@ -74,17 +74,27 @@ public class PartyController {
 		
 	}
 	
-	// 파티 찾기 (리스트 & 검색)
-	@RequestMapping("/findParty.py")
-	public ModelAndView findPartyForm(ModelAndView mav,
-								HttpServletRequest req,
-								@RequestParam(value="month", defaultValue="") String month) {
-		String ottListarr [] = req.getParameterValues("ottList");
-		String ottList = "";
+	// 파티 찾기 (리스트)
+	@RequestMapping("/findPartyForm.py")
+	public ModelAndView findPartyForm(ModelAndView mav) {
 		
-		if(ottListarr != null) {
-		 ottList = String.join(",",ottListarr);
-		}
+		List<Party> list = new ArrayList<>(); 
+		
+		list = partyService.findPartyForm();
+		
+		mav.addObject("list", list);
+		mav.setViewName("party/findPartyForm");
+		
+		System.out.println("***list(con/list)" + list);
+		return mav;
+	}
+	
+	// 파티 찾기 (검색)
+	@RequestMapping("/findParty.py")
+	public ModelAndView findParty(ModelAndView mav,
+								HttpServletRequest req,
+								@RequestParam(value="ottList[]") ArrayList<String> ottList,
+								@RequestParam(value="month", defaultValue="") String month) {
 		
 
 		System.out.println("***ottList" + ottList);
