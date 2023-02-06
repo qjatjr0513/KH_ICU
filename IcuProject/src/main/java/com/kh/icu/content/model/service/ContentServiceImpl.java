@@ -2,14 +2,13 @@ package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.common.template.Pagination;
 import com.kh.icu.content.model.dao.ContentDao;
@@ -69,6 +68,11 @@ public class ContentServiceImpl implements ContentService{
 	
 	@Override
 	public int insertReview(Coment c) {
+		
+		// 1) XSS, 개행문자처리
+		c.setCmtContent(Utils.XSSHandling(c.getCmtContent()));
+		c.setCmtContent(Utils.newLineHandling(c.getCmtContent()));
+		
 		return contentDao.insertReview(sqlSession, c);
 	}
 	

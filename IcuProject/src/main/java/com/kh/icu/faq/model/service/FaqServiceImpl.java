@@ -9,8 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.icu.board.model.vo.Board;
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.common.Utils;
 import com.kh.icu.common.template.Pagination;
 import com.kh.icu.faq.model.dao.FaqDao;
 import com.kh.icu.faq.model.vo.Faq;
@@ -58,6 +58,12 @@ public class FaqServiceImpl implements FaqService{
 	
 	@Override
 	public int insertFaq(Faq f) {
+		
+		// 1) XSS, 개행문자처리
+		f.setFaqTitle(Utils.XSSHandling(f.getFaqTitle()));
+		f.setFaqContent(Utils.XSSHandling(f.getFaqContent()));
+		f.setFaqContent(Utils.newLineHandling(f.getFaqContent()));
+		
 		return faqDao.insertFaq(sqlSession, f);
 	}
 	

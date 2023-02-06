@@ -8,12 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.party.model.dao.PartyDao;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.party.model.vo.PartyEvaluate;
 import com.kh.icu.party.model.vo.PartyJoin;
-import com.kh.icu.pay.model.vo.Pay;
 
 
 @Service
@@ -33,6 +33,10 @@ public class PartyServiceImpl implements PartyService{
 	// 파티 만들기
 	@Override
 	public int insertParty(Party p) {
+		
+		// 1) XSS, 개행문자처리
+		p.setPaTitle(Utils.XSSHandling(p.getPaTitle()));
+		
 		return partyDao.insertParty(sqlSession, p);
 	}
 	
@@ -75,6 +79,11 @@ public class PartyServiceImpl implements PartyService{
 	// 댓글 등록
 	@Override
 	public int insertReply(Reply r) {
+		
+		// 1) XSS, 개행문자처리
+		r.setReplyContent(Utils.XSSHandling(r.getReplyContent()));
+		r.setReplyContent(Utils.newLineHandling(r.getReplyContent()));
+		
 		return partyDao.insertReply(sqlSession, r);
 	}
 	

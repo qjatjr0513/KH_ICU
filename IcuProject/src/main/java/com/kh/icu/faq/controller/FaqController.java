@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.Utils;
 import com.kh.icu.faq.model.service.FaqService;
 import com.kh.icu.faq.model.vo.Faq;
 import com.kh.icu.member.model.vo.Member;
@@ -54,6 +55,8 @@ public class FaqController {
 	      if(mode.equals("update")) {
 	         
 	         Faq f = faqservice.selectFaq(fno);
+	         
+	         f.setFaqContent(Utils.newLineClear(f.getFaqContent()));
 	         
 	         model.addAttribute("f", f);
 	      }

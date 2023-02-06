@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.kh.icu.board.model.service.BoardService;
 import com.kh.icu.board.model.vo.Board;
+import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.member.model.vo.Member;
@@ -62,7 +61,7 @@ public class BoardController {
    }
    
    /**
-    * 게시글 등록페이지
+    * 게시글 등록페이지 이동
     */
    @RequestMapping("/enrollForm.bo")
    public String boardEnrollForm(Model model,
@@ -72,6 +71,10 @@ public class BoardController {
       if(mode.equals("update")) {
          
          Board b = boardService.selectBoard(bno);
+         
+     	// 개행문자가 <br>태그로 치환되어있는 상태
+		// textarea에 출력할 것이기 때문에 \n으로 변경해줌.
+         b.setBoardContent(Utils.newLineClear(b.getBoardContent()));
          
          model.addAttribute("b", b);
       }
