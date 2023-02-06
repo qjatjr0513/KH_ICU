@@ -33,10 +33,10 @@ public class Utils {
 	//크로스 사이트 스크립트 공격을 방지하기 위한 메소드
 	public static String XSSHandling(String content) {
 		if(content != null) {
-			content.replaceAll("&", "%amp;");
-			content.replaceAll("<", "&lt;");
-			content.replaceAll(">", "&gt;");
-			content.replaceAll("\"", "&quot;");
+			content = content.replaceAll("&", "%amp;");
+			content= content.replaceAll("<", "&lt;");
+			content = content.replaceAll(">", "&gt;");
+ 			content = content.replaceAll("\"", "&quot;");
 		}
 		return content;
 	}

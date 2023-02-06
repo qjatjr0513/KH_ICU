@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.icu.board.model.dao.BoardDao;
 import com.kh.icu.board.model.vo.Board;
@@ -104,6 +105,7 @@ public class BoardServiceImpl implements BoardService{
 	/**
 	 * 게시글 작성하기
 	 */
+	@Transactional(rollbackFor = {Exception.class}) // 모든종류의 예외에 대해서 발생시 rollback시킴
 	@Override
 	public int insertBoard(Board b) {
 		
