@@ -33,6 +33,9 @@
       referrerpolicy="no-referrer"
     />
 
+ <script src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/css/modaal.min.css" rel="stylesheet" />
+
 <!-- bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"

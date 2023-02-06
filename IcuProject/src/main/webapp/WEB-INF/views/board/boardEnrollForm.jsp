@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 게시판 등록</title>
 
     <!-- css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/06_findId.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/boardDetailView.css" />
 
 <style>
-   #enrollForm>div{width:100%;}
+  
 
 
 </style>
@@ -20,7 +20,9 @@
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <div class="content" style="margin-top: 50px;">
+     <img class='titleImg' src='${contextPath }/resources/images/board3.jpg' >
+    
+   <div class="content">
       <br><br>
       <div class="innerOuter" >
          <c:choose>
@@ -35,12 +37,12 @@
          <form id="enrollForm" action="${contextPath }/insert.bo">
             <div >
                <div>
-                  <label for="title">제목 : </label>
+                  <label class='labelTitle' for="title">제목 : </label>
                   <input type="text" id="title" class="form-control" name="boardTitle" value="${b.boardTitle } " required>
                </div>
                <hr>
                <div>
-                  <label for="writer">작성자 : </label>
+                  <label class='labelTitle' for="writer">작성자 : </label>
                   <input type="text" id="writer" class="form-control" value="${loginUser.memNickname}" name="memNickname" readonly>
                   <input type="hidden" name="boardWriter" value="${loginUser.memNo}">
                </div>
@@ -53,13 +55,13 @@
             <input type="hidden" name="boardNo" value="${empty b.boardNo ? 0 : b.boardNo}"/>
             
             <div align="center">
-               <a href="${contextPath }/list.bo" class="btn btn-danger">취소하기</a>
+               <a href="${contextPath }/list.bo" class="btn btn-danger boardBtn">취소하기</a>
                <c:choose>
                   <c:when test="${b.boardNo eq null}">
-                     <button type="submit" class="btn btn-primary">등록하기</button>
+                     <button type="submit" class="btn btn-primary boardBtn">등록하기</button>
                   </c:when>
                   <c:otherwise>
-                     <button type="submit" class="btn btn-primary">수정하기</button>
+                     <button type="submit" class="btn btn-primary boardBtn2">수정하기</button>
                   </c:otherwise>
                </c:choose>   
             </div>

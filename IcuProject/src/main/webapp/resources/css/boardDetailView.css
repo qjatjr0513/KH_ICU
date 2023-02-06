@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+@import url('main.css');
+
+.titleImg{
+	margin-top: -70px;
+	z-index: -1;
+	position:absolute;
+	width:1900px;
+	height:1700px;
+}	
+
+table * {margin:5px;}
+td{ margin-bottom: 0;}
+.table>tbody { vertical-align: middle !important;}
+
+#replyWriter-img{
+     vertical-align: middle;
+     width: 100%;
+     border-radius: 50%;
+}
+
+#boardWriter-img{
+     vertical-align: middle;
+     width: 45%;
+     border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 0 7px 2px var(--color-orange);
+}
+.content { 
+	width:60%;
+	margin:auto;
+	margin-top:120px;
+	padding:30px;
+	border:none;
+	box-shadow: 0 0 5px 1px lightgray;
+	border-radius : 12px;
+	background-color:white;
+}
+
+.innerOuter{
+	padding:20px;
+}
+
+.innerOuter > h2,
+#writer {
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold;
+}
+
+#writer {
+	width:150px;
+	text-align:center;
+	margin: 10px 0;
+}
+
+.profileImg{
+	width:250px;
+}
+
+.innerOuter > h2 {
+	text-align:center;
+	font-family:'Poor Story', 'cursive';
+	font-size:30px;	
+}
+
+.boardBtn{
+	background-color:var(--color-orange) !important;
+}
+
+.boardBtn, .boardBtn2, .boardBtn3 {
+		border:none !important;
+		font-weight:bold !important;
+		font-family:'Poor Story', 'cursive' !important;
+}
+
+.boardBtn3{
+	background-color: var(--color-purple) !important;
+}
+
+#replyContent {
+	border:none;
+	box-shadow: 0 0 3px 1px gray;
+	width: 970px;
+	margin:auto;
+	padding:10px;
+	border-radius: 8px;
+}
+
+#replyContent:focus {
+	outline:none;
+}
+
+#rWriter, #rContent, #rDate, #replyUpdate, .labelTitle{
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold;
+	font-size:16px;
+}
+
+.form-control:focus{
+	box-shadow: 0 0 0 0.25 var(--color-orange) !important;
+}

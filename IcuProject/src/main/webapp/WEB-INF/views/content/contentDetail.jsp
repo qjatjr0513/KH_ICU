@@ -11,161 +11,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-  	#whole{
-	  	margin: auto;
-		margin-top: 100px;
-		width: 800px;
-		height: 1000px;
-		border: 2px solid black;
-  	}
-  	#infoAndPoster{
-  		width: 100%;
-  		height: 40%;
-  	}
-  	#info{
-  		width: 60%;
-  		height: 100%;
-  		float: left;
-  	}
-  	#poster{
-  		width: 40%;
-  		height: 100%;
-  		float: left;
-  	}
-  	#poster>img{
-  		width: 80%;
-  		height: 80%;
-  		margin-top: 30px;
-  		margin-left: 30px;
-  	}
-  	#preview{
-  		width: 80%;
-  		height: 35%;
-  		margin-left: 80px;
-  	}
-  	#preview>iframe{
-  		margin-top: 20px;
-  	}
-  	#info2{
-  		width: 100%;
-  		height: 25%;
-  	}
-  	.wideLineHeight {
-		line-height: 1.8;
-	}
-	#reviewWrite{
-	  	margin: auto;
-		width: 800px;
-		height: 200px;
-  	}
-  	.star {
-	    position: relative;
-	    font-size: 2rem;
-	    color: #ddd;
-	}
-	.star input {
-	    width: 100%;
-	    height: 100%;
-	    position: absolute;
-	    left: 0;
-	    opacity: 0;
-	    cursor: pointer;
-	}  
-	.star span {
-	    width: 0;
-	    position: absolute; 
-	    left: 0;
-	    color: red;
-	    overflow: hidden;
-	    pointer-events: none;	
-	}
-	.setStar {
-    	position: relative;
-    	font-size: 2rem;
-    	color: #ddd;
-	}
-	.setStar span {
-    	width: 0;
-    	position: absolute; 
-    	left: 0;
-    	color: red;
-    	overflow: hidden;
-    	pointer-events: none;
-	}
-	
-  	textarea{
-  		resize: none;
-  	}
-  	#reviewInput{
-  		height: 100px;
-  		float: left;
-  		margin-bottom: 20px;
-  	}
-  	#submitBtn{
-  		width: 100px;
-  		height: 100px;
-  		margin-bottom: 90px;
-  	}
-  	#review{
-  		margin: auto;
-  		width: 800px;
-  		height: 600px;
-  	}
-  	#writtenReview{
-  		margin-top: 10px;
-  		width: 90%;
-  		height: 120px;
-  	}
-  	#profileArea{
-  		width: 15%;
-  		height: 100%;
-  		margin-bottom: 20px;
-  		float: left;
-  	}
-  	#reviewContent{
-  		width: 80%;
-  		height: 100%;
-  		margin-bottom: 20px;
-  		float: right;
-  	}
-  	#profile{
-  		width: 100%;
-  		height: 80%;
-  	}
-  	#profile>img{
-  		width: 100%;
-  		height: 100%;
-  		border-radius: 50%;
-  	}
-  	#userName{
-  		width: 100%;
-  		height: 20%;
-  	}
-  	#scoreStar{
-  		width: 100%;
-  		height: 40%;
-  	}
-  	#reviewText{
-  		margin-top: 20px;
-  		width: 100%;
-  		height: 55%;
-  	}
-  	.setStarTitle {
-    	position: relative;
-    	font-size: 2rem;
-    	color: #ddd;
-	}
-	.setStarTitle span {
-    	width: 0;
-    	position: absolute; 
-    	left: 0;
-    	color: red;
-    	overflow: hidden;
-    	pointer-events: none;
-	}
-</style>
+<title>ICU - 컨텐츠 상세</title>
+
+
+<!-- css -->
+<link rel="stylesheet" href="${contextPath }/resources/css/contentDetail.css" />
+
 </head>
 <body>
     
@@ -183,27 +34,30 @@
 				<h4 id="scoreAvg">&nbsp;&nbsp;()</h4>
 	    		<br>
 	    		<c:if test="${c.conAge ne 0}">
-	    			<h6>&nbsp;&nbsp;관람 연령 : ${c.conAge }세 미만 관람 불가</h6>
+	    			<h6>&nbsp;&nbsp;<b>관람 연령 : ${c.conAge }세 미만 관람 불가</b></h6>
 	    		</c:if>
 	    		<c:if test="${c.conAge eq 0}">
-	    			<h6>&nbsp;&nbsp;관람 연령 : 전체이용가</h6>
+	    			<h6>&nbsp;&nbsp;<b>관람 연령 : 전체이용가</b></h6>
 	    		</c:if>
-	    		<h6>&nbsp;&nbsp;장르 : 
+	    		<h6>&nbsp;&nbsp;<b>장르 : 
 		    		<c:forEach var="genre" items="${g }" varStatus="status">
-		    			${genre }<c:if test="${status.count ne size}">, </c:if>
+		    			${genre }<c:if test="${status.count ne size}">, </b></c:if>
 		    		</c:forEach>
 	    		</h6>
 	    		<c:if test="${c.conCategory eq 2}">
-	    			<h6>&nbsp;&nbsp;방영 회차 : ${c.conInfo }부작</h6>
+	    			<h6>&nbsp;&nbsp;<b>방영 회차 : ${c.conInfo }부작</b></h6>
 	    		</c:if>
 	    		<c:if test="${c.conCategory eq 1}">
-	    			<h6>&nbsp;&nbsp;상영 시간 : ${c.conInfo }분</h6>
+	    			<h6>&nbsp;&nbsp;<b>상영 시간: ${c.conInfo }분</b></h6>
 	    		</c:if>
-	    		<h6>&nbsp;&nbsp;방영 날짜 : ${c.conDate }</h6>
+	    		<h6>&nbsp;&nbsp;<b>방영 날짜 : ${c.conDate }</b></h6>
 	    	</div>
 	    	<div id="poster">
 	    		<c:if test="${c.filePath eq '' or c.filePath eq null}">
-					<img src="${c.filePath}${c.changeName}"/>
+					<a href="${c.filePath}${c.changeName}" class="imageFocus" data-modaal-desc="${c.conETitle}">
+						<img src="${c.filePath}${c.changeName}"/>
+					</a>
+	
 				</c:if>
 				<c:if test="${c.filePath ne '' and c.filePath ne null}">
 					<img src="${contextPath}/${c.filePath}${c.changeName}"/>
@@ -212,22 +66,26 @@
     	</div>
     	
     	<div id="preview">
-    		<iframe width="600" height="300" src="${c.conPreview }" title="YouTube video player" 
-    		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    	
+    	<a href="${c.conPreview }" class="video aTag">Show</a>
+    	
+   		<iframe class='bTag' width="810" height="300" src="${c.conPreview }" title="YouTube video player" 
+   		frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
     	</div>
     	
     	<div id="info2">
     		<br>
-	    	<h6>&nbsp;&nbsp;감독 : ${c.conDirector }</h6>
-	    	<h6>&nbsp;&nbsp;배우 : ${c.conActor }</h6>
-	    	<h6 class="wideLineHeight">&nbsp;&nbsp;줄거리 : ${c.conSynop }</h6>
+	    	<h6><span class="hTitle">감독</span> : ${c.conDirector }</h6>
+	    	<h6><span class="hTitle">배우</span> : ${c.conActor }</h6>
+	    	<h6 class="wideLineHeight"><span class="hTitle">줄거리</span> : ${c.conSynop }</h6>
 	    	<c:if test="${memId eq 'admin'}">
 	    		<button type="submit" id="updateBtn" class="btn btn-outline-primary btn-lg" onclick="movePage(${c.conNo});">수정하기</button>
 	    		<button type="submit" id="deleteBtn" class="btn btn-outline-primary btn-lg" onclick="deleteContent(${c.conNo});">삭제하기</button>
 	    	</c:if>
     	</div>
-    	
     </div>
+    <br>
+    <section id='review-container'>
     <div id="reviewWrite">
     	<br>
     	<c:if test="${memNo ne 0 }">
@@ -241,7 +99,7 @@
 		<br><br>
 		<div id="reviewInput">
 			<c:if test="${memNo ne 0 }">
-				<textarea cols="75" rows="4" id="cmtContent" placeholder="내용을 입력해주세요" required></textarea>
+				<textarea cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" required></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" onclick="insertReview();">작성</button>
 			</c:if>
 			
@@ -251,21 +109,34 @@
 			</c:if>
 		</div>
 		
-    </div>
 	<div id="review">
 		<div id="writtenReview">
 			<div id="reviewContent">
 				<div id="reviewText">
-					<h5>작성된 리뷰가 존재하지 않습니다</h5>
+					<h5 style='margin-top:200px;'>작성된 리뷰가 존재하지 않습니다</h5>
 				</div>
 			</div>
 		</div>
 	</div>
+    </div>
+    </section>
 	
 	<!-- 실시간 문의 -->
     <jsp:include page="../common/chatForm.jsp"/>
     
     <script>
+
+    $('.video').modaal({
+    	type: 'video'
+    });
+ 
+    $('.imageFocus').modaal({
+        type: 'image',
+        width: 900,
+        height:500
+        
+    });
+    
 		function movePage(cno){
 	 		location.href = '${contextPath}/contentUpdateForm?conNo='+cno;
 	 	}
@@ -301,7 +172,7 @@
 					let html ="";
 					let img = "";
 					for(let comment of result){
-						html += "<div id='profileArea'>" +
+						html += "<div class='profile-container'><div id='profileArea'>" +
 									"<div id='profile'>" +
 										"<img src='"+${contextPath}/+comment.filePath+comment.changeName+"'>" +
 									"</div>" +
@@ -309,7 +180,7 @@
 										"<h5 align='center'>"+comment.memNickname+"</h5>" +
 									"</div>" +
 								"</div>" +
-								"<div id='reviewContent'>" +
+								"<div id='reviewContent'> " +
 									"<div id='scoreStar'>" +
 										"<span class='setStar'>★★★★★" +
 											"<span style='width:"+comment.cmtStar+"%'>★★★★★</span>"+
@@ -318,7 +189,7 @@
 									"<div id='reviewText'>" +
 										"<h5>"+comment.cmtContent+"</h5>"+
 									"</div>"+
-								"</div>";
+								"</div></div>";
 						$("#writtenReview").html(html);
 						starChange();
 					}														
@@ -359,6 +230,10 @@
 				}
     		})
     	}
+    	
+    	
     </script>
+
+
 </body>
 </html>

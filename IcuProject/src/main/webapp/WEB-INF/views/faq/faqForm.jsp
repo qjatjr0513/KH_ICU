@@ -23,7 +23,7 @@
     </div>
 	
 	<br>
-	<div style="text-align: center; height:500px;">
+	<div style="text-align: center; height:700px;">
 	    <p class="faq">
 	        <button class="btn btn-primary btn__account"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
 	            계정 문의
@@ -38,7 +38,7 @@
 	
 	    <section id="collapse-container">
 	      <div class="collapse show" id="collapseExample" >
-	        <div class="card card-body card__display1">
+	        <div class="card card-body card__display1" style="font-family:'Poor Story', 'cursive'">
 	            <h1 style="text-align:left;">계정 문의</h1>
 	            <div class="accordion" id="accordionExample">
 	            
@@ -66,7 +66,7 @@
 	      
 	   <section id="collapse-container">
 	      <div class="collapse" id="collapseExample2" >
-	        <div class="card card-body card__display2">
+	        <div class="card card-body card__display2" style="font-family:'Poor Story', 'cursive'">
 	            <h1 style="text-align:left;">파티 문의</h1>
 	            <div class="accordion" id="accordionExample">
 	            
@@ -95,7 +95,7 @@
 	   
 	    <section id="collapse-container">
 	      <div class="collapse" id="collapseExample3" >
-	        <div class="card card-body card__display3">
+	        <div class="card card-body card__display3" style="font-family:'Poor Story', 'cursive'">
 	            <h1 style="text-align:left;">결제 문의</h1>
 	            <div class="accordion" id="accordionExample">
 	            

@@ -6,58 +6,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-   
-<style>
-   table * {margin:5px;}
-   table {
-      width:100%;
-   }
-   /* div{
-      border: 1px solid black;
-   } */
-   #replyWriter-img{
-        vertical-align: middle;
-        width: 100%;
-        border-radius: 50%;
-   }
-   #boardWriter-img{
-      vertical-align: middle;
-      width: 5%;
-      border-radius: 50%;
-   }
-</style>
+<title>ICU - 자유게시판</title>
 
-
-
+<link rel="stylesheet" href="${contextPath }/resources/css/boardDetailView.css" /> 
     
 </head>
 <body>
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <div class="content" style="margin-top: 50px;">
-      <br><br>
+    <img class='titleImg' src='${contextPath }/resources/images/board3.jpg' >
+    
+   <div class="content">
+      
       <div class="innerOuter">
          <h2>${b.boardTitle }</h2>
-         <div style="float:left;">
+         <div style="float:left; width:300px;">
             <span>
                <c:choose>
                   <c:when test="${!empty b.changeName}">
                      <img id="boardWriter-img" src="${contextPath }${b.filePath }${b.changeName}">
                   </c:when>
                   <c:otherwise>
-                     <i class="fa-solid fa-user fa-lg"></i>
+                     <i class="fa-solid fa-user fa-lg profileImg"></i>
                 </c:otherwise>
                </c:choose>
             </span>
+          
             <span id="writer" class="form-control" name="memNickname">${b.boardWriter}</span>
             <input type="hidden" name="boardWriter" value="${loginUser.memNo}">
          </div>
          <div style="float:right;">
             <c:if test="${not empty loginUser && loginUser.memNickname eq b.boardWriter }">
-               <a class="btn btn-primary" href="${contextPath}/enrollForm.bo?mode=update&bno=${b.boardNo}">수정하기</a>
-               <a class="btn btn-danger" href="${contextPath}/delete.bo?bno=${b.boardNo }">삭제하기</a>
+               <a class="btn btn-primary boardBtn" href="${contextPath}/enrollForm.bo?mode=update&bno=${b.boardNo}">수정하기</a>
+               <a class="btn btn-danger boardBtn2" href="${contextPath}/delete.bo?bno=${b.boardNo }">삭제하기</a>
             </c:if>
          </div>
          <br><br>
@@ -76,7 +58,7 @@
          <br>
          
          <div align="center">
-            <a class="btn btn-primary" href="${contextPath }/list.bo">목록으로</a>
+            <a class="btn btn-primary boardBtn3" href="${contextPath }/list.bo">목록으로</a>
          </div>
          <br><br>
          
@@ -84,12 +66,12 @@
          
          <div class="card mb-2">
             <div class="card-header bg-light">
-                    <i class="fa fa-comment fa"></i> REPLY
+                    <i class="fa fa-comment" style='color:yellowgreen;'></i> <span style='font-family:"Poor Story", "cursive"; font-weight:bold;'>REPLY</span>
             </div>
             <div class="card-body">
                <ul class="list-group list-group-flush">
                    <li class="list-group-item">
-                  <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요"; style="resize: none;"></textarea>
+                  <textarea name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요"; style="resize: none;"></textarea>
                   <c:if test="${not empty loginUser}">
                   <button type="button"  class="btn btn-dark mt-3" onClick="insertReply();">댓글 입력</button>
                   </c:if>
@@ -97,7 +79,7 @@
                </ul>
             </div>
          </div>
-         
+         <br><br>
          <table id="replyArea" class="table" align="center">
             <thead>
                <tr>
@@ -106,8 +88,8 @@
             </thead>
             <tbody>
               <c:forEach var="r" items="${list }" varStatus="i">
-				<tr>
-               <td style="width: 30px;">
+				<tr style='border-top: 1px solid #dee2e6;'>
+               <td style="width: 50px;">
                <c:choose>
                   <c:when test="${!empty r.changeName}">
                      <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
@@ -117,9 +99,9 @@
                 </c:otherwise>
                </c:choose>
                </td>
-               <td id="rWriter">${r.replyWriter }</td>
+               		<td id="rWriter">${r.replyWriter }</td>
 					<td id="rContent">${r.replyContent }</td>
-					<td>${r.createDate }</td>
+					<td id="rDate">${r.createDate }</td>
 					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
 					<c:if test="${r.replyWriter == loginUser.memNickname }">
 					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>

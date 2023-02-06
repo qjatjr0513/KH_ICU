@@ -1,0 +1,247 @@
+@charset "UTF-8";
+
+@import url('main.css');
+
+body { 
+	background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+}
+#whole{
+	margin: auto;
+	margin-top: 100px;
+	width: 1000px;
+	height: 1000px;
+	border:none;
+	box-shadow:0 0 7px 2px gray;
+	padding:40px;
+	border-radius:12px;
+	background-color:white;
+}
+#infoAndPoster{
+	width: 100%;
+	height: 40%;
+}
+#info{
+	width: 60%;
+	height: 100%;
+	float: left;
+	padding-left: 50px;
+}
+#poster{
+	width: 40%;
+	height: 100%;
+	float: left;
+}
+#poster>a>img{
+	width: 60%;
+	height: 80%;
+	margin-top: 30px;
+	margin-left: 30px;
+	box-shadow:0 0 7px 1px gray;
+	border-radius : 8px;
+	cursor:pointer;
+	transition: all 0.2s;
+}
+#poster>a>img:hover{
+	transform:scale(1.1);
+}
+#preview{
+	width: 80%;
+	height: 35%;
+	margin-left: 50px;
+}
+#preview>iframe{
+	margin-top: 20px;
+}
+#info2{
+	width: 90%;
+	height: 25%;
+	padding:20px;
+	margin:auto;
+}
+#info2 > h6, h5, #reviewText {
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold !important;
+	font-size: 18px;
+}
+.wideLineHeight {
+	line-height: 1.8;
+}
+#reviewWrite{
+  	margin: auto;
+	width: 800px;
+	height: 1500px;
+	padding:20px;
+	border:none;
+	border-radius:12px;
+	margin-top:20px;
+ }
+.star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;    
+}
+.star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}  
+.star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;	
+}
+.setStar {
+   	position: relative;
+   	font-size: 2rem;
+   	color: #ddd;
+}
+.setStar span {
+   	width: 0;
+   	position: absolute; 
+   	left: 0;
+   	color: red;
+   	overflow: hidden;
+   	pointer-events: none;
+}
+
+textarea{
+	resize: none;
+	border:1px solid lightgray;
+	border-radius:8px;
+}
+
+#review-container{
+	background-color: white;
+    margin: auto;
+    border-radius: 12px;
+    width: 1000px;
+    height: auto;
+    box-shadow:0 0 7px 2px gray;
+    overflow: hidden;
+}
+
+#cmtContent {
+	border:none;
+	box-shadow: 0 0 5px 1px lightgray;
+	padding:5px;
+}
+#cmtContent:focus{
+	outline:none;
+	box-shadow:0;
+}
+
+#reviewInput{
+	height: 100px;
+	float: left;
+	margin-bottom: 20px;
+}
+#average{
+	font-family: 'Poor Story', 'cursive';
+	font-weight:bold;
+	font-size:20px;
+}
+#submitBtn{
+	width: 92px;
+	height: 120px;
+	margin-bottom: 117px;
+	border:none;
+	box-shadow:0 0 5px solid var(--color-orange);
+	font-family: 'Poor Story', 'cursive';
+	font-weight:bold;
+	font-size:20px;
+	background-color:beige;
+}
+#submitBtn:hover {
+	background-color:var(--color-orange) !important;
+}
+#review{
+	margin: auto;
+	width: 800px;
+	height: 600px;
+}
+#writtenReview{
+	margin-top: 10px;
+	width: 90%;
+	height: 120px;
+}
+#profileArea{
+	width: 15%;
+	height: 100%;	
+}
+#reviewContent{
+	width: 80%;
+	height: 100%;
+	margin-bottom: 20px;
+}
+#profile{
+	width: 100%;
+	height: 80%;
+	text-align:center;
+}
+#profile>img{
+	width: 80%;
+	height: 90%;
+	border-radius: 50%;
+}
+#userName{
+	width: 100%;
+	height: 20%;
+}
+#scoreStar{
+	width: 100%;
+	height: 40%;
+}
+#reviewText{
+	margin-top: 20px;
+	width: 100%;
+	height: 55%;
+}
+
+.setStarTitle {
+ 	position: relative;
+ 	font-size: 2rem;
+ 	color: #ddd;
+}
+.setStarTitle span {
+   	width: 0;
+   	position: absolute; 
+   	left: 0;
+   	color: red;
+   	overflow: hidden;
+   	pointer-events: none;
+}
+.hTitle{
+	color:var(--color-orange);
+}
+.profile-container{
+	padding:20px;
+	margin:2px;
+	display:flex;
+	justify-content: space-between;
+	align-item:center;
+	width:750px;
+	height:150px;
+	border-bottom : 1px solid gray;
+
+	background-color:white;
+}
+.profile-container:first-child{
+	margin-top: 140px;
+}
+.aTag{
+	margin-top:20px;
+	width:810px;
+	height:300px;
+	background-color:beige;
+	position:absolute;
+	opacity:0;
+}
+.bTag{
+	z-index:-3
+}
