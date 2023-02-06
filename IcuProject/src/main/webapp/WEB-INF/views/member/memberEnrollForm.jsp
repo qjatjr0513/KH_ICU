@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" name="memPwd" required/></td>
+          <td><input type="password" id="memPwd" name="memPwd" placeholder="영문+숫자 조합 8자리 이상" required/></td>
           <td></td>
           <td></td>
         </tr>
@@ -283,10 +283,16 @@
               $('#chkNotice').attr('color', '#FF0000');
               
             } else{
-              $('#chkNotice').html('비밀번호 일치');
-              $('#chkNotice').attr('color', '#01DF01');             
+	          if(!regExp.test($("#memPwd").val()) || !regExp.test($("#memPwdCheck").val())) {
+				$("#chkNotice").html("영문+숫자로 8자 입력");
+				$("#chkNotice").attr("color", "FF0000");
+			  }
+	          else{
+              	$('#chkNotice').html('비밀번호 일치');
+              	$('#chkNotice').attr('color', '#01DF01');  
+	          }
             }
-
+            
         });
     });
     
