@@ -1,8 +1,8 @@
 'use strict';
 
 // Make navbar transparent when it is on the top
-const navbar = document.querySelector('#navbar');
-const navbarHeight = navbar.getBoundingClientRect().height;
+var navbar = document.querySelector('#navbar');
+var navbarHeight = navbar.getBoundingClientRect().height;
 
 document.addEventListener('scroll', () => {
   //   console.log(window.scrollY);

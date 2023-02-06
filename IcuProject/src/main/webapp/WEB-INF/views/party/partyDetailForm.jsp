@@ -160,7 +160,8 @@
 	    });
 	    
 		// 댓글 
-	    const replyWriter = "${loginUser.memNo}";
+	    const replyWriterNo = "${loginUser.memNo}";
+	    const replyWriter = "${loginUser.memNickname}";
         const memNickname = "${p.memNickname}";
         const paNo = "${p.paNo}";
         const paName = "${p.paName}";	
@@ -182,8 +183,8 @@
                  	console.log("party::socket>>", socket);
                  	
                  	if(socket){
-                 		if(replyWriter != memNickname ){
-                 		let socketMsg = "party,"+ replyWriter + "," + memNickname + "," +paName + "," + paNo;
+                 		if(replyWriterNo != paNo ){
+                 		let socketMsg = "party,"+ replyWriterNo+ "," + replyWriter + "," + memNickname + "," +paName + "," + paNo;
                  		console.log("sssssssmsg>>", socketMsg);
                  		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
                  		socket.send(socketMsg)                        			

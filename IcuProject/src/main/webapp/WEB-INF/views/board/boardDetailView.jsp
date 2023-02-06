@@ -131,37 +131,10 @@
             </tbody>
          </table>
          
-         <!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title fs-5" id="exampleModalLabel">댓글 수정창</h4>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		      </div>
-		      <div class="modal-body">
-		        <div class="form-group">
-                  <label for="replyNo">댓글 번호</label>
-                  <input class="form-control" id="replyNo" name="replyNo" readonly>
-	              </div>
-	              <div class="form-group">
-	                  <label for="replyText">댓글 내용</label>
-	                  <input class="form-control" id="replyText" name="replyText" placeholder="댓글 내용을 입력해주세요">
-	              </div>
-	              <div class="form-group">
-	                  <input type="hidden" class="form-control" name="replyWriter" readonly>
-	              </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
-		        <button type="button" class="btn btn-success">수정</button>
-		        <button type="button" class="btn btn-danger">삭제</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+
             <script>
-            const replyWriter = "${loginUser.memNo}";
+            const replyWriterNo = "${loginUser.memNo}";
+            const replyWriter = "${loginUser.memNickname}";
             const boardWriter = "${b.boardWriter}";
             const boardNo = "${b.boardNo}";
             const boardWriterNo = "${b.boardWriterNo}";	
@@ -182,7 +155,7 @@
                         	
                         	if(socket){
                         		if(replyWriter != boardWriter ){
-                        		let socketMsg = "reply,"+ replyWriter + "," + boardWriter + "," +boardWriterNo + "," + boardNo;
+                        		let socketMsg = "reply,"+replyWriterNo + "," + replyWriter + "," + boardWriter + "," +boardWriterNo + "," + boardNo;
                         		console.log("sssssssmsg>>", socketMsg);
                         		// websocket에 보내기!! (reply, 댓글작성자, 게시글 작성자, 게시글 번호)
                         		socket.send(socketMsg)                        			
@@ -229,23 +202,13 @@
 	        	}
          });
          
-         /*$("#replyUpdate").click(function () {
-
-        	 
-        	 var replyNo = document.getElementById("rno"+i).value;
-       	     var replyText = document.getElementById("rContent"+i).innerText;
-       	     var replyWriter = document.getElementById("rWriter"+i).innerText;
-       	     
-       	     $("#replyNo").val(replyNo);
-       	     $("#replyText").val(replyText);
-       	     $("#replyWriter").val(replyWriter);
-
-        	});*/
             </script>
             
       </div>
    </div>
    
+   <!-- 실시간 문의 -->
+   <jsp:include page="../common/chatForm.jsp"/>
    
 </body>
 </html>

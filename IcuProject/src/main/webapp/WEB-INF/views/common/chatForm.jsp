@@ -46,10 +46,10 @@
        </div>
      </section>
 </body>
-     <script src="resources/js/02_mainPage.js?1" defer></script>
+     <script src="${contextPath }/resources/js/02_mainPage.js" defer></script>
      
      <script>
-     let memNo = ${loginUser.memNo};
+     let memNo = "${loginUser.memNo}";
      let chatRoomNo = 0;
      $("#chatBot").click(function(){
      	

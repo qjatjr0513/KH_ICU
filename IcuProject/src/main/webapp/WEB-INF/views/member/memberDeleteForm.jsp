@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,12 +48,25 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.<br><br>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SNS계정은 비밀번호 설정 후 탈퇴하실 수 있습니다.</span>
       <br><br>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        확인
-      </button>
+      <c:choose>
+		<c:when test="${loginUser.snsType eq 'N' }">
+			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove'">
+				회원탈퇴
+			</button>
+		</c:when>
+		<c:when test="${loginUser.snsType eq 'K' }">
+			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove?mode=kakao'">
+				회원탈퇴
+			</button>
+		</c:when>
+		<c:otherwise>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				회원탈퇴
+			</button>
+		</c:otherwise>
+	 </c:choose>
     </div>
     <br>
 
@@ -80,6 +94,8 @@
     </div>
   </div>
 
+	<!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
 
 </body>
 <script> 

@@ -297,3 +297,16 @@ button {
 	left:0;
 	border:2px solid black;
 }
+
+#at{
+	text-decoration: none;
+    color: var(--color-black);
+    font-family: 'Poor Story', 'cursive';
+    font-weight: var(--weight-bold);
+}
+
+#none{
+	text-align: center;
+	font-family: 'Poor Story', 'cursive';
+	font-weight: var(--weight-bold);
+}

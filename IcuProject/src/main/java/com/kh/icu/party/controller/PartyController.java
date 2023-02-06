@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
+import com.kh.icu.common.socket.AlramHandler;
+import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
@@ -32,9 +36,12 @@ public class PartyController {
 	@Autowired
 	private PartyService partyService;
 	
-	 @Autowired
-	 private AlarmService alarmService;
+	@Autowired
+	private AlarmService alarmService;
 	
+	@Autowired
+	private AlramHandler alramHandler;
+	 
 	@RequestMapping("partyEnroll.py")
 	public String partyEnrollForm() {
 		return "party/partyEnrollForm";
@@ -309,6 +316,7 @@ public class PartyController {
 	public String partyBadEvaluate(PartyEvaluate pe, @RequestParam("paNo") int paNo, HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		Party p = partyService.partyDetailForm(paNo);
 		int memNo = loginUser.getMemNo();
 		pe.setMemNo(memNo);
 		pe.setPaNo(paNo);
@@ -325,7 +333,31 @@ public class PartyController {
 			System.out.println("******result : "+ result);
 			if(result > 0 ) {
 				redirectAttributes.addFlashAttribute("flag4","showAlert4"); // 싫어요에 성공하셨습니다.
-				partyService.blackCheck(pe);
+				int result2 = partyService.blackCheck(pe);
+				
+				if(result2 > 0) {
+					int sendId = 1;
+					String sendNickname = "관리자";
+					String receiveNickname = p.getMemNickname();
+					int receiveId = p.getPaName();
+					
+					String message = "black,"+ sendId + "," + sendNickname + "," + receiveNickname + "," +receiveId + "," + paNo;
+					
+					//Map<String, WebSocketSession> userSessions = new HashMap<>();
+					WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+					System.out.println(receiveSession);
+					
+					
+					TextMessage msg = new TextMessage(message);
+					
+					try {
+						alramHandler.handleTextMessage(receiveSession, msg);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}			
+				}
+					
 				return "redirect:LastParty.py";
 			} else {
 				redirectAttributes.addFlashAttribute("flag5","showAlert5"); // 싫어요에 실패하셨습니다.

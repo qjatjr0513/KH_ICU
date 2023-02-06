@@ -1,0 +1,130 @@
+@import url('main.css');
+
+/* chatBot */
+.chatBot {
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  width: 55px;
+  height: 55px;
+  font-size: 35px;
+  line-height: 20px;
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 0 3px 1px orangered;
+}
+.chatBot:hover {
+  transform: scale(1.2);
+}
+
+/* 채팅 */
+.chat_wrap {
+  /* border: 1px solid #999; */
+  border-radius: 20px;
+  width: 350px;
+  height: 650px;
+  padding: 5px;
+  font-size: 13px;
+  color: #333;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: none;
+  background-color: rgb(244, 244, 250);
+  box-shadow: 0 0 7px 1px rgb(138, 157, 176);
+  z-index: 3;
+}
+.chat_header {
+  border-radius: 15px;
+}
+.chat_header > h5 {
+  padding: 15px;
+  border-radius: 15px;
+  background: linear-gradient(45deg, rgb(157, 34, 157), Orange);
+  color: var(--color-white);
+  font-weight: bold;
+}
+.close__chatDiv {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.chat_header h5 {
+  text-align: center;
+}
+.chat_wrap .inner {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-y: scroll;
+  height: 440px;
+  /* 관리자 채팅과 나누면 500정도로 해도됨 */
+}
+.chat_wrap .item {
+  margin-top: 15px;
+}
+.chat_wrap .item:first-child {
+  margin-top: 0px;
+}
+.chat_wrap .item .box {
+  display: inline-block;
+  max-width: 180px;
+  position: relative;
+}
+.chat_wrap .item .box::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 9px;
+  border-top: 0px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #fff;
+}
+.chat_wrap .item .box .msg {
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: left;
+  font-size: 16px;
+  word-break: break-word;
+}
+.chat_wrap .item .box .time {
+  font-size: 8px;
+  color: #999;
+  position: absolute;
+  right: -75px;
+  bottom: 5px;
+  width: 70px;
+}
+.chat_wrap .item.mymsg {
+  text-align: right;
+}
+.chat_wrap .item.mymsg .box::before {
+  left: auto;
+  right: -7px;
+  border-left: 8px solid #fee600;
+  border-right: 0;
+}
+.chat_wrap .item.mymsg .box .msg {
+  background: #fee600;
+}
+.chat_wrap .item.mymsg .box .time {
+  right: auto;
+  left: -75px;
+}
+.chat_wrap .item .box {
+  transition: all 0.3s ease-out;
+  margin: 0 0 0 20px;
+  opacity: 0;
+}
+.chat_wrap .item.mymsg .box {
+  transition: all 0.3s ease-out;
+  margin: 0 20px 0 0;
+}
+.chat_wrap .item.on .box {
+  margin: 0;
+  opacity: 1;
+}

@@ -50,10 +50,11 @@ public class PartyDateScheduler {
 					oneWeek.add(p.get(i));
 					
 					int sendId = oneWeek.get(i).getPaName();
+					String sendNickname = oneWeek.get(i).getPaMemNickname();
 					String receiveNickname = oneWeek.get(i).getMemNickname();
 					int receiveId = oneWeek.get(i).getMemNo();
 					int paNo =  oneWeek.get(i).getPaNo();
-					String message = "endParty,"+ sendId + "," + receiveNickname + "," + receiveId + "," + paNo;
+					String message = "endParty,"+ sendId + ","  + sendNickname + ","  + receiveNickname + "," + receiveId + "," + paNo;
 					System.out.println(message);
 					TextMessage msg = new TextMessage(message);
 				

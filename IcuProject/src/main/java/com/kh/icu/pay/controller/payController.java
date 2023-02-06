@@ -96,17 +96,19 @@ public class payController {
 	
 	@RequestMapping("remitConfirm.pe")
 	public String remitConfirm(int payNo, HttpSession session, @RequestParam("paName") int paName, 
-								@RequestParam("paMemNickName") String paMemNickName) {
+								@RequestParam("paMemNickName") String paMemNickName,
+								@RequestParam("memNickName") String memNickName) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = payService.remitConfirm(payNo);
 		System.out.println("payNo :" + payNo);
 		
 		
 		int sendId = loginUser.getMemNo();
+		String sendNickname = memNickName;
 		String receiveNickname = paMemNickName;
 		int receiveId = paName;
 		
-		String message = "pay,"+ sendId + "," + receiveNickname + "," +receiveId + "," + payNo;
+		String message = "pay,"+ sendId + ","+ sendNickname + "," + receiveNickname + "," +receiveId + "," + payNo;
 		
 		//Map<String, WebSocketSession> userSessions = new HashMap<>();
 		WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);

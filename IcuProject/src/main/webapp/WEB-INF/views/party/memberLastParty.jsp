@@ -231,6 +231,10 @@
 	    </section>
       </div>
     </section>
+    
+    <!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
 	<script>
 		function likeBtn(paNo){
 			console.log(paNo+"번방 실행됨");

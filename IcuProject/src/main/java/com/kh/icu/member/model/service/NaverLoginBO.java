@@ -21,8 +21,8 @@ public class NaverLoginBO {
 	//response_type: 인증 과정에 대한 구분값, code로 값이 고정
 	//redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩) 애플리케이션을 등록할 때 Callback URL에 설정한 정보
 	//state: 애플리케이션이 생성한 상태 토큰
-    private final static String CLIENT_ID = "D3frxn4eOMrspc2MJIkO"; // 클라이언트 아이디
-    private final static String CLIENT_SECRET = "Ra9evAXL7G"; // 클라이언트 시크릿
+    public final static String CLIENT_ID = "D3frxn4eOMrspc2MJIkO"; // 클라이언트 아이디
+    public final static String CLIENT_SECRET = "Ra9evAXL7G"; // 클라이언트 시크릿
     private final static String REDIRECT_URI = "http://localhost:8088/icu/navercallback";
     private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */

@@ -65,7 +65,6 @@
 	<!-- 네이버 로그인  -->
     <div id="naver_id_login" style="text-align:center">
       <a id="naverlogin" href="${url}">
-	  <!-- <img width="223" src="resources/images/naver_btn.png" style="height:60px; width:400px;"/> -->
 	  <img src="resources/images/naverLogo.png" /><span>네이버 로그인</span>
   	  </a>
     </div>

@@ -19,6 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="createDate" column="CREATE_DATE"/>
 	</resultMap>
 	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM CHAT_ROOM 
+		WHERE STATUS = 'N'
+	</select>
+	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">
 		SELECT
 			CHAT_ROOM_NO,

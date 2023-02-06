@@ -1,11 +1,16 @@
 package com.kh.icu.member.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +31,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
+import com.kh.icu.common.socket.AlramHandler;
+import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.service.NaverLoginBO;
 import com.kh.icu.member.model.service.kakaoLoginBO;
@@ -38,13 +48,14 @@ import com.kh.icu.member.model.vo.Member;
 @Controller
 public class MemberController {
 	
-	
+	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder; // 암호화
 	
 	@Autowired
-	private HttpSession session;
+	private AlramHandler alramHandler;
 	
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
@@ -60,10 +71,7 @@ public class MemberController {
 	}
 	
 	@Autowired
-	public MemberController(MemberService memberService, BCryptPasswordEncoder bcryptPasswordEncoder) {
-		this.memberService = memberService;
-		this.bcryptPasswordEncoder = bcryptPasswordEncoder;
-	}
+	private ServletContext application;
 	  
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -258,10 +266,8 @@ public class MemberController {
             session.removeAttribute("profile");
         }else{
             System.out.println("oauthToken is null");
-            //return "redirect:/";
         }
         
-        //return "index";
         return "redirect:/";
     }
 	
@@ -312,6 +318,7 @@ public class MemberController {
 			session.setAttribute("loginUser", userInfo);
             session.setAttribute("signIn", apiResult);
             session.setAttribute("profile", profile);
+            session.setAttribute("oauthToken", oauthToken);
         }
 
 		System.out.println("getMemNickname : "+ m.getMemNickname());
@@ -330,6 +337,7 @@ public class MemberController {
 		System.out.println("로그인 성공 callbackKako");
 		OAuth2AccessToken oauthToken;
 		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
+		
 		// 로그인 사용자 정보를 읽어온다
 		apiResult = kakaoLoginBO.getUserProfile(oauthToken);
 		
@@ -360,6 +368,7 @@ public class MemberController {
 			session.setAttribute("loginUser", userInfo);
             session.setAttribute("signIn", apiResult);
             session.setAttribute("profile", profile);
+            session.setAttribute("oauthToken", oauthToken);
         }
 
 		return "redirect:main";
@@ -377,6 +386,107 @@ public class MemberController {
 		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
 		return (String) "K"+(int)(Math.floor(num));
 	}
+	
+	//SNS 로그인 회원탈퇴
+	@GetMapping("/remove")
+	public String removeNaver(HttpSession session, HttpServletRequest request, Model model,
+			                  @RequestParam(value="mode", defaultValue= "naver") String mode) {
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
+		OAuth2AccessToken oauthToken = (OAuth2AccessToken) session.getAttribute("oauthToken");
+		String apiUrl = "";
+		if(mode.equals("naver")) {
+			apiUrl = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id="+NaverLoginBO.CLIENT_ID+
+					"&client_secret="+NaverLoginBO.CLIENT_SECRET+"&access_token="+oauthToken.getAccessToken()+"&service_provider=NAVER";
+			try {
+				String res = requestToServer(apiUrl);
+				model.addAttribute("res", res); //결과값 찍어주는용
+				int result = memberService.deleteMember(memId);
+				if(result > 0) {
+					session.invalidate();				
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else if(mode.equals("kakao")){
+			String access_Token = oauthToken.getAccessToken();
+
+			apiUrl = "https://kapi.kakao.com/v1/user/unlink";
+			
+			unlink(apiUrl, access_Token);
+			int result = memberService.deleteMember(memId);
+			if(result > 0) {
+				session.invalidate();			
+			}
+		}
+		
+	    return "redirect:/";
+	}
+
+	
+	//카카오 회원탈퇴 서버연결
+	public void unlink(String apiURL, String access_Token) {
+	    try {
+	        URL url = new URL(apiURL);
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        conn.setRequestMethod("POST");
+	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+	        
+	        int responseCode = conn.getResponseCode();
+	        System.out.println("responseCode : " + responseCode);
+	        
+	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	        
+	        String result = "";
+	        String line = "";
+	        
+	        while ((line = br.readLine()) != null) {
+	            result += line;
+	        }
+	        System.out.println(result);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+		
+	//네이버 회원탈퇴 서버연결
+	 private String requestToServer(String apiURL) throws IOException {
+		    String headerStr = null;
+		 
+		    URL url = new URL(apiURL);
+		    HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		    con.setRequestMethod("GET");
+		    System.out.println("header Str: " + headerStr);
+		    con.setRequestProperty("Authorization", headerStr);
+
+		    int responseCode = con.getResponseCode();
+		    BufferedReader br;
+		    System.out.println("responseCode="+responseCode);
+		    if(responseCode == 200) { // 정상 호출
+		      br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		    } else {  // 에러 발생
+		      br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		    }
+		    String inputLine;
+		    StringBuffer res = new StringBuffer();
+		    while ((inputLine = br.readLine()) != null) {
+		      res.append(inputLine);
+		    }
+		    br.close();
+		    if(responseCode==200) {
+		    	String new_res=res.toString().replaceAll("&#39;", "");
+				 return new_res; 
+		    } else {
+		      return null;
+		    }
+		  }
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
@@ -486,8 +596,7 @@ public class MemberController {
 		
 	}
 	
-	@Autowired
-	private ServletContext application;
+	
 	
 	/**
 	 * 회원정보수정 페이지
@@ -604,11 +713,33 @@ public class MemberController {
 	 * 관리자 블랙리스트 해제
 	 */
 	@RequestMapping("blackCancel.me")
-	public String blackCancel(int memNo) {
-		
+	public String blackCancel(int memNo, String memNickname, HttpSession session) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		int result = memberService.blackCancel(memNo);
 		
-		System.out.println("memNo :" + memNo);
+		if(result > 0) {
+			int sendId = loginUser.getMemNo();
+			String sendNickname = loginUser.getMemNickname();
+			String receiveNickname = memNickname;
+			int receiveId = memNo;
+			
+			String message = "cancle,"+ sendId + "," + sendNickname + "," + receiveNickname + "," +receiveId + "," + memNo;
+			
+			//Map<String, WebSocketSession> userSessions = new HashMap<>();
+			WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+			System.out.println(receiveSession);
+			
+			
+			TextMessage msg = new TextMessage(message);
+			
+			try {
+				alramHandler.handleTextMessage(receiveSession, msg);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
+
 		
 		return "redirect:memBlackListForm.me";
 		

@@ -120,6 +120,9 @@
 	      </div>
 	    </section>
 	</div>
+	<!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
 <script>
     const cardDisplay1 = document.querySelector('#collapseExample');
     const cardDisplay2 = document.querySelector('#collapseExample2');

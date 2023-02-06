@@ -51,6 +51,7 @@
           <td>${m.enrollDate}</td>
           <td><button type="submit" class="btn btn-danger ">취소</button></td>
           <input type="hidden" name="memNo" value="${m.memNo}">
+          <input type="hidden" name="memNickname" value="${m.memNickname}">
           </form>
         </tr>
         </c:forEach>

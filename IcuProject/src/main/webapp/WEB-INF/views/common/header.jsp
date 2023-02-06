@@ -60,7 +60,7 @@
     />
 
     <!-- 웹사이트에 아이콘 추가 -->
-    <link rel="icon" type="image/png" href="resources/images/navbarLogo.png" />
+    <link rel="icon" type="image/png" href="${contextPath }/resources/images/navbarLogo.png" />
 
     <!-- Font Awesome cdn -->
     <link
@@ -70,6 +70,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
     
 
     <!-- Google Fonts -->
@@ -81,15 +82,12 @@
 
     <!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/main.css" />
-
+	<link rel="stylesheet" href="${contextPath }/resources/css/chat.css" />
     
 
     <!-- sweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     
-    <!-- Toastr -->
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
    
@@ -167,8 +165,8 @@
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
               <ul class="dropdown-menu" id="msg">
-	              <c:if test="${empty list}">
-	              	<li><p>알림이 없습니다.</p></li>
+	              <c:if test="${empty alist}">
+	              	<li><p id="none">알림이 없습니다.</p></li>
 	              </c:if>
               </ul>
             </div>
@@ -177,9 +175,20 @@
           </c:choose>
         
       </ul>
-      
+
     </nav>
-      <!-- <div id="socketAlert" class="alert alert-success" role="alert" style="display:none; margin-top:90px;"></div> -->
+		<div class="toast-container position-fixed bottom-0 end-0 p-3">
+		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+		  <div class="toast-header" style="background-color:#dee2e6">
+		    <img src="${contextPath }/resources/images/navbarLogo.png" width="50" class="rounded me-2">
+		    <strong class="me-auto">알림</strong>
+		    <small class="text-muted"></small>
+		    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		  </div>
+		  <div class="toast-body" style="background-color:#f8f9fa;text-align: center; border-bottom-left-radius: inherit; border-bottom-right-radius: inherit;">
+		  </div>
+		</div>
+		</div>
    
    
     <!-- sockjs  -->
@@ -204,38 +213,18 @@
          
          ws.onmessage = function (event){
             console.log("ReceiveMessage:", event.data+'\n');
-            /* let $socketAlert =  $('div#socketAlert');
-            $socketAlert.html(event.data);
-            $socketAlert.css('display', 'block');
-            
-            setTimeout( function(){
-               $socketAlert.css('display', 'none');
-            }, 5000);*/
-            
-            toastr.options = {
-                  "closeButton": false,
-                    "debug": false,
-                    "newestOnTop": false,
-                    "progressBar": true,
-                    "positionClass": "toast-bottom-right",
-                    "preventDuplicates": false,
-                    "onclick": null,
-                    "showDuration": "100",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "5000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                     };
-            toastr.options.onclick = function() { location.href="${contextPath}/list.bo" }
-            toastr.success(event.data);
+             let $liveToast =  $('.toast-body');
+             let $currentTime =  $('.text-muted');
+            $liveToast.html(event.data);
+            $currentTime.html(time());
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+      	    toast.show();
          };
          
          ws.onclose = function (event) { 
             console.log('Info: connection closed.');
-            //setTimeout(function(){ connect();}, 1000); // retry connection()!!
          };
          ws.onerror = function (err) { console.log('Error:;', err);};
          
@@ -247,11 +236,11 @@
        		type: 'POST',
        		dataType: 'json',      // 호출 했을 때 결과타입
 			contentType: "application/json",
-               success : function(list){
+               success : function(alist){
             	   //location.reload();
             	   // list로 반복문 돌려서 동적으로 html요소추가
             	   var html = "";
-            	   for(let a of list){
+            	   for(let a of alist){
       				let tableCd = a.tableCd;
       				
       				if($.trim(tableCd) == "B"){
@@ -269,13 +258,19 @@
            })
       	};
       
-      
-      
+      	var time = function () {
+      	  var date = new Date();
+      	  var hh =  addZero(date.getHours());
+      	  var mm =  addZero(date.getMinutes());
+      	  var apm = hh > 12 ? '오후' : '오전';
+      	  var ct = apm + ' ' + hh + ':' + mm + '';
+      	  return ct;
+      	}; 
      
       
      	   
     	   
    </script>
-   <script src="resources/js/main.js" defer></script>
+   <script src="${contextPath }/resources/js/main.js" defer></script>
 </body>
 </html>

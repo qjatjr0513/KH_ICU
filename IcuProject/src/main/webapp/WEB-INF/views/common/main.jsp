@@ -320,7 +320,7 @@
     
     <jsp:include page="../common/footer.jsp"/>
     
-     <script src="resources/js/main.js" defer></script>
+     
    </div>
    
    <script>

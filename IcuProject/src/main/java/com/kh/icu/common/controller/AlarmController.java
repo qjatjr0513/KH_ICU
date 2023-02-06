@@ -29,11 +29,11 @@ public class AlarmController {
 		List<Alarm> alarmList = alarmService.selectAlarmList(memNo);
 		System.out.println("??????????"+alarmList);
 		model.addAttribute("alarmList",alarmList);
-		String list = new Gson().toJson(alarmList);
-		System.out.println(list);
+		String alist = new Gson().toJson(alarmList);
+		System.out.println(alist);
 		//model.addAttribute("list", list);
 		// 1. 모델로 alarmList
-		return list;
+		return alist;
 	}
 	
 }

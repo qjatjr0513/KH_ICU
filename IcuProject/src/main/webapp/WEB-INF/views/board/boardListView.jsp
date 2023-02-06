@@ -138,6 +138,9 @@
 	
 	</div>
 	
+	<!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
 	<script>
 		 $(function(){
 	         if('${flag}' == 'showAlert'){

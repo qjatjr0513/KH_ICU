@@ -19,7 +19,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
    
- <!-- 결제관리 -->
+	<!-- 결제관리 -->
     <section id="payList">
       <h2>결제 관리</h2>
       <hr />
@@ -44,7 +44,7 @@
           </c:if>
           <c:forEach var="p" items="${list }" >
             <tr>
-              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}" method="post">
+              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}&memNickName=${p.memNickName}" method="post">
               <th scope="row">${p.payDate}</th>
               <td>${p.paTitle}</td>
               <td>${p.memName}(${p.memNickName})</td> 

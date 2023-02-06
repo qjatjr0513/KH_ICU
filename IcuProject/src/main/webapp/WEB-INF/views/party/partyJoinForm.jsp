@@ -62,6 +62,9 @@
       </div>
     </section>
 
+	<!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
     <script>
       let paNo = "${p.paNo}";
       let totalPrice = "${p.totalPrice}";

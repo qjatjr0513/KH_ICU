@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="pi" value="${map.pi }"/>
+<c:set var="list" value="${map.list }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +35,7 @@
 					<c:choose>
 						
 						<%-- 채팅목록이 없을때 --%>
-						<c:when test="${empty chatRoomList}">
+						<c:when test="${empty list}">
 							<tr>
 								<td colspan="3">존재하는 채팅방이 없습니다.</td>
 							</tr>
@@ -41,7 +43,7 @@
 						
 						<%-- 채팅목록이 있을경우 --%>
 						<c:otherwise>
-							<c:forEach var="chatRoom" items="${chatRoomList }">
+							<c:forEach var="chatRoom" items="${list }">
 								<tr>
 									<td>${chatRoom.chatRoomNo }</td>
 									<td>
@@ -59,33 +61,32 @@
 				</tbody>
 			</table>
 
-      <c:set var = "url" value="cpage="/>
-			<!-- 페이지 이동기능 구현 -->
-			<div id="pagingArea">
-				<ul class="pagination">
-					<c:choose>
-						<c:when test="${pi.currentPage eq 1 }">
-							<li class="page-item disabled"><a class="page-link" href="#">&lt</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&lt</a></li>
-						</c:otherwise>
-					</c:choose>
-					
-					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
-						<li class="page-item"><a class="page-link" href="${url }${item }${sUrl}">${item}</a></li>
-					</c:forEach>
-					
-					<c:choose>
-						<c:when test="${pi.currentPage eq pi.maxPage }">
-							<li class="page-item disabled"><a class="page-link" href="#">&gt</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&gt</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-    
+       <c:set var = "url" value="?cpage="/>
+      <div aria-label="Page navigation example" class="pagination">
+        <ul class="pagination">
+          <c:choose>
+            <c:when test="${pi.currentPage eq 1 }">
+              <li class="page-item disabled" ><a class="page-link" aria-label="Previous" href="#">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item" ><a class="page-link" aria-label="Previous" href="${url }${pi.currentPage -1 }">&laquo;</a></li>
+            </c:otherwise>
+          </c:choose>
+          
+          <c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+          <li class="page-item"><a class="page-link" href="${url }${item }">${item}</a></li>
+          </c:forEach>
+
+          <c:choose>
+            <c:when test="${pi.currentPage eq pi.maxPage }">
+              <li class="page-item disabled"><a class="page-link" aria-label="Next" href="#">&raquo;</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item"><a class="page-link" aria-label="Next" href="${url }${pi.currentPage +1 }">&raquo;</a></li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+      </div>
+    </section>
 </body>
 </html>

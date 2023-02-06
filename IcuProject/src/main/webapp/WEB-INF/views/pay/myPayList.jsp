@@ -81,5 +81,9 @@
         </ul>
       </div>
     </section>
+    
+    <!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
   </body>
 </html>

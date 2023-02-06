@@ -244,6 +244,8 @@
       
     </section>
     
+    <!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
     
     <script src="resources/js/memberCurrentParty.js" defer></script>
 </body>

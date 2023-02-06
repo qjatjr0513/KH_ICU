@@ -62,18 +62,19 @@ public class AlramHandler extends TextWebSocketHandler {
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = msg.split(",");
 			System.out.println(strs);
-			if(strs != null && strs.length == 5) {
+			if(strs != null && strs.length == 6) {
 				String cmd = strs[0];
 				String sendId = strs[1];
-				String receiveNickname = strs[2];
-				String receiveId = strs[3];
-				String refTno = strs[4];
+				String sendNickname = strs[2];
+				String receiveNickname = strs[3];
+				String receiveId = strs[4];
+				String refTno = strs[5];
 				
 				
 				
 				WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
 				System.out.println("============"+receiveSession);
-				if("reply".equals(cmd) && !sendId.equals(receiveSession)) {
+				if("reply".equals(cmd) && !sendId.equals(receiveId)) {
 					String content = "게시글에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
 					a.setMemNo(Integer.parseInt(receiveId));
@@ -84,7 +85,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href='/icu/detail.bo/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/detail.bo/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("party".equals(cmd) && !sendId.equals(receiveId)) {
@@ -98,11 +99,11 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("pay".equals(cmd) && !sendId.equals(receiveId)) {
-					String content = receiveNickname+"님이 송금하였습니다!";
+					String content = sendNickname+"님이 송금하였습니다!";
 					Alarm a = new Alarm();
 					a.setMemNo(Integer.parseInt(receiveId));
 					a.setSendMemNo(Integer.parseInt(sendId));
@@ -112,7 +113,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href=''>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href=''>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("endParty".equals(cmd) && !sendId.equals(receiveId)) {
@@ -126,7 +127,35 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
+					}
+				}else if("black".equals(cmd) && !sendId.equals(receiveId)) {
+					String content = "블랙리스트로 변경되었습니다!";
+					Alarm a = new Alarm();
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(refTno));
+					a.setTableCd("M");
+									
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a id='at' href=''>"+content+"</a>");
+						receiveSession.sendMessage(tmpMsg);						
+					}
+				}else if("cancle".equals(cmd) && !sendId.equals(receiveId)) {
+					String content = "블랙리스트가 해제되었습니다!";
+					Alarm a = new Alarm();
+					a.setMemNo(Integer.parseInt(receiveId));
+					a.setSendMemNo(Integer.parseInt(sendId));
+					a.setMesContent(content);
+					a.setRefTno(Integer.parseInt(refTno));
+					a.setTableCd("M");
+									
+					int result = alarmService.insertBoardAlarm(a);
+					if(result > 0 && receiveSession != null) {
+						TextMessage tmpMsg = new TextMessage("<a id='at' href=''>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}

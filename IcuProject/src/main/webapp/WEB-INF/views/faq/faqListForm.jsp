@@ -61,35 +61,33 @@
 				</tbody>
 			</table>
 
-      <c:set var = "url" value="cpage="/>
-			<!-- 페이지 이동기능 구현 -->
-			<div id="pagingArea">
-				<ul class="pagination">
-					<c:choose>
-						<c:when test="${pi.currentPage eq 1 }">
-							<li class="page-item disabled"><a class="page-link" href="#">&lt</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage -1 }${sUrl}">&lt</a></li>
-						</c:otherwise>
-					</c:choose>
-					
-					<c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
-						<li class="page-item"><a class="page-link" href="${url }${item }${sUrl}">${item}</a></li>
-					</c:forEach>
-					
-					<c:choose>
-						<c:when test="${pi.currentPage eq pi.maxPage }">
-							<li class="page-item disabled"><a class="page-link" href="#">&gt</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="${url }${pi.currentPage +1 }${sUrl}">&gt</a></li>
-						</c:otherwise>
-					</c:choose>
-				</ul>
-			</div>
-		</div>
-		<br><br>
+      <c:set var = "url" value="?cpage="/>
+      <div aria-label="Page navigation example" class="pagination">
+        <ul class="pagination">
+          <c:choose>
+            <c:when test="${pi.currentPage eq 1 }">
+              <li class="page-item disabled" ><a class="page-link" aria-label="Previous" href="#">&laquo;</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item" ><a class="page-link" aria-label="Previous" href="${url }${pi.currentPage -1 }">&laquo;</a></li>
+            </c:otherwise>
+          </c:choose>
+          
+          <c:forEach var="item" begin="${pi.startPage }" end="${pi.endPage }">
+          <li class="page-item"><a class="page-link" href="${url }${item }">${item}</a></li>
+          </c:forEach>
+
+          <c:choose>
+            <c:when test="${pi.currentPage eq pi.maxPage }">
+              <li class="page-item disabled"><a class="page-link" aria-label="Next" href="#">&raquo;</a></li>
+            </c:when>
+            <c:otherwise>
+              <li class="page-item"><a class="page-link" aria-label="Next" href="${url }${pi.currentPage +1 }">&raquo;</a></li>
+            </c:otherwise>
+          </c:choose>
+        </ul>
+      </div>
+	</section>
 		
 	<script>
 	

@@ -83,6 +83,10 @@
    			</c:forEach>
    		</section>
     </c:if>
+    
+    <!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
+    
   <script>
 		function movePage(cno){
 	 		location.href = '${contextPath}/detail?conNo='+cno;

@@ -1,18 +1,30 @@
 package com.kh.icu.chat.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.chat.model.vo.ChatMessage;
 import com.kh.icu.chat.model.vo.ChatRoom;
 
 @Repository
 public class ChatDao {
 	//채팅방 목록 조회
-	public List<ChatRoom> selectChatRoomList(SqlSession sqlSession){
-		return sqlSession.selectList("chattingMapper.selectChatRoomList");
+	public ArrayList<ChatRoom> selectChatRoomList(SqlSession sqlSession, PageInfo pi){
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("chattingMapper.selectChatRoomList", null , rowBounds);
+	}
+	
+	public int selectListCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("chattingMapper.selectListCount");
 	}
 	
 	//채팅방 참여

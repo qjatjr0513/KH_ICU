@@ -304,6 +304,9 @@
     </div>
     
     </section>
+	
+	<!-- 실시간 문의 -->
+    <jsp:include page="../common/chatForm.jsp"/>
 
 	<script>
 	 
@@ -576,6 +579,5 @@
 		}
 	</script>
 	
-	<script src="resources/js/main.js" defer></script>
 </body>
 </html>

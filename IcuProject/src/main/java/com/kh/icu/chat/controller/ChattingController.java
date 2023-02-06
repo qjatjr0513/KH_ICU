@@ -1,6 +1,8 @@
 package com.kh.icu.chat.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,9 +35,14 @@ public class ChattingController {
 	
 	// 채팅방 목록 조회
 	@GetMapping("/chat/chatRoomList")
-	public String selectChatRoomList(Model model) {
-		List<ChatRoom> crList = chatservice.selectChatRoomList();
-		model.addAttribute("chatRoomList", crList);
+	public String selectChatRoomList(Model model, @RequestParam(value="cpage", defaultValue = "1") int currentPage,
+			                         @RequestParam Map<String, Object> paramMap) {
+		
+		Map<String, Object> map = new HashMap();
+		
+		map = chatservice.selectChatRoomList(currentPage);
+		
+		model.addAttribute("map", map);
 		return "chat/chatRoomList";
 	}
 	
