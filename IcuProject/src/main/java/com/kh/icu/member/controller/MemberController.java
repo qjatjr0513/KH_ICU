@@ -335,6 +335,8 @@ public class MemberController {
 	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
 			throws Exception {
 		System.out.println("로그인 성공 callbackKako");
+		System.out.println("code : "+code );
+		System.out.println("state : "+state);
 		OAuth2AccessToken oauthToken;
 		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
 		

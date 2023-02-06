@@ -30,7 +30,7 @@
           <hr />
         </div>
         <div class="contents__manage">
-          <h2><a href="${contextPath }/contentListForm.co">컨텐츠 관리</a></h2>
+          <h2><a href="${contextPath }/contentListForm">컨텐츠 관리</a></h2>
           <hr />
         </div>
         <div class="faq__manage">

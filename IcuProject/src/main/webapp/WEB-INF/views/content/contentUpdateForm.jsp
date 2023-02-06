@@ -21,7 +21,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
-    <form id="contentUpdate" action="${contextPath }/contentUpdate.co" encType="multipart/form-data" method="post">
+    <form id="contentUpdate" action="${contextPath }/contentUpdate" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
       <h2>컨텐츠 등록</h2>

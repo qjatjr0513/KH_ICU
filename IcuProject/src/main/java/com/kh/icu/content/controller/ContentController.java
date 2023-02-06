@@ -187,7 +187,7 @@ public class ContentController {
 		return result;
 	}
 	
-	@RequestMapping("/contentListForm.co")
+	@RequestMapping("/contentListForm")
 	public String contentList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model
 							,@RequestParam Map<String, Object> paramMap) {
 		
@@ -224,7 +224,7 @@ public class ContentController {
 		return "content/contentListForm";
 	}
 	
-	@RequestMapping("/contentEnrollForm.co")
+	@RequestMapping("/contentEnrollForm")
 	public String contentEnrollForm() {			
 		return "content/contentEnrollForm";
 	}
@@ -248,7 +248,7 @@ public class ContentController {
 		return "content/contentUpdateForm";
 	}
 	
-	@RequestMapping("/contentEnroll.co")
+	@RequestMapping("/contentEnroll")
 	public String contentEnroll(Content c, 
 								@RequestParam("genre") ArrayList<String> genre,
 								Image image,
@@ -313,7 +313,7 @@ public class ContentController {
 		
 	}
 	
-	@RequestMapping("/contentUpdate.co")
+	@RequestMapping("/contentUpdate")
 	public String contentUpdate(Content c, 
 								@RequestParam("genre") ArrayList<String> genre,
 								Image image,

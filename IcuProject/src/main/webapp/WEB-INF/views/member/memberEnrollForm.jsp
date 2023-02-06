@@ -277,15 +277,14 @@
         });
 
         $('#memPwdCheck').keyup(function(){
-
+        	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
             if($('#memPwd').val() != $('#memPwdCheck').val()){
               $('#chkNotice').html('비밀번호 불일치');
               $('#chkNotice').attr('color', '#FF0000');
               
             } else{
               $('#chkNotice').html('비밀번호 일치');
-              $('#chkNotice').attr('color', '#01DF01');
-             
+              $('#chkNotice').attr('color', '#01DF01');             
             }
 
         });

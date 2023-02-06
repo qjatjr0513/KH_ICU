@@ -25,7 +25,7 @@
       <h2>컨텐츠 관리</h2>
       <hr />
 
-      <button class="contents__enrollBtn" onclick="location.href='${contextPath}/contentEnrollForm.co'">새 컨텐츠 등록</button>
+      <button class="contents__enrollBtn" onclick="location.href='${contextPath}/contentEnrollForm'">새 컨텐츠 등록</button>
       <br /><br /><br />
 
       <table class="table table-hover">
