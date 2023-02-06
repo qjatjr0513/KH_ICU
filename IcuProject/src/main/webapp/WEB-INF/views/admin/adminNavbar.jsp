@@ -37,6 +37,10 @@
           <h2><a href="${contextPath }/faqList.fq">FAQ 관리</a></h2>
           <hr />
         </div>
+        <div class="notice__manage">
+          <h2><a href="${contextPath }/noticeList.bo">공지사항 관리</a></h2>
+          <hr />
+        </div>
         <div class="pay__manage">
           <h2><a href="${contextPath }/payManageListForm.pe">결제 관리</a></h2>
           <hr />

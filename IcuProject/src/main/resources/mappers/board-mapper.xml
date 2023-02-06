@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="boardMapper">
 	<resultMap type="board" id="boardResultSet">
-		<id column="Board_NO" property="boardNo"/>
+		<id column="BOARD_NO" property="boardNo"/>
 		<result column="TABLE_CD" property="tableCd"/>
 		<result column="MEM_NICKNAME" property="boardWriter"/>
 		<result column="BOARD_TITLE" property="boardTitle"/>
@@ -52,8 +52,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			COUNT
 		FROM BOARD B
 		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
-		WHERE B.STATUS = 'N'
+		WHERE B.STATUS = 'N' AND ROLE = 'C'
 		ORDER BY B.CREATE_DATE DESC
+	</select>
+	
+	<select id="selectNotice" resultMap="boardResultSet">
+		SELECT 
+			BOARD_NO,
+			MEM_NICKNAME,
+			BOARD_TITLE,
+			CREATE_DATE,
+			COUNT
+		FROM (
+				SELECT 
+					BOARD_NO, 
+					M.MEM_NICKNAME, 
+					BOARD_TITLE, 
+					CREATE_DATE, 
+					COUNT 
+				FROM BOARD B 
+				JOIN MEMBER M ON(BOARD_WRITER = MEM_NO)
+				WHERE B.STATUS = 'N' AND ROLE = 'A' ORDER BY CREATE_DATE DESC
+			)
+		<![CDATA[WHERE ROWNUM <= 3]]>
 	</select>
 	
 	<!--
@@ -61,8 +82,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	<select id="selectListCount" resultType="int">
 		SELECT COUNT(*)
-		FROM BOARD 
-		WHERE STATUS = 'N'
+		FROM BOARD B
+		JOIN MEMBER M ON(BOARD_WRITER = MEM_NO)
+		WHERE B.STATUS = 'N' AND ROLE = 'C'
 	</select>
 	
 	<!--
@@ -223,4 +245,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SET STATUS = 'Y'
         WHERE REPLY_NO = #{rno}
 	</update>
+	
+	<select id="selectNoticeList" resultMap="boardResultSet">
+		SELECT
+			BOARD_NO,
+			BOARD_TITLE,
+			CREATE_DATE
+		FROM BOARD B
+		LEFT JOIN MEMBER M ON (B.BOARD_WRITER = M.MEM_NO)
+		WHERE B.STATUS = 'N' AND ROLE = 'A'
+		ORDER BY B.CREATE_DATE DESC
+	</select>
 </mapper>

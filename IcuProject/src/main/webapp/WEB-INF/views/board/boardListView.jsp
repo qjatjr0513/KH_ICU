@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="list" value="${map.list }"/>
 <c:set var="pi" value="${map.pi }"/>
+<c:set var="notice" value="${map.notice }"/>
+
 <c:if test="${!empty param.condition }">
 	<c:set var="sUrl" value="&condition=${param.condition}&keyword=${param.keyword }"/>
 </c:if>
@@ -46,6 +48,17 @@
 					</tr>
 				</thead>
 				<tbody>
+					
+					<c:forEach var="n" items="${notice }">
+						<tr onclick="movePage(${n.boardNo });">
+							<td class="bno">공지사항</td>
+							<td>${n.boardTitle }</td>
+							<td>${n.boardWriter }</td>
+							<td>${n.createDate }</td>
+							<td>${n.count}</td>
+						</tr>
+					</c:forEach>
+					
 					<c:if test="${empty list }">
 						<tr id="tableEmpty">
 							<td colspan="5">게시글이 없습니다..</td>

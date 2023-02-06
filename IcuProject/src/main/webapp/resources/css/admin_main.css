@@ -19,6 +19,7 @@
 
 .contents__manage a,
 .faq__manage a,
+.notice__manage a,
 .pay__manage a,
 .inquiry__manage a {
   color: var(--color-orange);

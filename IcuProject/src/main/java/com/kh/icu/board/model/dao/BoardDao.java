@@ -113,7 +113,13 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteReply", rno);
 	}
 	
+	public ArrayList<Board> selectNoticeList(SqlSession sqlSession, PageInfo pi){
+		return (ArrayList) sqlSession.selectList("boardMapper.selectNoticeList", pi);
+	}
 	
+	public ArrayList<Board> selectNotice(SqlSession sqlSession){
+		return (ArrayList) sqlSession.selectList("boardMapper.selectNotice");
+	}
 	
 	
 	

@@ -71,7 +71,7 @@ public interface BoardService {
 	public int deleteReply(int rno);
 	
 	
-	
+	public Map<String, Object> selectNoticeList(int currentPage);
 	
 	
 	

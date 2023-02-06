@@ -53,6 +53,9 @@ public class BoardServiceImpl implements BoardService{
 		ArrayList<Board> list = boardDao.selectList(sqlSession, pi);
 		map.put("list", list);
 		
+		ArrayList<Board> notice = boardDao.selectNotice(sqlSession);
+		map.put("notice", notice);
+		
 		return map;
 	}
 	
@@ -176,7 +179,22 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
-	
+	public Map<String, Object> selectNoticeList(int currentPage){
+		Map<String, Object> map = new HashMap();
+
+		int listCount = selectListCount();
+			
+		int pageLimit = 10;
+		int boardLimit = 10;
+						
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		map.put("pi", pi);
+			
+		ArrayList<Board> list = boardDao.selectNoticeList(sqlSession, pi);
+		map.put("list", list);
+			
+		return map;
+	}
 	
 	
 	

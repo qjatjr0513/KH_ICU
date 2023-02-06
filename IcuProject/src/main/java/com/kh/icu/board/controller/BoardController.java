@@ -56,7 +56,7 @@ public class BoardController {
          map = boardService.searchSelectList(paramMap);
       }
       model.addAttribute("map", map);
-      
+      System.out.println(map);
       return "board/boardListView";
    }
    
@@ -67,7 +67,7 @@ public class BoardController {
    public String boardEnrollForm(Model model,
                            @RequestParam(value="mode", required =false, defaultValue = "insert") String mode,
                            @RequestParam(value="bno", required =false, defaultValue = "0") int bno) {
-      
+
       if(mode.equals("update")) {
          
          Board b = boardService.selectBoard(bno);
@@ -91,6 +91,8 @@ public class BoardController {
                         @RequestParam(value="mode", required=false, defaultValue="insert") String mode,
                         RedirectAttributes redirectAttributes) {
       int result =0;
+      Member loginUser = (Member)session.getAttribute("loginUser");	
+      
       if(mode.equals("insert")) {
          result = boardService.insertBoard(b);
       }else {
@@ -98,8 +100,13 @@ public class BoardController {
       }
       
       if(result > 0) {
-    	  redirectAttributes.addFlashAttribute("flag2","showAlert2");
-         return "redirect:list.bo";
+    	 redirectAttributes.addFlashAttribute("flag2","showAlert2");
+    	 if(loginUser.getRole().equals("A")) {
+    		 return "redirect:noticeList.bo";
+    	 }
+    	 else {
+    		 return "redirect:list.bo";
+    	 }
       } else {
          model.addAttribute("errorMsg", "게시글 등록 실패");
          return "common/errorPage";
@@ -222,5 +229,17 @@ public class BoardController {
 	      }
 	   
 	   
+   }
+   
+   @RequestMapping("/noticeList.bo")
+   public String selectList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model) {
+      
+      Map<String, Object> map = new HashMap();
+         
+      map = boardService.selectNoticeList(currentPage);
+
+      model.addAttribute("map", map);
+      
+      return "board/noticeListForm";
    }
 }
