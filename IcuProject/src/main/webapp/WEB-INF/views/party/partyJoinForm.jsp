@@ -17,7 +17,7 @@
     <jsp:include page="../common/header.jsp"/>
     
     <!-- 파티신청 div -->
-    <section id="application">
+    <section id="application" style="position:relative">
       <div class="app-container">
         <h2>파티 신청</h2>
       </div>
@@ -75,6 +75,15 @@
       let email = "${loginUser.email}";
       let phone = "${loginUser.phone}";
 
+      var height = $(document).height();
+      var width  = window.document.body.clientWidth;
+      
+      var layer = "<div id='icon-box' style='display:absolute; height: 100%; min-width: 100%; position:fixed; background-color: rgba( 255, 255, 255, 0.5 ); z-index:99; left:0; top:0;'></div>";
+      var image = '';
+      image += "<div id='loadingImg'>";
+      image += "<img src='resources/images/spinner.gif' style='display:block; vertical-align: middle; postion:relative; margin: 0px auto; margin-top:400px;'/>";
+      image += "</div>";
+      
       $(document).ready(function(){
    	   	  
     	var IMP = window.IMP;
@@ -83,6 +92,7 @@
    		
    		$("#payBtn").click(function(e){
    			//결제요청
+   			
    			IMP.request_pay({ // param
                 pg: "html5_inicis",
                 pay_method: "card",
@@ -114,8 +124,16 @@
    				          }else{
    				             console.log("Insert Fail!!!");
    				          }
-   				        },
-   				        error:function(){
+   				        },beforeSend:function(){
+   				        	$('body').append(layer);
+   				   			$('#icon-box').append(image);
+   				   			$('#icon-box').show();
+   				   			$('#loadingImg').show();
+   				        },complete:function(){
+   				        	$('#icon-box, #loadingImg').hide();
+   				        	$('#icon-box, #loadingImg').empty();  
+   				        }
+   				        ,error:function(){
    				          console.log("Insert ajax 통신 실패!!!");
    				        }
    					}) //ajax
