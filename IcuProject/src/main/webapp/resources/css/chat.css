@@ -15,6 +15,7 @@
   cursor: pointer;
   z-index: 2;
   box-shadow: 0 0 3px 1px orangered;
+  transition:all 0.3s;
 }
 .chatBot:hover {
   transform: scale(1.2);
@@ -33,7 +34,7 @@
   right: 30px;
   bottom: 30px;
   display: none;
-  background-color: rgb(244, 244, 250);
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
   box-shadow: 0 0 7px 1px rgb(138, 157, 176);
   z-index: 3;
 }
@@ -43,9 +44,10 @@
 .chat_header > h5 {
   padding: 15px;
   border-radius: 15px;
-  background: linear-gradient(45deg, rgb(157, 34, 157), Orange);
+  background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
   color: var(--color-white);
   font-weight: bold;
+  box-shadow:0 0 5px var(--color-blue);
 }
 .close__chatDiv {
   position: absolute;
@@ -56,12 +58,12 @@
   text-align: center;
 }
 .chat_wrap .inner {
-  background-color: #e0e0e0;
+  background-color: white;
   border-radius: 5px;
   padding: 10px;
   overflow-y: scroll;
-  height: 440px;
-  /* 관리자 채팅과 나누면 500정도로 해도됨 */
+  height: 470px;
+  box-shadow: 0 0 3px 1px lightgrey
 }
 .chat_wrap .item {
   margin-top: 15px;
@@ -88,7 +90,7 @@
   border-radius: 10px;
   padding: 8px;
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
   word-break: break-word;
 }
 .chat_wrap .item .box .time {
@@ -127,4 +129,16 @@
 .chat_wrap .item.on .box {
   margin: 0;
   opacity: 1;
+}
+
+.chatMemo {
+	font-family: 'Poor Story', 'cursive';
+	font-weight:600;
+}
+
+#userMsg:focus{
+	outline:none;
+}
+.chatMemoText{
+	color:var(--color-orange);
 }

@@ -13,6 +13,14 @@
   border-radius: 15px;
   box-shadow: 0 0 5px 1px rgb(162, 162, 162);
 }
+.input-group{
+	flex-wrap:nowrap !important;
+}
+#search{
+	border:2px solid lightgray;
+	border-top-left-radius:8px !important;
+	border-bottom-left-radius:8px !important;
+}
 .sizing {
   width: 550px !important;
   height: 50px;

@@ -9,6 +9,7 @@
 #main__logo {
     text-align: center;
     margin-top: 80px;
+    margin-left:140px;
 }
 input {
 height: 30px;
@@ -20,74 +21,69 @@ box-shadow: 0 0 3px 1px var(--color-orange);
   
 #whole{
 	width: 50%;
-    margin: auto;
+    margin-left:550px;
     padding: 30px;
     border: none;
     box-shadow: 0 0 5px 1px lightgrey;
     border-radius: 12px;
     background-color: white;
 }
+#viewAndEnroll{
+	width:500px;
+	height:300px;
+}
+
+
 #imgAndInfo{
 width: 100%;
 height: 80%;
 display: flex;
 justify-content: center;
 align-items: center;
-/* background-color: cadetblue; */
+
 }
 #img{
-/* width: 40%; */
-/* height: 100%; */
-/* background-color: aquamarine   ;  */
 padding: 20px;
 }
-#info{
-/* width: 60%; */
-/* height: 100%; */
-/* background-color: blueviolet; */
-padding: 17px;
-margin-top: auto;
-margin-left: 10%;
+
+.info{
+	font-size:22px;
 }
-#view{
+#info{
+padding: 17px;
+}
+
+.viewImg{
+	 width: 300px;
+    height: 300px;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    position: relative;
-    left: -6px;
-    top: -20px;
 }
 
 #info input{
 /* border: 1px solid white; */
 }
-#enroll{
-    position: relative;
-}
-#enrollBtn{
-    position: absolute;
-    right: 65px;
-    bottom: -56px;
-}
+
+
 #updateButton {
-/* border: 2px solid black; */
-/* margin: auto; */
-position:relative;
-right:40%;
+	font-family:'Poor Story', 'cursive';
+
+text-align:center;
+width:200px;
+margin:auto;
 background-color: var(--color-purple);
 border-radius: 8px;
-margin-top: 400px;
+
 }
 #updateButton > a{
     color:white;
+    	font-weight:bold ;
 }
 
 #preview{
     border-radius: 50%;
-    width: 100px;
-    position: relative;
-    left: -6px;
-    top: -20px;
+    width: 300px;
+	height:300px;
+	border:1px solid lightgray;
     
 }
 

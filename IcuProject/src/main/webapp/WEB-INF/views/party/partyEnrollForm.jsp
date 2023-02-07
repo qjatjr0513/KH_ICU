@@ -56,7 +56,7 @@
 	      <tr>
 	        <td>모집 인원</td>
 	        <td>
-	          <select name="crewNum" id="crewNum">
+	          <select class='pl' name="crewNum" id="crewNum" style='width:100px;'>
 	            <option value="1">1명</option>
 	            <option value="2">2명</option>
 	            <option value="3">3명</option>

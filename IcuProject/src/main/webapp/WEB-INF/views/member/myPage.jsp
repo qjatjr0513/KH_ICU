@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 마이페이지</title>
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/myPage.css" />
@@ -17,7 +17,7 @@
     
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../member/myNavbar.jsp"/>
-    
+    <br><br>
 	<!-- Logo -->
     <div id="main__logo">
       <img src="resources/images/navbarLogo.png" />
@@ -31,23 +31,23 @@
           <c:choose>
           
           <c:when test="${!empty profile}">
-          	<img class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
+          	<img class='viewImg' src="${contextPath }${profile.filePath }${profile.changeName}">
           </c:when>
-          <c:otherwise>
-          	<i class="fa-solid fa-user fa-3x"></i>
-          </c:otherwise>
+
           </c:choose>
           </div>
-          <div id="enroll">
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
+          <div id="enroll">
+          	<c:if test='${empty profile }'>
+              <img id="preview" /> <Br>
+             </c:if>
             <label class="input-file-button" for="upfile">
 			  업로드
 			</label>
-              <img id="preview" />
               <input type="file" id="upfile" class="form-control" name="upfile" onchange="readURL(this);" style="display:none"/>
               <input type="hidden" name="originName" value="${image.originName }"/>
 			        <input type="hidden" name="changefile" value="${image.changeName }"/>
-              <div align="center">
+              <div class='deleteBtn'>
                 <c:if test="${empty profile}">
                     <button id="enrollBtn" type="submit" class="btn btn-primary" disabled>등록하기</button>
                 </c:if>
@@ -58,8 +58,8 @@
 	              <button id="deleteBtn" type="submit" class="btn btn-danger" onclick="modeDelete();">삭제하기</button>
                 </c:if>
               </div>
-            </form>
           </div>
+            </form>
         </div>
         <div id="info">
           <h4><span class="info">${loginUser.memNickname}</span></h4><br>
@@ -70,10 +70,10 @@
           <span class="info">가입일 : </span><span class="info">${loginUser.enrollDate}</span><br><br>
         </div>
 		<br>
-        <div id="updateButton">
-          <a class="btn" href="${contextPath}/memUpdateForm.me">정보 수정</a>
-        </div>
       </div>
+        <div id="updateButton">
+          <a class="btn" href="${contextPath}/memUpdateForm.me">수정하러 가기</a>
+        </div>
       
     </div>
     
@@ -84,10 +84,13 @@
     function readURL(input) {
     	  if (input.files && input.files[0]) {
     	    var reader = new FileReader();
-    	    var fileInput = document.getElementById("upfile");
+    	    /* var fileInput = document.getElementById("upfile"); */
     	    reader.onload = function(e) {
-    	      document.getElementById('preview').src = e.target.result;
-    	      $("#enrollBtn").attr("disabled",false);
+    	    
+	    	      document.getElementById('preview').src = e.target.result;
+	    	      $("#enrollBtn").attr("disabled",false);		
+    	    	
+    	      
     	    };
     	    reader.readAsDataURL(input.files[0]);
     	  } else {

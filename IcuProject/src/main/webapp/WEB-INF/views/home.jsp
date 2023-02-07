@@ -137,11 +137,11 @@
     <section id="point" class="section">
       <div class="section__container jong2">
         <div class="point__left-box">
-          <h1>포인트 충전 방식을 통해 <br> 믿을 수 있는 안전한 거래!</h1>
+          <h1>원하는 기간을 설정 후 <br> 콘텐츠별로 편리하게!</h1>
           <br><br>
           <h3>
-            월 단위 에스크로 시스템을 통해 금전 거래를 안전하게 보장하고, <br>
-            매달 링키드 정산일에 파티 요금을 자동으로 정산해요.
+            일 단위 에스크로 시스템을 통해 금전 거래를 안전하게 보장하고, <br>
+            원하는 콘텐츠를 보다 쉽게 찾아볼 수 있어요.
           </h3>
         </div>
         

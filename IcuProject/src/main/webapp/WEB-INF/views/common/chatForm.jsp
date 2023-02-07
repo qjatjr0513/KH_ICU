@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>실시간 문의</title>
+
+<link rel="stylesheet" href="resources/css/chat.css" />
+
 </head>
 <body>
 	<!-- chatBot -->
@@ -17,14 +20,14 @@
        
        <div class="chat_wrap animate__animated animate__fadeInUp">
          <div class="chat_header">
-           <h5>실시간 문의</h5>
+           <h5 style='font-family:"Poor Story","cursive"'>실시간 문의</h5>
            <button type="button" class="close__chatDiv" id="close">
              <i class="fa-solid fa-xmark fa-lg" style="color: white"></i>
            </button>
-           <hr />
-           <span><i class="fa-solid fa-user"></i>&nbsp;&nbsp;관리자</span
+           
+           <span class='chatMemo'><i class="fa-solid fa-user"></i>&nbsp;&nbsp;관리자</span
            ><br />
-           <span id="cdate"></span>
+           <span id="cdate" class='chatMemo chatMemoText'></span>
          </div>
 
          
@@ -37,12 +40,15 @@
          placeholder="내용 입력" 
          style="border: 0;
                width: 100%;
-               background: #ddd;
+               background:white;
                border-radius: 5px;
-               height: 30px;
+               height: 50px;
                padding-left: 5px;
                box-sizing: border-box;
-               margin-top: 5px;"/>
+               margin-top: 8px;
+               box-shadow:0 0 5px lightgray;
+               
+               "/>
        </div>
      </section>
 </body>

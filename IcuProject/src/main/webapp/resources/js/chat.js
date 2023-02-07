@@ -68,17 +68,6 @@ $(function () {
   
   
 
-  
-
-
-
-
-
-
-
-
-
-
 function chatting(socket){
 // 웹소켓에서 sendMessage라는 함수가 실행되었을때, -> 메세지가 전달되었을때를 의미함.
 socket.onmessage = function(e){
