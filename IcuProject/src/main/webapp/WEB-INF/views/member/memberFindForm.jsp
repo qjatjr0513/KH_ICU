@@ -69,6 +69,7 @@
       <!-- 비밀번호 -->
       <div id="findPwdBox">
         <div class="input__info">
+
           <table>
             <tr>
               <td>아이디</td>
@@ -76,7 +77,7 @@
                 <input type="text" placeholder="아이디를 입력해주세요." id="id" />
               </td>
             </tr>
-
+			
             <tr>
               <td>이메일</td>
               <td><input type="text" placeholder="가입된 이메일을 입력해주세요"  id="email" required/></td>
@@ -99,9 +100,11 @@
 	          <td></td>
 	        </tr> -->
           </table>
-
+		  <div style="text-align:center; margin:auto;">
+		  	<b>가입된 이메일로 임시비밀번호가 발송됩니다!</b>
+		  </div>
           <div class="btn__group">
-            <button onclick="location.href='03_logIn.html'">이전</button>
+            <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
             <button data-bs-toggle="modal" data-bs-target="#pwdModal" id="findBtn">
               확인
             </button>
@@ -302,6 +305,7 @@
 		        	   });	
 	        	   }else{
 	        		   Swal.fire({
+	        			    icon : 'info', 
 	        		   		title:'회원 아이디',
 		        	   		text: result
 		        	   });	
@@ -327,7 +331,7 @@
 						if(result == 2){
 							Swal.fire({
 		        		   		icon:'success',
-			        	   		title: "임시비밀번호가 이메일로 발송되었습니다."
+			        	   		title: "임시비밀번호 발송완료!."
 			        	   });
 							
 						}else if(result == 1){

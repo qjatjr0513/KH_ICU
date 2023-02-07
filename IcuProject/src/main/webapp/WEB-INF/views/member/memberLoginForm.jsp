@@ -80,6 +80,16 @@
 		
 	<p class="contact__rights" style='color:gray;'>Copyright © 2023 <span style='color:var(--color-orange)'>ICU</span> Inc. All rights reserved.</p>	
   
+  	<script>
+  	 $(function(){
+         if('${flag}' == 'showAlert'){
+        	 Swal.fire({
+                 icon:'error',
+                 title: "로그인 실패"
+           		});
+        	}
+     });
+  	</script>
 	
     <script src="resources/js/02_mainPage.js" defer></script>
     <script src="resources/js/main.js" defer></script>

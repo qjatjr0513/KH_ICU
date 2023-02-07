@@ -23,7 +23,7 @@
     
   <div id="main__logo">
 	<h2>회원탈퇴</h2>
-  <br><br>
+  <br>
   </div>
 
   <div id="whole">
@@ -31,24 +31,23 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       회원 탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.<br><br>
       
-      <i class="fa-solid fa-check"></i>&nbsp;&nbsp;사용하고 계신 아이디(<span style="color:#004643;" ><b>${loginUser.memId}</b></span>)는 탈퇴할 경우 재 사용 및 복구가 불가능 합니다.<br>
+      <i class="fa-solid fa-check"></i>&nbsp;&nbsp;사용하고 계신 아이디(<span id="red"><b>${loginUser.memId}</b></span>)는 탈퇴할 경우 재 사용 및 복구가 불가능 합니다.<br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <span style="color: #f25042;">탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가능하오니 신중하게 선택하시기 바랍니다.</span><br><br>
+      <span id="red">탈퇴한 아이디는 본인과 타인 모두 재사용 및 복구가 불가능하오니 신중하게 선택하시기 바랍니다.</span><br><br>
 
       <i class="fa-solid fa-check"></i>&nbsp;&nbsp;탈퇴 후 회원 정보 및 서비스 이용 기록은 모두 삭제됩니다.<br>
 
       <i class="fa-solid fa-check"></i>&nbsp;&nbsp;탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.<br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       삭제를 원하는 게시글이 있다면
-      <span style="color: #f25042;">반드시 탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.</span><br><br>
+      <span id="red">반드시 탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.</span><br><br>
 
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <span style="color: #f25042;">탈퇴 후에는 아이디 <span style="color:#004643;" ><b>${loginUser.memId}</b></span>로 다시 가입할 수 없으며
+      <span id="red">탈퇴 후에는 아이디 <span id="red"><b>${loginUser.memId}</b></span>로 다시 가입할 수 없으며
       아이디와 데이터는 복구할 수 없습니다.<br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       게시판형 서비스에 남아 있는 게시글은 탈퇴 후 삭제할 수 없습니다.<br><br>
 
-      <br><br>
       <!-- Button trigger modal -->
       <c:choose>
 		<c:when test="${loginUser.snsType eq 'N' }">

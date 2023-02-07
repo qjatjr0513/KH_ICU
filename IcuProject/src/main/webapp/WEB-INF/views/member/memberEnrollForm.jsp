@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" name="memPwd" placeholder="영문+숫자 조합 8자리 이상" required/></td>
+          <td><input type="password" id="memPwd" name="memPwd" placeholder="특수문자,영문,숫자 조합 8자리 이상" required/></td>
           <td></td>
           <td></td>
         </tr>
@@ -94,6 +94,7 @@
 
       <div class="btn__group">
         <button type="button" onclick="location.href='${contextPath }/loginForm.me'">취소</button>
+        <button type="reset" >초기화</button>
         <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
       </div>
     </form>
@@ -277,14 +278,14 @@
         });
 
         $('#memPwdCheck').keyup(function(){
-        	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        	let regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*]).{8,15}$/i;
             if($('#memPwd').val() != $('#memPwdCheck').val()){
               $('#chkNotice').html('비밀번호 불일치');
               $('#chkNotice').attr('color', '#FF0000');
               
             } else{
 	          if(!regExp.test($("#memPwd").val()) || !regExp.test($("#memPwdCheck").val())) {
-				$("#chkNotice").html("영문+숫자로 8자 입력");
+				$("#chkNotice").html("특수문자,영문,숫자 포함 8자 입력");
 				$("#chkNotice").attr("color", "FF0000");
 			  }
 	          else{
@@ -378,6 +379,16 @@
             });
    	 }
      }
+    
+    $(function(){
+        if('${flag}' == 'showAlert'){
+       	 Swal.fire({
+                icon:'error',
+                title: "회원가입 실패"
+          		});
+       	}
+    });
+    
     
     </script>
      

@@ -74,7 +74,7 @@ input::placeholder {
   height: 50px;
   border-radius: 10px;
   box-shadow: 0 0 5px 1px lightgray;
-  color: white;
+ /*  color: white; */
   font-size: 20px;
   font-weight: bold;
 }
@@ -83,5 +83,8 @@ input::placeholder {
   background-color: gray;
 }
 .btn__group > button:nth-child(2) {
+  background-color: #b1b1b1;
+}
+.btn__group > button:nth-child(3) {
   background-color: var(--color-purple);
 }

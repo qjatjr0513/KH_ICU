@@ -13,66 +13,69 @@ chatting(chatWs);
 })();
 
 
-document.getElementById("send").addEventListener("click",sendMessage);
+$(function () {
+    // 입력하고 엔터 누르면 채팅 입력
+    $('.inputChatting').keypress(function (e) {
+      if (e.keyCode == 13 && $(this).val().length) {
 
-// 채팅 보내는 함수 
-function sendMessage(){
-    // 채팅이 입력되는 textarea요소 가져오기
-    const inputChatting = document.getElementById("inputChatting");
-    if(inputChatting.value.trim().length == 0){
-        // 클라이언트가 채팅내용을 입력하지 않은상태로 보내기 버튼을 누른경우
-        alert("채팅내용을 입력해주세요..");
-        inputChatting.value=""; // 공백문자 제거.
-        inputChatting.focus();
-    }else{
-        // 입력이된경우
-
-        // 메세지 입력시 필요한 데이터를 js객체로 생성.
-        const chatMessage = {
-            "memNo" : memNo,
-            "memNickname" : memNickname,
-            "chatRoomNo" : chatRoomNo,
-            "message" : inputChatting.value
-        }
-
+       // 메세지 입력시 필요한 데이터를 js객체로 생성.
+       const chatMessage = {
+           "memNo" : memNo,
+           "memNickname" : memNickname,
+           "chatRoomNo" : chatRoomNo,
+           "message" : adminMsg.value
+       }
+   
+       
+       // JSON.parse(문자열) : JSON -> JS object로 변환
+       // JSON.stringify(객체) : JS object -> JSON
+       //console.log(chatMessage);
+       //console.log(JSON.stringify(chatMessage));
+   
+       // chatSocket(웹소캣객체)를 이용하여 메세지 보내기
+       // chatSocket.send(값) : 웹소켓 핸들러로 값을 보냄.
+       const li = document.createElement("li");
+       const p = document.createElement("p");
+    
+       p.classList.add("chat");
+    
+       p.innerHTML = adminMsg.value.replace(/\\n/gm , "<br>"); // 줄바꿈 처리
+    
+       // span태그 추가
+       const span = document.createElement("span");
+       span.classList.add("chatDate");
+    
+    //  span.innerText = chatMessage.createDate;
+        span.innerText = currentTime();
+    
+        // 내가쓴 채팅 
+       li.append(span, p);
+       li.classList.add("myChat"); // 본인글일경우
         
-        // JSON.parse(문자열) : JSON -> JS object로 변환
-        // JSON.stringify(객체) : JS object -> JSON
-        //console.log(chatMessage);
-        //console.log(JSON.stringify(chatMessage));
+        
+        // 채팅방
+        const displayChatting = document.getElementsByClassName("display-chatting")[0];
+    
+        // 채팅장에 채팅 추가
+        displayChatting.append(li);
+   
+       chatWs.send(JSON.stringify(chatMessage));
+       adminMsg.value = "";
+    const inputChatting = document.getElementById("inputChatting");
+      }
+    });
+  });
+  
+  
 
-        // chatSocket(웹소캣객체)를 이용하여 메세지 보내기
-        // chatSocket.send(값) : 웹소켓 핸들러로 값을 보냄.
-        const li = document.createElement("li");
-        const p = document.createElement("p");
-     
-        p.classList.add("chat");
-     
-        p.innerHTML = inputChatting.value.replace(/\\n/gm , "<br>"); // 줄바꿈 처리
-     
-        // span태그 추가
-        const span = document.createElement("span");
-        span.classList.add("chatDate");
-     
-     //  span.innerText = chatMessage.createDate;
-         span.innerText = getCurrentTime();
-     
-         // 내가쓴 채팅 
-        li.append(span, p);
-        li.classList.add("myChat"); // 본인글일경우
-         
-         
-         // 채팅방
-         const displayChatting = document.getElementsByClassName("display-chatting")[0];
-     
-         // 채팅장에 채팅 추가
-         displayChatting.append(li);
+  
 
-        chatWs.send(JSON.stringify(chatMessage));
-		inputChatting.value = "";
 
-    }
-}
+
+
+
+
+
 
 
 
@@ -103,7 +106,7 @@ socket.onmessage = function(e){
        span.classList.add("chatDate");
     
     //    span.innerText = chatMessage.createDate;
-        span.innerText = getCurrentTime();
+        span.innerText = currentTime();
     
         li.innerHTML = "<b>"+chatMessage.memNickname+"</b><br>";
         li.append(p, span);
@@ -124,17 +127,14 @@ socket.onmessage = function(e){
 }
 
 
-function getCurrentTime(){
-    const now = new Date();
-
-    const time = now.getFullYear() + "년" 
-                + addZero( now.getMonth()+1 ) + "월 "
-                + addZero( now.getDate() ) + "일 "
-                + addZero( now.getHours() ) + ":"
-                + addZero( now.getMinutes() ) + ":"
-                + addZero( now.getSeconds() ) + " ";
-        return time;
-}
+var currentTime = function () {
+    var date = new Date();
+    var hh =  addZero(date.getHours());
+    var mm =  addZero(date.getMinutes());
+    var apm = hh > 12 ? '오후' : '오전';
+    var ct = apm + ' ' + hh + ':' + mm + '';
+    return ct;
+  };
 
 // 10보다 작은수가 매개변수로 들어오는경우 앞에 0을 붙여서 반환해주는 함수.
 function addZero(number){

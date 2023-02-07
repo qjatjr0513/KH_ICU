@@ -28,13 +28,23 @@
         <div id="viewAndEnroll">
           <div id="view" class="titleImg">
           <!-- 올린 파일이 들어가는 자리 -->
-          <c:if test="${!empty profile}">
-          <img class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
-          </c:if>
+          <c:choose>
+          
+          <c:when test="${!empty profile}">
+          	<img class='view-img' src="${contextPath }${profile.filePath }${profile.changeName}">
+          </c:when>
+          <c:otherwise>
+          	<i class="fa-solid fa-user fa-3x"></i>
+          </c:otherwise>
+          </c:choose>
           </div>
           <div id="enroll">
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
-              <input type="file" id="upfile" class="form-control" name="upfile" onchange="validate()"/>
+            <label class="input-file-button" for="upfile">
+			  업로드
+			</label>
+              <img id="preview" />
+              <input type="file" id="upfile" class="form-control" name="upfile" onchange="readURL(this);" style="display:none"/>
               <input type="hidden" name="originName" value="${image.originName }"/>
 			        <input type="hidden" name="changefile" value="${image.changeName }"/>
               <div align="center">
@@ -52,14 +62,14 @@
           </div>
         </div>
         <div id="info">
-          <h4><input type="text" name="memNickname" value="${loginUser.memNickname}" readonly/></h4><br>
-          아이디 : <input type="text" name="memId" value="${loginUser.memId}" readonly><br><br>
-          이름   : <input type="text" name="memName" value="${loginUser.memName}" readonly><br><br>
-          연락처 : <input type="text" name="phone" value="${loginUser.phone}" readonly><br><br>
-          이메일 : <input type="text" name="email" value="${loginUser.email}" readonly><br><br>
-          가입일 : <input type="text" name="enrolldate" value="${loginUser.enrollDate}" readonly><br><br>
+          <h4><span class="info">${loginUser.memNickname}</span></h4><br>
+          <span class="info">아이디 : </span><span class="info">${loginUser.memId}</span><br><br>
+          <span class="info">이름   : </span><span class="info">${loginUser.memName}</span><br><br>
+          <span class="info">연락처 : </span><span class="info">${loginUser.phone}</span><br><br>
+          <span class="info">이메일 : </span><span class="info">${loginUser.email}</span><br><br>
+          <span class="info">가입일 : </span><span class="info">${loginUser.enrollDate}</span><br><br>
         </div>
-        <br>
+		<br>
         <div id="updateButton">
           <a class="btn" href="${contextPath}/memUpdateForm.me">정보 수정</a>
         </div>
@@ -71,6 +81,21 @@
     <jsp:include page="../common/chatForm.jsp"/>
     
     <script>
+    function readURL(input) {
+    	  if (input.files && input.files[0]) {
+    	    var reader = new FileReader();
+    	    var fileInput = document.getElementById("upfile");
+    	    reader.onload = function(e) {
+    	      document.getElementById('preview').src = e.target.result;
+    	      $("#enrollBtn").attr("disabled",false);
+    	    };
+    	    reader.readAsDataURL(input.files[0]);
+    	  } else {
+    	    document.getElementById('preview').src = "";
+    	  }
+    	}
+    
+    
     	function modeUpdate(){
 			$('#mode').val('update');
     	}

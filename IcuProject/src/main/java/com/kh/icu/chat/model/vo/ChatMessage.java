@@ -1,6 +1,6 @@
 package com.kh.icu.chat.model.vo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ public class ChatMessage {
 	private int memNo;
 	private int chatRoomNo;
 	private String message;
-	private Date createDate;
+	private Timestamp createDate;
 	private String memNickname;
 	
 
