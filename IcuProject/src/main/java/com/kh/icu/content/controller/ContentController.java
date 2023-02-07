@@ -2,13 +2,18 @@ package com.kh.icu.content.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +28,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
-import com.kh.icu.common.template.Pagination;
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Coment;
 import com.kh.icu.content.model.vo.Content;
 import com.kh.icu.member.controller.MemberController;
-import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.vo.Member;
 
 @Controller
@@ -440,5 +443,28 @@ public class ContentController {
 		model.addAttribute("list", list);
 		
 		return "content/searchContent";
+	}
+	
+	@RequestMapping("/autoSearch.co")
+	@ResponseBody
+	public String autoSearch(HttpServletRequest request, HttpServletResponse response) {
+		String keyword = request.getParameter("keyword");
+		String selectOption = request.getParameter("selectOption");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("selectOption", selectOption);
+		map.put("keyword", keyword);
+		
+		ArrayList<Content> list = contentService.autoSearch(map);
+		
+		Gson gson = new GsonBuilder().create();
+		String result = gson.toJson(list);
+		
+		System.out.println(result);
+		
+		return result;
+
+
 	}
 }

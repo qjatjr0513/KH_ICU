@@ -1,7 +1,10 @@
 package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.content.model.vo.Coment;
@@ -32,4 +35,5 @@ public interface ContentService {
 	public int selectListCount();
 	public Map<String, Object> getWrittenContent(int currentPage);
 	public ArrayList<String> getWrittenContentOtt(int conNo);
+	public ArrayList<Content> autoSearch(Map<String, Object> map);
 }

@@ -26,6 +26,7 @@
 		</select>
       <div class="input-group mb-3 sizing">
         <input
+          id="keyword"
           type="text"
           class="formControl"
           placeholder="내용을 입력해주세요."
@@ -91,6 +92,43 @@
 		function movePage(cno){
 	 		location.href = '${contextPath}/detail?conNo='+cno;
 	 	}
+		$(document).ready(function() {
+			$("#keyword").autocomplete({
+				source : function(request, response){
+					$.ajax({
+						url : '${contextPath}/autoSearch.co',
+						dataType : 'json',
+						data : {
+							keyword : request.term,
+							selectOption : $('select[name="searchNo"] option:selected').val()
+						},
+						success : function(data){	
+							console.log(data);
+							response($.map(data, function (item) {
+				                return {
+				                    value: item.conKTitle,
+				                    label: item.conKTitle,
+				                    idx: item.conNo
+				                };
+				            }));
+						},error : function(){
+				             console.log("오류가 발생했습니다.");
+				        }
+					})
+				},
+				focus : function(event, ui) {
+					return false;
+				}
+				,minLength: 1
+				,autoFocus : true
+				,delay: 100
+				,select : function(evt, ui) { 
+					location.href = '${contextPath}/detail?conNo='+ui.item.idx;
+					console.log(ui.item.label);
+					console.log(ui.item.value);
+				 }
+			});
+		});
   </script>
   </body>
 </html>

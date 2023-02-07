@@ -2,6 +2,7 @@ package com.kh.icu.content.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -173,5 +174,11 @@ public class ContentServiceImpl implements ContentService{
 	@Override
 	public ArrayList<String> getWrittenContentOtt(int conNo){
 		return contentDao.getWrittenContentOtt(sqlSession, conNo);
+	}
+	
+	@Override
+	public ArrayList<Content> autoSearch(Map<String, Object> map){
+		ArrayList<Content> list = contentDao.autoSearch(sqlSession, map);
+		return list;
 	}
 }

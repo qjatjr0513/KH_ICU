@@ -231,6 +231,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 	</select>
 	
+	<select id="autoSearch" parameterType="map" resultMap="contentResultSet">
+		SELECT *
+		FROM CONTENT
+		JOIN IMAGE I ON(I.REF_TNO = CON_NO) AND I.TABLE_CD = 'C'
+		WHERE
+		<if test="selectOption == 0">
+			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ETITLE LIKE '%'||#{keyword}||'%'
+			OR
+			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ACTOR LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
+		</if>
+		<if test="selectOption == 1">
+			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ETITLE LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
+		</if>
+		<if test="selectOption == 2">
+			(CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
+			OR
+			CON_ACTOR LIKE '%'||#{keyword}||'%')
+			AND STATUS = 'N'
+		</if>
+
+	</select>
+	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH

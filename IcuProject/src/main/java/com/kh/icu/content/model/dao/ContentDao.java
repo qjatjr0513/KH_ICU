@@ -2,6 +2,7 @@ package com.kh.icu.content.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
@@ -120,5 +121,9 @@ public class ContentDao {
 	
 	public ArrayList<String> getWrittenContentOtt(SqlSession sqlSession, int conNo){
 		return (ArrayList)sqlSession.selectList("contentMapper.getWrittenContentOtt", conNo);
+	}
+	
+	public ArrayList<Content> autoSearch(SqlSession sqlSession, Map<String, Object> map){
+		return (ArrayList)sqlSession.selectList("contentMapper.autoSearch", map);
 	}
 }
