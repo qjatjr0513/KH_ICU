@@ -1,5 +1,8 @@
 package com.kh.icu.party.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +25,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.icu.common.model.service.AES256Util;
 import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.common.model.vo.Reply;
 import com.kh.icu.common.socket.AlramHandler;
@@ -44,6 +48,9 @@ public class PartyController {
 	@Autowired
 	private AlramHandler alramHandler;
 	 
+	@Autowired
+    private AES256Util aes;
+	
 	@RequestMapping("partyEnroll.py")
 	public String partyEnrollForm() {
 		return "party/partyEnrollForm";
@@ -64,6 +71,14 @@ public class PartyController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int memNo = loginUser.getMemNo();
 		p.setPaName(memNo);
+		
+		String pwd = p.getOttPwd();
+		try {
+			String enc = aes.encrypt(pwd);
+			p.setOttPwd(enc);
+		} catch (UnsupportedEncodingException | GeneralSecurityException e) {
+			e.printStackTrace();
+		}
 		
 		int result = partyService.insertParty(p);
 
@@ -231,15 +246,25 @@ public class PartyController {
 	
     // 사용자페이지 - 진행중인 파티 (내가 만든 / 내가 참여한)
 	@RequestMapping("CurrentParty.py")
-	public ModelAndView memCurrentPartyList(ModelAndView mav, HttpSession session) {
+	public ModelAndView memCurrentPartyList(ModelAndView mav, HttpSession session) throws UnsupportedEncodingException, GeneralSecurityException {
 		
 		Member m = (Member)session.getAttribute("loginUser");
+		Party p = new Party();
 		int memNo = m.getMemNo();
 		
 		// 내가 만든 파티 listI / 내가 참여한 파티 listO
 		List<Party> listI = partyService.memCurrentPartyListI(memNo);
+		for(int i = 0; i< listI.size(); i++) {
+			String ottPwd = aes.decrypt(listI.get(i).getOttPwd());
+			listI.get(i).setOttPwd(ottPwd);
+
+		}
 		List<Party> listO = partyService.memCurrentPartyListO(memNo);
-		
+		for(int i = 0; i< listO.size(); i++) {
+			String ottPwd = aes.decrypt(listO.get(i).getOttPwd());
+			listO.get(i).setOttPwd(ottPwd);
+	
+		}
 		mav.addObject("listI", listI);
 		mav.addObject("listO", listO);
 

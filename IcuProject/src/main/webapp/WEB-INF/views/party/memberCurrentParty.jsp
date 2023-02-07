@@ -71,11 +71,11 @@
 		                  <span>${listI[count].paTitle}</span> <br />
 		                  <span id="endDate">${listI[count].endDate}까지 (${listI[count].leftDate}일)</span><br/><br/>
 		                  <br>
-		                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__1">ID / PWD 보기</button>
+		                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__${count}">ID / PWD 보기</button>
 		              </div>
 		              
 		                <!-- 모달창 -->
-					    <div class="modal fade" id="idModal__1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					    <div class="modal fade" id="idModal__${count}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					      <div class="modal-dialog modal-dialog-centered">
 					        <div class="modal-content">
 					          <div class="modal-header">
@@ -176,11 +176,11 @@
 		                  <span>${listO[countO].paTitle}</span> <br />
 		                  <span id="endDate">${listO[countO].endDate}까지 (${listO[countO].leftDate}일)</span><br/><br/>
 		                  <br>
-						  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__2">ID / PWD 보기</button>
+						  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__${count}">ID / PWD 보기</button>
 		              </div>
 					
 					  <!-- 모달창 -->
-					  <div class="modal fade" id="idModal__2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal fade" id="idModal__${count}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 						  <div class="modal-content">
 							<div class="modal-header">

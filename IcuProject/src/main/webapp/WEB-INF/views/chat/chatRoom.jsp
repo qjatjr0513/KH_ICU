@@ -66,7 +66,7 @@
 		</div>
 		<ul class="display-chatting">
 			<c:forEach items="${list }" var="msg">
-				<fmt:formatDate var="chatDate" value="${msg.createDate }" pattern="a KK:mm"/>
+				<fmt:formatDate var="chatDate" value="${msg.createDate }" pattern="a hh:mm"/>
 				
 				<%-- 1) 내가 보낸 메세지 --%>
 				<c:if test="${msg.memNo == loginUser.memNo}">
