@@ -218,6 +218,16 @@
      	function history_back(){
      		history.back();
      	}
+     	
+     	
+	    $(function(){
+	    	  if('${flag1}' == 'showAlert1'){
+	    	     Swal.fire({
+	    	          icon:'error',
+	    	          title: "파티 등록에 실패했습니다."
+	    	      });
+	    	  }
+	    });
 	 </script>
 		
     

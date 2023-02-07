@@ -44,6 +44,7 @@
       <div class="info__date">
         <span>종료일자 : ${p.endDate} (${p.leftDate}일)</span> <br />
         <span>금액 : ${p.totalPrice}원</span> 
+        <input type="hidden" name="crewNum" value="${p.crewNum}"/>
         <button id="join"> 참여 신청</button>
       </div>
     </section>
@@ -89,13 +90,17 @@
       </div>
       <hr style="width: 50%; margin: auto" />
     </section>
-    <br/>
     
+    <br/>
+    </form>
+    		loginUser.memNo : ${loginUser.memNo}
+			p.paName : ${p.paName}
     <c:set var="count" value="0"/>
 	<c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1" varStatus="i" >
-		<c:choose>
-			<c:when test="${loginUser.memNo == pj.memNo}">
-					
+		<c:if test="${(loginUser.memNo eq pj.memNo) or (loginUser.memNo eq p.paName)}">
+			
+    		loginUser.memNo : ${loginUser.memNo}
+			p.paName : ${p.paName}
 			
 		         <!-- 댓글등록기능 -->
 		         <div class="card mb-2" id="comment">
@@ -148,11 +153,7 @@
 		            </tbody>
 		         </table>
 		         </div>
-			</c:when>
-			<c:otherwise>
-				
-			</c:otherwise>
-		</c:choose>
+		</c:if>
 	<c:set var="count" value="${count+1 }"/>
 	</c:forEach>
     
@@ -199,7 +200,7 @@
                  	
                     Swal.fire({
                             icon:'success',
-                            title: "댓글등록 성공"
+                            title: "댓글이 정상적으로 등록되었습니다. "
                       }).then(function(){
                      	 location.href=contextPath+"/partyDetail.py/"+paNo;
                       })
@@ -207,7 +208,7 @@
                  }else{
                     Swal.fire({
                             icon:'error',
-                            title: "댓글등록 실패"
+                            title: "댓글등록에 실패하였습니다. 다시 시도해주세요. "
                       });
                  }
               },
@@ -230,9 +231,36 @@
 	         if('${flag}' == 'showAlert'){
 	        	 Swal.fire({
 	                 icon:'success',
-	                 title: "댓글삭제 성공"
+	                 title: "댓글이 삭제되었습니다. "
 	           		});
 	        	}
+	     });
+	     
+	     $(function(){
+	         if('${flag0}' == 'showAlert0'){
+	        	 Swal.fire({
+	                 icon:'error',
+	                 title: "댓글삭제 실패했습니다. 다시 시도해주세요. "
+	           		});
+	        	}
+	     });
+	     
+	     $(function(){
+	    	    if('${flag1}' == 'showAlert1'){
+	    	      Swal.fire({
+	    	            icon:'error',
+	    	            title: "이미 가입한 파티입니다."
+	    	        });
+	    	    }
+	     });
+	     
+	     $(function(){
+	    	    if('${flag2}' == 'showAlert2'){
+	    	      Swal.fire({
+	    	            icon:'error',
+	    	            title: "파티 정원이 찼습니다. 다른 파티를 찾아보세요."
+	    	        });
+	    	    }
 	     });
     </script>
   </body>

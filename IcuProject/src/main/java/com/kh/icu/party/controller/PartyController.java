@@ -59,7 +59,7 @@ public class PartyController {
 	
 	// 파티 만들기
 	@RequestMapping("/insert.py")
-	public String insertParty(Party p, HttpSession session, Model model) {
+	public String insertParty(Party p, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
 
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int memNo = loginUser.getMemNo();
@@ -68,10 +68,11 @@ public class PartyController {
 		int result = partyService.insertParty(p);
 
 		if(result > 0) {
+			redirectAttributes.addFlashAttribute("flag","showAlert"); // "파티가 등록되었습니다. "
 			return "redirect:findPartyForm.py";
 		} else {
-			model.addAttribute("errorMsg", "파티 등록 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag1","showAlert1"); // "파티 등록에 실패했습니다. "
+			return "redirect:insert.py";
 		}
 		
 	}
@@ -80,14 +81,11 @@ public class PartyController {
 	@RequestMapping("/findPartyForm.py")
 	public ModelAndView findPartyForm(ModelAndView mav) {
 		
-		List<Party> list = new ArrayList<>(); 
-		
-		list = partyService.findPartyForm();
+		List<Party> list = partyService.findPartyForm();
 		
 		mav.addObject("list", list);
 		mav.setViewName("party/findPartyForm");
 		
-		System.out.println("***list(con/list)" + list);
 		return mav;
 	}
 	
@@ -110,15 +108,11 @@ public class PartyController {
 		map.put("ottList", ottList);
 		map.put("month", month);
 		 
-		List<Party> list = new ArrayList<>(); 
 		Gson gson = new GsonBuilder().create();
-		
-		list = partyService.findParty(map);
+		List<Party> list = partyService.findParty(map);
 		
 		String result = gson.toJson(list);
 		
-		System.out.println("***list(con/list)" + list);
-		System.out.println("***result" + result);
 		return result;
 	}
 	
@@ -142,42 +136,33 @@ public class PartyController {
 	
 	// 파티 참여하기
 	@RequestMapping("/joinPartyMember")
-	public String joinPartyMember(Party p, int paNo, HttpSession session, Model model) {
+	public String joinPartyMember(Party p, int paNo, int crewNum, HttpSession session, RedirectAttributes redirectAttributes, Model model) {
 		
-		System.out.println("*** paNo" + paNo);
 		int num = partyService.partyJoinMem(paNo).size();
-		System.out.println("*** num" + num);
 		
 		// 인원수 제한
-		if(num < 3) {
+		if(num < crewNum) {
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			int logMemNo = loginUser.getMemNo();
-			System.out.println("*** logMemNo" + logMemNo);
 			
 			List<PartyJoin> pj1 = partyService.partyJoinMem(paNo);
-			System.out.println("*** pj1" + pj1);
 			int i = 0;
 			
 			for(PartyJoin p1 : pj1) {
 				i = p1.getMemNo();
-				System.out.println("*** i - 1" + i);
 	 		    for(int j=0; j<num; j++){
 	 			    if(logMemNo == i) {
-	 					System.out.println("*** i - 2" + i);
-	 				    model.addAttribute("errorMsg", "이미 가입한 파티입니다.");
-						return "common/errorPage";
+	 				    redirectAttributes.addFlashAttribute("flag1","showAlert1"); // "이미 가입한 파티입니다."
+	 				    return "redirect:partyDetail.py/"+paNo;
 	 			    }
 	 		    }
 			} 
-			 
 			p = partyService.partyDetailForm(paNo);
-			System.out.println("p" + p);
 			model.addAttribute("p", p); 
 			return "party/partyJoinForm";
-			
 		}else {
-			model.addAttribute("errorMsg", "파티 정원이 찼습니다. 다른 파티를 찾아보세요.");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag2","showAlert2");  // "파티 정원이 찼습니다. 다른 파티를 찾아보세요."
+			return "redirect:partyDetail.py/"+paNo;
 		}
 	}
 	
@@ -212,10 +197,10 @@ public class PartyController {
  	   int result = partyService.deleteReply(rno);
  	   
  	   if(result > 0) {
- 		   redirectAttributes.addFlashAttribute("flag","showAlert");
+ 		     redirectAttributes.addFlashAttribute("flag","showAlert"); // "댓글이 삭제되었습니다. "
  	         return "redirect:partyDetail.py/"+paNo;
  	      } else {
- 	         model.addAttribute("errorMsg", "댓글 삭제 실패");
+  		     redirectAttributes.addFlashAttribute("flag0","showAlert0"); // "댓글삭제 실패했습니다. 다시 시도해주세요. "
  	         return "common/errorPage";
  	      }
     }
@@ -228,7 +213,6 @@ public class PartyController {
 		
 		mav.addObject("list", list);
 		mav.setViewName("party/currentPartyListForm");
-		System.out.println("***list(con/list)" + list);
 		
 		return mav;
 	}
@@ -241,7 +225,6 @@ public class PartyController {
 		
 		mav.addObject("list", list);
 		mav.setViewName("party/endPartyListForm");
-		System.out.println("***list(con/list)" + list);
 		
 		return mav;
 	}	
@@ -252,7 +235,6 @@ public class PartyController {
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		int memNo = m.getMemNo();
-		System.out.println("****memNo" + memNo);
 		
 		// 내가 만든 파티 listI / 내가 참여한 파티 listO
 		List<Party> listI = partyService.memCurrentPartyListI(memNo);
@@ -275,7 +257,6 @@ public class PartyController {
 		
 		Member m = (Member)session.getAttribute("loginUser");
 		int memNo = m.getMemNo();
-		System.out.println("****memNo" + memNo);
 		
 		// 내가 만든 파티 listI / 내가 참여한 파티 listO
 		List<Party> listI = partyService.memEndPartyListI(memNo);
@@ -284,9 +265,6 @@ public class PartyController {
 		mav.addObject("listI", listI);
 		mav.addObject("listO", listO);
 
-		System.out.println("****listI" + listI);
-		System.out.println("****listO" + listO);
-		
 		mav.setViewName("party/memberLastParty");
 		
 		return mav;

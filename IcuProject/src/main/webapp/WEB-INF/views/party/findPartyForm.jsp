@@ -262,7 +262,7 @@
 		        						if(x >= result.length){
 											break;
 										}
-		        						html += "<div class='cardBox'>" +
+		        						html += "<div class='cardBox' onclick='movePage(" + result[x].paNo + ");'>" +
 		        										"<h4><b>" + result[x].ottName + "</b></h4>" +
 		        		                  				"<span>" + result[x].paTitle + "</span> <br />" +
 		        		                  				"<span id='endDate'>" + result[x].endDate + "까지 (" + result[x].leftDate + "일)</span><br/><br/>"
@@ -274,8 +274,11 @@
 		        								for(var b = 0; b <= (result[x].crewNum - result[x].joinNum -1); b++){
 		    		        						html += "<span><i class='fa-regular fa-user fa-lg'></i></span>&nbsp;&nbsp;"
 		        								}
-												html += "<button class='joinBtn' onclick='movePage(" + result[x].paNo + ");' >참여하기</button>"
-												+ "</div>"
+												
+												if (result[x].crewNum > result[x].joinNum) {    
+													html += "<button class='joinBtn' onclick='movePage(" + result[x].paNo + ");' >참여하기</button>"
+												}
+												html +=  "</div>" 
 		        					}
 		        					html += "</div><br>";
 		        				}
@@ -285,6 +288,16 @@
 		           }
 			})
 		};
+		
+		$(function(){
+    	    if('${flag}' == 'showAlert'){
+    	      Swal.fire({
+    	            icon:'success',
+    	            title: "파티가 등록되었습니다."
+    	        });
+    	    }
+        });
+     	
     </script>
   </body>
 </html>
