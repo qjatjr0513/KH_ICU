@@ -120,7 +120,13 @@
   }); 
   
    $(function () {
-     $('.datepicker').datepicker();
+	 var now_utc = Date.now()
+     var timeOff = new Date().getTimezoneOffset()*60000;
+     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+
+     $('.datepicker').datepicker({
+    	 minDate : today
+     });
    });
 
    $.datepicker.setDefaults({
@@ -133,7 +139,7 @@
      dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
      dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
      showMonthAfterYear: true,
-     yearSuffix: '년',
+     yearSuffix: '년'
    });
 
    $(function () {
@@ -183,7 +189,7 @@
          // 오늘날짜 
          $("#sysdate").html(today);
          // 날짜선택
-         document.getElementById("endDate").setAttribute("min", today);
+         document.getElementById("endDate").setAttribute("minDate", today);
       });
 	
 	// 남은기간 & 일일금액

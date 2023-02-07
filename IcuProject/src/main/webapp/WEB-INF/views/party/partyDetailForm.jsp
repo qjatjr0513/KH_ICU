@@ -43,7 +43,7 @@
       <hr />
       <div class="info__date">
         <span>종료일자 : ${p.endDate} (${p.leftDate}일)</span> <br />
-        <span>금액 : ${p.totalPrice}원</span>
+        <span>금액 : ${p.totalPrice}원</span> 
         <button id="join"> 참여 신청</button>
       </div>
     </section>
@@ -51,7 +51,7 @@
     <section id="userProfile">
       <div class="containerBox">
         <div class="photo-container">
-
+	
           
           <c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1">
           <div class="userInformation">
@@ -89,59 +89,72 @@
       </div>
       <hr style="width: 50%; margin: auto" />
     </section>
-    <br />
+    <br/>
     
-         <!-- 댓글등록기능 -->
-         <div class="card mb-2" id="comment">
-            <div class="card-header bg-light">
-                    <i class="fa fa-comment fa"></i> REPLY
-            </div>
-            <div class="card-body">
-               <ul class="list-group list-group-flush">
-                   <li class="list-group-item">
-                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
-                   <c:if test="${not empty loginUser}">
-                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
-                   </c:if>
-                   </li>
-               </ul>
-            </div>
-         </div>
-         
-         <div id="comment">
-         <table id="replyArea" class="table" align="center" >
-            <thead>
-               <tr>
-                  <td colspan="3"><b>댓글(${list.size()})</b></td>
-               </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="r" items="${list }" varStatus="i">
-				<tr>
-               <td style="width: 30px;">
-               <c:choose>
-                  <c:when test="${!empty r.changeName}">
-                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
-                  </c:when>
-                  <c:otherwise>
-                     <i class="fa-solid fa-user fa-lg"></i>
-                </c:otherwise>
-               </c:choose>
-               </td>
-               <td id="rWriter">${r.replyWriter }</td>
-					<td id="rContent">${r.replyContent }</td>
-					<td>${r.createDate }</td>
-					<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
-					<c:if test="${r.replyWriter == loginUser.memNickname }">
-					<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
-					<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.py?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
-					</c:if>
-				</tr>
-			</c:forEach>
-               
-            </tbody>
-         </table>
-         </div>
+    <c:set var="count" value="0"/>
+	<c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1" varStatus="i" >
+		<c:choose>
+			<c:when test="${loginUser.memNo == pj.memNo}">
+					
+			
+		         <!-- 댓글등록기능 -->
+		         <div class="card mb-2" id="comment">
+		            <div class="card-header bg-light">
+		                    <i class="fa fa-comment fa"></i> REPLY
+		            </div>
+		            <div class="card-body">
+		               <ul class="list-group list-group-flush">
+		                   <li class="list-group-item">
+		                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+		                   <c:if test="${not empty loginUser}">
+		                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
+		                   </c:if>
+		                   </li>
+		               </ul>
+		            </div>
+		         </div>
+		         
+		         <div id="comment">
+		         <table id="replyArea" class="table" align="center" >
+		            <thead>
+		               <tr>
+		                  <td colspan="3"><b>댓글(${list.size()})</b></td>
+		               </tr>
+		            </thead>
+		            <tbody>
+		              <c:forEach var="r" items="${list }" varStatus="i">
+						<tr>
+		               <td style="width: 30px;">
+		               <c:choose>
+		                  <c:when test="${!empty r.changeName}">
+		                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
+		                  </c:when>
+		                  <c:otherwise>
+		                     <i class="fa-solid fa-user fa-lg"></i>
+		                </c:otherwise>
+		               </c:choose>
+		               </td>
+		               <td id="rWriter">${r.replyWriter }</td>
+							<td id="rContent">${r.replyContent }</td>
+							<td>${r.createDate }</td>
+							<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
+							<c:if test="${r.replyWriter == loginUser.memNickname }">
+							<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
+							<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.py?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
+							</c:if>
+						</tr>
+					</c:forEach>
+		               
+		            </tbody>
+		         </table>
+		         </div>
+			</c:when>
+			<c:otherwise>
+				
+			</c:otherwise>
+		</c:choose>
+	<c:set var="count" value="${count+1 }"/>
+	</c:forEach>
     
     <script>
 

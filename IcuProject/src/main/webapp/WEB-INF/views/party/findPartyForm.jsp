@@ -122,7 +122,7 @@
 		      
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 			  <c:if test="${not doneLoop}">
-				  <div class="cardBox"> <!-- 1개 -->
+				  <div class="cardBox" onclick="movePage(${list[count].paNo});"> <!-- 1개 -->
 	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
@@ -133,8 +133,10 @@
 	                  <c:forEach begin="1" end="${list[count].crewNum-list[count].joinNum}" step="1">
 	                  <span><i class="fa-regular fa-user fa-lg"></i></span>&nbsp;&nbsp;
 	                  </c:forEach>
-	              
-	                  <button class="joinBtn" onclick="movePage(${list[count].paNo});">참여하기</button>
+	              		
+					  <c:if test="${list[count].crewNum > list[count].joinNum}">       
+	                  	<button class="joinBtn" onclick="movePage(${list[count].paNo});">참여하기</button>
+	                  </c:if>
 	              </div>
 				  <c:set var="count" value="${count+1 }"/>
 			      
