@@ -136,11 +136,11 @@
     		  console.log(chatMessage);
    			
    		 var html = "";
-   		 html +='<div class="item yourmsg send-msg on"><div class="box"><p class="msg" id="msg">' +
+   		 html +='<div><b>'+chatMessage.memNickname+'</b><div class="item yourmsg send-msg on"><div class="box"><p class="msg" id="msg">' +
          chatMessage.message +
          '</p><span class="time">' +
          currentTime() +
-         '</span></div></div>';
+         '</span></div></div></div>';
    		$("#mg").append(html);
    		 };
    				

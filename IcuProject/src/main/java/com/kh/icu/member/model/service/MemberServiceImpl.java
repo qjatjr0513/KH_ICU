@@ -132,7 +132,7 @@ public class MemberServiceImpl implements MemberService{
 
          mailSender.send(message);
       } catch (Exception e) {
-         System.out.println(e);
+         e.printStackTrace();
       }
    }
    

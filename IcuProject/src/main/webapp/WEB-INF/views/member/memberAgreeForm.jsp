@@ -31,7 +31,7 @@
       <div class="agreeBox__second">
         <input
           name="chk"
-          class="form-check-input"
+          class="form-check-input chk1"
           id="agreeUse"
           type="checkbox"
         />
@@ -165,7 +165,7 @@
       <div class="agreeBox__third">
         <input
           name="chk"
-          class="form-check-input"
+          class="form-check-input chk2"
           id="agreeInfo"
           type="checkbox"
         />
@@ -249,11 +249,15 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
     
     <script>
     	function checkAgree(){
-    		if($('input[name="chk"]').is(':checked')){
+    		if($('input.chk1').is(':checked') && $('input.chk2').is(':checked')){
     			location.href='${contextPath }/enrollForm.me';
     		}
     		else{
-    			$('input[name="chk"]').focus();
+    			if($('input.chk1').is(':checked')){
+	    			$('input.chk2').focus();	
+    			}else{
+    				$('input.chk1').focus();
+    			}		
     		}
     	}
     </script>

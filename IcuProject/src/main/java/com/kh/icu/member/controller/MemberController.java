@@ -115,7 +115,7 @@ public class MemberController {
 	 * 회원가입
 	 */
 	@RequestMapping("insert.me")
-	public String insertMember(Member m, HttpSession session, Model model, String checkId, String checkNick) {
+	public void insertMember(Member m, HttpSession session, Model model, String checkId, String checkNick, RedirectAttributes redirectAttributes) {
 		int result1 = memberService.idCheck(checkId);
 		
 		int result2 = memberService.nickCheck(checkNick);
@@ -135,16 +135,11 @@ public class MemberController {
 			System.out.println(result1+", "+result2);
 			int result3 = memberService.insertMember(m);
 			
-			if(result3 > 0) {
-				session.setAttribute("alertMsg", "회원가입 성공");
-				return "member/memberLoginForm";
-			}else {
-				model.addAttribute("errorMsg", "회원가입 실패");
-				return "common/errorPage";
+			if(result3 == 0) {
+				redirectAttributes.addFlashAttribute("flag","showAlert");
 			}
 		}else {
-			model.addAttribute("errorMsg", "회원가입 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert");
 		}
 	}
 	
@@ -200,14 +195,14 @@ public class MemberController {
 	 * 로그인
 	 */
 	@RequestMapping("login.me")
-	public String loginMember(Member m, HttpSession session, Model model) {
+	public String loginMember(Member m, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Member loginUser = memberService.loginMember(m);
 		int memNo = loginUser.getMemNo();
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
 			Image profile = memberService.selectProfile(memNo);
 
-			if(loginUser.getMemId().equals("admin")) {
+			if(loginUser.getRole().equals("A")) {
 				session.setAttribute("loginUser", loginUser);
 
 				return "redirect:memListForm.me";
@@ -218,8 +213,8 @@ public class MemberController {
 				return "redirect:main";				
 			}
 		}else {
-			model.addAttribute("errorMsg", "로그인 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert");
+			return "redirect:loginForm.me";
 		}
 	}
 	
@@ -554,15 +549,23 @@ public class MemberController {
 		
 		if(mode.equals("insert")) {
 			result = memberService.insertImg(image);
-		}else {
+		}else if(mode.equals("update")){
 			result = memberService.updateImg(image); 
+		}else if(mode.equals("delete")){
+			result = memberService.deleteImg(profile.getFileNo());
 		}
 		
 		
-		if(result > 0) {
-			
+		if(result > 0 && !mode.equals("delete")) {
 			loginUser.setImage(image);
 			session.setAttribute("loginUser", loginUser);
+			return "redirect:myPage.me";
+		}
+		else if(result > 0 && mode.equals("delete")) {			
+			File path = new File(application.getRealPath("/resources/profileImg"));
+			new File(path+profile.getChangeName()).delete();
+			
+			session.removeAttribute("profile");			
 			return "redirect:myPage.me";
 		}else {
 			model.addAttribute("errorMsg","게시글 작성 실패");

@@ -19,3 +19,30 @@ span{
   color: hotpink;
 }
 
+#whole{
+	width: 50%;
+    margin: auto;
+    padding: 30px;
+    border: none;
+    box-shadow: 0 0 5px 1px lightgrey;
+    border-radius: 12px;
+    background-color: white;
+}
+#content{
+	text-align:center;
+	font-family: 'Poor Story', 'cursive';
+	font-weight:  bold;
+	font-size: 20px;
+}
+
+#red{
+	color:#dc3545;
+	font-family: 'Poor Story', 'cursive';
+	font-weight:  bold;
+	font-size: 20px;
+}
+#main__logo{
+	font-family: 'Poor Story', 'cursive';
+	font-weight:  bold;
+	font-size: 20px;
+}

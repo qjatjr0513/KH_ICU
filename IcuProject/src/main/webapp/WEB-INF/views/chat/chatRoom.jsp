@@ -66,7 +66,7 @@
 		</div>
 		<ul class="display-chatting">
 			<c:forEach items="${list }" var="msg">
-				<fmt:formatDate var="chatDate" value="${msg.createDate }" pattern="yyyy년 MM월 dd일 HH:mm:ss"/>
+				<fmt:formatDate var="chatDate" value="${msg.createDate }" pattern="a KK:mm"/>
 				
 				<%-- 1) 내가 보낸 메세지 --%>
 				<c:if test="${msg.memNo == loginUser.memNo}">
@@ -80,6 +80,7 @@
 				<c:if test="${msg.memNo != loginUser.memNo}">
 					<li class="">
 						<b>${msg.memNickname }</b>
+						<br>
 						<p class="chat">${msg.message }</p>
 						<span class="chatDate">${chatDate }</span>
 					</li>
@@ -88,10 +89,20 @@
 			</c:forEach>
 		</ul>
 		
-		<div class="input-area">
-			<textarea id="inputChatting" rows="3"></textarea>
-			<button id="send">보내기</button>
-		</div>
+		
+		<input 
+         type="text" 
+         class="inputChatting" 
+         id="adminMsg"
+         placeholder="내용 입력" 
+         style="border: 0;
+               width: 100%;
+               background: #ddd;
+               border-radius: 5px;
+               height: 30px;
+               padding-left: 5px;
+               box-sizing: border-box;
+               margin-top: 5px;"/>
 		
 	</div>
 	
@@ -109,6 +120,6 @@
  		
 	</script>
 	
-	<script src="${contextPath }/resources/js/chat.js?1"></script>
+	<script src="${contextPath }/resources/js/chat.js"></script>
 </body>
 </html>
