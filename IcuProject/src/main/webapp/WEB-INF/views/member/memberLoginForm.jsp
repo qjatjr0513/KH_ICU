@@ -69,10 +69,17 @@
   	  </a>
     </div>
 	  
+    <!-- 카카오 로그인 -->
     <div class="kakao__button loginbtn" style="text-align:center">
-     <!-- 카카오 로그인 -->
 	 <button type ="button" class = "btn" onclick="location.href='${urlKakao}'">
 	 	<img class='kakaoImg' src="resources/images/kakao_login_large_wide.png">
+	 </button>
+    </div>
+
+    <!-- 구글 로그인 -->
+    <div class="google__button loginbtn" style="text-align:center">
+	 <button type ="button" class = "btn" onclick="location.href='${urlGoogle}'">
+	 	<img class='googleImg' src="resources/images/google_logo.png">
 	 </button>
     </div>
     

@@ -1,9 +1,7 @@
 package com.kh.icu.pay.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -19,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.kh.icu.common.model.service.AlarmService;
-import com.kh.icu.common.model.vo.Alarm;
 import com.kh.icu.common.socket.AlramHandler;
 import com.kh.icu.common.socket.Sessions;
 import com.kh.icu.member.model.vo.Member;
@@ -34,7 +30,7 @@ import com.kh.icu.pay.model.vo.Pay;
 
 @Controller
 @ServerEndpoint(value="/alram")
-public class payController {
+public class PayController {
 	
 	@Autowired
 	private PayService payService;

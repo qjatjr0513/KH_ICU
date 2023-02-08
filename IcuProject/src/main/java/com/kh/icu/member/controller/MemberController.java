@@ -19,30 +19,41 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.kh.icu.common.Utils;
 import com.kh.icu.common.model.vo.Image;
 import com.kh.icu.common.socket.AlramHandler;
 import com.kh.icu.common.socket.Sessions;
+import com.kh.icu.member.model.service.GoogleLoginBo;
 import com.kh.icu.member.model.service.MemberService;
 import com.kh.icu.member.model.service.NaverLoginBO;
 import com.kh.icu.member.model.service.kakaoLoginBO;
 import com.kh.icu.member.model.vo.Member;
+
+import lombok.Value;
 
 
 @Controller
@@ -65,6 +76,10 @@ public class MemberController {
 	@Autowired
 	private kakaoLoginBO kakaoLoginBO;
 	
+	/* GoogleLogin */
+	@Autowired
+	private GoogleLoginBo googleLoginBo;
+	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
@@ -74,6 +89,7 @@ public class MemberController {
 	private ServletContext application;
 	  
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	
 	/**
 	 * 로그인 페이지
@@ -92,6 +108,11 @@ public class MemberController {
 		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
 		System.out.println("카카오:" + kakaoAuthUrl);		
 		model.addAttribute("urlKakao", kakaoAuthUrl);
+		
+		/* 구글 URL */
+		String googleAuthUrl = googleLoginBo.getAuthorizationUrl(session);
+		System.out.println("구글:" + googleAuthUrl);		
+		model.addAttribute("urlGoogle", googleAuthUrl);
 		
 		return "member/memberLoginForm";
 	}
@@ -371,6 +392,29 @@ public class MemberController {
 		return "redirect:main";
 	}
 	
+	//	구글 로그인 callback
+	@RequestMapping(value = "/googleCallback",method = { RequestMethod.GET, RequestMethod.POST })
+	public String callback(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
+		System.out.println("구글 callback");
+		OAuth2AccessToken oauthToken;
+		oauthToken = googleLoginBo.getAccessToken(session, code, state);
+		System.out.println(oauthToken.toString());
+		apiResult = googleLoginBo.getUserProfile(oauthToken);
+		System.out.println(apiResult);
+		JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject)parser.parse(apiResult);
+        
+        
+        
+        System.out.println(jsonObject.toString());
+        String email=(String) jsonObject.get("email");
+        String userpw =(String)jsonObject.get("id");
+        System.out.println("userpw  : " + userpw);
+        
+        return "redirect:main";
+        
+	}
+	
 	
 	// 닉네임 랜덤생성 (naver)
 	public static String randomRangeN(int n1, int n2) {
@@ -383,6 +427,12 @@ public class MemberController {
 		double num = (((Math.random() * (n2 - n1 + 1)) + n1));
 		return (String) "K"+(int)(Math.floor(num));
 	}
+	
+	// 닉네임 랜덤생성(google)
+		public static String randomRangeG(int n1, int n2) {
+			double num = (((Math.random() * (n2 - n1 + 1)) + n1));
+			return (String) "K"+(int)(Math.floor(num));
+		}
 	
 	//SNS 로그인 회원탈퇴
 	@GetMapping("remove")
@@ -477,7 +527,9 @@ public class MemberController {
 		      return null;
 		    }
 		  }
+	 
 	
+
 	
 	
 	

@@ -99,7 +99,7 @@
 		<br><br>
 		<div id="reviewInput">
 			<c:if test="${memNo ne 0 }">
-				<textarea cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" required></textarea>
+				<textarea cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" style="resize: none;" required></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" onclick="insertReview();">작성</button>
 			</c:if>
 			

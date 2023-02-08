@@ -30,6 +30,9 @@
 	<!-- KakaoLoginBO Class에 대한 Bean설정 추가 -->
 	<beans:bean id="kakaoLoginBO" class="com.kh.icu.member.model.service.kakaoLoginBO" />
 	
+	<!-- GoogleLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="GoogleLoginBo" class="com.kh.icu.member.model.service.GoogleLoginBo" />
+	
 	<context:component-scan base-package="com.kh.icu" />
 	
 
