@@ -8,7 +8,7 @@
 <title>ICU - FAQ</title>
 
 <!-- css -->
-<link rel="stylesheet" href="resources/css/faqForm.css" />
+<link rel="stylesheet" href="${contextPath }/resources/css/faqForm.css" />
 
 </head>
 <body>

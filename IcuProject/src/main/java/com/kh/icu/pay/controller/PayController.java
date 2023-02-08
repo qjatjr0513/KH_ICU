@@ -74,69 +74,6 @@ public class PayController {
 	}
 	
 	
-	
-	
-	
-	@RequestMapping("payManageListForm.pe")
-	public String payManageListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
-			 					  @RequestParam Map<String, Object> paramMap){
-		
-		Map<String, Object> map = new HashMap();
-        
-	    map = payService.selectPayManageList(currentPage);
-	         
-	    model.addAttribute("map", map);
-		
-		return "pay/payManageList";
-	}
-	
-	@RequestMapping("remitConfirm.pe")
-	public String remitConfirm(int payNo, HttpSession session, @RequestParam("paName") int paName, 
-								@RequestParam("paMemNickName") String paMemNickName,
-								@RequestParam("memNickName") String memNickName) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int result = payService.remitConfirm(payNo);
-		System.out.println("payNo :" + payNo);
-		
-		
-		int sendId = loginUser.getMemNo();
-		String sendNickname = memNickName;
-		String receiveNickname = paMemNickName;
-		int receiveId = paName;
-		
-		String message = "pay,"+ sendId + ","+ sendNickname + "," + receiveNickname + "," +receiveId + "," + payNo;
-		
-		//Map<String, WebSocketSession> userSessions = new HashMap<>();
-		WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
-		System.out.println(receiveSession);
-		
-		
-		TextMessage msg = new TextMessage(message);
-		
-			try {
-				alramHandler.handleTextMessage(receiveSession, msg);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		
-			
-		
-		return "redirect:payManageListForm.pe";
-		
-	}
-	
-	 @OnMessage  
-	 public void onMessage(Session session, String msg) throws IOException {
-
-
-
-	}
-	
-	
-	
-	
-	
 	@RequestMapping("myPayListForm.pe")
 	public String myPayListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
 			 					  @RequestParam Map<String, Object> paramMap,

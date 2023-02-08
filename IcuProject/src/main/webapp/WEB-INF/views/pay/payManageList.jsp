@@ -10,7 +10,7 @@
 <title>결제 관리 페이지</title>
 
 	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_07_payManage.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/admin_07_payManage.css" />
 </head>
 <body>
 	<!-- Navbar -->
@@ -44,7 +44,7 @@
           </c:if>
           <c:forEach var="p" items="${list }" >
             <tr>
-              <form id="remitConfirm" action="${contextPath }/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}&memNickName=${p.memNickName}" method="post">
+              <form id="remitConfirm" action="${contextPath }/admin/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}&memNickName=${p.memNickName}" method="post">
               <th scope="row">${p.payDate}</th>
               <td>${p.paTitle}</td>
               <td>${p.memName}(${p.memNickName})</td> 

@@ -78,7 +78,7 @@
 	    	<h6><span class="hTitle">감독</span> : ${c.conDirector }</h6>
 	    	<h6><span class="hTitle">배우</span> : ${c.conActor }</h6>
 	    	<h6 class="wideLineHeight"><span class="hTitle">줄거리</span> : ${c.conSynop }</h6>
-	    	<c:if test="${memId eq 'admin'}">
+	    	<c:if test="${loginUser.role eq 'A'}">
 	    		<button type="submit" id="updateBtn" class="btn btn-outline-primary btn-lg" onclick="movePage(${c.conNo});">수정하기</button>
 	    		<button type="submit" id="deleteBtn" class="btn btn-outline-primary btn-lg" onclick="deleteContent(${c.conNo});">삭제하기</button>
 	    	</c:if>
@@ -138,11 +138,11 @@
     });
     
 		function movePage(cno){
-	 		location.href = '${contextPath}/contentUpdateForm?conNo='+cno;
+	 		location.href = '${contextPath}/admin/contentUpdateForm?conNo='+cno;
 	 	}
 		function deleteContent(cno){
 			if(confirm('컨텐츠를 삭제하시겠습니까?') == true){
-	 			location.href = '${contextPath}/contentDelete?conNo='+cno;
+	 			location.href = '${contextPath}/admin/contentDelete?conNo='+cno;
 			}
 			else{
 				return false;

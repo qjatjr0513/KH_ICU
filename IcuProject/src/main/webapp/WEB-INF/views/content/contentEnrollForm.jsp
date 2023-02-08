@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_05-1_contentsEnroll.css" />	
+    <link rel="stylesheet" href="${contextPath }/resources/css/admin_05-1_contentsEnroll.css" />	
     
 </head>
 <body>
@@ -17,7 +17,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
-    <form id="contentEnroll" action="${contextPath }/contentEnroll" encType="multipart/form-data" method="post">
+    <form id="contentEnroll" action="${contextPath }/admin/contentEnroll" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
       <h2>컨텐츠 등록</h2>

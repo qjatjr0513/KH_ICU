@@ -220,29 +220,7 @@ public class PartyController {
  	      }
     }
 
-    // 관리자페이지 - 진행중인 파티 
-	@RequestMapping("current.py")
-	public ModelAndView currentPartyList(ModelAndView mav) {
-		
-		List<Party> list = partyService.currentPartyList();
-		
-		mav.addObject("list", list);
-		mav.setViewName("party/currentPartyListForm");
-		
-		return mav;
-	}
-	
-	// 관리자페이지 - 종료된 파티 
-	@RequestMapping("end.py")
-	public ModelAndView endPartyList(ModelAndView mav) {
-		
-		List<Party> list = partyService.endPartyList();
-		
-		mav.addObject("list", list);
-		mav.setViewName("party/endPartyListForm");
-		
-		return mav;
-	}	
+
 	
     // 사용자페이지 - 진행중인 파티 (내가 만든 / 내가 참여한)
 	@RequestMapping("CurrentParty.py")

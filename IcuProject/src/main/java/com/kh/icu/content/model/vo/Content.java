@@ -20,6 +20,7 @@ public class Content {
 	private String conSynop;
 	private Date enrollDate;
 	private String status;
+	private String originName;
 	private String changeName;
 	private String filePath;
 	private double cmtStar;

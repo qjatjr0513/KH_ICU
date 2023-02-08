@@ -102,7 +102,7 @@ public class BoardController {
       if(result > 0) {
     	 redirectAttributes.addFlashAttribute("flag2","showAlert2");
     	 if(loginUser.getRole().equals("A")) {
-    		 return "redirect:noticeList.bo";
+    		 return "redirect:admin/noticeList.bo";
     	 }
     	 else {
     		 return "redirect:list.bo";
@@ -199,12 +199,18 @@ public class BoardController {
    public String deleteBoard(@RequestParam(value="bno", required =false, defaultValue = "0") int boardNo,
                        HttpSession session, Model model,
                        RedirectAttributes redirectAttributes) {
-      
+	  Member loginUser = (Member)session.getAttribute("loginUser");
       int result = boardService.deleteBoard(boardNo);
       
       if(result > 0) {
-    	  redirectAttributes.addFlashAttribute("flag","showAlert");
-         return "redirect:list.bo";
+    	  if(loginUser.getRole().equals("A")) {
+      		 redirectAttributes.addFlashAttribute("flag","showAlert");
+     		 return "redirect:admin/noticeList.bo";
+     	 }
+     	 else {
+     		 redirectAttributes.addFlashAttribute("flag","showAlert");
+     		 return "redirect:list.bo";
+     	 }
       } else {
          model.addAttribute("errorMsg", "게시글 삭제 실패");
          return "common/errorPage";
@@ -231,15 +237,4 @@ public class BoardController {
 	   
    }
    
-   @RequestMapping("/noticeList.bo")
-   public String selectList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model) {
-      
-      Map<String, Object> map = new HashMap();
-         
-      map = boardService.selectNoticeList(currentPage);
-
-      model.addAttribute("map", map);
-      
-      return "board/noticeListForm";
-   }
 }

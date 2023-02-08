@@ -58,7 +58,14 @@
          <br>
          
          <div align="center">
-            <a class="btn btn-primary boardBtn3" href="${contextPath }/list.bo">목록으로</a>
+         <c:choose>
+         	<c:when test="${loginUser.role eq 'A' }">
+            	<a class="btn btn-primary boardBtn3" href="${contextPath }/admin/noticeList.bo">목록으로</a>
+            </c:when>
+            <c:otherwise>
+            	<a class="btn btn-primary boardBtn3" href="${contextPath }/list.bo">목록으로</a>
+            </c:otherwise>
+         </c:choose>
          </div>
          <br><br>
          

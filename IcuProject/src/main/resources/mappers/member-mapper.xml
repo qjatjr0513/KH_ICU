@@ -114,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- SNS 로그인 정보 찾기 -->  
 	<select id="findMember" parameterType="member" resultMap="memberResultSet">
-		SELECT * FROM MEMBER WHERE MEM_NAME=#{memName} AND EMAIL=#{email} AND SNS_TYPE IN('N', 'K') AND STATUS = 'N'
+		SELECT * FROM MEMBER WHERE MEM_NAME=#{memName} AND EMAIL=#{email} AND SNS_TYPE IN('N', 'K', 'G') AND STATUS = 'N'
 	</select>
 
 	<!-- SNS 로그인 정보 저장 -->  

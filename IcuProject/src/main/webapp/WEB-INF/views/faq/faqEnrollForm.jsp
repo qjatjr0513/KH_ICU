@@ -33,7 +33,7 @@
             </c:otherwise>
          </c:choose>
          <br>
-         <form id="enrollForm" action="${contextPath }/insert.fq">
+         <form id="enrollForm" action="${contextPath }/admin/insert.fq">
             <div>
                <div>
                   <label for="title">제목 : </label>
@@ -44,9 +44,9 @@
                	  <label for="type">분류 : </label>
                   <select name="faqType" id="faqType">
 		            <option> 선택 </option>
-		            <option value="AC">계정 문의</option>
-		            <option value="PY">파티 문의</option>
-		            <option value="PA">결제 문의</option>
+		            <option value="AC"<c:if test="${f.faqType eq 'AC' }">selected</c:if>>계정 문의</option>
+		            <option value="PY"<c:if test="${f.faqType eq 'PY' }">selected</c:if>>파티 문의</option>
+		            <option value="PA"<c:if test="${f.faqType eq 'PA' }">selected</c:if>>결제 문의</option>
 		          </select>
                </div>
                <br>
@@ -58,7 +58,7 @@
             <input type="hidden" name="faqNo" value="${empty f.faqNo ? 0 : f.faqNo}"/>
             
             <div align="center">
-               <a href="${contextPath }/faqList.fq" class="btn btn-danger">취소하기</a>
+               <a href="${contextPath }/admin/faqList.fq" class="btn btn-danger">취소하기</a>
                <c:choose>
                   <c:when test="${f.faqNo eq null}">
                      <button type="submit" class="btn btn-primary">등록하기</button>

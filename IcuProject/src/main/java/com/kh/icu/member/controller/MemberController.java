@@ -226,7 +226,7 @@ public class MemberController {
 			if(loginUser.getRole().equals("A")) {
 				session.setAttribute("loginUser", loginUser);
 
-				return "redirect:memListForm.me";
+				return "redirect:admin/memListForm.me";
 
 			}else {
 				session.setAttribute("loginUser", loginUser);
@@ -408,10 +408,29 @@ public class MemberController {
         
         System.out.println(jsonObject.toString());
         String email=(String) jsonObject.get("email");
-        String userpw =(String)jsonObject.get("id");
-        System.out.println("userpw  : " + userpw);
         
-        return "redirect:main";
+        String nickname = randomRangeG(100000, 999999);
+          
+     // 세션에 사용자 정보 등록
+ 		m.setMemId(nickname);
+ 		m.setEmail(email);
+ 		m.setMemName(email);
+ 		m.setMemNickname(nickname);
+ 		m.setSnsType("G");
+ 		
+ 		Member userInfo = memberService.findMember(m);
+ 		
+ 		int memNo = userInfo.getMemNo();
+ 		Image profile = memberService.selectProfile(memNo);
+ 		
+ 		if (userInfo.getMemId() != null) {
+ 			session.setAttribute("loginUser", userInfo);
+             session.setAttribute("signIn", apiResult);
+             session.setAttribute("profile", profile);
+             session.setAttribute("oauthToken", oauthToken);
+         }
+
+ 		return "redirect:main";
         
 	}
 	
@@ -431,7 +450,7 @@ public class MemberController {
 	// 닉네임 랜덤생성(google)
 		public static String randomRangeG(int n1, int n2) {
 			double num = (((Math.random() * (n2 - n1 + 1)) + n1));
-			return (String) "K"+(int)(Math.floor(num));
+			return (String) "G"+(int)(Math.floor(num));
 		}
 	
 	//SNS 로그인 회원탈퇴
@@ -461,6 +480,13 @@ public class MemberController {
 			
 			unlink(apiUrl, access_Token);
 			int result = memberService.deleteMember(memId);
+			if(result > 0) {
+				session.invalidate();			
+			}
+		}else if(mode.equals("google")) {
+			apiUrl = "https://oauth2.googleapis.com/revoke?token="+oauthToken.getAccessToken();
+			int result = memberService.deleteMember(memId);
+			
 			if(result > 0) {
 				session.invalidate();			
 			}
@@ -734,73 +760,7 @@ public class MemberController {
 		
 	}
 	
-	/**
-	 * 관리자 회원리스트
-	 */
-	@RequestMapping("memListForm.me")
-	public String memberList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
-            				 @RequestParam Map<String, Object> paramMap) {
-		
-		Map<String, Object> map = new HashMap();
-	        
-	    map = memberService.selectMemList(currentPage);
-	         
-	    model.addAttribute("map", map);
-		
-		return "member/memberListForm";
-	}
 	
-	/**
-	 * 관리자 블랙리스트
-	 */
-	@RequestMapping("memBlackListForm.me")
-	public String memberBlackList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
-			 						@RequestParam Map<String, Object> paramMap){
-		
-		Map<String, Object> map = new HashMap();
-        
-	    map = memberService.selectBlackList(currentPage);
-	         
-	    model.addAttribute("map", map);
-		
-		return "member/memberBlackListForm";
-	}
-	
-	/**
-	 * 관리자 블랙리스트 해제
-	 */
-	@RequestMapping("blackCancel.me")
-	public String blackCancel(int memNo, String memNickname, HttpSession session) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int result = memberService.blackCancel(memNo);
-		
-		if(result > 0) {
-			int sendId = loginUser.getMemNo();
-			String sendNickname = loginUser.getMemNickname();
-			String receiveNickname = memNickname;
-			int receiveId = memNo;
-			
-			String message = "cancle,"+ sendId + "," + sendNickname + "," + receiveNickname + "," +receiveId + "," + memNo;
-			
-			//Map<String, WebSocketSession> userSessions = new HashMap<>();
-			WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
-			System.out.println(receiveSession);
-			
-			
-			TextMessage msg = new TextMessage(message);
-			
-			try {
-				alramHandler.handleTextMessage(receiveSession, msg);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		}
-
-		
-		return "redirect:memBlackListForm.me";
-		
-	}
 	
 	
 	

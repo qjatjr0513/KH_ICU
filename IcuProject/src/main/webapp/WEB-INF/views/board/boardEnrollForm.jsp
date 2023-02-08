@@ -48,7 +48,7 @@
                </div>
                <br>
                <div>
-                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="boardContent" placeholder="내용을 입력해주세요." required></textarea>
+                  <textarea id="content" style="resize:none;" cols="50" rows="20" class="form-control" name="boardContent" placeholder="내용을 입력해주세요." required>${b.boardContent }</textarea>
                </div>
                <br>
             <input type="hidden" name="mode" value="${param.mode }"/>

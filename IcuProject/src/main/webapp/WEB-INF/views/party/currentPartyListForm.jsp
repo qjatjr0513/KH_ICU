@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_03_currentParty.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/admin_03_currentParty.css" />
 </head>
 <body>
 	<!-- Navbar -->

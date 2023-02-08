@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 
 	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_05-1_contentsEnroll.css" />	
+    <link rel="stylesheet" href="${contextPath }/resources/css/admin_05-1_contentsEnroll.css" />	
     
 </head>
 <body>
@@ -21,7 +21,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
-    <form id="contentUpdate" action="${contextPath }/contentUpdate" encType="multipart/form-data" method="post">
+    <form id="contentUpdate" action="${contextPath }/admin/contentUpdate" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
       <h2>컨텐츠 등록</h2>
@@ -56,7 +56,7 @@
           <!-- 영화 left-box2 -->
           <div class="left-box-movie">
             <span>개봉 날짜 : </span
-            ><input type="date" name="conDate"/><br><br>
+            ><input type="date" name="conDate" value="${c.conDate }"/><br><br>
             <span>관람 연령 : </span
             ><select id="age" name="conAge" class="form-select" aria-label="Default select example">
               <option selected>연령 제한 선택</option>
@@ -97,7 +97,7 @@
           <br />
         </div>
         <div class="right-box">
-          	<input type="file" id="imgInput" name="poster"/><br />
+          	<input type="file" id="imgInput" name="poster" value="${c.changeName}"/><br />
           	<c:if test="${c.filePath eq '' or c.filePath eq null}">
 				<img id="image_section" src="${c.filePath}${c.changeName}"/>
 			</c:if>
@@ -119,9 +119,9 @@
       <div class="contents-info">
         <span>감독 : <input type="text" name="conDirector" placeholder="감독 이름 입력" value="${c.conDirector }" required/></span>
         <br />
-        <span>배우 : #갓대웅 <input type="text" name="conActor" value="${c.conActor }" required/></span>
+        <span>배우 : <input type="text" name="conActor" value="${c.conActor }" required/></span>
         <br />
-        <span>줄거리 <br /><textarea name="conSynop" id="" cols="50" rows="7" value="${c.conSynop }" required></textarea></span>
+        <span>줄거리 <br /><textarea name="conSynop" id="" cols="50" rows="7" required>${c.conSynop }</textarea></span>
       </div>
       
       <br />

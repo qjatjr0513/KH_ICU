@@ -10,7 +10,7 @@
 <title>블랙리스트 조회 페이지</title>
 
 	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_01_manageMeber.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/admin_01_manageMeber.css" />
 
 </head>
 <body>
@@ -43,7 +43,7 @@
         </c:if>
         <c:forEach var="m" items="${list }" >
           <tr>
-          <form id="blackCancel" action="${contextPath }/blackCancel.me" method="post">
+          <form id="blackCancel" action="${contextPath }/admin/blackCancel.me" method="post">
           <th scope="row">${m.memNo}</th>
           <td>${m.memName}(${m.memNickname})</td>
           <td>${m.email}</td>

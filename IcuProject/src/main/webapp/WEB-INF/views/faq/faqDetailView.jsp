@@ -51,8 +51,8 @@
             <input type="hidden" name="faqNo" value="${f.faqNo}">
          </div>
          <div style="float:right;">
-               <a class="btn btn-primary" href="${contextPath}/enrollForm.fq?mode=update&fno=${f.faqNo}">수정하기</a>
-               <a class="btn btn-danger" href="${contextPath}/delete.fq?fno=${f.faqNo}">삭제하기</a>
+               <a class="btn btn-primary" href="${contextPath}/admin/enrollForm.fq?mode=update&fno=${f.faqNo}">수정하기</a>
+               <a class="btn btn-danger" href="${contextPath}/admin/delete.fq?fno=${f.faqNo}">삭제하기</a>
          </div>
          <br><br>
       </div>
@@ -71,7 +71,7 @@
          <br>
          
          <div align="center">
-            <a class="btn btn-primary" href="${contextPath }/faqList.fq">목록으로</a>
+            <a class="btn btn-primary" href="${contextPath }/admin/faqList.fq">목록으로</a>
          </div>
          <br><br>
          

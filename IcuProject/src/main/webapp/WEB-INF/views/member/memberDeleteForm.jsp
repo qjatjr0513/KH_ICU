@@ -60,6 +60,11 @@
 				회원탈퇴
 			</button>
 		</c:when>
+		<c:when test="${loginUser.snsType eq 'G' }">
+			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove?mode=google'">
+				회원탈퇴
+			</button>
+		</c:when>
 		<c:otherwise>
 			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				회원탈퇴

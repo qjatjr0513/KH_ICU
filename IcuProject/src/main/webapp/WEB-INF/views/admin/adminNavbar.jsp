@@ -16,33 +16,33 @@
         <div class="member__manage">
           <h2>회원 정보 관리</h2>
           <ul>
-            <li><a href="${contextPath}/memListForm.me">회원정보조회</a></li>
-            <li><a href="${contextPath}/memBlackListForm.me">블랙리스트 관리</a></li>
+            <li><a href="${contextPath}/admin/memListForm.me">회원정보조회</a></li>
+            <li><a href="${contextPath}/admin/memBlackListForm.me">블랙리스트 관리</a></li>
           </ul>
           <hr />
         </div>
         <div class="party__manage">
           <h2>파티 관리</h2>
           <ul>
-            <li><a href="${contextPath }/current.py">진행중인 파티</a></li>
-            <li><a href="${contextPath }/end.py">종료된 파티</a></li>
+            <li><a href="${contextPath }/admin/current.py">진행중인 파티</a></li>
+            <li><a href="${contextPath }/admin/end.py">종료된 파티</a></li>
           </ul>
           <hr />
         </div>
         <div class="contents__manage">
-          <h2><a href="${contextPath }/contentListForm">컨텐츠 관리</a></h2>
+          <h2><a href="${contextPath }/admin/contentListForm">컨텐츠 관리</a></h2>
           <hr />
         </div>
         <div class="faq__manage">
-          <h2><a href="${contextPath }/faqList.fq">FAQ 관리</a></h2>
+          <h2><a href="${contextPath }/admin/faqList.fq">FAQ 관리</a></h2>
           <hr />
         </div>
         <div class="notice__manage">
-          <h2><a href="${contextPath }/noticeList.bo">공지사항 관리</a></h2>
+          <h2><a href="${contextPath }/admin/noticeList.bo">공지사항 관리</a></h2>
           <hr />
         </div>
         <div class="pay__manage">
-          <h2><a href="${contextPath }/payManageListForm.pe">결제 관리</a></h2>
+          <h2><a href="${contextPath }/admin/payManageListForm.pe">결제 관리</a></h2>
           <hr />
         </div>
         <div class="inquiry__manage">

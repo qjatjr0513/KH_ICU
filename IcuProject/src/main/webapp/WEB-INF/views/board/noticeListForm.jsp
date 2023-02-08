@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>공지사항 관리 페이지</title>
 	<!-- css -->
-    <link rel="stylesheet" href="resources/css/admin_08_faqManage.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin_08_faqManage.css" />
 </head>
 <body>
     <!-- Navbar -->
@@ -89,7 +89,7 @@
         if('${flag}' == 'showAlert'){
        	 Swal.fire({
                 icon:'success',
-                title: "FAQ 삭제 성공"
+                title: "공지사항 삭제 성공"
           		});
        	}
     });
@@ -98,7 +98,7 @@
         if('${flag2}' == 'showAlert2'){
        	 Swal.fire({
                 icon:'success',
-                title: "FAQ 등록 성공"
+                title: "공지사항 등록 성공"
           		});
        	}
     });
