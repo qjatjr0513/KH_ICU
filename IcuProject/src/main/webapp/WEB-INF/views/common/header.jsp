@@ -127,7 +127,7 @@
                 <a href="${contextPath }/loginForm" style="text-decoration: none; color:black; margin-top:16px;">로그인</a>
              </li>
              </c:when>
-             <c:when test="${ loginUser.memId == 'admin' }">
+             <c:when test="${ loginUser.role == 'A' }">
            <!-- 로그인 후 -->
            <li>
                 <a href="${contextPath }/memLogout" style="text-decoration: none; color:black;">로그아웃</a>
