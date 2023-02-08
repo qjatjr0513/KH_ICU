@@ -12,7 +12,11 @@
     <!-- css -->
     <link rel="stylesheet" href="resources/css/02_mainPage.css" />
 
-    
+    <style>
+      .match{
+      	float: right;
+      }
+    </style>
 </head>
 <body>
 <div>
@@ -43,8 +47,9 @@
 	         />
 	         <button
 	           class="btn btn-outline-secondary btn3"
-	           type="submit"
+	           type="button"
 	           id="button-addon2"
+	           onclick="clickMore();"
 	         >
 	           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 	         </button>
@@ -325,10 +330,11 @@
    </div>
    
    <script>
-   function movePage(cno){
+    function movePage(cno){
        location.href = '${contextPath}/detail?conNo='+cno;
     }
 	$(document).ready(function() {
+		var count = 1;
 		$("#keyword").autocomplete({
 			source : function(request, response){
 				$.ajax({
@@ -339,14 +345,17 @@
 						selectOption : $('select[name="searchNo"] option:selected').val()
 					},
 					success : function(data){	
-						console.log(data);
 						response($.map(data, function (item) {
 			                return {
 			                    value: item.conKTitle,
 			                    label: item.conKTitle,
-			                    idx: item.conNo
+			                    idx: item.conNo,
+			                    img_url: item.changeName,
+			                    category: item.conCategory,
+			                    date: item.conDate,
+			                    star: item.cmtStar
 			                };
-			            }));
+			            }).slice(0, 3));
 					},error : function(){
 			             console.log("오류가 발생했습니다.");
 			        }
@@ -358,13 +367,47 @@
 			,minLength: 1
 			,autoFocus : true
 			,delay: 100
-			,select : function(evt, ui) { 
-				location.href = '${contextPath}/detail?conNo='+ui.item.idx;
-				console.log(ui.item.label);
-				console.log(ui.item.value);
-			 }
-		});
+		}).autocomplete("instance")._renderItem = function(ul, item){
+			var highlight = String(item.label).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+			var category = "";
+			if(item.category == 1){
+				category = "영화";
+			}
+			else{
+				category = "드라마";
+			}
+			var html = "";
+			var html2 = "<button type='button'>더 보기</button>";
+			
+			html += '<a class="match" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
+			html += item.idx;
+			html += ')">';
+			html += '<div class="match_img">';
+			html += '<img src="';
+			html += item.img_url;
+			html += '" style="width:120px; height: 150px; margin: auto;">';
+			html += '<div class="match_name">';
+			html += highlight;
+			html += ' (';
+			html += category;
+			html += ' | ';
+			html += item.date.substr(0, 4);
+			html += ')   ';
+			html += '<i class="fa-solid fa-star">';
+			html += item.star;			
+			html += '</i></div>';
+			html += '</div><div></div></a>';
+			var result = $("<li class='match_li'>").append(html).appendTo(ul);
+			var result2 = "";
+			console.log(result);
+			return result;
+			
+		};
 	});
+	function clickMore(){
+		console.log("second!!");
+		$("#keyword").autocomplete("search");
+	}
    </script>
 </body>
 </html>
