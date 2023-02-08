@@ -485,6 +485,17 @@ public class MemberServiceImpl implements MemberService{
 		
 		return updateMember;
 	}
+	
+	/**
+	 * 소셜 로그인 닉네임 수정
+	 */
+	@Override
+	public int updateMemberNick(Member m) {
+		
+		int updateMember = memberDao.updateMemberNick(sqlSession, m);
+		
+		return updateMember;
+	}
 
 	/**
 	 * 프로필이미지 수정

@@ -160,6 +160,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			MODIFY_DATE = SYSDATE
 		WHERE MEM_ID = #{memId}
 	</update>
+
+	<!-- 소셜 로그인 닉네임 수정 -->
+	<update id="updateMemberNick" parameterType="member">
+		UPDATE MEMBER
+		SET 
+			MEM_NICKNAME = #{memNickname},
+			MODIFY_DATE = SYSDATE
+		WHERE EMAIL = #{email} AND MEM_NO = #{memNo}
+	</update>
+	
 	
 	<!-- 회원이미지 수정 -->
 	<update id="updateImg" parameterType="image">

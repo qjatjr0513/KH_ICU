@@ -554,16 +554,6 @@ public class MemberController {
 		    }
 		  }
 	 
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 	@RequestMapping("myPage.me")
 	public String myPage(HttpSession session) {
@@ -712,12 +702,41 @@ public class MemberController {
           session.setAttribute("loginUser", updateMem);
           session.setAttribute("alertMsg", "회원정보수정 성공!");
           
-          return "redirect:/";
+          return "redirect:myPage.me";
        } else {
           // 3. 업데이트 실패시 -> 에러메세지 추가, 에러페이지 이동
           model.addAttribute("errorMsg","회원정보수정 실패");
           return "common/errorPage";
        }
+	}
+	
+	/**
+	 * 소셜 로그인 닉네임 수정 
+	 */
+	@RequestMapping("memUpdateNick.me")
+	public String updateMemberNick(Member m, HttpSession session, Model model) {
+		// 1. 회원정보 업데이트
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		m.setMemId(loginUser.getMemId());
+		m.setEmail(loginUser.getEmail());
+		m.setMemNo(loginUser.getMemNo());
+		int result = memberService.updateMemberNick(m);
+		
+		
+		if(result > 0) {
+			Member updateMem = memberService.loginMember(m);
+			System.out.println(updateMem);
+			//업데이트 성공했으니 디비에 등록된 변경된 정보 가져오기
+			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("alertMsg", "닉네임 변경 성공!");
+			
+			return "redirect:myPage.me";
+		} else {
+			// 3. 업데이트 실패시 -> 에러메세지 추가, 에러페이지 이동
+			model.addAttribute("errorMsg","닉네임 변경 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	/**

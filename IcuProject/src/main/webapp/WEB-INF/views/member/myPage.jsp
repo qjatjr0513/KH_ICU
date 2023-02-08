@@ -71,10 +71,51 @@
         </div>
 		<br>
       </div>
-        <div id="updateButton">
-          <a class="btn" href="${contextPath}/memUpdateForm.me">수정하러 가기</a>
-        </div>
+      <c:choose>
+        <c:when test="${loginUser.snsType eq 'I'}">
+          <div id="updateButton">
+            <a class="btn" href="${contextPath}/memUpdateForm.me">수정하러 가기</a>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div id="updateButton">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <b><span style="color: white; font-weight: bold;">닉네임 수정하기</span></b>
+            </button>
+          </div>
+        </c:otherwise>
+      </c:choose>
       
+    </div>
+
+    <!-- 소셜 로그인 수정 모달 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">닉네임 수정하기</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="memberUpdateNick" action="${contextPath }/memUpdateNick.me" method="post">
+              <label>변경할 닉네임 : </label>
+              <input type="text" id="memNickname" placeholder="닉네임 입력" name="memNickname" required/>
+              <button
+              type="button"
+              class="btn btn-primary tableBtn"
+              onclick="nickCheck();"
+            >
+              중복확인
+            </button>
+            </form>
+          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >취소</button>
+              <button type="button" class="btn btn-primary" onclick="btnUpdate();" name="update" disabled>확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- 실시간 문의 -->
@@ -143,6 +184,95 @@
             });
             refreshProfile();
 
+        }
+
+        function btnUpdate(){
+    
+          if($('input[name=memNickname]').val() == ""){
+                Swal.fire({
+                    icon: 'error',
+                    title: '닉네임을 입력해주세요.'                  
+                });
+          } else {
+            Swal.fire({
+                    title: '변경하시겠습니까?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: '취소',
+                    confirmButtonText: '수정'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      $("#memberUpdateNick").submit();
+                        
+                    }
+                });
+          }
+          
+        }
+
+        function nickCheck(){
+        // 아이디 입력하는 input 요소 객체
+        let $memberNick = $("#memberUpdateNick input[name=memNickname]");
+        let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
+        
+            $.ajax({
+              url : "nickCheck.me",
+              data : {checkNick : $memberNick.val()},
+              success : function(result){
+                
+                if($memberNick.val() == "") {
+                  
+                  Swal.fire({
+                          icon: 'error',
+                          title: '닉네임을 입력해주세요.'
+                          
+                      });
+
+                      $memberNick.focus();
+                      
+                  }
+                
+                else if(!regExp.test($memberNick.val())){
+                    Swal.fire({
+                          icon: 'error',
+                          title: '유효한 닉네임을 입력해주세요.'                  
+                      });
+                    
+                  }else if(result == 1){ // 사용불가능한 닉네임
+                    
+                    Swal.fire({
+                          icon: 'error',
+                          title: '이미 존재하는 닉네임입니다.'
+                          
+                      });
+                    $memberNick.focus();
+                    
+                  }else{
+                    
+                    Swal.fire({
+                          title: '사용가능한 닉네임입니다.',
+                          text: '사용하시겠습니까?',
+                          icon: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: '사용',
+                          cancelButtonText: '취소'
+                      }).then((result) => {
+                        if(result.isConfirmed){
+                              $("input[name=memNickname]").attr("readonly", true);
+                              $("button:button[name=update]").attr("disabled",false);
+                          }  
+                        
+                      });
+                  }
+              },
+              error : function(){
+                  alert("닉네임 중복체크용 ajax 통신 실패");
+              }
+            });
         }
     </script>
 </body>

@@ -79,6 +79,11 @@ public interface MemberService {
 	public int updateMember(Member m);
 	
 	/**
+	 * 소셜 로그인 닉네임 수정
+	 */
+	public int updateMemberNick(Member m);
+	
+	/**
 	 * 프로필이미지 넣기 
 	 */
 	public int insertImg(Image image);

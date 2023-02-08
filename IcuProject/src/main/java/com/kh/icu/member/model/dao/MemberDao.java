@@ -162,6 +162,14 @@ public class MemberDao {
 	}
 
 	/**
+	 * 소셜 로그인 닉네임 수정
+	 */
+	public int updateMemberNick(SqlSession sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMemberNick", m);
+	}
+
+	
+	/**
 	 * 프로필이미지 수정
 	 */
 	public int updateImg(SqlSession sqlSession, Image image) {
