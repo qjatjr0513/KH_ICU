@@ -334,6 +334,10 @@
        location.href = '${contextPath}/detail?conNo='+cno;
     }
 	$(document).ready(function() {
+		search();
+	});
+	
+	function search(){
 		var count = 1;
 		$("#keyword").autocomplete({
 			source : function(request, response){
@@ -404,10 +408,11 @@
 			return result;
 			
 		};
-	});
+	}
+	
 	function clickMore(){
 		console.log("second!!");
-		$("#keyword").autocomplete("search");
+		search();
 	}
    </script>
 </body>
