@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <c:set var="p" value="${p}"/>
 <c:set var="pj" value="${pj}"/>
+<c:set var="pjr" value="${pjr}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +58,7 @@
           <c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1">
           <div class="userInformation">
             <div class="userPhoto">
+            <input type="hidden" value="${pj.memNo}"/>
             <c:choose>
             	<c:when test="${!empty pj.changeName}">
                      <img id="replyWriter-img" src="${contextPath }${pj.filePath }${pj.changeName}">
@@ -93,72 +95,66 @@
     
     <br/>
     </form>
-    		loginUser.memNo : ${loginUser.memNo}
-			p.paName : ${p.paName}
+
     <c:set var="count" value="0"/>
-	<c:forEach var="pj" items="${pj}" begin="0" end="${fn:length(pj)}" step="1" varStatus="i" >
-		<c:if test="${(loginUser.memNo eq pj.memNo) or (loginUser.memNo eq p.paName)}">
-			
-    		loginUser.memNo : ${loginUser.memNo}
-			p.paName : ${p.paName}
-			
-		         <!-- 댓글등록기능 -->
-		         <div class="card mb-2" id="comment">
-		            <div class="card-header bg-light">
-		                    <i class="fa fa-comment fa"></i> REPLY
-		            </div>
-		            <div class="card-body">
-		               <ul class="list-group list-group-flush">
-		                   <li class="list-group-item">
-		                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
-		                   <c:if test="${not empty loginUser}">
-		                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
-		                   </c:if>
-		                   </li>
-		               </ul>
-		            </div>
-		         </div>
-		         
-		         <div id="comment">
-		         <table id="replyArea" class="table" align="center" >
-		            <thead>
-		               <tr>
-		                  <td colspan="3"><b>댓글(${list.size()})</b></td>
-		               </tr>
-		            </thead>
-		            <tbody>
-		              <c:forEach var="r" items="${list }" varStatus="i">
-						<tr>
-		               <td style="width: 30px;">
-		               <c:choose>
-		                  <c:when test="${!empty r.changeName}">
-		                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
-		                  </c:when>
-		                  <c:otherwise>
-		                     <i class="fa-solid fa-user fa-lg"></i>
-		                </c:otherwise>
-		               </c:choose>
-		               </td>
-		               <td id="rWriter">${r.replyWriter }</td>
-							<td id="rContent">${r.replyContent }</td>
-							<td>${r.createDate }</td>
-							<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
-							<c:if test="${r.replyWriter == loginUser.memNickname }">
-							<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
-							<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.py?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
-							</c:if>
-						</tr>
-					</c:forEach>
-		               
-		            </tbody>
-		         </table>
-		         </div>
+	<c:forEach var="pjr" items="${pjr}" begin="0" end="${fn:length(pjr)}" step="1" varStatus="i" >
+		<c:if test="${(loginUser.memNo == pjr.memNo)}">
+			<div class="card mb-2" id="comment">
+	            <div class="card-header bg-light">
+	                    <i class="fa fa-comment fa"></i> REPLY
+	            </div>
+	            <div class="card-body">
+	               <ul class="list-group list-group-flush">
+	                   <li class="list-group-item">
+	                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+	                   <c:if test="${not empty loginUser}">
+	                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
+	                   </c:if>
+	                   </li>
+	               </ul>
+	            </div>
+	         </div>
+	         
+	         <div id="comment">
+	         <table id="replyArea" class="table" align="center" >
+	            <thead>
+	               <tr>
+	                  <td colspan="3"><b>댓글(${list.size()})</b></td>
+	               </tr>
+	            </thead>
+	            <tbody>
+	              <c:forEach var="r" items="${list }" varStatus="i">
+					<tr>
+	               <td style="width: 30px;">
+	               <c:choose>
+	                  <c:when test="${!empty r.changeName}">
+	                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
+	                  </c:when>
+	                  <c:otherwise>
+	                     <i class="fa-solid fa-user fa-lg"></i>
+	                </c:otherwise>
+	               </c:choose>
+	               </td>
+	               <td id="rWriter">${r.replyWriter }</td>
+						<td id="rContent">${r.replyContent }</td>
+						<td>${r.createDate }</td>
+						<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
+						<c:if test="${r.replyWriter == loginUser.memNickname }">
+						<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>
+						<td><button type='button' class='btn btn-danger'  id="replyUpdate"  onclick="location.href='${contextPath}/deleteReply.py?rno=${r.replyNo }&paNo=${p.paNo}'">삭제</button></td>
+						</c:if>
+					</tr>
+				</c:forEach>
+	               
+	            </tbody>
+	         </table>
+	         </div>
 		</c:if>
-	<c:set var="count" value="${count+1 }"/>
+		<c:set var="count" value="${count+1 }"/>
 	</c:forEach>
     
     <script>
-
+    
 		// 파티장일 경우 참여하기 버튼 가리기 
 	    $(function(){
 	    	if(${loginUser.memNo} == ${p.paName}){
@@ -172,8 +168,8 @@
         const memNickname = "${p.memNickname}";
         const paNo = "${p.paNo}";
         const paName = "${p.paName}";	
-
         
+     	// 댓글
         function insertReply(){
            console.log("댓글버튼 실행");
            

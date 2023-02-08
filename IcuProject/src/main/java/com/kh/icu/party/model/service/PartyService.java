@@ -24,6 +24,8 @@ public interface PartyService {
 	
 	public List<PartyJoin> partyJoinMem(int paNo);
 	
+	public List<PartyJoin> partyMem(int paNo);
+	
 	public int joinPartyMember(PartyJoin pj);
 
 	public ArrayList<Reply> selectReplyList(int paNo);

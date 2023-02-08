@@ -64,6 +64,11 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.partyJoinMem(sqlSession, paNo);
 	};
 	
+	@Override
+	public List<PartyJoin> partyMem(int paNo){
+		return partyDao.partyMem(sqlSession, paNo);
+	};
+	
 	// 파티 참여하기
 	@Override
 	public int joinPartyMember(PartyJoin pj) {

@@ -46,10 +46,13 @@ public class PartyDao {
 		return sqlSession.selectList("partyMapper.partyJoinMem", paNo);
 	}
 	
+	public List<PartyJoin> partyMem(SqlSession sqlSession, int paNo) {
+		return sqlSession.selectList("partyMapper.partyMem", paNo);
+	}
+	
 	// 파티 참여하기
-	public int joinPartyMember (SqlSession sqlSession, PartyJoin pj) {
+	public int joinPartyMember(SqlSession sqlSession, PartyJoin pj) {
 		return sqlSession.insert("partyMapper.joinPartyMember", pj);
-		
 	}
 	
 	// 댓글 불러오기 (리스트)

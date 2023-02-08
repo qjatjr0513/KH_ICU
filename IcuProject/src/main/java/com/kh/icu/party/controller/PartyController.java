@@ -138,12 +138,14 @@ public class PartyController {
 		
 		Party p = partyService.partyDetailForm(paNo);
 		List<PartyJoin> pj = partyService.partyJoinMem(paNo);
+		List<PartyJoin> pjr = partyService.partyMem(paNo);
 	    ArrayList<Reply> list = partyService.selectReplyList(paNo);
 		
 	    int result = alarmService.readAlarm(mesNo);
 	    
 		model.addAttribute("p", p);
 		model.addAttribute("pj", pj);
+		model.addAttribute("pjr", pjr);
 		model.addAttribute("list", list);
 		
 		return "party/partyDetailForm";
