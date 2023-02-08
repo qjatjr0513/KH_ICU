@@ -368,6 +368,7 @@
 			,autoFocus : true
 			,delay: 100
 		}).autocomplete("instance")._renderItem = function(ul, item){
+
 			var highlight = String(item.label).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 			var category = "";
 			if(item.category == 1){
