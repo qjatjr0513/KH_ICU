@@ -35,6 +35,17 @@
 	
 	<context:component-scan base-package="com.kh.icu" />
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.me"/>
+			<mvc:mapping path="/*.bo"/>
+			<mvc:mapping path="/*.py"/>
+			<mvc:mapping path="/*.fq"/>
+			<mvc:mapping path="/admin/*"/>
+			<beans:bean class="com.kh.icu.common.interceptor.AccessVaildator"/>	
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 
 	<!-- 댓글 알림 핸들러 -->
 	<beans:bean id="alramHandler" class="com.kh.icu.common.socket.AlramHandler"/>

@@ -34,7 +34,7 @@
             </c:otherwise>
          </c:choose>
          <br>
-         <form id="enrollForm" action="${contextPath }/insert.bo">
+         <form id="enrollForm" action="${contextPath }/insert">
             <div >
                <div>
                   <label class='labelTitle' for="title">제목 : </label>

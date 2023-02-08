@@ -118,6 +118,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE P.STATUS = 'N'
 	</select>
 	
+	<select id="partyDateList" resultMap="partyResultSet">
+		SELECT PA_NO,
+			   O.OTT_NAME,
+			   PA_TITLE,
+			   CREW_NUM,
+			   END_DATE,
+			   TRUNC(END_DATE-SYSDATE+2,0) AS LEFT_DATE 
+               FROM PARTY P 
+               JOIN OTT O USING(OTT_NO)
+               WHERE P.STATUS = 'N'
+	</select>
+	
 	<select id="findPartyForm" resultMap="partyResultSet">
 		SELECT P.PA_NO,
 			   O.OTT_NAME,

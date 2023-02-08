@@ -38,8 +38,8 @@
          </div>
          <div style="float:right;">
             <c:if test="${not empty loginUser && loginUser.memNickname eq b.boardWriter }">
-               <a class="btn btn-primary boardBtn" href="${contextPath}/enrollForm.bo?mode=update&bno=${b.boardNo}">수정하기</a>
-               <a class="btn btn-danger boardBtn2" href="${contextPath}/delete.bo?bno=${b.boardNo }">삭제하기</a>
+               <a class="btn btn-primary boardBtn" href="${contextPath}/enrollForm?mode=update&bno=${b.boardNo}">수정하기</a>
+               <a class="btn btn-danger boardBtn2" href="${contextPath}/delete?bno=${b.boardNo }">삭제하기</a>
             </c:if>
          </div>
          <br><br>
@@ -155,7 +155,7 @@
                                    icon:'success',
                                    title: "댓글등록 성공"
                              }).then(function(){
-                            	 location.href=contextPath+"/detail.bo/"+boardNo;
+                            	 location.href=contextPath+"/detail/"+boardNo;
                              })
                            
                         }else{

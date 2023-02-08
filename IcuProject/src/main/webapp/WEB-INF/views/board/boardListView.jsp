@@ -33,7 +33,7 @@
 			
 			<!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">
-				<a class="btn btn-secondary" style="float:right; margin-right:20px;" href="${contextPath }/enrollForm.bo">글쓰기</a>
+				<a class="btn btn-secondary" style="float:right; margin-right:20px;" href="${contextPath }/enrollForm">글쓰기</a>
 			</c:if>
 			<br><br>
 			<div class='table-container'>
@@ -84,7 +84,7 @@
 			<script>
 			
 			function movePage(bno){
-		 		location.href = "${contextPath}/detail.bo/"+bno;
+		 		location.href = "${contextPath}/detail/"+bno;
 		 	}
 			
 			/* $(function(){

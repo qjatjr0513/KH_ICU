@@ -30,18 +30,19 @@ public class PartyDateScheduler {
 	
 
 	
-	@Scheduled(cron = "0 */1 * * * *")
+	@Scheduled(cron = "0 */10 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
+		List<Party> py = partyService.partyDateList();
 		LocalDate today = LocalDate.now();
 		ArrayList<Party> oneWeek = new ArrayList<Party>();
 		
 		System.out.println("=========파티 날짜 조회 시작=========");
-		for(int i=0; i < p.size(); i++) {
-			LocalDate endDate = p.get(i).getEndDate().toLocalDate();
+		for(int i=0; i < py.size(); i++) {
+			LocalDate endDate = py.get(i).getEndDate().toLocalDate();
 			if(endDate.isEqual(today) || endDate.isBefore(today)) {
-				partyService.endParty(p.get(i).getPaNo());
-				System.out.println(p.get(i).getPaNo()+"번 파티 기한 종료");
+				partyService.endParty(py.get(i).getPaNo());
+				System.out.println(py.get(i).getPaNo()+"번 파티 기한 종료");
 			}
 			else{
 				Period pe = Period.between(today, endDate);

@@ -22,7 +22,7 @@
 
     <!-- id / pwd input -->
     <!-- 회원가입 / 아이디, 비밀번호 찾기 -->
-   <form id="memberLogin" action="${contextPath }/login.me" method="post">
+   <form id="memberLogin" action="${contextPath }/login" method="post">
     <div id="input__container">
       <div class="input__id">
         <i class="fa-regular fa-user"></i>

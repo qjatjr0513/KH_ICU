@@ -24,7 +24,7 @@
       <hr />
       <!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">
-				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm.bo">작성하기</a>
+				<a class="btn btn-secondary" style="float:right;" href="${contextPath }/enrollForm">작성하기</a>
 			</c:if>
       <table class="table table-hover">
         <thead>
@@ -82,7 +82,7 @@
 	<script>
 	
 	function movePage(bno){
- 		location.href = "${contextPath}/detail.bo/"+bno;
+ 		location.href = "${contextPath}/detail/"+bno;
  	}
 	
 	$(function(){

@@ -94,7 +94,7 @@ public class MemberController {
 	/**
 	 * 로그인 페이지
 	 */
-	@RequestMapping("loginForm.me")
+	@RequestMapping("loginForm")
 	public String loginForm(Model model, HttpSession session) {
 		
 		/* 네아로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
@@ -215,7 +215,7 @@ public class MemberController {
 	/**
 	 * 로그인
 	 */
-	@RequestMapping("login.me")
+	@RequestMapping("login")
 	public String loginMember(Member m, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Member loginUser = memberService.loginMember(m);
 		int memNo = loginUser.getMemNo();
@@ -242,7 +242,7 @@ public class MemberController {
 	/**
 	 * 로그아웃
 	 */
-	@RequestMapping("logout.me")
+	@RequestMapping("memLogout")
 	public String logoutMember(HttpSession session) {
 		
 		session.removeAttribute("loginUser");

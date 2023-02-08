@@ -63,7 +63,7 @@ public class BoardController {
    /**
     * 게시글 등록페이지 이동
     */
-   @RequestMapping("/enrollForm.bo")
+   @RequestMapping("/enrollForm")
    public String boardEnrollForm(Model model,
                            @RequestParam(value="mode", required =false, defaultValue = "insert") String mode,
                            @RequestParam(value="bno", required =false, defaultValue = "0") int bno) {
@@ -86,7 +86,7 @@ public class BoardController {
    /**
     * 게시글 등록하기
     */
-   @RequestMapping("/insert.bo")
+   @RequestMapping("/insert")
    public String insertBoard(Board b, HttpSession session, Model model,
                         @RequestParam(value="mode", required=false, defaultValue="insert") String mode,
                         RedirectAttributes redirectAttributes) {
@@ -117,7 +117,7 @@ public class BoardController {
    /**
     * 게시글 번호에 따라 게시글 상세페이지
     */
-   @RequestMapping("detail.bo/{boardNo}")
+   @RequestMapping("detail/{boardNo}")
    public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
                            HttpSession session,
                            ModelAndView mv,
@@ -195,7 +195,7 @@ public class BoardController {
    /**
     * 게시글 삭제
     */
-   @RequestMapping("delete.bo")
+   @RequestMapping("delete")
    public String deleteBoard(@RequestParam(value="bno", required =false, defaultValue = "0") int boardNo,
                        HttpSession session, Model model,
                        RedirectAttributes redirectAttributes) {
@@ -228,7 +228,7 @@ public class BoardController {
 	   
 	   if(result > 0) {
 		   redirectAttributes.addFlashAttribute("flag","showAlert");
-	         return "redirect:detail.bo/"+boardNo;
+	         return "redirect:detail/"+boardNo;
 	      } else {
 	         model.addAttribute("errorMsg", "댓글 삭제 실패");
 	         return "common/errorPage";

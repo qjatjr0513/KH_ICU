@@ -124,13 +124,13 @@
            <c:when test="${ empty loginUser }">
            <!-- 로그인 전 -->
            <li class="navbar__menu__item">
-                <a href="${contextPath }/loginForm.me" style="text-decoration: none; color:black; margin-top:16px;">로그인</a>
+                <a href="${contextPath }/loginForm" style="text-decoration: none; color:black; margin-top:16px;">로그인</a>
              </li>
              </c:when>
              <c:when test="${ loginUser.memId == 'admin' }">
            <!-- 로그인 후 -->
            <li>
-                <a href="${contextPath }/logout.me" style="text-decoration: none; color:black;">로그아웃</a>
+                <a href="${contextPath }/memLogout" style="text-decoration: none; color:black;">로그아웃</a>
              </li>
              </c:when>
              <c:otherwise>
@@ -157,7 +157,7 @@
                 <ul class="dropdown-menu">
                   <li><span class="dropdown-item">${loginUser.memNickname}</span></li>
                   <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
-                  <li><a class="dropdown-item" href="${contextPath }/logout.me">로그아웃</a></li>
+                  <li><a class="dropdown-item" href="${contextPath }/memLogout">로그아웃</a></li>
                 </ul>
               </div>
              </li>
@@ -168,9 +168,7 @@
                 <i class="fa-solid fa-bell fa-lg"></i>
               </button>
               <ul class="dropdown-menu" id="msg">
-	              <c:if test="${empty alist}">
-	              	<li><p id="none">알림이 없습니다.</p></li>
-	              </c:if>
+
               </ul>
             </div>
             </li>
@@ -247,9 +245,11 @@
       				let tableCd = a.tableCd;
       				
       				if($.trim(tableCd) == "B"){
-		            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail.bo/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
+		            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
       				}else if($.trim(tableCd) == "P"){
       					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+      				}else if(a == null){
+      					html += "<li><p id='none'>알림이 없습니다.</p></li>";
       				}
       				$("#msg").html(html);
             	   }
