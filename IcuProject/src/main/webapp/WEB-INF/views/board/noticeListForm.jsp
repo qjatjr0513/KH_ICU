@@ -102,6 +102,15 @@
           		});
        	}
     });
+
+	 $(function(){
+        if('${flag3}' == 'showAlert3'){
+       	 Swal.fire({
+                icon:'error',
+                title: "공지사항 등록 실패"
+          		});
+       	}
+    });
 	</script>
 </body>
 </html>

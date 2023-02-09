@@ -172,6 +172,15 @@
 	           		});
 	        	}
 	     });
+		
+		 $(function(){
+	         if('${flag3}' == 'showAlert3'){
+	        	 Swal.fire({
+	                 icon:'error',
+	                 title: "게시글 등록 실패"
+	           		});
+	        	}
+	     });
 	</script>
 	
 </body>

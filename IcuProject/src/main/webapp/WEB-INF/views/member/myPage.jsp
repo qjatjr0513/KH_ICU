@@ -274,6 +274,29 @@
               }
             });
         }
+
+        $(function(){
+          switch("${flag}"){
+            case 'showAlert1' : 
+              Swal.fire({
+                icon:'error',
+                title: "이미지 등록 실패"
+                  });
+              break;
+            case 'showAlert2' :
+              Swal.fire({
+                icon:'error',
+                title: "회원정보 수정 실패"
+                  });
+              break;
+            case 'showAlert3' :
+              Swal.fire({
+                icon:'error',
+                title: "닉네임 수정 실패"
+                  });
+              break;
+          }
+        });
     </script>
 </body>
 </html>

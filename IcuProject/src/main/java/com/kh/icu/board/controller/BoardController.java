@@ -108,8 +108,13 @@ public class BoardController {
     		 return "redirect:list.bo";
     	 }
       } else {
-         model.addAttribute("errorMsg", "게시글 등록 실패");
-         return "common/errorPage";
+    	 redirectAttributes.addFlashAttribute("flag3","showAlert3");
+    	 if(loginUser.getRole().equals("A")) {
+     		 return "redirect:admin/noticeList.bo";
+     	 }
+     	 else {
+     		 return "redirect:list.bo";
+     	 }
       }
       
    }
@@ -121,8 +126,8 @@ public class BoardController {
    public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
                            HttpSession session,
                            ModelAndView mv,
-                           @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo
-                           ) {
+                           @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo,
+                           RedirectAttributes redirectAttributes) {
       Board b = boardService.selectBoard(boardNo);
       ArrayList<Reply> list = boardService.selectReplyList(boardNo);
       
@@ -156,8 +161,8 @@ public class BoardController {
          
       }else {
          // 상세조회 실패
-         mv.addObject("errorMsg", "게시글 조회 실패");
-         mv.setViewName("common/errorPage");
+    	 redirectAttributes.addFlashAttribute("flag3","showAlert3");
+         mv.setViewName("redirect:list.bo");
       }
       
       return mv;

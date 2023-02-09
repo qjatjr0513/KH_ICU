@@ -74,6 +74,7 @@
       let memName = "${loginUser.memName}";
       let email = "${loginUser.email}";
       let phone = "${loginUser.phone}";
+      const rand_0_10000 = Math.floor(Math.random() * 10001);
 
       var height = $(document).height();
       var width  = window.document.body.clientWidth;
@@ -96,7 +97,7 @@
    			IMP.request_pay({ // param
                 pg: "html5_inicis",
                 pay_method: "card",
-                merchant_uid: paNo +"번 파티"+totalPrice+"원 결제",
+                merchant_uid: paNo +"번 파티 "+totalPrice+"원 결제 "+rand_0_10000,
                 name: paTitle ,
                 amount: totalPrice,
                 buyer_email: email,

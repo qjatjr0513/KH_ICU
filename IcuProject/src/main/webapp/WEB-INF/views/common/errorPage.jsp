@@ -17,7 +17,6 @@
 	</div>
 	<br>
 	
-	
 	<jsp:include page="footer.jsp"/>
 	
 </body>
