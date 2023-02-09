@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="PAY_DATE" property="payDate"/>
 		<result column="REMIT_STATUS" property="remitStatus"/>
 		
+		<result column="MEM_NO" property="memNo"/>
 		<result column="MEM_NAME" property="memName"/>
 		<result column="MEM_NICKNAME" property="memNickName"/>
 		<result column="PA_NAME" property="paName"/>
@@ -45,6 +46,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			P.PAY_NO,
 			P.PAY_DATE,
 			PA.PA_TITLE,
+			PA.PA_NO,
+			M.MEM_NO,
 			M.MEM_NAME,
 			M.MEM_NICKNAME,
 			PA.PA_NAME,
@@ -67,6 +70,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SET REMIT_STATUS = 'Y'
 		WHERE PAY_NO = #{payNo}
 	</update>
+	
+	<insert id="insertRemit" parameterType="deposit">
+		INSERT INTO DEPOSIT(DEP_NO, PA_NO, REC_NO, SEND_NO, DEP_PRICE) VALUES(SEQ_DEP.NEXTVAL, #{paNo}, #{recNo}, #{sendNo}, #{depPrice})
+	</insert>
 	
 	<select id="selectMyPayListCount" resultType="int">
 		SELECT COUNT(*)

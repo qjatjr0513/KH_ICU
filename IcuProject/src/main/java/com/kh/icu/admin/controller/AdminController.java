@@ -38,6 +38,7 @@ import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.Party;
 import com.kh.icu.pay.model.service.PayService;
+import com.kh.icu.pay.model.vo.Deposit;
 
 @Controller
 @RequestMapping("/admin")
@@ -225,7 +226,7 @@ public class AdminController {
 	@RequestMapping("/contentEnroll")
 	public String contentEnroll(Content c, @RequestParam("genre") ArrayList<String> genre, Image image,
 			@RequestParam("poster") MultipartFile poster, @RequestParam("ott") ArrayList<String> ott,
-			HttpSession session, Model model) {
+			HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		int resultImage = 0;
 		int resultContent = 0;
 		int resultGenre = 0;
@@ -272,11 +273,11 @@ public class AdminController {
 			Content cInfo = contentService.selectContent(conNo);
 
 			model.addAttribute("info", cInfo);
-
+			redirectAttributes.addFlashAttribute("flag","showAlert1");
 			return "redirect:contentListForm";
 		} else {
-			model.addAttribute("errorMsg", "컨텐츠 등록 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert2");
+			return "redirect:contentListForm";
 		}
 
 	}
@@ -285,7 +286,7 @@ public class AdminController {
 	@RequestMapping("/contentUpdate")
 	public String contentUpdate(Content c, @RequestParam("genre") ArrayList<String> genre, Image image,
 			@RequestParam("poster") MultipartFile poster, @RequestParam("ott") ArrayList<String> ott,
-			HttpSession session, Model model) {
+			HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		int resultImage = 0;
 		int resultContent = 0;
 		int resultGenre = 0;
@@ -345,25 +346,27 @@ public class AdminController {
 
 			model.addAttribute("info", cInfo);
 
+			redirectAttributes.addFlashAttribute("flag","showAlert3");
 			return "redirect:contentListForm";
 		} else {
-			model.addAttribute("errorMsg", "컨텐츠 수정 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert4");
+			return "redirect:contentListForm";
 		}
 
 	}
 
 	// 컨텐츠 삭제
 	@RequestMapping("/contentDelete")
-	public String contentDelete(@RequestParam(value = "conNo") int conNo, HttpSession session, Model model) {
+	public String contentDelete(@RequestParam(value = "conNo") int conNo, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
 		int resultDelete = contentService.deleteContent(conNo);
 
 		if (resultDelete > 0) {
+			redirectAttributes.addFlashAttribute("flag","showAlert5");
 			return "redirect:contentListForm";
 		} else {
-			model.addAttribute("errorMsg", "컨텐츠 수정 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert6");
+			return "redirect:contentListForm";
 		}
 	}
 
@@ -384,7 +387,7 @@ public class AdminController {
 	@RequestMapping("enrollForm.fq")
 	public String faqEnrollForm(Model model,
 			@RequestParam(value = "mode", required = false, defaultValue = "insert") String mode,
-			@RequestParam(value = "fno", required = false, defaultValue = "0") int fno) {
+			@RequestParam(value = "fno", required = false, defaultValue = "0") int fno, RedirectAttributes redirectAttributes) {
 
 		if (mode.equals("update")) {
 
@@ -410,11 +413,11 @@ public class AdminController {
 		}
 
 		if (result > 0) {
-			redirectAttributes.addFlashAttribute("flag2", "showAlert2");
+			redirectAttributes.addFlashAttribute("flag","showAlert1");
 			return "redirect:faqList.fq";
 		} else {
-			model.addAttribute("errorMsg", "게시글 등록 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert2");
+			return "redirect:faqList.fq";
 		}
 
 	}
@@ -444,11 +447,11 @@ public class AdminController {
 		int result = faqservice.deleteFaq(fno);
 
 		if (result > 0) {
-			redirectAttributes.addFlashAttribute("flag", "showAlert");
+			redirectAttributes.addFlashAttribute("flag","showAlert3");
 			return "redirect:faqList.fq";
 		} else {
-			model.addAttribute("errorMsg", "FAQ 삭제 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert4");
+			return "redirect:faqList.fq";
 		}
 	}
 
@@ -480,9 +483,18 @@ public class AdminController {
 
 	@RequestMapping("remitConfirm.pe")
 	public String remitConfirm(int payNo, HttpSession session, @RequestParam("paName") int paName,
-			@RequestParam("paMemNickName") String paMemNickName, @RequestParam("memNickName") String memNickName) {
+			@RequestParam("paMemNickName") String paMemNickName, @RequestParam("memNickName") String memNickName, @RequestParam("memNo") int memNo, @RequestParam("paNo") int paNo,
+			@RequestParam("remPrice") int depPrice) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		int result = payService.remitConfirm(payNo);
+		if(result > 0) {
+			Deposit de = new Deposit();
+			de.setPaNo(paNo);
+			de.setRecNo(paName);
+			de.setSendNo(memNo);
+			de.setDepPrice(depPrice);
+			payService.insertRemit(de);
+		}
 		System.out.println("payNo :" + payNo);
 
 		int sendId = loginUser.getMemNo();

@@ -95,23 +95,39 @@
  		location.href = "${contextPath}/admin/detail.fq/"+fno;
  	}
 	
-	$(function(){
-        if('${flag}' == 'showAlert'){
-       	 Swal.fire({
-                icon:'success',
-                title: "FAQ 삭제 성공"
-          		});
-       	}
-    });
-	 
-	 $(function(){
-        if('${flag2}' == 'showAlert2'){
-       	 Swal.fire({
-                icon:'success',
-                title: "FAQ 등록 성공"
-          		});
-       	}
-    });
-	</script>
+	 <script>
+		function movePage(cno){
+	 		location.href = '${contextPath}/detail?conNo='+cno;
+	 	}
+		
+		 $(function(){
+	          switch("${flag}"){
+	            case 'showAlert1' : 
+	            	Swal.fire({
+	                    icon:'success',
+	                    title: "FAQ 등록 성공"
+	              		});
+	              break;
+	            case 'showAlert2' :
+	            	Swal.fire({
+	                    icon:'error',
+	                    title: "FAQ 등록 실패"
+	              		});
+	              break;
+	            case 'showAlert3' :
+	            	Swal.fire({
+	                    icon:'success',
+	                    title: "FAQ 삭제 성공"
+	              		});
+	              break;
+	            case 'showAlert4' :
+	            	Swal.fire({
+	                    icon:'error',
+	                    title: "FAQ 삭제 실패"
+	              		});
+	              break;
+	          }
+	        });
+ </script>
 </body>
 </html>

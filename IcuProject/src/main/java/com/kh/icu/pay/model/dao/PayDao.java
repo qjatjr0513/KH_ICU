@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.icu.board.model.vo.PageInfo;
+import com.kh.icu.pay.model.vo.Deposit;
 import com.kh.icu.pay.model.vo.Pay;
 
 @Repository
@@ -33,6 +34,10 @@ public class PayDao {
 	
 	public int remitConfirm(SqlSession sqlSession, int payNo) {
 		return sqlSession.update("payMapper.remitConfirm", payNo);
+	}
+	
+	public int insertRemit(SqlSession sqlSession, Deposit de) {
+		return sqlSession.update("payMapper.insertRemit", de);
 	}
 	
 	public int selectMyPayListCount(SqlSession sqlSession, Pay p) {

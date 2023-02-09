@@ -80,6 +80,47 @@
 		function movePage(cno){
 	 		location.href = '${contextPath}/detail?conNo='+cno;
 	 	}
+		
+		 $(function(){
+	          switch("${flag}"){
+	            case 'showAlert1' : 
+	              Swal.fire({
+	                icon:'success',
+	                title: "컨텐츠 등록 성공"
+	                  });
+	              break;
+	            case 'showAlert2' :
+	              Swal.fire({
+	                icon:'error',
+	                title: "컨텐츠 등록 실패"
+	                  });
+	              break;
+	            case 'showAlert3' :
+		              Swal.fire({
+		                icon:'sucess',
+		                title: "컨텐츠 수정 성공"
+		                  });
+		              break;
+	            case 'showAlert4' :
+		              Swal.fire({
+		                icon:'error',
+		                title: "컨텐츠 수정 실패"
+		                  });
+		              break;
+	            case 'showAlert5' :
+		              Swal.fire({
+		                icon:'sucess',
+		                title: "컨텐츠 삭제 성공"
+		                  });
+		              break;
+	            case 'showAlert6' :
+		              Swal.fire({
+		                icon:'error',
+		                title: "컨텐츠 삭제 실패"
+		                  });
+		              break;
+	          }
+	        });
     </script>
   </body>
 </html>

@@ -16,6 +16,7 @@ public class Pay {
 	
 	private int paName;
 	private String memName;
+	private int memNo;
 	private String memNickName;
 	private String paMemNickName;
 	private String ottName;

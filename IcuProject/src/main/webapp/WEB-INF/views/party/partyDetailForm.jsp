@@ -174,7 +174,7 @@
            console.log("댓글버튼 실행");
            
            $.ajax({
-              url : "${contextPath}/insertReply.pa",
+              url : "${contextPath}/insertReply.py",
               data : {
                  refTno : paNo,
                  replyContent : $("#replyContent").val()

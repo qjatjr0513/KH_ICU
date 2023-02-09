@@ -184,7 +184,7 @@ public class PartyController {
 	}
 	
     // 댓글 등록
-    @RequestMapping("insertReply.pa")
+    @RequestMapping("insertReply.py")
     @ResponseBody
     public String insertReply(Reply r, HttpSession session) {
        System.out.println("***r : "+r);

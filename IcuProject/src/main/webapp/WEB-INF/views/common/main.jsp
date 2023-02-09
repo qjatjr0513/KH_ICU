@@ -162,7 +162,7 @@
              ></span>
            </div>
          </div>
-         <div class="party__box-right" onclick="location.href='${contextPath}/findParty.py'">
+         <div class="party__box-right" onclick="location.href='${contextPath}/findPartyForm.py'">
            <div class="plus-icon">
              <i
                class="fa-regular fa-square-plus fa-2x"
