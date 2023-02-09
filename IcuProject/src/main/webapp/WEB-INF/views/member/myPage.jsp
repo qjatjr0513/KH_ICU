@@ -122,181 +122,181 @@
     <jsp:include page="../common/chatForm.jsp"/>
     
     <script>
-    function readURL(input) {
-    	  if (input.files && input.files[0]) {
-    	    var reader = new FileReader();
-    	    /* var fileInput = document.getElementById("upfile"); */
-    	    reader.onload = function(e) {
-    	    
-	    	      document.getElementById('preview').src = e.target.result;
-	    	      $("#enrollBtn").attr("disabled",false);		
-    	    	
-    	      
-    	    };
-    	    reader.readAsDataURL(input.files[0]);
-    	  } else {
-    	    document.getElementById('preview').src = "";
-    	  }
-    	}
-    
-    
-    	function modeUpdate(){
-			$('#mode').val('update');
-    	}
-    	
-    	function modeDelete(){
-			$('#mode').val('delete');
-    	}
-    	
-        function validate() {
-          var fileInput = document.getElementById("upfile");
-          if (fileInput.val != "" ) {
-            $("#enrollBtn").attr("disabled",false);
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          /* var fileInput = document.getElementById("upfile"); */
+          reader.onload = function (e) {
+
+            document.getElementById('preview').src = e.target.result;
+            $("#enrollBtn").attr("disabled", false);
+
+
+          };
+          reader.readAsDataURL(input.files[0]);
+        } else {
+          document.getElementById('preview').src = "";
+        }
+      }
+
+
+      function modeUpdate() {
+        $('#mode').val('update');
+      }
+
+      function modeDelete() {
+        $('#mode').val('delete');
+      }
+
+      function validate() {
+        var fileInput = document.getElementById("upfile");
+        if (fileInput.val != "") {
+          $("#enrollBtn").attr("disabled", false);
+        }
+      };
+
+      function refreshProfile() {
+        location.reload();
+      }
+
+      function deleteBtn() {
+        console.log("${profile.fileNo}");
+        $.ajax({
+          url: "${contextPath}/deleteImg.me",
+          data: {
+            fileNo: "${profile.fileNo}"
+          },
+          type: "post",
+          success: function (result) {
+            if (result == "1") {
+
+              return "redirect:myPage.me";
+
+
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: '프로필 삭제 실패.'
+              });
+            }
           }
-        };
 
-        function refreshProfile(){
-          location.reload();
+        });
+        refreshProfile();
+
+      }
+
+      function btnUpdate() {
+
+        if ($('input[name=memNickname]').val() == "") {
+          Swal.fire({
+            icon: 'error',
+            title: '닉네임을 입력해주세요.'
+          });
+        } else {
+          Swal.fire({
+            title: '변경하시겠습니까?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: '취소',
+            confirmButtonText: '수정'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $("#memberUpdateNick").submit();
+
+            }
+          });
         }
 
-        function deleteBtn(){
-          console.log("${profile.fileNo}");
-          $.ajax({
-              url : "${contextPath}/deleteImg.me",
-              data : {
-                  fileNo : "${profile.fileNo}"
-              },
-              type : "post",
-              success : function(result){
-                if(result == "1"){
-                  
-                  return "redirect:myPage.me";
-                  
-                  
-                } else{
-                  Swal.fire({
-                    icon: 'error',
-                    title: '프로필 삭제 실패.'
-                  });
-                }
-              }
-              
-            });
-            refreshProfile();
+      }
 
-        }
-
-        function btnUpdate(){
-    
-          if($('input[name=memNickname]').val() == ""){
-                Swal.fire({
-                    icon: 'error',
-                    title: '닉네임을 입력해주세요.'                  
-                });
-          } else {
-            Swal.fire({
-                    title: '변경하시겠습니까?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: '취소',
-                    confirmButtonText: '수정'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                      $("#memberUpdateNick").submit();
-                        
-                    }
-                });
-          }
-          
-        }
-
-        function nickCheck(){
+      function nickCheck() {
         // 아이디 입력하는 input 요소 객체
         let $memberNick = $("#memberUpdateNick input[name=memNickname]");
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
-        
-            $.ajax({
-              url : "nickCheck.me",
-              data : {checkNick : $memberNick.val()},
-              success : function(result){
-                
-                if($memberNick.val() == "") {
-                  
-                  Swal.fire({
-                          icon: 'error',
-                          title: '닉네임을 입력해주세요.'
-                          
-                      });
 
-                      $memberNick.focus();
-                      
-                  }
-                
-                else if(!regExp.test($memberNick.val())){
-                    Swal.fire({
-                          icon: 'error',
-                          title: '유효한 닉네임을 입력해주세요.'                  
-                      });
-                    
-                  }else if(result == 1){ // 사용불가능한 닉네임
-                    
-                    Swal.fire({
-                          icon: 'error',
-                          title: '이미 존재하는 닉네임입니다.'
-                          
-                      });
-                    $memberNick.focus();
-                    
-                  }else{
-                    
-                    Swal.fire({
-                          title: '사용가능한 닉네임입니다.',
-                          text: '사용하시겠습니까?',
-                          icon: 'warning',
-                          showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: '사용',
-                          cancelButtonText: '취소'
-                      }).then((result) => {
-                        if(result.isConfirmed){
-                              $("input[name=memNickname]").attr("readonly", true);
-                              $("button:button[name=update]").attr("disabled",false);
-                          }  
-                        
-                      });
-                  }
-              },
-              error : function(){
-                  alert("닉네임 중복체크용 ajax 통신 실패");
-              }
-            });
-        }
+        $.ajax({
+          url: "nickCheck.me",
+          data: { checkNick: $memberNick.val() },
+          success: function (result) {
 
-        $(function(){
-          switch("${flag}"){
-            case 'showAlert1' : 
+            if ($memberNick.val() == "") {
+
               Swal.fire({
-                icon:'error',
-                title: "이미지 등록 실패"
-                  });
-              break;
-            case 'showAlert2' :
+                icon: 'error',
+                title: '닉네임을 입력해주세요.'
+
+              });
+
+              $memberNick.focus();
+
+            }
+
+            else if (!regExp.test($memberNick.val())) {
               Swal.fire({
-                icon:'error',
-                title: "회원정보 수정 실패"
-                  });
-              break;
-            case 'showAlert3' :
+                icon: 'error',
+                title: '유효한 닉네임을 입력해주세요.'
+              });
+
+            } else if (result == 1) { // 사용불가능한 닉네임
+
               Swal.fire({
-                icon:'error',
-                title: "닉네임 수정 실패"
-                  });
-              break;
+                icon: 'error',
+                title: '이미 존재하는 닉네임입니다.'
+
+              });
+              $memberNick.focus();
+
+            } else {
+
+              Swal.fire({
+                title: '사용가능한 닉네임입니다.',
+                text: '사용하시겠습니까?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '사용',
+                cancelButtonText: '취소'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  $("input[name=memNickname]").attr("readonly", true);
+                  $("button:button[name=update]").attr("disabled", false);
+                }
+
+              });
+            }
+          },
+          error: function () {
+            alert("닉네임 중복체크용 ajax 통신 실패");
           }
         });
+      }
+
+      $(function () {
+        switch ("${flag}") {
+          case 'showAlert1':
+            Swal.fire({
+              icon: 'error',
+              title: "이미지 등록 실패"
+            });
+            break;
+          case 'showAlert2':
+            Swal.fire({
+              icon: 'error',
+              title: "회원정보 수정 실패"
+            });
+            break;
+          case 'showAlert3':
+            Swal.fire({
+              icon: 'error',
+              title: "닉네임 수정 실패"
+            });
+            break;
+        }
+      });
     </script>
 </body>
 </html>

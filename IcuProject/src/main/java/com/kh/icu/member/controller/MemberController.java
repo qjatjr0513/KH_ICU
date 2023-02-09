@@ -767,12 +767,12 @@ public class MemberController {
 				
 			} else {
 				
-				redirectAttributes.addFlashAttribute("flag3","showAlert3");
+				redirectAttributes.addFlashAttribute("flag","showAlert3");
 				return "redirect:memDeleteForm.me";
 				
 			}
 		} else {
-			redirectAttributes.addFlashAttribute("flag","showAlert");
+			redirectAttributes.addFlashAttribute("flag","showAlert1");
 			
 			return "redirect:memDeleteForm.me";
 		}

@@ -100,7 +100,7 @@ public class BoardController {
       }
       
       if(result > 0) {
-    	 redirectAttributes.addFlashAttribute("flag2","showAlert2");
+    	 redirectAttributes.addFlashAttribute("flag","showAlert2");
     	 if(loginUser.getRole().equals("A")) {
     		 return "redirect:admin/noticeList.bo";
     	 }
@@ -108,7 +108,7 @@ public class BoardController {
     		 return "redirect:list.bo";
     	 }
       } else {
-    	 redirectAttributes.addFlashAttribute("flag3","showAlert3");
+    	 redirectAttributes.addFlashAttribute("flag","showAlert3");
     	 if(loginUser.getRole().equals("A")) {
      		 return "redirect:admin/noticeList.bo";
      	 }
@@ -161,7 +161,7 @@ public class BoardController {
          
       }else {
          // 상세조회 실패
-    	 redirectAttributes.addFlashAttribute("flag3","showAlert3");
+    	 redirectAttributes.addFlashAttribute("flag","showAlert4");
          mv.setViewName("redirect:list.bo");
       }
       
@@ -208,17 +208,21 @@ public class BoardController {
       int result = boardService.deleteBoard(boardNo);
       
       if(result > 0) {
+    	  redirectAttributes.addFlashAttribute("flag","showAlert1");
     	  if(loginUser.getRole().equals("A")) {
-      		 redirectAttributes.addFlashAttribute("flag","showAlert");
      		 return "redirect:admin/noticeList.bo";
      	 }
      	 else {
-     		 redirectAttributes.addFlashAttribute("flag","showAlert");
      		 return "redirect:list.bo";
      	 }
       } else {
-         model.addAttribute("errorMsg", "게시글 삭제 실패");
-         return "common/errorPage";
+    	  redirectAttributes.addFlashAttribute("flag","showAlert5");
+    	  if(loginUser.getRole().equals("A")) {
+      		 return "redirect:admin/noticeList.bo";
+      	 }
+      	 else {
+      		 return "redirect:list.bo";
+      	 }
       }
    }
    
@@ -232,11 +236,11 @@ public class BoardController {
 	   int result = boardService.deleteReply(rno);
 	   
 	   if(result > 0) {
-		   redirectAttributes.addFlashAttribute("flag","showAlert");
+		   redirectAttributes.addFlashAttribute("flag","showAlert1");
 	         return "redirect:detail/"+boardNo;
 	      } else {
-	         model.addAttribute("errorMsg", "댓글 삭제 실패");
-	         return "common/errorPage";
+	    	  redirectAttributes.addFlashAttribute("flag","showAlert2");
+	         return "redirect:detail/"+boardNo;
 	      }
 	   
 	   
