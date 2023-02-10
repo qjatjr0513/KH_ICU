@@ -22,9 +22,9 @@ public class NaverLoginBO {
 	//redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩) 애플리케이션을 등록할 때 Callback URL에 설정한 정보
 	//state: 애플리케이션이 생성한 상태 토큰
     public final static String CLIENT_ID = "D3frxn4eOMrspc2MJIkO"; // 클라이언트 아이디
-    public final static String CLIENT_SECRET = "Ra9evAXL7G"; // 클라이언트 시크릿
+    public final static String CLIENT_SECRET = "2mkyrb5fRo"; // 클라이언트 시크릿
     private final static String REDIRECT_URI = "http://localhost:8088/icu/navercallback";
-    private final static String SESSION_STATE = "oauth_state";
+    private final static String SESSION_STATE = "naver_oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
     
@@ -48,7 +48,7 @@ public class NaverLoginBO {
     }
 
     /* 네이버아이디로 Callback 처리 및  AccessToken 획득 Method */
-    public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
+    public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws Exception{
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
@@ -67,6 +67,20 @@ public class NaverLoginBO {
         }
         return null;
     }
+    
+    /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
+    public String getUserProfile(OAuth2AccessToken oauthToken) throws Exception{
+    	
+    	OAuth20Service oauthService =new ServiceBuilder()
+    			.apiKey(CLIENT_ID)
+    			.apiSecret(CLIENT_SECRET)
+    			.callback(REDIRECT_URI).build(NaverOAuthApi.instance());
+    	
+    	OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
+    	oauthService.signRequest(oauthToken, request);
+    	Response response = request.send();
+    	return response.getBody();
+    }
 
     /* 세션 유효성 검증을 위한 난수 생성기 */
     private String generateRandomString() {
@@ -81,19 +95,6 @@ public class NaverLoginBO {
     /* http session에서 데이터 가져오기 */ 
     private String getSession(HttpSession session){
         return (String) session.getAttribute(SESSION_STATE);
-    }
-    /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
-    public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
-
-        OAuth20Service oauthService =new ServiceBuilder()
-                .apiKey(CLIENT_ID)
-                .apiSecret(CLIENT_SECRET)
-                .callback(REDIRECT_URI).build(NaverOAuthApi.instance());
-
-            OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
-        oauthService.signRequest(oauthToken, request);
-        Response response = request.send();
-        return response.getBody();
     }
 
 }

@@ -102,7 +102,7 @@ public class MemberController {
 		/* 인증요청문 확인 */
 		System.out.println("네이버:" + naverAuthUrl);
 		/* 객체 바인딩 */
-		model.addAttribute("url", naverAuthUrl);
+		model.addAttribute("urlNaver", naverAuthUrl);
 		
 		/* 카카오 URL */
 		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
@@ -120,14 +120,14 @@ public class MemberController {
 	/**
 	 * 약관 동의 페이지
 	 */
-	@RequestMapping("agreeForm.me")
+	@RequestMapping("agreeForm")
 	public String agreeForm() {
 		return "member/memberAgreeForm";
 	}
 	/**
 	 * 회원가입페이지 이동
 	 */
-	@RequestMapping("enrollForm.me")
+	@RequestMapping("enrollMemForm")
 	public String enrollForm() {
 		return "member/memberEnrollForm";
 	}
@@ -135,8 +135,8 @@ public class MemberController {
 	/**
 	 * 회원가입
 	 */
-	@RequestMapping("insert.me")
-	public void insertMember(Member m, HttpSession session, Model model, String checkId, String checkNick, RedirectAttributes redirectAttributes) {
+	@RequestMapping("insertMem")
+	public String insertMember(Member m, HttpSession session, Model model, String checkId, String checkNick, RedirectAttributes redirectAttributes) {
 		int result1 = memberService.idCheck(checkId);
 		
 		int result2 = memberService.nickCheck(checkNick);
@@ -158,9 +158,12 @@ public class MemberController {
 			
 			if(result3 == 0) {
 				redirectAttributes.addFlashAttribute("flag","showAlert");
+				return "redirect:loginForm";
 			}
+			return "redirect:loginForm";
 		}else {
 			redirectAttributes.addFlashAttribute("flag","showAlert");
+			return "redirect:loginForm";
 		}
 	}
 	
@@ -253,7 +256,7 @@ public class MemberController {
 	/**
 	 * 아이디, 비밀번호 찾기 페이지
 	 */
-	@RequestMapping("find.me")
+	@RequestMapping("find")
 	public String find() {
 		return "member/memberFindForm";
 	}

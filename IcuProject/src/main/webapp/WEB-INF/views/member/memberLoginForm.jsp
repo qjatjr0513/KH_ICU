@@ -57,14 +57,14 @@
     </div>
     
     <div class="join-container">
-        <a href="${contextPath }/agreeForm.me">회원가입 &nbsp;|&nbsp; </a>
-        <a href="${contextPath }/find.me">아이디 / 비밀번호 찾기</a>
+        <a href="${contextPath }/agreeForm">회원가입 &nbsp;|&nbsp; </a>
+        <a href="${contextPath }/find">아이디 / 비밀번호 찾기</a>
       </div>
 	</form>
 	<br>
 	<!-- 네이버 로그인  -->
     <div id="naver_id_login" style="text-align:center">
-      <a id="naverlogin" href="${url}">
+      <a id="naverlogin" href="${urlNaver}">
 	  <img src="resources/images/naverLogo.png" /><span>네이버 로그인</span>
   	  </a>
     </div>

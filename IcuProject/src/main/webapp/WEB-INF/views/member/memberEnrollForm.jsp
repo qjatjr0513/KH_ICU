@@ -20,7 +20,7 @@
     </div>
 
     <!-- 회원정보 입력 -->
-    <form id="memberEnroll" action="${contextPath }/insert.me" method="post">
+    <form id="memberEnroll" action="${contextPath }/insertMem" method="post">
       <table>
         <tr>
           <td><label>이름</label></td>

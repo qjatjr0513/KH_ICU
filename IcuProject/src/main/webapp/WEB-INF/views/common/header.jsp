@@ -241,17 +241,23 @@
             	   //location.reload();
             	   // list로 반복문 돌려서 동적으로 html요소추가
             	   var html = "";
-            	   for(let a of alist){
-      				let tableCd = a.tableCd;
-      				
-      				if($.trim(tableCd) == "B"){
-		            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
-      				}else if($.trim(tableCd) == "P"){
-      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
-      				}else if(a == null){
-      					html += "<li><p id='none'>알림이 없습니다.</p></li>";
-      				}
-      				$("#msg").html(html);
+            	   
+            	   if(alist.length == 0){
+            		   html += "<li><div id='none'><span>알림이 없습니다.</span><div></li>";
+            		   $("#msg").html(html);
+            	   }else{
+	            	   for(let a of alist){
+	      				let tableCd = a.tableCd;
+	      				
+	      				if($.trim(tableCd) == "B"){
+			            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
+	      				}else if($.trim(tableCd) == "P"){
+	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+	      				}else if(a == null){
+	      					html += "<li><p id='none'>알림이 없습니다.</p></li>";
+	      				}
+	      				$("#msg").html(html);
+	            	   } 
             	   }
                    
                },	

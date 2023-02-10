@@ -19,7 +19,7 @@ public class GoogleLoginBo {
 	private final static String CLIENT_ID = "814148008336-t034ku77jddjmahc3084dm7qfimi12qk.apps.googleusercontent.com";
     private final static String CLIENT_SECRET = "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";
     private final static String REDIRECT_URI = "http://localhost:8088/icu/googleCallback";
-    private final static String SESSION_STATE = "oauth_state";
+    private final static String SESSION_STATE = "google_oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json";
     

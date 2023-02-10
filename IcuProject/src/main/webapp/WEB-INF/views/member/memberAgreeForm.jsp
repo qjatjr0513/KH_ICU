@@ -250,7 +250,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
     <script>
     	function checkAgree(){
     		if($('input.chk1').is(':checked') && $('input.chk2').is(':checked')){
-    			location.href='${contextPath }/enrollForm.me';
+    			location.href='${contextPath }/enrollMemForm';
     		}
     		else{
     			if($('input.chk1').is(':checked')){
