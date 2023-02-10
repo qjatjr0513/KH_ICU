@@ -20,4 +20,8 @@ public interface PayService{
 	public Map<String, Object> selectMyPayList(int currentPage, Pay p);
 	
 	public int insertRemit(Deposit de);
+	
+	public int selectMydepListCount(Deposit d);
+	
+	public Map<String, Object> selectMydepList(int currentPage, Deposit d);
 }

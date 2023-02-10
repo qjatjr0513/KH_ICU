@@ -93,6 +93,7 @@
           <li class='li3'><a href="${contextPath }/CurrentParty.py">참여중인 파티</a></li>
           <li class='li4'><a href="${contextPath }/LastParty.py">참여했던 파티</a></li>
           <li class='li5'><a href="${contextPath }/myPayListForm.pe">결제 내역</a></li>
+          <li class='li6'><a href="${contextPath }/depositListForm.pe">입금 내역</a></li>
         </ul>
       </nav>
       
@@ -116,8 +117,10 @@
 		
 	} else if(link[4] == 'LastParty.py') {
 		$('.li4').addClass('active');	
-	} else {
+	} else if(link[4] == 'myPayListForm.pe') {
 		$('.li5').addClass('active');	
+	}else{
+		$('.li6').addClass('active');
 	}
 		
 	

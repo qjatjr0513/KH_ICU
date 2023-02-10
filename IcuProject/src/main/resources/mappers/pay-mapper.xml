@@ -25,6 +25,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</resultMap>
 	
+	<resultMap type="deposit" id="depResultSet">
+		<result column="DEP_NO" property="depNo"/>
+		<result column="PA_NO" property="paNo"/>
+		<result column="REC_NO" property="recNo"/>
+		<result column="SEND_NO" property="sendNo"/>
+		<result column="DEP_PRICE" property="depPrice"/>
+		<result column="DEP_DATE" property="depDate"/>
+		
+		<result column="MEM_NICKNAME" property="memNickname"/>
+		<result column="PA_TITLE" property="paTitle"/>
+		<result column="OTT_NAME" property="ottName"/>
+	</resultMap>
+	
 	<insert id="accountOfPayment" parameterType="pay">
 	INSERT INTO PAY
 	VALUES (SEQ_PAY.NEXTVAL,
@@ -95,6 +108,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT JOIN OTT O ON (O.OTT_NO = PA.OTT_NO)
 		WHERE P.PAY_MEM_NO = #{payMemNo}
 		ORDER BY P.PAY_NO DESC
+	</select>
+	
+	<select id="selectMydepListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM DEPOSIT
+		WHERE REC_NO = #{recNo}
+	</select>
+	
+	<select id="selectMydepList" resultType="int" resultMap="depResultSet">
+		SELECT 
+		    DEP_DATE,
+		    P.PA_TITLE,
+		    OTT_NAME,
+		    SEND_NO,
+		    MEM_NICKNAME,
+		    DEP_PRICE
+		FROM DEPOSIT D
+		JOIN PARTY P USING(PA_NO)
+		JOIN OTT O ON (O.OTT_NO = P.OTT_NO)
+		JOIN MEMBER M ON(D.SEND_NO = M.MEM_NO)
+		WHERE REC_NO = #{recNo}
 	</select>
 	
 </mapper>

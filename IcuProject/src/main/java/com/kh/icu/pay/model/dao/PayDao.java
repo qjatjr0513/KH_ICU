@@ -53,4 +53,18 @@ public class PayDao {
 		
 		return (ArrayList)sqlSession.selectList("payMapper.selectMyPayList", p ,  rowBounds);
 	}
+	
+	public int selectMydepListCount(SqlSession sqlSession, Deposit d) {
+		return sqlSession.selectOne("payMapper.selectMydepListCount", d);
+	}
+	
+	public ArrayList<Deposit> selectMydepList(SqlSession sqlSession, PageInfo pi, Deposit d){
+		
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("payMapper.selectMydepList", d ,  rowBounds);
+	}
 }

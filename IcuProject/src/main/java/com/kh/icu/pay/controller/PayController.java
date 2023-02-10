@@ -26,6 +26,7 @@ import com.kh.icu.member.model.vo.Member;
 import com.kh.icu.party.model.service.PartyService;
 import com.kh.icu.party.model.vo.PartyJoin;
 import com.kh.icu.pay.model.service.PayService;
+import com.kh.icu.pay.model.vo.Deposit;
 import com.kh.icu.pay.model.vo.Pay;
 
 @Controller
@@ -90,6 +91,24 @@ public class PayController {
 	    model.addAttribute("map", map);
 		
 		return "pay/myPayList";
+	}
+	
+	@RequestMapping("depositListForm.pe")
+	public String depositListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
+			  @RequestParam Map<String, Object> paramMap,
+			  HttpSession session,
+			  Deposit d){
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		d.setRecNo(loginUser.getMemNo());
+		
+		Map<String, Object> map = new HashMap();
+		
+		map = payService.selectMydepList(currentPage, d);
+		
+		model.addAttribute("map", map);
+		
+		return "pay/memberDepositList";
 	}
 	
 	

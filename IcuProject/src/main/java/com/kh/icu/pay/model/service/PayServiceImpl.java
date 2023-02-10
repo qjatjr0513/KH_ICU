@@ -95,4 +95,29 @@ public class PayServiceImpl implements PayService{
 	}
 	
 	
+	@Override
+	public int selectMydepListCount(Deposit d) {
+		return payDao.selectMydepListCount(sqlSession, d);
+	}
+	
+	@Override
+	public Map<String, Object> selectMydepList(int currentPage, Deposit d){
+		Map<String, Object> map = new HashMap();
+		
+		// 1. 페이징처리
+		int listCount = selectMydepListCount(d);
+		
+		int pageLimit = 10;
+		int boardLimit = 10;
+		
+		PageInfo pi = pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		map.put("pi", pi);
+		
+		ArrayList<Deposit> list = payDao.selectMydepList(sqlSession, pi, d);
+		map.put("list", list);
+		
+		return map;
+	}
+	
+	
 }
