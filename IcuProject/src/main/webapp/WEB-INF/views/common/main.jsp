@@ -47,9 +47,8 @@
 	         />
 	         <button
 	           class="btn btn-outline-secondary btn3"
-	           type="button"
+	           type="submit"
 	           id="button-addon2"
-	           onclick="clickMore();"
 	         >
 	           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 	         </button>
@@ -333,6 +332,7 @@
     function movePage(cno){
        location.href = '${contextPath}/detail?conNo='+cno;
     }
+    
 	$(document).ready(function() {
 		search();
 	});
@@ -373,6 +373,7 @@
 			,autoFocus : true
 			,delay: 100
 		}).autocomplete("instance")._renderItem = function(ul, item){
+			console.log(item);
 			var highlight = String(item.label).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 			var category = "";
 			if(item.category == 1){
@@ -382,7 +383,7 @@
 				category = "드라마";
 			}
 			var html = "";
-			var html2 = "<button type='button'>더 보기</button>";
+			var html2 = "<button type='button' onclick='clickMore();'>더 보기</button>";
 			
 			html += '<a class="match" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
 			html += item.idx;
@@ -403,16 +404,12 @@
 			html += '</i></div>';
 			html += '</div><div></div></a>';
 			var result = $("<li class='match_li'>").append(html).appendTo(ul);
-			var result2 = "";
-			console.log(result);
-			return result;
-			
+			return result;			
 		};
 	}
 	
 	function clickMore(){
-		console.log("second!!");
-		$("#keyword").autocomplete("search");
+		//$("#keyword").autocomplete("search");
 	}
    </script>
 </body>

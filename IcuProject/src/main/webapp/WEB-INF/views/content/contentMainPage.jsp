@@ -37,7 +37,7 @@
         <input id="mv" type="checkbox" name="category" value="1" />
        </div>
        <div class="movie_drama_Btn"> 
-        <button class="dramaBtn" id="drama" name="dr">드라마</button>
+        <button class="dramaBtn" id="drama" name="dr">TV 프로그램</button>
         <input id="dr" type="checkbox" name="category" value="2" />
       </div>
       <br>
@@ -134,12 +134,36 @@
             	<label id='genre' for="animation">애니메이션</label>
             </td>
             <td>
-              <input id='comedy' type='checkbox' name='genre' value='10'/>
-              <label id='genre' for='comedy'>코메디</label>
+              	<input id='comedy' type='checkbox' name='genre' value='10'/>
+              	<label id='genre' for='comedy'>코메디</label>
             </td>
             <td>
             	<input type="checkbox" id="docu" name="genre" value="11">
             	<label for="docu">다큐</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="horror" name="genre" value="12">
+            	<label for="horror">공포</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="mystery" name="genre" value="13">
+            	<label for="mystery">미스터리</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="crime" name="genre" value="14">
+            	<label for="crime">범죄</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="music" name="genre" value="15">
+            	<label for="music">음악</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="adventure" name="genre" value="16">
+            	<label for="adventure">모험</label>
+            </td>
+            <td>
+            	<input type="checkbox" id="war" name="genre" value="17">
+            	<label for="war">전쟁</label>
             </td>
           </tr>
           <tr>
