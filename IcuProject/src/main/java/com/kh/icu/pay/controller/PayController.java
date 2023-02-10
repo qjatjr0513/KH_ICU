@@ -63,7 +63,7 @@ public class PayController {
 	
 		int result = payService.accountOfPayment(p);
 		System.out.println("*****result : "+result); 
-		if(result == 1) {
+		if(result > 0) {
 			
 			partyService.joinPartyMember(pj);
 //			redirectAttributes.addFlashAttribute("flag","showAlert");

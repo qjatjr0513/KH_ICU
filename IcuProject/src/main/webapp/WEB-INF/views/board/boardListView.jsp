@@ -155,23 +155,40 @@
     <jsp:include page="../common/chatForm.jsp"/>
     
 	<script>
-		 $(function(){
-	         if('${flag}' == 'showAlert'){
-	        	 Swal.fire({
-	                 icon:'success',
-	                 title: "게시글 삭제 성공"
-	           		});
-	        	}
-	     });
-		 
-		 $(function(){
-	         if('${flag2}' == 'showAlert2'){
-	        	 Swal.fire({
-	                 icon:'success',
-	                 title: "게시글 등록 성공"
-	           		});
-	        	}
-	     });
+		$(function () {
+			switch ("${flag}") {
+				case 'showAlert1':
+					Swal.fire({
+						icon: 'success',
+						title: "게시글 삭제 성공"
+					});
+					break;
+				case 'showAlert2':
+					Swal.fire({
+						icon: 'success',
+						title: "게시글 등록 성공"
+					});
+					break;
+				case 'showAlert3':
+					Swal.fire({
+						icon: 'error',
+						title: "게시글 등록 실패"
+					});
+					break;
+				case 'showAlert4':
+					Swal.fire({
+						icon: 'error',
+						title: "상세조회 실패"
+					});
+					break;
+				case 'showAlert5':
+					Swal.fire({
+						icon: 'error',
+						title: "게시글 삭제 실패"
+					});
+					break;
+			}
+		});
 	</script>
 	
 </body>

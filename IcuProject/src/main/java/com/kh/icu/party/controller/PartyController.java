@@ -184,7 +184,7 @@ public class PartyController {
 	}
 	
     // 댓글 등록
-    @RequestMapping("insertReply.pa")
+    @RequestMapping("insertReply.py")
     @ResponseBody
     public String insertReply(Reply r, HttpSession session) {
        System.out.println("***r : "+r);
@@ -218,7 +218,7 @@ public class PartyController {
  	         return "redirect:partyDetail.py/"+paNo;
  	      } else {
   		     redirectAttributes.addFlashAttribute("flag0","showAlert0"); // "댓글삭제 실패했습니다. 다시 시도해주세요. "
- 	         return "common/errorPage";
+ 	         return "redirect:partyDetail.py/"+paNo;
  	      }
     }
 

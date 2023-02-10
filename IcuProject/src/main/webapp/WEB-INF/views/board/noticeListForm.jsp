@@ -79,29 +79,39 @@
       </div>
 	</section>
 		
-	<script>
-	
-	function movePage(bno){
- 		location.href = "${contextPath}/detail/"+bno;
- 	}
-	
-	$(function(){
-        if('${flag}' == 'showAlert'){
-       	 Swal.fire({
-                icon:'success',
-                title: "공지사항 삭제 성공"
-          		});
-       	}
+	 <script>
+
+    function movePage(bno) {
+      location.href = "${contextPath}/detail/" + bno;
+    }
+    $(function () {
+      switch ("${flag}") {
+        case 'showAlert1':
+          Swal.fire({
+            icon: 'success',
+            title: "공지사항 삭제 성공"
+          });
+          break;
+        case 'showAlert2':
+          Swal.fire({
+            icon: 'success',
+            title: "공지사항 등록 성공"
+          });
+          break;
+        case 'showAlert3':
+          Swal.fire({
+            icon: 'error',
+            title: "공지사항 등록 실패"
+          });
+          break;
+        case 'showAlert5':
+          Swal.fire({
+            icon: 'error',
+            title: "게시글 삭제 실패"
+          });
+          break;
+      }
     });
-	 
-	 $(function(){
-        if('${flag2}' == 'showAlert2'){
-       	 Swal.fire({
-                icon:'success',
-                title: "공지사항 등록 성공"
-          		});
-       	}
-    });
-	</script>
+  </script>
 </body>
 </html>

@@ -103,23 +103,21 @@
 
 </body>
 <script> 
-  $(function(){
-    if('${flag}' == 'showAlert'){
-      Swal.fire({
+  $(function () {
+        switch ("${flag}") {
+          case 'showAlert1':
+          Swal.fire({
             icon:'error',
             title: "비밀번호가 일치하지 않습니다."
-        });
-    }
-  });
-  
-  $(function(){
-    if('${flag3}' == 'showAlert3'){
-      Swal.fire({
+          }); break;
+
+          case 'showAlert3':
+          Swal.fire({
             icon:'error',
             title: "회원 탈퇴 실패하였습니다."
-        });
-    }
-  });
+          }); break;
+        }
+      });
   
   function btnDelete(){
     

@@ -25,8 +25,8 @@ public class AccessVaildator implements HandlerInterceptor {
 		if(role == null) {// 권한이 없음
 			
 			try {
-				request.setAttribute("errorMsg", "로그인 후 이용할 수 있습니다.");
-				request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
+				request.setAttribute("errorMsg", "1");
+				request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}
@@ -35,9 +35,10 @@ public class AccessVaildator implements HandlerInterceptor {
 		
 		// 관리자인 경우
 		if(requestUrl.indexOf("admin") > -1 && !role.equals("A")) {
+			System.out.println("???????"+role);
 			try {
-				request.setAttribute("errorMsg", "권한이 없습니다.");
-				request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
+				request.setAttribute("errorMsg", "2");
+				request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}

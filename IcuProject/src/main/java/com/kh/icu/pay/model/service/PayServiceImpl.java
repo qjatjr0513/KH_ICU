@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.icu.board.model.vo.PageInfo;
 import com.kh.icu.common.template.Pagination;
 import com.kh.icu.pay.model.dao.PayDao;
+import com.kh.icu.pay.model.vo.Deposit;
 import com.kh.icu.pay.model.vo.Pay;
 
 @Service
@@ -60,6 +61,11 @@ public class PayServiceImpl implements PayService{
 	@Override
 	public int remitConfirm(int payNo) {
 		return payDao.remitConfirm(sqlSession, payNo);
+	}
+	
+	@Override
+	public int insertRemit(Deposit de) {
+		return payDao.insertRemit(sqlSession, de);
 	}
 	
 	@Override

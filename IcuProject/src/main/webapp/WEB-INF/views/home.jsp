@@ -180,11 +180,21 @@
     </section>
     <script>
     $(function(){
-      if('${flag2}' == 'showAlert2'){
+        if('${errorMsg}' == '1'){
+          Swal.fire({
+                title: '로그인 후 이용가능합니다',
+                icon:'error',
+                customClass: {
+                confirmButton: 'swal2-confirm swal2-styled swal2-jong',
+                } 
+          });
+        }
+      });    
+    $(function(){
+      if('${errorMsg}' == '2'){
         Swal.fire({
-              title: '지금까지 ICU를 이용해주셔서 감사합니다.',
-              text: '시작페이지로 이동합니다.',
-              icon:'success',
+              title: '이용권한이 없습니다.',
+              icon:'error',
               customClass: {
               confirmButton: 'swal2-confirm swal2-styled swal2-jong',
               } 

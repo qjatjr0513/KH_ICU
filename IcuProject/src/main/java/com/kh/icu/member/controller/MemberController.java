@@ -570,14 +570,15 @@ public class MemberController {
 	}
 	
 	/**
-	 * 프로필사진 넣기
+	 * 프로필사진 삽입,수정,삭제
 	 */
 	@PostMapping("insertImg.me")
 	public String insertImg(Image image,
 							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
 							Model model,
-							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode) {
+							@RequestParam(value="mode", required=false, defaultValue= "insert") String mode,
+							RedirectAttributes redirectAttributes) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		Image profile = (Image) session.getAttribute("profile");
@@ -636,8 +637,8 @@ public class MemberController {
 			session.removeAttribute("profile");			
 			return "redirect:myPage.me";
 		}else {
-			model.addAttribute("errorMsg","게시글 작성 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert1");
+			return "redirect:myPage.me";
 		}
 	}
 	
@@ -683,7 +684,7 @@ public class MemberController {
 	 * 회원정보수정
 	 */
 	@RequestMapping("memUpdate.me")
-    public String updateMember(Member m, HttpSession session, Model model) {
+    public String updateMember(Member m, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
        // 1. 회원정보 업데이트
           
        // 암호화 작업
@@ -705,8 +706,8 @@ public class MemberController {
           return "redirect:myPage.me";
        } else {
           // 3. 업데이트 실패시 -> 에러메세지 추가, 에러페이지 이동
-          model.addAttribute("errorMsg","회원정보수정 실패");
-          return "common/errorPage";
+          redirectAttributes.addFlashAttribute("flag","showAlert2");
+          return "redirect:myPage.me";
        }
 	}
 	
@@ -714,7 +715,7 @@ public class MemberController {
 	 * 소셜 로그인 닉네임 수정 
 	 */
 	@RequestMapping("memUpdateNick.me")
-	public String updateMemberNick(Member m, HttpSession session, Model model) {
+	public String updateMemberNick(Member m, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		// 1. 회원정보 업데이트
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
@@ -730,12 +731,11 @@ public class MemberController {
 			//업데이트 성공했으니 디비에 등록된 변경된 정보 가져오기
 			session.setAttribute("loginUser", updateMem);
 			session.setAttribute("alertMsg", "닉네임 변경 성공!");
-			
 			return "redirect:myPage.me";
 		} else {
 			// 3. 업데이트 실패시 -> 에러메세지 추가, 에러페이지 이동
-			model.addAttribute("errorMsg","닉네임 변경 실패");
-			return "common/errorPage";
+			redirectAttributes.addFlashAttribute("flag","showAlert3");
+			return "redirect:myPage.me";
 		}
 	}
 	
@@ -767,12 +767,12 @@ public class MemberController {
 				
 			} else {
 				
-				redirectAttributes.addFlashAttribute("flag3","showAlert3");
+				redirectAttributes.addFlashAttribute("flag","showAlert3");
 				return "redirect:memDeleteForm.me";
 				
 			}
 		} else {
-			redirectAttributes.addFlashAttribute("flag","showAlert");
+			redirectAttributes.addFlashAttribute("flag","showAlert1");
 			
 			return "redirect:memDeleteForm.me";
 		}

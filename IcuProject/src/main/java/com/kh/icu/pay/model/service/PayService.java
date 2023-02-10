@@ -2,7 +2,9 @@ package com.kh.icu.pay.model.service;
 
 import java.util.Map;
 
+import com.kh.icu.pay.model.vo.Deposit;
 import com.kh.icu.pay.model.vo.Pay;
+
 
 public interface PayService{
 	public int accountOfPayment(Pay p);
@@ -16,4 +18,6 @@ public interface PayService{
 	public int selectMyPayListCount(Pay p);
 	
 	public Map<String, Object> selectMyPayList(int currentPage, Pay p);
+	
+	public int insertRemit(Deposit de);
 }

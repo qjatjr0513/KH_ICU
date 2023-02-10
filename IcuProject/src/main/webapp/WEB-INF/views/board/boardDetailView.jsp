@@ -182,16 +182,25 @@
         	 socket.send(msg);
          });
          
-         $(function(){
-	         if('${flag}' == 'showAlert'){
-	        	 Swal.fire({
+         $(function () {
+            switch ("${flag}") {
+               case 'showAlert1':
+               Swal.fire({
                      icon:'success',
                      title: "댓글삭제 성공"
-               		});
-	        	}
+                     }); break;
+
+               case 'showAlert2':
+               Swal.fire({
+                     icon:'error',
+                     title: "댓글삭제 실패"
+                     }); break;
+            }
          });
          
-            </script>
+         
+         
+         </script>
             
       </div>
    </div>
