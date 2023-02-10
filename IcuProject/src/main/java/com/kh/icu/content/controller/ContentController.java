@@ -105,8 +105,8 @@ public class ContentController {
 		ArrayList<Coment> list = contentService.selectReview(conNo);
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getFilePath() == null && list.get(i).getChangeName() == null) {
-				list.get(i).setFilePath("/resources/profileImg");
-				list.get(i).setChangeName("/orange.jpg");
+				list.get(i).setFilePath("");
+				list.get(i).setChangeName("");
 				
 			}
 		}

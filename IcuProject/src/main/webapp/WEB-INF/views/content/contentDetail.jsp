@@ -126,6 +126,8 @@
     
     <script>
 
+    </script>
+    <script>
     $('.video').modaal({
     	type: 'video'
     });
@@ -137,34 +139,38 @@
         
     });
     
-		function movePage(cno){
-	 		location.href = '${contextPath}/admin/contentUpdateForm?conNo='+cno;
-	 	}
-		function deleteContent(cno){
-			if(confirm('컨텐츠를 삭제하시겠습니까?') == true){
-	 			location.href = '${contextPath}/admin/contentDelete?conNo='+cno;
-			}
-			else{
-				return false;
-			}
-	 	}
-    	 function drawStar(target){
-	    	let percent = 0;
-	    	percent = target.value * 10+'%';
-	    	
-	    	$('.star>span').width(percent);
-	    	$('#average').text("평점 : "+target.value * 0.5+"점");	
-	    	console.log(percent);
+    $(function(){
+    	selectReview();
+    	starChange();
+    })
+    
+	function drawStar(target){
+		   let percent = 0;
+		   percent = target.value * 10+'%';
+		    	
+		   $('.star>span').width(percent);
+		   $('#average').text("평점 : "+target.value * 0.5+"점");	
+		   console.log(percent);
+		}
+		
+	    function insertReview(){
+	    	$.ajax({
+	    		url : '${contextPath}/commentInsert.co',
+				data : {conNo : '${c.conNo}', memNo : '${memNo}'
+					, cmtContent : $("#cmtContent").val()
+					, cmtScore : ($("#score").val()) * 10},
+				success: function(result){
+					$("#cmtContent").val('');
+					$('.star>span').width('0%');
+					$('#average').text('평점');
+					selectReview();
+				}
+	    	})
 	    }
-    	
-    	$(function(){
-    		starChange();
-    		selectReview();
-		});
-    	
-    	function selectReview(){
-    		$.ajax({
-    			url : '${contextPath}/comment.co',
+		
+		function selectReview(){
+			$.ajax({
+				url : '${contextPath}/comment.co',
 				data : {conNo : '${c.conNo}'},
 				dataType : 'json',
 				success: function(result){
@@ -173,9 +179,14 @@
 					let img = "";
 					for(let comment of result){
 						html += "<div class='profile-container'><div id='profileArea'>" +
-									"<div id='profile'>" +
-										"<img src='"+${contextPath}/+comment.filePath+comment.changeName+"'>" +
-									"</div>" +
+									"<div id='profile'>";
+						if(comment.filePath != "" && comment.chagneName != ""){
+							html += "<img src='"+${contextPath}/+comment.filePath+comment.changeName+"'/>";
+						}
+						else{
+							html += "<i class='fa-solid fa-user fa-lg'></i>";
+						}
+						html +=	"</div>" +
 									"<div id='userName'>" +
 										"<h5 align='center'>"+comment.memNickname+"</h5>" +
 									"</div>" +
@@ -193,33 +204,14 @@
 						$("#writtenReview").html(html);
 						starChange();
 					}														
-				},error : function(req,sts,err){
-					console.log(req);
-					console.log(sts);
-					console.log(err);
-				} 
-    		})
-    		
-    	}
-    	
-    	function insertReview(){
-    		$.ajax({
-    			url : '${contextPath}/commentInsert.co',
-				data : {conNo : '${c.conNo}', memNo : '${memNo}'
-					, cmtContent : $("#cmtContent").val()
-					, cmtScore : ($("#score").val()) * 10},
-				success: function(result){
-					$("#cmtContent").val('');
-					$('.star>span').width('0%');
-					$('#average').text('평점');
-					selectReview();
 				}
-    		})
-    	}
-    	
-    	function starChange(){
-    		$.ajax({
-    			url : '${contextPath}/starChange.co',
+			})
+			
+		}
+		
+		function starChange(){
+			$.ajax({
+				url : '${contextPath}/starChange.co',
 				data : {conNo : '${c.conNo}'},
 				success: function(result){
 					let percent = 0;
@@ -228,8 +220,22 @@
 					$('.setStarTitle>span').width(percent);
 					console.log(percent);
 				}
-    		})
-    	}
+			})
+		}
+		
+	function movePage(cno){	 		
+		location.href = '${contextPath}/admin/contentUpdateForm?conNo='+cno;	 	
+	}
+	
+		
+	function deleteContent(cno){
+		if(confirm('컨텐츠를 삭제하시겠습니까?') == true){
+	 		location.href = '${contextPath}/admin/contentDelete?conNo='+cno;
+		}
+		else{
+			return false;
+		}
+	 }   	
     	
     	
     </script>

@@ -339,6 +339,7 @@
 	
 	function search(){
 		var count = 1;
+		console.log("search!!!");
 		$("#keyword").autocomplete({
 			source : function(request, response){
 				$.ajax({
@@ -372,7 +373,6 @@
 			,autoFocus : true
 			,delay: 100
 		}).autocomplete("instance")._renderItem = function(ul, item){
-
 			var highlight = String(item.label).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 			var category = "";
 			if(item.category == 1){
@@ -412,7 +412,7 @@
 	
 	function clickMore(){
 		console.log("second!!");
-		search();
+		$("#keyword").autocomplete("search");
 	}
    </script>
 </body>
