@@ -46,7 +46,9 @@
         <span>종료일자 : ${p.endDate} (${p.leftDate}일)</span> <br />
         <span>금액 : ${p.totalPrice}원</span> 
         <input type="hidden" name="crewNum" value="${p.crewNum}"/>
-        <button id="join"> 참여 신청</button>
+		<c:if test="${loginUser.role eq 'C'}">
+			<button id="join"> 참여 신청</button>
+		</c:if>
       </div>
     </section>
     <!-- User Profile -->
