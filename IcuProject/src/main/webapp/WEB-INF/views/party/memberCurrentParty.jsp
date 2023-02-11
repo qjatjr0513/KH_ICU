@@ -66,11 +66,13 @@
 			      
 			      <c:forEach var="p" items="${listI}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 				  <c:if test="${not doneLoop}">
-					  <div class="cardBox"> <!-- 1개 -->
+					  <div class="cardBox">
+					  	  <div onclick="movePageI(${listI[count].paNo})">
 		                  <h4><b>${listI[count].ottName}</b></h4>
 		                  <span>${listI[count].paTitle}</span> <br />
 		                  <span id="endDate">${listI[count].endDate}까지 (${listI[count].leftDate}일)</span><br/><br/>
 		                  <br>
+		                  </div>
 		                  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__${count}">ID / PWD 보기</button>
 		              </div>
 		              
@@ -171,11 +173,14 @@
 			      
 			      <c:forEach var="p" items="${listO}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 				  <c:if test="${not doneLoopO}">
-					  <div class="cardBox"> <!-- 1개 -->
+				  	 
+					  <div class="cardBox">
+					  	  <div onclick="movePageO(${listO[countO].paNo})">
 		                  <h4><b>${listO[countO].ottName}</b></h4>
 		                  <span>${listO[countO].paTitle}</span> <br />
 		                  <span id="endDate">${listO[countO].endDate}까지 (${listO[countO].leftDate}일)</span><br/><br/>
 		                  <br>
+		                  </div>
 						  <button class="joinBtn" data-bs-toggle="modal" data-bs-target="#idModal__${count}">ID / PWD 보기</button>
 		              </div>
 					
@@ -247,6 +252,18 @@
     <!-- 실시간 문의 -->
     <jsp:include page="../common/chatForm.jsp"/>
     
-    <script src="resources/js/memberCurrentParty.js" defer></script>
+    <script src="resources/js/memberCurrentParty.js" defer> </script>
+    
+    <script>
+    function movePageI(paNo){
+    	location.href = "${contextPath}/partyDetail.py/"+paNo;
+    };
+
+    function movePageO(paNo){
+    	location.href = "${contextPath}/partyDetail.py/"+paNo;
+    };
+       
+    </script>
+
 </body>
 </html>
