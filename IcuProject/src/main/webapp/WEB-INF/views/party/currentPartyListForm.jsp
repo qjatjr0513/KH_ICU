@@ -53,7 +53,7 @@
 		      
 		      <c:forEach var="p" items="${list}" begin="${j.begin *4}" end="${j.begin * 4 +3}" step="1" varStatus="i" >
 			  <c:if test="${not doneLoop}">
-				  <div class="cardBox"> <!-- 1개 -->
+				  <div class="cardBox" onclick="movePage(${list[count].paNo})"> <!-- 1개 -->
 	                  <h4><b>${list[count].ottName}</b></h4>
 	                  <span>${list[count].paTitle}</span> <br />
 	                  <span id="endDate">${list[count].endDate}까지 (${list[count].leftDate}일)</span><br/><br/>
@@ -100,5 +100,11 @@
         </button>
       </div>
     </section>
+    
+    <script>
+	    function movePage(paNo){
+	    	location.href = "${contextPath}/partyDetail.py/"+paNo;
+	    };
+    </script>
   </body>
 </html>

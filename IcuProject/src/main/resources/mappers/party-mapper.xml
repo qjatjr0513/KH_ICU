@@ -222,25 +222,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="partyMem" parameterType="int" resultMap="partyJoinResultSet">
-        SELECT MEM_NO,
+SELECT MEM_NO,
         	   MEM_NICKNAME,
-               JOIN_DATE,
          	   I.CHANGE_NAME AS "CHANGE_NAME",
          	   I.FILE_PATH AS "FILE_PATH"
         FROM PARTY_JOIN P
         JOIN MEMBER USING(MEM_NO)
 	    LEFT JOIN IMAGE I ON(I.REF_TNO = MEM_NO) AND I.TABLE_CD= 'M'
         WHERE P.PA_NO = #{paNo}
-        UNION ALL
-        SELECT PA_NAME,
+        UNION
+        SELECT PA_NAME AS MEM_NO,
         	   MEM_NICKNAME,
-               START_DATE,
          	   I.CHANGE_NAME AS "CHANGE_NAME",
          	   I.FILE_PATH AS "FILE_PATH"
         FROM PARTY P
         JOIN MEMBER ON MEM_NO=PA_NAME
 	    LEFT JOIN IMAGE I ON(I.REF_TNO = MEM_NO) AND I.TABLE_CD= 'M'
         WHERE P.PA_NO = #{paNo}
+        UNION
+        SELECT MEM_NO,
+        	   MEM_NICKNAME,
+         	   I.CHANGE_NAME AS "CHANGE_NAME",
+         	   I.FILE_PATH AS "FILE_PATH"
+        FROM MEMBER
+        LEFT JOIN IMAGE I ON(I.REF_TNO = MEM_NO) AND I.TABLE_CD= 'M'
+        WHERE ROLE = 'A'
+    
 	</select>
 	
 	<insert id="joinPartyMember" parameterType="PartyJoin">
