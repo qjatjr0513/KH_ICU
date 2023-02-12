@@ -88,7 +88,7 @@
     <section id='review-container'>
     <div id="reviewWrite">
     	<br>
-    	<c:if test="${memNo ne 0 }">
+    	<c:if test="${loginUser.role eq 'C' }">
 	    	<h6 id="average">평점</h6>
 			<span class="star">
 			★★★★★

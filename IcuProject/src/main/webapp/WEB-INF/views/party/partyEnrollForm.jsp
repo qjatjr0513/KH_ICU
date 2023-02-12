@@ -101,7 +101,7 @@
 		
 	    <div class="btnGroup">
 			<button type="button" onclick="history_back();">이전</button>
-		<c:if test="${loginUser.bkStatus eq 'N'}">
+		<c:if test="${loginUser.bkStatus eq 'N' && loginUser.role eq 'C'}">
 			<button type="submit">등록</button>
 		</c:if>
 		</div>
