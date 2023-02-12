@@ -66,15 +66,16 @@
     <jsp:include page="../common/chatForm.jsp"/>
     
     <script>
-      let paNo = "${p.paNo}";
-      let totalPrice = "${p.totalPrice}";
-      let endDate = "${p.endDate}";
-      let startDate = "${p.startDate}";
-      let paTitle = "${p.paTitle}";
-      let memName = "${loginUser.memName}";
-      let email = "${loginUser.email}";
-      let phone = "${loginUser.phone}";
+      const paNo = "${p.paNo}";
+      const totalPrice = "${p.totalPrice}";
+      const endDate = "${p.endDate}";
+      const startDate = "${p.startDate}";
+      const paTitle = "${p.paTitle}";
+      const memName = "${loginUser.memName}";
+      const email = "${loginUser.email}";
+      const phone = "${loginUser.phone}";
       const rand_0_10000 = Math.floor(Math.random() * 10001);
+
 
       var height = $(document).height();
       var width  = window.document.body.clientWidth;
@@ -97,7 +98,7 @@
    			IMP.request_pay({ // param
                 pg: "html5_inicis",
                 pay_method: "card",
-                merchant_uid: paNo +"번 파티 "+totalPrice+"원 결제 "+rand_0_10000,
+                merchant_uid: paNo +"번 파티 "+totalPrice+"원 결제 "+ rand_0_10000,
                 name: paTitle ,
                 amount: totalPrice,
                 buyer_email: email,
@@ -109,7 +110,7 @@
    					var msg = '결제가 완료되었습니다';
    					console.log("결제성공 " + msg);
    					$.ajax({
-   						url : '${contextPath}/accountOfPayment.pe', 
+   						  url : '${contextPath}/accountOfPayment.pe', 
    				        type :'POST',
 	   				     data:{
 	   			            paNo : paNo,
@@ -120,8 +121,15 @@
    				        			        	
    				          if(res == 1){
                       console.log("추가성공");
-
-                      alertInfo();       
+                      Swal.fire({
+                            icon:'success',
+                            title: totalPrice + "원이 결제되었습니다.",
+                            confirmButtonColor: '#3085d6',
+                        }).then((result) => {
+                          if (result.isConfirmed){
+                            location.href = '${contextPath}/partyDetail.py/'+paNo;
+                          }
+                        });
    				          }else{
    				             console.log("Insert Fail!!!");
    				          }
@@ -148,26 +156,6 @@
    			});//pay
    		}); //check1 클릭 이벤트
    	}); //doc.ready
-     
-     function alertInfo() {
-       alert(totalPrice + "원 결제되었습니다.");
-       location.href = '${contextPath}/partyDetail.py/'+paNo;
-     }
-        
-  //   $(function(){
-  //   if('${flag}' == 'showAlert'){
-  //     Swal.fire({
-  //           icon:'success',
-  //           title: totalPrice + "원이 결제되었습니다.",
-  //           confirmButtonColor: '#3085d6',
-  //       }).then((result) => {
-  //         if (result.isConfirmed){
-  //           location.href = '${contextPath}/partyDetail.py/'+paNo;
-  //         }
-  //       });
-  //   }
-  // });
-
     </script>
 </body>
 </html>

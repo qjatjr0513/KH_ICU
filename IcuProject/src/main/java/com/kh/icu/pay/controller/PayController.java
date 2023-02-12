@@ -50,8 +50,7 @@ public class PayController {
 	@ResponseBody
 	public int accountOfPayment(HttpSession session,
 								Pay p, int paNo, String payment, int price,
-								PartyJoin pj,
-								RedirectAttributes redirectAttributes) {
+								PartyJoin pj) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		p.setPaNo(paNo);
@@ -67,7 +66,6 @@ public class PayController {
 		if(result > 0) {
 			
 			partyService.joinPartyMember(pj);
-//			redirectAttributes.addFlashAttribute("flag","showAlert");
 		}
 		
 		return result;
