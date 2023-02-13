@@ -253,8 +253,10 @@
 			            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
 	      				}else if($.trim(tableCd) == "P"){
 	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
-	      				}else if(a == null){
-	      					html += "<li><p id='none'>알림이 없습니다.</p></li>";
+	      				}else if($.trim(tableCd) == "A"){
+	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/depositListForm.pe?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+	      				}else{
+	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/main?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";
 	      				}
 	      				$("#msg").html(html);
 	            	   } 

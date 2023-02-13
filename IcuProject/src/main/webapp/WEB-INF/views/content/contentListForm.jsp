@@ -38,9 +38,14 @@
           </tr>
         </thead>
         <tbody>
+         <c:if test="${empty list }">
+          <tr id="tableEmpty">
+            <th colspan="4">조회할 컨텐츠가 없습니다</th>
+          </tr>
+        </c:if>
           <c:forEach var="l" items="${list }">   
 	          <tr onclick="movePage(${l.conNo });">
-	            <th scope="row">${l.conNo }</th>
+	            <td scope="row">${l.conNo }</td>
 	            <td>${l.conCategory }</td>
 	            <td>${l.conKTitle }</td>
 	            <td>${l.ottName }</td>

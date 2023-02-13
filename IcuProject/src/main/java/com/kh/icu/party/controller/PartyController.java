@@ -83,10 +83,10 @@ public class PartyController {
 		int result = partyService.insertParty(p);
 
 		if(result > 0) {
-			redirectAttributes.addFlashAttribute("flag","showAlert"); // "파티가 등록되었습니다. "
+			redirectAttributes.addFlashAttribute("flag","showAlert1"); // "파티가 등록되었습니다. "
 			return "redirect:findPartyForm.py";
-		} else {
-			redirectAttributes.addFlashAttribute("flag1","showAlert1"); // "파티 등록에 실패했습니다. "
+		}else {
+			redirectAttributes.addFlashAttribute("flag","showAlert2"); // "파티 등록에 실패했습니다. "
 			return "redirect:insert.py";
 		}
 		

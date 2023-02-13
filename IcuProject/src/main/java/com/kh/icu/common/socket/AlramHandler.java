@@ -109,11 +109,11 @@ public class AlramHandler extends TextWebSocketHandler {
 					a.setSendMemNo(Integer.parseInt(sendId));
 					a.setMesContent(content);
 					a.setRefTno(Integer.parseInt(refTno));
-					a.setTableCd("P");
+					a.setTableCd("A");
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href=''>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/depositListForm.pe'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("endParty".equals(cmd) && !sendId.equals(receiveId)) {
@@ -127,7 +127,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("black".equals(cmd) && !sendId.equals(receiveId)) {

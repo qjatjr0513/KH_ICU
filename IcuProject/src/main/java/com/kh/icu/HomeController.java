@@ -11,11 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.icu.common.model.service.AlarmService;
 import com.kh.icu.content.model.service.ContentService;
 import com.kh.icu.content.model.vo.Content;
 
@@ -33,15 +36,20 @@ public class HomeController {
 		this.contentService = contentService;
 	}
 	
+	@Autowired
+	private AlarmService alarmService;
+	
 	@RequestMapping("/")
 	public String home(HttpSession session, Model model, HttpServletResponse res) {
 		return "home";	
 	}
 	
 	@RequestMapping("main")
-	public String main(Model model) {
+	public String main(Model model, @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo) {
 		ArrayList<Content> recommend = contentService.recommendContents();
 		model.addAttribute("recommend", recommend);
+		int result = alarmService.readAlarm(mesNo);
+		
 		
 		return "common/main";
 	}

@@ -57,7 +57,7 @@
       </div>
       <br />
       <div class="btn-group2">
-        <button>이전</button>
+        <button type="button" onclick="location.href='${contextPath }/findPartyForm.py'">취소</button>
         <button type="button" id="payBtn">결제</button>
       </div>
     </section>

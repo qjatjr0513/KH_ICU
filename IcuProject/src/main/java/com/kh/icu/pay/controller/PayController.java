@@ -95,7 +95,7 @@ public class PayController {
 	public String depositListForm(@RequestParam(value="cpage", defaultValue = "1") int currentPage, Model model,
 			  @RequestParam Map<String, Object> paramMap,
 			  HttpSession session,
-			  Deposit d){
+			  Deposit d, @RequestParam(value="mesNo", required=false, defaultValue="0") int mesNo){
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		d.setRecNo(loginUser.getMemNo());
@@ -103,6 +103,9 @@ public class PayController {
 		Map<String, Object> map = new HashMap();
 		
 		map = payService.selectMydepList(currentPage, d);
+		
+		// 알림 조회 상태 변경
+        int result = alarmService.readAlarm(mesNo);
 		
 		model.addAttribute("map", map);
 		

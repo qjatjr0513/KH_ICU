@@ -198,7 +198,7 @@
                  	
                     Swal.fire({
                             icon:'success',
-                            title: "댓글이 정상적으로 등록되었습니다. "
+                            title: "댓글이 등록되었습니다"
                       }).then(function(){
                      	 location.href=contextPath+"/partyDetail.py/"+paNo;
                       })
@@ -206,7 +206,7 @@
                  }else{
                     Swal.fire({
                             icon:'error',
-                            title: "댓글등록에 실패하였습니다. 다시 시도해주세요. "
+                            title: "댓글등록 실패"
                       });
                  }
               },
@@ -229,7 +229,7 @@
 	         if('${flag}' == 'showAlert'){
 	        	 Swal.fire({
 	                 icon:'success',
-	                 title: "댓글이 삭제되었습니다. "
+	                 title: "댓글이 삭제되었습니다"
 	           		});
 	        	}
 	     });
@@ -238,7 +238,7 @@
 	         if('${flag0}' == 'showAlert0'){
 	        	 Swal.fire({
 	                 icon:'error',
-	                 title: "댓글삭제 실패했습니다. 다시 시도해주세요. "
+	                 title: "댓글 삭제 실패"
 	           		});
 	        	}
 	     });

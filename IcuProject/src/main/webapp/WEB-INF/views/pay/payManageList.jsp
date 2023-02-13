@@ -39,13 +39,13 @@
         <tbody>
           <c:if test="${empty list }">
             <tr id="tableEmpty">
-              <td colspan="8">조회할 결제내역이 없습니다</td>
+              <th colspan="8">조회할 결제내역이 없습니다</th>
             </tr>
           </c:if>
           <c:forEach var="p" items="${list }" >
             <tr>
               <form id="remitConfirm" action="${contextPath }/admin/remitConfirm.pe?paName=${p.paName}&paMemNickName=${p.paMemNickName}&memNickName=${p.memNickName}&memNo=${p.memNo}&paNo=${p.paNo }&remPrice=${p.price}" method="post">
-              <th scope="row">${p.payDate}</th>
+              <td scope="row">${p.payDate}</td>
               <td>${p.paTitle}</td>
               <td>${p.memName}(${p.memNickName})</td> 
               <td>${p.ottName}</td> 

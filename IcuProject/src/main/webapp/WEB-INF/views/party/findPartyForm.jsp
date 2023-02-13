@@ -289,14 +289,21 @@
 			})
 		};
 		
-		$(function(){
-    	    if('${flag}' == 'showAlert'){
-    	      Swal.fire({
-    	            icon:'success',
-    	            title: "파티가 등록되었습니다."
-    	        });
-    	    }
-        });
+		$(function () {
+            switch ("${flag}") {
+               case 'showAlert1':
+               Swal.fire({
+                     icon:'success',
+                     title: "파티 등록 성공"
+                     }); break;
+                     
+               case 'showAlert2':
+                   Swal.fire({
+                         icon:'error',
+                         title: "파티 등록 실패"
+                         }); break;
+            }
+         });
      	
     </script>
   </body>

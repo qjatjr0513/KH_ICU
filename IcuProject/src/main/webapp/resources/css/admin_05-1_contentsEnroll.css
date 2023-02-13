@@ -7,6 +7,9 @@
   width: 60%;
   background-color: white;
   padding: 20px;
+  font-family: 'Poor Story', 'cursive';
+  font-size:18px;
+  font-weight: var(--weight-bold);
 }
 
 .form-select {

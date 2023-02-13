@@ -37,7 +37,7 @@
         <tbody>
 					<c:if test="${empty list }">
 						<tr id="tableEmpty">
-							<td colspan="5">목록이 없습니다..</td>
+							<th colspan="5">목록이 없습니다..</th>
 						</tr>
 					</c:if>
 					
@@ -95,39 +95,35 @@
  		location.href = "${contextPath}/admin/detail.fq/"+fno;
  	}
 	
-	 <script>
-		function movePage(cno){
-	 		location.href = '${contextPath}/detail?conNo='+cno;
-	 	}
 		
-		 $(function(){
-	          switch("${flag}"){
-	            case 'showAlert1' : 
-	            	Swal.fire({
-	                    icon:'success',
-	                    title: "FAQ 등록 성공"
-	              		});
-	              break;
-	            case 'showAlert2' :
-	            	Swal.fire({
-	                    icon:'error',
-	                    title: "FAQ 등록 실패"
-	              		});
-	              break;
-	            case 'showAlert3' :
-	            	Swal.fire({
-	                    icon:'success',
-	                    title: "FAQ 삭제 성공"
-	              		});
-	              break;
-	            case 'showAlert4' :
-	            	Swal.fire({
-	                    icon:'error',
-	                    title: "FAQ 삭제 실패"
-	              		});
-	              break;
-	          }
-	        });
+	 $(function(){
+          switch("${flag}"){
+            case 'showAlert1' : 
+            	Swal.fire({
+                    icon:'success',
+                    title: "FAQ 등록 성공"
+              		});
+              break;
+            case 'showAlert2' :
+            	Swal.fire({
+                    icon:'error',
+                    title: "FAQ 등록 실패"
+              		});
+              break;
+            case 'showAlert3' :
+            	Swal.fire({
+                    icon:'success',
+                    title: "FAQ 삭제 성공"
+              		});
+              break;
+            case 'showAlert4' :
+            	Swal.fire({
+                    icon:'error',
+                    title: "FAQ 삭제 실패"
+              		});
+              break;
+          }
+        });
  </script>
 </body>
 </html>

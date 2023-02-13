@@ -15,7 +15,9 @@ public class AccessVaildator implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setHeader("Expires", "0"); // Proxies.
 		String requestUrl = request.getRequestURL().substring(request.getContextPath().length());
 		
 		// 권한 체크

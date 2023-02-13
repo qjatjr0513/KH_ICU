@@ -38,12 +38,12 @@
         <tbody>
           <c:if test="${empty list }">
             <tr id="tableEmpty">
-              <td colspan="5">조회할 회원이 없습니다</td>
+              <th colspan="5">조회할 회원이 없습니다</th>
             </tr>
           </c:if>
           <c:forEach var="m" items="${list }" >
           <tr>
-            <th scope="row" name="memNo">${m.memNo}</th>
+            <td scope="row" name="memNo">${m.memNo}</td>
             <td>${m.memName}(${m.memNickname})</td>
             <td>${m.email}</td>
             <td>${m.phone}</td>

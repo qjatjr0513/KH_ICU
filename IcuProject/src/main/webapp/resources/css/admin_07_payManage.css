@@ -8,6 +8,13 @@
   width: 60%;
   /* background-color: antiquewhite; */
 }
+
+th{
+	font-family: 'Poor Story', 'cursive';
+	font-weight: var(--weight-bold);
+	font-size: 18px;
+}
+
 td button {
   border: 1px solid rgb(75, 75, 75);
   border-radius: 5px;

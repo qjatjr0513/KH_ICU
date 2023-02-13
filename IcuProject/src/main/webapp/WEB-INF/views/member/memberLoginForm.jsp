@@ -79,7 +79,7 @@
     <!-- 구글 로그인 -->
     <div class="google__button loginbtn" style="text-align:center">
 	 <button type ="button" class = "btn" onclick="location.href='${urlGoogle}'">
-	 	<img class='googleImg' src="resources/images/google_logo.png">
+	 	<img class='googleImg' src="resources/images/btn_google_signin_light_normal_web.png">
 	 </button>
     </div>
     

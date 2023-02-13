@@ -238,7 +238,7 @@ public class MemberController {
 			}
 		}else {
 			redirectAttributes.addFlashAttribute("flag","showAlert");
-			return "redirect:loginForm.me";
+			return "redirect:loginForm";
 		}
 	}
 	
