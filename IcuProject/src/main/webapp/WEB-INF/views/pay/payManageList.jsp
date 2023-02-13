@@ -21,7 +21,7 @@
    
 	<!-- 결제관리 -->
     <section id="payList">
-      <h2>결제 관리</h2>
+      <h2 class='memberTitle'>결제 관리</h2>
       <hr />
       <table class="table table-hover">
         <thead>

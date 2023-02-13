@@ -22,7 +22,7 @@
     
 	<!-- 블랙리스트관리 -->
   <section id="memberInfo">
-    <h2>블랙리스트 조회</h2>
+    <h2 class="blackTitle">블랙리스트 조회</h2>
     <hr />
     <table class="table table-hover">
       <thead>
@@ -44,7 +44,7 @@
         <c:forEach var="m" items="${list }" >
           <tr>
           <form id="blackCancel" action="${contextPath }/admin/blackCancel.me" method="post">
-          <th scope="row">${m.memNo}</th>
+          <td scope="row">${m.memNo}</td>
           <td>${m.memName}(${m.memNickname})</td>
           <td>${m.email}</td>
           <td>${m.phone}</td>

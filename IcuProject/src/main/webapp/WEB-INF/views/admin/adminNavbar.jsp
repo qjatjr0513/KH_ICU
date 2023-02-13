@@ -101,6 +101,7 @@
           <li class='li6'><a href="${contextPath }/admin/faqList.fq">FAQ 관리</a></li>
           <li class='li7'><a href="${contextPath }/admin/noticeList.bo">공지사항 관리</a></li>
           <li class='li8'><a href="${contextPath }/admin/payManageListForm.pe">결제 관리</a></li>
+          <li class='li9'><a href="${contextPath }/chat/chatRoomList">실시간 문의</a></li>
         </ul>
       </nav>
       
@@ -126,9 +127,11 @@
 			$('.li6').addClass('active');
 		}else if(link[5] == 'noticeList.bo'){
 			$('.li7').addClass('active');
-		} else {
+		} else if(link[5] == 'payManageListForm.pe') {
 			$('.li8').addClass('active');
-		} 
+		} else{
+			
+		}
 	</script>
     
     

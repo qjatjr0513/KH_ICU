@@ -1,7 +1,7 @@
-@import url('main.css');
 @import url('admin_main.css');
+@import url('main.css');
 
-#contentList {
+#noticeList {
   margin-left:550px;
   margin-top: 300px;
   width: 60%;
@@ -17,6 +17,12 @@ th{
 	font-size: 18px;
 }
 
+.noticeTitle {
+	font-family:'Poor Story', 'cursive';
+	font-size:30px;
+	color: var(--color-orange);
+}
+
 td button {
   border: 1px solid rgb(75, 75, 75);
   border-radius: 5px;
@@ -25,33 +31,16 @@ td button {
   color: white;
 }
 
-.contentTitle {
-	font-family:'Poor Story', 'cursive';
-	font-size:30px;
-	color: var(--color-orange);
-}
-
-
-#contentList > table td,
-#contentList > table th {
+#noticeList > table td,
+#noticeList > table th {
   padding: 10px;
 }
 
-#contentList > table {
+#noticeList > table {
   background-color: white;
   text-align: center;
 }
 
 .pagination {
   margin: auto;
-}
-.contents__enrollBtn {
-  width: 150px;
-  background-color: var(--color-purple);
-  padding: 15px 5px;
-  border-radius: 8px;
-  font-size: 18px;
-  color: white;
-  font-weight: bold;
-  float: right;
 }

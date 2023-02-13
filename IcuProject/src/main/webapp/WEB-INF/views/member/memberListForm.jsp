@@ -22,7 +22,7 @@
     
     <!-- 회원정보조회 -->
     <section id="memberInfo">
-      <h2>회원정보조회</h2>
+      <h2 class="memberTitle">회원정보조회</h2>
       <hr />
       <table class="table table-hover">
         <thead>

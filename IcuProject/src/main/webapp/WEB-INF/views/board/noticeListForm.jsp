@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>공지사항 관리 페이지</title>
 	<!-- css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin_08_faqManage.css" />
+    <link rel="stylesheet" href="${contextPath}/resources/css/admin_06_noticeManage.css" />
 </head>
 <body>
     <!-- Navbar -->
@@ -19,8 +19,8 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
     <!-- 결제관리 -->
-    <section id="faqList">
-      <h2>공지사항 관리</h2>
+    <section id="noticeList">
+      <h2 class="noticeTitle">공지사항 관리</h2>
       <hr />
       <!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">

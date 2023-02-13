@@ -20,7 +20,7 @@
 
     <!-- 결제관리 -->
     <section id="faqList">
-      <h2>FAQ 관리</h2>
+      <h2 class="faqTitle">FAQ 관리</h2>
       <hr />
       <!-- 로그인시에만 보이는 글쓰기 버튼. -->
 			<c:if test="${ not empty loginUser }">

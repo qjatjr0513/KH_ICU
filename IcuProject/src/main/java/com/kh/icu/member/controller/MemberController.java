@@ -221,9 +221,9 @@ public class MemberController {
 	@RequestMapping("login")
 	public String loginMember(Member m, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Member loginUser = memberService.loginMember(m);
-		int memNo = loginUser.getMemNo();
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginUser.getMemPwd())) {// 로그인 성공
+			int memNo = loginUser.getMemNo();
 			Image profile = memberService.selectProfile(memNo);
 
 			if(loginUser.getRole().equals("A")) {

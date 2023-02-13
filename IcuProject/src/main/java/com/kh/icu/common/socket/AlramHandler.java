@@ -85,7 +85,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/detail.bo/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/detail/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("party".equals(cmd) && !sendId.equals(receiveId)) {

@@ -20,7 +20,7 @@
     <form id="contentEnroll" action="${contextPath }/admin/contentEnroll" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
-      <h2>컨텐츠 등록</h2>
+      <h2 class="contentTitle">컨텐츠 등록</h2>
       <hr />
       <div class="header-box">
         <div class="leftBox">
@@ -116,7 +116,7 @@
       
       <br />
       <div class="btnGroup">
-        <button class="contents-btn">취소</button>
+        <button class="contents-btn" type="button" onclick="location.href='${contextPath}/admin/contentListForm'">취소</button>
         <button type="submit" class="contents-btn">저장</button>
       </div>
     </section>

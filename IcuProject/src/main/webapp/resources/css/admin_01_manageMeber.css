@@ -4,17 +4,26 @@
 /* 회원정보조회 */
 
 #memberInfo {
-  margin: auto;
+  margin-left:550px;
   margin-top: 300px;
-  padding-left: 200px;
   width: 60%;
-  /* background-color: antiquewhite; */
+  padding:30px;
+  background-color:white;
+  box-shadow:0 0 5px 1px lightgray;
+  border-radius:12px;
 }
 th {
 	font-family: 'Poor Story', 'cursive';
 	font-weight: var(--weight-bold);
 	font-size: 18px;
 }
+
+.memberTitle{
+	font-family:'Poor Story', 'cursive';
+	font-size:30px;
+	color: var(--color-orange);
+}
+
 #memberInfo > table {
   background-color: white;
   text-align: center;
@@ -28,11 +37,13 @@ th {
 }
 
 #blackList {
-  margin: auto;
+  margin-left:550px;
   margin-top: 300px;
-  padding-left: 200px;
   width: 60%;
-  /* background-color: antiquewhite; */
+  padding:30px;
+  background-color:white;
+  box-shadow:0 0 5px 1px lightgray;
+  border-radius:12px;
 }
 td button {
   border: 1px solid rgb(75, 75, 75);
@@ -40,6 +51,12 @@ td button {
   padding: 0 3px;
   background-color: rgb(150, 150, 150);
   color: white;
+}
+
+.blackTitle{
+	font-family:'Poor Story', 'cursive';
+	font-size:30px;
+	color: var(--color-orange);
 }
 
 #blackList > table td,

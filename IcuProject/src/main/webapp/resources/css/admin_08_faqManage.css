@@ -2,17 +2,25 @@
 @import url('main.css');
 
 #faqList {
-  margin: auto;
+  margin-left:550px;
   margin-top: 300px;
-  padding-left: 200px;
   width: 60%;
-  /* background-color: antiquewhite; */
+  padding:30px;
+  background-color:white;
+  box-shadow:0 0 5px 1px lightgray;
+  border-radius:12px;
 }
 
 th{
 	font-family: 'Poor Story', 'cursive';
 	font-weight: var(--weight-bold);
 	font-size: 18px;
+}
+
+.faqTitle {
+	font-family:'Poor Story', 'cursive';
+	font-size:30px;
+	color: var(--color-orange);
 }
 
 td button {
