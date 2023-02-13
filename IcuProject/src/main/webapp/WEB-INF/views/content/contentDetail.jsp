@@ -51,6 +51,7 @@
 	    			<h6>&nbsp;&nbsp;<b>상영 시간: ${c.conInfo }분</b></h6>
 	    		</c:if>
 	    		<h6>&nbsp;&nbsp;<b>방영 날짜 : ${c.conDate }</b></h6>
+	    		<h6></h6>
 	    	</div>
 	    	<div id="poster">
 	    		<c:if test="${c.filePath eq '' or c.filePath eq null}">
