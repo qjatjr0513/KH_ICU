@@ -2,7 +2,8 @@
 
 #main__logo {
   text-align: center;
-  margin-top: 95px;
+  margin-top: 170px;
+  margin-left:150px;
 }
 
 #whole{
@@ -21,7 +22,7 @@ span{
 
 #whole{
 	width: 50%;
-    margin: auto;
+    margin-left:550px;
     padding: 30px;
     border: none;
     box-shadow: 0 0 5px 1px lightgrey;
@@ -45,4 +46,9 @@ span{
 	font-family: 'Poor Story', 'cursive';
 	font-weight:  bold;
 	font-size: 20px;
+}
+
+.deleteBtn{
+	margin-top:30px;
+	font-weight:bold !important;
 }

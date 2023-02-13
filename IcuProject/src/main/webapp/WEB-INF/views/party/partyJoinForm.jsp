@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 파티 신청</title>
 
 	<!-- css -->
     <link rel="stylesheet" href="resources/css/10_application.css" />

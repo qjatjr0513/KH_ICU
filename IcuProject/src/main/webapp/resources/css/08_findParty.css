@@ -155,6 +155,7 @@ input[type='range'] {
 .partyCard {
   display:flex;
   justify-content: start;
+  margin-left:25px;
 }
 
 .cardBox {
@@ -182,7 +183,10 @@ input[type='range'] {
   margin: auto;
   padding:20px;
 }
-
+.carousel-item{
+	height:400px !important;
+	/* background-color:blue !important; */
+}
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: var(--color-orange);

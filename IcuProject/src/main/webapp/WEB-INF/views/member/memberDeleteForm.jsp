@@ -21,12 +21,12 @@
     <jsp:include page="../member/myNavbar.jsp"/>
     
     
-  <div id="main__logo">
+  <div id="main__logo" class='animate__animated animate__fadeIn'>
 	<h2>회원탈퇴</h2>
   <br>
   </div>
 
-  <div id="whole">
+  <div id="whole" class='animate__animated animate__fadeIn'>
     <div id="content">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       회원 탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.<br><br>
@@ -66,7 +66,7 @@
 			</button>
 		</c:when>
 		<c:otherwise>
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			<button type="button" class="btn btn-primary deleteBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				회원탈퇴
 			</button>
 		</c:otherwise>

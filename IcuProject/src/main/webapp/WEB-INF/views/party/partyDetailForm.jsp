@@ -30,7 +30,7 @@
       <div class="info__partyOwner">
            <c:choose>
 			   <c:when test="${!empty p.changeName}">
-                    <img id="replyWriter-img" src="${contextPath }${p.filePath }${p.changeName}">
+                    <img id="replyWriter-img1" src="${contextPath }${p.filePath }${p.changeName}">
                </c:when>
                <c:otherwise>
                     <i class="fa-solid fa-user fa-3x"></i>
@@ -63,7 +63,7 @@
             <input type="hidden" value="${pj.memNo}"/>
             <c:choose>
             	<c:when test="${!empty pj.changeName}">
-                     <img id="replyWriter-img" src="${contextPath }${pj.filePath }${pj.changeName}">
+                     <img id="replyWriter-img1" src="${contextPath }${pj.filePath }${pj.changeName}">
                 </c:when>
                 <c:otherwise>
                      <i class="fa-solid fa-user fa-3x"></i>
@@ -103,12 +103,12 @@
 		<c:if test="${(loginUser.memNo == pjr.memNo)}">
 			<div class="card mb-2" id="comment">
 	            <div class="card-header bg-light">
-	                    <i class="fa fa-comment fa"></i> REPLY
+	                    <i class="fa fa-comment fa"  style='color:yellowgreen;'></i> <span style='font-family:"Poor Story", "cursive"; font-weight:bold;'>REPLY</span>
 	            </div>
 	            <div class="card-body">
 	               <ul class="list-group list-group-flush">
 	                   <li class="list-group-item">
-	                   <textarea class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
+	                   <textarea maxlength="100" class="form-control"  name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요" style="resize: none;"></textarea>
 	                   <c:if test="${not empty loginUser}">
 	                   <button type="button"  class="btn btn-dark mt-3" onclick="insertReply();">댓글 입력</button>
 	                   </c:if>
@@ -126,8 +126,8 @@
 	            </thead>
 	            <tbody>
 	              <c:forEach var="r" items="${list }" varStatus="i">
-					<tr>
-	               <td style="width: 30px;">
+					<tr  style='border-top: 1px solid #dee2e6;'>
+	               <td style="width:50px;">
 	               <c:choose>
 	                  <c:when test="${!empty r.changeName}">
 	                     <img id="replyWriter-img" src="${contextPath }${r.filePath }${r.changeName}">
@@ -138,8 +138,8 @@
 	               </c:choose>
 	               </td>
 	               <td id="rWriter">${r.replyWriter }</td>
-						<td id="rContent">${r.replyContent }</td>
-						<td>${r.createDate }</td>
+						<td id="rContent" style='width:500px;'>${r.replyContent }</td>
+						<td id='rDate'>${r.createDate }</td>
 						<td><input type="hidden" id="rno" value="${r.replyNo }"/></td>
 						<c:if test="${r.replyWriter == loginUser.memNickname }">
 						<%-- <td><button type='button' class='btn btn-danger' data-bs-toggle='modal' id="replyUpdate" data-bs-target='#exampleModal' data-rno="${r.replyNo }">삭제</button></td> --%>

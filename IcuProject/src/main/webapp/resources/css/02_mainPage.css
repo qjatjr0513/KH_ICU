@@ -1,9 +1,10 @@
 @import url('main.css');
 
+
 /* Home */
 #home {
   margin: auto;
-  width: 850px;
+  width: 1275px;
   height: 52vh;
   padding: 40px;
   padding-top: 135px;
@@ -13,6 +14,11 @@
   border-radius: 15px;
   box-shadow: 0 0 5px 1px rgb(162, 162, 162);
 }
+.carousel-inner h3 {
+	font-size:18px !important;
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold !important;
+}
 .input-group{
 	flex-wrap:nowrap !important;
 }
@@ -21,6 +27,42 @@
 	border-top-left-radius:8px !important;
 	border-bottom-left-radius:8px !important;
 }
+
+#ui-id-1 {
+	/* 오토 컴플리트 창 */
+	border-radius:8px;
+}
+.ui-menu-item-wrapper {
+	/* 오토 컴플리트 리스트 화면 수정 */
+	width:350px;
+	border-radius:8px;
+	background-color:white;
+}
+
+
+.ui-menu-item-wrapper:hover {
+	/* 오토컴플리트 리스트 hover 시 화면 수정 */
+	background-color:lightgray !important;
+	border:none !important;
+	color:black !important;
+
+}
+.ui-state-active{
+	/* 키보드 선택 시 오토 컴플리트 화면수정 */
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+	border:none !important;
+	color:black !important;
+}
+
+.match_name{
+	font-family:'Poor Story', 'cursive';
+	font-weight:bold;
+	font-size:20px;
+}
+.fa-star{
+	color:orange;
+}
+
 .sizing {
   width: 550px !important;
   height: 50px;
@@ -31,6 +73,10 @@
   border: 2px solid lightgray;
   border-radius: 5px;
   width: 90%;
+}
+.formControl::placeholder{
+	font-family:'Poor Story', 'cursive';
+	font-weight:600;
 }
 .formControl:focus {
   outline: none !important;
@@ -56,8 +102,9 @@
 
 .first-box {
   background: linear-gradient(45deg, rgb(157, 34, 157), Orange);
-  height: 30vh;
+  height: 40vh;
   display: flex;
+
 }
 
 .head__left-box,
@@ -68,7 +115,7 @@
   height: 100%;
   display: inline-block;
   text-align: left;
-  padding: 32px;
+  padding: 80px;
 }
 .head__left-box h2,
 .head__left-box h3,
@@ -79,32 +126,44 @@
   color: var(--color-white);
 }
 
+.head__left-box h2,
+.head__left-box2 h2,
+.head__left-box3 h2{
+	font-size:32px;
+}
+
+
+.head__left-box h3,
+.head__left-box2 h3,
+.head__left-box3 h3 {
+  font-size:26px;
+}
+
 .head__right-box,
 .head__right-box2,
 .head__right-box3 {
-  /* background-color: #4d4d4d; */
   width: 40%;
   float: right;
   position: relative;
 }
 .our-story-card-img {
-  width: 320px;
+  width:440px;
   position: absolute;
   top: 30px;
   right: 30px;
   z-index: 1;
 }
 .img-popcorn {
-  width: 198px;
-  height: 115px;
+  width: 280px;
+  height: 155px;
   position: absolute;
-  top: 50px;
-  right: 92px;
+  top: 65px;
+  right: 113px;
 }
 
 .second-box {
   background: linear-gradient(45deg, rgb(178, 182, 115), Orange);
-  height: 30vh;
+  height: 40vh;
   display: flex;
 }
 .head__right-box2 {
@@ -112,14 +171,14 @@
 }
 .head__right-box2 img {
   position: absolute;
-  width: 250px;
-  top: 40px;
-  right: 50px;
+  width: 370px;
+  top: 30px;
+  right: 100px;
 }
 
 .third-box {
   background: linear-gradient(45deg, darkslateblue, rgb(75, 101, 179));
-  height: 30vh;
+  height: 40vh;
   display: flex;
 }
 
@@ -132,14 +191,14 @@
   box-shadow: 0 0 10px 3px #73aace;
 }
 .party-img1 {
-  width: 120px;
+  width: 180px;
   transform: rotate(-5deg);
   position: absolute;
   top: 60px;
-  right: 160px;
+  right: 250px;
 }
 .party-img2 {
-  width: 170px;
+  width: 250px;
   transform: rotate(5deg);
   position: absolute;
   top: 40px;
@@ -149,7 +208,7 @@
 /* party box */
 #party {
   /* background-color: antiquewhite; */
-  width: 770px;
+  width: 1200px;
   height: 250px;
   margin: auto;
   text-align: center;
@@ -159,14 +218,16 @@
 }
 .party__box {
   display: flex;
+  width:1200px;
   height: 100%;
   justify-content: space-between;
+  margin:auto;
 }
 
 .party__box-left,
 .party__box-right {
   background: white;
-  width: 48%;
+  width: 32%;
   height: 100%;
   position: relative;
   cursor: pointer;
@@ -182,6 +243,9 @@
 }
 .party__box-right:hover{
 	box-shadow:0 0 5px 1px var(--color-orange);
+}
+.party__box-right:nth-child(3):hover{
+	box-shadow:0 0 7px 1px var(--color-blue);
 }
 
 .party__box-left,
@@ -234,8 +298,8 @@
 .wonder__box {
   background-color: rgb(237, 211, 97);
   margin: auto;
-  width: 770px;
-  height: 110px;
+  width: 1200px;
+  height: 170px;
   margin-top: 70px;
   display: flex;
   align-items: center;
@@ -247,7 +311,7 @@
 
 .wonder-text {
   color: rgb(130, 130, 130);
-  font-size: 22px;
+  font-size: 30px;
   font-weight: 600;
   margin-left: -20px;
 }

@@ -21,8 +21,8 @@
 
    
  <!-- 결제내역 -->
-    <section id="payList">
-      <h2>입금 내역</h2>
+    <section id="payList" class='animate__animated animate__fadeIn'>
+      <h2 class='memberTitle'>입금 내역</h2>
       <hr />
       <table class="table table-hover">
         <thead>

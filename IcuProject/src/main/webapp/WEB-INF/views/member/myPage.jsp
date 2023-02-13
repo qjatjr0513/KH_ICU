@@ -19,11 +19,11 @@
     <jsp:include page="../member/myNavbar.jsp"/>
     <br><br>
 	<!-- Logo -->
-    <div id="main__logo">
+    <div id="main__logo" class='animate__animated animate__fadeIn'>
       <img src="resources/images/navbarLogo.png" />
     </div>
 
-    <div id="whole">
+    <div id="whole" class='animate__animated animate__fadeIn'>
       <div id="imgAndInfo">
         <div id="viewAndEnroll">
           <div id="view" class="titleImg">

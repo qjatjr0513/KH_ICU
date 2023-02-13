@@ -27,7 +27,7 @@
      <!-- input, carousel -->
 
 	
-     <section id="home">
+     <section id="home" class='animate__animated animate__fadeInDown'>
      <form id="contentSearch" action="${contextPath }/searchByKeyword.co" method="post">
        <div class="input-group mb-3 sizing">
         <select name="searchNo" id="search">
@@ -39,7 +39,7 @@
 	           type="text"
 	           id="keyword"
 	           class="formControl"
-	           placeholder="내용을 입력해주세요."
+	           placeholder="그 영화 어떤 OTT에 있지? 컨텐츠를 검색해보세요!"
 	           name="keyword"
 	           aria-label="Recipient's username"
 	           aria-describedby="button-addon2"
@@ -139,9 +139,10 @@
          </div>
        </div>
      </section>
+     <br><br><br><br>
 
      <!-- 파티찾기, 파티만들기 -->
-     <section id="party">
+     <section id="party" class='animate__animated animate__fadeInDown'>
       <h2>나의 파티</h2>
        <div class="party__box">
          <div class="party__box-left" onclick="location.href='${contextPath}/partyEnroll.py'">
@@ -178,11 +179,28 @@
              ></span>
            </div>
          </div>
+         <div class="party__box-right" onclick="location.href='${contextPath}/contentList.co'">
+           <div class="plus-icon">
+             <i
+               class="fa-regular fa-square-plus fa-2x"
+               style="color: var(--color-blue)"
+             ></i>
+           </div>
+           <div class="party__text">
+             <h3>컨텐츠 찾기</h3>
+             <span><b>내가 원하는 컨텐츠를 찾아보세요!</b>   </span>
+           </div>
+           <div class="party__makeParty">
+             <span style="color: var(--color-blue)"
+               >컨텐츠 찾기&nbsp;<i class="fa-regular fa-circle-right"></i
+             ></span>
+           </div>
+         </div>
        </div>
      </section>
 
      <!-- icu가 궁금하셈? -->
-     <section id="wondering">
+     <section id="wondering" class='animate__animated animate__fadeInDown titleText2'>
        <div class="wonder__box">
          <a class='wonder__a'
            target="_blank"
@@ -383,7 +401,6 @@
 				category = "드라마";
 			}
 			var html = "";
-			var html2 = "<button type='button' onclick='clickMore();'>더 보기</button>";
 			
 			html += '<a class="match" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
 			html += item.idx;
@@ -391,7 +408,7 @@
 			html += '<div class="match_img">';
 			html += '<img src="';
 			html += item.img_url;
-			html += '" style="width:120px; height: 150px; margin: auto;">';
+			html += '" style="width:120px; height: 150px; margin: auto; border-radius:8px;">';
 			html += '<div class="match_name">';
 			html += highlight;
 			html += ' (';
@@ -402,15 +419,12 @@
 			html += '<i class="fa-solid fa-star">';
 			html += item.star;			
 			html += '</i></div>';
-			html += '</div><div></div></a>';
+			html += '</div><hr><div></div></a>';
 			var result = $("<li class='match_li'>").append(html).appendTo(ul);
 			return result;			
 		};
 	}
 	
-	function clickMore(){
-		//$("#keyword").autocomplete("search");
-	}
    </script>
 </body>
 </html>

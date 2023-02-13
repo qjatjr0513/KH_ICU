@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 컨텐츠 관리</title>
 
 	<!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/admin_05_contentsManage.css" />

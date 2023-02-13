@@ -25,7 +25,7 @@
         <a href="https://github.com/prodaniel93" target="_blank">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="https://www.instagram.com/jjongsta9ram/?hl=ko" target="_blank">
+        <a href="https://tame-suggestion-7b3.notion.site/baf766587b9f4b9fa26834ab04a33463" target="_blank">
           <img src="resources/images/Notion-logo-removebg-preview.png" style="width:50px; margin-bottom:6px;">
         </a>
       </div>

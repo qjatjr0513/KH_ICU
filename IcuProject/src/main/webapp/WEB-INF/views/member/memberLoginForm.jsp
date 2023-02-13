@@ -60,44 +60,46 @@
         <a href="${contextPath }/agreeForm">회원가입 &nbsp;|&nbsp; </a>
         <a href="${contextPath }/find">아이디 / 비밀번호 찾기</a>
       </div>
-	</form>
-	<br>
-	<!-- 네이버 로그인  -->
+   </form>
+   <br>
+   <!-- 네이버 로그인  -->
     <div id="naver_id_login" style="text-align:center">
       <a id="naverlogin" href="${urlNaver}">
-	  <img src="resources/images/naverLogo.png" /><span>네이버 로그인</span>
-  	  </a>
+     <img src="resources/images/naverLogo.png" /><span>네이버 로그인</span>
+       </a>
     </div>
-	  
+     
     <!-- 카카오 로그인 -->
-    <div class="kakao__button loginbtn" style="text-align:center">
-	 <button type ="button" class = "btn" onclick="location.href='${urlKakao}'">
-	 	<img class='kakaoImg' src="resources/images/kakao_login_large_wide.png">
-	 </button>
+    <div class="kakao__button loginbtn kakaobtn" style="text-align:center">
+    <button type ="button" class = "btn" onclick="location.href='${urlKakao}'">
+       <img class='kakaoImg' src="resources/images/kakao_login_large_wide.png">
+    </button>
     </div>
 
     <!-- 구글 로그인 -->
     <div class="google__button loginbtn" style="text-align:center">
-	 <button type ="button" class = "btn" onclick="location.href='${urlGoogle}'">
-	 	<img class='googleImg' src="resources/images/btn_google_signin_light_normal_web.png">
-	 </button>
+
+    <button type ="button" class = "btn googlebtn" onclick="location.href='${urlGoogle}'">
+       <img class='googleImg' src="resources/images/google_logo.png">
+       <span>구글 로그인</span>
+    </button>
     </div>
     
     <br><br>
-		
-	<p class="contact__rights" style='color:gray;'>Copyright © 2023 <span style='color:var(--color-orange)'>ICU</span> Inc. All rights reserved.</p>	
+      
+   <p class="contact__rights" style='color:gray;'>Copyright © 2023 <span style='color:var(--color-orange)'>ICU</span> Inc. All rights reserved.</p>   
   
-  	<script>
-  	 $(function(){
+     <script>
+      $(function(){
          if('${flag}' == 'showAlert'){
-        	 Swal.fire({
+            Swal.fire({
                  icon:'error',
                  title: "로그인 실패"
-           		});
-        	}
+                 });
+           }
      });
-  	</script>
-	
+     </script>
+   
     <script src="resources/js/02_mainPage.js" defer></script>
     <script src="resources/js/main.js" defer></script>
   </body>

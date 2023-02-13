@@ -2,18 +2,18 @@
 @import url('main.css');
 
 #partySection{
-	margin-top : 200px;
+   margin-top : 200px;
 }
 
 
 table{
-	margin:auto;
+   margin:auto;
 }
 td {
   padding: 10px;
 }
 td > span {
-	font-size:18px;
+   font-size:18px;
 }
 
 input {
@@ -24,24 +24,37 @@ input {
   font-size:14px;
 }
 input:focus{
-	outline:none;
+   outline:none;
 }
 input::placeholder{
-	font-size: 14px;
+   font-size: 14px;
 }
 
+#makePartyBox, #lastPartyBox{
+   background-color:white;
+   width:1300px;
+   height:440px;
+   margin-left:500px;
+   padding:30px;
+   border-radius:12px;
+   box-shadow:0 0 5px 1px gray;
+    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+}
+.carousel-inner{
+   height:402px;
+}
 .logoBox {
   text-align: center;
   margin-top: 100px;
 }
 .makeParty{
-	box-shadow: 0 0 5px var(--color-orange);
+   box-shadow: 0 0 5px var(--color-orange);
 }
 .makeParty, .lastParty{
-	transition:all 0.1s;
+   transition:all 0.1s;
 }
 .makeParty:hover, .lastParty:hover{
-	transform:scale(1.05);
+   transform:scale(1.05);
 }
 
 .PartyBtnGroup {
@@ -51,7 +64,7 @@ input::placeholder{
   justify-content: space-around;
   width: 500px;
   height:50px;
-  margin: auto;
+  margin-left:900px;
   margin-top: 30px;
 }
 
@@ -76,7 +89,7 @@ input::placeholder{
 }
 
 .tableBtn {
-	width:130px;
+   width:130px;
   height: 40px;
   background-color: var(--color-purple) !important;
   border: none !important;
@@ -107,7 +120,7 @@ input::placeholder{
   width: 150px;
 }
 .btn-previous{
-	background-color:gray;
+   background-color:gray;
 }
 .btn-enter {
   background-color: var(--color-purple);
@@ -126,26 +139,44 @@ input::placeholder{
 
 
 #party__container {
-  width: 60%;
-  margin: auto;
-  padding-left: 200px;
-  background-color: rgb(193, 200, 200);
+  width: 83%;
+  margin:auto;
 }
 .partyCard {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
 }
 
 .cardBox {
-  border: 2px solid black;
-  width: 250px;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
+    border: none;
+    box-shadow: 0 0 5px 1px lightgrey;
+    width: 250px;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 3px;
+    position: relative;
+    background-color: #ffffff;
 }
+.divBox{
+	cursor:pointer;
+}
+.divBox > h4 > b {
+   font-family: 'Poor Story', 'cursive';
+    color: var(--color-orange);
+    font-size: 24px;
+}
+.divBox span{
+   font-size:13px;
+   font-weight:600;
+}
+
 .carousel-inner {
   width: 80%;
   margin: auto;
+}
+.carousel-item{
+   height:380px !important;
+/*    background-color:blue; */
 }
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -164,6 +195,7 @@ input::placeholder{
   color: white;
   font-weight: bold;
   font-size: 14px;
+  transition: all 0.1s;
 }
 
 .joinBtn2 {
@@ -175,6 +207,7 @@ input::placeholder{
   background-color: var(--color-purple);
   color: white;
   font-weight: bold;
+  transition: all 0.1s;
 }
 
 .joinBtn:hover {
@@ -182,7 +215,7 @@ input::placeholder{
 }
 
 .joinBtn2:hover{
-	 transform: scale(1.1);
+    transform: scale(1.1);
 }
 .modal-body {
   text-align: center;
@@ -198,4 +231,28 @@ input::placeholder{
 }
 .secondBtn {
   background-color: rgb(235, 65, 65);
+}
+.carousel-control-prev, 
+.carousel-control-next {
+   height:100px;
+   width:100px;
+   top:140px !important;
+}
+.carousel-control-prev {
+   left:-150px !important;
+}
+.carousel-control-next{
+   right:-150px !important;
+}
+
+.noParty{
+   background-color:white;
+   padding:30px;
+   border-radius:12px;
+    position: relative;
+   top: 130px;
+   text-align:center;
+   font-family:'Poor Story', 'cursive';
+   font-size:20px;
+   box-shadow:0 0 5px 1px lightgray;
 }

@@ -40,6 +40,10 @@
   box-sizing: border-box;
 }
 
+/* input 자동완성시 파란색 배경되는거 지움 */
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fff inset ; -webkit-text-fill-color: #000; }
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -121,6 +125,21 @@ button {
 }
 
 @-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.titleText2 {
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: text;
+  -webkit-animation: hue2 7s infinite linear;
+}
+
+@-webkit-keyframes hue2 {
   from {
     -webkit-filter: hue-rotate(0deg);
   }

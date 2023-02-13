@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제 관리 페이지</title>
+<title>ICU - 결제 관리 페이지</title>
 
 	<!-- css -->
     <link rel="stylesheet" href="resources/css/admin_07_payManage.css" />
@@ -21,8 +21,8 @@
 
    
  <!-- 결제내역 -->
-    <section id="payList">
-      <h2>결제 내역</h2>
+    <section id="payList" class='animate__animated animate__fadeIn'>
+      <h2 class='memberTitle'>결제 내역</h2>
       <hr />
       <table class="table table-hover">
         <thead>

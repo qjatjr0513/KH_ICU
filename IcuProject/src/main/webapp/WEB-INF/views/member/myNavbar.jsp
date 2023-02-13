@@ -101,34 +101,23 @@
 
     
 	<script>
-	const link =  document.location.href.split('/');
-	/* console.log(link[4]);	 */
-
-
-	if(link[4] == 'myPage.me'){
-		
-		$('.li1').addClass('active');	
-		
-	} else if(link[4] == 'memDeleteForm.me'){
-		$('.li2').addClass('active');	
-		
-	} else if(link[4] == 'CurrentParty.py') {
-		$('.li3').addClass('active');	
-		
-	} else if(link[4] == 'LastParty.py') {
-		$('.li4').addClass('active');	
-	} else if(link[4] == 'myPayListForm.pe') {
-		$('.li5').addClass('active');	
-	}else{
-		$('.li6').addClass('active');
-	}
-		
+		const link =  document.location.href.split('/');
+		/* console.log(link[4]);	 */
 	
-	/* 
-		$('li').click(function () {
-	        $(this).addClass('active');
-	       
-	    }); */
+	
+		if(link[4] == 'myPage.me'){	
+			$('.li1').addClass('active');	
+		} else if(link[4] == 'memDeleteForm.me'){
+			$('.li2').addClass('active');		
+		} else if(link[4] == 'CurrentParty.py') {
+			$('.li3').addClass('active');	
+		} else if(link[4] == 'LastParty.py') {
+			$('.li4').addClass('active');	
+		} else if(link[4] == 'myPayListForm.pe') {
+			$('.li5').addClass('active');	
+		}else{
+			$('.li6').addClass('active');
+		}		
 	</script>
 </body>
 </html>

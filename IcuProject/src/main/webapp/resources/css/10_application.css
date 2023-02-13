@@ -1,12 +1,14 @@
 @import url('main.css');
 
 #application {
-  /* background-color: aquamarine; */
   margin: auto;
   margin-top: 105px;
   width: 50%;
-  padding: 20px;
+  padding: 30px;
   background-color: white;
+  border-radius:12px;
+  box-shadow: 0 0 5px 1px lightgray;
+  font-family:'Poor Story', 'cursive';
 }
 
 table,
