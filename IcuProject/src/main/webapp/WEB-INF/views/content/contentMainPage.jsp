@@ -588,6 +588,8 @@
                }
                else if(result.length >= 4){
                   $('.carousel-item').remove();
+                  $('.carousel-control-prev').remove();
+				  $('.carousel-control-next').remove();
                   html += "<div class='carousel-item active' data-bs-interval='100000'>";
                   console.log(carouselCnt);
                   html += "<div id='movieBox1' class='movieBox'></div>";
@@ -631,6 +633,8 @@
 				}
                else{
                   $('.carousel-inner').remove();
+                  $('.carousel-control-prev').remove();
+				  $('.carousel-control-next').remove();
                   htmlMid += "<div class='carousel-inner'>" +
                            "<div class='carousel-item active' data-bs-interval='100000'>" +
                               "<div id='movieBox' class='movieBox'>";
