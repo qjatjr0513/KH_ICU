@@ -270,23 +270,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
 			</foreach>
-			) AND STATUS = 'N'
-			ORDER BY CON_NO
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -295,40 +298,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			) AND STATUS = 'N'
-			ORDER BY CON_NO
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			) AND STATUS = 'N'
-			ORDER BY CON_NO
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
 			WHERE OTT_NO IN (
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size == 0">
-			SELECT DISTINCT CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -337,14 +347,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -353,15 +366,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="ott" item="o" separator=",">
 				${o}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -374,14 +390,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="age" item="a" separator=",">
 				${a}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -390,14 +409,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -410,13 +432,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -425,14 +450,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size != 0">
-			SELECT DISTINCT CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
+			WHERE CON_CATEGORY IN(
 			WHERE OTT_NO IN (
 			<foreach collection="ott" item="o" separator=",">
 				${o}
@@ -441,15 +470,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC	
 		</if>
 		
-		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+		<if test="genre.size != 0 and age.size == 0 and ott.size != 0 and category.size != 0">			
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -462,14 +494,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size != 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
 			WHERE CON_AGE IN (
 			<foreach collection="age" item="a" separator=",">
 				${a}
@@ -482,15 +517,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size != 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN GENRE_STORAGE G USING(CON_NO)
-			JOIN OTT_STORAGE O USING(CON_NO)
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
+			JOIN GENRE_STORAGE G ON(CT.CON_NO = G.CON_NO)
 			WHERE GEN_NO IN (
 			<foreach collection="genre" item="c" separator=",">
 				${c}
@@ -507,26 +545,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size != 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_CATEGORY IN(
 			<foreach collection="category" item="g" separator=",">
 				${g}
 			</foreach>
-			) AND STATUS = 'N'
-			ORDER BY CON_NO
+			) AND CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size == 0">
-			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
-			FROM CONTENT
-			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
-			WHERE STATUS = 'N'
+			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"
+			FROM CONTENT CT
+			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
+			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
+			WHERE CT.STATUS = 'N'
+			GROUP BY CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			ORDER BY STAR_AVG DESC NULLS LAST, CT.CON_DATE DESC
 		</if>
 			
 			

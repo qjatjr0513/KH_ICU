@@ -573,6 +573,11 @@
 						$(".carousel-inner").html(html);
 						for(var j = 1; j <= 2; j++){
 							while(cnt < j * 4){
+								let title = result[cnt].conKTitle;
+								if(title.length > 15){
+									title = title.substr(0, 14);
+									title += '..';
+								}
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
@@ -603,6 +608,11 @@
 						$("#carouselExampleControls").html(htmlMid);
 						
 						for(var i = 0 in result){
+							let title = result[cnt].conKTitle;
+							if(title.length > 15){
+								title = title.substr(0, 14);
+								title += '..';
+							}
 							htmlInfo += "<div class='movieContainer'>" +
 											"<div class='movie__info'>" +
 												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
