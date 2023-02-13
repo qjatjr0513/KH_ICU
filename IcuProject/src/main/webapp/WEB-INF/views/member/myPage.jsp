@@ -64,8 +64,12 @@
         <div id="info">
           <h4><span class="info">${loginUser.memNickname}</span></h4><br>
           <span class="info">아이디 : </span><span class="info">${loginUser.memId}</span><br><br>
-          <span class="info">이름   : </span><span class="info">${loginUser.memName}</span><br><br>
-          <span class="info">연락처 : </span><span class="info">${loginUser.phone}</span><br><br>
+          <c:if test="${loginUser.snsType ne 'G'}">
+            <span class="info">이름   : </span><span class="info">${loginUser.memName}</span><br><br>
+          </c:if>
+          <c:if test="${loginUser.snsType eq 'I'}">
+            <span class="info">연락처 : </span><span class="info">${loginUser.phone}</span><br><br>
+          </c:if>
           <span class="info">이메일 : </span><span class="info">${loginUser.email}</span><br><br>
           <span class="info">가입일 : </span><span class="info">${loginUser.enrollDate}</span><br><br>
         </div>
@@ -87,7 +91,7 @@
       </c:choose>
       
     </div>
-
+    
     <!-- 소셜 로그인 수정 모달 -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
