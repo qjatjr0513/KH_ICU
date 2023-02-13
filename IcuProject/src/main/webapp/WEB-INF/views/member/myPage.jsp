@@ -31,7 +31,7 @@
           <c:choose>
           
           <c:when test="${!empty profile}">
-          	<img class='viewImg' src="${contextPath }${profile.filePath }${profile.changeName}">
+          	<img class='viewImg' src="${contextPath }${profile.filePath }${profile.changeName}" onclick="previewClick();">
           </c:when>
 
           </c:choose>
@@ -39,12 +39,10 @@
             <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
           <div id="enroll">
           	<c:if test='${empty profile }'>
-              <img id="preview" /> <Br>
+              <img id="preview" onclick="previewClick();"/> <Br>
              </c:if>
-            <label class="input-file-button" for="upfile">
-			  업로드
-			</label>
-              <input type="file" id="upfile" class="form-control" name="upfile" onchange="readURL(this);" style="display:none"/>
+
+              <input type="file" id="upfile" class="form-control" name="upfile" style="display:none"/>
               <input type="hidden" name="originName" value="${image.originName }"/>
 			        <input type="hidden" name="changefile" value="${image.changeName }"/>
               <div class='deleteBtn'>
@@ -127,23 +125,44 @@
     
     <script>
       function readURL(input) {
+    	console.log(input.files[0]);
         if (input.files && input.files[0]) {
           var reader = new FileReader();
           /* var fileInput = document.getElementById("upfile"); */
           reader.onload = function (e) {
-
-            document.getElementById('preview').src = e.target.result;
+        	if($(".viewImg").length > 0){
+        		//document.getElementsByClassName('viewImg').src = e.target.result;
+        		$('.viewImg').attr('src', e.target.result);
+        	}
+        	else{
+            	//document.getElementById('view').src = e.target.result;
+            	$('#preview').attr('src', e.target.result);
+        	}
             $("#enrollBtn").attr("disabled", false);
-
-
           };
           reader.readAsDataURL(input.files[0]);
-        } else {
-          document.getElementById('preview').src = "";
         }
       }
+	  
+      $("#upfile").change(function(){
+    	  	console.log($(".viewImg").length);
+    	  	console.log($("#upfile").val());
+    	  	if($(".viewImg").length > 0 && $("#upfile").val() == ''){
+      		//document.getElementsByClassName('viewImg').src = e.target.result;
+      			$('.viewImg').attr('src', '');
+      		}
+      		else if($("#preview").length > 0 && $("#upfile").val() == ''){
+          		//document.getElementById('view').src = e.target.result;
+          		$('#preview').attr('src', '');
+      		}
 
-
+			readURL(this);
+	});
+      
+      
+	  function previewClick(){
+		  $("#upfile").click();
+	  }
       function modeUpdate() {
         $('#mode').val('update');
       }

@@ -150,8 +150,7 @@
 			  
 				reader.onload = function (e) {
 					$('#image_section').attr('src', e.target.result);  
-				}
-			  
+				}			  
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
