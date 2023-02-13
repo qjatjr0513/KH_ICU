@@ -181,4 +181,9 @@ public class ContentServiceImpl implements ContentService{
 		ArrayList<Content> list = contentDao.autoSearch(sqlSession, map);
 		return list;
 	}
+	
+	@Override
+	public int deleteReview(int cmtNo) {
+		return contentDao.deleteReview(sqlSession, cmtNo);
+	}
 }

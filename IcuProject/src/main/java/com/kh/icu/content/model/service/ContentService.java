@@ -36,4 +36,5 @@ public interface ContentService {
 	public Map<String, Object> getWrittenContent(int currentPage);
 	public ArrayList<String> getWrittenContentOtt(int conNo);
 	public ArrayList<Content> autoSearch(Map<String, Object> map);
+	public int deleteReview(int cmtNo);
 }

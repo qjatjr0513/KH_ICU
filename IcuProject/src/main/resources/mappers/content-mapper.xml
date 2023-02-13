@@ -70,13 +70,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM COMENT C
 		JOIN MEMBER M ON (CMT_WRITER = MEM_NO)
 		LEFT JOIN IMAGE I ON (I.REF_TNO = M.MEM_NO) AND I.TABLE_CD = 'M'
-		WHERE CON_NO = #{conNo}
+		WHERE CON_NO = #{conNo} AND C.STATUS = 'N'
 	</select>
 	
 	<insert id="insertReview" parameterType="coment">
 		INSERT INTO COMENT(CMT_NO, CMT_WRITER, CON_NO, CMT_CONTENT, CMT_STAR)
 		VALUES (SEQ_CMNO.NEXTVAL, #{cmtWriter}, #{conNo}, #{cmtContent}, #{cmtStar})
 	</insert>
+	
+	<update id="deleteReview" parameterType="int">
+		UPDATE COMENT
+		SET STATUS = 'Y'
+		WHERE CMT_NO = #{cmtNo}
+	</update>
 	
 	<select id="selectStar" resultType="double">
 		SELECT ROUND(AVG(CMT_STAR/20), 1)
@@ -232,9 +238,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="autoSearch" parameterType="map" resultMap="contentResultSet">
-		SELECT *
-		FROM CONTENT
+		SELECT CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE
+		FROM CONTENT CT
 		JOIN IMAGE I ON(I.REF_TNO = CON_NO) AND I.TABLE_CD = 'C'
+		JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO) 
 		WHERE
 		<if test="selectOption == 0">
 			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
@@ -244,21 +251,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
 			OR
 			CON_ACTOR LIKE '%'||#{keyword}||'%')
-			AND STATUS = 'N'
+			AND CT.STATUS = 'N'
 		</if>
 		<if test="selectOption == 1">
 			(CON_KTITLE LIKE '%'||#{keyword}||'%' 
 			OR
 			CON_ETITLE LIKE '%'||#{keyword}||'%')
-			AND STATUS = 'N'
+			AND CT.STATUS = 'N'
 		</if>
 		<if test="selectOption == 2">
 			(CON_DIRECTOR LIKE '%'||#{keyword}||'%' 
 			OR
 			CON_ACTOR LIKE '%'||#{keyword}||'%')
-			AND STATUS = 'N'
+			AND CT.STATUS = 'N'
 		</if>
-
+		GROUP BY CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE
 	</select>
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">

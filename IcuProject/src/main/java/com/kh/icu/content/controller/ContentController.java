@@ -241,13 +241,33 @@ public class ContentController {
 		
 		ArrayList<Content> list = contentService.autoSearch(map);
 		
+		double cmtStar = 0.0;
+		
+		for(int i = 0; i < list.size(); i++) {
+			try {
+				cmtStar = contentService.selectStar(list.get(i).getConNo());
+			}
+			catch(NullPointerException e) {
+				cmtStar = 0.0;
+			}
+			list.get(i).setCmtStar(cmtStar);
+		}
+		
 		Gson gson = new GsonBuilder().create();
 		String result = gson.toJson(list);
 		
 		System.out.println(result);
 		
 		return result;
-
-
+	}
+	
+	@RequestMapping("/commentDelete.co")
+	@ResponseBody
+	public int deleteReview(int cmtNo) {
+		
+		int result = contentService.deleteReview(cmtNo);
+		
+		System.out.println(result);
+		return result;
 	}
 }

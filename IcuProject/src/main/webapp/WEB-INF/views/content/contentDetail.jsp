@@ -89,11 +89,11 @@
     <div id="reviewWrite">
     	<br>
     	<c:if test="${loginUser.role eq 'C' }">
-	    	<h6 id="average">평점</h6>
+	    	<h6 id="average">평점 : 0점</h6>
 			<span class="star">
 			★★★★★
 			<span>★★★★★</span>
-			<input type="range" id="score" name="score" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+			<input type="range" id="score" name="score" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
 			</span>
 		</c:if>
 		<br><br>
@@ -141,6 +141,7 @@
     
     $(function(){
     	selectReview();
+    	//"<button type='button' id='deleteComment'>삭제하기</button>"
     	starChange();
     })
     
@@ -154,6 +155,13 @@
 		}
 		
 	    function insertReview(){
+	    	if($("#cmtContent").val() == ''){
+	    		Swal.fire({
+                    icon: 'error',
+                    title: '댓글 내용을 입력해주세요'                  
+                });
+	    		return false;
+	    	}
 	    	$.ajax({
 	    		url : '${contextPath}/commentInsert.co',
 				data : {conNo : '${c.conNo}', memNo : '${memNo}'
@@ -168,6 +176,28 @@
 	    	})
 	    }
 		
+	    function deleteReview(cno){
+	    	Swal.fire({
+	    		icon: 'warning',
+	    		title: '댓글을 삭제하시겠습니까?',   
+            }).then((result) => {
+        		if (result.isConfirmed) {
+        		    $.ajax({
+        		    	url : '${contextPath}/commentDelete.co',
+        				data : {cmtNo : cno},
+        				success: function(result){
+        					Swal.fire({
+        		            	icon: 'success',
+        		            	title: '댓글을 삭제했습니다'                  
+        		            });
+        					selectReview();
+        					location.reload();
+        				}
+        		    })                    	
+        		}
+            });
+	    }
+	    
 		function selectReview(){
 			$.ajax({
 				url : '${contextPath}/comment.co',
@@ -198,8 +228,11 @@
 										"</span>" +
 									"</div>" +
 									"<div id='reviewText'>" +
-										"<h5>"+comment.cmtContent+"</h5>"+
-									"</div>"+
+										"<h5>"+comment.cmtContent+"</h5>";
+						if("${loginUser.memNickname}" == comment.memNickname){
+							html += "<button type='button' id='deleteComment' onclick='deleteReview("+comment.cmtNo+");'>삭제하기</button>";
+						}
+						html +=		"</div>"+
 								"</div></div>";
 						$("#writtenReview").html(html);
 						starChange();

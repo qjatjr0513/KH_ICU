@@ -126,4 +126,8 @@ public class ContentDao {
 	public ArrayList<Content> autoSearch(SqlSession sqlSession, Map<String, Object> map){
 		return (ArrayList)sqlSession.selectList("contentMapper.autoSearch", map);
 	}
+	
+	public int deleteReview(SqlSession sqlSession, int cmtNo) {
+		return sqlSession.update("contentMapper.deleteReview", cmtNo);
+	}
 }
