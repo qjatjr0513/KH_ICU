@@ -225,7 +225,14 @@
 											        	/>
 										            </c:if>
 										            <br>
-										            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+										            <c:choose>
+													        <c:when test="${fn:length(c.conKTitle) gt 15}">
+														        <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
+													        </c:when>
+													        <c:otherwise>
+													        	<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+													        </c:otherwise>
+													</c:choose>
 										            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 										            <i class="fa-solid fa-star">${c.cmtStar }</i>
 									            </div>
@@ -255,7 +262,14 @@
 												        	/>
 											            </c:if>
 											            <br>
-											            <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+											            <c:choose>
+													        <c:when test="${fn:length(c.conKTitle) gt 15}">
+														        <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
+													        </c:when>
+													        <c:otherwise>
+													        	<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+													        </c:otherwise>
+														</c:choose>
 											            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
 											            <i class="fa-solid fa-star">${c.cmtStar }</i>
 										            </div>
@@ -524,11 +538,16 @@
 						$(".carousel-inner").html(html);
 						for(var j = 1; j <= movieBoxCnt; j++){
 							while(cnt < j * 4){
+								let title = result[cnt].conKTitle;
+								if(title.length > 15){
+									title = title.substr(0, 14);
+									title += '..';
+								}
 								htmlInfo += "<div class='movieContainer'>" +
 												"<div class='movie__info'>" +
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br>" +
-													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
+													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
 													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
 													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
@@ -558,7 +577,7 @@
 												"<div class='movie__info'>" +
 													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
 													"<br>" +
-													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+result[cnt].conKTitle+"</h4>" +
+													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
 													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
 													"<br>" +
 													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
@@ -588,7 +607,7 @@
 											"<div class='movie__info'>" +
 												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
 												"<br>" +
-												"<h4 onclick='movePage("+ result[i].conNo +");'>"+result[i].conKTitle+"</h4>" +
+												"<h4 onclick='movePage("+ result[i].conNo +");'>"+title+"</h4>" +
 												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
 												"<br>" +
 												"<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+

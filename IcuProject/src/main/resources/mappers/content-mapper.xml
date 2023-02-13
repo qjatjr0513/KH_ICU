@@ -279,6 +279,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				${c}
 			</foreach>
 			) AND STATUS = 'N'
+			ORDER BY CON_NO
 		</if>
 		
 		<if test="genre.size != 0 and age.size != 0 and ott.size == 0 and category.size == 0">
@@ -295,6 +296,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				${a}
 			</foreach>
 			) AND STATUS = 'N'
+			ORDER BY CON_NO
 		</if>
 		
 		<if test="genre.size == 0 and age.size != 0 and ott.size == 0 and category.size == 0">
@@ -306,6 +308,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				${a}
 			</foreach>
 			) AND STATUS = 'N'
+			ORDER BY CON_NO
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size != 0 and category.size == 0">
@@ -516,6 +519,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				${g}
 			</foreach>
 			) AND STATUS = 'N'
+			ORDER BY CON_NO
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size == 0">
