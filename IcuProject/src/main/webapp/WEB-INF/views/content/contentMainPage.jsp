@@ -597,6 +597,13 @@
 						cnt = 0;
 						cnt2 = 0;
 					}
+					else if(result.length == 0){
+						$('.carousel-inner').remove();
+						$('.carousel-control-prev').remove();
+						$('.carousel-control-next').remove();
+						htmlMid += "<div class='carousel-inner' style='height: 400px;'><h5>검색 결과가 존재하지 않습니다</h5></div>"
+						$("#carouselExampleControls").html(htmlMid);
+					}
 					else{
 						$('.carousel-inner').remove();
 						htmlMid += "<div class='carousel-inner'>" +
