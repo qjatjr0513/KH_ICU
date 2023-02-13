@@ -176,6 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = MEM_NO)
 	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER) AND I.TABLE_CD = 'M'
       WHERE BOARD_NO = #{boardNo} AND  R.STATUS = 'N'
+      ORDER BY R.CREATE_DATE ASC
 	</select>
 	
 	<!--

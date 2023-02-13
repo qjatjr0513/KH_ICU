@@ -92,9 +92,18 @@
      <script>
       $(function(){
          if('${flag}' == 'showAlert'){
-            Swal.fire({
-                 icon:'error',
-                 title: "로그인 실패"
+          Swal.fire({
+                 icon:'warning',
+                 html: "<h4 style='color:#ff8906'><b>아이디 혹은 비밀번호를 확인해주세요.<br><span></span></b></h4>",
+                 timer : 1800,
+                 timerProgressBar: true,
+                 showConfirmButton: false,
+                 showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
                  });
            }
      });

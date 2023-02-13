@@ -71,6 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN MEMBER M ON (CMT_WRITER = MEM_NO)
 		LEFT JOIN IMAGE I ON (I.REF_TNO = M.MEM_NO) AND I.TABLE_CD = 'M'
 		WHERE CON_NO = #{conNo} AND C.STATUS = 'N'
+		ORDER BY C.CREATE_DATE ASC
 	</select>
 	
 	<insert id="insertReview" parameterType="coment">
