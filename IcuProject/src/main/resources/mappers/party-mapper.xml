@@ -222,7 +222,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="partyMem" parameterType="int" resultMap="partyJoinResultSet">
-SELECT MEM_NO,
+		SELECT MEM_NO,
         	   MEM_NICKNAME,
          	   I.CHANGE_NAME AS "CHANGE_NAME",
          	   I.FILE_PATH AS "FILE_PATH"

@@ -104,14 +104,11 @@
       <ul class="navbar__menu">
       <c:if test="${loginUser.memId != 'admin'}">
         <li class="navbar__menu__item active1">
-           <a href="${contextPath }/partyEnroll.py" style="text-decoration: none; color:black;">파티만들기</a></li>
+           <span onclick="partyEnroll();" style="text-decoration: none; color:black;">파티만들기</span></li>
         <li class="navbar__menu__item" data-link="#about">
             <a href="${contextPath }/findPartyForm.py" style="text-decoration: none; color:black;">파티찾기</a></li>
-        </li>
         <li class="navbar__menu__item">
-           <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a>
-        </li>
-
+           <a href="${contextPath }/contentList.co" style="text-decoration: none; color:black;">컨텐츠 찾기</a></li>
         <li class="navbar__menu__item">
            <a href="${contextPath }/list.bo" style="text-decoration: none; color:black;">자유게시판</a></li>
         <li class="navbar__menu__item">
@@ -278,8 +275,17 @@
       	  return ct;
       	}; 
      
-      
-     	   
+		function partyEnroll(){
+			if(${loginUser.bkStatus == 'N'}){
+	 			location.href = "${contextPath }/partyEnroll.py";
+			}else{
+				Swal.fire({
+    	            icon:'error',
+    	            title: "파티만들기가 제한되었습니다.",
+    	            text:"관리자에게 문의하세요."
+    	        });
+			}
+	 	};
     	   
    </script>
    <script src="${contextPath }/resources/js/main.js" defer></script>
