@@ -285,6 +285,13 @@
     	            text:"관리자에게 문의하세요."
     	        });
 			}
+			
+			if(${loginUser == null}){
+				Swal.fire({
+    	            icon:'error',
+    	            title: "로그인 후 이용가능합니다."
+    	        });
+			}
 	 	};
     	   
    </script>
