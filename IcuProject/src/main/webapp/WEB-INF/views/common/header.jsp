@@ -102,7 +102,7 @@
         </a>
       </div>
       <ul class="navbar__menu">
-      <c:if test="${loginUser.memId != 'admin'}">
+      <c:if test="${loginUser.role != 'A'}">
         <li class="navbar__menu__item active1">
            <span onclick="partyEnroll();" style="text-decoration: none; color:black;">파티만들기</span></li>
         <li class="navbar__menu__item" data-link="#about">
