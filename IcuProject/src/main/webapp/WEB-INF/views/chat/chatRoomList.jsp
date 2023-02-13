@@ -50,7 +50,7 @@
 										${chatRoom.memNickname }
 										
 									</td>
-										<c:if test="${loginUser.memNickname == chatRoom.memNickname || loginUser.memNickname == '관리자' }">
+										<c:if test="${loginUser.memNickname == chatRoom.memNickname || loginUser.role eq 'A' }">
 											<td><button class="btn btn-primary" onclick="location.href='${contextPath}/chat/room/${chatRoom.chatRoomNo}'">참여</button></td>
 										</c:if>
 									
