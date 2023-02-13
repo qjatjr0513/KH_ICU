@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 컨텐츠 찾기</title>
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/12_findContents.css" />
@@ -18,20 +18,20 @@
 <body>
 
     
-	<jsp:include page="../common/header.jsp"/>
-	
-	<img src='resources/images/findContents.png' style="width:1898px; height:500px;">
+   <jsp:include page="../common/header.jsp"/>
+   
+   <img src='resources/images/findContents.png' style="width:1898px; height:500px;">
 
-	
-	<div class='sl-in2' style=' padding:10px; margin-top:10px;'>
-	<h2 class='titleText' style='font-size:3rem;'>< 컨텐츠 찾기 ></h2>
-	</div>
-	
-	<br>
-	
-	<section id='body-container' class='sl-in2'>
-	
-	<section id="click__movie-drama">
+   
+   <div class='sl-in2' style=' padding:10px; margin-top:10px;'>
+   <h2 class='titleText' style='font-size:3rem;'>< 컨텐츠 찾기 ></h2>
+   </div>
+   
+   <br>
+   
+   <section id='body-container' class='sl-in2'>
+   
+   <section id="click__movie-drama">
       <div class="movie_drama_Btn">
         <button class="movieBtn" id="movie" name="mv">영화</button>
         <input id="mv" type="checkbox" name="category" value="1" />
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div style='text-align:right; padding:5px;'>
-   	 <span class='span'>* 원하는 서비스를 클릭 후 장르와 연령 제한을 선택해주세요.</span>
+       <span class='span'>* 원하는 서비스를 클릭 후 장르와 연령 제한을 선택해주세요.</span>
     </div>
     
     <br>
@@ -96,230 +96,232 @@
           <tr>
             <td class='table-title'>장르</td>
             <td>
-              	<input id='action' type='checkbox' name='genre' value='1' />
-              	<label id='genre' for='action'>액션</label>
+                 <input id='action' type='checkbox' class='genre' name='genre' value='1' />
+                 <label id='genre' for='action' name='action'>액션</label>
             </td>
             <td>
-              	<!-- <input id="dramaCh" type="checkbox" name="genre" value="2" />
-              	<label for="dramaCh">드라마</label> -->
-              	<input id='dramaCh' type='checkbox' name='genre' value='2' />
-              	<label id='genre' for='dramaCh'>드라마</label>
+                 <input id='dramaCh' type='checkbox' name='genre' value='2' />
+                 <label id='genre' for='dramaCh' name='dramaCh'>드라마</label>
             </td>
             <td>
-            	<input type="checkbox" id="sf" name="genre" value="3">
-            	<label id='genre' for="sf">SF</label>
+               <input type="checkbox" id="sf" name="genre" value="3">
+               <label id='genre' for="sf" name='sf'>SF</label>
             </td>
             <td>
-            	<input type="checkbox" id="fantasy" name="genre" value="4">
-            	<label id='genre' for="fantasy">판타지</label>
+               <input type="checkbox" id="fantasy" name="genre" value="4">
+               <label id='genre' for="fantasy" name='fantasy'>판타지</label>
             </td>
             <td>
-            	<input type="checkbox" id="romance" name="genre" value="5">
-            	<label  for="romance">로맨스</label>
+               <input type="checkbox" id="romance" name="genre" value="5">
+               <label  for="romance" name='romance'>로맨스</label>
             </td>
             <td>
               <input id="entertain" type="checkbox" name="genre" value="6" />
-              <label id='genre' for="entertain">예능</label>
+              <label id='genre' for="entertain" name='entertain'>예능</label>
             </td>
             <td>
-            	<input type="checkbox" id="thriller" name="genre" value="7">
-            	<label id='genre' for="thriller">스릴러</label>
+               <input type="checkbox" id="thriller" name="genre" value="7">
+               <label id='genre' for="thriller" name='thriller'>스릴러</label>
             </td>
             <td>
-            	<input type="checkbox" id="family" name="genre" value="8">
-            	<label id='genre' for="family">가족</label>
+               <input type="checkbox" id="family" name="genre" value="8">
+               <label id='genre' for="family" name='family'>가족</label>
             </td>
             <td>
-            	<input type="checkbox" id="animation" name="genre" value="9">
-            	<label id='genre' for="animation">애니메이션</label>
+               <input type="checkbox" id="animation" name="genre" value="9">
+               <label id='genre' for="animation" name='animation'>애니메이션</label>
             </td>
             <td>
-              	<input id='comedy' type='checkbox' name='genre' value='10'/>
-              	<label id='genre' for='comedy'>코메디</label>
+                 <input id='comedy' type='checkbox' name='genre' value='10'/>
+                 <label id='genre' for='comedy' name='comedy'>코메디</label>
             </td>
             <td>
-            	<input type="checkbox" id="docu" name="genre" value="11">
-            	<label for="docu">다큐</label>
+               <input type="checkbox" id="docu" name="genre" value="11">
+               <label for="docu" name='docu'>다큐</label>
             </td>
             <td>
-            	<input type="checkbox" id="horror" name="genre" value="12">
-            	<label for="horror">공포</label>
+               <input type="checkbox" id="horror" name="genre" value="12">
+               <label for="horror" name='horror'>공포</label>
+            </td>
+       
+          </tr>
+          <tr>
+            <td class='table-title'></td>
+            <td>
+               <input type="checkbox" id="mystery" name="genre" value="13">
+               <label for="mystery" name="mystery">미스터리</label>
             </td>
             <td>
-            	<input type="checkbox" id="mystery" name="genre" value="13">
-            	<label for="mystery">미스터리</label>
+               <input type="checkbox" id="crime" name="genre" value="14">
+               <label for="crime" name="crime">범죄</label>
             </td>
             <td>
-            	<input type="checkbox" id="crime" name="genre" value="14">
-            	<label for="crime">범죄</label>
+               <input type="checkbox" id="music" name="genre" value="15">
+               <label for="music" name="music">음악</label>
             </td>
             <td>
-            	<input type="checkbox" id="music" name="genre" value="15">
-            	<label for="music">음악</label>
+               <input type="checkbox" id="adventure" name="genre" value="16">
+               <label for="adventure" name="adventure">모험</label>
             </td>
             <td>
-            	<input type="checkbox" id="adventure" name="genre" value="16">
-            	<label for="adventure">모험</label>
-            </td>
-            <td>
-            	<input type="checkbox" id="war" name="genre" value="17">
-            	<label for="war">전쟁</label>
+               <input type="checkbox" id="war" name="genre" value="17">
+               <label for="war" name="war">전쟁</label>
             </td>
           </tr>
           <tr>
             <td class='table-title'>연령 제한</td>
             <td>
               <input id='allage' type='checkbox' value='0' name='age' />
-              <label id='age' for='allage'>모든 연령</label>
+              <label id='age' for='allage' name="allage">모든 연령</label>
             </td>
             <td>
               <input id="twelve" type="checkbox" value="12" name="age"/>
-              <label id='age' for="twelve">12세</label>
+              <label id='age' for="twelve" name="twelve">12세</label>
             </td>
             <td>
               <input id="fifteen" type="checkbox" value="15" name="age"/>
-              <label id='age' for="fifteen">15세</label>
+              <label id='age' for="fifteen" name="fifteen">15세</label>
             </td>
             <td>
               <input id="nineteen" type="checkbox" value="19" name="age"/>
-              <label id='age' for="nineteen">19세 이상</label>
+              <label id='age' for="nineteen" name="nineteen">19세 이상</label>
             </td>
           </tr>
         </table>
       </div>
       
    
-	<section id="party__container">
+   <section id="party__container">
         <div
           id="carouselExampleControls"
           class="carousel slide"
           data-bs-ride="carousel"
         >
-	          <div class="carousel-inner">
-	          	<c:if test="${size ge 8}">
-		          	<c:forEach var="cnt" begin="1" end="${size }" step="8">
-		          		<c:if test="${cnt eq 1 }">
-				            <div class="carousel-item active" data-bs-interval="100000">
-				        </c:if>
-				        <c:if test="${cnt ne 1 }">
-				            <div class="carousel-item" data-bs-interval="100000">
-				        </c:if>
-				        	<c:if test="${cnt eq 1 }">				    
-						    	<c:forEach var="cnt2" begin="0" end="1">
-						        	<div id="movieBox" class="movieBox">					        		
-							            <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
-								        	<div class="movieContainer">
-									            <div class="movie__info">
-										            <c:if test="${c.filePath eq '' }">
-											        	<img
-											             id="poster"
-											             src="${c.filePath}${c.changeName}"
-											             onclick="movePage(${c.conNo });"
-											            />
-										            </c:if>
-										            <c:if test="${c.filePath ne '' }">
-											        	<img
-											             id="poster"
-											             src="${contextPath}/${c.filePath}${c.changeName}"
-											             onclick="movePage(${c.conNo });"
-											        	/>
-										            </c:if>
-										            <br>
-										            <c:choose>
-													        <c:when test="${fn:length(c.conKTitle) gt 15}">
-														        <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
-													        </c:when>
-													        <c:otherwise>
-													        	<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-													        </c:otherwise>
-													</c:choose>
-										            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
-										            <i class="fa-solid fa-star">${c.cmtStar }</i>
-									            </div>
-								    		</div>
-							    		</c:forEach>
-					    			</div>	    			
-					    			</c:forEach>  
-				    			</c:if>
-				    			<c:if test="${cnt ne 1 }">				    
-						    		<c:forEach var="cnt2" begin="1" end="2">
-							        	<div id="movieBox" class="movieBox">						        							        		
-								            <c:forEach var="c" items="${list }" begin="${cCount * 4}" end="${(cCount * 4) + 3}">
-									        	<div class="movieContainer">
-										            <div class="movie__info">
-											            <c:if test="${c.filePath eq '' }">
-												        	<img
-												             id="poster"
-												             src="${c.filePath}${c.changeName}"
-												             onclick="movePage(${c.conNo });"
-												            />
-											            </c:if>
-											            <c:if test="${c.filePath ne '' }">
-												        	<img
-												             id="poster"
-												             src="${contextPath}/${c.filePath}${c.changeName}"
-												             onclick="movePage(${c.conNo });"
-												        	/>
-											            </c:if>
-											            <br>
-											            <c:choose>
-													        <c:when test="${fn:length(c.conKTitle) gt 15}">
-														        <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
-													        </c:when>
-													        <c:otherwise>
-													        	<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-													        </c:otherwise>
-														</c:choose>
-											            <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
-											            <i class="fa-solid fa-star">${c.cmtStar }</i>
-										            </div>
-									    		</div>
-								    		</c:forEach>
-								    		<c:set var="cCount" value="${cCount + 1}"></c:set>
-						    			</div>	    			
-					    			</c:forEach>  
-				    			</c:if> 		 		
-				    		</div>
-		    		</c:forEach>
-	    		</c:if>
-	    		
-	    		<c:if test="${size lt 8}">
-					<div class="carousel-item active" data-bs-interval="100000">
-						<c:forEach var="cnt2" begin="0" end="1">
-							<div id="movieBox" class="movieBox">					        		
-								<c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
-									<div class="movieContainer">
-										<div class="movie__info">
-											<c:if test="${c.filePath eq '' }">
-												<img
-												id="poster"
-												src="${c.filePath}${c.changeName}"
-												onclick="movePage(${c.conNo });"
-												/>
-											</c:if>
-											<c:if test="${c.filePath ne '' }">
-												<img
-												id="poster"
-												src="${contextPath}/${c.filePath}${c.changeName}"
-												onclick="movePage(${c.conNo });"
-												/>
-											</c:if>
-											<br>
-											<h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
-											<span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
-											<i class="fa-solid fa-star">${c.cmtStar }</i>
-										</div>
-									</div>
-								</c:forEach>
-							</div>	    			
-						</c:forEach>
-					</div>  
-				</c:if> 		 		
-				</div>
-	    		
-	    	</div>
-    	</div>
-    	<button
+             <div class="carousel-inner">
+                <c:if test="${size ge 8}">
+                   <c:forEach var="cnt" begin="1" end="${size }" step="8">
+                      <c:if test="${cnt eq 1 }">
+                        <div class="carousel-item active" data-bs-interval="100000">
+                    </c:if>
+                    <c:if test="${cnt ne 1 }">
+                        <div class="carousel-item" data-bs-interval="100000">
+                    </c:if>
+                       <c:if test="${cnt eq 1 }">                
+                         <c:forEach var="cnt2" begin="0" end="1">
+                             <div id="movieBox" class="movieBox">                             
+                                 <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
+                                   <div class="movieContainer">
+                                       <div class="movie__info">
+                                          <c:if test="${c.filePath eq '' }">
+                                            <img
+                                              id="poster"
+                                              src="${c.filePath}${c.changeName}"
+                                              onclick="movePage(${c.conNo });"
+                                             />
+                                          </c:if>
+                                          <c:if test="${c.filePath ne '' }">
+                                            <img
+                                              id="poster"
+                                              src="${contextPath}/${c.filePath}${c.changeName}"
+                                              onclick="movePage(${c.conNo });"
+                                            />
+                                          </c:if>
+                                          <br>
+                                          <c:choose>
+                                               <c:when test="${fn:length(c.conKTitle) gt 15}">
+                                                  <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
+                                               </c:when>
+                                               <c:otherwise>
+                                                  <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+                                               </c:otherwise>
+                                       </c:choose>
+                                          <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
+                                          <i class="fa-solid fa-star">${c.cmtStar }</i>
+                                       </div>
+                                  </div>
+                               </c:forEach>
+                            </div>                
+                            </c:forEach>  
+                         </c:if>
+                         <c:if test="${cnt ne 1 }">                
+                            <c:forEach var="cnt2" begin="1" end="2">
+                                <div id="movieBox" class="movieBox">                                                             
+                                    <c:forEach var="c" items="${list }" begin="${cCount * 4}" end="${(cCount * 4) + 3}">
+                                      <div class="movieContainer">
+                                          <div class="movie__info">
+                                             <c:if test="${c.filePath eq '' }">
+                                               <img
+                                                 id="poster"
+                                                 src="${c.filePath}${c.changeName}"
+                                                 onclick="movePage(${c.conNo });"
+                                                />
+                                             </c:if>
+                                             <c:if test="${c.filePath ne '' }">
+                                               <img
+                                                 id="poster"
+                                                 src="${contextPath}/${c.filePath}${c.changeName}"
+                                                 onclick="movePage(${c.conNo });"
+                                               />
+                                             </c:if>
+                                             <br>
+                                             <c:choose>
+                                               <c:when test="${fn:length(c.conKTitle) gt 15}">
+                                                  <h4 onclick="movePage(${c.conNo });">${fn:substring(c.conKTitle, 0, 14)}..</h4>
+                                               </c:when>
+                                               <c:otherwise>
+                                                  <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+                                               </c:otherwise>
+                                          </c:choose>
+                                             <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
+                                             <i class="fa-solid fa-star">${c.cmtStar }</i>
+                                          </div>
+                                     </div>
+                                  </c:forEach>
+                                  <c:set var="cCount" value="${cCount + 1}"></c:set>
+                               </div>                
+                            </c:forEach>  
+                         </c:if>              
+                      </div>
+                </c:forEach>
+             </c:if>
+             
+             <c:if test="${size lt 8}">
+               <div class="carousel-item active" data-bs-interval="100000">
+                  <c:forEach var="cnt2" begin="0" end="1">
+                     <div id="movieBox" class="movieBox">                             
+                        <c:forEach var="c" items="${list }" begin="${cnt2 * 4}" end="${(cnt2 * 4) + 3}">
+                           <div class="movieContainer">
+                              <div class="movie__info">
+                                 <c:if test="${c.filePath eq '' }">
+                                    <img
+                                    id="poster"
+                                    src="${c.filePath}${c.changeName}"
+                                    onclick="movePage(${c.conNo });"
+                                    />
+                                 </c:if>
+                                 <c:if test="${c.filePath ne '' }">
+                                    <img
+                                    id="poster"
+                                    src="${contextPath}/${c.filePath}${c.changeName}"
+                                    onclick="movePage(${c.conNo });"
+                                    />
+                                 </c:if>
+                                 <br>
+                                 <h4 onclick="movePage(${c.conNo });">${c.conKTitle }</h4>
+                                 <span onclick="movePage(${c.conNo });">(${fn:substring(c.conDate,0,4)})</span><br />
+                                 <i class="fa-solid fa-star">${c.cmtStar }</i>
+                              </div>
+                           </div>
+                        </c:forEach>
+                     </div>                
+                  </c:forEach>
+               </div>  
+            </c:if>              
+            </div>
+             
+          </div>
+       </div>
+       <button
             class="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleControls"
@@ -337,307 +339,331 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-    	</div>
+       </div>
     </section>
     </div>
     
     </section>
-	
-	<!-- 실시간 문의 -->
+   
+   <!-- 실시간 문의 -->
     <jsp:include page="../common/chatForm.jsp"/>
 
-	<script>
-	 
+   <script>
+    
 
-	
-	
-		$(function() {
-			let mvClicked = false;
-			let drClicked = false;
-			
-			$('#movie').click(function(){
-				console.log(mvClicked)
-				if(mvClicked == false){
-		    		$(this).css('background', 'white');
-		    		$(this).css('opacity', '1');
-		    		$('#drama').css('background', 'white');
-		    		$('#drama').css('opacity', '0.3');
-		    		
-		    		mvClicked = true;
-		    		drClicked = false;
-				}
-				else{
-					$(this).css('background', 'white');
-		    		$(this).css('opacity', '1');
-		    		
-					mvClicked = false;
-				}		    	
-		  	});
-			
-			$('#drama').click(function(){				
-				if(drClicked == false){
-					$(this).css('background', 'white');
-		    		$(this).css('opacity', '1');
-		    		$('#movie').css('background', 'white');
-		    		$('#movie').css('opacity', '0.3');
-		    		
-		    		drClicked = true;
-		    		mvClicked = false;
-				}
-				else{
-					$(this).css('background', 'var(--color-orange)');
-		    		$(this).css('opacity', '1');
-					drClicked = false;
-				}
-		  	});
-		});
-		
-		function movePage(cno){
-	 		location.href = '${contextPath}/detail?conNo='+cno;
-	 	}
-		
-		let categorys = document.getElementsByName("genre");
-		
-		categorys.forEach( (item) => {
-			return item.addEventListener("click", searchContent);
-		});
-		
-		let ages = document.getElementsByName("age");
-		ages.forEach( (item) => {
-			return item.addEventListener("click", searchContent);
-		});
-		
-		let platforms = document.getElementsByClassName("major_btn");
-		
-		for(var i = 0; i < platforms.length; i++){
-			platforms[i].addEventListener("click", searchContent);
-		}
-		
-		let movieBtn = document.getElementById("movie");
-		let dramaBtn = document.getElementById("drama");
-		
-		movieBtn.addEventListener("click", searchContent);
-		dramaBtn.addEventListener("click", searchContent);
-		
-		function searchContent(e){
-			//console.log($(this).attr('id'));
+   
+   
+      $(function() {
+         let mvClicked = false;
+         let drClicked = false;
+         
+         $('#movie').click(function(){
+            console.log(mvClicked)
+            if(mvClicked == false){
+                $(this).css('background', 'white');
+                $(this).css('opacity', '1');
+                $('#drama').css('background', 'white');
+                $('#drama').css('opacity', '0.3');
+                
+                mvClicked = true;
+                drClicked = false;
+            }
+            else{
+               $(this).css('background', 'white');
+                $(this).css('opacity', '1');
+                
+               mvClicked = false;
+            }             
+           });
+         
+         $('#drama').click(function(){            
+            if(drClicked == false){
+               $(this).css('background', 'white');
+                $(this).css('opacity', '1');
+                $('#movie').css('background', 'white');
+                $('#movie').css('opacity', '0.3');
+                
+                drClicked = true;
+                mvClicked = false;
+            }
+            else{
+               $(this).css('background', 'var(--color-orange)');
+                $(this).css('opacity', '1');
+               drClicked = false;
+            }
+           });
+      });
+      
+      function movePage(cno){
+          location.href = '${contextPath}/detail?conNo='+cno;
+       }
+      
+      let categorys = document.getElementsByName("genre");
+      
+      categorys.forEach( (item) => {
+         return item.addEventListener("click", searchContent);
+      });
+      
+      let ages = document.getElementsByName("age");
+      ages.forEach( (item) => {
+         return item.addEventListener("click", searchContent);
+      });
+      
+      let platforms = document.getElementsByClassName("major_btn");
+      
+      for(var i = 0; i < platforms.length; i++){
+         platforms[i].addEventListener("click", searchContent);
+      }
+      
+      let movieBtn = document.getElementById("movie");
+      let dramaBtn = document.getElementById("drama");
+      
+      movieBtn.addEventListener("click", searchContent);
+      dramaBtn.addEventListener("click", searchContent);
+      
+      function searchContent(e){
+         //console.log($(this).attr('id'));
 
-			var genreList = ['all'];
+         var genreList = ['all'];
             var ageList = ['all'];
             var ottList = ['all'];
             var categoryList = ['all'];
             
             if($(this).attr('id') == 'movie'){
-            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
-            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
-            	}
-            	else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
-            			&& $('input[id="dr"]').is(':checked') == true){
-            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
-            		$('input[id="dr"]').prop("checked", false);
-            	}
-            	else{
-            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
-            	}
+               if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+                  $('input[id='+$(this).attr('name')+']').prop("checked", false);
+               }
+               else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
+                     && $('input[id="dr"]').is(':checked') == true){
+                  $('input[id='+$(this).attr('name')+']').prop("checked", true);
+                  $('input[id="dr"]').prop("checked", false);
+               }
+               else{
+                  $('input[id='+$(this).attr('name')+']').prop("checked", true);
+               }
             }
             
             else if($(this).attr('id') == 'drama'){
-            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
-            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
-            	}
-            	else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
-            			&& $('input[id="mv"]').is(':checked') == true){
-            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
-            		$('input[id="mv"]').prop("checked", false);
-            	}
-            	else{
-            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
-            	}
+               if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+                  $('input[id='+$(this).attr('name')+']').prop("checked", false);
+               }
+               else if($('input[id='+$(this).attr('name')+']').is(':checked') == false
+                     && $('input[id="mv"]').is(':checked') == true){
+                  $('input[id='+$(this).attr('name')+']').prop("checked", true);
+                  $('input[id="mv"]').prop("checked", false);
+               }
+               else{
+                  $('input[id='+$(this).attr('name')+']').prop("checked", true);
+               }
             }
             
          
             
             if($(this).attr('id') == 'ott'){
-            	//ottList.push($(this).val());
-            	if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
-            		$('input[id='+$(this).attr('name')+']').prop("checked", false);
-            		console.log('안녕');
-            		$('h2[id='+$(this).attr('name')+']').removeClass('colorOrange');
-            		
-            		console.log('안녕2');
-            	}
-            	else{
-            		$('input[id='+$(this).attr('name')+']').prop("checked", true);
-            		console.log('안녕3');
-            		$('h2[id='+$(this).attr('name')+']').addClass('colorOrange');
-            		console.log('안녕4');
-            	}
+               //ottList.push($(this).val());
+               if($('input[id='+$(this).attr('name')+']').is(':checked') == true){
+                  $('input[id='+$(this).attr('name')+']').prop("checked", false);
+                  console.log('안녕');
+                  $('h2[id='+$(this).attr('name')+']').removeClass('colorOrange');
+                  
+                  console.log('안녕2');
+               }
+               else{
+                  $('input[id='+$(this).attr('name')+']').prop("checked", true);
+                  console.log('안녕3');
+                  $('h2[id='+$(this).attr('name')+']').addClass('colorOrange');
+                  console.log('안녕4');
+               }
+            }
+            
+            if($(this).attr('name') == 'genre'){
+               if($(this).is(':checked') == true){
+                  $('label[for='+$(this).attr('id')+']').addClass('colorPurple');
+                  console.log('안녕2');
+               }
+               else{
+                  $('label[for='+$(this).attr('id')+']').removeClass('colorPurple');
+                  console.log('안녕4');
+               }
+            }
+            
+            if($(this).attr('name') == 'age'){
+               if($(this).is(':checked') == true){
+                  $('label[for='+$(this).attr('id')+']').addClass('colorPurple');
+                  console.log('안녕2');
+               }
+               else{
+                  $('label[for='+$(this).attr('id')+']').removeClass('colorPurple');
+                  console.log('안녕4');
+               }
             }
             
             $('input[name="genre"]:checked').each(function(i){
-            	genreList.push($(this).val());
+               genreList.push($(this).val());
             });
             
             $('input[name="age"]:checked').each(function(i){
-            	ageList.push($(this).val());
+               ageList.push($(this).val());
             });
             
             $('input[name="ott"]:checked').each(function(i){
-            	ottList.push($(this).val());
+               ottList.push($(this).val());
             });
             
             $('input[name="category"]:checked').each(function(i){
-            	categoryList.push($(this).val());
+               categoryList.push($(this).val());
             });
-// 			let genre = document.querySelectorAll("input[name=genre]:checked");		
-// 			genre = [].map.call(genre, function(item){
-// 			    return item.value
-// 			});
+//          let genre = document.querySelectorAll("input[name=genre]:checked");      
+//          genre = [].map.call(genre, function(item){
+//              return item.value
+//          });
 
-			console.log(genreList);
-			console.log(ageList);
-			console.log(ottList);
-			console.log(categoryList);
-			
-			var cnt = 0;
-			$.ajax({
-				url : '${contextPath}/searchContent.co',
-				data : {
-					genre : genreList,
-					age : ageList,
-					ott : ottList,
-					category : categoryList
-				},
-				dataType : 'json',
-				success: function(result){
-					let htmlUpside = "";
-					let htmlMid = "";
-					let htmlInfo = "";
-					let html = "";
-					//$('.carousel-inner').remove();
-					var carouselCnt = parseInt(result.length/8);
-					var movieBoxCnt = parseInt(result.length/4);
-					var movieContainerCnt = parseInt(result.length/2) + 1;
-					var cnt2 = 1;
-					console.log(result);
-					if(result.length >= 8){
-						$('.carousel-item').remove();
-						for(var i = 1; i <= carouselCnt; i++){
-							if(i > 1){
-								html += "<div class='carousel-item' data-bs-interval='100000'>";
-							}
-							else{
-								html += "<div class='carousel-item active' data-bs-interval='100000'>";
-							}
-							for(var j = 0; j < 2; j++){
-								html += "<div id='movieBox"+ cnt2 +"' class='movieBox'></div>";
-								cnt2 += 1;
-							}
-							html += "</div>";
-						}						
-						$(".carousel-inner").html(html);
-						for(var j = 1; j <= movieBoxCnt; j++){
-							while(cnt < j * 4){
-								let title = result[cnt].conKTitle;
-								if(title.length > 15){
-									title = title.substr(0, 14);
-									title += '..';
-								}
-								htmlInfo += "<div class='movieContainer'>" +
-												"<div class='movie__info'>" +
-													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
-													"<br>" +
-													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
-													"<br>" +
-													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
-												"</div>"+
-											"</div>";
-								$('#movieBox'+j).html(htmlInfo);									
+         console.log(genreList);
+         console.log(ageList);
+         console.log(ottList);
+         console.log(categoryList);
+         
+         var cnt = 0;
+         $.ajax({
+            url : '${contextPath}/searchContent.co',
+            data : {
+               genre : genreList,
+               age : ageList,
+               ott : ottList,
+               category : categoryList
+            },
+            dataType : 'json',
+            success: function(result){
+               let htmlUpside = "";
+               let htmlMid = "";
+               let htmlInfo = "";
+               let html = "";
+               //$('.carousel-inner').remove();
+               var carouselCnt = parseInt(result.length/8);
+               var movieBoxCnt = parseInt(result.length/4);
+               var movieContainerCnt = parseInt(result.length/2) + 1;
+               var cnt2 = 1;
+               console.log(result);
+               if(result.length >= 8){
+                  $('.carousel-item').remove();
+                  for(var i = 1; i <= carouselCnt; i++){
+                     if(i > 1){
+                        html += "<div class='carousel-item' data-bs-interval='100000'>";
+                     }
+                     else{
+                        html += "<div class='carousel-item active' data-bs-interval='100000'>";
+                     }
+                     for(var j = 0; j < 2; j++){
+                        html += "<div id='movieBox"+ cnt2 +"' class='movieBox'></div>";
+                        cnt2 += 1;
+                     }
+                     html += "</div>";
+                  }                  
+                  $(".carousel-inner").html(html);
+                  for(var j = 1; j <= movieBoxCnt; j++){
+                     while(cnt < j * 4){
+                        let title = result[cnt].conKTitle;
+                        if(title.length > 15){
+                           title = title.substr(0, 14);
+                           title += '..';
+                        }
+                        htmlInfo += "<div class='movieContainer'>" +
+                                    "<div class='movie__info'>" +
+                                       "<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
+                                       "<br>" +
+                                       "<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
+                                       "<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
+                                       "<br>" +
+                                       "<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
+                                    "</div>"+
+                                 "</div>";
+                        $('#movieBox'+j).html(htmlInfo);                           
 
-								cnt += 1;
-							}
-							htmlInfo = "";
-						}
-						cnt = 0;
-						cnt2 = 0;
-					}
-					else if(result.length >= 4){
-						$('.carousel-item').remove();
-						html += "<div class='carousel-item active' data-bs-interval='100000'>";
-						console.log(carouselCnt);
-						html += "<div id='movieBox1' class='movieBox'></div>";
-						html += "<div id='movieBox2' class='movieBox'></div>";
-						html += "</div>";
-						
-						$(".carousel-inner").html(html);
-						for(var j = 1; j <= 2; j++){
-							while(cnt < j * 4){
-								let title = result[cnt].conKTitle;
-								if(title.length > 15){
-									title = title.substr(0, 14);
-									title += '..';
-								}
-								htmlInfo += "<div class='movieContainer'>" +
-												"<div class='movie__info'>" +
-													"<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
-													"<br>" +
-													"<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
-													"<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
-													"<br>" +
-													"<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
-												"</div>"+
-											"</div>";
-								$('#movieBox'+j).html(htmlInfo);									
+                        cnt += 1;
+                     }
+                     htmlInfo = "";
+                  }
+                  cnt = 0;
+                  cnt2 = 0;
+               }
+               else if(result.length >= 4){
+                  $('.carousel-item').remove();
+                  html += "<div class='carousel-item active' data-bs-interval='100000'>";
+                  console.log(carouselCnt);
+                  html += "<div id='movieBox1' class='movieBox'></div>";
+                  html += "<div id='movieBox2' class='movieBox'></div>";
+                  html += "</div>";
+                  
+                  $(".carousel-inner").html(html);
+                  for(var j = 1; j <= 2; j++){
+                     while(cnt < j * 4){
+                        let title = result[cnt].conKTitle;
+                     if(title.length > 15){
+                        title = title.substr(0, 14);
+                        title += '..';
+                     }
+                        
+                        htmlInfo += "<div class='movieContainer'>" +
+                                    "<div class='movie__info'>" +
+                                       "<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
+                                       "<br>" +
+                                       "<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
+                                       "<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
+                                       "<br>" +
+                                       "<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
+                                    "</div>"+
+                                 "</div>";
+                        $('#movieBox'+j).html(htmlInfo);                           
 
-								cnt += 1;
-							}
-							htmlInfo = "";
-						}
-						cnt = 0;
-						cnt2 = 0;
-					}
-					else if(result.length == 0){
-						$('.carousel-inner').remove();
-						$('.carousel-control-prev').remove();
-						$('.carousel-control-next').remove();
-						htmlMid += "<div class='carousel-inner' style='height: 400px;'><h5>검색 결과가 존재하지 않습니다</h5></div>"
-						$("#carouselExampleControls").html(htmlMid);
-					}
-					else{
-						$('.carousel-inner').remove();
-						htmlMid += "<div class='carousel-inner'>" +
-									"<div class='carousel-item active' data-bs-interval='100000'>" +
-										"<div id='movieBox' class='movieBox'>";
-						htmlMid += 		"</div>"+
-									"</div>"+
-								"</div>";
-						$("#carouselExampleControls").html(htmlMid);
-						
-						for(var i = 0 in result){
-							let title = result[cnt].conKTitle;
-							if(title.length > 15){
-								title = title.substr(0, 14);
-								title += '..';
-							}
-							htmlInfo += "<div class='movieContainer'>" +
-											"<div class='movie__info'>" +
-												"<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
-												"<br>" +
-												"<h4 onclick='movePage("+ result[i].conNo +");'>"+title+"</h4>" +
-												"<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
-												"<br>" +
-												"<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
-											"</div>"+
-										"</div>";
-							$("#movieBox").html(htmlInfo);
-						}
-					}
-					//console.log(genre);
+                        cnt += 1;
+                     }
+                     htmlInfo = "";
+                  }
+                  cnt = 0;
+                  cnt2 = 0;
+               }
+				else if(result.length == 0){
+					$('.carousel-inner').remove();
+					$('.carousel-control-prev').remove();
+					$('.carousel-control-next').remove();
+					htmlMid += "<div class='carousel-inner' style='height: 400px;'><h5>검색 결과가 존재하지 않습니다</h5></div>"
+					$("#carouselExampleControls").html(htmlMid);
 				}
-			})
-		}
-	</script>
-	
+               else{
+                  $('.carousel-inner').remove();
+                  htmlMid += "<div class='carousel-inner'>" +
+                           "<div class='carousel-item active' data-bs-interval='100000'>" +
+                              "<div id='movieBox' class='movieBox'>";
+                  htmlMid +=       "</div>"+
+                           "</div>"+
+                        "</div>";
+                  $("#carouselExampleControls").html(htmlMid);
+                  
+                  for(var i = 0 in result){
+                  let title = result[cnt].conKTitle;
+                  if(title.length > 15){
+                     title = title.substr(0, 14);
+                     title += '..';
+                  }
+                     
+                     htmlInfo += "<div class='movieContainer'>" +
+                                 "<div class='movie__info'>" +
+                                    "<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
+                                    "<br>" +
+                                    "<h4 onclick='movePage("+ result[i].conNo +");'>"+title+"</h4>" +
+                                    "<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
+                                    "<br>" +
+                                    "<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
+                                 "</div>"+
+                              "</div>";
+                     $("#movieBox").html(htmlInfo);
+                  }
+               }
+               //console.log(genre);
+            }
+         })
+      }
+   </script>
+   
 </body>
 </html>

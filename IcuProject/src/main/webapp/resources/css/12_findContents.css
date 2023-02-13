@@ -14,13 +14,15 @@ td {
 }
 label{
 	cursor:pointer;
+	color:lightgray;
 }
 label:hover{
-	color:gray;
+	color:black;
 }
 table input[type=checkbox]{
 	display:none;
 }
+
 
 .span{
 	font-family: 'Poor Story', 'cursive' !important;
@@ -35,6 +37,13 @@ table input[type=checkbox]{
 	color:var(--color-orange) !important;
 	font-family: 'Poor Story', 'cursive' !important;
 	transition:all 0.3s;
+}
+
+.colorPurple{
+	color:var(--color-purple) !important;
+	font-family: 'Poor Story', 'cursive' !important;
+	transition:all 0.1s;
+	transform:scale(1.2);
 }
 
 
@@ -311,7 +320,7 @@ table input[type=checkbox]{
 	width:150px !important;
 	height:150px;
 	background-color:blue;
-	top:920px !important;
+	top:980px !important;
 }
 
 .carousel-control-prev{
