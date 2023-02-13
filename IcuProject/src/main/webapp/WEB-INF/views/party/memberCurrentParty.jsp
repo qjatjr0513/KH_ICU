@@ -152,6 +152,7 @@
 
         </c:if>
          
+         <c:if test="${!empty listO }">
          <c:set var="doneLoopO" value="false"/>
          <c:set var="countO" value="0"/>
            <div
@@ -247,6 +248,7 @@
              <span class="visually-hidden">Next</span>
            </button>
          </div>
+         </c:if>
        </section>
         
       </div>
