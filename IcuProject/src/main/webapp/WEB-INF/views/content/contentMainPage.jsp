@@ -505,7 +505,7 @@
 					var movieBoxCnt = parseInt(result.length/4);
 					var movieContainerCnt = parseInt(result.length/2) + 1;
 					var cnt2 = 1;
-					console.log(carouselCnt);
+					console.log(result);
 					if(result.length >= 8){
 						$('.carousel-item').remove();
 						for(var i = 1; i <= carouselCnt; i++){

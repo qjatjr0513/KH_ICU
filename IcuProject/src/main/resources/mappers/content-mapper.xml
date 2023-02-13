@@ -508,7 +508,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		
 		<if test="genre.size == 0 and age.size == 0 and ott.size == 0 and category.size != 0">
-			SELECT DISTINCT CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
+			SELECT DISTINCT CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH
 			FROM CONTENT
 			JOIN IMAGE I ON (CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			WHERE CON_CATEGORY IN(

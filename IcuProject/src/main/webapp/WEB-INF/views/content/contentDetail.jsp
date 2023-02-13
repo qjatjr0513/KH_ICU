@@ -5,8 +5,10 @@
 <c:set var="c" value="${content}"/>
 <c:set var="g" value="${genre }"/>
 <c:set var="size" value="${fn:length(genre)}" />
+<c:set var="ott_size" value="${fn:length(ott)}" />
 <c:set var="memNo" value="${memNo }"/>
 <c:set var="memId" value="${memId }"/>
+<c:set var="o" value="${ott }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +53,11 @@
 	    			<h6>&nbsp;&nbsp;<b>상영 시간: ${c.conInfo }분</b></h6>
 	    		</c:if>
 	    		<h6>&nbsp;&nbsp;<b>방영 날짜 : ${c.conDate }</b></h6>
-	    		<h6></h6>
+	    		<h6>&nbsp;&nbsp;<b>플랫폼 : 
+	    			<c:forEach var="ott" items="${o }" varStatus="status">
+		    			${ott }<c:if test="${status.count ne ott_size}">, </b></c:if>
+		    		</c:forEach>
+				</h6>
 	    	</div>
 	    	<div id="poster">
 	    		<c:if test="${c.filePath eq '' or c.filePath eq null}">
@@ -141,6 +147,7 @@
     });
     
     $(function(){
+    	console.log("${ott}");
     	selectReview();
     	//"<button type='button' id='deleteComment'>삭제하기</button>"
     	starChange();

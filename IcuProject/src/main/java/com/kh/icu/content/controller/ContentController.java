@@ -89,10 +89,15 @@ public class ContentController {
 		}
 		
 		ArrayList<String> genre = new ArrayList<String>();
-		genre = contentService.selectGenre(conNo);
+		ArrayList<String> ott = new ArrayList<String>();
 
+		ott = contentService.selectOtt(conNo);
+		genre = contentService.selectGenre(conNo);
+		
+		System.out.println(conNo);
 		model.addAttribute("content", c);
 		model.addAttribute("genre", genre);
+		model.addAttribute("ott", ott);
 		model.addAttribute("memNo", memNo);
 		model.addAttribute("memId", memId);
 		
