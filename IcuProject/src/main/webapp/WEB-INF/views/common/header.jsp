@@ -127,7 +127,7 @@
              <c:when test="${ loginUser.role == 'A' }">
            <!-- 로그인 후 -->
            <li>
-                <a href="${contextPath }/memLogout" style="text-decoration: none; color:black;">로그아웃</a>
+                <a href="${contextPath }/memLogout" style="text-decoration: none; color:black; margin-right:30px;">로그아웃</a>
              </li>
              </c:when>
              <c:otherwise>

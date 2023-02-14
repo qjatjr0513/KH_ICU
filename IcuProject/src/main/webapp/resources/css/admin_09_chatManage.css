@@ -2,11 +2,19 @@
 @import url('main.css');
 
 #chatList {
-  margin: auto;
-  margin-top: 300px;
-  padding-left: 200px;
+  margin-left: 550px;
+  margin-top: 170px;
+  padding:30px;
   width: 60%;
-  /* background-color: antiquewhite; */
+  background-color:white;
+  border-radius:12px;
+  box-shadow:0 0 5px 1px lightgray;
+}
+
+#chatList > h2{
+	font-family:'Poor Story', 'cursive';
+	font-size:28px;
+	color:var(--color-orange);
 }
 
 th{
@@ -31,6 +39,7 @@ td button {
 #chatList > table {
   background-color: white;
   text-align: center;
+  vertical-align:middle;
 }
 
 .pagination {
