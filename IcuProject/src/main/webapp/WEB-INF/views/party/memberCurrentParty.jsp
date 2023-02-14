@@ -23,7 +23,7 @@
     <jsp:include page="../member/myNavbar.jsp"/>
     
     <!-- 파티 섹션 -->
-    <section id="partySection" class='animate__animated animate__fadeIn'>
+    <section id="partySection">
     
       <div class="PartyBtnGroup">
         <button class="makeParty">내가 만든 파티</button>

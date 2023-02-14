@@ -202,46 +202,5 @@
       });
   }
   
-  async function deleteMem() {
-	  const { value: password } = await Swal.fire({
-		  title: 'Enter your password',
-		  input: 'password',
-		  inputLabel: 'Password',
-		  inputPlaceholder: 'Enter your password',
-		  inputAttributes: {
-		    maxlength: 10,
-		    autocapitalize: 'off',
-		    autocorrect: 'off'
-		  }
-		})
-	
-		if (password) {
-			Swal.fire({
-		          title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
-		          icon: 'warning',
-		          showCancelButton: true,
-		          confirmButtonColor: '#3085d6',
-		          cancelButtonColor: '#d33',
-		          cancelButtonText: '취소',
-		          confirmButtonText: '탈퇴'
-		      }).then((result) => {
-		          if (result.isConfirmed) {
-		        	  $.ajax({
-		                     url : "${contextPath }/memDelete.me",
-		                     data : {
-		                    	 memPwd : password
-		                     },
-		                     type : "post",
-		                     success : function(result){
-		                        
-		                        
-		                     }
-		                  });
-		          }
-		      }); 	
-		   
-			
-		}
-  }
   </script>
 </html>

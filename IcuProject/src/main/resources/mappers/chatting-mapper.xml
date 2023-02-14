@@ -20,9 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectListCount" resultType="int">
-		SELECT COUNT(*)
-		FROM CHAT_ROOM 
-		WHERE STATUS = 'N'
+		 SELECT COUNT(*)
+		FROM CHAT_ROOM A
+        JOIN MEMBER M USING(MEM_NO)
+		WHERE A.STATUS = 'N'
 	</select>
 	
 	<select id="selectChatRoomList" resultMap="chatRoomResultSet">

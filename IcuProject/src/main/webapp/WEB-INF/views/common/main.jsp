@@ -13,14 +13,7 @@
     <link rel="stylesheet" href="resources/css/02_mainPage.css" />
 	
     <style>
-      .match{
-      	float: right;
-      }
-      .ui-autocomplete {
-		  max-height: 600px;
-		  overflow-y: auto;
-		  overflow-x: hidden;
-		}
+      
     </style>
 </head>
 <body>
@@ -298,7 +291,7 @@
                src="${r.get(6).getChangeName()}"
              />
            </div>
-           <div class="recommend__box-third movie-poster">
+           <div class="recommend__box-third movie-poster">f
              <div class="overlay-wrap">
                <div class="overlay-black" onclick="movePage(${r.get(7).getConNo() });">
                  <span class="overlay-text">보러가기</span>
@@ -352,6 +345,7 @@
 	});
 	
 	function search(){
+		
 		var count = 1;
 		console.log("search!!!");
 		$("#keyword").autocomplete({
@@ -364,6 +358,7 @@
 						selectOption : $('select[name="searchNo"] option:selected').val()
 					},
 					success : function(data){	
+						
 						response($.map(data, function (item) {
 			                return {
 			                    value: item.conKTitle,
@@ -388,7 +383,6 @@
 				return false;
 			}
 			,minLength: 1
-			,autoFocus : true
 			,delay: 100
 		}).autocomplete("instance")._renderItem = function(ul, item){
 			var actors = String(item.actor).split(',');
@@ -437,7 +431,7 @@
 				category = "드라마";
 			}
 			var html = "";			
-			html += '<a class="match" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
+			html += '<a class="match" id="ho" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
 			html += item.idx;
 			html += ')">';
 			html += '<div class="match_img">';
