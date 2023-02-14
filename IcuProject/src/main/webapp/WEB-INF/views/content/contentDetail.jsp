@@ -111,12 +111,12 @@
 		<br><br>
 		<div id="reviewInput">
 			<c:if test="${memNo ne 0 }">
-				<textarea cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" style="resize: none;" required></textarea>
+				<textarea class="textarea" cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" style="resize: none;" required></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" onclick="insertReview();">작성</button>
 			</c:if>
 			
 			<c:if test="${memNo eq 0 }">
-				<textarea cols="75" rows="4" placeholder="로그인 후 이용해주세요" disabled></textarea>
+				<textarea class="textarea" cols="75" rows="4" placeholder="로그인 후 이용해주세요" disabled></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" disabled>작성</button>
 			</c:if>
 		</div>
@@ -221,6 +221,12 @@
 					let html ="";
 					let img = "";
 					for(let comment of result){
+						if('${memNo}' == comment.cmtWriter){
+							$('#submitBtn').attr("disabled", true);
+							$('.textarea').attr("disabled", true);
+							$('#score').attr("disabled", true);
+							$('.textarea').attr("placeholder", "이미 평가를 진행한 유저입니다");
+						}
 						html += "<div class='profile-container'><div id='profileArea'>" +
 									"<div id='profile'>";
 						if(comment.filePath != "" && comment.chagneName != ""){
