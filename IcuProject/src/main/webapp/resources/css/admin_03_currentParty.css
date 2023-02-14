@@ -2,24 +2,42 @@
 @import url('admin_main.css');
 
 #party__container {
-  width: 80%;
-  margin: auto;
-  margin-top: 230px;
-  padding-left: 200px;
-  /* background-color: rgb(193, 200, 200); */
+	margin-top:150px;
+	background-color: white;
+    width: 1100px;
+    height: 700px;
+    margin-left: 560px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px 1px grey;
+    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
 }
 .partyCard {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
 }
 
 .cardBox {
-  border: 2px solid black;
-  width: 250px;
-  padding: 20px;
-  border-radius: 8px;
-  position: relative;
+	border: none;
+    box-shadow: 0 0 5px 1px lightgrey;
+    width: 250px;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 3px;
+    position: relative;
+    background-color: #ffffff;
+    cursor:pointer;
 }
+.cardBox > h4 > b {
+   font-family: 'Poor Story', 'cursive';
+    color: var(--color-orange);
+    font-size: 24px;
+}
+.cardBox span{
+   font-size:13px;
+   font-weight:600;
+}
+
 .carousel-inner {
   width: 80%;
   margin: auto;
@@ -64,4 +82,16 @@
 }
 .secondBtn {
   background-color: rgb(235, 65, 65);
+}
+.carousel-control-prev, 
+.carousel-control-next {
+   height:100px;
+   width:100px;
+   top:270px !important;
+}
+.carousel-control-prev {
+   left:-150px !important;
+}
+.carousel-control-next{
+   right:-150px !important;
 }

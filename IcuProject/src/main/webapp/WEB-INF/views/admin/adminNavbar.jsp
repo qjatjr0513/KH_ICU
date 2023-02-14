@@ -112,7 +112,6 @@
 		const link =  document.location.href.split('/');
 		/* console.log(link[4]);	 */
 	
-	
 		if(link[5] == 'memListForm.me'){	
 			$('.li1').addClass('active');	
 		} else if(link[5] == 'memBlackListForm.me'){
@@ -123,14 +122,18 @@
 			$('.li4').addClass('active');	
 		} else if(link[5] == 'contentListForm') {
 			$('.li5').addClass('active');	
-		}else if(link[5] == 'faqList.fq'){
+		} else if(link[5] == 'faqList.fq'){
 			$('.li6').addClass('active');
-		}else if(link[5] == 'noticeList.bo'){
+		} else if(link[5] == 'noticeList.bo'){
 			$('.li7').addClass('active');
 		} else if(link[5] == 'payManageListForm.pe') {
 			$('.li8').addClass('active');
+		} else if(link[5] == 'contentEnrollForm'){
+			$('.li5').addClass('active');
+		} else if(link[5] == 'chatRoomList') {
+			$('.li9').addClass('active');			
 		} else {
-			$('.li9').addClass('active');
+			$('.li5').addClass('active');
 		}
 	</script>
     

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 진행중인 파티</title>
  	<!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/admin_03_currentParty.css" />
 </head>
