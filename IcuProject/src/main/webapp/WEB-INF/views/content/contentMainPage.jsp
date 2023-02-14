@@ -538,6 +538,8 @@
                let htmlMid = "";
                let htmlInfo = "";
                let html = "";
+               let previousBtn = "";
+               let nextBtn = "";
                //$('.carousel-inner').remove();
                var carouselCnt = parseInt(result.length/8);
                var movieBoxCnt = parseInt(result.length/4);
@@ -546,6 +548,22 @@
                console.log(result);
                if(result.length >= 8){
                   $('.carousel-item').remove();
+                  if($('.carousel-control-prev').length <= 0){
+                	  previousBtn += "<button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleControls' data-bs-slide='prev'>";
+                	  previousBtn += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                	  previousBtn += "<span class='visually-hidden'>Previous</span>";
+                	  previousBtn += "</button>";
+                	  $("#body-container").html(previousBtn);
+                  }
+                  
+                  if($('.carousel-control-next').length <= 0){
+                	  nextBtn += "<button class='carousel-control-next' type='button' data-bs-target='#carouselExampleControls' data-bs-slide='next'>";
+                	  nextBtn += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                	  nextBtn += "<span class='visually-hidden'>Next</span>";
+                	  nextBtn += "</button>";
+                	  $("#body-container").html(nextBtn);
+                  }
+                  
                   for(var i = 1; i <= carouselCnt; i++){
                      if(i > 1){
                         html += "<div class='carousel-item' data-bs-interval='100000'>";
@@ -568,8 +586,21 @@
                            title += '..';
                         }
                         htmlInfo += "<div class='movieContainer'>" +
-                                    "<div class='movie__info'>" +
-                                       "<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
+                                    "<div class='movie__info'>";
+                        if(result[cnt].filePath == null){
+                        	htmlInfo += '<img id="poster" src="';
+                        	htmlInfo += result[cnt].changeName
+                        	htmlInfo += '"';
+                        }
+                        else{
+                        	htmlInfo += '<img id="poster" src="';
+                        	htmlInfo += '${contextPath}';
+                        	htmlInfo += result[cnt].filePath;
+                        	htmlInfo += result[cnt].changeName;
+                        	htmlInfo += '"';
+                        	
+                        }
+                        htmlInfo += "onclick='movePage("+ result[cnt].conNo +");'>" +
                                        "<br>" +
                                        "<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
                                        "<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
@@ -606,15 +637,28 @@
                      }
                         
                         htmlInfo += "<div class='movieContainer'>" +
-                                    "<div class='movie__info'>" +
-                                       "<img id='poster' src="+ result[cnt].changeName +" onclick='movePage("+ result[cnt].conNo +");'>" +
-                                       "<br>" +
-                                       "<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
-                                       "<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
-                                       "<br>" +
-                                       "<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
-                                    "</div>"+
-                                 "</div>";
+                                    "<div class='movie__info'>";
+                        if(result[cnt].filePath == null){
+                        	htmlInfo += '<img id="poster" src="';
+                        	htmlInfo += result[cnt].changeName
+                        	htmlInfo += '"';
+                        }
+                        else{
+                            htmlInfo += '<img id="poster" src="';
+                            htmlInfo += '${contextPath}';
+                            htmlInfo += result[cnt].filePath;
+                            htmlInfo += result[cnt].changeName;
+                            htmlInfo += '"';
+                                    	
+                       }
+                       htmlInfo += "onclick='movePage("+ result[cnt].conNo +");'>" +
+                                    	"<br>" +
+                                        "<h4 onclick='movePage("+ result[cnt].conNo +");'>"+title+"</h4>" +
+                                             "<span onclick='movePage("+ result[cnt].conNo +");'>("+result[cnt].conDate.substr(0, 4)+")</span>" +
+                                             "<br>" +
+                                             "<i class='fa-solid fa-star'>"+ result[cnt].cmtStar +"</i>"+
+                                        "</div>"+
+                                    "</div>";
                         $('#movieBox'+j).html(htmlInfo);                           
 
                         cnt += 1;
@@ -644,22 +688,34 @@
                   $("#carouselExampleControls").html(htmlMid);
                   
                   for(var i = 0 in result){
-                  let title = result[cnt].conKTitle;
-                  if(title.length > 15){
-                     title = title.substr(0, 14);
-                     title += '..';
-                  }
+                  	let title = result[i].conKTitle;
+                  	if(title.length > 15){
+                     	title = title.substr(0, 14);
+                     	title += '..';
+                  	}
                      
                      htmlInfo += "<div class='movieContainer'>" +
-                                 "<div class='movie__info'>" +
-                                    "<img id='poster' src="+ result[i].changeName +" onclick='movePage("+ result[i].conNo +");'>" +
-                                    "<br>" +
-                                    "<h4 onclick='movePage("+ result[i].conNo +");'>"+title+"</h4>" +
-                                    "<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
-                                    "<br>" +
-                                    "<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
-                                 "</div>"+
-                              "</div>";
+                                 "<div class='movie__info'>";
+                     if(result[i].filePath == null){
+                         htmlInfo += '<img id="poster" src="';
+                         htmlInfo += result[i].changeName
+                         htmlInfo += '"';
+                     }
+                     else{
+                         htmlInfo += '<img id="poster" src="';
+                         htmlInfo += '${contextPath}';
+                         htmlInfo += result[i].filePath;
+                         htmlInfo += result[i].changeName;
+                         htmlInfo += '"';                                 	
+                     }
+                     htmlInfo += "onclick='movePage("+ result[i].conNo +");'>" +
+                                                "<br>" +
+                                                "<h4 onclick='movePage("+ result[i].conNo +");'>"+title+"</h4>" +
+                                                "<span onclick='movePage("+ result[i].conNo +");'>("+result[i].conDate.substr(0, 4)+")</span>" +
+                                                "<br>" +
+                                                "<i class='fa-solid fa-star'>"+ result[i].cmtStar +"</i>"+
+                                             "</div>"+
+                                          "</div>";
                      $("#movieBox").html(htmlInfo);
                   }
                }
