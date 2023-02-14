@@ -239,7 +239,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="autoSearch" parameterType="map" resultMap="contentResultSet">
-		SELECT CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE
+		SELECT CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE, CON_ACTOR, CON_DIRECTOR, CON_ETITLE
 		FROM CONTENT CT
 		JOIN IMAGE I ON(I.REF_TNO = CON_NO) AND I.TABLE_CD = 'C'
 		LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO) 
@@ -266,7 +266,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CON_ACTOR LIKE '%'||#{keyword}||'%')
 			AND CT.STATUS = 'N'
 		</if>
-		GROUP BY CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE
+		GROUP BY CT.CON_NO, CON_KTITLE, CHANGE_NAME, CON_CATEGORY, CON_DATE, CON_ACTOR, CON_DIRECTOR, CON_ETITLE
 	</select>
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">

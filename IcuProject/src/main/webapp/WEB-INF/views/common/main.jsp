@@ -11,11 +11,16 @@
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/02_mainPage.css" />
-
+	
     <style>
       .match{
       	float: right;
       }
+      .ui-autocomplete {
+		  max-height: 600px;
+		  overflow-y: auto;
+		  overflow-x: hidden;
+		}
     </style>
 </head>
 <body>
@@ -376,9 +381,12 @@
 			                    img_url: item.changeName,
 			                    category: item.conCategory,
 			                    date: item.conDate,
-			                    star: item.cmtStar
+			                    star: item.cmtStar,
+			                    actor: item.conActor,
+			                    director: item.conDirector,
+			                    etitle: item.conETitle
 			                };
-			            }).slice(0, 3));
+			            }));
 					},error : function(){
 			             console.log("오류가 발생했습니다.");
 			        }
@@ -391,8 +399,45 @@
 			,autoFocus : true
 			,delay: 100
 		}).autocomplete("instance")._renderItem = function(ul, item){
-			console.log(item);
-			var highlight = String(item.label).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+			var actors = String(item.actor).split(',');
+			var checkData = 1;			
+			let title = item.label;
+			let titleEng = item.etitle;
+			
+			console.log(title);
+			console.log(titleEng);
+			
+            if(title.length > 15){
+               title = title.substr(0, 14);
+               title += '..';
+            }
+            
+            if(titleEng != null){
+	            if(titleEng.length > 15){
+	                titleEng = titleEng.substr(0, 14);
+	                titleEng += '..';
+	            }
+            }
+			var highlight = String(title).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+            
+			if(!highlight.includes('</span>')){
+				for(var i = 0; i < actors.length; i++){
+					highlight = String(actors[i]).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");					
+					if(highlight.includes('</span>')){
+						checkData = 2;
+						break;
+					}
+				}
+				if(!highlight.includes('</span>')){
+					highlight = String(item.director).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					checkData = 3;
+				}
+				if(!highlight.includes('</span>')){
+					highlight = String(titleEng).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					checkData = 4;
+				}
+			}
+			console.log(highlight);
 			var category = "";
 			if(item.category == 1){
 				category = "영화";
@@ -400,8 +445,7 @@
 			else{
 				category = "드라마";
 			}
-			var html = "";
-			
+			var html = "";			
 			html += '<a class="match" style="width: 500px; height: 200px; margin: auto;" onclick="movePage(';	
 			html += item.idx;
 			html += ')">';
@@ -410,16 +454,41 @@
 			html += item.img_url;
 			html += '" style="width:120px; height: 150px; margin: auto; border-radius:8px;">';
 			html += '<div class="match_name">';
-			html += highlight;
-			html += ' (';
-			html += category;
-			html += ' | ';
-			html += item.date.substr(0, 4);
-			html += ')   ';
+			if(checkData == 1){
+				html += '제목 : ';
+				html += highlight;
+				html += ' (';
+				html += category;
+				html += ' | ';
+				html += item.date.substr(0, 4);
+				html += ')   ';
+			}
+			else if(checkData == 2){
+				html += '배우 : ';
+				html += highlight;
+				html += ' (';
+				html += title;
+				html += ')   ';
+			}
+			else if(checkData == 3){
+				html += '감독 : ';
+				html += highlight;
+				html += ' (';
+				html += title;
+				html += ')   ';
+			}
+			else{
+				html += '제목(영어) : ';
+				html += highlight;
+				html += ' (';
+				html += title;
+				html += ')   ';
+			}
 			html += '<i class="fa-solid fa-star">';
 			html += item.star;			
 			html += '</i></div>';
 			html += '</div><hr><div></div></a>';
+
 			var result = $("<li class='match_li'>").append(html).appendTo(ul);
 			return result;			
 		};
