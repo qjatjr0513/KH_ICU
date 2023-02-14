@@ -384,7 +384,8 @@
 			                    star: item.cmtStar,
 			                    actor: item.conActor,
 			                    director: item.conDirector,
-			                    etitle: item.conETitle
+			                    etitle: item.conETitle,
+			                    path: item.filePath
 			                };
 			            }));
 					},error : function(){
@@ -437,7 +438,6 @@
 					checkData = 4;
 				}
 			}
-			console.log(highlight);
 			var category = "";
 			if(item.category == 1){
 				category = "영화";
@@ -450,9 +450,18 @@
 			html += item.idx;
 			html += ')">';
 			html += '<div class="match_img">';
-			html += '<img src="';
-			html += item.img_url;
-			html += '" style="width:120px; height: 150px; margin: auto; border-radius:8px;">';
+			if(item.path == null){
+				html += '<img src="';
+				html += item.img_url;
+				html += '" style="width:120px; height: 150px; margin: auto; border-radius:8px;">';
+			}
+			else{
+				html += '<img src="';
+				html += '${contextPath}';
+				html += item.path;
+				html += item.img_url;
+				html += '" style="width:120px; height: 150px; margin: auto; border-radius:8px;">';
+			}
 			html += '<div class="match_name">';
 			if(checkData == 1){
 				html += '제목 : ';
