@@ -100,7 +100,7 @@
     <section id='review-container'>
     <div id="reviewWrite">
     	<br>
-    	<c:if test="${loginUser.role eq 'C' }">
+    	<c:if test="${loginUser.role eq 'C' || memNo gt 1}">
 	    	<h6 id="average">평점 : 0점</h6>
 			<span class="star">
 			★★★★★
@@ -110,13 +110,14 @@
 		</c:if>
 		<br><br>
 		<div id="reviewInput">
-			<c:if test="${memNo ne 0 }">
-				<textarea class="textarea" cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" style="resize: none;" required></textarea>
+
+			<c:if test="${loginUser.role eq 'C' || memNo gt 1 }">
+				<textarea cols="75" rows="5" id="cmtContent" placeholder="내용을 입력해주세요" style="resize: none;" required></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" onclick="insertReview();">작성</button>
 			</c:if>
 			
 			<c:if test="${memNo eq 0 }">
-				<textarea class="textarea" cols="75" rows="4" placeholder="로그인 후 이용해주세요" disabled></textarea>
+				<textarea cols="75" rows="4" placeholder="로그인 후 이용해주세요" disabled style="resize: none;"></textarea>
 				<button type="submit" id="submitBtn" class="btn btn-outline-primary btn-lg" disabled>작성</button>
 			</c:if>
 		</div>
@@ -172,6 +173,13 @@
 	    		Swal.fire({
                     icon: 'error',
                     title: '댓글 내용을 입력해주세요'                  
+                });
+	    		return false;
+	    	}
+			if($("#score").val() == 0){
+	    		Swal.fire({
+                    icon: 'error',
+                    title: '평점을 입력해주세요'                  
                 });
 	    		return false;
 	    	}
