@@ -94,15 +94,15 @@
          if('${flag}' == 'showAlert'){
           Swal.fire({
                  icon:'warning',
-                 html: "<h4 style='color:#ff8906'><b>아이디 혹은 비밀번호를 확인해주세요.<br><span></span></b></h4>",
-                 timer : 1800,
+                 html: "<h4><b><span style='color:#ff8906'>아이디</span> 혹은 <span style='color:#ff8906'>비밀번호</span>를 확인해주세요</b></h4>",
+                 timer : 1500,
                  timerProgressBar: true,
                  showConfirmButton: false,
                  showClass: {
                     popup: 'animate__animated animate__fadeInDown'
                   },
                   hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
+                    popup: 'animate__animated animate__fadeOutDown'
                   }
                  });
            }
