@@ -85,17 +85,17 @@
             <input type="checkbox" id="romance" name="genre" value="11">
             <label for="romance">다큐</label>
             <input type="checkbox" id="horror" name="genre" value="12">
-            <label for="horror" name='horror'>공포</label>
+            <label for="horror">공포</label>
             <input type="checkbox" id="mystery" name="genre" value="13">
-            <label for="mystery" name="mystery">미스터리</label>
+            <label for="mystery">미스터리</label>
             <input type="checkbox" id="crime" name="genre" value="14">
-            <label for="crime" name="crime">범죄</label>
+            <label for="crime">범죄</label>
             <input type="checkbox" id="music" name="genre" value="15">
-            <label for="music" name="music">음악</label>
+            <label for="music">음악</label>
             <input type="checkbox" id="adventure" name="genre" value="16">
-            <label for="adventure" name="adventure">모험</label>
+            <label for="adventure">모험</label>
             <input type="checkbox" id="war" name="genre" value="17">
-            <label for="war" name="war">전쟁</label>
+            <label for="war">전쟁</label>
             <br>         
             
             <span id="info">상영시간 : <input name="conInfo" type="text" size="4"/> min</span><br />

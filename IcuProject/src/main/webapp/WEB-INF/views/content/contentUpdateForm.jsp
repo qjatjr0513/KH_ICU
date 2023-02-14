@@ -90,17 +90,17 @@
             <input type="checkbox" id="documentary" name="genre" value="11">
             <label for="documentary">다큐</label>
             <input type="checkbox" id="horror" name="genre" value="12">
-            <label for="horror" name='horror'>공포</label>
+            <label for="horror">공포</label>
             <input type="checkbox" id="mystery" name="genre" value="13">
-            <label for="mystery" name="mystery">미스터리</label>
+            <label for="mystery">미스터리</label>
             <input type="checkbox" id="crime" name="genre" value="14">
-            <label for="crime" name="crime">범죄</label>
+            <label for="crime">범죄</label>
             <input type="checkbox" id="music" name="genre" value="15">
-            <label for="music" name="music">음악</label>
+            <label for="music">음악</label>
             <input type="checkbox" id="adventure" name="genre" value="16">
-            <label for="adventure" name="adventure">모험</label>
+            <label for="adventure">모험</label>
             <input type="checkbox" id="war" name="genre" value="17">
-            <label for="war" name="war">전쟁</label>
+            <label for="war">전쟁</label>
             <br>         
             
             <span id="info">상영시간 : <input type="text" size="4" value="${c.conInfo }"/> min</span><br />
@@ -222,7 +222,25 @@
     			}
     			if($("#documentary").next().text() == genre[i]){
     				$("#documentary").prop("checked", true);
-    			}	
+    			}
+    			if($("#horror").next().text() == genre[i]){
+    				$("#horror").prop("checked", true);
+    			}
+    			if($("#mystery").next().text() == genre[i]){
+    				$("#mystery").prop("checked", true);
+    			}
+    			if($("#crime").next().text() == genre[i]){
+    				$("#crime").prop("checked", true);
+    			}
+    			if($("#music").next().text() == genre[i]){
+    				$("#music").prop("checked", true);
+    			}
+    			if($("#adventure").next().text() == genre[i]){
+    				$("#adventure").prop("checked", true);
+    			}
+    			if($("#war").next().text() == genre[i]){
+    				$("#war").prop("checked", true);
+    			}
     		}
     		
     		if(age == 0){
