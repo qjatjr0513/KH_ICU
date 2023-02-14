@@ -240,6 +240,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY CT.CON_NO, CON_KTITLE, CHANGE_NAME, FILE_PATH, CON_CATEGORY, CON_DATE, CON_ACTOR, CON_DIRECTOR, CON_ETITLE
 	</select>
 	
+	<select id="selectChangeName" parameterType="int" resultType="String">
+		SELECT CHANGE_NAME
+		FROM IMAGE
+		WHERE REF_TNO = #{conNo}
+	</select>
+	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
 		<if test="genre.size != 0 and age.size == 0 and ott.size == 0 and category.size == 0">
 			SELECT DISTINCT CT.CON_NO, CON_KTITLE, CON_DATE, CHANGE_NAME, FILE_PATH, ROUND(AVG(CMT_STAR/20), 1) AS "STAR_AVG"

@@ -86,7 +86,7 @@
             <label for="romance">다큐</label>
             <br>         
             
-            <span id="info">상영시간 : <input type="text" size="4"/> min</span><br />
+            <span id="info">상영시간 : <input name="conInfo" type="text" size="4"/> min</span><br />
           </div>
 
           <br />

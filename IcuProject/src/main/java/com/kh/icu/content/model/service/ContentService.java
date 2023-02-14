@@ -36,4 +36,5 @@ public interface ContentService {
 	public ArrayList<String> getWrittenContentOtt(int conNo);
 	public ArrayList<Content> autoSearch(Map<String, Object> map);
 	public int deleteReview(int cmtNo);
+	public String selectChangeName(int conNo);
 }

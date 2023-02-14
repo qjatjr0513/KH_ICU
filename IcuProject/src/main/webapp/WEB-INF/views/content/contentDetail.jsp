@@ -72,7 +72,9 @@
 	
 				</c:if>
 				<c:if test="${c.filePath ne '' and c.filePath ne null}">
-					<img src="${contextPath}/${c.filePath}${c.changeName}"/>
+					<a href="${contextPath}/${c.filePath}${c.changeName}" class="imageFocus" data-modaal-desc="${c.conETitle}">
+						<img src="${contextPath}/${c.filePath}${c.changeName}"/>
+					</a>
 				</c:if>
 	    	</div>
     	</div>

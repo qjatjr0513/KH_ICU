@@ -126,4 +126,8 @@ public class ContentDao {
 	public int deleteReview(SqlSession sqlSession, int cmtNo) {
 		return sqlSession.update("contentMapper.deleteReview", cmtNo);
 	}
+	
+	public String selectChangeName(SqlSession sqlSession, int conNo) {
+		return sqlSession.selectOne("contentMapper.selectChangeName", conNo);
+	}
 }

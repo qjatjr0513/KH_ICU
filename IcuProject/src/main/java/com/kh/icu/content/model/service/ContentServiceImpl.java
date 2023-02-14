@@ -181,4 +181,9 @@ public class ContentServiceImpl implements ContentService{
 	public int deleteReview(int cmtNo) {
 		return contentDao.deleteReview(sqlSession, cmtNo);
 	}
+	
+	@Override
+	public String selectChangeName(int conNo) {
+		return contentDao.selectChangeName(sqlSession, conNo);
+	}
 }

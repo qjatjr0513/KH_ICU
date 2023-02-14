@@ -293,11 +293,12 @@ public class AdminController {
 		int resultOtt = 0;
 		int resultDeleteGenre = 0;
 		int resultDeleteOtt = 0;
-
+		
 		resultContent = contentService.updateContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
 		int conNo = contentService.selectConNo();
-
+		String deleteName = contentService.selectChangeName(conNo);
+		
 		conNoList.add(conNo);
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -310,7 +311,6 @@ public class AdminController {
 
 		if (!poster.getOriginalFilename().equals("")) {
 			String savePath = session.getServletContext().getRealPath("/resources/posterImg/");
-			System.out.println("savePath : " + savePath);
 			String changeName = Utils.saveFile(poster, savePath);
 			File file = new File(savePath + changeName);
 			try {
@@ -324,7 +324,13 @@ public class AdminController {
 			image.setChangeName("/" + changeName);
 			image.setRefTno(conNo);
 			image.setFilePath(filePath);
-
+			System.out.println("deleteName : "+deleteName);
+			if(deleteName != null) {
+				File path = new File(savePath);
+				System.out.println(path+deleteName);
+				new File(path+deleteName).delete();
+			}
+			
 			resultImage = contentService.updateImg(image);
 		}
 
