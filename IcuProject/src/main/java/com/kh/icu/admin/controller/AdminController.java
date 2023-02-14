@@ -297,16 +297,17 @@ public class AdminController {
 		resultContent = contentService.updateContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
 		int conNo = contentService.selectConNo();
-		String deleteName = contentService.selectChangeName(conNo);
+		String deleteName = contentService.selectChangeName(c.getConNo());
 		
-		conNoList.add(conNo);
+		conNoList.add(c.getConNo());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		map.put("conNo", conNoList);
 		map.put("genre", genre);
 		map.put("ott", ott);
-
+		
+		System.out.println(genre);
 		String filePath = "/resources/posterImg";
 
 		if (!poster.getOriginalFilename().equals("")) {
@@ -322,9 +323,9 @@ public class AdminController {
 
 			image.setOriginName(poster.getOriginalFilename());
 			image.setChangeName("/" + changeName);
-			image.setRefTno(conNo);
+			image.setRefTno(c.getConNo());
 			image.setFilePath(filePath);
-			System.out.println("deleteName : "+deleteName);
+
 			if(deleteName != null) {
 				File path = new File(savePath);
 				System.out.println(path+deleteName);
