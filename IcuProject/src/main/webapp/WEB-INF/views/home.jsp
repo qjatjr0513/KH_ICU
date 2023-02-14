@@ -200,7 +200,20 @@
               } 
         });
       }
-    });    
+    });   
+    
+    $(function(){
+        if('${flag2}' == 'showAlert2'){
+          Swal.fire({
+                title: '지금까지 ICU를 이용해주셔서 감사합니다.',
+                icon:'success',
+                customClass: {
+                confirmButton: 'swal2-confirm swal2-styled swal2-jong',
+                cancelButton: 'btn btn-danger'
+                } 
+          });
+        }
+      });    
     </script>
 	<!-- Contact  -->
     <jsp:include page="common/footer.jsp"/>

@@ -27,7 +27,9 @@
         <tr>
           <td><label>이름</label></td>
           <td><input type="text" name="memName" value="${loginUser.memName}" readonly/></td>
-          <td><label>&nbsp;&nbsp;이메일</label></td>
+        </tr>
+        <tr>
+          <td><label>이메일</label></td>
           <td><input type="email" name="email" value="${loginUser.email}"/></td>
         </tr>
         <tr>
@@ -84,88 +86,9 @@
         </tr>
       </table>
       <div class="btn__group">
-        <button type="button" onclick="location.href='${contextPath }/myPage.me'">뒤로가기</button>
-        <button type="button" onclick="btnUpdate();" disabled name="update">회원정보 저장</button>
-      </div>
-    </form>
-       
-    <!-- 회원정보 입력 -->
-    <form id="memberEnroll" action="${contextPath }/insert" method="post">
-      <table>
-        <tr>
-          <td><label>이름</label></td>
-          <td><input type="text"  name="memName" value="${loginUser.memName}" readonly/></td>
-        </tr>
-        <tr>
-          <td><label>이메일</label></td>
-          <td><input type="email" name="email" /></td>
-        </tr>
-        <tr>
-          <td><label for="">아이디</label></td>
-          <td><input type="text"  name="memId" required/></td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary tableBtn"
-              onclick="idCheck();"
-            >
-              중복확인
-            </button>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label>닉네임</label></td>
-          <td><input type="text"  name="memNickname" required/></td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary tableBtn"
-              onclick="nickCheck();"
-            >
-              중복확인
-            </button>
-          </td>
-          
-        </tr>
-        <tr>
-          <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" name="memPwd" placeholder="특수문자,영문,숫자 조합 8자리 이상" required/></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label></label>비밀번호 확인</td>
-          <td><input type="password" id="memPwdCheck" /></td>
-          <td><font id="chkNotice" size="3" style="font-size:14px;"></font></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label>휴대폰 번호</label></td>
-          <td><input type="text" placeholder="전화번호 입력" name="phone" required/></td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary tableBtn"
-              onclick="sendMessage();"
-            >
-              인증번호 전송
-            </button>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><label>인증번호</label></td>
-          <td><input type="text" placeholder="인증번호 확인" id="authNum" required/></td>
-          <td><font id="chkAuth" size="2" style="font-size:14px;"></font></td>
-          <td></td>
-        </tr>
-      </table>
-
-      <div class="btn__group">
-        <button type="button" onclick="location.href='${contextPath }/loginForm.me'">취소</button>
-        <button type="reset" >초기화</button>
-        <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
+        <button type="button" onclick="location.href='${contextPath }/myPage.me'">뒤로가기</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="reset" >초기화</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="btnUpdate();" disabled name="update">회원정보 저장</button>&nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </form>
     
@@ -218,7 +141,7 @@
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
         
         $.ajax({
-           url : "nickCheck.me",
+           url : "nickCheck",
            data : {checkNick : $memberNick.val()},
            success : function(result){
         	   

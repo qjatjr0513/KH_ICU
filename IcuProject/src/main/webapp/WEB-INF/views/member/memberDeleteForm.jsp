@@ -51,17 +51,17 @@
       <!-- Button trigger modal -->
       <c:choose>
 		<c:when test="${loginUser.snsType eq 'N' }">
-			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove'">
+			<button type="button" class="btn btn-primary" onclick="snsDelete();">
 				회원탈퇴
 			</button>
 		</c:when>
 		<c:when test="${loginUser.snsType eq 'K' }">
-			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove?mode=kakao'">
+			<button type="button" class="btn btn-primary" onclick="kakaoDelete();">
 				회원탈퇴
 			</button>
 		</c:when>
 		<c:when test="${loginUser.snsType eq 'G' }">
-			<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/remove?mode=google'">
+			<button type="button" class="btn btn-primary" onclick="googleDelete();">
 				회원탈퇴
 			</button>
 		</c:when>
@@ -150,5 +150,98 @@
       };
     }, true);
   
+  
+  function naverDelete(){
+	  Swal.fire({
+          title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: '취소',
+          confirmButtonText: '탈퇴'
+      }).then((result) => {
+          if (result.isConfirmed) {
+        	  location.href='${contextPath}/remove';
+              
+          }
+      });
+  }
+  
+  function kakaoDelete(){
+	  Swal.fire({
+          title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: '취소',
+          confirmButtonText: '탈퇴'
+      }).then((result) => {
+          if (result.isConfirmed) {
+        	  location.href='${contextPath}/remove?mode=kakao';
+              
+          }
+      });
+  }
+  
+  function googleDelete(){
+	  Swal.fire({
+          title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          cancelButtonText: '취소',
+          confirmButtonText: '탈퇴'
+      }).then((result) => {
+          if (result.isConfirmed) {
+        	  location.href='${contextPath}/remove?mode=google';
+              
+          }
+      });
+  }
+  
+  async function deleteMem() {
+	  const { value: password } = await Swal.fire({
+		  title: 'Enter your password',
+		  input: 'password',
+		  inputLabel: 'Password',
+		  inputPlaceholder: 'Enter your password',
+		  inputAttributes: {
+		    maxlength: 10,
+		    autocapitalize: 'off',
+		    autocorrect: 'off'
+		  }
+		})
+	
+		if (password) {
+			Swal.fire({
+		          title: '회원탈퇴는 되돌릴 수 없습니다<br>탈퇴하시겠습니까?',
+		          icon: 'warning',
+		          showCancelButton: true,
+		          confirmButtonColor: '#3085d6',
+		          cancelButtonColor: '#d33',
+		          cancelButtonText: '취소',
+		          confirmButtonText: '탈퇴'
+		      }).then((result) => {
+		          if (result.isConfirmed) {
+		        	  $.ajax({
+		                     url : "${contextPath }/memDelete.me",
+		                     data : {
+		                    	 memPwd : password
+		                     },
+		                     type : "post",
+		                     success : function(result){
+		                        
+		                        
+		                     }
+		                  });
+		          }
+		      }); 	
+		   
+			
+		}
+  }
   </script>
 </html>

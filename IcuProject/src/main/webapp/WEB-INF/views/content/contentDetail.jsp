@@ -137,8 +137,9 @@
     </section>
 	
 	<!-- 실시간 문의 -->
-    <jsp:include page="../common/chatForm.jsp"/>
-    
+	<c:if test="${loginUser != null }">
+    	<jsp:include page="../common/chatForm.jsp"/>
+    </c:if>
     <script>
 
     </script>

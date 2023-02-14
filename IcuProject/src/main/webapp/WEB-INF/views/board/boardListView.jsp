@@ -18,7 +18,8 @@
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/07_boardList.css" />
-
+ 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 </head>
 <body>
 	<!-- Navbar -->
@@ -51,7 +52,7 @@
 					
 					<c:forEach var="n" items="${notice }">
 						<tr onclick="movePage(${n.boardNo });">
-							<td class="bno">공지사항</td>
+							<td class="bno notice"><i class="bi bi-exclamation-triangle-fill"></i> 공지사항</td>
 							<td>${n.boardTitle }</td>
 							<td>${n.boardWriter }</td>
 							<td>${n.createDate }</td>

@@ -97,6 +97,22 @@ button {
   outline: none;
 }
 
+body::-webkit-scrollbar {
+  	width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+body::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px
+}
+
+
 .sl-in2 {
 	  animation: change1 1s ease forwards;
 }
@@ -333,4 +349,14 @@ button {
 	text-align: center;
 	font-family: 'Poor Story', 'cursive';
 	font-weight: var(--weight-bold);
+}
+
+#msg{
+	height:100px;
+	overflow: scroll;
+}
+
+#msg::-webkit-scrollbar {
+	display:none; /* Chrome , Safari , Opera */
+	
 }

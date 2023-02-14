@@ -91,7 +91,7 @@
      <aside class="sidebar">
  	  
       <div class='imgBox'></div>
-      <nav class="nav">
+      <nav class="nav" style='top:47%;'>
         <ul>
           <li class='li1'><a href="${contextPath}/admin/memListForm.me">회원정보 조회</a></li>
           <li class='li2'><a href="${contextPath}/admin/memBlackListForm.me">블랙리스트 관리</a></li>
@@ -129,8 +129,8 @@
 			$('.li7').addClass('active');
 		} else if(link[5] == 'payManageListForm.pe') {
 			$('.li8').addClass('active');
-		} else{
-			
+		} else {
+			$('.li9').addClass('active');
 		}
 	</script>
     

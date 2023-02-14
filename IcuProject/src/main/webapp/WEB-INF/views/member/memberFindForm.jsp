@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>ICU - 아이디 / 비밀번호 찾기</title>
 	 <!-- css -->
-    <link rel="stylesheet" href="resources/css/06_findId.css?" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/06_findId.css" />
 </head>
 <body>
      <!-- Navbar -->
@@ -55,7 +55,7 @@
           </table>
 
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
+            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
             <!-- <button data-bs-toggle="modal" data-bs-target="#idModal" id="findId" name="findId" onclick="findId();">
               확인
             </button> -->
@@ -101,10 +101,10 @@
 	        </tr> -->
           </table>
 		  <div style="text-align:center; margin:auto;">
-		  	<b>가입된 이메일로 임시비밀번호가 발송됩니다!</b>
+		  	<h5 style="font-size:15px; color:red; font-weight:bold;">* 가입된 이메일로 임시비밀번호가 발송됩니다!</h5>
 		  </div>
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
+            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
             <button data-bs-toggle="modal" data-bs-target="#pwdModal" id="findBtn">
               확인
             </button>
@@ -113,128 +113,6 @@
       </div>
     </section>
 
-    <!-- 휴대폰 인증번호 전송 모달창 -->
-    <!-- <div
-      class="modal fade"
-      id="phoneModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">휴대폰인증</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="button" class="btn btn-primary">확인</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- 비밀번호 변경 모달창 -->
-    <%-- <div
-      class="modal fade"
-      id="pwdModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              새로 설정할 비밀번호를 입력하세요.
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">비밀번호
-          <form action="${contextPath}/findPwd.me">
-            <input
-              type="password"
-              name="memPwd"
-              placeholder="비밀번호 입력"
-              style="width: 450px"
-            />
-            <br /><br />
-            비밀번호 확인
-            <input
-              type="password"
-              name="memPwdCheck"
-              placeholder="비밀번호 재입력"
-              style="width: 450px"
-            />
-          </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="submit" class="btn btn-primary" id="btnAlert">
-              확인
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> --%>
-
-    <!-- 아이디 알려주는 모달창 -->
-    <!-- <div
-      class="modal fade"
-      id="idModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">아이디 확인</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">회원님의 아이디는 입니다.</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              닫기
-            </button>
-            <button type="button" class="btn btn-primary">확인</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
 	<script>
 	 function sendMessage(){
 	    	let $sms = $("#phone");
@@ -254,8 +132,6 @@
 	                        title: '인증번호 전송실패!'                  
 	                    });
 	            	}
-	            	
-	            	
 	            	
 	            	
 	            	$(function(){
@@ -293,11 +169,10 @@
 	        let $phone = $("#phone");
 	        
 	        $.ajax({
-	           url : "${contextPath}/findId.me",
+	           url : "${contextPath}/findId",
 	           data : {memName : $memberName.val(),
 	        	   	   phone : $phone.val()},
 	           success : function(result){
-	        	   console.log(result);
 	        	   if(result == ""){
 	        		   Swal.fire({
 	        		   		icon:'error',
@@ -321,7 +196,7 @@
 	 $(function(){
 			$("#findBtn").click(function(){
 				$.ajax({
-					url : "${contextPath}/findPwd.me",
+					url : "${contextPath}/findPwd",
 					type : "POST",
 					data : {
 						id : $("#id").val(),
@@ -350,6 +225,6 @@
 			});
 		})
 	</script>
-    <script src="resources/js/06_findId.js" defer></script>
+    <script src="${contextPath }/resources/js/06_findId.js" defer></script>
   </body>
 </html>

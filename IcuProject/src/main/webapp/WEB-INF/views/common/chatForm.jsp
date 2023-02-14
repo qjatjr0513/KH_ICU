@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>실시간 문의</title>
 
-<link rel="stylesheet" href="resources/css/chat.css" />
+<link rel="stylesheet" href="${contextPath}/resources/css/chat.css" />
 
 </head>
 <body>
@@ -128,7 +128,6 @@
       });  */
       
 
-// 띄우는거, 관리자 페이지 새로고침 고치기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	
 	
 	function chatting(socket){
