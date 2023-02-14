@@ -103,7 +103,8 @@
                   },
                   hideClass: {
                     popup: 'animate__animated animate__fadeOutDown'
-                  }
+                  },
+                  allowOutsideClick : false
                  });
            }
      });

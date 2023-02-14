@@ -26,7 +26,7 @@
   <br>
   </div>
 
-  <div id="whole" class='animate__animated animate__fadeIn'>
+  <div id="whole">
     <div id="content">
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       회원 탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.<br><br>
@@ -144,6 +144,11 @@
     }
     
    }
+   document.addEventListener('keydown', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      };
+    }, true);
   
   </script>
 </html>
