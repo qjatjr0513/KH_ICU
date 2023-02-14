@@ -116,3 +116,6 @@
  outline: none !important;
   box-shadow: 0 0 5px lightgray;	
 }
+.notice{
+	color:red;
+}
