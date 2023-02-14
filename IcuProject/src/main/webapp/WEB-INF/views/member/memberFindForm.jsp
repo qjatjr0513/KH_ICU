@@ -55,7 +55,7 @@
           </table>
 
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
+            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
             <!-- <button data-bs-toggle="modal" data-bs-target="#idModal" id="findId" name="findId" onclick="findId();">
               확인
             </button> -->
@@ -104,7 +104,7 @@
 		  	<h5 style="font-size:15px; color:red; font-weight:bold;">* 가입된 이메일로 임시비밀번호가 발송됩니다!</h5>
 		  </div>
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm.me'">이전</button>
+            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
             <button data-bs-toggle="modal" data-bs-target="#pwdModal" id="findBtn">
               확인
             </button>

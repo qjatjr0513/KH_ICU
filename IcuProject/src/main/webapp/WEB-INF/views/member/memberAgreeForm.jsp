@@ -238,7 +238,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
         </textarea>
       </div>
       <div class="enroll__btn">
-        <button class="button__cancel" onclick="location.href='${contextPath }/loginForm.me';">취소</button>
+        <button class="button__cancel" onclick="location.href='${contextPath }/loginForm';">취소</button>
         <button class="button__check" onclick="checkAgree();">확인</button>
       </div>
     </section>

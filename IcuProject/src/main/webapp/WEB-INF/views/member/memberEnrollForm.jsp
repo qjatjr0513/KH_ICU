@@ -93,7 +93,7 @@
       </table>
 
       <div class="btn__group">
-        <button type="button" onclick="location.href='${contextPath }/loginForm.me'">취소</button>
+        <button type="button" onclick="location.href='${contextPath }/loginForm'">취소</button>
         <button type="reset" >초기화</button>
         <button type="button" onclick="btnEnroll();" disabled name="enroll">회원가입</button>
       </div>

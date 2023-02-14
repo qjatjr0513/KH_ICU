@@ -77,5 +77,8 @@ tr {
   background-color: gray;
 }
 .btn__group > button:nth-child(2) {
+  background-color: #b1b1b1;
+}
+.btn__group > button:nth-child(3) {
   background-color: var(--color-purple);
 }
