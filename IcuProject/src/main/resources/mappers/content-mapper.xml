@@ -243,7 +243,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectChangeName" parameterType="int" resultType="String">
 		SELECT CHANGE_NAME
 		FROM IMAGE
-		WHERE REF_TNO = #{conNo}
+		WHERE REF_TNO = #{conNo} AND TABLE_CD = 'C'
 	</select>
 	
 	<select id="selectContentCategory" parameterType="map" resultMap="contentResultSet">
