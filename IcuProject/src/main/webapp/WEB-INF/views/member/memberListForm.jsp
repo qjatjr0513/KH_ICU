@@ -21,7 +21,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
     
     <!-- 회원정보조회 -->
-    <section id="memberInfo">
+    <section id="memberInfo" class='animate__animated animate__fadeIn'>
       <h2 class="memberTitle">회원정보조회</h2>
       <hr />
       <table class="table table-hover">

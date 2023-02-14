@@ -19,7 +19,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
     <!-- 결제관리 -->
-    <section id="noticeList">
+    <section id="noticeList" class='animate__animated animate__fadeIn'>
       <h2 class="noticeTitle">공지사항 관리</h2>
       <hr />
       <!-- 로그인시에만 보이는 글쓰기 버튼. -->

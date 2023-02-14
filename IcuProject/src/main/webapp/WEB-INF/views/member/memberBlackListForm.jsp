@@ -21,7 +21,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
     
 	<!-- 블랙리스트관리 -->
-  <section id="memberInfo">
+  <section id="memberInfo" class='animate__animated animate__fadeIn'>
     <h2 class="blackTitle">블랙리스트 조회</h2>
     <hr />
     <table class="table table-hover">

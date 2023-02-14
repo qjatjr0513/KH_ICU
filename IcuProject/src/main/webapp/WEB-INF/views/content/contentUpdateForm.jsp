@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 컨텐츠 수정</title>
 
 	<!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/admin_05-1_contentsEnroll.css" />	
@@ -24,7 +24,7 @@
     <form id="contentUpdate" action="${contextPath }/admin/contentUpdate" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
-      <h2>컨텐츠 등록</h2>
+      <h2>컨텐츠 수정</h2>
       <hr />
       <div class="header-box">
         <div class="leftBox">
@@ -35,7 +35,7 @@
               <option value="2">드라마</option>
             </select>
             <br>
-            <span>플랫폼 : </span><br>
+            <span class='colorBlue'>플랫폼 : </span><br>
             <input id="netflix" type="checkbox" name="ott" value="4" />
             <label for="netflix">넷플릭스</label>
             <input id="watcha" type="checkbox" name="ott" value="4" />
@@ -55,9 +55,9 @@
           </div>
           <!-- 영화 left-box2 -->
           <div class="left-box-movie">
-            <span>개봉 날짜 : </span
+            <span class='colorBlue'>개봉 날짜 : </span
             ><input type="date" name="conDate" value="${c.conDate }"/><br><br>
-            <span>관람 연령 : </span
+            <span class='colorBlue'>관람 연령 : </span
             ><select id="age" name="conAge" class="form-select" aria-label="Default select example">
               <option selected>연령 제한 선택</option>
               <option value="0">전체이용가</option>
@@ -66,7 +66,7 @@
               <option value="19">19세 미만 관람불가</option>
             </select>
             <br>
-            <span>장르 : </span><br>
+            <span class='colorBlue'>장르 : </span><br>
 			<input type="checkbox" id="action" name="genre" value="1">
             <label for="action">액션</label>
             <input type="checkbox" id="drama" name="genre" value="2">
@@ -103,7 +103,7 @@
             <label for="war">전쟁</label>
             <br>         
             
-            <span id="info">상영시간 : <input type="text" size="4" value="${c.conInfo }"/> min</span><br />
+            <span class='colorBlue' id="info">상영시간 : <input type="text" size="4" value="${c.conInfo }"/> min</span><br />
           </div>
 
           <br />

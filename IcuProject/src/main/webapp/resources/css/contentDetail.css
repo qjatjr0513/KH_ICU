@@ -245,3 +245,13 @@ textarea{
 .bTag{
 	z-index:-3
 }
+#updateBtn, #deleteBtn {
+	background-color:var(--color-blue);
+	color:white;
+	font-weight:bold;
+	border:none;
+	transition:all 0.1s;
+}
+#updateBtn:hover, #deleteBtn:hover{
+	transform:scale(1.05);
+}

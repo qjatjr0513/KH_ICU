@@ -5,22 +5,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - FAQ 등록</title>
 <style>
    #enrollForm>div{width:100%;}
 
+   .titleImg{
+  	 margin-top:-50px;
+	z-index: -1;
+	position:absolute;
+	width:1900px;
+	height:1100px;
+}	
 
+	 #body-container{
+	   	background-color:#fff;
+	   	width:70%;
+	   	height:900px;
+	   	margin:auto;
+	   	padding:30px;
+	   	border:none;
+	   	box-shadow:0 0 5px 1px lightgray;
+	   	border-radius:12px;
+	   	margin-top:120px;
+      }
+	.form-control:focus{
+		outline:none !important;
+		border:none !important;
+		box-shadow:0 !important;
+	}
+	.pl {
+	width: 200px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.btn:first-child, .btn:nth-child(2){
+   	border:none;
+   }
+   .btn:first-child{
+   	background-color:var(--color-blue);
+   }
+   .btn:nth-child(2){
+   	background-color:var(--color-orange);
+   }
+   .btn:first-child:hover{
+   	background-color:var(--color-blue);
+   }
+   .btn:nth-child(2):hover{
+   	background-color:var(--color-orange);
+   }
 </style>
 </head>
 <body>
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
-    
-   <!-- Logo -->
-    <div id="main__logo">
-      <img src="resources/images/navbarLogo.png" />
-    </div>
-   <br><br>
+   
+   <img class='titleImg' src='${contextPath }/resources/images/board3.jpg' >
+   
+   <section id='body-container'>
    <div class="content">
       <br><br>
       <div class="innerOuter" >
@@ -42,7 +90,7 @@
                <hr>
                <div>
                	  <label for="type">분류 : </label>
-                  <select name="faqType" id="faqType">
+                  <select name="faqType" id="faqType" class='pl'>
 		            <option> 선택 </option>
 		            <option value="AC"<c:if test="${f.faqType eq 'AC' }">selected</c:if>>계정 문의</option>
 		            <option value="PY"<c:if test="${f.faqType eq 'PY' }">selected</c:if>>파티 문의</option>
@@ -56,6 +104,7 @@
                <br>
             <input type="hidden" name="mode" value="${param.mode }"/>
             <input type="hidden" name="faqNo" value="${empty f.faqNo ? 0 : f.faqNo}"/>
+            
             
             <div align="center">
                <a href="${contextPath }/admin/faqList.fq" class="btn btn-danger">취소하기</a>
@@ -75,6 +124,8 @@
       </div>
    
    </div>
+   </section>
+   <br><br>
 </body>
 </html>
 </body>

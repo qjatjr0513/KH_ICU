@@ -20,7 +20,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
    
 	<!-- 결제관리 -->
-    <section id="payList">
+    <section id="payList" class='animate__animated animate__fadeIn'>
       <h2 class='memberTitle'>결제 관리</h2>
       <hr />
       <table class="table table-hover">

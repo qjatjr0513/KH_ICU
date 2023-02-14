@@ -21,7 +21,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
     
     <!-- 컨텐츠 관리 -->
-    <section id="contentList">
+    <section id="contentList" class='animate__animated animate__fadeIn'>
       <h2 class="contentTitle">컨텐츠 관리</h2>
       <hr />
 

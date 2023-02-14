@@ -20,7 +20,7 @@
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
     <!-- 결제관리 -->
-    <section id="chatList">
+    <section id="chatList" class='animate__animated animate__fadeIn'>
       <h2>실시간 문의</h2>
       <hr />
       <table class="table table-hover">

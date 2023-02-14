@@ -6,33 +6,64 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - FAQ 상세</title>
    
 <style>
+   .titleImg{
+  	 margin-top:-50px;
+	z-index: -1;
+	position:absolute;
+	width:1900px;
+	height:1100px;
+}	
+
    table * {margin:5px;}
    table {
       width:100%;
    }
-   /* div{
-      border: 1px solid black;
-   } */
+   
+   #body-container{
+   	background-color:#fff;
+   	width:70%;
+   	height:700px;
+   	margin:auto;
+   	padding:30px;
+   	border:none;
+   	box-shadow:0 0 5px 1px lightgray;
+   	border-radius:12px;
+   	margin-top:120px;
+   }
+   .btn:first-child, .btn:nth-child(2){
+   	border:none;
+   }
+   
+   .btn:first-child{
+   	background-color:var(--color-blue);
+   }
+   .btn:nth-child(2){
+   	background-color:var(--color-orange);
+   }
+   .btn:first-child:hover{
+   	background-color:var(--color-blue);
+   }
+   .btn:nth-child(2):hover{
+   	background-color:var(--color-orange);
+   }
+
+   
 </style>
 
-    <!-- css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/06_findId.css?2" />
-
+   
     
 </head>
 <body>
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-   <!-- Logo -->
-    <div id="main__logo">
-      <img src="resources/images/navbarLogo.png" />
-    </div>
-   <br>
-   <div class="content">
+   <img class='titleImg' src='${contextPath }/resources/images/board3.jpg' >
+   
+   <section id='body-container'>
+   
       <br><br>
       <div class="innerOuter">
          <h2>${f.faqTitle }</h2>
@@ -56,7 +87,7 @@
          </div>
          <br><br>
       </div>
-    </div>
+    
          <table id="contentArea" class="table">
             
             <tr>
@@ -68,6 +99,7 @@
                <td colspan="4"><p style="height:150px;">${f.faqContent }</p></td>
             </tr>
          </table>
+         </section>
          <br>
          
          <div align="center">

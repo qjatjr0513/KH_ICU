@@ -1,9 +1,24 @@
 @import url('main.css');
 @import url('admin_main.css');
 
+.pl {
+	width: 300px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+.colorBlue{
+	color:var(--color-blue);
+}
 #contentsEnroll {
   margin-left:550px;
-  margin-top: 300px;
+  margin-top: 120px;
   width: 60%;
   padding:30px;
   background-color:white;
@@ -13,9 +28,9 @@
   font-size:18px;
   font-weight: var(--weight-bold);
 }
-
-.form-select {
-  width: 200px;
+#contentsEnroll > h2{
+  color:var(--color-orange);
+  font-size:32px;
 }
 
 .input__title {
@@ -23,24 +38,28 @@
 }
 .input__title > input[type='text'] {
   padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size:16px;
+  width:300px;
+}
+.form-select{
+	width:500px !important;
+}
+.form-select option{
+	font-weight:bold;
 }
 .header-box {
-  /* background-color: aquamarine; */
   display: flex;
   padding: 20px;
 }
 .leftBox {
-  /* background-color: coral; */
   width: 50%;
 }
-.left-box1 {
-  /* border: 1px solid black; */
-  /* background-color: antiquewhite; */
+.left-box-movie{
+	width:1040px;
 }
 
 .right-box {
-  /* border: 1px solid black; */
-  /* background-color: burlywood; */
   width: 50%;
   text-align: center;
 }
@@ -53,7 +72,6 @@
 
 /* 예고편 */
 .trailer-container {
-  /* background-color: cornflowerblue; */
   text-align: center;
   padding: 20px;
 }
@@ -75,8 +93,9 @@
 
 /* 감독, 배우, 줄거리 */
 .contents-info {
-  /* background-color: rgb(112, 122, 142); */
   padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size:16px;
 }
 
 .btnGroup {

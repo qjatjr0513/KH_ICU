@@ -19,13 +19,15 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
     
-    
+    <div class='titleText'>
+    	<h2>진행중인 파티</h2>
+    </div>
     <!-- 파티 카드 -->
-    <section id="party__container">
+    <section id="party__container" class='animate__animated animate__fadeIn'>
    	  <c:if test="${empty list }">
-		 <tr id="tableEmpty">
-			<td colspan="5">진행중인 파티방이 없습니다. </td>
-		 </tr>
+		<div class='noParty'>
+             <span style='font-weight:bold;'>진행중인 파티가 존재하지 않습니다😒</span>
+          </div>
 	  </c:if>
 		
 		<c:set var="doneLoop" value="false"/>

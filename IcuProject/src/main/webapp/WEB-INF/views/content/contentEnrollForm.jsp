@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ICU - 컨텐츠 등록</title>
 
 	<!-- css -->
     <link rel="stylesheet" href="${contextPath }/resources/css/admin_05-1_contentsEnroll.css" />	
@@ -25,14 +25,14 @@
       <div class="header-box">
         <div class="leftBox">
           <div class="left-box1">
-            <select name="conCategory" id="category" class="form-select" aria-label="Default select example">
+            <select name="conCategory" id="category" class="pl" aria-label="Default select example">
               <option value="1" selected>영화</option>
               <option value="2">드라마</option>
             </select>
-            <br>
-            <span>플랫폼 : </span><br>
+            <br><br>
+            <span style='color:var(--color-blue);'>플랫폼 : </span><br>
             <input id="netflix" type="checkbox" name="ott" value="1" />
-            <label for="netflix">넷플릭스</label>
+            <label for="netflix">넷플릭스</label>
             <input id="watcha" type="checkbox" name="ott" value="4" />
             <label for="watcha">왓챠</label>
 			<input id="wavve" type="checkbox" name="ott" value="2" />	
@@ -50,9 +50,9 @@
           </div>
           <!-- 영화 left-box2 -->
           <div class="left-box-movie">
-            <span>개봉 날짜 : </span
+            <span style='color:var(--color-blue);'>개봉 날짜 : </span
             ><input type="date" name="conDate"/><br><br>
-            <span>관람 연령 : </span
+            <span style='color:var(--color-blue);'>관람 연령 : </span
             ><select name="conAge" class="form-select" aria-label="Default select example">
               <option selected>연령 제한 선택</option>
               <option value="0">전체이용가</option>
@@ -61,11 +61,11 @@
               <option value="19">19세 미만 관람불가</option>
             </select>
             <br>
-            <span>장르 : </span><br>
+            <span style='color:var(--color-blue);'>장르 : </span><br>
             <input id="action" type="checkbox" name="genre" value="1" />
-            <label for="action">액션</label>
+            <label for='action'>액션</label>
             <input id="drama" type="checkbox" name="genre" value="2" />
-            <label for="drama">드라마</label>
+            <label for='drama'>드라마</label>
             <input type="checkbox" id="sf" name="genre" value="3">
             <label for="sf">SF</label>
             <input type="checkbox" id="fantasy" name="genre" value="4">
@@ -79,9 +79,9 @@
             <input type="checkbox" id="family" name="genre" value="8">
             <label for="family">가족</label>
             <input type="checkbox" id="animation" name="genre" value="9">
-           	<label for="animation">애니메이션</label>
+           	<label for="animation">애니메이션</label><br>
             <input id="comedy" type="checkbox" name="genre" value="10" />
-            <label for="comedy">코메디</label>
+            <label for='comedy'>코미디</label>
             <input type="checkbox" id="romance" name="genre" value="11">
             <label for="romance">다큐</label>
             <input type="checkbox" id="horror" name="genre" value="12">
@@ -98,7 +98,7 @@
             <label for="war">전쟁</label>
             <br>         
             
-            <span id="info">상영시간 : <input name="conInfo" type="text" size="4"/> min</span><br />
+            <span style='color:var(--color-blue);' id="info">상영시간 : <input name="conInfo" type="text" size="4"/> min</span><br />
           </div>
 
           <br />
@@ -133,6 +133,8 @@
       </div>
     </section>
     </form>
+    
+  	<br><br>
     
     
     <script>
