@@ -33,11 +33,11 @@
    
    <section id="click__movie-drama">
       <div class="movie_drama_Btn">
-        <button class="movieBtn" id="movie" name="mv">영화</button>
+        <button class="movieBtn" id="movie" name="mv" style="opacity:0.3;">영화</button>
         <input id="mv" type="checkbox" name="category" value="1" />
        </div>
        <div class="movie_drama_Btn"> 
-        <button class="dramaBtn" id="drama" name="dr">TV 프로그램</button>
+        <button class="dramaBtn" id="drama" name="dr" style="opacity:0.3;">TV 프로그램</button>
         <input id="dr" type="checkbox" name="category" value="2" />
       </div>
       <br>
@@ -358,7 +358,7 @@
          let drClicked = false;
          
          $('#movie').click(function(){
-            console.log(mvClicked)
+            console.log("mv click");
             if(mvClicked == false){
                 $(this).css('background', 'white');
                 $(this).css('opacity', '1');
@@ -370,13 +370,14 @@
             }
             else{
                $(this).css('background', 'white');
-                $(this).css('opacity', '1');
+               $(this).css('opacity', '0.3');
                 
                mvClicked = false;
             }             
            });
          
-         $('#drama').click(function(){            
+         $('#drama').click(function(){ 
+        	console.log("dr click");
             if(drClicked == false){
                $(this).css('background', 'white');
                 $(this).css('opacity', '1');
@@ -387,8 +388,9 @@
                 mvClicked = false;
             }
             else{
-               $(this).css('background', 'var(--color-orange)');
-                $(this).css('opacity', '1');
+               $(this).css('background', 'white');
+               $(this).css('opacity', '0.3');
+               
                drClicked = false;
             }
            });

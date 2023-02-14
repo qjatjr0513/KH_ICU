@@ -259,10 +259,6 @@ table input[type=checkbox]{
 	top:450px;
 }
 
-.dramaBtn {
-  opacity: 0.3;
-}
-
 .movieBtn, .dramaBtn{
 	margin-left:95px;
 }
