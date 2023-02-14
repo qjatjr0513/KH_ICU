@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 이메일 조회 -->
 	<select id="selectEmail" parameterType="member" resultType="String">
 		SELECT EMAIL FROM MEMBER
-		WHERE EMAIL = #{email} 
+		WHERE EMAIL = #{email} AND MEM_ID = #{memId}
 	</select>
 	
 	<!-- 회원조회 -->

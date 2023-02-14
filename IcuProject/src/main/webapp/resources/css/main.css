@@ -350,3 +350,13 @@ body::-webkit-scrollbar-track {
 	font-family: 'Poor Story', 'cursive';
 	font-weight: var(--weight-bold);
 }
+
+#msg{
+	height:100px;
+	overflow: scroll;
+}
+
+#msg::-webkit-scrollbar {
+	display:none; /* Chrome , Safari , Opera */
+	
+}

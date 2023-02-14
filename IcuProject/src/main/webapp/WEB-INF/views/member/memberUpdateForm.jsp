@@ -218,7 +218,7 @@
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
         
         $.ajax({
-           url : "nickCheck.me",
+           url : "nickCheck",
            data : {checkNick : $memberNick.val()},
            success : function(result){
         	   

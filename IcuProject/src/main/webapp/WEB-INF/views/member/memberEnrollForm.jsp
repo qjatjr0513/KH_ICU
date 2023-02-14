@@ -153,7 +153,7 @@
         let regExp = /^[a-z][a-z\d]{3,11}$/;
         
         $.ajax({
-           url : "idCheck.me",
+           url : "idCheck",
            data : {checkId : $memberId.val()},
            success : function(result){
         	   
@@ -195,12 +195,7 @@
                       cancelButtonColor: '#d33',
                       confirmButtonText: '사용',
                       cancelButtonText: '취소'
-                  }).then((result) => {
-                	  if(result.isConfirmed){
-                          $("input[name=memId]").attr("readonly", true);
-                       }  
-                	  
-                  });
+                  })
               }
            },
            error : function(){
@@ -215,7 +210,7 @@
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
         
         $.ajax({
-           url : "nickCheck.me",
+           url : "nickCheck",
            data : {checkNick : $memberNick.val()},
            success : function(result){
         	   
@@ -257,12 +252,7 @@
                       cancelButtonColor: '#d33',
                       confirmButtonText: '사용',
                       cancelButtonText: '취소'
-                  }).then((result) => {
-                	  if(result.isConfirmed){
-                          $("input[name=memNickname]").attr("readonly", true);
-                       }  
-                	  
-                  });
+                  })
               }
            },
            error : function(){

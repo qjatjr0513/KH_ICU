@@ -161,8 +161,11 @@
              &nbsp;&nbsp;
              <li class='navbar__icon'>
               <div class="dropdown">
-              <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown" onclick="alarm()" aria-expanded="false">
+              <button class="btn btn-secondary alert" id="alarm" type="button" data-bs-toggle="dropdown"  aria-expanded="false">
                 <i class="fa-solid fa-bell fa-lg"></i>
+                <div id="count">
+
+                </div>
               </button>
               <ul class="dropdown-menu" id="msg">
 
@@ -227,34 +230,42 @@
          ws.onerror = function (err) { console.log('Error:;', err);};
          
       }
+
 	   
-    function alarm(){
+      $(document).ready(function(){
     	$.ajax({
        		url : "${contextPath }/alarm",
        		type: 'POST',
        		dataType: 'json',      // 호출 했을 때 결과타입
 			contentType: "application/json",
                success : function(alist){
+            	   
             	   //location.reload();
             	   // list로 반복문 돌려서 동적으로 html요소추가
             	   var html = "";
+            	   var al ="";
             	   
             	   if(alist.length == 0){
             		   html += "<li><div id='none'><span>알림이 없습니다.</span><div></li>";
             		   $("#msg").html(html);
             	   }else{
 	            	   for(let a of alist){
-	      				let tableCd = a.tableCd;
+	            		let tableCd = a.tableCd;
 	      				
 	      				if($.trim(tableCd) == "B"){
-			            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";  
+			            	html +="<li><a class='dropdown-item' href='"+contextPath+"/detail/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+			            	al += '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New alerts</span></span>'
 	      				}else if($.trim(tableCd) == "P"){
-	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/partyDetail.py/"+a.refTno+"?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";
+	      					al += '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New alerts</span></span>'
 	      				}else if($.trim(tableCd) == "A"){
 	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/depositListForm.pe?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>"; 
+	      					al += '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New alerts</span></span>'
 	      				}else{
 	      					html +="<li><a class='dropdown-item' href='"+contextPath+"/main?mesNo="+a.mesNo+"'>"+a.mesContent+"</a><li>";
+	      					al += '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New alerts</span></span>'
 	      				}
+	      				$("#count").html(al);
 	      				$("#msg").html(html);
 	            	   } 
             	   }
@@ -264,7 +275,7 @@
             	   console.log("에러");
                 }
            })
-      	};
+      	});
       
       	var time = function () {
       	  var date = new Date();

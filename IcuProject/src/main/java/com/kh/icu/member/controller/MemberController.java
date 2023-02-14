@@ -170,7 +170,7 @@ public class MemberController {
 	/**
 	 * 닉네임 아이디 검사
 	 */
-	@RequestMapping("idCheck.me")
+	@RequestMapping("idCheck")
 	@ResponseBody
 	public int idCheck(String checkId) {
 		int result = memberService.idCheck(checkId);
@@ -180,7 +180,7 @@ public class MemberController {
 	/**
 	 * 닉네임중복검사
 	 */
-	@RequestMapping("nickCheck.me")
+	@RequestMapping("nickCheck")
 	@ResponseBody
 	public int nickCheck(String checkNick) {
 		int result = memberService.nickCheck(checkNick);
@@ -190,7 +190,7 @@ public class MemberController {
 	/**
 	 * 아이디 찾기
 	 */
-	@RequestMapping("findId.me")
+	@RequestMapping("findId")
 	@ResponseBody
 	public String findId(String memName, String phone, Model model) {
 		Member m = new Member();
@@ -205,7 +205,7 @@ public class MemberController {
 	/**
 	 * 비밀번호 찾기
 	 */
-	@RequestMapping("findPwd.me")
+	@RequestMapping("findPwd")
 	@ResponseBody
 	public int findPwd(String id, String email, HttpServletResponse response) throws Exception {
 		Member m = new Member();
@@ -459,7 +459,7 @@ public class MemberController {
 	//SNS 로그인 회원탈퇴
 	@GetMapping("remove")
 	public String removeNaver(HttpSession session, HttpServletRequest request, Model model,
-			                  @RequestParam(value="mode", defaultValue= "naver") String mode) {
+			                  @RequestParam(value="mode", defaultValue= "naver") String mode, RedirectAttributes redirectAttributes) {
 		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
 		OAuth2AccessToken oauthToken = (OAuth2AccessToken) session.getAttribute("oauthToken");
 		String apiUrl = "";
@@ -494,7 +494,7 @@ public class MemberController {
 				session.invalidate();			
 			}
 		}
-		
+		redirectAttributes.addFlashAttribute("flag2","showAlert2");
 	    return "redirect:/";
 	}
 
