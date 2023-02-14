@@ -102,10 +102,6 @@ public class ContentDao {
 		return (ArrayList)sqlSession.selectList("contentMapper.recommendContents");
 	}
 	
-	public ArrayList<Content> searchByKeyword(SqlSession sqlSession, Map<String, Object> map){
-		return (ArrayList) sqlSession.selectList("contentMapper.searchByKeyword", map);
-	}
-	
 	public int selectListCount(SqlSession sqlSession) {
 		return sqlSession.selectOne("contentMapper.selectListCount");
 	}

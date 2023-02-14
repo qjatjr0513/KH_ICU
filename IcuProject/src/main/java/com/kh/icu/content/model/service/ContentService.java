@@ -31,7 +31,6 @@ public interface ContentService {
 	public int selectConNo();
 	public int deleteContent(int conNo);
 	public ArrayList<Content> recommendContents();
-	public ArrayList<Content> searchByKeyword(Map<String, Object> map);
 	public int selectListCount();
 	public Map<String, Object> getWrittenContent(int currentPage);
 	public ArrayList<String> getWrittenContentOtt(int conNo);

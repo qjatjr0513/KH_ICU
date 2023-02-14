@@ -144,11 +144,6 @@ public class ContentServiceImpl implements ContentService{
 	}
 
 	@Override
-	public ArrayList<Content> searchByKeyword(Map<String, Object> map){
-		return contentDao.searchByKeyword(sqlSession, map);
-	}
-	
-	@Override
 	public int selectListCount() {
 		return contentDao.selectListCount(sqlSession);
 	}

@@ -33,7 +33,6 @@
 
 	
      <section id="home" class='animate__animated animate__fadeInDown'>
-     <form id="contentSearch" action="${contextPath }/searchByKeyword.co" method="post">
        <div class="input-group mb-3 sizing">
         <select name="searchNo" id="search">
 		     	<option value="0" selected><span>전체</span></option>
@@ -50,15 +49,7 @@
 	           aria-describedby="button-addon2"
 	           required
 	         />
-	         <button
-	           class="btn btn-outline-secondary btn3"
-	           type="submit"
-	           id="button-addon2"
-	         >
-	           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-	         </button>
-       </div>
-       </form>
+	   </div>
 
        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" >
          <div class="carousel-indicators">
