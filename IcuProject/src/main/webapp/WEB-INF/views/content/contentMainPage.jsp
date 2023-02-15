@@ -20,10 +20,7 @@
     
    <jsp:include page="../common/header.jsp"/>
    
-   <img src='resources/images/findContents.png' style="width:1898px; height:500px;">
-
-   
-   <div class='sl-in2' style=' padding:10px; margin-top:10px;'>
+   <div class='sl-in2' style=' padding:10px; margin-top:120px;'>
    <h2 class='titleText' style='font-size:3rem;'>< 컨텐츠 찾기 ></h2>
    </div>
    

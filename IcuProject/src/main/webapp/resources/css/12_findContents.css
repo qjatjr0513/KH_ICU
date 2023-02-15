@@ -252,11 +252,11 @@ table input[type=checkbox]{
 
 .movie_drama_Btn:first-child{
 	position:sticky;
-	top:400px;
+	top:300px;
 }
 .movie_drama_Btn:nth-child(2){
 	position:sticky;
-	top:450px;
+	top:350px;
 }
 
 .movieBtn, .dramaBtn{

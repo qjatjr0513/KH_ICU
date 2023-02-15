@@ -1,6 +1,9 @@
 @import url('main.css');
 body { 
 	background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+	background-repeat:no-repeat;
+	background-cover:cover;
+	height:120vh;
 }
 table * {margin:5px;}
 td{ margin-bottom: 0;}

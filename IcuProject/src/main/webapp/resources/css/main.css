@@ -114,6 +114,7 @@ body::-webkit-scrollbar-track {
 
 .sl-in2 {
 	  animation: change1 1s ease forwards;
+	  animation-fill-mode: both;
 }
 	
 @keyframes change1 {

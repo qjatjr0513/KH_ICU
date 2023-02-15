@@ -156,6 +156,7 @@ a {
 	position:relative;	
 	border:none !important;
 	box-shadow: 0 0 7px 1px lightgrey;
+	margin-top:3px;
 }
 .googlebtn span{
     font-weight: 900;

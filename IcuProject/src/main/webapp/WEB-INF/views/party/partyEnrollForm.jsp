@@ -15,10 +15,6 @@
 <body>
     <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
-	
-	<div class='imgBox1'>
-		<img class='titleImg' src='resources/images/findParty.png'>
-	</div>
 
     <div class="header__title titleText sl-in2">
       <h2>< 파티 등록 ></h2>
