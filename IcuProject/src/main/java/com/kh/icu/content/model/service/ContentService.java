@@ -28,7 +28,6 @@ public interface ContentService {
 	public int deleteOtt(Map<String, Object> map);
 	public int insertImg(Image image);
 	public int updateImg(Image image);
-	public int selectConNo();
 	public int deleteContent(int conNo);
 	public ArrayList<Content> recommendContents();
 	public int selectListCount();

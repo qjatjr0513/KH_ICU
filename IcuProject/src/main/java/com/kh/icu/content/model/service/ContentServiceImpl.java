@@ -129,11 +129,6 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
-	public int selectConNo() {
-		return contentDao.selectConNo(sqlSession);
-	}
-	
-	@Override
 	public int deleteContent(int conNo) {
 		return contentDao.deleteContent(sqlSession, conNo);
 	}

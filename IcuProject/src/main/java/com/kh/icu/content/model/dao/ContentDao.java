@@ -90,10 +90,6 @@ public class ContentDao {
 		return sqlSession.update("contentMapper.updateImg", image);
 	}
 	
-	public int selectConNo(SqlSession sqlSession) {
-		return sqlSession.selectOne("contentMapper.selectConNo");
-	}
-	
 	public int deleteContent(SqlSession sqlSession, int conNo) {
 		return sqlSession.update("contentMapper.deleteContent", conNo);
 	}

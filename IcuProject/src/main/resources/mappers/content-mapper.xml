@@ -113,12 +113,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CON_NO = #{conNo}
 	</update>
 	
-	<select id="selectConNo" resultType="int">
-			SELECT CON_NO
-			FROM (SELECT * FROM CONTENT ORDER BY CON_NO DESC)
-			<![CDATA[WHERE ROWNUM <= 1 AND STATUS = 'N']]> 
-	</select>
-	
 	<update id="deleteContent" parameterType="int">
 		UPDATE CONTENT
 		SET STATUS = 'Y'
