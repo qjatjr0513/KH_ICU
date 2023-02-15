@@ -189,7 +189,7 @@
      </section>
 
      <!-- icu가 궁금하셈? -->
-     <section id="wondering" class='animate__animated animate__fadeInDown titleText2'>
+     <section id="wondering" class='animate__animated animate__fadeInDown'>
        <div class="wonder__box">
          <a class='wonder__a'
            target="_blank"

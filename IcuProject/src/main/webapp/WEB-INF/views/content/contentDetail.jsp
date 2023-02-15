@@ -99,9 +99,9 @@
     	</div>
     </div>
     <br>
+    
     <section id='review-container'>
     <div id="reviewWrite">
-    	<br>
     	<c:if test="${loginUser.role eq 'C' || memNo gt 1}">
 	    	<h6 id="average">평점 : 0점</h6>
 			<span class="star">
@@ -110,7 +110,6 @@
 			<input type="range" id="score" name="score" oninput="drawStar(this)" value="0" step="1" min="0" max="10">
 			</span>
 		</c:if>
-		<br><br>
 		<div id="reviewInput">
 
 			<c:if test="${loginUser.role eq 'C' || memNo gt 1 }">
