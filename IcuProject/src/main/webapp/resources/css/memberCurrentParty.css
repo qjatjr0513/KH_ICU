@@ -244,7 +244,12 @@ input::placeholder{
 .carousel-control-next{
    right:-150px !important;
 }
-
+.modal-body > h2{
+	font-size:20px;
+}
+.modal-body > h2 > span {
+	color:var(--color-orange);
+}
 .noParty{
    background-color:white;
    padding:30px;
