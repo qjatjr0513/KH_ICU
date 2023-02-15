@@ -335,5 +335,17 @@ table input[type=checkbox]{
   height: 4rem;
 
 }
-
+.noParty{
+   background-color:white;
+   padding:30px;
+   width:900px;
+   margin:auto;
+   border-radius:12px;
+    position: relative;
+   top: 130px;
+   text-align:center;
+   font-family:'Poor Story', 'cursive';
+   font-size:20px;
+   box-shadow:0 0 5px 1px lightgray;
+}
 

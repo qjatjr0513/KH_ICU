@@ -672,8 +672,8 @@
 					$('.carousel-inner').remove();
 					$('.carousel-control-prev').remove();
 					$('.carousel-control-next').remove();
-					htmlMid += "<div class='carousel-inner' style='height: 400px;'><h5>검색 결과가 존재하지 않습니다</h5></div>"
-					$("#carouselExampleControls").html(htmlMid);
+					htmlMid += "<div class='carousel-inner' style='height: 400px;'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div>"
+					$("#carouselExampleControls").html(htmlMid);			
 				}
                else{
                   $('.carousel-inner').remove();
