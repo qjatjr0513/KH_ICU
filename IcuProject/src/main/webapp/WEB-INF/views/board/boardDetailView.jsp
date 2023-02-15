@@ -78,7 +78,7 @@
             <div class="card-body">
                <ul class="list-group list-group-flush">
                    <li class="list-group-item">
-                  <textarea name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요"; style="resize: none;"></textarea>
+                  <textarea maxlength="100" name="replyContent" id="replyContent" rows="3" placeholder="내용을 입력해주세요"; style="resize: none;"></textarea>
                   <c:if test="${not empty loginUser}">
                   <button type="button"  class="btn btn-dark mt-3" onClick="insertReply();">댓글 입력</button>
                   </c:if>

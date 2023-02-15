@@ -419,3 +419,9 @@
 .ui-menu-item-wrapper{
 	padding : 0 !important;
 }
+
+.ui-state-highlight{
+	background-color:white !important;
+	color : black !important;
+	border: 0px solid white !important;
+}
