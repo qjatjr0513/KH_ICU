@@ -126,7 +126,11 @@
              </c:when>
              <c:when test="${ loginUser.role == 'A' }">
            <!-- 로그인 후 -->
-           <li>
+             <li>
+                <a href="${contextPath }/admin/memListForm.ad" style="text-decoration: none; color:black; margin-right:30px;">관리자 페이지</a>
+             </li>
+             
+              <li>
                 <a href="${contextPath }/memLogout" style="text-decoration: none; color:black; margin-right:30px;">로그아웃</a>
              </li>
              </c:when>
