@@ -37,7 +37,7 @@ input::placeholder{
    margin-left:500px;
    padding:30px;
    border-radius:12px;
-   box-shadow:0 0 5px 1px gray;
+   box-shadow:0 0 5px 1px lightgray;
    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 .carousel-inner{

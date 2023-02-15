@@ -113,13 +113,14 @@ body::-webkit-scrollbar-track {
 }
 
 .sl-in2 {
-	  animation: change1 1s ease forwards;
+	  animation: change1 0.8s ease forwards;
 	  animation-fill-mode: both;
+	  animation-iteration-count: 1;
 }
 	
 @keyframes change1 {
   from {
-    transform: translateY(50%);
+    transform: translateY(20%);
   }
 
   to {
