@@ -62,7 +62,6 @@ public class PayController {
 		pj.setPaNo(paNo);
 	
 		int result = payService.accountOfPayment(p);
-		System.out.println("*****result : "+result); 
 		if(result > 0) {
 			
 			partyService.joinPartyMember(pj);

@@ -55,23 +55,17 @@ public class ChattingController {
 			                   RedirectAttributes ra, HttpSession session
 								) throws Exception {
 		 
-		System.out.println("================"+memNo);
 		room.setMemNo(memNo);
 		
 		int chatRoomNo = chatservice.openChatRoom(room);
-//		String path = "redirect:/chat/";
 		
 		if(chatRoomNo > 0) {
 			model.addAttribute("chatRoomNo", chatRoomNo);
-			//session.setAttribute("chatRoomNo", chatRoomNo);
-			System.out.println("채팅방 만들기 성공");
 			
-//			path += "chatRoomList";
 			return chatRoomNo;
 		}else {
 			return 0;
 		}
-//		return path;
 	}
 	
 	
@@ -88,7 +82,6 @@ public class ChattingController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("chatRoomNo", chatRoomNo);
-		//session.setAttribute("chatRoomNo", chatRoomNo);
 		
 		return "chat/chatRoom";
 	}

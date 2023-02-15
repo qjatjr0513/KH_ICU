@@ -142,7 +142,6 @@ public class MemberServiceImpl implements MemberService{
    @Override
    public int findPwd(HttpServletResponse response, Member m) throws Exception {
       response.setContentType("text/html;charset=utf-8");
-      System.out.println("?????????????????"+m);
       
       // 가입된 아이디가 없으면
       if(memberDao.selectId(sqlSession, m) == null) {
@@ -203,7 +202,6 @@ public class MemberServiceImpl implements MemberService{
             
          // 결과 코드가 200이라면 성공
          int responseCode = conn.getResponseCode();
-         System.out.println("responseCode : " + responseCode);
             
          // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
          BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -213,7 +211,6 @@ public class MemberServiceImpl implements MemberService{
          while ((line = br.readLine()) != null) {
             result += line;
          }
-         System.out.println("response body : " + result);
             
          // Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
          JsonParser parser = new JsonParser();
@@ -221,9 +218,6 @@ public class MemberServiceImpl implements MemberService{
             
          access_Token = element.getAsJsonObject().get("access_token").getAsString();
          refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
-            
-         System.out.println("access_token : " + access_Token);
-         System.out.println("refresh_token : " + refresh_Token);
             
          br.close();
          bw.close();
@@ -255,7 +249,6 @@ public class MemberServiceImpl implements MemberService{
          conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
          int responseCode = conn.getResponseCode();
-         System.out.println("responseCode : " + responseCode);
 
          BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -265,7 +258,6 @@ public class MemberServiceImpl implements MemberService{
          while ((line = br.readLine()) != null) {
             result += line;
          }
-         System.out.println("response body : " + result);
 
          JsonParser parser = new JsonParser();
          JsonElement element = parser.parse(result);
@@ -288,8 +280,6 @@ public class MemberServiceImpl implements MemberService{
       
       Member result = memberDao.findkakao(sqlSession, userInfo); 
         // 저장되어있는지 확인
-        System.out.println("S :" + result);
-        System.out.println(userInfo);
         if(result == null) {
             //result null 이면 정보가 저장 안되어있는거라서 저보를 저장.
             memberDao.kakaoinsert(sqlSession,userInfo);
@@ -303,73 +293,6 @@ public class MemberServiceImpl implements MemberService{
         }
    }
 
-//   // 카카오 정보확인
-//   @Override
-//   public Member getUserInfo(String access_Token) {
-//
-//      // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-//      HashMap<String, Object> userInfo = new HashMap<String, Object>();
-//      
-//      // 닉네임 숫자 범위
-//      String nickName = randomRange(100000, 999999);
-//      
-//      String reqURL = "https://kapi.kakao.com/v2/user/me";
-//      try {
-//         URL url = new URL(reqURL);
-//         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//         conn.setRequestMethod("GET");
-//
-//         // 요청에 필요한 Header에 포함될 내용
-//         conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-//
-//         int responseCode = conn.getResponseCode();
-//         System.out.println("responseCode : " + responseCode);
-//
-//         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//
-//         String line = "";
-//         String result = "";
-//
-//         while ((line = br.readLine()) != null) {
-//            result += line;
-//         }
-//         System.out.println("response body : " + result);
-//
-//         JsonParser parser = new JsonParser();
-//         JsonElement element = parser.parse(result);
-//
-//         JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-//         JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-//
-//         String name = properties.getAsJsonObject().get("nickname").getAsString();
-//         String email = kakao_account.getAsJsonObject().get("email").getAsString();
-//
-//         userInfo.put("name", name);
-//         userInfo.put("email", email);
-//         userInfo.put("nickName", nickName);
-//
-//      } catch (IOException e) {
-//         e.printStackTrace();
-//      }
-//      
-//      
-//      
-//      Member result = memberDao.findkakao(sqlSession, userInfo); 
-//        // 저장되어있는지 확인
-//        System.out.println("S :" + result);
-//        System.out.println(userInfo);
-//        if(result == null) {
-//            //result null 이면 정보가 저장 안되어있는거라서 저보를 저장.
-//            memberDao.kakaoinsert(sqlSession,userInfo);
-//            //저장하기위해 repository 로 이동
-//            return memberDao.findkakao(sqlSession, userInfo);
-//            // 정보 저장후 컨트롤러에 정보를 보냄
-//            //result 를 리턴으로 보내면 null 이 리턴되므로 위코드를 사용.
-//        }else {
-//            return result;
-//            //정보가 있으므로 result 를 리턴함
-//        }
-//   }
    
    /**
     * 카카오계정 로그아웃
@@ -384,7 +307,6 @@ public class MemberServiceImpl implements MemberService{
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -394,7 +316,6 @@ public class MemberServiceImpl implements MemberService{
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println(result);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -422,18 +343,6 @@ public class MemberServiceImpl implements MemberService{
         }
    };
    
-//   //네이버 정보저장
-//   
-//     @Override 
-//     public int getUserInfo(Member m) { 
-//	    String nickname = randomRangeN(100000, 999999); m.setMemNickname(nickname);
-//	    System.out.println(nickname);
-//	     
-//	    int result = memberDao.getUserInfo(sqlSession, m);
-//	    System.out.println(result); return result;    
-//     };
-    
-   
 
    // 닉네임 랜덤생성(kakao)
    public static String randomRange(int n1, int n2) {
@@ -448,7 +357,6 @@ public class MemberServiceImpl implements MemberService{
    @Override
    public Image selectProfile(int memNo) {
 	   Image profile = memberDao.selectProfile(sqlSession, memNo);
-	   System.out.println("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ"+profile);
 	   return profile;
    }
 	

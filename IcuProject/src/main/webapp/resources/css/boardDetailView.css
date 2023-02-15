@@ -19,7 +19,8 @@ td{ margin-bottom: 0;}
 
 #boardWriter-img{
      vertical-align: middle;
-     width: 45%;
+     width: 50%;
+     height:150px;
      border-radius: 50%;
     padding: 5px;
     box-shadow: 0 0 7px 2px var(--color-orange);

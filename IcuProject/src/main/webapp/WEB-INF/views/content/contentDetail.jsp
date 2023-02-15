@@ -55,12 +55,12 @@
 	    		<h6>&nbsp;&nbsp;<b>방영 날짜 : ${c.conDate }</b></h6>
 	    		<h6>&nbsp;&nbsp;<b>플랫폼 : 
 	    			<c:forEach var="ott" items="${o }" varStatus="status">
-	    				<c:if test="${ott eq 1}">넷플릭스</c:if>
-	    				<c:if test="${ott eq 2}">웨이브</c:if>
-	    				<c:if test="${ott eq 3}">왓챠</c:if>
-	    				<c:if test="${ott eq 4}">디즈니 플러스</c:if>
-	    				<c:if test="${ott eq 5}">Apple Tv</c:if>
-		    			<c:if test="${status.count ne ott_size}">, </b></c:if>
+	    				<c:if test="${ott eq 1}"><b>넷플릭스</b></c:if>
+	    				<c:if test="${ott eq 2}"><b>웨이브</b></c:if>
+	    				<c:if test="${ott eq 3}"><b>왓챠</b></c:if>
+	    				<c:if test="${ott eq 4}"><b>디즈니 플러스</b></c:if>
+	    				<c:if test="${ott eq 5}"><b>Apple Tv</b></c:if>
+		    			<c:if test="${status.count ne ott_size}"><b>, </b></c:if>
 		    		</c:forEach>
 				</h6>
 	    	</div>

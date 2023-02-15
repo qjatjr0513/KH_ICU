@@ -36,14 +36,10 @@ public class smsMessageController {
 			params.put("app_version", "test app 1.2"); // application name and version
 
 			
-		  System.out.println(params);
 		  try {
 		  JSONObject result = coolsms.send(params); // 보내기&전송결과받기
 
-		  System.out.println(result.toString());
 	    } catch (CoolsmsException e) {
-	      System.out.println(e.getMessage());
-	      System.out.println(e.getCode());
 	    }
 
 		  return authNum;

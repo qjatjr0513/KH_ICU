@@ -54,7 +54,6 @@ public class MemberDao {
 	 */
    public String selectId(SqlSession sqlSession, Member m) {
 	   String result = sqlSession.selectOne("memberMapper.selectId", m);
-	   System.out.println("아이디 : "+result);
 	   
 	   return result;
    }
@@ -89,7 +88,6 @@ public class MemberDao {
 	 */   
    public String selectEmail(SqlSession sqlSession, Member m) {
 	   String result = sqlSession.selectOne("memberMapper.selectEmail", m);
-	   System.out.println("이메일 : "+result);
 	   
       return result;
    }
@@ -105,9 +103,6 @@ public class MemberDao {
 	 * 카카오 로그인 정보 확인
 	 */
    public Member findkakao(SqlSession sqlSession, HashMap<String, Object> userInfo) {
-      System.out.println("RN:"+userInfo.get("nickname"));
-      System.out.println("RE:"+userInfo.get("email"));
-      System.out.println("RM:"+userInfo.get("name"));
       return sqlSession.selectOne("memberMapper.findKakao", userInfo);
    }
    
@@ -115,9 +110,7 @@ public class MemberDao {
 	 * 네이버 로그인 정보 확인
 	 */
    public Member findMember(SqlSession sqlSession, Member m) {
-      System.out.println("Member(findMember/Dao):"+m);
       Member result = sqlSession.selectOne("memberMapper.findMember", m);
-      System.out.println("result :"+result);
       return result;
    }
    
@@ -127,7 +120,6 @@ public class MemberDao {
 	 */
    // 네이버 로그인 정보 저장
    public int getUserInfo(SqlSession sqlSession, Member m) {
-      System.out.println(m.getMemNickname());
       return sqlSession.insert("memberMapper.getUserInfo", m);
    }
 

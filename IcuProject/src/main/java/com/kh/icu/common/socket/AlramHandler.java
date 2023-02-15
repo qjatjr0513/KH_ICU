@@ -35,7 +35,6 @@ public class AlramHandler extends TextWebSocketHandler {
 	// 클라이언트가 서버로 연결시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) {
-		System.out.println("afterConnection : "+ session);
 		Sessions.WSsessions.add(session); // 접속된 유저들을 sessions에 모두 담는다.
 		
 		// 접속한 유저의 httpsession을 조회해서 id 얻어오기
@@ -47,21 +46,14 @@ public class AlramHandler extends TextWebSocketHandler {
 	// 클라이언트가 Data 전송시
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
-		System.out.println("handleTextMessage:"+ message);
-		//String senderId = getMemberId(session);
-//		for(WebSocketSession sess : sessions) { // 세션에 접속된 모든 사람들에게 메세지 전송
-//			sess.sendMessage(new TextMessage(senderId+ ":" + message.getPayload())); //실제로 보낸 내용 : message.getPayload()
-//		}
 		
 		//특정 유저에게 보내기
 		//protocol: cmd, 댓글 작성자, 게시글 작성자, bno (ex: reply, user2, user1, 234)
 		String msg = message.getPayload();
 		
-		System.out.println("전달된 메세지 : " + message.getPayload());
 		
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = msg.split(",");
-			System.out.println(strs);
 			if(strs != null && strs.length == 6) {
 				String cmd = strs[0];
 				String sendId = strs[1];
@@ -73,7 +65,6 @@ public class AlramHandler extends TextWebSocketHandler {
 				
 				
 				WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
-				System.out.println("============"+receiveSession);
 				if("reply".equals(cmd) && !sendId.equals(receiveId)) {
 					String content = "게시글에 댓글이 달렸습니다!";
 					Alarm a = new Alarm();
@@ -166,7 +157,6 @@ public class AlramHandler extends TextWebSocketHandler {
 	// 연결 해제될 때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		System.out.println("afterConnection : "+ session + ":"+status);
 		
 		String senderId = getMemberId(session);
 		if(senderId != null) { // 로그인 값이 있는 경우
@@ -180,7 +170,6 @@ public class AlramHandler extends TextWebSocketHandler {
 	
 	//로그 메세지
 	private void log(String logmsg) {
-		System.out.println(new Date() + " : " + logmsg );
 	}
 	
 	// 웹소켓에 id 가져오기

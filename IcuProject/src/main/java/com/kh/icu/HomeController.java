@@ -54,11 +54,4 @@ public class HomeController {
 		return "common/main";
 	}
 	
-	/*
-	 * @RequestMapping(value = "/rate") public String rateHandler(HttpServletRequest
-	 * request) { //your controller code String referer =
-	 * request.getHeader("Referer"); System.out.println(referer); return
-	 * "redirect:"+ referer; }
-	 */
-	
 }

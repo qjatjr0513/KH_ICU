@@ -87,8 +87,8 @@
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                          </div>
                          <div class="modal-body">
-                           <h2>계정 아이디 : ${listI[count].ottId}</h2>
-                           <h2>계정 비밀번호 : ${listI[count].ottPwd}</h2>     
+                           <h2><span>계정 아이디</span> : ${listI[count].ottId}</h2>
+                           <h2><span>계정 비밀번호</span> : ${listI[count].ottPwd}</h2>     
                          </div>
                          <div class="modal-footer">
                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
