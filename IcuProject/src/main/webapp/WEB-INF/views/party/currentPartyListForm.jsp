@@ -107,6 +107,31 @@
 	    function movePage(paNo){
 	    	location.href = "${contextPath}/partyDetail.py/"+paNo;
 	    };
+	    
+	    $(function(){
+	    	let prevBtn = "";
+	    	let nextBtn = "";
+	    	<c:if test="${empty list || fn:length(list) <= 12}">
+	    		$(".carousel-control-prev").remove();
+	    		$(".carousel-control-next").remove();
+	    	</c:if>
+	    	
+	    	<c:if test="${!empty list && fn:length(list) > 12}">
+    			if($(".carousel-control-prev").length <= 0){
+    				prevBtn += "<button class='carousel-control-prev' type='button' data-bs-target='#carouselExampleControls'data-bs-slide='prev'>";
+    				prevBtn += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>"
+    				prevBtn += "<span class='visually-hidden'>Previous</span></button>"
+	    			$("#carouselExampleControls").html(prevBtn);
+    			}
+    			
+    			if($(".carousel-control-next").length <= 0){
+    				nextBtn += "<button class='carousel-control-next' type='button' data-bs-target='#carouselExampleControls'data-bs-slide='next'>";
+    				nextBtn += "<span class='carousel-control-next-icon' aria-hidden='true'></span>"
+    				nextBtn += "<span class='visually-hidden'>Next</span></button>"
+	    			$("#carouselExampleControls").html(nextBtn);
+    			}
+    		</c:if>
+	    })
     </script>
   </body>
 </html>

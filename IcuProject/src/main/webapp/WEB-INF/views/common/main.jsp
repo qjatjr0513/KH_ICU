@@ -223,9 +223,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(0).getChangeName()} "
-             />
+             <c:if test="${r.get(0).getFilePath() eq null }">
+	             <img
+	               src="${r.get(0).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(0).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(0).getFilePath() }${r.get(0).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
@@ -233,9 +240,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(1).getChangeName()} "
-             />
+             <c:if test="${r.get(1).getFilePath() eq null }">
+	             <img
+	               src="${r.get(1).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(1).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(1).getFilePath() }${r.get(1).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
@@ -243,9 +257,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(2).getChangeName()}"
-             />
+             <c:if test="${r.get(2).getFilePath() eq null }">
+	             <img
+	               src="${r.get(2).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(2).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(2).getFilePath() }${r.get(2).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
@@ -253,9 +274,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(3).getChangeName()}"
-             />
+             <c:if test="${r.get(3).getFilePath() eq null }">
+	             <img
+	               src="${r.get(3).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(3).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(3).getFilePath() }${r.get(3).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
@@ -263,9 +291,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(4).getChangeName()}"
-             />
+             <c:if test="${r.get(4).getFilePath() eq null }">
+	             <img
+	               src="${r.get(4).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(4).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(4).getFilePath() }${r.get(4).getChangeName() } "
+	             />             
+             </c:if>
            </div>
          </div>
        </div>
@@ -277,9 +312,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(5).getChangeName()}"
-             />
+             <c:if test="${r.get(5).getFilePath() eq null }">
+	             <img
+	               src="${r.get(5).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(5).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(5).getFilePath() }${r.get(5).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-second movie-poster">
              <div class="overlay-wrap">
@@ -287,19 +329,33 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(6).getChangeName()}"
-             />
+             <c:if test="${r.get(6).getFilePath() eq null }">
+	             <img
+	               src="${r.get(6).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(6).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(6).getFilePath() }${r.get(6).getChangeName() } "
+	             />             
+             </c:if>
            </div>
-           <div class="recommend__box-third movie-poster">f
+           <div class="recommend__box-third movie-poster">
              <div class="overlay-wrap">
                <div class="overlay-black" onclick="movePage(${r.get(7).getConNo() });">
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(7).getChangeName()}"
-             />
+             <c:if test="${r.get(7).getFilePath() eq null }">
+	             <img
+	               src="${r.get(7).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(7).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(7).getFilePath() }${r.get(7).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-fourth movie-poster">
              <div class="overlay-wrap">
@@ -307,9 +363,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(8).getChangeName()}"
-             />
+             <c:if test="${r.get(8).getFilePath() eq null }">
+	             <img
+	               src="${r.get(8).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(8).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(8).getFilePath() }${r.get(8).getChangeName() } "
+	             />             
+             </c:if>
            </div>
            <div class="recommend__box-fifth movie-poster">
              <div class="overlay-wrap">
@@ -317,9 +380,16 @@
                  <span class="overlay-text">보러가기</span>
                </div>
              </div>
-             <img
-               src="${r.get(9).getChangeName()}"
-             />
+             <c:if test="${r.get(9).getFilePath() eq null }">
+	             <img
+	               src="${r.get(9).getChangeName()} "
+	             />             
+             </c:if>
+             <c:if test="${r.get(9).getFilePath() ne null }">
+	             <img
+	               src="${contextPath}${r.get(9).getFilePath() }${r.get(9).getChangeName() } "
+	             />             
+             </c:if>
            </div>
          </div>
        </div>
