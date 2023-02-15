@@ -76,16 +76,15 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-heade">
             <h1 class="modal-title fs-5" id="exampleModalLabel">회원탈퇴</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form id="memberDelete" action="${contextPath }/memDelete.me" method="post">
-              <label>비밀번호 입력 : </label>
-              <input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/>
+            <label>비밀번호 입력 : </label>
+              <input type="password" id="memPwd" placeholder="비밀번호를 입력해주세요" name="memPwd" required/>
               <!-- <input type="hidden" id="memPwdCheck" value="${member.getMemPwd}"/> -->
             </form>
           </div>

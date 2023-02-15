@@ -56,9 +56,6 @@
 
           <div class="btn__group">
             <button onclick="location.href='${contextPath}/loginForm'">이전</button>
-            <!-- <button data-bs-toggle="modal" data-bs-target="#idModal" id="findId" name="findId" onclick="findId();">
-              확인
-            </button> -->
             <button id="findId" name="findId" onclick="findId(); " disabled>
               확인
             </button>
@@ -181,8 +178,7 @@
 	        	   }else{
 	        		   Swal.fire({
 	        			    icon : 'info', 
-	        		   		title:'회원 아이디',
-		        	   		text: result
+		        	   		html: '<h2>회원님의 아이디는 <span style="color:#ff8906; font-weight:bold;">'+result+'</span> 입니다!</h2>'
 		        	   });	
 	        	   }     
 	           },

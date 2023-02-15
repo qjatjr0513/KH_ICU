@@ -148,8 +148,8 @@ textarea{
 }
 #submitBtn{
 	width: 92px;
-	height: 120px;
-	margin-bottom: 117px;
+	height: 100px;
+    margin-bottom: 93px;
 	border:none;
 	box-shadow:0 0 5px solid var(--color-orange);
 	font-family: 'Poor Story', 'cursive';

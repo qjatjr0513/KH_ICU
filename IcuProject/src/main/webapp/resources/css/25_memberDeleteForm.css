@@ -52,3 +52,22 @@ span{
 	margin-top:30px;
 	font-weight:bold !important;
 }
+
+#memberDelete{
+	text-align:center;
+	font-weight:  bold;
+}
+#memPwd{
+	width: 250px;
+	
+}
+.modal-heade{
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--bs-modal-header-padding);
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+    border-top-left-radius: var(--bs-modal-inner-border-radius);
+    border-top-right-radius: var(--bs-modal-inner-border-radius);
+	text-align:center;
+}
