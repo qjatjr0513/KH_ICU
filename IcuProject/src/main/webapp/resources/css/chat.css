@@ -58,7 +58,7 @@
   text-align: center;
 }
 .chat_wrap .inner {
-  background-color: white;
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   border-radius: 5px;
   padding: 10px;
   overflow-y: scroll;
@@ -83,10 +83,11 @@
   top: 9px;
   border-top: 0px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 8px solid #fff;
+  border-right: 8px solid lightblue;
 }
 .chat_wrap .item .box .msg {
-  background: #fff;
+  margin-top: -5px;
+  background: lightblue;
   border-radius: 10px;
   padding: 8px;
   text-align: left;

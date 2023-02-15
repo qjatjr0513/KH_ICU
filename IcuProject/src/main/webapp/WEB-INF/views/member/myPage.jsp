@@ -36,7 +36,7 @@
 
           </c:choose>
           </div>
-            <form id="enrollForm" action="${contextPath }/insertImg.me" encType="multipart/form-data" method="post">
+            <form id="enrollForm" action="${contextPath }/img.me" encType="multipart/form-data" method="post">
           <div id="enroll">
           	<c:if test='${empty profile }'>
               <img id="preview" onclick="previewClick();"/> <Br>

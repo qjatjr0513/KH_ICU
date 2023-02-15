@@ -171,7 +171,7 @@
 
                 </div>
               </button>
-              <ul class="dropdown-menu" id="msg">
+              <ul class="dropdown-menu" id="msg2">
 
               </ul>
             </div>
@@ -251,7 +251,7 @@
             	   
             	   if(alist.length == 0){
             		   html += "<li><div id='none'><span>알림이 없습니다.</span><div></li>";
-            		   $("#msg").html(html);
+            		   $("#msg2").html(html);
             	   }else{
 	            	   for(let a of alist){
 	            		let tableCd = a.tableCd;
@@ -270,7 +270,7 @@
 	      					al += '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New alerts</span></span>'
 	      				}
 	      				$("#count").html(al);
-	      				$("#msg").html(html);
+	      				$("#msg2").html(html);
 	            	   } 
             	   }
                    

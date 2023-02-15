@@ -351,12 +351,12 @@ body::-webkit-scrollbar-track {
 	font-weight: var(--weight-bold);
 }
 
-#msg{
+#msg2{
 	height:100px;
 	overflow: scroll;
 }
 
-#msg::-webkit-scrollbar {
+#msg2::-webkit-scrollbar {
 	display:none; /* Chrome , Safari , Opera */
 	
 }

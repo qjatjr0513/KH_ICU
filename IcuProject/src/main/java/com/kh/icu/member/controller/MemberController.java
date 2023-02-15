@@ -575,7 +575,7 @@ public class MemberController {
 	/**
 	 * 프로필사진 삽입,수정,삭제
 	 */
-	@PostMapping("insertImg.me")
+	@PostMapping("img.me")
 	public String insertImg(Image image,
 							MultipartFile upfile, // 일반게시판 첨부파일
 							HttpSession session,
