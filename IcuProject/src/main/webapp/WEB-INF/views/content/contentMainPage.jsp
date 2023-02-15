@@ -341,11 +341,14 @@
     </div>
     
     </section>
-   
+   <br><br><br><br><br><br>
    <!-- 실시간 문의 -->
    <c:if test="${loginUser != null }">
     	<jsp:include page="../common/chatForm.jsp"/>
    </c:if>
+   
+   
+   
    <script>
     
 
@@ -676,7 +679,7 @@
 					$('.carousel-item').remove();
 					$('.carousel-control-prev').remove();
 					$('.carousel-control-next').remove();
-					htmlMid += "<div class='carousel-inner'><div class='carousel-item active' data-bs-interval='100000'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div></div>"
+					htmlMid += "<div class='carousel-inner'><div class='carousel-item active' style='padding:20px; margin-top:20px;' data-bs-interval='100000'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div></div>"
 					$("#carouselExampleControls").html(htmlMid);			
 				}
                else{            	 	
