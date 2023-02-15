@@ -123,8 +123,10 @@
                       console.log("추가성공");
                       Swal.fire({
                             icon:'success',
-                            title: totalPrice + "원이 결제되었습니다.",
+                            title: paTitle + " 참여완료!",
+                            html: "<br><h2><b><span style='color:#ff8906'>"+totalPrice+"원</span> 결제되었습니다.</b></h2>",
                             confirmButtonColor: '#3085d6',
+                            confirmButtonText: '확인'
                         }).then((result) => {
                           if (result.isConfirmed){
                             location.href = '${contextPath}/partyDetail.py/'+paNo;

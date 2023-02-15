@@ -255,7 +255,7 @@
 	    	    if('${flag2}' == 'showAlert2'){
 	    	      Swal.fire({
 	    	            icon:'error',
-	    	            title: "파티 정원이 찼습니다. 다른 파티를 찾아보세요."
+	    	            html: "<h2>파티 정원이 찼습니다.<br>다른 파티를 찾아보세요.</h2>"
 	    	        });
 	    	    }
 	     });
