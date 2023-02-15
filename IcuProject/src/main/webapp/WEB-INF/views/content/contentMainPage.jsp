@@ -545,7 +545,6 @@
                var movieBoxCnt = parseInt(result.length/4);
                var movieContainerCnt = parseInt(result.length/2) + 1;
                var cnt2 = 1;
-               console.log(result);
                if(result.length >= 8){
                   $('.carousel-item').remove();
                   if($('.carousel-control-prev').length <= 0){
@@ -553,7 +552,7 @@
                 	  previousBtn += "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
                 	  previousBtn += "<span class='visually-hidden'>Previous</span>";
                 	  previousBtn += "</button>";
-                	  $("#body-container").html(previousBtn);
+                	  $("#body-container").append(previousBtn);
                   }
                   
                   if($('.carousel-control-next').length <= 0){
@@ -561,9 +560,10 @@
                 	  nextBtn += "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
                 	  nextBtn += "<span class='visually-hidden'>Next</span>";
                 	  nextBtn += "</button>";
-                	  $("#body-container").html(nextBtn);
+                	  $("#body-container").append(nextBtn);
                   }
                   
+                  html = '';
                   for(var i = 1; i <= carouselCnt; i++){
                      if(i > 1){
                         html += "<div class='carousel-item' data-bs-interval='100000'>";
@@ -575,11 +575,12 @@
                         html += "<div id='movieBox"+ cnt2 +"' class='movieBox'></div>";
                         cnt2 += 1;
                      }
-                     html += "</div>";
-                  }                  
+                     html += "</div></div>";
+                  }
                   $(".carousel-inner").html(html);
+                  console.log("inner : "+$(".carousel-inner").length);
                   for(var j = 1; j <= movieBoxCnt; j++){
-                     while(cnt < j * 4){
+                     while(cnt < j * 4){                   
                         let title = result[cnt].conKTitle;
                         if(title.length > 15){
                            title = title.substr(0, 14);
@@ -628,13 +629,21 @@
                   html += "</div>";
                   
                   $(".carousel-inner").html(html);
-                  for(var j = 1; j <= 2; j++){
+                  for(var j = 1; j <= 2; j++){                	  
                      while(cnt < j * 4){
-                        let title = result[cnt].conKTitle;
-                     if(title.length > 15){
-                        title = title.substr(0, 14);
-                        title += '..';
-                     }
+                    	console.log(result.length);
+                    	console.log(cnt);
+                    	console.log(j);
+                    	if(cnt == result.length){
+                    		break;
+                    	}
+                     	let title = result[cnt].conKTitle;
+                     	
+                     	if(title.length > 15){
+                        	title = title.substr(0, 14);
+                        	title += '..';
+                     	}
+                     	
                         
                         htmlInfo += "<div class='movieContainer'>" +
                                     "<div class='movie__info'>";
@@ -672,18 +681,17 @@
 					$('.carousel-inner').remove();
 					$('.carousel-control-prev').remove();
 					$('.carousel-control-next').remove();
-					htmlMid += "<div class='carousel-inner' style='height: 400px;'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div>"
+					htmlMid += "<div class='carousel-inner'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div>"
 					$("#carouselExampleControls").html(htmlMid);			
 				}
-               else{
-                  $('.carousel-inner').remove();
+               else{            	 	
+                  $('.carousel-item').remove();
                   $('.carousel-control-prev').remove();
 				  $('.carousel-control-next').remove();
-                  htmlMid += "<div class='carousel-inner'>" +
-                           "<div class='carousel-item active' data-bs-interval='100000'>" +
+				  console.log("inner : "+$(".carousel-inner").length);
+                  htmlMid += "<div class='carousel-inner'><div class='carousel-item active' data-bs-interval='100000'>" +
                               "<div id='movieBox' class='movieBox'>";
-                  htmlMid +=       "</div>"+
-                           "</div>"+
+                  htmlMid += "</div></div>"+
                         "</div>";
                   $("#carouselExampleControls").html(htmlMid);
                   
@@ -717,6 +725,7 @@
                                              "</div>"+
                                           "</div>";
                      $("#movieBox").html(htmlInfo);
+                     console.log("inner : "+$(".carousel-inner").length);
                   }
                }
                //console.log(genre);
