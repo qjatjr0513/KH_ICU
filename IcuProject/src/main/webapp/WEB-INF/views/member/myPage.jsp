@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ICU - 마이페이지</title>
+<title>ICU - 회원정보 수정</title>
 
     <!-- css -->
     <link rel="stylesheet" href="resources/css/myPage.css" />
@@ -118,6 +118,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class='imgBtn'>
+    <c:if test="${profile eq null }">
+    	<span>* 원을 클릭하여 프로필 이미지를 등록해보세요!</span>
+    </c:if>
     </div>
     
     <!-- 실시간 문의 -->

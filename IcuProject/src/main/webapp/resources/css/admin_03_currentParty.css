@@ -18,7 +18,7 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 5px 1px grey;
-    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 .partyCard {
   display: flex;

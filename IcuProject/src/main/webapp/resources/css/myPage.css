@@ -57,6 +57,7 @@ padding: 17px;
 	 width: 300px;
     height: 300px;
     border-radius: 50%;
+    cursor:pointer;
 }
 
 #info input{
@@ -83,8 +84,12 @@ border-radius: 8px;
     border-radius: 50%;
     width: 300px;
 	height:300px;
-	border:1px solid lightgray;
-    
+	border:2px solid gray;
+    cursor:pointer;
+    transition:all 0.2s;
+}
+#preview:hover{
+	transform:scale(1.05);
 }
 
 .input-file-button{
@@ -95,4 +100,12 @@ border-radius: 8px;
   cursor: pointer;
 }
 
- 
+.imgBtn{
+	width:350px;
+	position:absolute;
+	left:33.5%;
+	top:50%;
+	font-weight:bold;
+	font-family:'Poor Story', 'cursive';
+	color:gray;
+}

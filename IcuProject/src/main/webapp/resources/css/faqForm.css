@@ -46,13 +46,10 @@ background: linear-gradient(
 .btn__account:hover, .btn__party:hover, .btn__pay:hover{
 	transform:scale(1.05);
 }
+.faq > button {
+	background-color:var(--color-dark-grey) !important;
+}
 
-.faq > button:hover {
-	  background-color: var(--color-purple);
-	}
-.faq > button:active {
-	  background-color: var(--color-purple) !important;
-	}
 	
 .card{	
 	border-radius: 12px !important;

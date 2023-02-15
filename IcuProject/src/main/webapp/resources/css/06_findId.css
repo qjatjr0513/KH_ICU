@@ -1,5 +1,8 @@
 @import url('main.css');
 
+body{
+	font-family:'Poor Story', 'cursive' !important;
+}
 table{
 	margin:auto;
 }
@@ -117,3 +120,22 @@ input::placeholder{
 .findPwdBtn {
   opacity: 0.3;
 }
+.btn-previous1, #findId, #findBtn{
+	border:none;
+	width: 150px;
+	padding:10px;
+	box-shadow:0 0 5px 1px lightgray;
+	border-radius: 8px;
+}
+.btn-previous1 {
+	background-color:gray;
+	color:white;
+}
+#findId, #findBtn {
+	background-color: var(--color-orange);
+}
+#findBtn {
+	color:white;
+}
+
+
