@@ -20,8 +20,6 @@
    <!-- Navbar -->
     <jsp:include page="../common/header.jsp"/>
     
-     <img class='titleImg' src='${contextPath }/resources/images/board3.jpg' >
-    
    <div class="content">
       <br><br>
       <div class="innerOuter" >

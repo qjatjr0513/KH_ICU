@@ -2,13 +2,10 @@
 
 @import url('main.css');
 
-.titleImg{
-	margin-top: -70px;
-	z-index: -1;
-	position:absolute;
-	width:1900px;
-	height:1700px;
-}	
+body{
+	background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+
 
 table * {margin:5px;}
 td{ margin-bottom: 0;}
@@ -90,7 +87,9 @@ td{ margin-bottom: 0;}
 #replyContent:focus {
 	outline:none;
 }
-
+#rContent{
+	width:550px;
+}
 #rWriter, #rContent, #rDate, #replyUpdate, .labelTitle{
 	font-family:'Poor Story', 'cursive';
 	font-weight:bold;

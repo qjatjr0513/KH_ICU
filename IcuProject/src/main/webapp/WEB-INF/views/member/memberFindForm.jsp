@@ -55,7 +55,10 @@
           </table>
 
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
+            <button class='btn-previous1' onclick="location.href='${contextPath}/loginForm'">이전</button>
+            <!-- <button data-bs-toggle="modal" data-bs-target="#idModal" id="findId" name="findId" onclick="findId();">
+              확인
+            </button> -->
             <button id="findId" name="findId" onclick="findId(); " disabled>
               확인
             </button>
@@ -101,7 +104,7 @@
 		  	<h5 style="font-size:15px; color:red; font-weight:bold;">* 가입된 이메일로 임시비밀번호가 발송됩니다!</h5>
 		  </div>
           <div class="btn__group">
-            <button onclick="location.href='${contextPath}/loginForm'">이전</button>
+            <button class='btn-previous1' onclick="location.href='${contextPath}/loginForm'">이전</button>
             <button data-bs-toggle="modal" data-bs-target="#pwdModal" id="findBtn">
               확인
             </button>
@@ -178,8 +181,7 @@
 	        	   }else{
 	        		   Swal.fire({
 	        			    icon : 'info', 
-		        	   		html: '<h2>회원님의 아이디는 <span style="color:#ff8906; font-weight:bold;">'+result+'</span> 입니다!</h2>'
-		        	   });	
+		        	   	    html: '<h2>회원님의 아이디는 <span style="color:#ff8906; font-weight:bold;">'+result+'</span> 입니다!</h2>'		        	   });	
 	        	   }     
 	           },
 	           error : function(){
