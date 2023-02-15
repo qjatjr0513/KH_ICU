@@ -239,9 +239,17 @@ body::-webkit-scrollbar-track {
 .dropdown-item{
 	font-weight:bold;
 }
+
 .dropdown-item:hover {
   background-color: var(--color-orange);
   color: #ffffff;
+}
+.firstItem{
+	color:var(--color-blue);
+}
+.firstItem:hover{
+	background-color:white !important;
+	color:var(--color-blue);
 }
 
 /* Contact */

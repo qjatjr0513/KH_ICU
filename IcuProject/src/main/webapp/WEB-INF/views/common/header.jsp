@@ -156,7 +156,7 @@
                   
                 </button>
                 <ul class="dropdown-menu">
-                  <li><span class="dropdown-item">${loginUser.memNickname}</span></li>
+                  <li><span class="dropdown-item firstItem">${loginUser.memNickname}</span></li>
                   <li><a class="dropdown-item" href="${contextPath }/myPage.me">마이페이지</a></li>
                   <li><a class="dropdown-item" href="${contextPath }/memLogout">로그아웃</a></li>
                 </ul>
