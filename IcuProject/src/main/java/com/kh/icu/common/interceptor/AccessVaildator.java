@@ -37,7 +37,6 @@ public class AccessVaildator implements HandlerInterceptor {
 		
 		// 관리자인 경우
 		if(requestUrl.indexOf("admin") > -1 && !role.equals("A")) {
-			System.out.println("???????"+role);
 			try {
 				request.setAttribute("errorMsg", "2");
 				request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);

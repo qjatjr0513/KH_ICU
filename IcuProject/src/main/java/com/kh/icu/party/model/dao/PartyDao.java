@@ -110,9 +110,7 @@ public class PartyDao {
 	};
 	
 	public int checkPartyEvaluate(SqlSession sqlSession, PartyEvaluate pe) {
-		System.out.println("*****************pe: "+pe);
 		int result = sqlSession.selectOne("partyMapper.checkPartyEvaluate", pe);
-		System.out.println("**************result : "+result);
 		return result;
 	}
 	

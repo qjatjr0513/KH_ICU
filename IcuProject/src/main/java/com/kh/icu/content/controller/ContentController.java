@@ -50,11 +50,7 @@ public class ContentController {
 	
 	@RequestMapping("contentList.co")
 	public String contentList(HttpSession session, Model model) {
-		//Map<String, Object> list = contentService.selectList();
 		ArrayList<Content> list2 = contentService.selectList();
-//		System.out.println("====================");
-//		System.out.println("list : "+list2);
-//		System.out.println("====================");
 		double cmtStar = 0.0;
 		
 		for(int i = 0; i < list2.size(); i++) {
@@ -94,7 +90,6 @@ public class ContentController {
 		ott = contentService.selectOtt(conNo);
 		genre = contentService.selectGenre(conNo);
 		
-		System.out.println(conNo);
 		model.addAttribute("content", c);
 		model.addAttribute("genre", genre);
 		model.addAttribute("ott", ott);
@@ -118,7 +113,6 @@ public class ContentController {
 		Gson gson = new GsonBuilder().create();
 
 		String result = gson.toJson(list);
-		System.out.println(result);
 		return result;
 	}
 	
@@ -133,7 +127,6 @@ public class ContentController {
 		
 		int result = contentService.insertReview(c);
 		
-		System.out.println(result);
 		return result;
 	}
 	
@@ -172,8 +165,6 @@ public class ContentController {
 		map.put("ott", ott);
 		map.put("category", category);
 		
-		System.out.println(map);
-
 		list = contentService.searchContentCategory(map);
 		
 		double cmtStar = 0.0;
@@ -189,9 +180,6 @@ public class ContentController {
 		}
 		
 		String result = gson.toJson(list);
-		System.out.println(list);
-		//System.out.println(genre);
-		//System.out.println(age);
 		return result;
 	}
 	
@@ -223,8 +211,6 @@ public class ContentController {
 		Gson gson = new GsonBuilder().create();
 		String result = gson.toJson(list);
 		
-		System.out.println(result);
-		
 		return result;
 	}
 	
@@ -234,7 +220,6 @@ public class ContentController {
 		
 		int result = contentService.deleteReview(cmtNo);
 		
-		System.out.println(result);
 		return result;
 	}
 }

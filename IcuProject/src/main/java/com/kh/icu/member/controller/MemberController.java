@@ -100,18 +100,15 @@ public class MemberController {
 		/* 네아로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		/* 인증요청문 확인 */
-		System.out.println("네이버:" + naverAuthUrl);
 		/* 객체 바인딩 */
 		model.addAttribute("urlNaver", naverAuthUrl);
 		
 		/* 카카오 URL */
 		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
-		System.out.println("카카오:" + kakaoAuthUrl);		
 		model.addAttribute("urlKakao", kakaoAuthUrl);
 		
 		/* 구글 URL */
 		String googleAuthUrl = googleLoginBo.getAuthorizationUrl(session);
-		System.out.println("구글:" + googleAuthUrl);		
 		model.addAttribute("urlGoogle", googleAuthUrl);
 		
 		return "member/memberLoginForm";
@@ -141,7 +138,6 @@ public class MemberController {
 		
 		int result2 = memberService.nickCheck(checkNick);
 		
-		System.out.println("암호화 전 비밀번호 : "+ m.getMemPwd());
 		
 		// 암호화 작업
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
@@ -149,11 +145,7 @@ public class MemberController {
 		// 암호화된 비밀번호 Memeber m에 넣음
 		m.setMemPwd(encPwd);
 		
-		System.out.println("암호화 후 비밀번호 : "+m.getMemPwd());
-		
-
 		if(result1 == 0 && result2 == 0) {
-			System.out.println(result1+", "+result2);
 			int result3 = memberService.insertMember(m);
 			
 			if(result3 == 0) {
@@ -274,17 +266,13 @@ public class MemberController {
             session.removeAttribute("loginUser");
             session.removeAttribute("profile");
         }else{
-            System.out.println("access_Token is null");
-            //return "redirect:/";
         }
         
         if(oauthToken != null && !"".equals(oauthToken)){
-            //memberService.naverLogout(oauthToken);
             session.removeAttribute("signIn");
             session.removeAttribute("loginUser");
             session.removeAttribute("profile");
         }else{
-            System.out.println("oauthToken is null");
         }
         
         return "redirect:/";
@@ -298,13 +286,10 @@ public class MemberController {
 	@RequestMapping(value = "navercallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackNaver(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
-		System.out.println("로그인 성공 callbackNaver");
 		OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		System.out.println("oauthToken : "+oauthToken);
         //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
-		System.out.println("apiResult : "+ apiResult);
 	    
 		JSONParser jsonParser = new JSONParser();
 		JSONObject jsonObj;
@@ -312,14 +297,11 @@ public class MemberController {
 		jsonObj = (JSONObject) jsonParser.parse(apiResult);
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");	
 		
-		System.out.println("response_obj : "+response_obj);
 		
 		// 프로필 조회
 		String email = (String) response_obj.get("email");
 		String name = (String) response_obj.get("nickname");
 		String nickname = randomRangeN(100000, 999999); 
-		System.out.println("email : "+ email);
-		System.out.println("name : "+ name);
         
 		
 		m.setMemId(nickname);
@@ -340,7 +322,6 @@ public class MemberController {
             session.setAttribute("oauthToken", oauthToken);
         }
 
-		System.out.println("getMemNickname : "+ m.getMemNickname());
         
 		return "redirect:main";
 	}
@@ -353,9 +334,6 @@ public class MemberController {
 	@RequestMapping(value = "kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
 			throws Exception {
-		System.out.println("로그인 성공 callbackKako");
-		System.out.println("code : "+code );
-		System.out.println("state : "+state);
 		OAuth2AccessToken oauthToken;
 		oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
 		
@@ -398,18 +376,14 @@ public class MemberController {
 	//	구글 로그인 callback
 	@RequestMapping(value = "/googleCallback",method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
-		System.out.println("구글 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = googleLoginBo.getAccessToken(session, code, state);
-		System.out.println(oauthToken.toString());
 		apiResult = googleLoginBo.getUserProfile(oauthToken);
-		System.out.println(apiResult);
 		JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject)parser.parse(apiResult);
         
         
         
-        System.out.println(jsonObject.toString());
         String email=(String) jsonObject.get("email");
         
         String nickname = randomRangeG(100000, 999999);
@@ -508,7 +482,6 @@ public class MemberController {
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 	        
 	        int responseCode = conn.getResponseCode();
-	        System.out.println("responseCode : " + responseCode);
 	        
 	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 	        
@@ -518,7 +491,6 @@ public class MemberController {
 	        while ((line = br.readLine()) != null) {
 	            result += line;
 	        }
-	        System.out.println(result);
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
@@ -532,12 +504,10 @@ public class MemberController {
 		    URL url = new URL(apiURL);
 		    HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		    con.setRequestMethod("GET");
-		    System.out.println("header Str: " + headerStr);
 		    con.setRequestProperty("Authorization", headerStr);
 
 		    int responseCode = con.getResponseCode();
 		    BufferedReader br;
-		    System.out.println("responseCode="+responseCode);
 		    if(responseCode == 200) { // 정상 호출
 		      br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		    } else {  // 에러 발생
@@ -592,7 +562,6 @@ public class MemberController {
 		
 		if(loginUser != null) {
 			int memNo = loginUser.getMemNo();
-			System.out.println("memNo : " + memNo);
 			image.setRefTno(memNo);
 		}
 		
@@ -730,7 +699,6 @@ public class MemberController {
 		
 		if(result > 0) {
 			Member updateMem = memberService.loginMember(m);
-			System.out.println(updateMem);
 			//업데이트 성공했으니 디비에 등록된 변경된 정보 가져오기
 			session.setAttribute("loginUser", updateMem);
 			session.setAttribute("alertMsg", "닉네임 변경 성공!");

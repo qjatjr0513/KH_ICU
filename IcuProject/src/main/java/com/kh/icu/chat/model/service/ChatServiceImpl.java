@@ -63,7 +63,6 @@ public class ChatServiceImpl implements ChatService{
 	
 	// 채팅 메세지 DB 저장
 	public int insertMessage(ChatMessage cm) {
-		System.out.println(cm);
 		// 데이터를 db에 넣을때 개행문자 처리
 		cm.setMessage(Utils.newLineHandling(cm.getMessage()));
 		cm.setMessage(Utils.XSSHandling(cm.getMessage()));

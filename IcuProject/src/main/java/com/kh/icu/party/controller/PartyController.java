@@ -116,8 +116,6 @@ public class PartyController {
 			ottList = String.join(",",ottListarr);
 		}
 		
-		System.out.println("***ottList" + ottList);
-		System.out.println("***month" + month);
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("ottList", ottList);
@@ -187,7 +185,6 @@ public class PartyController {
     @RequestMapping("insertReply.py")
     @ResponseBody
     public String insertReply(Reply r, HttpSession session) {
-       System.out.println("***r : "+r);
        Member m = (Member)session.getAttribute("loginUser");
        if(m != null) {
      	  String memNo = Integer.toString(m.getMemNo());
@@ -248,9 +245,6 @@ public class PartyController {
 		mav.addObject("listI", listI);
 		mav.addObject("listO", listO);
 
-		System.out.println("****listI" + listI);
-		System.out.println("****listO" + listO);
-		
 		mav.setViewName("party/memberCurrentParty");
 		
 		return mav;
@@ -285,10 +279,8 @@ public class PartyController {
 		int memNo = loginUser.getMemNo();
 		pe.setMemNo(memNo);
 		pe.setPaNo(paNo);
-		System.out.println("******pe:"+pe);
 		
 		int cpe = partyService.checkPartyEvaluate(pe);
-		System.out.println("******cpe : "+ cpe);
 		int result = 0;
 		if(cpe == 1) {
 			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
@@ -296,7 +288,6 @@ public class PartyController {
 		} else {
 			result = partyService.partyLikeEvaluate(pe);
 			
-			System.out.println("******result : "+ result);
 			if(result > 0 ) {
 				redirectAttributes.addFlashAttribute("flag2","showAlert2"); // 좋아요 성공하셨습니다.
 				return "redirect:LastParty.py";
@@ -319,17 +310,14 @@ public class PartyController {
 		int memNo = loginUser.getMemNo();
 		pe.setMemNo(memNo);
 		pe.setPaNo(paNo);
-		System.out.println("******pe:"+pe);
 		
 		int cpe = partyService.checkPartyEvaluate(pe);
-		System.out.println("******cpe : "+ cpe);
 		int result = 0;
 		if(cpe == 1) {
 			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
 			return "redirect:LastParty.py";
 		} else {
 			result = partyService.partyBadEvaluate(pe);
-			System.out.println("******result : "+ result);
 			if(result > 0 ) {
 				redirectAttributes.addFlashAttribute("flag4","showAlert4"); // 싫어요에 성공하셨습니다.
 				int result2 = partyService.blackCheck(pe);
@@ -342,9 +330,7 @@ public class PartyController {
 					
 					String message = "black,"+ sendId + "," + sendNickname + "," + receiveNickname + "," +receiveId + "," + paNo;
 					
-					//Map<String, WebSocketSession> userSessions = new HashMap<>();
 					WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
-					System.out.println(receiveSession);
 					
 					
 					TextMessage msg = new TextMessage(message);
@@ -352,7 +338,6 @@ public class PartyController {
 					try {
 						alramHandler.handleTextMessage(receiveSession, msg);
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}			
 				}

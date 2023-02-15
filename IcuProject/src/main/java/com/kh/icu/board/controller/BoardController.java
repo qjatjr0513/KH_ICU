@@ -175,12 +175,10 @@ public class BoardController {
    @RequestMapping("insertReply.bo")
    @ResponseBody
    public String insertReply(Reply r, HttpSession session) {
-      System.out.println(r);
       Member m = (Member)session.getAttribute("loginUser");
       if(m != null) {
     	  String memNo = Integer.toString(m.getMemNo());
          r.setReplyWriter(memNo);
-//         r.setTableCd(b.getTableCd());
       }
       if(r.getReplyContent() == "") {
          return "0";

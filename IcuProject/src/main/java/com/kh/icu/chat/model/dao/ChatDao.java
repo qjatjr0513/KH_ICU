@@ -40,7 +40,6 @@ public class ChatDao {
 	
 	// 채팅 메세지 DB 삽입
 	public int insertMessage(SqlSession sqlSession, ChatMessage cm) {
-		System.out.println(cm);
 		return sqlSession.insert("chattingMapper.insertMessage", cm);
 	}
 

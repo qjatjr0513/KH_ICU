@@ -36,16 +36,13 @@ public class PartyDateScheduler {
 		LocalDate today = LocalDate.now();
 		ArrayList<Party> oneWeek = new ArrayList<Party>();
 		
-		System.out.println("=========파티 날짜 조회 시작=========");
 		for(int i=0; i < p.size(); i++) {
 			LocalDate endDate = p.get(i).getEndDate().toLocalDate();
 			if(endDate.isEqual(today) || endDate.isBefore(today)) {
 				partyService.endParty(p.get(i).getPaNo());
-				System.out.println(p.get(i).getPaNo()+"번 파티 기한 종료");
 			}
 			else{
 				Period pe = Period.between(today, endDate);
-				System.out.println(p.get(i).getPaNo()+"번 파티 기한 : " +pe.getDays()+"일");
 				if(pe.getDays() == 7 && p.get(i).getJoinNum() > 0) {
 					oneWeek.add(p.get(i));
 					for(int j=0; j < oneWeek.size(); j++) {
@@ -55,7 +52,6 @@ public class PartyDateScheduler {
 						int receiveId = oneWeek.get(j).getMemNo();
 						int paNo =  oneWeek.get(j).getPaNo();
 						String message = "endParty,"+ sendId + ","  + sendNickname + ","  + receiveNickname + "," + receiveId + "," + paNo;
-						System.out.println(message);
 						TextMessage msg = new TextMessage(message);
 						
 						WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
@@ -63,7 +59,6 @@ public class PartyDateScheduler {
 						try {
 							alramHandler.handleTextMessage(receiveSession, msg);
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}					
 					}					
@@ -72,8 +67,6 @@ public class PartyDateScheduler {
 				
 			}
 		}
-		System.out.println("일주일 남은 파티 : " +oneWeek);
-		System.out.println("=========파티 날짜 조회 끝=========");
 
 	}
 }
