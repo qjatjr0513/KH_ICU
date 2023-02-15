@@ -97,10 +97,6 @@ public class PartyServiceImpl implements PartyService{
 		return partyDao.partyList(sqlSession);
 	}
 	
-	@Override
-	public List<Party> partyDateList(){
-		return partyDao.partyDateList(sqlSession);
-	}
 
 	// 댓글 삭제 
 	@Override

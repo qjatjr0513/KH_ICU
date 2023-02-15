@@ -69,9 +69,6 @@ public class PartyDao {
 		return sqlSession.selectList("partyMapper.partyList");
 	}
 	
-	public List<Party> partyDateList(SqlSession sqlSession){
-		return sqlSession.selectList("partyMapper.partyDateList");
-	}
 	
 	public int endParty(SqlSession sqlSession, int paNo) {
 		return sqlSession.update("partyMapper.endParty", paNo);

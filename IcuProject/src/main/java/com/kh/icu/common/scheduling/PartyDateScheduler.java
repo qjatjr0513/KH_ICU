@@ -33,43 +33,40 @@ public class PartyDateScheduler {
 	@Scheduled(cron = "0 */10 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
-		List<Party> py = partyService.partyDateList();
 		LocalDate today = LocalDate.now();
 		ArrayList<Party> oneWeek = new ArrayList<Party>();
 		
 		System.out.println("=========파티 날짜 조회 시작=========");
-		for(int i=0; i < py.size(); i++) {
-			LocalDate endDate = py.get(i).getEndDate().toLocalDate();
+		for(int i=0; i < p.size(); i++) {
+			LocalDate endDate = p.get(i).getEndDate().toLocalDate();
 			if(endDate.isEqual(today) || endDate.isBefore(today)) {
-				partyService.endParty(py.get(i).getPaNo());
-				System.out.println(py.get(i).getPaNo()+"번 파티 기한 종료");
+				partyService.endParty(p.get(i).getPaNo());
+				System.out.println(p.get(i).getPaNo()+"번 파티 기한 종료");
 			}
 			else{
 				Period pe = Period.between(today, endDate);
 				System.out.println(p.get(i).getPaNo()+"번 파티 기한 : " +pe.getDays()+"일");
-				if(pe.getDays() == 7) {
+				if(pe.getDays() == 7 && p.get(i).getJoinNum() > 0) {
 					oneWeek.add(p.get(i));
-					
-					int sendId = oneWeek.get(i).getPaName();
-					String sendNickname = oneWeek.get(i).getPaMemNickname();
-					String receiveNickname = oneWeek.get(i).getMemNickname();
-					int receiveId = oneWeek.get(i).getMemNo();
-					int paNo =  oneWeek.get(i).getPaNo();
-					String message = "endParty,"+ sendId + ","  + sendNickname + ","  + receiveNickname + "," + receiveId + "," + paNo;
-					System.out.println(message);
-					TextMessage msg = new TextMessage(message);
-				
-					WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
-
+					for(int j=0; j < oneWeek.size(); j++) {
+						int sendId = oneWeek.get(j).getPaName();
+						String sendNickname = oneWeek.get(j).getPaMemNickname();
+						String receiveNickname = oneWeek.get(j).getMemNickname();
+						int receiveId = oneWeek.get(j).getMemNo();
+						int paNo =  oneWeek.get(j).getPaNo();
+						String message = "endParty,"+ sendId + ","  + sendNickname + ","  + receiveNickname + "," + receiveId + "," + paNo;
+						System.out.println(message);
+						TextMessage msg = new TextMessage(message);
+						
+						WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+						
 						try {
 							alramHandler.handleTextMessage(receiveSession, msg);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-							
-						
-					
+						}					
+					}					
 					
 				}
 				

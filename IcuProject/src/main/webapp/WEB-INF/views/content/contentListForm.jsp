@@ -25,7 +25,7 @@
       <h2 class="contentTitle">컨텐츠 관리</h2>
       <hr />
 
-      <button class="contents__enrollBtn" onclick="location.href='${contextPath}/admin/contentEnrollForm'">새 컨텐츠 등록</button>
+      <button class="contents__enrollBtn" onclick="location.href='${contextPath}/admin/contentEnrollForm.ad'">새 컨텐츠 등록</button>
       <br /><br /><br />
 
       <table class="table table-hover">
@@ -102,7 +102,7 @@
 	              break;
 	            case 'showAlert3' :
 		              Swal.fire({
-		                icon:'sucess',
+		                icon:'success',
 		                title: "컨텐츠 수정 성공"
 		                  });
 		              break;
@@ -114,7 +114,7 @@
 		              break;
 	            case 'showAlert5' :
 		              Swal.fire({
-		                icon:'sucess',
+		                icon:'success',
 		                title: "컨텐츠 삭제 성공"
 		                  });
 		              break;

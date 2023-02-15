@@ -229,7 +229,7 @@ public class MemberController {
 			if(loginUser.getRole().equals("A")) {
 				session.setAttribute("loginUser", loginUser);
 
-				return "redirect:admin/memListForm.me";
+				return "redirect:admin/memListForm.ad";
 
 			}else {
 				session.setAttribute("loginUser", loginUser);

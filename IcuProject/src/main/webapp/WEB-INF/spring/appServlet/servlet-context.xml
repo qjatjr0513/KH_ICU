@@ -40,6 +40,7 @@
 			<mvc:mapping path="/*.me"/>
 			<mvc:mapping path="/*.bo"/>
 			<mvc:mapping path="/*.py"/>
+			<mvc:mapping path="/**/*.ad"/>
 			<beans:bean class="com.kh.icu.common.interceptor.AccessVaildator"/>	
 		</mvc:interceptor>
 	</mvc:interceptors>

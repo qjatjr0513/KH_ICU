@@ -93,15 +93,15 @@
       <div class='imgBox'></div>
       <nav class="nav" style='top:47%;'>
         <ul>
-          <li class='li1'><a href="${contextPath}/admin/memListForm.me">회원정보 조회</a></li>
-          <li class='li2'><a href="${contextPath}/admin/memBlackListForm.me">블랙리스트 관리</a></li>
-          <li class='li3'><a href="${contextPath }/admin/current.py">진행중인 파티</a></li>
-          <li class='li4'><a href="${contextPath }/admin/end.py">종료된 파티</a></li>
-          <li class='li5'><a href="${contextPath }/admin/contentListForm">컨텐츠 관리</a></li>
-          <li class='li6'><a href="${contextPath }/admin/faqList.fq">FAQ 관리</a></li>
+          <li class='li1'><a href="${contextPath}/admin/memListForm.ad">회원정보 조회</a></li>
+          <li class='li2'><a href="${contextPath}/admin/memBlackListForm.ad">블랙리스트 관리</a></li>
+          <li class='li3'><a href="${contextPath }/admin/current.ad">진행중인 파티</a></li>
+          <li class='li4'><a href="${contextPath }/admin/end.ad">종료된 파티</a></li>
+          <li class='li5'><a href="${contextPath }/admin/contentListForm.ad">컨텐츠 관리</a></li>
+          <li class='li6'><a href="${contextPath }/admin/faqList.ad">FAQ 관리</a></li>
           <li class='li7'><a href="${contextPath }/admin/noticeList.bo">공지사항 관리</a></li>
-          <li class='li8'><a href="${contextPath }/admin/payManageListForm.pe">결제 관리</a></li>
-          <li class='li9'><a href="${contextPath }/chat/chatRoomList">실시간 문의</a></li>
+          <li class='li8'><a href="${contextPath }/admin/payManageListForm.ad">결제 관리</a></li>
+          <li class='li9'><a href="${contextPath }/chat/chatRoomList.ad">실시간 문의</a></li>
         </ul>
       </nav>
       
@@ -112,25 +112,25 @@
 		const link =  document.location.href.split('/');
 		/* console.log(link[4]);	 */
 	
-		if(link[5] == 'memListForm.me'){	
+		if(link[5] == 'memListForm.ad'){	
 			$('.li1').addClass('active');	
-		} else if(link[5] == 'memBlackListForm.me'){
+		} else if(link[5] == 'memBlackListForm.ad'){
 			$('.li2').addClass('active');		
-		} else if(link[5] == 'current.py') {
+		} else if(link[5] == 'current.ad') {
 			$('.li3').addClass('active');	
-		} else if(link[5] == 'end.py') {
+		} else if(link[5] == 'end.ad') {
 			$('.li4').addClass('active');	
-		} else if(link[5] == 'contentListForm') {
+		} else if(link[5] == 'contentListForm.ad') {
 			$('.li5').addClass('active');	
-		} else if(link[5] == 'faqList.fq'){
+		} else if(link[5] == 'faqList.ad'){
 			$('.li6').addClass('active');
 		} else if(link[5] == 'noticeList.bo'){
 			$('.li7').addClass('active');
-		} else if(link[5] == 'payManageListForm.pe') {
+		} else if(link[5] == 'payManageListForm.ad') {
 			$('.li8').addClass('active');
-		} else if(link[5] == 'contentEnrollForm'){
+		} else if(link[5] == 'contentEnrollForm.ad'){
 			$('.li5').addClass('active');
-		} else if(link[5] == 'chatRoomList') {
+		} else if(link[5] == 'chatRoomList.ad') {
 			$('.li9').addClass('active');			
 		} else {
 			$('.li5').addClass('active');

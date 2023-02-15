@@ -6,7 +6,7 @@
 	<title>ICU (I See You)</title>
 
     <!-- css -->
-    <link rel="stylesheet" href="resources/css/01_startPage.css" />
+    <link rel="stylesheet" href="${contextPath }/resources/css/01_startPage.css" />
 
 </head>
 <body>
@@ -66,7 +66,7 @@
                   </h3>
               </div>
               <div class="head__right-box2">
-                <img src="resources/images/ipad-removebg-preview.png"> 
+                <img src="${contextPath }/resources/images/ipad-removebg-preview.png"> 
               </div>
             </div>            
           </div>
@@ -86,8 +86,8 @@
             </div>
             <div class="head__right-box3">
               <div class="imgBox">
-                <img class="party-img1" src="resources/images/party.jpg" style="width:300px;">
-                <img class="party-img2" src="resources/images/party.jpg" style="width:350px;">
+                <img class="party-img1" src="${contextPath }/resources/images/party.jpg" style="width:300px;">
+                <img class="party-img2" src="${contextPath }/resources/images/party.jpg" style="width:350px;">
               </div>
             </div>
             </div>
@@ -146,8 +146,8 @@
         </div>
         
         <div class="point__right-box">
-          <img src="resources/images/notebook-removebg-preview.png">
-          <img src="resources/images/1532003027_QYUSBylXvQAnQe8G2Bwn7alMJyI5jmR9aXZLm5dt.jpeg">
+          <img src="${contextPath }/resources/images/notebook-removebg-preview.png">
+          <img src="${contextPath }/resources/images/1532003027_QYUSBylXvQAnQe8G2Bwn7alMJyI5jmR9aXZLm5dt.jpeg">
         </div>
 
         
@@ -162,8 +162,8 @@
       <div class="section__container jong3">
 
         <div class="protect__left-box">
-          <img src="resources/images/notebook-removebg-preview.png">
-          <img src="resources/images/ott.jpg">
+          <img src="${contextPath }/resources/images/notebook-removebg-preview.png">
+          <img src="${contextPath }/resources/images/ott.jpg">
         </div>
 
         <div class="protect__right-box">
@@ -220,8 +220,8 @@
     
     <!-- javascript -->
     <!-- defer : html 파일이 파싱 되는동안 js 파일을 동시에 다운받아서 html 파싱이 다 되면 js를 실행함 -->
-    <script src="resources/js/01_startPage.js" defer></script>
-    <script src="resources/js/main.js" defer></script>
+    <script src="${contextPath }/resources/js/01_startPage.js" defer></script>
+    <script src="${contextPath }/resources/js/main.js" defer></script>
 
   </body>
 </html>

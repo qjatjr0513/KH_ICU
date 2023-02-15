@@ -58,4 +58,26 @@
   <session-config>
    <session-timeout>60</session-timeout>
   </session-config>
+
+	<!-- Security-Constraint(JSP 접근제한) -->
+	<security-constraint>
+		<display-name>JSP Protection</display-name>
+		<web-resource-collection>
+			<web-resource-name>SecureJSPPages</web-resource-name>
+			<url-pattern>*.jsp</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<!-- nobody 로 할 경우 tomcat-user.xml 과 상관없이 무조건 에러를 발생시킨다. -->
+			<role-name>nobody</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<description>
+			Nobody should be in this role so JSP files are protected
+			from direct access.
+		</description>
+		<role-name>nobody</role-name>
+	</security-role> 
+  
 </web-app>

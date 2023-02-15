@@ -287,17 +287,24 @@
 		}
 		
 	function movePage(cno){	 		
-		location.href = '${contextPath}/admin/contentUpdateForm?conNo='+cno;	 	
+		location.href = '${contextPath}/admin/contentUpdateForm.ad?conNo='+cno;	 	
 	}
 	
 		
 	function deleteContent(cno){
-		if(confirm('컨텐츠를 삭제하시겠습니까?') == true){
-	 		location.href = '${contextPath}/admin/contentDelete?conNo='+cno;
-		}
-		else{
-			return false;
-		}
+		Swal.fire({
+    		icon: 'warning',
+    		title: '컨텐츠를 삭제하시겠습니까?',
+    		showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+    		cancelButtonColor: '#d33',
+            cancelButtonText: '취소',
+            confirmButtonText: '확인'
+        }).then((result) => {
+    		if (result.isConfirmed) {
+    			location.href = '${contextPath}/admin/contentDelete.ad?conNo='+cno; 	
+    		}
+        });
 	 }   	
     	
     	

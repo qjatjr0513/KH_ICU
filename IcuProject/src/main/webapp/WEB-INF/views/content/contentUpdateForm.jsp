@@ -21,7 +21,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
-    <form id="contentUpdate" action="${contextPath }/admin/contentUpdate" encType="multipart/form-data" method="post">
+    <form id="contentUpdate" action="${contextPath }/admin/contentUpdate.ad" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
       <h2>컨텐츠 수정</h2>
@@ -133,7 +133,7 @@
         <br />
         <span>배우 : <input type="text" name="conActor" value="${c.conActor }" required/></span>
         <br />
-        <span>줄거리 <br /><textarea name="conSynop" id="" cols="50" rows="7" required>${c.conSynop }</textarea></span>
+        <span>줄거리 <br /><textarea name="conSynop" id="conSynop" cols="50" rows="7" required>${c.conSynop }</textarea></span>
       </div>
       
       <br />

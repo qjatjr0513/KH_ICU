@@ -81,7 +81,7 @@
             </c:otherwise>
          </c:choose>
          <br>
-         <form id="enrollForm" action="${contextPath }/admin/insert.fq">
+         <form id="enrollForm" action="${contextPath }/admin/insert.ad">
             <div>
                <div>
                   <label for="title">제목 : </label>
@@ -107,7 +107,7 @@
             
             
             <div align="center">
-               <a href="${contextPath }/admin/faqList.fq" class="btn btn-danger">취소하기</a>
+               <a href="${contextPath }/admin/faqList.ad" class="btn btn-danger">취소하기</a>
                <c:choose>
                   <c:when test="${f.faqNo eq null}">
                      <button type="submit" class="btn btn-primary">등록하기</button>

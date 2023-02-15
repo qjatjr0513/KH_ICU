@@ -34,7 +34,7 @@ public class ChattingController {
 	private ChatService chatservice;
 	
 	// 채팅방 목록 조회
-	@GetMapping("/chat/chatRoomList")
+	@GetMapping("/chat/chatRoomList.ad")
 	public String selectChatRoomList(Model model, @RequestParam(value="cpage", defaultValue = "1") int currentPage,
 			                         @RequestParam Map<String, Object> paramMap) {
 		

@@ -140,9 +140,9 @@ function exit(){
 		        "memNo" : memNo },
 		success : function(result){
 			if(result == 1){
-				location.href = contextPath+"/chat/chatRoomList";
+				location.href = contextPath+"/chat/chatRoomList.ad";
 			}else{
-				location.href = contextPath+"/chat/chatRoomList";
+				location.href = contextPath+"/chat/chatRoomList.ad";
 			}
 		}
 	})

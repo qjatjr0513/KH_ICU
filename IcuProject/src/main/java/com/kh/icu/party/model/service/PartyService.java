@@ -34,7 +34,6 @@ public interface PartyService {
 	
 	public List<Party> partyList();
 	
-	public List<Party> partyDateList();
 	
 	public int endParty(int paNo);
 

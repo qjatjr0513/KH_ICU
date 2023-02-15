@@ -70,7 +70,7 @@ public class AdminController {
 	/**
 	 * 관리자 회원리스트
 	 */
-	@RequestMapping("memListForm.me")
+	@RequestMapping("memListForm.ad")
 	public String memberList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
@@ -86,7 +86,7 @@ public class AdminController {
 	/**
 	 * 관리자 블랙리스트
 	 */
-	@RequestMapping("memBlackListForm.me")
+	@RequestMapping("memBlackListForm.ad")
 	public String memberBlackList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
@@ -102,7 +102,7 @@ public class AdminController {
 	/**
 	 * 관리자 블랙리스트 해제
 	 */
-	@RequestMapping("blackCancel.me")
+	@RequestMapping("blackCancel.ad")
 	public String blackCancel(int memNo, String memNickname, HttpSession session) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		int result = memberService.blackCancel(memNo);
@@ -130,14 +130,14 @@ public class AdminController {
 			}
 		}
 
-		return "redirect:memBlackListForm.me";
+		return "redirect:memBlackListForm.ad";
 
 	}
 
 	// 관리자 파티 관리
 
 	// 관리자페이지 - 진행중인 파티
-	@RequestMapping("current.py")
+	@RequestMapping("current.ad")
 	public ModelAndView currentPartyList(ModelAndView mav) {
 
 		List<Party> list = partyService.currentPartyList();
@@ -149,7 +149,7 @@ public class AdminController {
 	}
 
 	// 관리자페이지 - 종료된 파티
-	@RequestMapping("end.py")
+	@RequestMapping("end.ad")
 	public ModelAndView endPartyList(ModelAndView mav) {
 
 		List<Party> list = partyService.endPartyList();
@@ -161,7 +161,7 @@ public class AdminController {
 	}
 
 	// 관리자 컨텐츠 관리
-	@RequestMapping("/contentListForm")
+	@RequestMapping("/contentListForm.ad")
 	public String contentList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
@@ -198,13 +198,13 @@ public class AdminController {
 	}
 
 	// 컨텐츠 등록 페이지
-	@RequestMapping("/contentEnrollForm")
+	@RequestMapping("/contentEnrollForm.ad")
 	public String contentEnrollForm() {
 		return "content/contentEnrollForm";
 	}
 
 	// 컨텐츠 수정 페이지
-	@RequestMapping("/contentUpdateForm")
+	@RequestMapping("/contentUpdateForm.ad")
 	public String contentUpdateForm(@RequestParam(value = "conNo") int conNo, HttpSession session, Model model) {
 
 		Content c = contentService.selectContent(conNo);
@@ -223,7 +223,7 @@ public class AdminController {
 	}
 
 	// 컨텐츠 등록
-	@RequestMapping("/contentEnroll")
+	@RequestMapping("/contentEnroll.ad")
 	public String contentEnroll(Content c, @RequestParam("genre") ArrayList<String> genre, Image image,
 			@RequestParam("poster") MultipartFile poster, @RequestParam("ott") ArrayList<String> ott,
 			HttpSession session, Model model, RedirectAttributes redirectAttributes) {
@@ -274,16 +274,16 @@ public class AdminController {
 
 			model.addAttribute("info", cInfo);
 			redirectAttributes.addFlashAttribute("flag","showAlert1");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		} else {
 			redirectAttributes.addFlashAttribute("flag","showAlert2");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		}
 
 	}
 
 	// 컨텐츠 수정
-	@RequestMapping("/contentUpdate")
+	@RequestMapping("/contentUpdate.ad")
 	public String contentUpdate(Content c, @RequestParam("genre") ArrayList<String> genre, Image image,
 			@RequestParam("poster") MultipartFile poster, @RequestParam("ott") ArrayList<String> ott,
 			HttpSession session, Model model, RedirectAttributes redirectAttributes) {
@@ -354,31 +354,31 @@ public class AdminController {
 			model.addAttribute("info", cInfo);
 
 			redirectAttributes.addFlashAttribute("flag","showAlert3");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		} else {
 			redirectAttributes.addFlashAttribute("flag","showAlert4");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		}
 
 	}
 
 	// 컨텐츠 삭제
-	@RequestMapping("/contentDelete")
+	@RequestMapping("/contentDelete.ad")
 	public String contentDelete(@RequestParam(value = "conNo") int conNo, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
 		int resultDelete = contentService.deleteContent(conNo);
 
 		if (resultDelete > 0) {
 			redirectAttributes.addFlashAttribute("flag","showAlert5");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		} else {
 			redirectAttributes.addFlashAttribute("flag","showAlert6");
-			return "redirect:contentListForm";
+			return "redirect:contentListForm.ad";
 		}
 	}
 
 	// 관리자 faq 관리
-	@RequestMapping("faqList.fq")
+	@RequestMapping("faqList.ad")
 	public String faqList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
@@ -391,7 +391,7 @@ public class AdminController {
 		return "faq/faqListForm";
 	}
 
-	@RequestMapping("enrollForm.fq")
+	@RequestMapping("enrollForm.ad")
 	public String faqEnrollForm(Model model,
 			@RequestParam(value = "mode", required = false, defaultValue = "insert") String mode,
 			@RequestParam(value = "fno", required = false, defaultValue = "0") int fno, RedirectAttributes redirectAttributes) {
@@ -408,7 +408,7 @@ public class AdminController {
 		return "faq/faqEnrollForm";
 	}
 
-	@RequestMapping("insert.fq")
+	@RequestMapping("insert.ad")
 	public String insertFaq(Faq f, HttpSession session, Model model,
 			@RequestParam(value = "mode", required = false, defaultValue = "insert") String mode,
 			RedirectAttributes redirectAttributes) {
@@ -421,15 +421,15 @@ public class AdminController {
 
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("flag","showAlert1");
-			return "redirect:faqList.fq";
+			return "redirect:faqList.ad";
 		} else {
 			redirectAttributes.addFlashAttribute("flag","showAlert2");
-			return "redirect:faqList.fq";
+			return "redirect:faqList.ad";
 		}
 
 	}
 
-	@RequestMapping("detail.fq/{fno}")
+	@RequestMapping("detail.ad/{fno}")
 	public ModelAndView selectFaq(@PathVariable("fno") int fno, HttpSession session, ModelAndView mv) {
 		Faq f = faqservice.selectFaq(fno);
 
@@ -447,7 +447,7 @@ public class AdminController {
 		return mv;
 	}
 
-	@RequestMapping("delete.fq")
+	@RequestMapping("delete.ad")
 	public String deleteBoard(@RequestParam(value = "fno", required = false, defaultValue = "0") int fno,
 			HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
@@ -455,10 +455,10 @@ public class AdminController {
 
 		if (result > 0) {
 			redirectAttributes.addFlashAttribute("flag","showAlert3");
-			return "redirect:faqList.fq";
+			return "redirect:faqList.ad";
 		} else {
 			redirectAttributes.addFlashAttribute("flag","showAlert4");
-			return "redirect:faqList.fq";
+			return "redirect:faqList.ad";
 		}
 	}
 
@@ -475,7 +475,7 @@ public class AdminController {
 		return "board/noticeListForm";
 	}
 
-	@RequestMapping("payManageListForm.pe")
+	@RequestMapping("payManageListForm.ad")
 	public String payManageListForm(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, Model model,
 			@RequestParam Map<String, Object> paramMap) {
 
@@ -488,7 +488,7 @@ public class AdminController {
 		return "pay/payManageList";
 	}
 
-	@RequestMapping("remitConfirm.pe")
+	@RequestMapping("remitConfirm.ad")
 	public String remitConfirm(int payNo, HttpSession session, @RequestParam("paName") int paName,
 			@RequestParam("paMemNickName") String paMemNickName, @RequestParam("memNickName") String memNickName, @RequestParam("memNo") int memNo, @RequestParam("paNo") int paNo,
 			@RequestParam("remPrice") int depPrice) {
@@ -524,7 +524,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 
-		return "redirect:payManageListForm.pe";
+		return "redirect:payManageListForm.ad";
 
 	}
 }

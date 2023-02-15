@@ -43,7 +43,7 @@
         </c:if>
         <c:forEach var="m" items="${list }" >
           <tr>
-          <form id="blackCancel" action="${contextPath }/admin/blackCancel.me" method="post">
+          <form id="blackCancel" action="${contextPath }/admin/blackCancel.ad" method="post">
           <td scope="row">${m.memNo}</td>
           <td>${m.memName}(${m.memNickname})</td>
           <td>${m.email}</td>

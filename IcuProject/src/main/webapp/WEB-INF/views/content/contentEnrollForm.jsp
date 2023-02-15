@@ -17,7 +17,7 @@
     <!-- 왼쪽 수직 navbar -->
     <jsp:include page="../admin/adminNavbar.jsp"/>
 
-    <form id="contentEnroll" action="${contextPath }/admin/contentEnroll" encType="multipart/form-data" method="post">
+    <form id="contentEnroll" action="${contextPath }/admin/contentEnroll.ad" encType="multipart/form-data" method="post">
 	<!-- 컨텐츠 등록 -->
     <section id="contentsEnroll">
       <h2 class="contentTitle">컨텐츠 등록</h2>
@@ -123,12 +123,12 @@
         <br />
         <span>배우 : #갓대웅 <input type="text" name="conActor" required/></span>
         <br />
-        <span>줄거리 <br /><textarea name="conSynop" id="" cols="50" rows="7" required></textarea></span>
+        <span>줄거리 <br /><textarea name="conSynop" id="conSynop" cols="50" rows="7" required></textarea></span>
       </div>
       
       <br />
       <div class="btnGroup">
-        <button class="contents-btn" type="button" onclick="location.href='${contextPath}/admin/contentListForm'">취소</button>
+        <button class="contents-btn" type="button" onclick="location.href='${contextPath}/admin/contentListForm.ad'">취소</button>
         <button type="submit" class="contents-btn">저장</button>
       </div>
     </section>
