@@ -517,11 +517,6 @@
 //          genre = [].map.call(genre, function(item){
 //              return item.value
 //          });
-
-         console.log(genreList);
-         console.log(ageList);
-         console.log(ottList);
-         console.log(categoryList);
          
          var cnt = 0;
          $.ajax({
@@ -678,17 +673,16 @@
                   cnt2 = 0;
                }
 				else if(result.length == 0){
-					$('.carousel-inner').remove();
+					$('.carousel-item').remove();
 					$('.carousel-control-prev').remove();
 					$('.carousel-control-next').remove();
-					htmlMid += "<div class='carousel-inner'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div>"
+					htmlMid += "<div class='carousel-inner'><div class='carousel-item active' data-bs-interval='100000'><div class='noParty'><span style='font-weight:bold;'>검색 결과가 존재하지 않습니다😒</span></div></div></div>"
 					$("#carouselExampleControls").html(htmlMid);			
 				}
                else{            	 	
                   $('.carousel-item').remove();
                   $('.carousel-control-prev').remove();
 				  $('.carousel-control-next').remove();
-				  console.log("inner : "+$(".carousel-inner").length);
                   htmlMid += "<div class='carousel-inner'><div class='carousel-item active' data-bs-interval='100000'>" +
                               "<div id='movieBox' class='movieBox'>";
                   htmlMid += "</div></div>"+
