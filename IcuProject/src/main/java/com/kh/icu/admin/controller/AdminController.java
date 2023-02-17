@@ -230,9 +230,8 @@ public class AdminController {
 
 		resultContent = contentService.insertContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
-		int conNo = contentService.selectConNo();
 
-		conNoList.add(conNo);
+		conNoList.add(c.getConNo());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -254,7 +253,7 @@ public class AdminController {
 
 			image.setOriginName(poster.getOriginalFilename());
 			image.setChangeName("/" + changeName);
-			image.setRefTno(conNo);
+			image.setRefTno(c.getConNo());
 			image.setFilePath(filePath);
 
 			resultImage = contentService.insertImg(image);
@@ -264,7 +263,7 @@ public class AdminController {
 		resultOtt = contentService.insertOtt(map);
 
 		if (resultContent > 0 && resultImage > 0 && resultGenre > 0 && resultOtt > 0) {
-			Content cInfo = contentService.selectContent(conNo);
+			Content cInfo = contentService.selectContent(c.getConNo());
 
 			model.addAttribute("info", cInfo);
 			redirectAttributes.addFlashAttribute("flag","showAlert1");
@@ -290,7 +289,6 @@ public class AdminController {
 		
 		resultContent = contentService.updateContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
-		int conNo = contentService.selectConNo();
 		String deleteName = contentService.selectChangeName(c.getConNo());
 		
 		conNoList.add(c.getConNo());
@@ -335,7 +333,7 @@ public class AdminController {
 		}
 
 		if (resultContent > 0 && resultGenre > 0 && resultOtt > 0) {
-			Content cInfo = contentService.selectContent(conNo);
+			Content cInfo = contentService.selectContent(c.getConNo());
 
 			model.addAttribute("info", cInfo);
 

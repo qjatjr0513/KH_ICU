@@ -193,7 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT CT.CON_NO, CON_CATEGORY, CON_KTITLE
 		FROM CONTENT CT
 		WHERE STATUS = 'N'
-		ORDER BY CON_NO
+		ORDER BY CON_NO DESC
 	</select>
 	
 	<select id="getWrittenContentOtt" resultType="string">
