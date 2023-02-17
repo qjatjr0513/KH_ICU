@@ -71,7 +71,7 @@
                  <div class="cardBox divBox"> <!-- 1개 -->
                         <h4><b>${listI[count].ottName}</b></h4>
                         <span>${listI[count].paTitle}</span> <br />
-                        <span id="endDate">파티 종료일 : ${listI[count].endDate})</span><br/><br/>
+                        <span id="endDate">파티 종료일 : ${listI[count].endDate}</span><br/><br/>
                         <br>
                     </div>
                  <c:set var="count" value="${count+1 }"/>
