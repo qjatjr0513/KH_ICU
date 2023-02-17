@@ -439,7 +439,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			LEFT JOIN COMENT CM ON(CT.CON_NO = CM.CON_NO)
 			JOIN IMAGE I ON (CT.CON_NO = REF_TNO) AND I.TABLE_CD = 'C'
 			JOIN OTT_STORAGE O ON (CT.CON_NO = O.CON_NO)
-			WHERE CON_CATEGORY IN(
 			WHERE OTT_NO IN (
 			<foreach collection="ott" item="o" separator=",">
 				${o}
