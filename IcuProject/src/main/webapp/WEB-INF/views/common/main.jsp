@@ -460,9 +460,6 @@
 			let title = item.label;
 			let titleEng = item.etitle;
 			
-			console.log(title);
-			console.log(titleEng);
-			
             if(title.length > 15){
                title = title.substr(0, 14);
                title += '..';

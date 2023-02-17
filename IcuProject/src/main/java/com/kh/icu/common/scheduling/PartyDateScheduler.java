@@ -38,7 +38,7 @@ public class PartyDateScheduler {
 		
 		for(int i=0; i < p.size(); i++) {
 			LocalDate endDate = p.get(i).getEndDate().toLocalDate();
-			if(endDate.isEqual(today) || endDate.isBefore(today)) {
+			if(endDate.isBefore(today)) {
 				partyService.endParty(p.get(i).getPaNo());
 			}
 			else{
