@@ -85,6 +85,7 @@
             <label for="family">가족</label>
             <input type="checkbox" id="animation" name="genre" value="9">
            	<label for="animation">애니메이션</label>
+           	<br>
             <input type="checkbox" id="comedy" name="genre" value="10">
            	<label for="comdey">코미디</label>
             <input type="checkbox" id="documentary" name="genre" value="11">
