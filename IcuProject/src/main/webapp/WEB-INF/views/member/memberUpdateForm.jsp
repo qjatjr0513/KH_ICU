@@ -40,7 +40,7 @@
         </tr>
         <tr>
           <td><label>닉네임</label></td>
-          <td><input type="text" name="memNickname" value="${loginUser.memNickname}" required/></td>
+          <td><input type="text" name="memNickname" value="${loginUser.memNickname}" readonly/></td>
           <!-- <td>
             <button
               type="button"
@@ -54,7 +54,7 @@
         </tr>
         <tr>
           <td><label>비밀번호</label></td>
-          <td><input type="password" id="memPwd" placeholder="비밀번호" name="memPwd" required/></td>
+          <td><input type="password" id="memPwd" placeholder="대소문자,숫자,특수문자 조합" name="memPwd" required/></td>
           <td></td>
           <td></td>
         </tr>

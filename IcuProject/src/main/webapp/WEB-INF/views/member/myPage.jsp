@@ -87,18 +87,25 @@
           </div>
         </c:otherwise>
       </c:choose> -->
-      
-        <div id="updateButton" style="float: right; margin-right: 200px;" >
-          <c:if test="${loginUser.snsType eq 'I'}">
-            <a class="btn" href="${contextPath}/memUpdateForm.me">회원정보 수정하러 가기</a>
-          </c:if>
-        </div>
-        <div id="updateButton" style="margin-left: 230px;">
-          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <b><span style="color: white; font-weight: bold;">닉네임 수정하기</span></b>
-          </button>
-        </div>
-        
+      <c:choose>
+        <c:when test="${loginUser.snsType eq 'I'}">
+          <div id="updateButton" style="float: right; margin-right: 230px;" >
+              <a class="btn" href="${contextPath}/memUpdateForm.me">회원정보 수정하기</a>
+          </div>
+          <div id="updateButton" style="margin-left: 250px;">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <b><span style="color: white; font-weight: bold;">닉네임 수정하기</span></b>
+            </button>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div id="updateButton">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <b><span style="color: white; font-weight: bold;">닉네임 수정하기</span></b>
+            </button>
+          </div>
+        </c:otherwise>
+    </c:choose>
       
       
     </div>
