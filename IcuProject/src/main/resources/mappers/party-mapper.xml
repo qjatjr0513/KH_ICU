@@ -208,6 +208,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         JOIN MEMBER USING(MEM_NO)
 	    LEFT JOIN IMAGE I ON(I.REF_TNO = MEM_NO) AND I.TABLE_CD= 'M'
         WHERE P.PA_NO = #{paNo}
+        ORDER BY JOIN_DATE ASC
 	</select>
 	
 	<select id="partyMem" parameterType="int" resultMap="partyJoinResultSet">
