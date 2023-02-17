@@ -235,7 +235,7 @@
 							$('#submitBtn').attr("disabled", true);
 							$('.textarea').attr("disabled", true);
 							$('#score').attr("disabled", true);
-							$('.textarea').attr("placeholder", "이미 평가를 진행한 유저입니다");
+							$('#cmtContent').attr("placeholder", "이미 평가를 진행한 유저입니다");
 						}
 						html += "<div class='profile-container'><div id='profileArea'>" +
 									"<div id='profile'>";
