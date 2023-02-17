@@ -116,13 +116,16 @@ public class AdminController {
 			String message = "cancle," + sendId + "," + sendNickname + "," + receiveNickname + "," + receiveId + ","
 					+ memNo;
 
+			// Map<String, WebSocketSession> userSessions = new HashMap<>();
 			WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+			System.out.println(receiveSession);
 
 			TextMessage msg = new TextMessage(message);
 
 			try {
 				alramHandler.handleTextMessage(receiveSession, msg);
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -190,6 +193,7 @@ public class AdminController {
 		model.addAttribute("list", list);
 		model.addAttribute("map", map);
 
+		System.out.println(map);
 		return "content/contentListForm";
 	}
 
@@ -244,10 +248,12 @@ public class AdminController {
 
 		if (!poster.getOriginalFilename().equals("")) {
 			String savePath = session.getServletContext().getRealPath("/resources/posterImg/");
+			System.out.println("savePath : " + savePath);
 			String changeName = Utils.saveFile(poster, savePath);
 			File file = new File(savePath + changeName);
 			try {
 				poster.transferTo(file);
+				// System.out.println("save poster : "+file.exists());
 			} catch (IllegalStateException | IOException e) {
 				logger.error(e.getMessage());
 			}
@@ -300,6 +306,7 @@ public class AdminController {
 		map.put("genre", genre);
 		map.put("ott", ott);
 		
+		System.out.println(genre);
 		String filePath = "/resources/posterImg";
 
 		if (!poster.getOriginalFilename().equals("")) {
@@ -308,6 +315,7 @@ public class AdminController {
 			File file = new File(savePath + changeName);
 			try {
 				poster.transferTo(file);
+				// System.out.println("save poster : "+file.exists());
 			} catch (IllegalStateException | IOException e) {
 				logger.error(e.getMessage());
 			}
@@ -319,6 +327,7 @@ public class AdminController {
 
 			if(deleteName != null) {
 				File path = new File(savePath);
+				System.out.println(path+deleteName);
 				new File(path+deleteName).delete();
 			}
 			
@@ -332,6 +341,11 @@ public class AdminController {
 			resultGenre = contentService.insertGenre(map);
 			resultOtt = contentService.insertOtt(map);
 		}
+
+		System.out.println(resultContent);
+		System.out.println(resultImage);
+		System.out.println(resultGenre);
+		System.out.println(resultOtt);
 
 		if (resultContent > 0 && resultGenre > 0 && resultOtt > 0) {
 			Content cInfo = contentService.selectContent(c.getConNo());
@@ -487,6 +501,7 @@ public class AdminController {
 			de.setDepPrice(depPrice);
 			payService.insertRemit(de);
 		}
+		System.out.println("payNo :" + payNo);
 
 		int sendId = loginUser.getMemNo();
 		String sendNickname = memNickName;
@@ -495,13 +510,16 @@ public class AdminController {
 
 		String message = "pay," + sendId + "," + sendNickname + "," + receiveNickname + "," + receiveId + "," + payNo;
 
+		// Map<String, WebSocketSession> userSessions = new HashMap<>();
 		WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
+		System.out.println(receiveSession);
 
 		TextMessage msg = new TextMessage(message);
 
 		try {
 			alramHandler.handleTextMessage(receiveSession, msg);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -141,7 +141,7 @@
         let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
         
         $.ajax({
-           url : "nickCheck",
+           url : "${contextPath }/nickCheck",
            data : {checkNick : $memberNick.val()},
            success : function(result){
         	   

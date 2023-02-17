@@ -24,7 +24,7 @@
     </div>
     
         <!-- 파티 카드 -->
-    <section id="party__container" class='animate__animated animate__fadeIn'>
+    <section id="party__container">
    	  <c:if test="${empty list }">
 		 <div class='noParty'>
              <span style='font-weight:bold;'>종료된 파티가 존재하지 않습니다😒</span>

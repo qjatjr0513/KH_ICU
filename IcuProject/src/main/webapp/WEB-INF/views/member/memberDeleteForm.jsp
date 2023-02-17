@@ -51,7 +51,7 @@
       <!-- Button trigger modal -->
       <c:choose>
 		<c:when test="${loginUser.snsType eq 'N' }">
-			<button type="button" class="btn btn-primary" onclick="snsDelete();">
+			<button type="button" class="btn btn-primary" onclick="naverDelete();">
 				회원탈퇴
 			</button>
 		</c:when>

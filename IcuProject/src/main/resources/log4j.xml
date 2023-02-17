@@ -10,6 +10,31 @@
 		</layout>
 	</appender>
 	
+	<appender name="dailyLog" class="org.apache.log4j.DailyRollingFileAppender">
+      <param name="threshold" value="INFO"/>
+      <!-- logger안에 appender ref로 dailyLog객체를 사용시 level정보가 없다면 threshod에 설정한 정보를 사용 -->
+      <param name="Append" value="true"/>
+      <!-- 파일 이어쓰기 여부 true 이어씀. false 새로생성 -->
+      <param name="File" value="/logs/kh.log"/>
+      <!-- 폴더에 접근권한 없는 경우 에러발생할수있다. -->
+      <param name="DatePattern" value="'.'yyyyMMdd"/>
+      <!-- 
+         매일 자정에 로그파일을 바꿔주는 명령어
+         yyyyMM : 매달 바꿔주는 명령어
+         yyyyww : 매주 바꿔주는 명령어
+         yyyyMMdd : 매일 자정에 로그파일을 바꿔주는 명령어
+         yyyyMMdd a : 자정과, 정오에 로그파일을 바꿔주는 명령어
+         그외 매시간, 매분 마다도 가능함.
+       -->
+       <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="[%d{HH:mm:ss.SSS}] - %m%n" />
+         <!-- 패턴을 외울필요없음 -->
+         <!-- 
+            %p : 우선순위 레벨 , %c : 호출클래스명{1} %m은 메서드 %F로그발생한 파일명 출력 라인수 
+          -->
+      </layout>
+   </appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.kh.icu">
 		<level value="info" />
