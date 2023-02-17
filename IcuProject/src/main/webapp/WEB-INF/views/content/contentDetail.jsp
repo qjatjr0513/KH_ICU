@@ -46,10 +46,10 @@
 		    			${genre }<c:if test="${status.count ne size}">, </b></c:if>
 		    		</c:forEach>
 	    		</h6>
-	    		<c:if test="${c.conCategory eq 2}">
+	    		<c:if test="${c.conCategory eq 2 && c.conInfo ne null}">
 	    			<h6>&nbsp;&nbsp;<b>방영 회차 : ${c.conInfo }부작</b></h6>
 	    		</c:if>
-	    		<c:if test="${c.conCategory eq 1}">
+	    		<c:if test="${c.conCategory eq 1 && c.conInfo ne null}">
 	    			<h6>&nbsp;&nbsp;<b>상영 시간: ${c.conInfo }분</b></h6>
 	    		</c:if>
 	    		<h6>&nbsp;&nbsp;<b>방영 날짜 : ${c.conDate }</b></h6>
