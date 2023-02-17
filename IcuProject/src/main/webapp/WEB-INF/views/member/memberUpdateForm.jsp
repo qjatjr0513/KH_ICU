@@ -41,7 +41,7 @@
         <tr>
           <td><label>닉네임</label></td>
           <td><input type="text" name="memNickname" value="${loginUser.memNickname}" required/></td>
-          <td>
+          <!-- <td>
             <button
               type="button"
               class="btn btn-primary tableBtn"
@@ -49,7 +49,7 @@
             >
               중복확인
             </button>
-          </td>
+          </td> -->
           <td></td>
         </tr>
         <tr>

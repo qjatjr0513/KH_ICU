@@ -22,9 +22,9 @@
 	 <!-- 1단계 DB연결을 위한 도구 설정. -->
 	 <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
 	 	<!-- 어느 db연결할것인지 지정 -->
-	 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
-	 	<property name="url" value="jdbc:log4jdbc:oracle:thin:@3.37.42.51:1521:xe"/>
-	 	<property name="username" value="KHICU"/>
+	 	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	 	<property name="username" value="ICU"/>
 	 	<property name="password" value="ICU" />
 	 </bean>
 	 

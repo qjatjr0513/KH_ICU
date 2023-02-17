@@ -53,7 +53,7 @@
                   <input type="hidden" id="mode" name="mode" value=""/>                   
                   <input type="hidden" name="profile" value="${profile }"/>  
                   <button id="enrollBtn" type="submit" class="btn btn-primary" disabled onclick="modeUpdate();">수정하기</button>
-	              <button id="deleteBtn" type="submit" class="btn btn-danger" onclick="modeDelete();">삭제하기</button>
+	                <button id="deleteBtn" type="submit" class="btn btn-danger" onclick="modeDelete();">삭제하기</button>
                 </c:if>
               </div>
           </div>
@@ -73,7 +73,7 @@
         </div>
 		<br>
       </div>
-      <c:choose>
+      <!-- <c:choose>
         <c:when test="${loginUser.snsType eq 'I'}">
           <div id="updateButton">
             <a class="btn" href="${contextPath}/memUpdateForm.me">수정하러 가기</a>
@@ -86,7 +86,20 @@
             </button>
           </div>
         </c:otherwise>
-      </c:choose>
+      </c:choose> -->
+      
+        <div id="updateButton" style="float: right; margin-right: 200px;" >
+          <c:if test="${loginUser.snsType eq 'I'}">
+            <a class="btn" href="${contextPath}/memUpdateForm.me">회원정보 수정하러 가기</a>
+          </c:if>
+        </div>
+        <div id="updateButton" style="margin-left: 230px;">
+          <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <b><span style="color: white; font-weight: bold;">닉네임 수정하기</span></b>
+          </button>
+        </div>
+        
+      
       
     </div>
     
