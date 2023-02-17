@@ -230,8 +230,9 @@ public class AdminController {
 
 		resultContent = contentService.insertContent(c);
 		ArrayList<Integer> conNoList = new ArrayList<Integer>();
-
-		conNoList.add(c.getConNo());
+		int conNo = contentService.selectConNo();
+		
+		conNoList.add(conNo);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -253,7 +254,7 @@ public class AdminController {
 
 			image.setOriginName(poster.getOriginalFilename());
 			image.setChangeName("/" + changeName);
-			image.setRefTno(c.getConNo());
+			image.setRefTno(conNo);
 			image.setFilePath(filePath);
 
 			resultImage = contentService.insertImg(image);
@@ -263,7 +264,7 @@ public class AdminController {
 		resultOtt = contentService.insertOtt(map);
 
 		if (resultContent > 0 && resultImage > 0 && resultGenre > 0 && resultOtt > 0) {
-			Content cInfo = contentService.selectContent(c.getConNo());
+			Content cInfo = contentService.selectContent(conNo);
 
 			model.addAttribute("info", cInfo);
 			redirectAttributes.addFlashAttribute("flag","showAlert1");

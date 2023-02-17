@@ -203,6 +203,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CON_NO = #{conNo}
 	</select>
 	
+	<select id="selectConNo" resultType="int">
+		SELECT CON_NO
+		FROM (SELECT * FROM CONTENT ORDER BY CON_NO DESC)
+		<![CDATA[WHERE ROWNUM <= 1 AND STATUS = 'N']]> 
+	</select>
+	
 	<select id="autoSearch" parameterType="map" resultMap="contentResultSet">
 		SELECT CT.CON_NO, CON_KTITLE, CHANGE_NAME, FILE_PATH, CON_CATEGORY, CON_DATE, CON_ACTOR, CON_DIRECTOR, CON_ETITLE
 		FROM CONTENT CT

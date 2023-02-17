@@ -99,6 +99,11 @@ public class ContentServiceImpl implements ContentService{
 	}
 	
 	@Override
+	public int selectConNo() {
+		return contentDao.selectConNo(sqlSession);
+	}
+	
+	@Override
 	public int insertGenre(Map<String, Object> map) {
 		return contentDao.insertGenre(sqlSession, map);
 	}

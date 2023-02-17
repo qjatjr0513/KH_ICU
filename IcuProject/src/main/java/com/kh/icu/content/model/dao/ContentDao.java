@@ -66,6 +66,10 @@ public class ContentDao {
 		return sqlSession.update("contentMapper.updateContent", c);
 	}
 	
+	public int selectConNo(SqlSession sqlSession) {
+		return sqlSession.selectOne("contentMapper.selectConNo");
+	}
+	
 	public int insertGenre(SqlSession sqlSession, Map<String, Object> map) {
 		return sqlSession.insert("contentMapper.insertGenre", map);
 	}

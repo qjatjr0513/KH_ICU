@@ -22,6 +22,7 @@ public interface ContentService {
 	public ArrayList<Content> searchContentCategory(Map<String, ArrayList<String>> map);
 	public int insertContent(Content c);
 	public int updateContent(Content c);
+	public int selectConNo();
 	public int insertGenre(Map<String, Object> map);
 	public int insertOtt(Map<String, Object> map);
 	public int deleteGenre(Map<String, Object> map);
