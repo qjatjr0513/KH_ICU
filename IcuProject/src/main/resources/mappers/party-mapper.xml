@@ -258,6 +258,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       LEFT JOIN MEMBER M  ON (R.REPLY_WRITER = M.MEM_NO)
 	  LEFT JOIN IMAGE I ON(I.REF_TNO = R.REPLY_WRITER) AND I.TABLE_CD= 'M'
       WHERE P.PA_NO = #{paNo} AND  R.STATUS = 'N' AND R.TABLE_CD = 'P'
+      ORDER BY R.CREATE_DATE ASC
 	</select>
 	
 	<insert id="insertReply" parameterType="reply" >
