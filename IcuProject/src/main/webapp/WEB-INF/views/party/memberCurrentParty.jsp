@@ -180,7 +180,7 @@
               <c:if test="${not doneLoopO}">
                   
                  <div class="cardBox">
-                      <div onclick="movePageO(${listO[countO].paNo})">
+                      <div class='divBox' onclick="movePageO(${listO[countO].paNo})">
                         <h4><b>${listO[countO].ottName}</b></h4>
                         <span>${listO[countO].paTitle}</span> <br />
                         <span id="endDate">${listO[countO].endDate}까지 (${listO[countO].leftDate}일)</span><br/><br/>
