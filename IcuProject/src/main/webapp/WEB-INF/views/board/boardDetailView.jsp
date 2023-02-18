@@ -50,7 +50,7 @@
                </td>
             </tr>
             <tr>
-               <td colspan="4"><p style="height:400px;">${b.boardContent }</p></td>
+               <td colspan="4"><p style="height:150px;">${b.boardContent }</p></td>
             </tr>
          </table>
          <br>
