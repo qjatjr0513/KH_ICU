@@ -134,7 +134,7 @@
      <section id="party" class='animate__animated animate__fadeInDown'>
       <h2>나의 파티</h2>
        <div class="party__box">
-         <div class="party__box-left" onclick="location.href='${contextPath}/partyEnroll.py'">
+         <div class="party__box-left"  onclick="partyEnroll();" >
            <div class="plus-icon">
              <i
                class="fa-regular fa-square-plus fa-2x"
@@ -454,7 +454,6 @@
 			}
 			,minLength: 1
 			,delay: 100
-			,autoFocus: true
 		}).autocomplete("instance")._renderItem = function(ul, item){
 			var actors = String(item.actor).split(',');
 			var checkData = 1;			
@@ -472,22 +471,22 @@
 	                titleEng += '..';
 	            }
             }
-			var highlight = String(title).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+			var highlight = String(title).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
             
 			if(!highlight.includes('</span>')){
 				for(var i = 0; i < actors.length; i++){
-					highlight = String(actors[i]).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");					
+					highlight = String(actors[i]).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");					
 					if(highlight.includes('</span>')){
 						checkData = 2;
 						break;
 					}
 				}
 				if(!highlight.includes('</span>')){
-					highlight = String(item.director).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					highlight = String(item.director).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 					checkData = 3;
 				}
 				if(!highlight.includes('</span>')){
-					highlight = String(titleEng).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					highlight = String(titleEng).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 					checkData = 4;
 				}
 			}
@@ -555,6 +554,19 @@
 			return result;			
 		};
 	}
+	
+	function partyEnroll(){
+		if(${loginUser.bkStatus == 'N'}){
+ 			location.href = "${contextPath }/partyEnroll.py";
+		}else{
+			Swal.fire({
+	            icon:'error',
+	            title: "파티만들기가 제한되었습니다.",
+	            text:"관리자에게 문의하세요."
+	        });
+		}
+ 	};
+	   
 	
    </script>
 </body>
