@@ -57,7 +57,7 @@
         </tr>
         <tr>
           <td><label>휴대폰 번호</label></td>
-          <td><input type="text" value="${loginUser.phone}" name="phone" required/></td>
+          <td><input type="text" value="${loginUser.phone}" id="cellPhone" placeholder="핸드폰번호 입력" maxlength="13" required/></td>
           <td>
             <button
               type="button"
@@ -132,15 +132,23 @@
         });
 
         $('#memPwdCheck').keyup(function(){
-
+        	let regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*]).{8,15}$/i;
             if($('#memPwd').val() != $('#memPwdCheck').val()){
-              $('#chkNotice').html('비밀번호 일치하지 않음');
+              $('#chkNotice').html('비밀번호 불일치');
               $('#chkNotice').attr('color', '#FF0000');
+              
             } else{
-              $('#chkNotice').html('비밀번호 일치함');
-              $('#chkNotice').attr('color', '#01DF01');
+	          if(!regExp.test($("#memPwd").val()) || !regExp.test($("#memPwdCheck").val())) {
+				$("#chkNotice").html("특수문자,영문,숫자" + "<br>" + "포함 8자 입력");
+				$("#chkNotice").css('fontSize', '12px');
+				$("#chkNotice").attr("color", "FF0000");
+			  }
+	          else{
+              	$('#chkNotice').html('비밀번호 일치');
+              	$('#chkNotice').attr('color', '#01DF01');  
+	          }
             }
-
+            
         });
     });
     
@@ -212,6 +220,40 @@
    	 }
      }
     
+    function autoHypenPhone(str){
+        str = str.replace(/[^0-9]/g, '');
+        var tmp = '';
+        if( str.length < 4){
+            return str;
+        }else if(str.length < 7){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3);
+            return tmp;
+        }else if(str.length < 11){
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 3);
+            tmp += '-';
+            tmp += str.substr(6);
+            return tmp;
+        }else{              
+            tmp += str.substr(0, 3);
+            tmp += '-';
+            tmp += str.substr(3, 4);
+            tmp += '-';
+            tmp += str.substr(7);
+            return tmp;
+        }
+        return str;
+    }
+
+var cellPhone = document.getElementById('cellPhone');
+cellPhone.onkeyup = function(event){
+    event = event || window.event;
+    var _val = this.value.trim();
+    this.value = autoHypenPhone(_val) ;
+}
     </script>
      
 </html>

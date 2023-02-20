@@ -3,7 +3,7 @@
 table {
   margin: auto;
   margin-top: 50px;
-  width: 920px;
+  width: 590px;
   height: 500px;
   font-size: 20px;
   font-weight: bold;
@@ -82,3 +82,7 @@ tr {
 .btn__group > button:nth-child(3) {
   background-color: var(--color-purple);
 }
+
+input:read-only {
+	color:lightgray;
+} 

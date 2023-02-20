@@ -30,7 +30,7 @@ public class PartyDateScheduler {
 	
 
 	
-	@Scheduled(cron = "0 */10 * * * *")
+	@Scheduled(cron = "0 */1 * * * *")
 	public void partyDateCheck() {
 		List<Party> p = partyService.partyList();
 		LocalDate today = LocalDate.now();

@@ -33,17 +33,6 @@ public interface MemberService {
    public Member loginMember(Member m);
    
    /**
-    * 카카오 토큰 발급
-    */
-   public String getAccessToken(String authorize_code);
-   
-   /**
-    * 카카오 정보 확인
-    */
-   public Member getUserInfo(String access_Token);
-
-   
-   /**
     * 카카오계정 로그아웃
     */
    public void kakaoLogout(String access_Token);

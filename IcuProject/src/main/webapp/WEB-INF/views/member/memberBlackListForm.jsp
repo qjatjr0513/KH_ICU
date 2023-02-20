@@ -42,7 +42,7 @@
           </tr>
         </c:if>
         <c:forEach var="m" items="${list }" >
-          <tr>
+          <tr style='vertical-align:middle;'>
           <form id="blackCancel" action="${contextPath }/admin/blackCancel.ad" method="post">
           <td scope="row">${m.memNo}</td>
           <td>${m.memName}(${m.memNickname})</td>

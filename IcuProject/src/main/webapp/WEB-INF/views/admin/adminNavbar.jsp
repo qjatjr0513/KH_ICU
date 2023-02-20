@@ -112,25 +112,25 @@
 		const link =  document.location.href.split('/');
 		/* console.log(link[4]);	 */
 	
-		if(link[5] == 'memListForm.ad'){	
+		if(link[4] == 'memListForm.ad'){	
 			$('.li1').addClass('active');	
-		} else if(link[5] == 'memBlackListForm.ad'){
+		} else if(link[4] == 'memBlackListForm.ad'){
 			$('.li2').addClass('active');		
-		} else if(link[5] == 'current.ad') {
+		} else if(link[4] == 'current.ad') {
 			$('.li3').addClass('active');	
-		} else if(link[5] == 'end.ad') {
+		} else if(link[4] == 'end.ad') {
 			$('.li4').addClass('active');	
-		} else if(link[5] == 'contentListForm.ad') {
+		} else if(link[4] == 'contentListForm.ad') {
 			$('.li5').addClass('active');	
-		} else if(link[5] == 'faqList.ad'){
+		} else if(link[4] == 'faqList.ad'){
 			$('.li6').addClass('active');
-		} else if(link[5] == 'noticeList.bo'){
+		} else if(link[4] == 'noticeList.bo'){
 			$('.li7').addClass('active');
-		} else if(link[5] == 'payManageListForm.ad') {
+		} else if(link[4] == 'payManageListForm.ad') {
 			$('.li8').addClass('active');
-		} else if(link[5] == 'contentEnrollForm.ad'){
+		} else if(link[4] == 'contentEnrollForm.ad'){
 			$('.li5').addClass('active');
-		} else if(link[5] == 'chatRoomList.ad') {
+		} else if(link[4] == 'chatRoomList.ad') {
 			$('.li9').addClass('active');			
 		} else {
 			$('.li5').addClass('active');

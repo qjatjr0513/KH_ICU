@@ -212,9 +212,10 @@
         					Swal.fire({
         		            	icon: 'success',
         		            	title: '댓글을 삭제했습니다'                  
-        		            });
-        					selectReview();
-        					location.reload();
+        		            }).then((result) => {
+	        					selectReview();
+	        					location.reload();        		            	
+        		            })
         				}
         		    })                    	
         		}
@@ -240,7 +241,7 @@
 						html += "<div class='profile-container'><div id='profileArea'>" +
 									"<div id='profile'>";
 						if(comment.filePath != "" && comment.chagneName != ""){
-							html += "<img src='"+${contextPath}/+comment.filePath+comment.changeName+"'/>";
+							html += "<img src='${contextPath}"+comment.filePath+comment.changeName+"'/>";
 						}
 						else{
 							html += "<i class='fa-solid fa-user fa-lg'></i>";

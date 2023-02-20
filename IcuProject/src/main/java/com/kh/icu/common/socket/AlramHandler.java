@@ -46,12 +46,10 @@ public class AlramHandler extends TextWebSocketHandler {
 	// 클라이언트가 Data 전송시
 	@Override
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
-		
 		//특정 유저에게 보내기
 		//protocol: cmd, 댓글 작성자, 게시글 작성자, bno (ex: reply, user2, user1, 234)
 		String msg = message.getPayload();
-		
-		
+	
 		if(StringUtils.isNotEmpty(msg)) {
 			String[] strs = msg.split(",");
 			if(strs != null && strs.length == 6) {
@@ -61,9 +59,7 @@ public class AlramHandler extends TextWebSocketHandler {
 				String receiveNickname = strs[3];
 				String receiveId = strs[4];
 				String refTno = strs[5];
-				
-				
-				
+						
 				WebSocketSession receiveSession = Sessions.userSessions.get(receiveNickname);
 				if("reply".equals(cmd) && !sendId.equals(receiveId)) {
 					String content = "게시글에 댓글이 달렸습니다!";
@@ -76,7 +72,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/detail/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/detail/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("party".equals(cmd) && !sendId.equals(receiveId)) {
@@ -90,7 +86,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/partyDetail.py/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("pay".equals(cmd) && !sendId.equals(receiveId)) {
@@ -104,7 +100,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/depositListForm.pe'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/depositListForm.pe'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("endParty".equals(cmd) && !sendId.equals(receiveId)) {
@@ -118,7 +114,7 @@ public class AlramHandler extends TextWebSocketHandler {
 									
 					int result = alarmService.insertBoardAlarm(a);
 					if(result > 0 && receiveSession != null) {
-						TextMessage tmpMsg = new TextMessage("<a id='at' href='/icu/partyDetail.py/"+ refTno +"'>"+content+"</a>");
+						TextMessage tmpMsg = new TextMessage("<a id='at' href='/partyDetail.py/"+ refTno +"'>"+content+"</a>");
 						receiveSession.sendMessage(tmpMsg);						
 					}
 				}else if("black".equals(cmd) && !sendId.equals(receiveId)) {

@@ -47,8 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertMessage" parameterType="chatMessage">
-		INSERT INTO CHAT_MESSAGE
-		VALUES(SEQ_CMNO.NEXTVAL, #{memNo}, #{chatRoomNo}, #{message}, SYSDATE)
+		INSERT INTO CHAT_MESSAGE(CM_NO, MEM_NO, CHAT_ROOM_NO, MESSAGE)
+		VALUES(SEQ_CMNO.NEXTVAL, #{memNo}, #{chatRoomNo}, #{message})
 	</insert>
 	
 	<select id="selectChatList" resultMap="chatMessageResultSet">

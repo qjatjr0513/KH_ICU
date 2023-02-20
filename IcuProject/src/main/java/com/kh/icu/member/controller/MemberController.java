@@ -283,7 +283,7 @@ public class MemberController {
 	/**
 	 * 네이버 로그인 성공시 callback호출 메소드
 	 */ 
-	@RequestMapping(value = "navercallback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/navercallback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackNaver(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
 		OAuth2AccessToken oauthToken;
@@ -331,7 +331,7 @@ public class MemberController {
 	 * 마이페이지
 	 */
 	// 카카오 로그인 성공시 callback
-	@RequestMapping(value = "kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callbackKakao(Member m, Model model, @RequestParam String code, @RequestParam String state, HttpSession session) 
 			throws Exception {
 		OAuth2AccessToken oauthToken;
