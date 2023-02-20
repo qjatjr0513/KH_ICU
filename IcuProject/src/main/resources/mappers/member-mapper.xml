@@ -202,6 +202,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			MEM_NICKNAME,
 			EMAIL,
 			PHONE,
+			STATUS,
 			ENROLL_DATE
 		FROM MEMBER
 		WHERE ROLE = 'C'

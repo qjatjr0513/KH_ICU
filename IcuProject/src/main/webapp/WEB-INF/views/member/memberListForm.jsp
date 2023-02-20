@@ -32,13 +32,14 @@
             <th scope="col">이메일</th>
             <th scope="col">휴대폰 번호</th>
             <th scope="col">가입일</th>
+            <th scope="col">탈퇴여부</th>
             
           </tr>
         </thead>
         <tbody>
           <c:if test="${empty list }">
             <tr id="tableEmpty">
-              <th colspan="5">조회할 회원이 없습니다</th>
+              <th colspan="6">조회할 회원이 없습니다</th>
             </tr>
           </c:if>
           <c:forEach var="m" items="${list }" >
@@ -48,6 +49,12 @@
             <td>${m.email}</td>
             <td>${m.phone}</td>
             <td>${m.enrollDate}</td>
+            <c:if test="${m.status eq 'N'}">
+              <td></td>
+            </c:if>
+            <c:if test="${m.status eq 'Y'}">
+              <td><span style="color: #ff6e6c;">탈퇴회원</span></td>
+            </c:if>
           </tr>
           </c:forEach>
 
