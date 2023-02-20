@@ -270,7 +270,7 @@ public class PartyController {
 	}
 	
 	/**
-	 * 사용자페이지 파티장 평가
+	 * 사용자페이지 파티장 좋아요 평가
 	 */
 	@RequestMapping("partyLikeEvaluate.py")
 	public String partyLikeEvaluate(PartyEvaluate pe, @RequestParam("paNo") int paNo, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -280,12 +280,14 @@ public class PartyController {
 		pe.setMemNo(memNo);
 		pe.setPaNo(paNo);
 		
+		// 평가 여부 체크 (중복평가 방지)
 		int cpe = partyService.checkPartyEvaluate(pe);
 		int result = 0;
 		if(cpe == 1) {
 			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
 			return "redirect:LastParty.py";
 		} else {
+			// 해당 파티 좋아요 1 증가, 멤버 평가 점수 1 증가
 			result = partyService.partyLikeEvaluate(pe);
 			
 			if(result > 0 ) {
@@ -300,7 +302,7 @@ public class PartyController {
 	}
 	
 	/**
-	 * 사용자페이지 파티장 평가
+	 * 사용자페이지 파티장 싫어요 평가
 	 */
 	@RequestMapping("partyBadEvaluate.py")
 	public String partyBadEvaluate(PartyEvaluate pe, @RequestParam("paNo") int paNo, HttpSession session, RedirectAttributes redirectAttributes) {
@@ -311,15 +313,18 @@ public class PartyController {
 		pe.setMemNo(memNo);
 		pe.setPaNo(paNo);
 		
+		// 평가 여부 체크 (중복평가 방지)
 		int cpe = partyService.checkPartyEvaluate(pe);
 		int result = 0;
 		if(cpe == 1) {
 			redirectAttributes.addFlashAttribute("flag","showAlert"); // 이미 평가하셨습니다.
 			return "redirect:LastParty.py";
 		} else {
+			// 해당 파티 싫어요 1 증가, 멤버 평가 점수 1 감소
 			result = partyService.partyBadEvaluate(pe);
 			if(result > 0 ) {
 				redirectAttributes.addFlashAttribute("flag4","showAlert4"); // 싫어요에 성공하셨습니다.
+				// 멤버 평가 점수가 -10이하 멤버 체크해서 블랙리스트로 변경
 				int result2 = partyService.blackCheck(pe);
 				
 				if(result2 > 0) {
