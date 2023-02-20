@@ -454,6 +454,7 @@
 			}
 			,minLength: 1
 			,delay: 100
+			,autoFocus: true
 		}).autocomplete("instance")._renderItem = function(ul, item){
 			var actors = String(item.actor).split(',');
 			var checkData = 1;			
@@ -471,22 +472,22 @@
 	                titleEng += '..';
 	            }
             }
-			var highlight = String(title).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+			var highlight = String(title).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
             
 			if(!highlight.includes('</span>')){
 				for(var i = 0; i < actors.length; i++){
-					highlight = String(actors[i]).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");					
+					highlight = String(actors[i]).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");					
 					if(highlight.includes('</span>')){
 						checkData = 2;
 						break;
 					}
 				}
 				if(!highlight.includes('</span>')){
-					highlight = String(item.director).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					highlight = String(item.director).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 					checkData = 3;
 				}
 				if(!highlight.includes('</span>')){
-					highlight = String(titleEng).replace(new RegExp(this.term), "<span class='ui-state-highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
+					highlight = String(titleEng).replace(new RegExp(this.term), "<span class='highlight' style='background-color: black; color: white; font-weight:bold;'>$&</span>");
 					checkData = 4;
 				}
 			}
