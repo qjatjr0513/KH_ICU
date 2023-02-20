@@ -41,15 +41,6 @@
         <tr>
           <td><label>닉네임</label></td>
           <td><input type="text" name="memNickname" value="${loginUser.memNickname}" readonly/></td>
-          <!-- <td>
-            <button
-              type="button"
-              class="btn btn-primary tableBtn"
-              onclick="nickCheck();"
-            >
-              중복확인
-            </button>
-          </td> -->
           <td></td>
         </tr>
         <tr>
@@ -134,69 +125,6 @@
              }
         });
      }
-
-    function nickCheck(){
-        // 아이디 입력하는 input 요소 객체
-        let $memberNick = $("#memberUpdate input[name=memNickname]");
-        let regExp = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;
-        
-        $.ajax({
-           url : "${contextPath }/nickCheck",
-           data : {checkNick : $memberNick.val()},
-           success : function(result){
-        	   
-        	   if($memberNick.val() == "") {
-        		   
-        		   Swal.fire({
-                       icon: 'error',
-                       title: '닉네임을 입력해주세요.'
-                       
-                   });
-
-                   $memberNick.focus();
-                   
-               }
-        	   
-        	   else if(!regExp.test($memberNick.val())){
-              	 Swal.fire({
-                       icon: 'error',
-                       title: '유효한 닉네임을 입력해주세요.'                  
-                   });
-              	 
-               }else if(result == 1){ // 사용불가능한 닉네임
-            	   
-            	   Swal.fire({
-                       icon: 'error',
-                       title: '이미 존재하는 닉네임입니다.'
-                       
-                   });
-                 $memberNick.focus();
-                 
-              }else{
-                 
-            	  Swal.fire({
-                      title: '사용가능한 닉네임입니다.',
-                      text: '사용하시겠습니까?',
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: '사용',
-                      cancelButtonText: '취소'
-                  }).then((result) => {
-                	  if(result.isConfirmed){
-                          $("input[name=memNickname]").attr("readonly", true);
-                       }  
-                	  
-                  });
-              }
-           },
-           error : function(){
-              alert("닉네임 중복체크용 ajax 통신 실패");
-           }
-        });
-     }
-   
     
     $(function(){
         $('#memPwd').keyup(function(){
