@@ -47,8 +47,8 @@ public class BoardDao {
 	/**
 	 * 게시글 검색후 개수 카운트
 	 */
-	public int selectSearchListCount(SqlSession sqlSession,Map<String,Object> paramMap) {
-		return sqlSession.selectOne("boardMapper.selectSearchListCount");
+	public int selectSearchListCount(SqlSession sqlSession, Map<String,Object> paramMap) {
+		return sqlSession.selectOne("boardMapper.selectSearchListCount", paramMap);
 	}
 	
 	/**
