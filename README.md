@@ -8,7 +8,7 @@
    <tr><td>서경주</td><td><a href="https://github.com/seokyoungjuu">@seokyoungjuu</a></td></tr>
    <tr><td>한대웅</td><td><a href="https://github.com/woongz1">@woongz1</a></td></tr>
    </table>
-    <br><br>
+    
 ## :book: Description 
 매년 성장하는 OTT시장.<br>늘어나는 OTT시장 만큼 소비자의 부담도 늘어가고 있다.<br>다양한 컨텐츠를 저렴하게 안전하게 구독할 수 없을까 ?
 ## :book: 기획의도
