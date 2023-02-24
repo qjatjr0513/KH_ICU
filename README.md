@@ -5,6 +5,16 @@
 2. 혼자 부담하기 힘든 금액 이젠 NO!
 3. 믿을 수 있는 안전한 거래!
 
+## :book: Usecase Diagram
+  ![icu_유스케이스다이어그램](https://user-images.githubusercontent.com/80880587/221183066-c1dc9a3e-6010-41da-90fd-7a01efb9a4f6.png)
+## :book: ER Diagram
+  ![ICU ERD](https://user-images.githubusercontent.com/80880587/221184314-f7cb9d67-7557-4ddd-b00a-b283f072e5e0.png)
+
+## :book: 실제 구현 화면
+  ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
+  ![image](https://user-images.githubusercontent.com/100131986/220095904-affe8b82-3c4e-475e-823e-f77c866a3fe1.png)
+  ![image](https://user-images.githubusercontent.com/100131986/220096051-77f6a2b4-1df8-427b-b259-46cf8f4375ce.png)
+  
 ## :busts_in_silhouette: 팀원명
    <table>   
    <tr><td>이름</td><td>GitHub</td>
@@ -44,18 +54,6 @@
 	<img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" />
 	<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white" />	
 </div>
-
-## :book: Usecase Diagram
-  ![icu_유스케이스다이어그램](https://user-images.githubusercontent.com/80880587/221183066-c1dc9a3e-6010-41da-90fd-7a01efb9a4f6.png)
-## :book: ER Diagram
-  ![ICU ERD](https://user-images.githubusercontent.com/80880587/221184314-f7cb9d67-7557-4ddd-b00a-b283f072e5e0.png)
-
-## :book: 실제 구현 화면
-  ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
-  ![image](https://user-images.githubusercontent.com/100131986/220095904-affe8b82-3c4e-475e-823e-f77c866a3fe1.png)
-  ![image](https://user-images.githubusercontent.com/100131986/220096051-77f6a2b4-1df8-427b-b259-46cf8f4375ce.png)
-  
-
 
 
    <br><br>
