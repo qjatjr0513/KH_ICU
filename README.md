@@ -1,6 +1,5 @@
 # KH_ICU 
-<br>
-## <ott 계정 공유 사이트>
+## ott 계정 공유 사이트
 <hr>
 
   ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
