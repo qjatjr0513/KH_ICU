@@ -1,4 +1,4 @@
-# <img src="https://user-images.githubusercontent.com/80880587/221177122-f2e53e6d-ed36-4140-9fad-74201763ebea.png"  width="100px" height="70px"/> ICU(ott 계정 공유 사이트) 
+# <img src="https://user-images.githubusercontent.com/80880587/221177122-f2e53e6d-ed36-4140-9fad-74201763ebea.png"  width="100px" height="70px"/> ICU (ott 계정 공유 사이트) 
 #### 매년 성장하는 OTT시장.<br>늘어나는 OTT시장 만큼 소비자의 부담도 늘어가고 있다.<br>다양한 컨텐츠를 저렴하게 안전하게 구독할 수 없을까 ?
 ### :book: 기획의도
 1. 광범위한 컨텐츠를 한번에 쉽게!
