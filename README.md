@@ -1,6 +1,10 @@
-# KH_ICU 
-## ott 계정 공유 사이트
-<hr>
+# KH_ICU(ott 계정 공유 사이트) 
+## 기획의도
+- 매년 성장하는 OTT시장. 늘어나는 OTT시장 만큼 소비자의 부담도 늘어가고 있다. 다양한 컨텐츠를 저렴하게 안전하게 구독할 수 없을까 ?
+1. 광범위한 컨텐츠를 한번에 쉽게!
+2. 혼자 부담하기 힘든 금액 이젠 NO!
+3. 믿을 수 있는 안전한 거래!
+
 
   ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
   ![image](https://user-images.githubusercontent.com/100131986/220095904-affe8b82-3c4e-475e-823e-f77c866a3fe1.png)
