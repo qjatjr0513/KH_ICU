@@ -28,7 +28,7 @@
 	<img src="https://img.shields.io/badge/jQuery-0769AD?style=flat&logo=jQuery&logoColor=white" />	
 	<img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=flat&logo=Apache Tomcat&logoColor=white" />
 	<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=Bootstrap&logoColor=white" />
-	<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=Bootstrap&logoColor=white" />	
+
 </div>
 <div>
 	<img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=Spring&logoColor=white" />
@@ -42,18 +42,6 @@
 <div>
 	<img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white" />
 </div>
-- 
-- JavaScript
-- ajax
-- jQuery
-- OracleDB
-- tomcat9
-- Spring
-- MyBatis
-- Maven
-- aws
-- ubuntu
-- docker
 
 
    <br><br>
