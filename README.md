@@ -5,7 +5,9 @@
 2. 혼자 부담하기 힘든 금액 이젠 NO!
 3. 믿을 수 있는 안전한 거래!
 
-
+### Usecase Diagram
+  ![icu_유스케이스다이어그램](https://user-images.githubusercontent.com/80880587/221183066-c1dc9a3e-6010-41da-90fd-7a01efb9a4f6.png)
+  
   ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
   ![image](https://user-images.githubusercontent.com/100131986/220095904-affe8b82-3c4e-475e-823e-f77c866a3fe1.png)
   ![image](https://user-images.githubusercontent.com/100131986/220096051-77f6a2b4-1df8-427b-b259-46cf8f4375ce.png)
