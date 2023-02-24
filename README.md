@@ -1,5 +1,15 @@
 # <img src="https://user-images.githubusercontent.com/80880587/221177122-f2e53e6d-ed36-4140-9fad-74201763ebea.png"  width="100px" height="70px"/> ICU (ott 계정 공유 사이트) 
-## Description 
+## :busts_in_silhouette: 팀원명
+   <table>   
+   <tr><td>이름</td><td>GitHub</td>
+   <tr><td>이범석</td><td><a href="https://github.com/qjatjr0513">@qjatjr0513</a></td></tr>
+   <tr><td>황종수</td><td><a href="https://github.com/prodaniel93">@prodaniel93</a></td></tr>
+   <tr><td>이상엽</td><td><a href="https://github.com/Lee-sang-yeop">@Lee-sang-yeop</a></td></tr>
+   <tr><td>서경주</td><td><a href="https://github.com/seokyoungjuu">@seokyoungjuu</a></td></tr>
+   <tr><td>한대웅</td><td><a href="https://github.com/woongz1">@woongz1</a></td></tr>
+   </table>
+    <br><br>
+## :book: Description 
 매년 성장하는 OTT시장.<br>늘어나는 OTT시장 만큼 소비자의 부담도 늘어가고 있다.<br>다양한 컨텐츠를 저렴하게 안전하게 구독할 수 없을까 ?
 ## :book: 기획의도
 1. 광범위한 컨텐츠를 한번에 쉽게!
@@ -15,18 +25,6 @@
   ![image](https://user-images.githubusercontent.com/100131986/220095712-7c24fc9a-590c-4ed8-ac51-2f74cf8b0efc.png)
   ![image](https://user-images.githubusercontent.com/100131986/220095904-affe8b82-3c4e-475e-823e-f77c866a3fe1.png)
   ![image](https://user-images.githubusercontent.com/100131986/220096051-77f6a2b4-1df8-427b-b259-46cf8f4375ce.png)
-  
-## :busts_in_silhouette: 팀원명
-   <table>   
-   <tr><td>이름</td><td>GitHub</td>
-   <tr><td>이범석</td><td><a href="https://github.com/qjatjr0513">@qjatjr0513</a></td></tr>
-   <tr><td>황종수</td><td><a href="https://github.com/prodaniel93">@prodaniel93</a></td></tr>
-   <tr><td>이상엽</td><td><a href="https://github.com/Lee-sang-yeop">@Lee-sang-yeop</a></td></tr>
-   <tr><td>서경주</td><td><a href="https://github.com/seokyoungjuu">@seokyoungjuu</a></td></tr>
-   <tr><td>한대웅</td><td><a href="https://github.com/woongz1">@woongz1</a></td></tr>
-   </table>
-   
-   <br><br>
 
    ## :computer: 개발환경
    ### :pencil: Front-End
