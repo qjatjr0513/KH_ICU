@@ -1,4 +1,4 @@
-# <img src="/uploads/1848994ad25765da30fa8ef3684c67bc/캡처.PNG](https://user-images.githubusercontent.com/80880587/221176652-ebc84432-859b-40e0-bcde-135137bc93fb.png)"  width="700" height="370"> KH_ICU(ott 계정 공유 사이트) 
+# <img src="https://user-images.githubusercontent.com/80880587/221176652-ebc84432-859b-40e0-bcde-135137bc93fb.png)"  width="700" height="370"> KH_ICU(ott 계정 공유 사이트) 
 ## 기획의도
 ### 매년 성장하는 OTT시장.<br>늘어나는 OTT시장 만큼 소비자의 부담도 늘어가고 있다.<br>다양한 컨텐츠를 저렴하게 안전하게 구독할 수 없을까 ?
 1. 광범위한 컨텐츠를 한번에 쉽게!
